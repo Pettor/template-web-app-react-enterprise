@@ -11,8 +11,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
-  open: true,
-  onClose: () => console.log("onClose"),
+  title: "Modal Title",
   children: <div>This is content test</div>,
 } satisfies Props;
 
