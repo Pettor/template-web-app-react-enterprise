@@ -1,0 +1,74 @@
+name: "deploy"
+
+on:
+  pull_request:
+    types:
+      - closed
+
+permissions: 
+  contents: write
+
+jobs:
+  deploy-gh-pages:
+    name: Deploy
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4.1.0
+        id: pnpm-install
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Add buildnumber to version
+        run: |
+          cd $GITHUB_WORKSPACE/apps/web
+          echo "VITE_APP_VERSION=\${npm_package_version}-build.${{github.run_number}}" > .env.production
+
+      - name: Build deployment and move files
+        run: pnpm run deploy
+        env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
+
+      - name: Check GitHub Pages status
+        uses: crazy-max/ghaction-github-status@v4
+        with:
+          pages_threshold: major_outage
+
+      - name: Deploy to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          build_dir: output/deployment
+          commit_message: "chore(deploy): deploy to github pages"
+          jekyll: false
+          keep_history: false
+          target_branch: deploy/main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

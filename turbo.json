@@ -1,0 +1,85 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "globalEnv": ["PORT"],
+  "tasks": {
+    "prepare": {
+      "cache": true
+    },
+    "build": {
+      "outputs": [
+        "dist/**",
+        "build/**"
+      ],
+      "dependsOn": ["^build"]
+    },
+    "deploy": {
+      "outputs": [
+        "dist/**",
+        "output/deployment/**"
+      ],
+      "dependsOn": ["^build"]
+    },
+    "dev": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
+    },
+    "dev:mocks": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
+    },
+    "clean": {
+      "cache": false
+    },
+    "clean:all": {
+      "cache": false
+    },
+    "lint": {
+      "cache": false
+    },
+    "lint:fix": {
+      "cache": false
+    },
+    "test": {
+      "cache": false
+    },
+    "test:e2e:env": {
+      "cache": false
+    },
+    "test:unit": {
+      "cache": false,
+      "dependsOn": ["storybook:build"],
+      "outputs": ["**/junit/*.json", "**/.nyc_output/*.json"]
+    },
+    "test:unit:coverage": {
+      "cache": false,
+      "outputs": ["**/.nyc_output/**/*"]
+    },
+    "test:unit:coverage:ci": {
+      "cache": false,
+      "outputs": ["output/coverage/*.xml"]
+    },
+    "storybook:dev": {
+      "cache": false
+    },
+    "storybook:dev:combined": {
+      "cache": false
+    },
+    "storybook:build": {
+      "cache": false,
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts"],
+      "outputs": ["**/storybook-static/**"]
+    },
+    "storybook:publish": {
+      "cache": false,
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts"],
+      "outputs": ["**/storybook-static/**"]
+    },
+    "storybook:move": {
+      "cache": false,
+      "outputs": ["output/storybook-static/**"]
+    }
+  }
+}

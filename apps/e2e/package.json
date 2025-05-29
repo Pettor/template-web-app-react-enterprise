@@ -1,0 +1,16 @@
+{
+  "name": "e2e",
+  "license": "MIT",
+  "private": true,
+  "version": "0.6.0",
+  "scripts": {
+    "prepare": "playwright install",
+    "test:e2e": "cross-env PLAYWRIGHT_JUNIT_OUTPUT_NAME=\"./.test-results/results.xml\" pnpm playwright test --reporter=junit"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.52.0",
+    "eslint-config": "workspace:*",
+    "mocks-package": "workspace:*",
+    "typescript-config": "workspace:*"
+  }
+}
