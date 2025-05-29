@@ -1,33 +1,20 @@
 # React Web Application Template
 
-[![GitHub](https://img.shields.io/badge/license-MIT-green)](https://github.com/Pettor/template-web-app-react/blob/main/LICENSE)
+[![GitHub](https://img.shields.io/badge/license-MIT-green)](https://github.com/Pettor/template-web-app-react-enterprise/blob/main/LICENSE)
 [![Actions Main](../../actions/workflows/main.yml/badge.svg)](../../actions/workflows/main.yml)
-[![Storybook](https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg)](https://pettor.github.io/template-web-app-react/storybook/)
+[![Storybook](https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg)](https://pettor.github.io/template-web-app-react-enterprise/storybook/)
 
 This is a template for building web applications with React. It includes a basic project structure and configuration files to help you get started quickly.
 
 ## Demo
 
-To check out a demo of the latest main branch [click here](https://pettor.github.io/template-web-app-react/app/).
+To check out a demo of the latest main branch [click here](https://pettor.github.io/template-web-app-react-enterprise/app/).
 
 ## Features
 
 This template includes the following features:
 
-- [React](https://reactjs.org/) for building user interfaces.
-- [TypeScript](https://www.typescriptlang.org/) for static type checking.
-- [Vite](https://vitejs.dev/) for fast development and building.
-- [Turborepo](https://turbo.build/repo/) for performant build system.
-- [Tailwind CSS](https://tailwindcss.com/) for utility-first CSS.
-- [DiasyUI](https://daisyui.com/) for component styling.
-- [Storybook](https://storybook.js.org/) for component development.
-- [Storybook Component Test](https://storybook.js.org/docs/writing-tests/component-testing) for testing components.
-- [Playwright](https://playwright.dev/) for end-to-end testing.
-- [Vitest](https://vitest.dev/) for testing components.
-- [Github Actions](https://docs.github.com/en/actions) for continuous integration.
-- [Github Pages](https://pages.github.com/) for hosting the application.
-- [Prettier](https://prettier.io/) for code formatting.
-- [ESLint](https://eslint.org/) for linting.
+TBD
 
 ## Getting Started
 
