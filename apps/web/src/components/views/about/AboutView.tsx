@@ -3,6 +3,7 @@ import { XMarkIcon } from "@heroicons/react/20/solid";
 import { useIntl } from "react-intl";
 import { BasicLayout, BlueFadeBackground, GridBackground } from "ui-package";
 import { AboutDetails, type AboutDetailsProps } from "~/components/feedback/about-details/AboutDetails";
+import { Button, Card, CardBody, CardHeader } from "@heroui/react";
 
 export interface AboutViewProps extends AboutDetailsProps {
   onBack: () => void;
@@ -21,14 +22,15 @@ export function AboutView({ onBack, ...aboutProps }: AboutViewProps): ReactEleme
         </>
       }
     >
-      <div className="hero">
-        <div className="hero-content w-full flex-col lg:flex-row-reverse">
-          <div className="card bg-base-100 min-h-[550px] w-full shrink-0 shadow-2xl sm:w-[550px]">
-            <div className="card-body">
-              <div className="card-actions justify-end">
-                <button
-                  className="btn btn-square btn-sm"
+      <div className="display-grid w-full place-items-center">
+        <div className="flex w-full flex-col items-center justify-center gap-1 p-4 lg:flex-row-reverse">
+          <div className="bg-base-100 h-full min-h-[550px] w-full shrink-0 sm:w-[550px]">
+            <Card className="min-h-[550px]">
+              <CardHeader className="flex w-full items-end justify-between">
+                <div className="flex" />
+                <Button
                   onClick={onBack}
+                  isIconOnly
                   title={intl.formatMessage({
                     description: "AboutView - Back button title",
                     defaultMessage: "Back",
@@ -41,10 +43,12 @@ export function AboutView({ onBack, ...aboutProps }: AboutViewProps): ReactEleme
                   })}
                 >
                   <XMarkIcon className="h-6 w-6" />
-                </button>
-              </div>
-              <AboutDetails {...aboutProps} />
-            </div>
+                </Button>
+              </CardHeader>
+              <CardBody>
+                <AboutDetails {...aboutProps} />
+              </CardBody>
+            </Card>
           </div>
         </div>
       </div>
