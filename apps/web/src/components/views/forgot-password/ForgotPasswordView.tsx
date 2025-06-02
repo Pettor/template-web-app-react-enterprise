@@ -4,6 +4,7 @@ import { useIntl } from "react-intl";
 import { BasicLayout, BlueFadeBackground, GridBackground } from "ui-package";
 import type { ForgotPasswordFormProps } from "../../forms/forgot-password/ForgotPasswordForm";
 import { ForgotPasswordForm } from "../../forms/forgot-password/ForgotPasswordForm";
+import { Card, CardHeader, Button, CardBody, Spacer } from "@heroui/react";
 
 export interface ForgotPasswordViewProps {
   appName: string;
@@ -24,30 +25,31 @@ export function ForgotPasswordView({ appName, resetForm, onBack }: ForgotPasswor
         </>
       }
     >
-      <div className="flex flex-1 flex-col items-center justify-center">
-        <div className="hero">
-          <div className="hero-content w-full flex-col lg:flex-row-reverse">
-            <div className="card bg-base-100 min-h-[550px] w-full shrink-0 shadow-2xl sm:w-[550px]">
-              <div className="card-body w-full">
-                <div className="card-actions justify-end">
-                  <button
-                    className="btn btn-square btn-sm"
-                    onClick={onBack}
-                    title={intl.formatMessage({
-                      description: "ForgotPasswordView - Back button title",
-                      defaultMessage: "Back",
-                      id: "bz4LRs",
-                    })}
-                    aria-label={intl.formatMessage({
-                      description: "ForgotPasswordView - Back button aria label",
-                      defaultMessage: "Back",
-                      id: "lJxJFw",
-                    })}
-                  >
-                    <XMarkIcon className="h-6 w-6" />
-                  </button>
-                </div>
-                <span className="mt-8 text-center text-base">
+      <div className="display-grid w-full place-items-center">
+        <div className="flex w-full flex-col items-center justify-center gap-1 p-4 lg:flex-row-reverse">
+          <div className="bg-base-100 h-full min-h-[550px] w-full shrink-0 sm:w-[550px]">
+            <Card className="min-h-[550px]">
+              <CardHeader className="flex w-full items-end justify-between">
+                <div className="flex" />
+                <Button
+                  isIconOnly
+                  onPress={onBack}
+                  title={intl.formatMessage({
+                    description: "AboutView - Back button title",
+                    defaultMessage: "Back",
+                    id: "72q+Ui",
+                  })}
+                  aria-label={intl.formatMessage({
+                    description: "AboutView - Back button aria label",
+                    defaultMessage: "Back",
+                    id: "ZTBga3",
+                  })}
+                >
+                  <XMarkIcon className="h-6 w-6" />
+                </Button>
+              </CardHeader>
+              <CardBody className="flex flex-col items-center">
+                <span className="mt-8 p-4 text-center text-base">
                   {intl.formatMessage(
                     {
                       description: "ForgotPasswordView - Reset password description",
@@ -60,11 +62,10 @@ export function ForgotPasswordView({ appName, resetForm, onBack }: ForgotPasswor
                     }
                   )}
                 </span>
-                <div className="mt-4 mb-2 px-4 md:mt-8 md:px-12">
-                  <ForgotPasswordForm {...resetForm} />
-                </div>
-              </div>
-            </div>
+                <Spacer y={4} />
+                <ForgotPasswordForm {...resetForm} />
+              </CardBody>
+            </Card>
           </div>
         </div>
       </div>
