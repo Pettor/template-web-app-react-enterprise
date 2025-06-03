@@ -1,6 +1,9 @@
 /* Tailwind confugration */
 @import "tailwindcss";
 
+/* Tailwind plugins */
+@plugin "@tailwindcss/typography";
+
 /* HeroUI theme */
 @plugin './hero.ts';
 
