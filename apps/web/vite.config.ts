@@ -1,5 +1,5 @@
 import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react-swc";
+import react from "@vitejs/plugin-react";
 import type { PluginOption, UserConfig } from "vite";
 import { defineConfig, loadEnv, mergeConfig } from "vite";
 import proxy from "vite-plugin-http2-proxy";
@@ -7,13 +7,21 @@ import mkcert from "vite-plugin-mkcert";
 import { VitePWA } from "vite-plugin-pwa";
 import tsconfigPaths from "vite-tsconfig-paths";
 
+const ReactCompilerConfig = {
+  target: "19",
+};
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   const commonConfig: UserConfig = {
     plugins: [
-      react() as PluginOption,
+      react({
+        babel: {
+          plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]],
+        },
+      }) as PluginOption,
       tailwindcss(),
       tsconfigPaths() as PluginOption,
       VitePWA({
