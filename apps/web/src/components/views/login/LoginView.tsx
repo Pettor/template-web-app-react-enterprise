@@ -1,27 +1,19 @@
 import type { ReactElement } from "react";
 import { ExclamationTriangleIcon, InformationCircleIcon } from "@heroicons/react/20/solid";
 import { useIntl } from "react-intl";
-import { BasicLayout, BlueFadeBackground, GridBackground, LogoFull } from "ui-package";
+import { BasicLayout, BlueFadeBackground, GridBackground, Logo, LogoFull } from "ui-package";
 import type { LoginFormProps } from "~/components/forms/login/LoginForm";
 import { LoginForm } from "~/components/forms/login/LoginForm";
+import { Card, CardHeader, Button, CardBody, Spacer, Link, Checkbox } from "@heroui/react";
 
 export interface LoginViewProps {
   appName: string;
   loginForm: LoginFormProps;
   error?: string;
   onAbout(): void;
-  onForgotPassword(): void;
-  onSignUp(): void;
 }
 
-export function LoginView({
-  appName,
-  loginForm,
-  error,
-  onAbout,
-  onForgotPassword,
-  onSignUp,
-}: LoginViewProps): ReactElement {
+export function LoginView({ appName, loginForm, error, onAbout }: LoginViewProps): ReactElement {
   const intl = useIntl();
 
   return (
@@ -34,52 +26,35 @@ export function LoginView({
         </>
       }
     >
-      <div className="flex flex-1 items-center justify-center">
-        <div className="hero">
-          <div className="hero-content w-full flex-col lg:flex-row-reverse">
-            <div className="card bg-base-100 min-h-[550px] w-full shadow-2xl sm:w-[550px]">
-              <div className="card-body w-full">
-                <div className="card-actions justify-end">
-                  <button className="btn btn-square btn-ghost btn-sm" onClick={onAbout}>
-                    <InformationCircleIcon className="h-6 w-6" />
-                  </button>
-                </div>
-                <div className="flex justify-center md:hidden">
-                  <LogoFull appName={appName} size="small" />
-                </div>
-                <div className="flex justify-center max-md:hidden">
-                  <LogoFull appName={appName} size="large" />
-                </div>
-                <br />
-                {error && (
-                  <div className="alert alert-warning mb-4">
-                    <ExclamationTriangleIcon className="h-5 w-5" />
-                    {error}
-                  </div>
-                )}
-                <div className="md:px-16">
-                  <LoginForm {...loginForm} />
-                </div>
-                <br />
-                <div className="grid grid-flow-row-dense grid-cols-1 md:grid-cols-5">
-                  <button className="btn btn-link z-20 col-span-2 justify-start" onClick={onForgotPassword}>
-                    {intl.formatMessage({
-                      description: "LoginViewLink - Forgot password",
-                      defaultMessage: "Forgot password?",
-                      id: "aNSSLX",
-                    })}
-                  </button>
-                  <button className="btn btn-link z-20 col-span-3 justify-start" onClick={onSignUp}>
-                    {intl.formatMessage({
-                      description: "LoginViewLink - Don't have an account? Sign Up",
-                      defaultMessage: "Don't have an account? Sign up",
-                      id: "Erb2yF",
-                    })}
-                  </button>
-                </div>
+      <div className="flex w-full flex-col items-center justify-center gap-1 p-4 lg:flex-row-reverse">
+        <div className="bg-base-100 h-full min-h-[550px] w-full shrink-0 sm:w-[550px]">
+          <Card isBlurred className="flex w-full flex-col gap-4 px-8 pt-6 pb-10">
+            <CardHeader className="flex w-full items-end justify-between">
+              <div className="flex" />
+              <Button
+                isIconOnly
+                onPress={onAbout}
+                aria-label={intl.formatMessage({
+                  description: "AboutView - About button aria label",
+                  defaultMessage: "About",
+                  id: "ZTBga3",
+                })}
+              >
+                <InformationCircleIcon className="h-6 w-6" />
+              </Button>
+            </CardHeader>
+            <CardBody className="flex flex-col items-center">
+              <div className="flex justify-center md:hidden">
+                <Logo size="medium" />
               </div>
-            </div>
-          </div>
+              <div className="flex justify-center max-md:hidden">
+                <Logo size="large" />
+              </div>
+              <p className="text-5xl">{appName}</p>
+              <Spacer y={6} />
+              <LoginForm {...loginForm} />
+            </CardBody>
+          </Card>
         </div>
       </div>
     </BasicLayout>

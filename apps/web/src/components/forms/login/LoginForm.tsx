@@ -1,25 +1,30 @@
-import type { ReactElement } from "react";
-import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/outline";
+import { useState, type ReactElement } from "react";
+import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { yupResolver } from "@hookform/resolvers/yup";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
-import { InputField } from "ui-package";
 import * as yup from "yup";
-import { ButtonLoading } from "ui-package";
+import { Button, Checkbox, Form, Input, Link } from "@heroui/react";
 
 export interface FormLogin {
   email: string;
   password: string;
+  remember?: boolean;
 }
 
 export interface LoginFormProps {
   loading: boolean;
+  onForgotPassword(): void;
+  onSignUp(): void;
   onSubmit: SubmitHandler<FormLogin>;
 }
 
-export function LoginForm({ loading, onSubmit }: LoginFormProps): ReactElement {
+export function LoginForm({ loading, onForgotPassword, onSignUp, onSubmit }: LoginFormProps): ReactElement {
   const intl = useIntl();
+
+  const [isVisible, setIsVisible] = useState(false);
+  const toggleVisibility = (): void => setIsVisible(!isVisible);
 
   const schema = yup
     .object()
@@ -60,42 +65,69 @@ export function LoginForm({ loading, onSubmit }: LoginFormProps): ReactElement {
   });
 
   return (
-    <form onSubmit={handleFormSubmit(onSubmit)} className="flex flex-col justify-center">
-      <InputField
+    <Form onSubmit={handleFormSubmit(onSubmit)} className="flex flex-col justify-center">
+      <Input
+        fullWidth
         autoFocus
         id="email"
         type="text"
+        variant="bordered"
         placeholder="Email"
         autoComplete="username"
-        icon={<EnvelopeIcon className="h-5 w-5" />}
-        error={errors.email?.message}
+        startContent={<EnvelopeIcon className="h-5 w-5" />}
+        errorMessage={errors.email?.message}
         {...register("email")}
         data-testid="login-form__email-input"
       />
-      <InputField
+      <Input
+        fullWidth
         id="password"
-        type="password"
+        type={isVisible ? "text" : "password"}
+        variant="bordered"
         placeholder="Password"
         autoComplete="current-password"
-        icon={<LockClosedIcon className="h-5 w-5" />}
-        error={errors.password?.message}
+        startContent={<LockClosedIcon className="h-5 w-5" />}
+        endContent={
+          <button type="button" onClick={toggleVisibility}>
+            {isVisible ? <EyeIcon className="h-5 w-5" /> : <EyeSlashIcon className="h-5 w-5" />}
+          </button>
+        }
+        errorMessage={errors.password?.message}
         {...register("password")}
         data-testid="login-form__password-input"
       />
-      <div className="flex w-full flex-1 justify-end">
-        <ButtonLoading
-          loading={loading}
-          type="submit"
-          className="btn btn-primary text-base-100 dark:text-base-300 z-20 w-full md:w-40"
-          data-testid="login-form__submit-button"
-        >
+      <div className="flex w-full items-center justify-between px-1 py-2">
+        <Checkbox defaultSelected name="remember" size="sm">
           {intl.formatMessage({
-            description: "LoginFormButton: Sign in",
-            defaultMessage: "Sign in",
-            id: "zXsz1H",
+            description: "LoginForm - Remember me checkbox label",
+            defaultMessage: "Remember me",
+            id: "3k1Z5e",
           })}
-        </ButtonLoading>
+        </Checkbox>
+        <Link className="text-default-500 cursor-pointer" size="sm" onPress={onForgotPassword}>
+          {intl.formatMessage({
+            description: "LoginForm - Forgot password link",
+            defaultMessage: "Forgot password?",
+            id: "2k1Z5e",
+          })}
+        </Link>
       </div>
-    </form>
+      <Button isLoading={loading} className="w-full" color="primary" type="submit">
+        {intl.formatMessage({
+          description: "LoginForm - Submit button text",
+          defaultMessage: "Login",
+          id: "ojcPit",
+        })}
+      </Button>
+      <p className="text-small text-center">
+        <Link className="cursor-pointer" size="sm" onPress={onSignUp}>
+          {intl.formatMessage({
+            description: "LoginForm - Sign up link",
+            defaultMessage: "Don't have an account? Sign up",
+            id: "r3YQJ5",
+          })}
+        </Link>
+      </p>
+    </Form>
   );
 }
