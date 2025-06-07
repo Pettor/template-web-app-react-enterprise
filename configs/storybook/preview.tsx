@@ -1,7 +1,7 @@
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { Preview } from "@storybook/react";
 import { IntlProvider } from "react-intl";
-import { withThemeByDataAttribute } from "@storybook/addon-themes";
+import { withThemeByClassName } from "@storybook/addon-themes";
 
 const preview: Preview = {
   decorators: [
@@ -10,13 +10,12 @@ const preview: Preview = {
         <Story {...context} />
       </IntlProvider>
     ),
-    withThemeByDataAttribute({
+    withThemeByClassName({
       themes: {
         light: "light",
-        dark: "night",
+        dark: "dark",
       },
       defaultTheme: "light",
-      attributeName: "data-theme",
     }),
   ],
   parameters: {

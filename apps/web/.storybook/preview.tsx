@@ -1,6 +1,6 @@
 import baseConfig from "storybook-config/preview";
-import "../src/main.css";
 import type { Preview } from "@storybook/react";
+import "../src/main.css";
 
 const preview: Preview = {
   ...baseConfig,

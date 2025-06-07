@@ -1,23 +1,32 @@
-import type { ReactElement, ReactNode } from "react";
+import { useState, type ReactElement, type ReactNode } from "react";
 import { Logo } from "../../Layout";
+import type { NavbarMenuItem } from "@heroui/react";
+import { Navbar as HeroNavbar, NavbarContent, NavbarMenuToggle, NavbarBrand, NavbarMenu } from "@heroui/react";
 
 export interface NavbarProps {
   title: string;
   centerElement?: ReactNode;
   endElement?: ReactNode;
+  menuElement?: ReactElement<typeof NavbarMenuItem> | ReactElement<typeof NavbarMenuItem>[];
 }
 
-export function Navbar({ title, centerElement, endElement }: NavbarProps): ReactElement {
+export function Navbar({ title, centerElement, endElement, menuElement }: NavbarProps): ReactElement {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <div className="glass navbar bg-opacity-55 dark:bg-opacity-100 p-0 dark:bg-none">
-      <div className="navbar container mx-auto min-h-0 p-0">
-        <div className="navbar-start h-full">
+    <HeroNavbar shouldHideOnScroll isBordered onMenuOpenChange={setIsMenuOpen}>
+      <NavbarContent>
+        <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} className="sm:hidden" />
+        <NavbarBrand>
           <Logo size="small" />
-          <span className="text-base font-semibold md:text-2xl">{title}</span>
-        </div>
-        <div className="navbar-center h-8">{centerElement}</div>
-        <div className="navbar-end h-8">{endElement}</div>
-      </div>
-    </div>
+          <p className="font-bold text-inherit">{title}</p>
+        </NavbarBrand>
+      </NavbarContent>
+      <NavbarContent className="hidden gap-4 sm:flex" justify="center">
+        {centerElement}
+      </NavbarContent>
+      <NavbarContent justify="end">{endElement}</NavbarContent>
+      <NavbarMenu>{menuElement}</NavbarMenu>
+    </HeroNavbar>
   );
 }

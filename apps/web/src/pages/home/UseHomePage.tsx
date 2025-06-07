@@ -7,21 +7,12 @@ export function useHomePage(githubLink: string, linkedInLink: string): HomeViewP
   const appSessionProps = useAppSessionContent("/version");
   const themeSwitchProps = useThemeSwitcher();
   const socialLinkProps = useAppSocialLinks(githubLink, linkedInLink);
-  const appbarProps = {
-    ...appSessionProps,
-    ...themeSwitchProps,
-  };
-
-  function handleOnGotoClick(href: string): void {
-    window.open(href, "_blank", "noreferrer");
-  }
 
   return {
-    appSocialLinkProps: socialLinkProps,
     appNavbarProps: {
-      appbarDesktopProps: appbarProps,
-      appbarPhoneProps: appbarProps,
+      profile: appSessionProps,
+      socialLinks: socialLinkProps,
+      themeSwitch: themeSwitchProps,
     },
-    onGotoClick: handleOnGotoClick,
   };
 }
