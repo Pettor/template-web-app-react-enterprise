@@ -5,7 +5,6 @@ import { BasicLayout, BlueFadeBackground, GridBackground } from "ui-package";
 import type { SignUpFormProps } from "~/components/forms/sign-up/SignUpForm";
 import { SignUpForm } from "~/components/forms/sign-up/SignUpForm";
 import { Card, CardHeader, Button, CardBody, Spacer } from "@heroui/react";
-import { ForgotPasswordForm } from "~/components/forms/forgot-password/ForgotPasswordForm";
 
 export interface SignUpViewProps {
   appName: string;

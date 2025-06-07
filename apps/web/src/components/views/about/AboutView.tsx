@@ -3,7 +3,7 @@ import { XMarkIcon } from "@heroicons/react/20/solid";
 import { useIntl } from "react-intl";
 import { BasicLayout, BlueFadeBackground, GridBackground } from "ui-package";
 import { AboutDetails, type AboutDetailsProps } from "~/components/feedback/about-details/AboutDetails";
-import { Button, Card, CardBody, CardHeader } from "@heroui/react";
+import { Button, Card, CardBody, CardHeader, Divider, Spacer } from "@heroui/react";
 
 export interface AboutViewProps extends AboutDetailsProps {
   onBack: () => void;
@@ -26,9 +26,9 @@ export function AboutView({ onBack, ...aboutProps }: AboutViewProps): ReactEleme
         <div className="bg-base-100 h-full min-h-[550px] w-full shrink-0 sm:w-[550px]">
           <Card className="min-h-[550px]">
             <CardHeader className="flex w-full items-end justify-between">
-              <div className="flex" />
+              <div className="flex"></div>
               <Button
-                onClick={onBack}
+                onPress={onBack}
                 isIconOnly
                 title={intl.formatMessage({
                   description: "AboutView - Back button title",
@@ -45,7 +45,19 @@ export function AboutView({ onBack, ...aboutProps }: AboutViewProps): ReactEleme
               </Button>
             </CardHeader>
             <CardBody>
-              <AboutDetails {...aboutProps} />
+              <div className="p-4">
+                <p className="text-2xl font-bold">
+                  {intl.formatMessage({
+                    description: "About - Title",
+                    defaultMessage: "About",
+                    id: "2Rm6Lp",
+                  })}
+                </p>
+                <Spacer y={4} />
+                <Divider />
+                <Spacer y={4} />
+                <AboutDetails {...aboutProps} />
+              </div>
             </CardBody>
           </Card>
         </div>

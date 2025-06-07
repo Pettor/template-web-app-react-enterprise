@@ -1,24 +1,8 @@
 import type { ReactElement } from "react";
-import {
-  UserCircleIcon,
-  InformationCircleIcon,
-  Cog8ToothIcon,
-  ArrowLeftStartOnRectangleIcon,
-} from "@heroicons/react/20/solid";
+import { InformationCircleIcon, ArrowLeftStartOnRectangleIcon } from "@heroicons/react/20/solid";
 import { useIntl } from "react-intl";
 import type { IAppSessionContent } from "~/classes/app-session/IAppSessionContent";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Divider,
-  Listbox,
-  ListboxItem,
-  Skeleton,
-  Spacer,
-  User,
-} from "@heroui/react";
+import { Card, CardBody, Divider, Listbox, ListboxItem, Skeleton, Spacer, User } from "@heroui/react";
 
 export interface ProfileCardProps extends IAppSessionContent {}
 

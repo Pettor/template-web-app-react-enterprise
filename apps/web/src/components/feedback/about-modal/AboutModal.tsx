@@ -1,15 +1,34 @@
 import type { ReactElement } from "react";
-import type { ModalProps } from "ui-package";
-import { Modal } from "ui-package";
 import type { AboutDetailsProps } from "../about-details/AboutDetails";
 import { AboutDetails } from "../about-details/AboutDetails";
+import { Modal, ModalBody, ModalContent, ModalHeader, Spacer, type ModalProps } from "@heroui/react";
+import { useIntl } from "react-intl";
 
-export interface AboutModalProps extends Omit<ModalProps, "children">, AboutDetailsProps {}
+export interface AboutModalProps {
+  modalProps: Omit<ModalProps, "children">;
+  aboutDetailsProps: AboutDetailsProps;
+}
 
-export function AboutModal({ open, onClose, ...aboutProps }: AboutModalProps): ReactElement {
+export function AboutModal({ modalProps, aboutDetailsProps }: AboutModalProps): ReactElement {
+  const intl = useIntl();
+
   return (
-    <Modal open={open} onClose={onClose} className="min-h-96">
-      <AboutDetails {...aboutProps} />
+    <Modal {...modalProps}>
+      <ModalContent>
+        <ModalHeader>
+          <p>
+            {intl.formatMessage({
+              description: "About - Title",
+              defaultMessage: "About",
+              id: "2Rm6Lp",
+            })}
+          </p>
+        </ModalHeader>
+        <ModalBody>
+          <AboutDetails {...aboutDetailsProps} />
+          <Spacer y={4} />
+        </ModalBody>
+      </ModalContent>
     </Modal>
   );
 }
