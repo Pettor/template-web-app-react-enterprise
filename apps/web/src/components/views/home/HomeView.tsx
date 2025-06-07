@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import { useIntl } from "react-intl";
 import { BlueFadeBackground, NavbarLayout } from "ui-package";
-import daisyuiImgSrc from "~/assets/images/logo/daisyui.png";
+import herouiImgSrc from "~/assets/images/logo/heroui.png";
 import githubImgSrc from "~/assets/images/logo/github.png";
 import mocksServerImgSrc from "~/assets/images/logo/mocks-server.png";
 import netImgSrc from "~/assets/images/logo/net.png";
@@ -105,7 +105,7 @@ export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
             })}
           />
           <GridItem
-            imageSrc={daisyuiImgSrc}
+            imageSrc={herouiImgSrc}
             title={intl.formatMessage({
               description: "HomeView - TailwindCSS + HeroUI title",
               defaultMessage: "TailwindCSS + HeroUI",
