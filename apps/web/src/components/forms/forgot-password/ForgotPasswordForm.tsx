@@ -62,6 +62,7 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
           id: "2k1Z5e",
         })}
         startContent={<EnvelopeIcon className="h-5 w-5" />}
+        isInvalid={!!errors.email}
         errorMessage={errors.email?.message}
         data-testid="forgot-password-form__email-input"
         {...register("email")}

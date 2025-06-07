@@ -46,11 +46,11 @@ export function useLoginPage(): LoginViewProps {
     appName,
     loginForm: {
       loading: loginLoading,
+      error: loginError,
+      onSignUp: handleSignUp,
+      onForgotPassword: handleForgotPassword,
       onSubmit: handleSubmit,
     },
-    error: loginError,
     onAbout: handleOnAbout,
-    onForgotPassword: handleForgotPassword,
-    onSignUp: handleSignUp,
   };
 }

@@ -15,12 +15,13 @@ export interface FormLogin {
 
 export interface LoginFormProps {
   loading: boolean;
+  error?: string;
   onForgotPassword(): void;
   onSignUp(): void;
   onSubmit: SubmitHandler<FormLogin>;
 }
 
-export function LoginForm({ loading, onForgotPassword, onSignUp, onSubmit }: LoginFormProps): ReactElement {
+export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit }: LoginFormProps): ReactElement {
   const intl = useIntl();
 
   const [isVisible, setIsVisible] = useState(false);
@@ -75,9 +76,10 @@ export function LoginForm({ loading, onForgotPassword, onSignUp, onSubmit }: Log
         placeholder="Email"
         autoComplete="username"
         startContent={<EnvelopeIcon className="h-5 w-5" />}
+        isInvalid={!!errors.email}
         errorMessage={errors.email?.message}
-        {...register("email")}
         data-testid="login-form__email-input"
+        {...register("email")}
       />
       <Input
         fullWidth
@@ -92,9 +94,10 @@ export function LoginForm({ loading, onForgotPassword, onSignUp, onSubmit }: Log
             {isVisible ? <EyeIcon className="h-5 w-5" /> : <EyeSlashIcon className="h-5 w-5" />}
           </button>
         }
+        isInvalid={!!errors.password}
         errorMessage={errors.password?.message}
-        {...register("password")}
         data-testid="login-form__password-input"
+        {...register("password")}
       />
       <div className="flex w-full items-center justify-between px-1 py-2">
         <Checkbox defaultSelected name="remember" size="sm">
@@ -119,6 +122,7 @@ export function LoginForm({ loading, onForgotPassword, onSignUp, onSubmit }: Log
           id: "ojcPit",
         })}
       </Button>
+      {error && <div className="text-small text-danger">{error}</div>}
       <p className="text-small text-center">
         <Link className="cursor-pointer" size="sm" onPress={onSignUp}>
           {intl.formatMessage({

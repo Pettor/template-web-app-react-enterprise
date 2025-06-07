@@ -1,10 +1,10 @@
 import type { ReactElement } from "react";
-import { ExclamationTriangleIcon, InformationCircleIcon } from "@heroicons/react/20/solid";
+import { InformationCircleIcon } from "@heroicons/react/20/solid";
 import { useIntl } from "react-intl";
-import { BasicLayout, BlueFadeBackground, GridBackground, Logo, LogoFull } from "ui-package";
+import { BasicLayout, BlueFadeBackground, GridBackground, Logo } from "ui-package";
 import type { LoginFormProps } from "~/components/forms/login/LoginForm";
 import { LoginForm } from "~/components/forms/login/LoginForm";
-import { Card, CardHeader, Button, CardBody, Spacer, Link, Checkbox } from "@heroui/react";
+import { Card, CardHeader, Button, CardBody, Spacer } from "@heroui/react";
 
 export interface LoginViewProps {
   appName: string;
@@ -13,7 +13,7 @@ export interface LoginViewProps {
   onAbout(): void;
 }
 
-export function LoginView({ appName, loginForm, error, onAbout }: LoginViewProps): ReactElement {
+export function LoginView({ appName, loginForm, onAbout }: LoginViewProps): ReactElement {
   const intl = useIntl();
 
   return (

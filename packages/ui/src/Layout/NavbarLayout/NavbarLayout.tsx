@@ -1,4 +1,3 @@
-import { Divider } from "@heroui/react";
 import { Logo } from "Layout/Logo";
 import type { ReactElement, ReactNode } from "react";
 
