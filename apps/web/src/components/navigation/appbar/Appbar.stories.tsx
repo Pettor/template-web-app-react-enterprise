@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Appbar as Component } from "./Appbar";
 import type { AppbarProps as Props } from "./Appbar";
-import { AppSocialLinksData } from "~/storybook/data/AppSocialLinksData";
+import { AppbarCommonData } from "~/storybook/data/AppbarData";
 
 const meta: Meta<typeof Component> = {
   component: Component,
@@ -15,7 +15,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
-  ...AppSocialLinksData,
+  ...AppbarCommonData,
 } satisfies Props;
 
 export const Responsive: Story = {

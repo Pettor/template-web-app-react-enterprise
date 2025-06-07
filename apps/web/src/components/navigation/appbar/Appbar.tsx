@@ -1,11 +1,31 @@
 import { type ReactElement } from "react";
 import { GithubIcon, LinkedInIcon, Navbar } from "ui-package";
-import { Button, Link, NavbarItem, NavbarMenuItem } from "@heroui/react";
+import {
+  Avatar,
+  Button,
+  Divider,
+  Link,
+  NavbarItem,
+  NavbarMenuItem,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@heroui/react";
 import type { IAppSocialLinks } from "~/classes/app-social-links/IAppSocialLinks";
+import type { ThemeSwitchProps } from "~/components/actions/theme-switch/ThemeSwitch";
+import { ThemeSwitch } from "~/components/actions/theme-switch/ThemeSwitch";
+import type { ProfileCardProps } from "~/components/feedback/profile-card/ProfileCard";
+import { ProfileCard } from "~/components/feedback/profile-card/ProfileCard";
 
-export interface AppbarProps extends IAppSocialLinks {}
+export interface AppbarProps {
+  profile: ProfileCardProps;
+  socialLinks: IAppSocialLinks;
+  themeSwitch: ThemeSwitchProps;
+}
 
-export function Appbar({ onGithubClick, onLinkedInClick }: AppbarProps): ReactElement {
+export function Appbar({ profile, socialLinks, themeSwitch }: AppbarProps): ReactElement {
+  const { onGithubClick, onLinkedInClick } = socialLinks;
+
   const menuRender = (
     <>
       <NavbarMenuItem key="1">
@@ -37,6 +57,17 @@ export function Appbar({ onGithubClick, onLinkedInClick }: AppbarProps): ReactEl
 
   const endElement = (
     <>
+      <Popover placement="bottom-end">
+        <PopoverTrigger>
+          <Avatar size="sm" />
+        </PopoverTrigger>
+        <PopoverContent>
+          <ProfileCard {...profile} />
+        </PopoverContent>
+      </Popover>
+      <Divider orientation="vertical" />
+      <ThemeSwitch {...themeSwitch} />
+      <Divider orientation="vertical" />
       <Button isIconOnly className="p-2" color="default" onPress={onGithubClick}>
         <GithubIcon />
       </Button>

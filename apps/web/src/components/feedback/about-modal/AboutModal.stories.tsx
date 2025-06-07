@@ -13,10 +13,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
-  modalProps: {
+  modal: {
     isOpen: true,
   },
-  aboutDetailsProps: {
+  aboutDetails: {
     appName: "My App",
     appVersion: "1.0.0",
     serverVersion: "1.0.0",

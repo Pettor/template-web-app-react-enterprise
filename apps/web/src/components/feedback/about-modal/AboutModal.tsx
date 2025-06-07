@@ -5,15 +5,15 @@ import { Modal, ModalBody, ModalContent, ModalHeader, Spacer, type ModalProps } 
 import { useIntl } from "react-intl";
 
 export interface AboutModalProps {
-  modalProps: Omit<ModalProps, "children">;
-  aboutDetailsProps: AboutDetailsProps;
+  modal: Omit<ModalProps, "children">;
+  aboutDetails: AboutDetailsProps;
 }
 
-export function AboutModal({ modalProps, aboutDetailsProps }: AboutModalProps): ReactElement {
+export function AboutModal({ modal, aboutDetails }: AboutModalProps): ReactElement {
   const intl = useIntl();
 
   return (
-    <Modal {...modalProps}>
+    <Modal {...modal}>
       <ModalContent>
         <ModalHeader>
           <p>
@@ -25,7 +25,7 @@ export function AboutModal({ modalProps, aboutDetailsProps }: AboutModalProps): 
           </p>
         </ModalHeader>
         <ModalBody>
-          <AboutDetails {...aboutDetailsProps} />
+          <AboutDetails {...aboutDetails} />
           <Spacer y={4} />
         </ModalBody>
       </ModalContent>

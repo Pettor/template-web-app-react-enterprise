@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { FullSizeDecorator } from "storybook-package";
 import { HomeView as Component } from "./HomeView";
 import type { HomeViewProps as Props } from "./HomeView";
-import { AppSocialLinksData } from "~/storybook/data/AppSocialLinksData";
+import { AppbarCommonData } from "~/storybook/data/AppbarData";
 
 const meta: Meta<typeof Component> = {
   component: Component,
@@ -16,9 +16,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
-  appNavbarProps: {
-    ...AppSocialLinksData,
-  },
+  appNavbarProps: AppbarCommonData,
 } satisfies Props;
 
 export const Fullscreen: Story = {

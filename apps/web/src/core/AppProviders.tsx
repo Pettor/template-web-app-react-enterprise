@@ -4,6 +4,7 @@ import { validateCrypto } from "react-package";
 import { AppLocales } from "./AppLocales";
 import { PwaProviderModule } from "~/components/modules/pwa-provider-module/PwaProviderModule";
 import { AuthProvider } from "./auth/AuthProvider";
+import { HeroUIProvider } from "@heroui/react";
 
 const queryClient = new QueryClient();
 
@@ -15,12 +16,14 @@ export function AppProviders({ children }: AppProvidersProps): ReactElement {
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   typeof window !== "undefined" && validateCrypto();
   return (
-    <AppLocales>
-      <PwaProviderModule>
-        <QueryClientProvider client={queryClient}>
-          <AuthProvider>{children}</AuthProvider>
-        </QueryClientProvider>
-      </PwaProviderModule>
-    </AppLocales>
+    <HeroUIProvider>
+      <AppLocales>
+        <PwaProviderModule>
+          <QueryClientProvider client={queryClient}>
+            <AuthProvider>{children}</AuthProvider>
+          </QueryClientProvider>
+        </PwaProviderModule>
+      </AppLocales>
+    </HeroUIProvider>
   );
 }
