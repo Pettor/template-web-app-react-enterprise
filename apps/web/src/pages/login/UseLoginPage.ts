@@ -17,7 +17,11 @@ export function useLoginPage(): LoginViewProps {
     setLoginError("");
 
     try {
-      await login(data);
+      await login({
+        email: data.email,
+        password: data.password,
+        rememberMe: data.remember,
+      });
       navigate("/");
     } catch {
       setLoginError(

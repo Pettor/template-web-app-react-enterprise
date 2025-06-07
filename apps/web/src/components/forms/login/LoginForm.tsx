@@ -100,7 +100,7 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
         {...register("password")}
       />
       <div className="flex w-full items-center justify-between px-1 py-2">
-        <Checkbox defaultSelected name="remember" size="sm">
+        <Checkbox defaultSelected size="sm" {...register("remember")}>
           {intl.formatMessage({
             description: "LoginForm - Remember me checkbox label",
             defaultMessage: "Remember me",
