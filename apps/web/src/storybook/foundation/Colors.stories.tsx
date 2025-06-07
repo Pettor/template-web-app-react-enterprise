@@ -1,4 +1,5 @@
-import type { ReactElement } from "react";
+import { Card, CardBody, CardHeader, Spacer } from "@heroui/react";
+import { useMemo, useState, type ReactElement, type ReactNode } from "react";
 import { DocumentationDecorator, DocumentationLayout } from "storybook-package";
 
 export default {
@@ -10,74 +11,105 @@ export default {
   },
 };
 
+function ColorSection({ title, children }: { title: string; children: ReactNode }): ReactElement {
+  return (
+    <div>
+      <p className="text-3xl">{title}</p>
+      <Spacer y={2} />
+      <div className="flex">{children}</div>
+    </div>
+  );
+}
+
+function ColorItem({ text, bgColor }: { text: string; bgColor: string }): ReactElement {
+  // From the <html> element get class dark or light
+
+  const [theme] = useState<string>(() => {
+    const htmlElement = document.querySelector("html");
+    return htmlElement?.classList.contains("dark") ? "dark" : "light";
+  });
+  console.log("Theme:", theme);
+
+  // What theme is storybook using
+  const [cardRef, setCardRef] = useState<HTMLDivElement | null>(null);
+
+  const refCallback = (node: HTMLDivElement | null) => {
+    setCardRef(node);
+  };
+
+  function rgbToHex(rgb: string): string {
+    const result = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+
+    if (!result || !result[1] || !result[2] || !result[3]) {
+      return "#ffffff";
+    }
+
+    const r = parseInt(result[1], 10);
+    const g = parseInt(result[2], 10);
+    const b = parseInt(result[3], 10);
+
+    return "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("");
+  }
+
+  const hexColor = useMemo(() => {
+    if (!cardRef) {
+      return "";
+    }
+
+    let el: HTMLElement | null = cardRef;
+
+    while (el) {
+      const bg = window.getComputedStyle(el).backgroundColor;
+
+      // If it's not fully transparent, return it
+      if (bg && bg !== "transparent" && bg !== "rgba(0, 0, 0, 0)") {
+        return rgbToHex(bg);
+      }
+
+      // Otherwise, walk up the DOM tree
+      el = el.parentElement;
+    }
+
+    // Default to white if no background color is found
+    return "rgb(255, 255, 255)";
+  }, [bgColor, cardRef]);
+
+  const textFromHex = useMemo(() => {
+    if (!hexColor) {
+      return "";
+    }
+
+    // Using hext decide if black or white text is better
+    const sanitizedHex = hexColor.replace(/^#/, "");
+
+    // Convert to RGB
+    console.log("Sanitized Hex:", sanitizedHex);
+    const r = parseInt(sanitizedHex.substring(0, 2), 16);
+    const g = parseInt(sanitizedHex.substring(2, 4), 16);
+    const b = parseInt(sanitizedHex.substring(4, 6), 16);
+
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness > 128 ? "text-black" : "text-white";
+  }, [hexColor]);
+
+  return (
+    <Card ref={refCallback} className={`mr-2 ${bgColor} ${textFromHex}`} isBlurred>
+      <CardHeader>{text}</CardHeader>
+      <CardBody>{hexColor}</CardBody>
+    </Card>
+  );
+}
+
 export function Colors(): ReactElement {
   return (
-    <DocumentationLayout label="Colors">
-      <table className="max-sm:table-xs table border-separate border-spacing-y-4 text-xl [&_*]:border-0 [&_td]:py-0 [&_th]:px-0 [&_tr]:py-2">
-        <thead className="text-base-content text-lg md:text-2xl">
-          <tr>
-            <th>Name</th>
-            <th>Main</th>
-            <th>Content</th>
-          </tr>
-        </thead>
-        <colgroup>
-          <col className="w-2/12 md:w-3/12" />
-          <col className="w-5/12 md:w-4/12" />
-          <col className="w-5/12 md:w-4/12" />
-        </colgroup>
-        <tbody className="[&_tr]:h-8 md:[&_tr]:h-12">
-          <tr>
-            <td>Primary</td>
-            <td className="bg-primary" />
-            <td className="bg-primary-content" />
-          </tr>
-          <tr>
-            <td>Secondary</td>
-            <td className="bg-secondary" />
-            <td className="bg-secondary-content" />
-          </tr>
-          <tr>
-            <td>Accent</td>
-            <td className="bg-accent" />
-            <td className="bg-accent-content" />
-          </tr>
-          <tr>
-            <td>Neutral</td>
-            <td className="bg-neutral" />
-            <td className="bg-neutral-content" />
-          </tr>
-          <tr>
-            <td>Base</td>
-            <td className="flex h-8 flex-row !p-0 md:h-12">
-              <div className="bg-base-100 basis-1/3">&nbsp;</div>
-              <div className="bg-base-200 basis-1/3">&nbsp;</div>
-              <div className="bg-base-300 basis-1/3" />
-            </td>
-            <td className="bg-neutral-content" />
-          </tr>
-          <tr>
-            <td>Info</td>
-            <td className="bg-info" />
-            <td className="bg-info-content" />
-          </tr>
-          <tr>
-            <td>Success</td>
-            <td className="bg-success" />
-            <td className="bg-success-content" />
-          </tr>
-          <tr>
-            <td>Warning</td>
-            <td className="bg-warning" />
-            <td className="bg-warning-content" />
-          </tr>
-          <tr>
-            <td>Error</td>
-            <td className="bg-error" />
-            <td className="bg-error-content" />
-          </tr>
-        </tbody>
-      </table>
+    <DocumentationLayout label="Layout">
+      <Spacer y={8} />
+      <ColorSection title="Base">
+        <ColorItem text="Background" bgColor="bg-background" />
+        <ColorItem text="Foreground" bgColor="bg-foreground" />
+        <ColorItem text="Divider" bgColor="bg-divider" />
+        <ColorItem text="Focus" bgColor="bg-focus" />
+      </ColorSection>
     </DocumentationLayout>
   );
 }
