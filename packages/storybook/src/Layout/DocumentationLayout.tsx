@@ -1,21 +1,20 @@
-import type { ReactElement } from "react";
+import type { ReactElement, ReactNode } from "react";
+import { Card, CardBody } from "@heroui/react";
 
 interface Props {
   label: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function DocumentationLayout({ label, children }: Props): ReactElement {
   return (
     <div className="md:m-4">
-      <div className="card bg-base-100 w-full shadow-xl">
-        <div className="card-body">
-          <div className="card-title">
-            <span className="text-3xl md:text-5xl">{label}</span>
-          </div>
+      <Card className="p-4">
+        <CardBody>
+          <p className="text-3xl md:text-5xl">{label}</p>
           {children}
-        </div>
-      </div>
+        </CardBody>
+      </Card>
     </div>
   );
 }
