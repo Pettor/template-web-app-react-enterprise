@@ -1,41 +1,26 @@
-import clsx from "clsx";
+import { Card, CardBody, CardHeader, Divider, Spacer } from "@heroui/react";
 import type { ReactElement } from "react";
-import { useIntl } from "react-intl";
 
 export interface GridItemProps {
   title: string;
   imageSrc: string;
   description: string;
-  invertColor?: boolean;
-  onClick?(): void;
 }
 
-export function GridItem({ title, imageSrc, description, invertColor, onClick }: GridItemProps): ReactElement {
-  const intl = useIntl();
-
+export function GridItem({ title, imageSrc, description }: GridItemProps): ReactElement {
   return (
-    <div className="card hover:bg-neutral-content/70 dark:hover:bg-neutral/40 transition-colors">
-      <div className="card-body glass min-h-56 rounded-xl dark:bg-none">
-        <h2 className="card-title">
-          {imageSrc && (
-            <img className={clsx(invertColor ? "dark:invert" : "", "mask mask-squircle h-6 w-6")} src={imageSrc} />
-          )}
-          {title}
-        </h2>
-        <div className="divider m-0" />
-        <p>{description}</p>
-        {onClick && (
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary" onClick={onClick}>
-              {intl.formatMessage({
-                description: "HomeView - Turborepo goto button",
-                defaultMessage: "Goto",
-                id: "UU8qy5",
-              })}
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
+    <Card isBlurred className="p-4">
+      <CardHeader className="gap-2">
+        {imageSrc && <img className="h-6 w-6" src={imageSrc} />}
+        <p className="text-lg font-bold">{title}</p>
+      </CardHeader>
+      <CardBody>
+        <div className="px-2">
+          <Divider />
+          <Spacer y={2} />
+          <p>{description}</p>
+        </div>
+      </CardBody>
+    </Card>
   );
 }

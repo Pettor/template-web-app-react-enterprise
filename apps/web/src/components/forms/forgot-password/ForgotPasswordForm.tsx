@@ -4,8 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
-import { ButtonLoading, InputField } from "ui-package";
 import * as yup from "yup";
+import { Button, Form, Input, Spacer } from "@heroui/react";
 
 export interface FormForgotPassword {
   email: string;
@@ -50,21 +50,28 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
   });
 
   return (
-    <form onSubmit={handleFormSubmit(onSubmit)} className="flex flex-col">
-      <InputField
+    <Form onSubmit={handleFormSubmit(onSubmit)} className="md:min-w-sm">
+      <Input
         autoFocus
         id="email"
-        type="text"
-        placeholder="Email"
-        icon={<EnvelopeIcon className="h-5 w-5" />}
-        error={errors.email?.message}
-        {...register("email")}
+        type="email"
+        fullWidth
+        label={intl.formatMessage({
+          description: "ForgotPasswordFormValidation - Email label",
+          defaultMessage: "Email",
+          id: "2k1Z5e",
+        })}
+        startContent={<EnvelopeIcon className="h-5 w-5" />}
+        isInvalid={!!errors.email}
+        errorMessage={errors.email?.message}
         data-testid="forgot-password-form__email-input"
+        {...register("email")}
       />
-      <ButtonLoading
-        loading={loading}
+      <Spacer />
+      <Button
+        isLoading={loading}
         type="submit"
-        className="btn btn-primary text-base-100 dark:text-base-300 z-20 w-full"
+        className="btn btn-primary text-base-100 dark:text-base-300 z-20"
         title={intl.formatMessage({
           description: "ForgotPasswordFormValidation - Send button title",
           defaultMessage: "Submit",
@@ -82,7 +89,7 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
           defaultMessage: "Send",
           id: "r3YQJ5",
         })}
-      </ButtonLoading>
-    </form>
+      </Button>
+    </Form>
   );
 }

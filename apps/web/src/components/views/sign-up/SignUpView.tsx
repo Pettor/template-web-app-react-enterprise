@@ -4,6 +4,7 @@ import { useIntl } from "react-intl";
 import { BasicLayout, BlueFadeBackground, GridBackground } from "ui-package";
 import type { SignUpFormProps } from "~/components/forms/sign-up/SignUpForm";
 import { SignUpForm } from "~/components/forms/sign-up/SignUpForm";
+import { Card, CardHeader, Button, CardBody, Spacer } from "@heroui/react";
 
 export interface SignUpViewProps {
   appName: string;
@@ -24,42 +25,40 @@ export function SignUpView({ signUpForm, onBack }: SignUpViewProps): ReactElemen
         </>
       }
     >
-      <div className="flex flex-1 flex-col items-center justify-center">
-        <div className="hero">
-          <div className="hero-content w-full flex-col lg:flex-row-reverse">
-            <div className="card bg-base-100 w-full shrink-0 shadow-2xl sm:min-h-[550px] sm:w-[550px]">
-              <div className="card-body w-full md:min-w-96">
-                <div className="card-actions justify-end">
-                  <button
-                    className="btn btn-square btn-sm"
-                    onClick={onBack}
-                    title={intl.formatMessage({
-                      description: "SignUpView - Back button title",
-                      defaultMessage: "Back",
-                      id: "beyKXy",
-                    })}
-                    aria-label={intl.formatMessage({
-                      description: "SignUpView - Back button aria label",
-                      defaultMessage: "Back",
-                      id: "Gy2cjY",
-                    })}
-                  >
-                    <XMarkIcon className="h-6 w-6" />
-                  </button>
-                </div>
-                <p className="my-2 text-center">
-                  {intl.formatMessage({
-                    description: "SignUpView - Sign up description",
-                    defaultMessage: "Sign up with your email address",
-                    id: "NG06ZV",
-                  })}
-                </p>
-                <div className="md:px-12">
-                  <SignUpForm {...signUpForm} />
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="flex w-full flex-col items-center justify-center gap-1 p-4 lg:flex-row-reverse">
+        <div className="bg-base-100 h-full min-h-[550px] w-full shrink-0 sm:w-[550px]">
+          <Card className="min-h-[550px]">
+            <CardHeader className="flex w-full items-end justify-between">
+              <div className="flex" />
+              <Button
+                isIconOnly
+                onPress={onBack}
+                title={intl.formatMessage({
+                  description: "AboutView - Back button title",
+                  defaultMessage: "Back",
+                  id: "72q+Ui",
+                })}
+                aria-label={intl.formatMessage({
+                  description: "AboutView - Back button aria label",
+                  defaultMessage: "Back",
+                  id: "ZTBga3",
+                })}
+              >
+                <XMarkIcon className="h-6 w-6" />
+              </Button>
+            </CardHeader>
+            <CardBody className="flex flex-col items-center">
+              <p className="my-2 text-center">
+                {intl.formatMessage({
+                  description: "SignUpView - Sign up description",
+                  defaultMessage: "Sign up with your email address",
+                  id: "NG06ZV",
+                })}
+              </p>
+              <SignUpForm {...signUpForm} />
+              <Spacer y={4} />
+            </CardBody>
+          </Card>
         </div>
       </div>
     </BasicLayout>

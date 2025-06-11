@@ -3,8 +3,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
-import { ButtonLoading, InputField } from "ui-package";
 import * as yup from "yup";
+import { Button, Form, Input } from "@heroui/react";
 
 export interface FormSignUp {
   firstName?: string;
@@ -99,8 +99,8 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
   });
 
   return (
-    <form onSubmit={handleFormSubmit(onSubmit)} className="flex flex-col">
-      <InputField
+    <Form onSubmit={handleFormSubmit(onSubmit)} className="md:min-w-sm">
+      <Input
         autoFocus
         id="userName"
         type="text"
@@ -109,11 +109,12 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           defaultMessage: "What should we call you?",
           id: "f2xRFX",
         })}
-        error={errors.userName?.message}
+        isInvalid={!!errors.userName}
+        errorMessage={errors.userName?.message}
         {...register("userName")}
         data-testid="sign-up-form__username-input"
       />
-      <InputField
+      <Input
         id="firstName"
         type="text"
         placeholder={intl.formatMessage({
@@ -121,11 +122,12 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           defaultMessage: "What is your first name?",
           id: "NFDCUF",
         })}
-        error={errors.firstName?.message}
+        isInvalid={!!errors.firstName}
+        errorMessage={errors.firstName?.message}
         {...register("firstName")}
         data-testid="sign-up-form__firstname-input"
       />
-      <InputField
+      <Input
         id="lastName"
         type="text"
         placeholder={intl.formatMessage({
@@ -133,11 +135,12 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           defaultMessage: "What is your last name?",
           id: "3YTbxI",
         })}
-        error={errors.lastName?.message}
+        isInvalid={!!errors.lastName}
+        errorMessage={errors.lastName?.message}
         {...register("lastName")}
         data-testid="sign-up-form__lastname-input"
       />
-      <InputField
+      <Input
         id="email"
         type="email"
         placeholder={intl.formatMessage({
@@ -145,11 +148,12 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           defaultMessage: "What's your email?",
           id: "tZBQgk",
         })}
-        error={errors.email?.message}
+        isInvalid={!!errors.email}
+        errorMessage={errors.email?.message}
         {...register("email")}
         data-testid="sign-up-form__email-input"
       />
-      <InputField
+      <Input
         id="phoneNumber"
         type="tel"
         placeholder={intl.formatMessage({
@@ -157,11 +161,12 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           defaultMessage: "What's your phone number?",
           id: "UjAA8C",
         })}
-        error={errors.phoneNumber?.message}
+        isInvalid={!!errors.phoneNumber}
+        errorMessage={errors.phoneNumber?.message}
         {...register("phoneNumber")}
         data-testid="sign-up-form__phonenumber-input"
       />
-      <InputField
+      <Input
         id="password"
         type="password"
         placeholder={intl.formatMessage({
@@ -169,11 +174,12 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           defaultMessage: "Create a password",
           id: "ppqAda",
         })}
-        error={errors.password?.message}
+        isInvalid={!!errors.password}
+        errorMessage={errors.password?.message}
         {...register("password")}
         data-testid="sign-up-form__password-input"
       />
-      <InputField
+      <Input
         id="confirmPassword"
         type="password"
         placeholder={intl.formatMessage({
@@ -181,12 +187,13 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           defaultMessage: "Confirm password",
           id: "dU9xzq",
         })}
-        error={errors.confirmPassword?.message}
+        isInvalid={!!errors.confirmPassword}
+        errorMessage={errors.confirmPassword?.message}
         {...register("password")}
         data-testid="sign-up-form__confirmpassword-input"
       />
-      <ButtonLoading
-        loading={loading}
+      <Button
+        isLoading={loading}
         type="submit"
         className="btn btn-primary text-base-100 dark:text-base-300 z-20 mt-2"
         data-testid="sign-up-form__submit-button"
@@ -196,7 +203,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           defaultMessage: "Sign Up",
           id: "oigOyc",
         })}
-      </ButtonLoading>
-    </form>
+      </Button>
+    </Form>
   );
 }
