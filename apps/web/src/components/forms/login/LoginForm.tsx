@@ -115,7 +115,13 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
           })}
         </Link>
       </div>
-      <Button isLoading={loading} className="w-full" color="primary" type="submit">
+      <Button
+        isLoading={loading}
+        className="w-full"
+        color="primary"
+        type="submit"
+        data-testid="login-form__submit-button"
+      >
         {intl.formatMessage({
           description: "LoginForm - Submit button text",
           defaultMessage: "Login",

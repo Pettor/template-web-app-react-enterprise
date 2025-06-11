@@ -58,7 +58,7 @@ export function Appbar({ profile, socialLinks, themeSwitch }: AppbarProps): Reac
   const endElement = (
     <>
       <Popover placement="bottom-end">
-        <PopoverTrigger>
+        <PopoverTrigger data-testid="home-page__menu-button">
           <Avatar size="sm" />
         </PopoverTrigger>
         <PopoverContent>
