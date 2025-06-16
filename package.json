@@ -9,6 +9,7 @@
   },
   "scripts": {
     "prepare": "husky",
+    "generate:exports": "turbo run generate:exports --no-daemon",
     "build": "turbo run build --no-daemon",
     "deploy": "turbo run deploy --no-daemon",
     "clean": "turbo run clean --no-daemon && rimraf output",
@@ -37,15 +38,14 @@
     "storybook:move:ui": "turbo run storybook:move --filter=ui-package --no-daemon"
   },
   "dependencies": {
-    "@emotion/core": "11.0.0",
-    "@emotion/react": "11.14.0",
-    "@emotion/styled": "11.14.0",
     "@fontsource/rubik": "5.2.5",
     "@heroicons/react": "2.2.0",
+    "@heroui/react": "2.8.0-beta.6",
     "@tanstack/react-query": "5.77.0",
     "clsx": "2.1.1",
     "concurrently": "9.1.2",
     "daisyui": "5.0.35",
+    "framer-motion": "12.15.0",
     "immer": "10.1.1",
     "jotai": "2.12.4",
     "jotai-effect": "2.0.2",
@@ -78,6 +78,7 @@
     "@types/node": "22.15.18",
     "@types/react": "19.1.4",
     "@types/react-dom": "19.1.5",
+    "barrelsby": "2.8.1",
     "cross-env": "7.0.3",
     "eslint": "9.27.0",
     "http-server": "14.1.1",
@@ -103,6 +104,9 @@
     "overrides": {
       "typescript": "5.8.3",
       "vite": "6.3.5"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "@heroui/shared-utils"
+    ]
   }
 }

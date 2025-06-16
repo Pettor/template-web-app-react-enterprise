@@ -6,12 +6,15 @@
     "prepare": {
       "cache": true
     },
+    "generate:exports": {
+      "cache": false
+    },
     "build": {
       "outputs": [
         "dist/**",
         "build/**"
       ],
-      "dependsOn": ["^build"]
+      "dependsOn": ["generate:exports", "^build"]
     },
     "deploy": {
       "outputs": [

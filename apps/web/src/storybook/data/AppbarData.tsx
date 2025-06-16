@@ -1,15 +1,18 @@
-import type { AppbarDesktopProps } from "../../components/navigation/appbar-desktop";
-import type { AppbarPhoneProps } from "../../components/navigation/appbar-phone";
-import { AppSessionData } from "./AppSessionData";
+import type { AppbarProps } from "~/components/navigation/appbar";
 
-const AppbarCommonData: AppbarPhoneProps & AppbarDesktopProps = {
-  title: "Some Title",
-  mode: "light",
-  ...AppSessionData,
-  onSwitch: () => console.log("onToggle"),
-  onGithubClick: () => console.log("onGithubClick"),
-  onLinkedInClick: () => console.log("onLinkedInClick"),
+export const AppbarCommonData: AppbarProps = {
+  profile: {
+    name: "John Doe",
+    email: "john.doe@mailcom",
+    onAbout: () => console.log("onAbout"),
+    onLogout: () => console.log("onLogout"),
+  },
+  socialLinks: {
+    onGithubClick: () => console.log("onGithubClick"),
+    onLinkedInClick: () => console.log("onLinkedInClick"),
+  },
+  themeSwitch: {
+    mode: "light",
+    onSwitch: () => console.log("onToggle"),
+  },
 };
-
-export const AppbarDesktopData: AppbarDesktopProps = AppbarCommonData;
-export const AppbarPhoneData: AppbarPhoneProps = AppbarCommonData;

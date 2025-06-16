@@ -1,6 +1,6 @@
 import type { UseMutationResult } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
-import { apiClient } from "../../Client";
+import { apiClient } from "../../Client/ApiClient";
 import { ServiceErrorFactory } from "../../Service/ServiceErrorFactory";
 import type { ApiError } from "../../Worker/ApiWorkerReponse";
 import type { LoginData } from "./Classes";

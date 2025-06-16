@@ -25,11 +25,11 @@ const defaultArgs = {
   appName: "My App",
   loginForm: {
     loading: false,
+    onForgotPassword: () => console.log("handleForgotPassword"),
+    onSignUp: () => console.log("handleSignUp"),
     onSubmit: () => console.log("onSubmit"),
   },
   onAbout: () => console.log("onAbout"),
-  onForgotPassword: () => console.log("handleForgotPassword"),
-  onSignUp: () => console.log("handleSignUp"),
 } satisfies Props;
 
 export const Fullscreen: Story = {

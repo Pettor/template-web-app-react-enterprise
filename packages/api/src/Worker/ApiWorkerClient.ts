@@ -8,10 +8,10 @@ import type {
 } from "axios";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
 import { produce } from "immer";
-import type { LoginData } from "../Api";
 import type { JwtToken } from "../Token/JwtToken";
 import { getToken } from "../Token/TokenStorage";
 import { tokenSchema } from "./ApiWorkerClasses";
+import type { LoginData } from "../Api/Login/Classes";
 
 export class ApiWorkerClient {
   private readonly TOKEN_API_URL = "/api/tokens";

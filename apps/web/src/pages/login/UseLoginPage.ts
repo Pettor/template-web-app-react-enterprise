@@ -17,7 +17,11 @@ export function useLoginPage(): LoginViewProps {
     setLoginError("");
 
     try {
-      await login(data);
+      await login({
+        email: data.email,
+        password: data.password,
+        rememberMe: data.remember,
+      });
       navigate("/");
     } catch {
       setLoginError(
@@ -46,11 +50,11 @@ export function useLoginPage(): LoginViewProps {
     appName,
     loginForm: {
       loading: loginLoading,
+      error: loginError,
+      onSignUp: handleSignUp,
+      onForgotPassword: handleForgotPassword,
       onSubmit: handleSubmit,
     },
-    error: loginError,
     onAbout: handleOnAbout,
-    onForgotPassword: handleForgotPassword,
-    onSignUp: handleSignUp,
   };
 }

@@ -1,7 +1,7 @@
 import type { ProfileInfo } from "./Classes";
 import type { ProfileInfoDto } from "./Schema";
 
-export function convertFromDto(dto: ProfileInfoDto): ProfileInfo {
+export function personalProfileConvertFromDto(dto: ProfileInfoDto): ProfileInfo {
   return {
     id: dto.id,
     userName: dto.userName,
