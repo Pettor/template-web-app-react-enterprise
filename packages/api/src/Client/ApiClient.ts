@@ -1,7 +1,7 @@
-import type { LoginData } from "../Api";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore - this is worker syntax
 import ApiWorker from "../Worker/ApiWorker?worker";
+import type { LoginData } from "../Api/Login/Classes";
 import { ApiWorkerCommunication } from "../Worker/ApiWorkerCommunication";
 import type { ApiResponse } from "../Worker/ApiWorkerReponse";
 
@@ -53,3 +53,5 @@ export class ApiClient {
     return this._apiWorkerCommunication.send<T>({ type: "request/put", url });
   }
 }
+
+export const apiClient = new ApiClient();

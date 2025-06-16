@@ -1,0 +1,9 @@
+{
+	"directory": ["src"],
+  "delete": true,
+	"exclude": ["stories.tsx$"],
+	"include": [".ts$", ".tsx$"],
+  "location": "top",
+	"structure": "flat",
+  "verbose": false
+}

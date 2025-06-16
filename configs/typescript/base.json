@@ -19,9 +19,13 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "preserveWatchOutput": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "ESNext"
   },
-  "exclude": ["**/node_modules", "**/dist", "**/build", "**/coverage", "**/output", "**/storybook-static", "**/.junit"]
+  "exclude": ["**/node_modules", "**/dist", "**/build", "**/coverage", "**/output", "**/storybook-static", "**/.junit"],
+  "typescript.preferences": {
+    "includePackageJsonAutoImports": "off"
+  }
 }

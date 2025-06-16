@@ -9,6 +9,7 @@
   },
   "scripts": {
     "prepare": "husky",
+    "generate:exports": "turbo run generate:exports --no-daemon",
     "build": "turbo run build --no-daemon",
     "deploy": "turbo run deploy --no-daemon",
     "clean": "turbo run clean --no-daemon && rimraf output",
@@ -77,6 +78,7 @@
     "@types/node": "22.15.18",
     "@types/react": "19.1.4",
     "@types/react-dom": "19.1.5",
+    "barrelsby": "2.8.1",
     "cross-env": "7.0.3",
     "eslint": "9.27.0",
     "http-server": "14.1.1",

@@ -1,10 +1,10 @@
 import axios from "axios";
-import type { LoginData } from "../Api";
 import { client } from "../Client/AxiosClient";
 import { clearToken, setToken } from "../Token/TokenStorage";
 import { ALLOWED_URLS } from "./ApiWorkerAllowedUrls";
 import { ApiWorkerClient } from "./ApiWorkerClient";
 import type { ApiError, ApiResponseTypes } from "./ApiWorkerReponse";
+import type { LoginData } from "../Api/Login/Classes";
 
 // Request and Response types
 type ApiMessages =
