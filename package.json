@@ -106,7 +106,7 @@
       "@heroui/shared-utils"
     ]
   },
-    "lint-staged": {
+  "lint-staged": {
     "*.js": "prettier --write",
     "*.ts": "prettier --write",
     "*.tsx": "prettier --write",

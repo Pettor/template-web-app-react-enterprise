@@ -2,7 +2,8 @@
   "name": "storybook-config",
   "exports": {
     "./main": "./main.ts",
-    "./preview": "./preview.tsx"
+    "./preview": "./preview.tsx",
+    "./vite": "./vite.config.js"
   },
   "version": "0.6.0",
   "devDependencies": {
