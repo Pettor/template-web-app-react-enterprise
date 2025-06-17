@@ -10,27 +10,27 @@
       "cache": false
     },
     "build": {
+      "dependsOn": ["generate:exports", "^build"],
       "outputs": [
         "dist/**",
         "build/**"
-      ],
-      "dependsOn": ["generate:exports", "^build"]
+      ]
     },
     "deploy": {
+      "dependsOn": ["^build"],
       "outputs": [
         "dist/**",
         "output/deployment/**"
-      ],
-      "dependsOn": ["^build"]
+      ]
     },
     "dev": {
-      "dependsOn": ["^build"],
       "cache": false,
+      "dependsOn": ["^build"],
       "persistent": true
     },
     "dev:mocks": {
-      "dependsOn": ["^build"],
       "cache": false,
+      "dependsOn": ["^build"],
       "persistent": true
     },
     "clean": {
@@ -72,11 +72,7 @@
     },
     "storybook:build": {
       "cache": false,
-      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts"],
-      "outputs": ["**/storybook-static/**"]
-    },
-    "storybook:publish": {
-      "cache": false,
+      "dependsOn": ["^build"],
       "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts"],
       "outputs": ["**/storybook-static/**"]
     },
