@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { userEvent, within, expect } from "@storybook/test";
+import { expect } from "storybook/test";
 import { ContainerDecorator } from "storybook-package";
 import { SignUpForm as Component } from "./SignUpForm";
 import type { SignUpFormProps as Props } from "./SignUpForm";
@@ -24,9 +24,7 @@ export const Standard: Story = {
 
 export const Success: Story = {
   args: defaultArgs,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
+  play: async ({ canvas, userEvent }) => {
     await userEvent.type(canvas.getByTestId("sign-up-form__username-input"), "username");
     await userEvent.type(canvas.getByTestId("sign-up-form__firstname-input"), "john");
     await userEvent.type(canvas.getByTestId("sign-up-form__lastname-input"), "doe");
@@ -49,9 +47,7 @@ export const Success: Story = {
 
 export const MissingFields: Story = {
   args: defaultArgs,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
+  play: async ({ canvas, userEvent }) => {
     await userEvent.click(canvas.getByTestId("sign-up-form__submit-button"));
 
     await expect(canvas.getByText("We need to call you something")).toBeInTheDocument();
@@ -63,9 +59,7 @@ export const MissingFields: Story = {
 
 export const IncorrectPassword: Story = {
   args: defaultArgs,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
+  play: async ({ canvas, userEvent }) => {
     await userEvent.type(canvas.getByTestId("sign-up-form__username-input"), "username");
     await userEvent.type(canvas.getByTestId("sign-up-form__email-input"), "email@provider.com");
     await userEvent.type(canvas.getByTestId("sign-up-form__password-input"), "short");

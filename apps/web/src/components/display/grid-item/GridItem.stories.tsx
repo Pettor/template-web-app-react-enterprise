@@ -20,10 +20,3 @@ const defaultArgs = {
 export const Default: Story = {
   args: defaultArgs,
 };
-
-export const Inverted: Story = {
-  args: {
-    ...defaultArgs,
-    invertColor: true,
-  },
-};
