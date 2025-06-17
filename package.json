@@ -83,6 +83,7 @@
     "eslint": "9.27.0",
     "http-server": "14.1.1",
     "husky": "9.1.7",
+    "lint-staged": "16.1.2",
     "move-cli": "2.0.0",
     "nyc": "17.1.0",
     "playwright": "1.52.0",
@@ -108,5 +109,11 @@
     "onlyBuiltDependencies": [
       "@heroui/shared-utils"
     ]
+  },
+    "lint-staged": {
+    "*.js": "prettier --write",
+    "*.ts": "prettier --write",
+    "*.tsx": "prettier --write",
+    "*.scss": "prettier --write"
   }
 }
