@@ -1,0 +1,2 @@
+import{u as p}from"./chunk-MW56SEHC-OXtVZdTl.js";import{f as u,a as h}from"./chunk-3HKZRFKK-BUq3PZP3.js";import{u as v}from"./chunk-OEE6MISH-iYYuBCZd.js";import{j as x}from"./iframe-AX-ZHRPq.js";var s=u((o,t)=>{var a;const{as:d,className:l,children:m,...c}=o,n=d||"div",f=v(t),{slots:e,classNames:r}=p(),i=h(r==null?void 0:r.header,l);return x.jsx(n,{ref:f,className:(a=e.header)==null?void 0:a.call(e,{class:i}),...c,children:m})});s.displayName="HeroUI.CardHeader";var H=s;export{H as c};
+//# sourceMappingURL=chunk-D5XJWRAV-DrVpPclL.js.map

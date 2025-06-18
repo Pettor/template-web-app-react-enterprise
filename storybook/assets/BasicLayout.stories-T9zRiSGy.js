@@ -1,0 +1,6 @@
+import{j as p}from"./iframe-AX-ZHRPq.js";import{S as i}from"./StorybookTableContentComponent-xTEpvxVt.js";import{B as a}from"./BasicLayout-DqNArPPZ.js";import"./chunk-F3UDT23P-yOXVegnb.js";import"./chunk-3HKZRFKK-BUq3PZP3.js";import"./index-SOlPy6ph.js";import"./chunk-OEE6MISH-iYYuBCZd.js";import"./chunk-RJKRL3AU-CjtrMR1U.js";import"./index-DD9tcz9C.js";import"./FocusScope-sYJwysp0.js";import"./useControlledState-DceTrbrl.js";import"./getScrollParent-DEy-eG3W.js";import"./chunk-MZRCPRP2-Av5AC3Xf.js";import"./useToggleState-YX0Ws1hH.js";import"./index-ejUXTslw.js";import"./chunk-SLABUSGS-CKyLQa6f.js";import"./useToggle-DHia1q0B.js";import"./useFormReset-BChVea6x.js";import"./chunk-AWMMSYR4-D7Oz3SW6.js";import"./chunk-R6AK6OQ4-DMfExj23.js";import"./chunk-GQT3YUX3-FQ1U8E7v.js";const _={component:a,title:"Shared/Layout"},o={args:{children:p.jsx(i,{})}};var t,r,m;o.parameters={...o.parameters,docs:{...(t=o.parameters)==null?void 0:t.docs,source:{originalSource:`{
+  args: {
+    children: <StorybookTableContentComponent />
+  }
+}`,...(m=(r=o.parameters)==null?void 0:r.docs)==null?void 0:m.source}}};const O=["BasicLayout"];export{o as BasicLayout,O as __namedExportsOrder,_ as default};
+//# sourceMappingURL=BasicLayout.stories-T9zRiSGy.js.map

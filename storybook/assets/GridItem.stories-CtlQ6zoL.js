@@ -1,0 +1,4 @@
+import{G as s,s as i}from"./storybook-AhqWAKtc.js";import"./iframe-AX-ZHRPq.js";import"./chunk-MW56SEHC-OXtVZdTl.js";import"./chunk-3HKZRFKK-BUq3PZP3.js";import"./index-SOlPy6ph.js";import"./chunk-OEE6MISH-iYYuBCZd.js";import"./chunk-6VC6TS2O-DSZcp7nF.js";import"./proxy-CpOrQZxw.js";import"./chunk-RJKRL3AU-CjtrMR1U.js";import"./chunk-D5XJWRAV-DrVpPclL.js";import"./chunk-IHO36JMK-BVmgnnO3.js";import"./chunk-AWMMSYR4-D7Oz3SW6.js";const S={title:"Display/Grid Item",component:s},m={title:"Title",imageSrc:i,description:"Description"},r={args:m};var t,o,e;r.parameters={...r.parameters,docs:{...(t=r.parameters)==null?void 0:t.docs,source:{originalSource:`{
+  args: defaultArgs
+}`,...(e=(o=r.parameters)==null?void 0:o.docs)==null?void 0:e.source}}};const x=["Default"];export{r as Default,x as __namedExportsOrder,S as default};
+//# sourceMappingURL=GridItem.stories-CtlQ6zoL.js.map

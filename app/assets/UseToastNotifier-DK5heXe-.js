@@ -1,0 +1,1 @@
+import{c as r,V as e}from"./index-Cl5wLEy5.js";import{t as m,f as c}from"./BlueFadeBackground-PmMmfSeV.js";function f(){const t=r.c(3),s=e(m),a=e(c);let o;return t[0]!==s||t[1]!==a?(o={addToast:s,clearToasts:a},t[0]=s,t[1]=a,t[2]=o):o=t[2],o}export{f as u};
