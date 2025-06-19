@@ -12,7 +12,7 @@ export function StorybookTableContentComponent(): ReactElement {
       <TableBody>
         {Array.from({ length: 150 }, (_, i) => (
           <TableRow key={i}>
-            <TableCell>{faker.internet.displayName()}</TableCell>
+            <TableCell>{faker.internet.username()}</TableCell>
             <TableCell>
               <User
                 avatarProps={{ radius: "lg", src: faker.image.avatar() }}
