@@ -9,6 +9,9 @@
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules"
   },
+  "peerDependencies": {
+    "@storybook/react": "catalog:storybook"
+  },
   "devDependencies": {
     "eslint-config": "workspace:*",
     "react-package": "workspace:*",

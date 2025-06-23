@@ -1,0 +1,12 @@
+{
+  "exclude": ["dist"],
+  "extends": "typescript-config/vite.json",
+  "compilerOptions": {
+    // Paths & Types
+    "paths": {
+      "~/*": ["../web/src/*"]
+    },
+    "types": ["typescript-config/types"]
+  },
+  "include": ["**/*.ts", "**/*.tsx", ".storybook/vite.config.ts", "vitest.config.ts"],
+}

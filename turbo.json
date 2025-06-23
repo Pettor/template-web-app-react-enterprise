@@ -9,20 +9,6 @@
     "generate:exports": {
       "cache": false
     },
-    "build": {
-      "dependsOn": ["generate:exports", "^build"],
-      "outputs": [
-        "dist/**",
-        "build/**"
-      ]
-    },
-    "deploy": {
-      "dependsOn": ["^build"],
-      "outputs": [
-        "dist/**",
-        "output/deployment/**"
-      ]
-    },
     "dev": {
       "cache": false,
       "dependsOn": ["^build"],
@@ -45,19 +31,13 @@
     "lint:fix": {
       "cache": false
     },
-    "test": {
-      "cache": false
+    "build": {
+      "dependsOn": ["generate:exports", "^build"],
+      "outputs": ["dist/**", "build/**"]
     },
-    "test:e2e:env": {
-      "cache": false
-    },
-    "test:coverage": {
-      "cache": false,
-      "outputs": ["**/.coverage/**/*"]
-    },
-    "test:coverage:ci": {
-      "cache": false,
-      "outputs": ["output/coverage/*.xml"]
+    "deploy": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "output/deployment/**"]
     },
     "storybook": {
       "cache": false
@@ -71,6 +51,20 @@
     "storybook:move": {
       "cache": false,
       "outputs": ["output/storybook-static/**"]
+    },
+    "test": {
+      "cache": false
+    },
+    "test:e2e:env": {
+      "cache": false
+    },
+    "test:coverage": {
+      "cache": false,
+      "outputs": ["**/.coverage/**/*"]
+    },
+    "test:coverage:ci": {
+      "cache": false,
+      "outputs": ["output/coverage/*.xml"]
     }
   }
 }

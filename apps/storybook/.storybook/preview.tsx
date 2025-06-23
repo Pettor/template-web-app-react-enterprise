@@ -1,7 +1,9 @@
 import { INITIAL_VIEWPORTS } from "storybook/viewport";
-import { Preview } from "@storybook/react";
 import { IntlProvider } from "react-intl";
 import { withThemeByClassName } from "@storybook/addon-themes";
+import baseConfig from "storybook-config/preview";
+import type { Preview } from "@storybook/react";
+import "../src/main.css";
 
 const preview: Preview = {
   decorators: [
@@ -19,6 +21,12 @@ const preview: Preview = {
     }),
   ],
   parameters: {
+    options: {
+      storySort: {
+        method: "alphabetical",
+        order: ["Design System", "Views", "Actions", "Display", "Feedback", "Forms", "Layout", "Navigation", "Shared"],
+      },
+    },
     viewport: {
       viewports: INITIAL_VIEWPORTS,
     },

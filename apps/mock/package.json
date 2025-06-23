@@ -5,8 +5,8 @@
   "version": "0.6.0",
   "scripts": {
     "clean": "rimraf dist",
-    "clean:all": "pnpm clean",
-    "mocks": "mocks-server",
+    "clean:all": "pnpm clean node_modules",
+    "dev:mocks": "mocks-server",
     "test:e2e:env": "mocks-server --no-plugins.inquirerCli.enabled --log=silent"
   },
   "devDependencies": {

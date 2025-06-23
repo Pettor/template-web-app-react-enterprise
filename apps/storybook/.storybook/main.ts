@@ -1,7 +1,7 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
-  addons: ["@storybook/addon-coverage", "@storybook/addon-themes"],
+  addons: ["@storybook/addon-themes", "@storybook/addon-vitest"],
   core: {
     builder: {
       name: "@storybook/builder-vite",
@@ -14,7 +14,7 @@ const config: StorybookConfig = {
     defaultName: "Docs",
   },
   framework: "@storybook/react-vite",
-  stories: ["**/*.stories.@(ts|tsx)"],
+  stories: ["../node_modules/web/src/**/*.stories.@(ts|tsx)", "../node_modules/ui-package/src/**/*.stories.tsx"],
 };
 
 export default config;
