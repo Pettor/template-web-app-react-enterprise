@@ -12,6 +12,6 @@
 @import "../node_modules/tailwind-config/tailwind.css";
 
 /* Tailwind sources */
-@source "./**/**.{js,ts,jsx,tsx}";
-@source "../node_modules/ui-package";
-@source "../node_modules/storybook-package";
+@source "../node_modules/web/src/**/*.{js,ts,jsx,tsx}";
+@source "../node_modules/ui-package/src/**/*.{js,ts,jsx,tsx}";
+@source "../node_modules/storybook-package/src/**/*.{js,ts,jsx,tsx}";

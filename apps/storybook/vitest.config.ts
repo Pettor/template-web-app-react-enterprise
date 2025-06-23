@@ -1,13 +1,25 @@
 import path from "node:path";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { defineConfig } from "vitest/config";
+import tsconfigPaths from "vite-tsconfig-paths";
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   test: {
     coverage: {
-      include: ["src/**/*.{ts,tsx}"],
-      exclude: ["src/Storybook/**/*.{ts,tsx}"],
+      allowExternal: true,
+      include: ["**/apps/**/src/**/*.{ts,tsx}", "**/packages/ui/**/src/**/*.{ts,tsx}"],
+      exclude: [
+        "**/src/**/*.stories.{ts,tsx}",
+        "**/src/**/*.test.{ts,tsx}",
+        "**/src/**/*.spec.{ts,tsx}",
+        "**/src/**/*.d.ts",
+        "**/src/**/index.ts",
+        "**/{storybook,Storybook}/**/*.{ts,tsx}",
+      ],
+      reporter: ["cobertura"]
     },
     projects: [
       {
@@ -16,8 +28,9 @@ export default defineConfig({
           include: ["react/jsx-dev-runtime"],
         },
         plugins: [
-          // The plugin will run tests for the stories defined in your Storybook config
-          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+          react(),
+          tailwindcss(),
+          tsconfigPaths(),
           storybookTest({ configDir: path.join(__dirname, ".storybook") }),
         ],
         test: {

@@ -8,5 +8,5 @@
     },
     "types": ["typescript-config/types", "vite-plugin-pwa/client"]
   },
-  "include": ["**/*.ts", "**/*.tsx", ".storybook/vite.config.ts", "vite.config.ts"]
+  "include": ["**/*.ts", "**/*.tsx", "vite.config.ts"]
 }

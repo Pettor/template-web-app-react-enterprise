@@ -1,8 +1,6 @@
-import path from "path";
-import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
-import type { PluginOption, UserConfig } from "vite";
+import type { UserConfig } from "vite";
 import { defineConfig, loadEnv, mergeConfig } from "vite";
 import proxy from "vite-plugin-http2-proxy";
 import mkcert from "vite-plugin-mkcert";
@@ -24,9 +22,9 @@ export default defineConfig(({ mode, command }) => {
         babel: {
           plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]],
         },
-      }) as PluginOption,
+      }),
       tailwindcss(),
-      tsconfigPaths() as PluginOption,
+      tsconfigPaths(),
       VitePWA({
         devOptions: {
           enabled: false,
@@ -43,8 +41,8 @@ export default defineConfig(({ mode, command }) => {
         manifest: {
           background_color: "#ffffff",
           display: "standalone",
-          description: "React Template using Turborepo, TailwindCSS, DaisyUI and Vite.",
-          name: "ReactWebTemplate",
+          description: "React Enterprise Template using Turborepo, TailwindCSS, HeroUI and Vite.",
+          name: "ReactEnterpriseTemplate",
           icons: [
             {
               src: "pwa-192x192.png",
@@ -81,40 +79,9 @@ export default defineConfig(({ mode, command }) => {
           globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
           navigateFallbackDenylist: [/storybook/],
         },
-      }) as PluginOption,
+      }),
     ],
   };
-
-  const vitestConfig = defineConfigVitest({
-    test: {
-      coverage: {
-        include: ["src/components/**/*.{ts,tsx}"],
-      },
-      projects: [
-        {
-          extends: true,
-          optimizeDeps: {
-            include: ["react/jsx-dev-runtime"],
-          },
-          plugins: [
-            // The plugin will run tests for the stories defined in your Storybook config
-            // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
-            storybookTest({ configDir: path.join(__dirname, ".storybook") }),
-          ],
-          test: {
-            name: "storybook",
-            browser: {
-              enabled: true,
-              headless: true,
-              provider: "playwright",
-              instances: [{ browser: "chromium" }],
-            },
-            setupFiles: [path.join(".storybook", "vitest.setup.ts")],
-          },
-        },
-      ],
-    },
-  });
 
   switch (command) {
     case "build":
@@ -128,7 +95,6 @@ export default defineConfig(({ mode, command }) => {
       });
     case "serve":
       return mergeConfig(commonConfig, {
-        ...vitestConfig,
         server: {
           cors: true,
           https: true,

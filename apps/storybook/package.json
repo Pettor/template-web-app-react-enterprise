@@ -1,0 +1,37 @@
+{
+  "name": "storybook",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "version": "0.6.0",
+  "scripts": {
+    "clean": "rimraf storybook-static coverage",
+    "clean:all": "pnpm clean node_modules",
+    "deploy": "pnpm deploy:build && pnpm deploy:move",
+    "deploy:build": "pnpm storybook:build",
+    "deploy:move": "move-cli storybook-static \"../../output/deployment/storybook\" --mkdirp",
+    "test": "vitest --project=storybook",
+    "test:coverage": "vitest --project=storybook --coverage",
+    "test:coverage:ci": "pnpm test:coverage && pnpm test:coverage:ci:move",
+    "test:coverage:ci:move": "move-cli ./coverage/cobertura-coverage.xml \"../../output/coverage/web.xml\" --mkdirp",
+    "storybook": "storybook dev -p 9050",
+    "storybook:build": "storybook build -o storybook-static"
+  },
+  "dependencies": {
+    "react-package": "workspace:*",
+    "ui-package": "workspace:*",
+    "tailwind-config": "workspace:*",
+    "web": "workspace:*"
+  },
+  "devDependencies": {
+    "@storybook/addon-themes": "catalog:storybook",
+    "@storybook/addon-vitest": "catalog:storybook",
+    "@storybook/builder-vite": "catalog:storybook",
+    "@storybook/react": "catalog:storybook",
+    "@storybook/react-vite": "catalog:storybook",
+    "eslint-config": "workspace:*",
+    "storybook": "catalog:storybook",
+    "storybook-package": "workspace:*",
+    "typescript-config": "workspace:*"
+  }
+}

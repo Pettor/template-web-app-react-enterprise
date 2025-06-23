@@ -11,5 +11,5 @@
     },
     "types": ["typescript-config/types"]
   },
-  "include": ["**/*.ts", "**/*.tsx", ".storybook/vite.config.ts"]
+  "include": ["**/*.ts", "**/*.tsx"]
 }

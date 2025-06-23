@@ -9,18 +9,10 @@
   "version": "0.6.0",
   "scripts": {
     "generate:exports": "barrelsby -c ../../.barrelsby.json",
-    "clean": "rimraf dist storybook-static .junit coverage",
+    "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
-    "lint": "eslint ./src ./.storybook",
-    "lint:fix": "pnpm lint --fix",
-    "test": "vitest --project=storybook",
-    "test:coverage": "vitest --project=storybook --coverage",
-    "test:coverage:ci": "pnpm test:coverage && pnpm test:coverage:ci:create && pnpm test:coverage:ci:move",
-    "test:coverage:ci:create": "npx nyc report --reporter=cobertura -t ./coverage --report-dir ./coverage/storybook",
-    "test:coverage:ci:move": "move-cli ./coverage/storybook/cobertura-coverage.xml \"../../output/coverage/ui-package.xml\" --mkdirp",
-    "storybook:dev": "storybook dev -p 9060 --quiet",
-    "storybook:build": "storybook build -o storybook-static",
-    "storybook:move": "move-cli storybook-static \"../../output/storybook-static/ui-package\" --mkdirp"
+    "lint": "eslint ./src",
+    "lint:fix": "pnpm lint --fix"
   },
   "dependencies": {
     "react-package": "workspace:*",
@@ -28,7 +20,6 @@
   },
   "devDependencies": {
     "eslint-config": "workspace:*",
-    "storybook-config": "workspace:*",
     "storybook-package": "workspace:*",
     "typescript-config": "workspace:*"
   },
