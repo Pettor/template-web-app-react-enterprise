@@ -1,3 +1,4 @@
+import type { PluginOption } from "vite";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
@@ -6,10 +7,10 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig(() => {
   return {
     base: "./",
-    plugins: [tailwindcss(), tsconfigPaths()],
+    plugins: [tailwindcss() as PluginOption, tsconfigPaths() as PluginOption],
     // Add storybook-specific dependencies to pre-optimization
     optimizeDeps: {
-      include: ["@storybook/addon-a11y"],
+      include: ["@storybook/addon-interactions"],
     },
   };
 });
