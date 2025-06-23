@@ -31,10 +31,10 @@
     "@hookform/resolvers": "5.0.1",
     "api-package": "workspace:*",
     "react-hook-form": "7.56.4",
-    "react-router-dom": "7.6.0",
     "react-package": "workspace:*",
-    "ui-package": "workspace:*",
-    "tailwind-config": "workspace:*"
+    "react-router-dom": "7.6.0",
+    "tailwind-config": "workspace:*",
+    "ui-package": "workspace:*"
   },
   "devDependencies": {
     "@formatjs/cli": "6.7.1",

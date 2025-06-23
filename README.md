@@ -1,4 +1,4 @@
-# React Web Application Template
+# React Web Enterprise Application Template
 
 [![GitHub](https://img.shields.io/badge/license-MIT-green)](https://github.com/Pettor/template-web-app-react-enterprise/blob/main/LICENSE)
 [![Actions Main](../../actions/workflows/main.yml/badge.svg)](../../actions/workflows/main.yml)
