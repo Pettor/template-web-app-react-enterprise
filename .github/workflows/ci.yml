@@ -174,7 +174,7 @@ jobs:
 
       - name: Get installed Playwright version
         id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package.json').devDependencies['playwright'])")" >> $GITHUB_OUTPUT
+        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./apps/e2e/package.json').devDependencies['playwright'])")" >> $GITHUB_OUTPUT
 
       - name: Cache playwright binaries
         uses: actions/cache@v4
