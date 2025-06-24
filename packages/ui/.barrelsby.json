@@ -4,13 +4,14 @@
   "exclude": [
     "stories.tsx$",
     "\\.test\\.(ts|tsx)$",
-    "\\.spec\\.(ts|tsx)$", 
-    "\\.stories\\.(ts|tsx)$",
+    "\\.spec\\.(ts|tsx)$",
+    "\\.stories\\.(ts|tsx)$", 
     "__tests__",
-    "__mocks__"
+    "__mocks__",
+    "\\.storybook"
   ],
   "include": [".ts$", ".tsx$"],
   "location": "top",
-  "structure": "flat",
+  "structure": "flat", 
   "verbose": false
 }

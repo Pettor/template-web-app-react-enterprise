@@ -18,6 +18,8 @@
     "storybook:build": "storybook build -o storybook-static"
   },
   "dependencies": {
+    "@fontsource/rubik": "5.2.5",
+    "react-intl": "7.1.11",
     "react-package": "workspace:*",
     "ui-package": "workspace:*",
     "tailwind-config": "workspace:*",
