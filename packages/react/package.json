@@ -19,7 +19,10 @@
     "react": ">=19.0.0"
   },
   "devDependencies": {
+    "@types/react": "19.1.8",
     "eslint-config": "workspace:*",
-    "typescript-config": "workspace:*"
+    "typescript-config": "workspace:*",
+    "usehooks-ts": "3.1.1",
+    "utility-types": "3.11.0"
   }
 }

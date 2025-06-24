@@ -14,6 +14,7 @@
     "cross-env": "7.0.3",
     "eslint-config": "workspace:*",
     "mocks-package": "workspace:*",
+    "playwright": "1.52.0",
     "typescript-config": "workspace:*"
   }
 }

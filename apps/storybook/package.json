@@ -31,9 +31,14 @@
     "@storybook/builder-vite": "catalog:storybook",
     "@storybook/react": "catalog:storybook",
     "@storybook/react-vite": "catalog:storybook",
+    "@vitejs/plugin-react": "4.5.0",
     "eslint-config": "workspace:*",
     "storybook": "catalog:storybook",
     "storybook-package": "workspace:*",
-    "typescript-config": "workspace:*"
+    "tailwindcss": "4.1.10",
+    "typescript-config": "workspace:*",
+    "vite": "6.3.5",
+    "vite-tsconfig-paths": "5.1.4",
+    "vitest": "3.2.3"
   }
 }

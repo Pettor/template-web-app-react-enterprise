@@ -24,7 +24,7 @@ function ColorSection({ title, children }: { title: string; children: ReactNode 
 
 function ColorItem({ text, bgColor, invert }: { text: string; bgColor: string; invert?: boolean }): ReactElement {
   return (
-    <Card className={`m-2 h-25 w-25 ${bgColor}`}>
+    <Card className={`h-25 w-25 m-2 ${bgColor}`}>
       <CardBody
         className={clsx("items-center justify-center truncate text-xs", invert ? "text-background" : "text-foreground")}
       >

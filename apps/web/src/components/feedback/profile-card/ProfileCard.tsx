@@ -20,8 +20,8 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
       </p>
       <div className="mt-2 flex flex-row gap-4 py-2">
         <User
-          name={name ? name : <Skeleton className="my-1 h-4 w-30 rounded-2xl" />}
-          description={email ? email : <Skeleton className="my-1 h-3 w-30 rounded-2xl" />}
+          name={name ? name : <Skeleton className="w-30 my-1 h-4 rounded-2xl" />}
+          description={email ? email : <Skeleton className="w-30 my-1 h-3 rounded-2xl" />}
           data-testid="profile-card__details"
         />
       </div>

@@ -39,14 +39,22 @@
   "devDependencies": {
     "@formatjs/cli": "6.7.1",
     "@storybook/react": "catalog:storybook",
+    "@vitejs/plugin-react": "4.5.0",
+    "@vitest/browser": "3.2.3",
+    "@vitest/coverage-v8": "3.2.3",
     "babel-plugin-react-compiler": "19.1.0-rc.2",
     "eslint-config": "workspace:*",
     "storybook": "catalog:storybook",
     "storybook-package": "workspace:*",
+    "tailwindcss": "4.1.10",
     "typescript-config": "workspace:*",
+    "usehooks-ts": "3.1.1",
+    "vite": "6.3.5",
     "vite-plugin-http2-proxy": "0.5.0",
     "vite-plugin-mkcert": "1.17.8",
     "vite-plugin-pwa": "1.0.0",
+    "vite-tsconfig-paths": "5.1.4",
+    "vitest": "3.2.3",
     "workbox-window": "7.3.0"
   },
   "jest-junit": {
