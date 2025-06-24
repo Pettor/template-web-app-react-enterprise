@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "@fontsource/rubik": "5.2.5",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "react-intl": "7.1.11",
     "react-package": "workspace:*",
     "ui-package": "workspace:*",

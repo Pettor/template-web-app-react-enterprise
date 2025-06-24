@@ -28,6 +28,8 @@
     "immer": "10.1.1",
     "jotai": "2.12.4",
     "jotai-effect": "2.0.2",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "react-hook-form": "7.56.4",
     "react-intl": "7.1.11",
     "react-router-dom": "7.6.0",
