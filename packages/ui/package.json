@@ -8,17 +8,26 @@
   "types": "./src/index.ts",
   "version": "0.6.0",
   "scripts": {
-    "generate:exports": "barrelsby -c ../../.barrelsby.json",
+    "generate:exports": "barrelsby -c .barrelsby.json",
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
     "lint": "eslint ./src",
     "lint:fix": "pnpm lint --fix"
   },
   "dependencies": {
+    "@heroui/react": "2.8.0-beta.6",
+    "clsx": "2.1.1",
+    "framer-motion": "12.15.0",
+    "jotai": "2.12.4",
     "react-package": "workspace:*",
     "tailwind-config": "workspace:*"
   },
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },
   "devDependencies": {
+    "@faker-js/faker": "9.8.0",
     "eslint-config": "workspace:*",
     "storybook-package": "workspace:*",
     "typescript-config": "workspace:*"

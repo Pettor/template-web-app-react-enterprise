@@ -4,10 +4,22 @@
   "globalEnv": ["PORT"],
   "tasks": {
     "prepare": {
-      "cache": true
+      "cache": true,
+      "inputs": [".husky/**", "package.json"]
     },
     "generate:exports": {
-      "cache": false
+      "cache": true,
+      "inputs": ["src/**/*.ts", "src/**/*.tsx", ".barrelsby.json"],
+      "outputs": ["src/index.ts"]
+    },
+    "build": {
+      "dependsOn": ["generate:exports", "^build"],
+      "inputs": ["src/**", "package.json", "tsconfig.json"],
+      "outputs": ["dist/**", "build/**"]
+    },
+    "deploy": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "output/deployment/**"]
     },
     "dev": {
       "cache": false,
@@ -16,7 +28,7 @@
     },
     "dev:mocks": {
       "cache": false,
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build"], 
       "persistent": true
     },
     "clean": {
@@ -26,45 +38,45 @@
       "cache": false
     },
     "lint": {
-      "cache": false
+      "cache": true,
+      "inputs": ["src/**", ".eslintrc.*", "package.json"],
+      "outputs": []
     },
     "lint:fix": {
       "cache": false
     },
-    "build": {
-      "dependsOn": ["generate:exports", "^build"],
-      "outputs": ["dist/**", "build/**"]
-    },
-    "deploy": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", "output/deployment/**"]
-    },
-    "storybook": {
-      "cache": false
-    },
-    "storybook:build": {
-      "cache": false,
-      "dependsOn": ["^build"],
-      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts"],
-      "outputs": ["**/storybook-static/**"]
-    },
-    "storybook:move": {
-      "cache": false,
-      "outputs": ["output/storybook-static/**"]
-    },
     "test": {
-      "cache": false
+      "cache": true,
+      "inputs": ["src/**", "test/**", "package.json"],
+      "outputs": []
     },
     "test:e2e:env": {
       "cache": false
     },
     "test:coverage": {
-      "cache": false,
+      "cache": true,
+      "inputs": ["src/**", "test/**", "package.json"],
       "outputs": ["**/.coverage/**/*"]
     },
     "test:coverage:ci": {
-      "cache": false,
+      "cache": true,
+      "inputs": ["src/**", "test/**", "package.json"],
       "outputs": ["output/coverage/*.xml"]
+    },
+    "storybook": {
+      "cache": false,
+      "persistent": true
+    },
+    "storybook:build": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", ".storybook/**", "package.json"],
+      "outputs": ["**/storybook-static/**"]
+    },
+    "storybook:move": {
+      "cache": true,
+      "inputs": ["storybook-static/**"],
+      "outputs": ["output/storybook-static/**"]
     }
   }
 }

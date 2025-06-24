@@ -13,7 +13,12 @@
   },
   "dependencies": {
     "axios": "1.9.0",
-    "axios-auth-refresh": "3.3.6"
+    "axios-auth-refresh": "3.3.6",
+    "immer": "10.1.1"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": ">=5.0.0",
+    "yup": ">=1.0.0"
   },
   "devDependencies": {
     "eslint-config": "workspace:*",
