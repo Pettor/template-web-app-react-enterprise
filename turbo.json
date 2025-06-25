@@ -60,8 +60,7 @@
     },
     "test:coverage:ci": {
       "cache": true,
-      "inputs": ["src/**", "test/**", "package.json"],
-      "outputs": ["output/coverage/*.xml"]
+      "inputs": ["src/**", "test/**", "package.json"]
     },
     "storybook": {
       "cache": false,
