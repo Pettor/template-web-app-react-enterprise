@@ -174,7 +174,7 @@ jobs:
 
       - name: Get installed Playwright version
         id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./apps/e2e/package.json').devDependencies['playwright'])")" >> $GITHUB_OUTPUT
+        run: echo "PLAYWRIGHT_VERSION=$(grep -A 3 'playwright:' pnpm-workspace.yaml | grep '"playwright":' | awk '{print $2}')" >> $GITHUB_OUTPUT
 
       - name: Cache playwright binaries
         uses: actions/cache@v4
@@ -188,7 +188,7 @@ jobs:
         run: pnpm install
 
       - name: Install Playwright
-        run: npx playwright install
+        run: pnpm --filter=e2e exec playwright install --with-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Build Storybook
