@@ -12,8 +12,8 @@
     "lint:fix": "pnpm lint --fix"
   },
   "devDependencies": {
-    "@mocks-server/admin-api-client": "7.0.1",
-    "@mocks-server/admin-api-paths": "5.0.0",
+    "@mocks-server/admin-api-client": "catalog:mocks",
+    "@mocks-server/admin-api-paths": "catalog:mocks",
     "eslint-config": "workspace:*",
     "typescript-config": "workspace:*"
   }

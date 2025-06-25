@@ -10,11 +10,11 @@
     "test:e2e": "cross-env PLAYWRIGHT_JUNIT_OUTPUT_NAME=\"./.test-results/results.xml\" pnpm playwright test --reporter=junit"
   },
   "devDependencies": {
-    "@playwright/test": "1.52.0",
-    "cross-env": "7.0.3",
+    "@playwright/test": "catalog:playwright",
+    "cross-env": "catalog:common",
     "eslint-config": "workspace:*",
     "mocks-package": "workspace:*",
-    "playwright": "1.52.0",
+    "playwright": "catalog:playwright",
     "typescript-config": "workspace:*"
   }
 }

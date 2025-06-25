@@ -10,8 +10,8 @@
     "test:e2e:env": "mocks-server --no-plugins.inquirerCli.enabled --log=silent"
   },
   "devDependencies": {
+    "@mocks-server/main": "catalog:mocks",
     "eslint-config": "workspace:*",
-    "typescript-config": "workspace:*",
-    "@mocks-server/main": "4.1.0"
+    "typescript-config": "workspace:*"
   }
 }

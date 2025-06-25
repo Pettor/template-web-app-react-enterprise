@@ -18,13 +18,13 @@
     "storybook:build": "storybook build -o storybook-static"
   },
   "dependencies": {
-    "@fontsource/rubik": "5.2.5",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "@fontsource/rubik": "catalog:common",
+    "react": "catalog:react19",
+    "react-dom": "catalog:react19",
     "react-intl": "7.1.11",
     "react-package": "workspace:*",
-    "ui-package": "workspace:*",
     "tailwind-config": "workspace:*",
+    "ui-package": "workspace:*",
     "web": "workspace:*"
   },
   "devDependencies": {
@@ -33,17 +33,17 @@
     "@storybook/builder-vite": "catalog:storybook",
     "@storybook/react": "catalog:storybook",
     "@storybook/react-vite": "catalog:storybook",
-    "@tailwindcss/vite": "4.1.10",
-    "@vitejs/plugin-react": "4.5.0",
-    "@vitest/browser": "3.2.3",
-    "@vitest/coverage-v8": "3.2.3",
+    "@tailwindcss/vite": "catalog:tailwind",
+    "@vitejs/plugin-react": "catalog:vite",
+    "@vitest/browser": "catalog:vitest",
+    "@vitest/coverage-v8": "catalog:vitest",
     "eslint-config": "workspace:*",
     "storybook": "catalog:storybook",
     "storybook-package": "workspace:*",
-    "tailwindcss": "4.1.10",
+    "tailwindcss": "catalog:tailwind",
     "typescript-config": "workspace:*",
-    "vite": "6.3.5",
-    "vite-tsconfig-paths": "5.1.4",
-    "vitest": "3.2.3"
+    "vite": "catalog:vite",
+    "vite-tsconfig-paths": "catalog:vite",
+    "vitest": "catalog:vitest"
   }
 }
