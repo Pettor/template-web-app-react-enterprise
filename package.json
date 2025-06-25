@@ -18,7 +18,7 @@
     "dev:mocks:cli": "pnpm --filter=mock mocks",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint --no-daemon",
-    "lint:fix": "turbo run lint:fix --no-daemon",
+    "lint:fix": "turbo run lint:fix --no-daemon && sherif --fix",
     "build": "turbo run build --no-daemon",
     "deploy": "turbo run deploy",
     "storybook": "turbo run storybook",
@@ -44,6 +44,7 @@
     "prettier": "3.5.3",
     "prettier-plugin-tailwindcss": "0.6.11",
     "rimraf": "catalog:common",
+    "sherif": "1.6.1",
     "turbo": "2.5.4",
     "wait-on": "8.0.3"
   },
