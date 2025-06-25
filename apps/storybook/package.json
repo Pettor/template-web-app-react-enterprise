@@ -23,8 +23,8 @@
     "react-dom": "catalog:react19",
     "react-intl": "7.1.11",
     "react-package": "workspace:*",
-    "ui-package": "workspace:*",
     "tailwind-config": "workspace:*",
+    "ui-package": "workspace:*",
     "web": "workspace:*"
   },
   "devDependencies": {

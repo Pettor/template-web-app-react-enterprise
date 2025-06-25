@@ -32,10 +32,10 @@
     "react-dom": "catalog:react19",
     "react-hook-form": "7.56.4",
     "react-intl": "7.1.11",
-    "react-router-dom": "7.6.0",
     "react-package": "workspace:*",
-    "ui-package": "workspace:*",
+    "react-router-dom": "7.6.0",
     "tailwind-config": "workspace:*",
+    "ui-package": "workspace:*",
     "yup": "1.6.1"
   },
   "devDependencies": {
