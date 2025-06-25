@@ -40,10 +40,10 @@
     "http-server": "14.1.1",
     "husky": "9.1.7",
     "lint-staged": "16.1.2",
-    "move-cli": "2.0.0",
+    "move-cli": "catalog:common",
     "prettier": "3.5.3",
     "prettier-plugin-tailwindcss": "0.6.11",
-    "rimraf": "6.0.1",
+    "rimraf": "catalog:common",
     "turbo": "2.5.4",
     "wait-on": "8.0.3"
   },

@@ -12,6 +12,6 @@
   "devDependencies": {
     "eslint-config": "workspace:*",
     "typescript-config": "workspace:*",
-    "@mocks-server/main": "4.1.0"
+    "@mocks-server/main": "catalog:mocks"
   }
 }

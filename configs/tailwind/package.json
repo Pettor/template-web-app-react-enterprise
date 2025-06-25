@@ -5,9 +5,9 @@
   ],
   "version": "0.6.0",
   "devDependencies": {
-    "@tailwindcss/aspect-ratio": "0.4.2",
-    "@tailwindcss/typography": "0.5.16",
+    "@tailwindcss/aspect-ratio": "catalog:tailwind",
+    "@tailwindcss/typography": "catalog:tailwind",
     "storybook-package": "workspace:*",
-    "tailwindcss": "4.1.10"
+    "tailwindcss": "catalog:tailwind"
   }
 }
