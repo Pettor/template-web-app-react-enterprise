@@ -28,7 +28,7 @@ export function LoginView({ appName, loginForm, onAbout }: LoginViewProps): Reac
     >
       <div className="flex w-full flex-col items-center justify-center gap-1 p-4 lg:flex-row-reverse">
         <div className="bg-base-100 h-full min-h-[550px] w-full shrink-0 sm:w-[550px]">
-          <Card isBlurred className="flex w-full flex-col gap-4 px-8 pt-6 pb-10">
+          <Card isBlurred className="flex w-full flex-col gap-4 px-8 pb-10 pt-6">
             <CardHeader className="flex w-full items-end justify-between">
               <div className="flex" />
               <Button

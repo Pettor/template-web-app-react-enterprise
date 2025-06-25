@@ -4,9 +4,9 @@
   "private": true,
   "version": "0.6.0",
   "scripts": {
+    "prepare": "playwright install",
     "clean": "rimraf .test-results",
     "clean:all": "pnpm clean node_modules",
-    "prepare": "playwright install",
     "test:e2e": "cross-env PLAYWRIGHT_JUNIT_OUTPUT_NAME=\"./.test-results/results.xml\" pnpm playwright test --reporter=junit"
   },
   "devDependencies": {
@@ -14,6 +14,7 @@
     "cross-env": "7.0.3",
     "eslint-config": "workspace:*",
     "mocks-package": "workspace:*",
+    "playwright": "1.52.0",
     "typescript-config": "workspace:*"
   }
 }
