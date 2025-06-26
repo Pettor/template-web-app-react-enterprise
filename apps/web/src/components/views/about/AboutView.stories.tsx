@@ -24,10 +24,10 @@ const defaultArgs = {
 export const Fullscreen: Story = {
   args: defaultArgs,
   decorators: [FullSizeDecorator],
-  parameters: { viewport: { defaultViewport: "full" } },
+  parameters: { viewport: { value: "full" } },
 };
 
 export const Phone: Story = {
   args: defaultArgs,
-  parameters: { viewport: { defaultViewport: "iphonex" } },
+  globals: { viewport: { value: "iphonex" } },
 };

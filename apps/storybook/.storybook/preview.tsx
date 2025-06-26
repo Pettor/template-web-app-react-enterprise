@@ -1,7 +1,6 @@
 import { INITIAL_VIEWPORTS } from "storybook/viewport";
 import { IntlProvider } from "react-intl";
 import { withThemeByClassName } from "@storybook/addon-themes";
-import baseConfig from "storybook-config/preview";
 import type { Preview } from "@storybook/react";
 import "../src/main.css";
 
@@ -28,7 +27,7 @@ const preview: Preview = {
       },
     },
     viewport: {
-      viewports: INITIAL_VIEWPORTS,
+      options: INITIAL_VIEWPORTS,
     },
   },
 };

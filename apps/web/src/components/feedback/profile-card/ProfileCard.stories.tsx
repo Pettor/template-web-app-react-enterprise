@@ -21,7 +21,7 @@ const defaultArgs = {
 
 export const WithData: Story = {
   args: defaultArgs,
-  parameters: { viewport: { defaultViewport: "full" } },
+  parameters: { viewport: { value: "full" } },
   play: async ({ canvas, userEvent }) => {
     // No text should be visible during loading
     await expect(canvas.getByTestId("profile-card__details")).toHaveTextContent("John Doe");

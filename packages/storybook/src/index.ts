@@ -7,8 +7,5 @@ export * from "./Decorators/CommonDecorator";
 export * from "./Decorators/ContainerDecorator";
 export * from "./Decorators/DocumentationDecorator";
 export * from "./Decorators/FullSizeDecorator";
-export * from "./Decorators/MockBrowserDecorator";
-export * from "./Decorators/MockPhoneDecorator";
-export * from "./Decorators/MockWindowDecorator";
 export * from "./Functions/UseStorybookTheme";
 export * from "./Layout/DocumentationLayout";
