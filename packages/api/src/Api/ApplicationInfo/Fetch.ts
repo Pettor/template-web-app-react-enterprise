@@ -9,7 +9,7 @@ import { applicationInfoConvertFromDto } from "./Convert";
 export async function fetchApplicationInfo(): Promise<ApplicationInfo> {
   try {
     const { data } = await apiClient.get<ApplicationInfoDto>("/api/application/info");
-    const userSchema = await applicationInfoSchema.validate(data);
+    const userSchema = await applicationInfoSchema.parseAsync(data);
     return applicationInfoConvertFromDto(userSchema);
   } catch (e: unknown) {
     throw ServiceErrorFactory.create(e);
