@@ -40,8 +40,8 @@ export const Success: Story = {
     await expect(canvas.getByTestId("sign-up-form__lastname-input")).toHaveValue("doe");
     await expect(canvas.getByTestId("sign-up-form__email-input")).toHaveValue("email@provider.com");
     await expect(canvas.getByTestId("sign-up-form__phonenumber-input")).toHaveValue("1234567890");
-    await expect(canvas.getByTestId("sign-up-form__password-input")).toHaveValue("passwordpassword");
-    await expect(canvas.getByTestId("sign-up-form__confirmpassword-input")).toHaveValue("passwordpassword");
+    await expect(canvas.getByTestId("sign-up-form__password-input")).toHaveValue("password");
+    await expect(canvas.getByTestId("sign-up-form__confirmpassword-input")).toHaveValue("password");
   },
 };
 
@@ -66,6 +66,6 @@ export const IncorrectPassword: Story = {
     await userEvent.type(canvas.getByTestId("sign-up-form__confirmpassword-input"), "short");
     await userEvent.click(canvas.getByTestId("sign-up-form__submit-button"));
 
-    await expect(canvas.getByText("Password must be confirmed")).toBeInTheDocument();
+    await expect(canvas.getByText("Password is too short - should be 8 chars minimum")).toBeInTheDocument();
   },
 };
