@@ -1,4 +1,4 @@
-import { ValidationError } from "yup";
+import { ZodError } from "zod";
 import { isApiError, type ApiError } from "../Worker/ApiWorkerReponse";
 import type { ServiceError } from "./ServiceError";
 
@@ -11,8 +11,8 @@ export class ServiceErrorFactory {
       } as ServiceError;
     }
 
-    if (e instanceof ValidationError) {
-      console.error("Validation error", e);
+    if (e instanceof ZodError) {
+      console.error("Validation error", e.errors);
     }
 
     return {

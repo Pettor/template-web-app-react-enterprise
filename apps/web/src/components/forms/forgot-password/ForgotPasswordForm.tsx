@@ -1,10 +1,10 @@
 import type { ReactElement } from "react";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
-import * as yup from "yup";
+import { z } from "zod";
 import { Button, Form, Input, Spacer } from "@heroui/react";
 
 export interface FormForgotPassword {
@@ -19,34 +19,32 @@ export interface ForgotPasswordFormProps {
 export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProps): ReactElement {
   const intl = useIntl();
 
-  const schema = yup
-    .object()
-    .shape({
-      email: yup
-        .string()
-        .email(
-          intl.formatMessage({
-            description: "ForgotPasswordFormValidation - Email must be valid",
-            defaultMessage: "Email must be valid",
-            id: "4lmP9Q",
-          })
-        )
-        .required(
-          intl.formatMessage({
-            description: "ForgotPasswordFormValidation - Email is required",
-            defaultMessage: "Email is required",
-            id: "wtHdxy",
-          })
-        ),
-    })
-    .required();
+  const schema = z.object({
+    email: z
+      .string()
+      .min(
+        1,
+        intl.formatMessage({
+          description: "ForgotPasswordFormValidation - Email is required",
+          defaultMessage: "Email is required",
+          id: "wtHdxy",
+        })
+      )
+      .email(
+        intl.formatMessage({
+          description: "ForgotPasswordFormValidation - Email must be valid",
+          defaultMessage: "Email must be valid",
+          id: "4lmP9Q",
+        })
+      ),
+  });
 
   const {
     handleSubmit: handleFormSubmit,
     register,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: zodResolver(schema),
   });
 
   return (

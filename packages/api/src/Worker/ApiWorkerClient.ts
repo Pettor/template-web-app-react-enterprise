@@ -59,7 +59,7 @@ export class ApiWorkerClient {
 
   public async tokenRequest(data: LoginData): Promise<JwtToken> {
     const response = await this._client.post(this.TOKEN_API_URL, data, this._defaultConfig);
-    const { token } = await tokenSchema.validate(response.data);
+    const { token } = await tokenSchema.parseAsync(response.data);
     return token;
   }
 
@@ -70,7 +70,7 @@ export class ApiWorkerClient {
   public async refreshToken(): Promise<JwtToken> {
     // Refresh-Token API will use the standard AXIOS client to avoid issue where API is stuck
     const response = await this._client.get(this.REFRESH_TOKEN_API_URL, this._defaultConfig);
-    const { token } = await tokenSchema.validate(response.data);
+    const { token } = await tokenSchema.parseAsync(response.data);
     return token;
   }
 

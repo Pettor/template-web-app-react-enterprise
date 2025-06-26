@@ -19,6 +19,7 @@ node_modules
 build/
 coverage
 dist/
+test-results/
 out/
 output/
 storybook-static/

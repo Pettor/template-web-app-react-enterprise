@@ -1,9 +1,9 @@
 import type { ReactElement } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
-import * as yup from "yup";
+import { z } from "zod";
 import { Button, Form, Input } from "@heroui/react";
 
 export interface FormSignUp {
@@ -24,37 +24,39 @@ export interface SignUpFormProps {
 export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement {
   const intl = useIntl();
 
-  const schema = yup
-    .object()
-    .shape({
-      firstName: yup.string().optional(),
-      lastName: yup.string().optional(),
-      userName: yup.string().required(
+  const schema = z
+    .object({
+      firstName: z.string().optional(),
+      lastName: z.string().optional(),
+      userName: z.string().min(
+        1,
         intl.formatMessage({
           description: "SignUpFormValidation - Display Name is required",
           defaultMessage: "We need to call you something",
           id: "piUPAg",
         })
       ),
-      email: yup
+      email: z
         .string()
+        .min(
+          1,
+          intl.formatMessage({
+            description: "SignUpFormValidation - Email is required",
+            defaultMessage: "Email is required",
+            id: "o5TvN6",
+          })
+        )
         .email(
           intl.formatMessage({
             description: "SignUpFormValidation - Email must be valid",
             defaultMessage: "Email must be valid",
             id: "SBRRVR",
           })
-        )
-        .required(
-          intl.formatMessage({
-            description: "SignUpFormValidation - Email is required",
-            defaultMessage: "Email is required",
-            id: "o5TvN6",
-          })
         ),
-      password: yup
+      password: z
         .string()
-        .required(
+        .min(
+          1,
           intl.formatMessage({
             description: "SignUpFormValidation - Password is required",
             defaultMessage: "Password is required",
@@ -69,33 +71,31 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             id: "YzHSuh",
           })
         ),
-      confirmPassword: yup
-        .string()
-        .required(
-          intl.formatMessage({
-            description: "SignUpFormValidation - PasswordConfirm is required",
-            defaultMessage: "Password must be confirmed",
-            id: "WZbH01",
-          })
-        )
-        .oneOf(
-          [yup.ref("password")],
-          intl.formatMessage({
-            description: "SignUpFormValidation - Passwords must match",
-            defaultMessage: "Passwords must match",
-            id: "IOLTJ0",
-          })
-        ),
-      phoneNumber: yup.string().optional(),
+      confirmPassword: z.string().min(
+        1,
+        intl.formatMessage({
+          description: "SignUpFormValidation - PasswordConfirm is required",
+          defaultMessage: "Password must be confirmed",
+          id: "WZbH01",
+        })
+      ),
+      phoneNumber: z.string().optional(),
     })
-    .required();
+    .refine((data) => data.password === data.confirmPassword, {
+      message: intl.formatMessage({
+        description: "SignUpFormValidation - Passwords must match",
+        defaultMessage: "Passwords must match",
+        id: "IOLTJ0",
+      }),
+      path: ["confirmPassword"],
+    });
 
   const {
     handleSubmit: handleFormSubmit,
     register,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: zodResolver(schema),
   });
 
   return (
@@ -189,7 +189,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
         })}
         isInvalid={!!errors.confirmPassword}
         errorMessage={errors.confirmPassword?.message}
-        {...register("password")}
+        {...register("confirmPassword")}
         data-testid="sign-up-form__confirmpassword-input"
       />
       <Button

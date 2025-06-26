@@ -10,7 +10,7 @@ import { personalProfileConvertFromDto } from "./Convert";
 export async function fetchPersonalProfile(): Promise<ProfileInfo> {
   try {
     const { data } = await apiClient.get<ProfileInfoDto>("/api/personal/profile");
-    const userSchema = await profileInfoSchema.validate(data);
+    const userSchema = await profileInfoSchema.parseAsync(data);
     return personalProfileConvertFromDto(userSchema);
   } catch (e: unknown) {
     throw ServiceErrorFactory.create(e);

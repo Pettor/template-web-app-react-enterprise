@@ -1,9 +1,8 @@
-import type { InferType } from "yup";
-import { object, string } from "yup";
+import { z } from "zod";
 
-export const tokenSchema = object({
-  token: string().required(),
-  refreshTokenExpiryTime: string().required(),
+export const tokenSchema = z.object({
+  token: z.string(),
+  refreshTokenExpiryTime: z.string(),
 });
 
-export type TokenDto = InferType<typeof tokenSchema>;
+export type TokenDto = z.infer<typeof tokenSchema>;
