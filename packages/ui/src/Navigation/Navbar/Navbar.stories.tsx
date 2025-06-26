@@ -27,5 +27,5 @@ export const WithComponents: Story = {
     ...defaultArgs,
     endElement: <StorybookNavbarContentComponent />,
   },
-  parameters: { viewport: { defaultViewport: "full" } },
+  parameters: { viewport: { value: "full" } },
 };
