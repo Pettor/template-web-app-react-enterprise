@@ -1,10 +1,10 @@
 import { useState, type ReactElement } from "react";
 import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
-import * as yup from "yup";
+import { z } from "zod";
 import { Button, Checkbox, Form, Input, Link } from "@heroui/react";
 
 export interface FormLogin {
@@ -27,42 +27,41 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = (): void => setIsVisible(!isVisible);
 
-  const schema = yup
-    .object()
-    .shape({
-      email: yup
-        .string()
-        .email(
-          intl.formatMessage({
-            description: "LoginFormValidation - Email must be valid",
-            defaultMessage: "Email must be valid",
-            id: "+2i1XS",
-          })
-        )
-        .required(
-          intl.formatMessage({
-            description: "LoginFormValidation - Email is required",
-            defaultMessage: "Email is required",
-            id: "sJG6e/",
-          })
-        ),
-      password: yup.string().required(
+  const schema = z.object({
+    email: z
+      .string()
+      .min(
+        1,
         intl.formatMessage({
-          description: "LoginFormValidation - Password is required",
-          defaultMessage: "Password is required",
-          id: "+ADOR2",
+          description: "LoginFormValidation - Email is required",
+          defaultMessage: "Email is required",
+          id: "sJG6e/",
+        })
+      )
+      .email(
+        intl.formatMessage({
+          description: "LoginFormValidation - Email must be valid",
+          defaultMessage: "Email must be valid",
+          id: "+2i1XS",
         })
       ),
-      remember: yup.boolean(),
-    })
-    .required();
+    password: z.string().min(
+      1,
+      intl.formatMessage({
+        description: "LoginFormValidation - Password is required",
+        defaultMessage: "Password is required",
+        id: "+ADOR2",
+      })
+    ),
+    remember: z.boolean().optional(),
+  });
 
   const {
     handleSubmit: handleFormSubmit,
     register,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: zodResolver(schema),
   });
 
   return (

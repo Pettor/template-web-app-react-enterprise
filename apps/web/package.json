@@ -21,7 +21,7 @@
     "@fontsource/rubik": "5.2.5",
     "@heroicons/react": "2.2.0",
     "@heroui/react": "2.8.0-beta.6",
-    "@hookform/resolvers": "5.0.1",
+    "@hookform/resolvers": "catalog:validation",
     "@tanstack/react-query": "5.77.0",
     "api-package": "workspace:*",
     "clsx": "2.1.1",
@@ -36,7 +36,7 @@
     "react-router-dom": "7.6.0",
     "tailwind-config": "workspace:*",
     "ui-package": "workspace:*",
-    "yup": "1.6.1"
+    "zod": "catalog:validation"
   },
   "devDependencies": {
     "@formatjs/cli": "6.7.1",

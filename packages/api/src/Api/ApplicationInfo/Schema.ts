@@ -1,8 +1,7 @@
-import type { InferType } from "yup";
-import { object, string } from "yup";
+import { z } from "zod";
 
-export const applicationInfoSchema = object({
-  version: string().required(),
+export const applicationInfoSchema = z.object({
+  version: z.string(),
 });
 
-export type ApplicationInfoDto = InferType<typeof applicationInfoSchema>;
+export type ApplicationInfoDto = z.infer<typeof applicationInfoSchema>;

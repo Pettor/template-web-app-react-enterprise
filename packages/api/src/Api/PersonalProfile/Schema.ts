@@ -1,16 +1,15 @@
-import type { InferType } from "yup";
-import { object, string, boolean } from "yup";
+import { z } from "zod";
 
-export const profileInfoSchema = object({
-  id: string().required(),
-  userName: string().required(),
-  firstName: string().required(),
-  lastName: string().required(),
-  email: string().required(),
-  isActive: boolean().required(),
-  emailConfirmed: boolean().required(),
-  phoneNumber: string().optional().nullable(),
-  imageUrl: string().optional().nullable(),
+export const profileInfoSchema = z.object({
+  id: z.string(),
+  userName: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
+  email: z.string(),
+  isActive: z.boolean(),
+  emailConfirmed: z.boolean(),
+  phoneNumber: z.string().nullable().optional(),
+  imageUrl: z.string().nullable().optional(),
 });
 
-export type ProfileInfoDto = InferType<typeof profileInfoSchema>;
+export type ProfileInfoDto = z.infer<typeof profileInfoSchema>;
