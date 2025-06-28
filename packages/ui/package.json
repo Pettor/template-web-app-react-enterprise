@@ -1,5 +1,5 @@
 {
-  "name": "ui-package",
+  "name": "@package/ui",
   "files": [
     "dist"
   ],
@@ -15,36 +15,35 @@
     "lint:fix": "pnpm lint --fix"
   },
   "dependencies": {
+    "@config/tailwind": "workspace:*",
     "@heroui/react": "2.8.0-beta.6",
-    "@template/design-tokens": "workspace:*",
+    "@package/react": "workspace:*",
     "clsx": "2.1.1",
     "framer-motion": "12.15.0",
-    "jotai": "2.12.4",
-    "react-package": "workspace:*",
-    "tailwind-config": "workspace:*"
+    "jotai": "2.12.4"
   },
   "peerDependencies": {
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0"
   },
   "devDependencies": {
+    "@config/eslint": "workspace:*",
+    "@config/typescript": "workspace:*",
     "@faker-js/faker": "9.8.0",
+    "@package/storybook": "workspace:*",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
     "@vitejs/plugin-react": "catalog:vite",
     "@vitest/browser": "catalog:vitest",
     "@vitest/coverage-v8": "catalog:vitest",
-    "eslint-config": "workspace:*",
-    "storybook-package": "workspace:*",
     "tailwindcss": "catalog:tailwind",
-    "typescript-config": "workspace:*",
     "vite": "catalog:vite",
     "vite-tsconfig-paths": "catalog:vite",
     "vitest": "catalog:vitest"
   },
   "jest-junit": {
-    "suiteName": "ui-package tests",
+    "suiteName": "@package/ui tests",
     "outputDirectory": ".junit",
-    "outputName": "ui-package.xml"
+    "outputName": "@package/ui.xml"
   }
 }

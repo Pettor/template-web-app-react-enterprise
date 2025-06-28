@@ -1,5 +1,5 @@
 {
-  "name": "react-package",
+  "name": "@package/react",
   "main": "./src/index.ts",
   "type": "module",
   "types": "./src/index.ts",
@@ -19,9 +19,9 @@
     "react": ">=19.0.0"
   },
   "devDependencies": {
+    "@config/eslint": "workspace:*",
+    "@config/typescript": "workspace:*",
     "@types/react": "catalog:react19",
-    "eslint-config": "workspace:*",
-    "typescript-config": "workspace:*",
     "usehooks-ts": "3.1.1",
     "utility-types": "3.11.0"
   }

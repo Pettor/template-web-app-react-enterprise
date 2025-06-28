@@ -1,5 +1,5 @@
 {
-  "name": "mocks-package",
+  "name": "@package/mocks",
   "main": "./src/index.ts",
   "type": "module",
   "types": "./src/index.ts",
@@ -12,9 +12,9 @@
     "lint:fix": "pnpm lint --fix"
   },
   "devDependencies": {
+    "@config/eslint": "workspace:*",
+    "@config/typescript": "workspace:*",
     "@mocks-server/admin-api-client": "catalog:mocks",
-    "@mocks-server/admin-api-paths": "catalog:mocks",
-    "eslint-config": "workspace:*",
-    "typescript-config": "workspace:*"
+    "@mocks-server/admin-api-paths": "catalog:mocks"
   }
 }

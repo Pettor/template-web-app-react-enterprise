@@ -1,5 +1,5 @@
 import { type ReactElement } from "react";
-import { GithubIcon, LinkedInIcon, Navbar } from "ui-package";
+import { GithubIcon, LinkedInIcon, Navbar } from "@package/ui";
 import {
   Avatar,
   Button,

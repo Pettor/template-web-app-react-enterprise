@@ -1,5 +1,5 @@
 {
-  "name": "storybook",
+  "name": "@app/storybook",
   "license": "MIT",
   "private": true,
   "type": "module",
@@ -18,16 +18,20 @@
     "storybook:build": "storybook build -o storybook-static"
   },
   "dependencies": {
+    "@app/web": "workspace:*",
+    "@config/tailwind": "workspace:*",
     "@fontsource/rubik": "catalog:common",
+    "@package/react": "workspace:*",
+    "@package/ui": "workspace:*",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
-    "react-intl": "7.1.11",
-    "react-package": "workspace:*",
-    "tailwind-config": "workspace:*",
-    "ui-package": "workspace:*",
-    "web": "workspace:*"
+    "react-intl": "7.1.11"
   },
   "devDependencies": {
+    "@config/eslint": "workspace:*",
+    "@config/typescript": "workspace:*",
+    "@config/vite": "workspace:*",
+    "@package/storybook": "workspace:*",
     "@storybook/addon-themes": "catalog:storybook",
     "@storybook/addon-vitest": "catalog:storybook",
     "@storybook/builder-vite": "catalog:storybook",
@@ -37,13 +41,9 @@
     "@vitejs/plugin-react": "catalog:vite",
     "@vitest/browser": "catalog:vitest",
     "@vitest/coverage-v8": "catalog:vitest",
-    "eslint-config": "workspace:*",
     "storybook": "catalog:storybook",
-    "storybook-package": "workspace:*",
     "tailwindcss": "catalog:tailwind",
-    "typescript-config": "workspace:*",
     "vite": "catalog:vite",
-    "vite-config": "workspace:*",
     "vite-tsconfig-paths": "catalog:vite",
     "vitest": "catalog:vitest"
   }

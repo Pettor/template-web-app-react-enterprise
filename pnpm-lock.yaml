@@ -210,42 +210,54 @@ importers:
 
   apps/e2e:
     devDependencies:
+      '@config/eslint':
+        specifier: workspace:*
+        version: link:../../configs/eslint
+      '@config/typescript':
+        specifier: workspace:*
+        version: link:../../configs/typescript
+      '@package/mocks':
+        specifier: workspace:*
+        version: link:../../packages/mocks
       '@playwright/test':
         specifier: catalog:playwright
         version: 1.52.0
       cross-env:
         specifier: catalog:common
         version: 7.0.3
-      eslint-config:
-        specifier: workspace:*
-        version: link:../../configs/eslint
-      mocks-package:
-        specifier: workspace:*
-        version: link:../../packages/mocks
       playwright:
         specifier: catalog:playwright
         version: 1.52.0
-      typescript-config:
-        specifier: workspace:*
-        version: link:../../configs/typescript
 
   apps/mock:
     devDependencies:
+      '@config/eslint':
+        specifier: workspace:*
+        version: link:../../configs/eslint
+      '@config/typescript':
+        specifier: workspace:*
+        version: link:../../configs/typescript
       '@mocks-server/main':
         specifier: catalog:mocks
         version: 4.1.0
-      eslint-config:
-        specifier: workspace:*
-        version: link:../../configs/eslint
-      typescript-config:
-        specifier: workspace:*
-        version: link:../../configs/typescript
 
   apps/storybook:
     dependencies:
+      '@app/web':
+        specifier: workspace:*
+        version: link:../web
+      '@config/tailwind':
+        specifier: workspace:*
+        version: link:../../configs/tailwind
       '@fontsource/rubik':
         specifier: catalog:common
         version: 5.2.5
+      '@package/react':
+        specifier: workspace:*
+        version: link:../../packages/react
+      '@package/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       react:
         specifier: catalog:react19
         version: 19.1.0
@@ -255,19 +267,19 @@ importers:
       react-intl:
         specifier: 7.1.11
         version: 7.1.11(react@19.1.0)(typescript@5.8.3)
-      react-package:
-        specifier: workspace:*
-        version: link:../../packages/react
-      tailwind-config:
-        specifier: workspace:*
-        version: link:../../configs/tailwind
-      ui-package:
-        specifier: workspace:*
-        version: link:../../packages/ui
-      web:
-        specifier: workspace:*
-        version: link:../web
     devDependencies:
+      '@config/eslint':
+        specifier: workspace:*
+        version: link:../../configs/eslint
+      '@config/typescript':
+        specifier: workspace:*
+        version: link:../../configs/typescript
+      '@config/vite':
+        specifier: workspace:*
+        version: link:../../configs/vite
+      '@package/storybook':
+        specifier: workspace:*
+        version: link:../../packages/storybook
       '@storybook/addon-themes':
         specifier: catalog:storybook
         version: 9.0.12(storybook@9.0.12(@testing-library/dom@10.4.0)(prettier@3.5.3))
@@ -295,27 +307,15 @@ importers:
       '@vitest/coverage-v8':
         specifier: catalog:vitest
         version: 3.2.3(@vitest/browser@3.2.3)(vitest@3.2.3)
-      eslint-config:
-        specifier: workspace:*
-        version: link:../../configs/eslint
       storybook:
         specifier: catalog:storybook
         version: 9.0.12(@testing-library/dom@10.4.0)(prettier@3.5.3)
-      storybook-package:
-        specifier: workspace:*
-        version: link:../../packages/storybook
       tailwindcss:
         specifier: catalog:tailwind
         version: 4.1.10
-      typescript-config:
-        specifier: workspace:*
-        version: link:../../configs/typescript
       vite:
         specifier: 6.3.5
         version: 6.3.5(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.0)
-      vite-config:
-        specifier: workspace:*
-        version: link:../../configs/vite-config
       vite-tsconfig-paths:
         specifier: catalog:vite
         version: 5.1.4(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.0))
@@ -325,6 +325,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@config/tailwind':
+        specifier: workspace:*
+        version: link:../../configs/tailwind
       '@fontsource/rubik':
         specifier: 5.2.5
         version: 5.2.5
@@ -337,12 +340,18 @@ importers:
       '@hookform/resolvers':
         specifier: catalog:validation
         version: 5.0.1(react-hook-form@7.56.4(react@19.1.0))
+      '@package/api':
+        specifier: workspace:*
+        version: link:../../packages/api
+      '@package/react':
+        specifier: workspace:*
+        version: link:../../packages/react
+      '@package/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@tanstack/react-query':
         specifier: 5.77.0
         version: 5.77.0(react@19.1.0)
-      api-package:
-        specifier: workspace:*
-        version: link:../../packages/api
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -367,25 +376,28 @@ importers:
       react-intl:
         specifier: 7.1.11
         version: 7.1.11(react@19.1.0)(typescript@5.8.3)
-      react-package:
-        specifier: workspace:*
-        version: link:../../packages/react
       react-router-dom:
         specifier: 7.6.0
         version: 7.6.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      tailwind-config:
-        specifier: workspace:*
-        version: link:../../configs/tailwind
-      ui-package:
-        specifier: workspace:*
-        version: link:../../packages/ui
       zod:
         specifier: catalog:validation
         version: 3.24.2
     devDependencies:
+      '@config/eslint':
+        specifier: workspace:*
+        version: link:../../configs/eslint
+      '@config/typescript':
+        specifier: workspace:*
+        version: link:../../configs/typescript
+      '@config/vite':
+        specifier: workspace:*
+        version: link:../../configs/vite
       '@formatjs/cli':
         specifier: 6.7.1
         version: 6.7.1
+      '@package/storybook':
+        specifier: workspace:*
+        version: link:../../packages/storybook
       '@storybook/react':
         specifier: catalog:storybook
         version: 9.0.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.12(@testing-library/dom@10.4.0)(prettier@3.5.3))(typescript@5.8.3)
@@ -398,33 +410,21 @@ importers:
       babel-plugin-react-compiler:
         specifier: 19.1.0-rc.2
         version: 19.1.0-rc.2
-      eslint-config:
-        specifier: workspace:*
-        version: link:../../configs/eslint
       storybook:
         specifier: catalog:storybook
         version: 9.0.12(@testing-library/dom@10.4.0)(prettier@3.5.3)
-      storybook-package:
-        specifier: workspace:*
-        version: link:../../packages/storybook
       tailwindcss:
         specifier: catalog:tailwind
         version: 4.1.10
       typescript:
         specifier: 5.8.3
         version: 5.8.3
-      typescript-config:
-        specifier: workspace:*
-        version: link:../../configs/typescript
       usehooks-ts:
         specifier: 3.1.1
         version: 3.1.1(react@19.1.0)
       vite:
         specifier: 6.3.5
         version: 6.3.5(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.0)
-      vite-config:
-        specifier: workspace:*
-        version: link:../../configs/vite-config
       vite-plugin-http2-proxy:
         specifier: catalog:vite
         version: 0.5.0(vite@6.3.5(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.0))
@@ -482,22 +482,22 @@ importers:
 
   configs/tailwind:
     devDependencies:
+      '@package/storybook':
+        specifier: workspace:*
+        version: link:../../packages/storybook
       '@tailwindcss/aspect-ratio':
         specifier: catalog:tailwind
         version: 0.4.2(tailwindcss@4.1.10)
       '@tailwindcss/typography':
         specifier: catalog:tailwind
         version: 0.5.16(tailwindcss@4.1.10)
-      storybook-package:
-        specifier: workspace:*
-        version: link:../../packages/storybook
       tailwindcss:
         specifier: catalog:tailwind
         version: 4.1.10
 
   configs/typescript: {}
 
-  configs/vite-config:
+  configs/vite:
     dependencies:
       '@tailwindcss/vite':
         specifier: catalog:tailwind
@@ -521,24 +521,15 @@ importers:
         specifier: catalog:vite
         version: 5.1.4(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.0))
     devDependencies:
-      eslint-config:
+      '@config/eslint':
         specifier: workspace:*
         version: link:../eslint
+      '@config/typescript':
+        specifier: workspace:*
+        version: link:../typescript
       typescript:
         specifier: 5.8.3
         version: 5.8.3
-      typescript-config:
-        specifier: workspace:*
-        version: link:../typescript
-
-  packages/@template/design-tokens:
-    devDependencies:
-      eslint-config:
-        specifier: workspace:*
-        version: link:../../../configs/eslint
-      typescript-config:
-        specifier: workspace:*
-        version: link:../../../configs/typescript
 
   packages/api:
     dependencies:
@@ -558,27 +549,27 @@ importers:
         specifier: '>=3.0.0'
         version: 3.25.67
     devDependencies:
-      eslint-config:
+      '@config/eslint':
         specifier: workspace:*
         version: link:../../configs/eslint
-      typescript-config:
+      '@config/typescript':
         specifier: workspace:*
         version: link:../../configs/typescript
 
   packages/mocks:
     devDependencies:
+      '@config/eslint':
+        specifier: workspace:*
+        version: link:../../configs/eslint
+      '@config/typescript':
+        specifier: workspace:*
+        version: link:../../configs/typescript
       '@mocks-server/admin-api-client':
         specifier: catalog:mocks
         version: 7.0.1
       '@mocks-server/admin-api-paths':
         specifier: catalog:mocks
         version: 5.0.0
-      eslint-config:
-        specifier: workspace:*
-        version: link:../../configs/eslint
-      typescript-config:
-        specifier: workspace:*
-        version: link:../../configs/typescript
 
   packages/react:
     dependencies:
@@ -592,15 +583,15 @@ importers:
         specifier: '>=19.0.0'
         version: 19.1.0
     devDependencies:
+      '@config/eslint':
+        specifier: workspace:*
+        version: link:../../configs/eslint
+      '@config/typescript':
+        specifier: workspace:*
+        version: link:../../configs/typescript
       '@types/react':
         specifier: catalog:react19
         version: 19.1.8
-      eslint-config:
-        specifier: workspace:*
-        version: link:../../configs/eslint
-      typescript-config:
-        specifier: workspace:*
-        version: link:../../configs/typescript
       usehooks-ts:
         specifier: 3.1.1
         version: 3.1.1(react@19.1.0)
@@ -620,24 +611,27 @@ importers:
         specifier: '>=19.0.0'
         version: 19.1.0(react@19.1.0)
     devDependencies:
-      eslint-config:
+      '@config/eslint':
         specifier: workspace:*
         version: link:../../configs/eslint
-      react-package:
-        specifier: workspace:*
-        version: link:../react
-      typescript-config:
+      '@config/typescript':
         specifier: workspace:*
         version: link:../../configs/typescript
+      '@package/react':
+        specifier: workspace:*
+        version: link:../react
 
   packages/ui:
     dependencies:
+      '@config/tailwind':
+        specifier: workspace:*
+        version: link:../../configs/tailwind
       '@heroui/react':
         specifier: 2.8.0-beta.6
         version: 2.8.0-beta.6(@types/react@19.1.8)(framer-motion@12.15.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
-      '@template/design-tokens':
+      '@package/react':
         specifier: workspace:*
-        version: link:../@template/design-tokens
+        version: link:../react
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -653,16 +647,19 @@ importers:
       react-dom:
         specifier: '>=19.0.0'
         version: 19.1.0(react@19.1.0)
-      react-package:
-        specifier: workspace:*
-        version: link:../react
-      tailwind-config:
-        specifier: workspace:*
-        version: link:../../configs/tailwind
     devDependencies:
+      '@config/eslint':
+        specifier: workspace:*
+        version: link:../../configs/eslint
+      '@config/typescript':
+        specifier: workspace:*
+        version: link:../../configs/typescript
       '@faker-js/faker':
         specifier: 9.8.0
         version: 9.8.0
+      '@package/storybook':
+        specifier: workspace:*
+        version: link:../storybook
       '@types/react':
         specifier: catalog:react19
         version: 19.1.8
@@ -678,18 +675,9 @@ importers:
       '@vitest/coverage-v8':
         specifier: catalog:vitest
         version: 3.2.3(@vitest/browser@3.2.3)(vitest@3.2.3)
-      eslint-config:
-        specifier: workspace:*
-        version: link:../../configs/eslint
-      storybook-package:
-        specifier: workspace:*
-        version: link:../storybook
       tailwindcss:
         specifier: catalog:tailwind
         version: 4.1.10
-      typescript-config:
-        specifier: workspace:*
-        version: link:../../configs/typescript
       vite:
         specifier: 6.3.5
         version: 6.3.5(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.0)

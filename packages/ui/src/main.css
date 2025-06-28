@@ -9,4 +9,4 @@
 @import "@fontsource/rubik/900.css";
 
 /* Tailwind configuration */
-@import "../node_modules/tailwind-config/tailwind.css";
+@import "../node_modules/@config/tailwind/tailwind.css";

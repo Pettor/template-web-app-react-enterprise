@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import { InformationCircleIcon } from "@heroicons/react/20/solid";
 import { useIntl } from "react-intl";
-import { BasicLayout, BlueFadeBackground, GridBackground, Logo } from "ui-package";
+import { BasicLayout, BlueFadeBackground, GridBackground, Logo } from "@package/ui";
 import type { LoginFormProps } from "~/components/forms/login/LoginForm";
 import { LoginForm } from "~/components/forms/login/LoginForm";
 import { Card, CardHeader, Button, CardBody, Spacer } from "@heroui/react";

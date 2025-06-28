@@ -8,6 +8,6 @@
     "declarationMap": true,
     "noEmit": false,
     "sourceMap": true,
-    "types": ["typescript-config/types"]
+    "types": ["@config/typescript/types"]
   }
 }

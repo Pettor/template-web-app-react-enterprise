@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import { DocumentationDecorator, DocumentationLayout } from "storybook-package";
+import { DocumentationDecorator, DocumentationLayout } from "@package/storybook";
 
 export default {
   title: "Design System/Typograhy",

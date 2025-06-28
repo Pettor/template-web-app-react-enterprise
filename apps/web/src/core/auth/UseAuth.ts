@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import type { LoginData } from "api-package";
-import { usePostLoginMutate, usePostLogoutMutate } from "api-package";
+import type { LoginData } from "@package/api";
+import { usePostLoginMutate, usePostLogoutMutate } from "@package/api";
 import { AuthContext } from "./AuthContext";
 import type { AuthStatus } from "./AuthReducer";
 

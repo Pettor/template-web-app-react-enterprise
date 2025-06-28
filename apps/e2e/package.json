@@ -1,5 +1,5 @@
 {
-  "name": "e2e",
+  "name": "@app/e2e",
   "license": "MIT",
   "private": true,
   "version": "0.6.0",
@@ -10,11 +10,11 @@
     "test:e2e": "cross-env PLAYWRIGHT_JUNIT_OUTPUT_NAME=\"./.test-results/results.xml\" pnpm playwright test --reporter=junit"
   },
   "devDependencies": {
+    "@config/eslint": "workspace:*",
+    "@config/typescript": "workspace:*",
+    "@package/mocks": "workspace:*",
     "@playwright/test": "catalog:playwright",
     "cross-env": "catalog:common",
-    "eslint-config": "workspace:*",
-    "mocks-package": "workspace:*",
-    "playwright": "catalog:playwright",
-    "typescript-config": "workspace:*"
+    "playwright": "catalog:playwright"
   }
 }

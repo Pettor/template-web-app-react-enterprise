@@ -1,7 +1,7 @@
 import { defineConfig, loadEnv, mergeConfig } from "vite";
 import proxy from "vite-plugin-http2-proxy";
 import mkcert from "vite-plugin-mkcert";
-import { createBaseConfig, createPWAConfig, createReactConfig } from "vite-config";
+import { createBaseConfig, createPWAConfig, createReactConfig } from "@config/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {

@@ -1,5 +1,5 @@
 {
-  "name": "vite-config",
+  "name": "@config/vite",
   "version": "0.6.0",
   "license": "MIT",
   "type": "module",
@@ -19,17 +19,17 @@
     "@tailwindcss/vite": "catalog:tailwind",
     "@vitejs/plugin-react": "catalog:vite",
     "vite": "catalog:vite",
-    "vite-tsconfig-paths": "catalog:vite",
     "vite-plugin-http2-proxy": "catalog:vite",
     "vite-plugin-mkcert": "catalog:vite",
-    "vite-plugin-pwa": "catalog:vite"
+    "vite-plugin-pwa": "catalog:vite",
+    "vite-tsconfig-paths": "catalog:vite"
   },
   "peerDependencies": {
     "typescript": ">=5.0.0"
   },
   "devDependencies": {
-    "eslint-config": "workspace:*",
-    "typescript": "catalog:typescript",
-    "typescript-config": "workspace:*"
+    "@config/eslint": "workspace:*",
+    "@config/typescript": "workspace:*",
+    "typescript": "catalog:typescript"
   }
 }

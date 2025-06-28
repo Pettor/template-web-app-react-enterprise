@@ -1,5 +1,5 @@
 {
-  "name": "storybook-package",
+  "name": "@package/storybook",
   "main": "./src/index.ts",
   "type": "module",
   "types": "./src/index.ts",
@@ -15,8 +15,8 @@
     "react-dom": ">=19.0.0"
   },
   "devDependencies": {
-    "eslint-config": "workspace:*",
-    "react-package": "workspace:*",
-    "typescript-config": "workspace:*"
+    "@config/eslint": "workspace:*",
+    "@config/typescript": "workspace:*",
+    "@package/react": "workspace:*"
   }
 }
