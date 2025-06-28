@@ -5,16 +5,18 @@
   "types": "./src/index.ts",
   "version": "0.6.0",
   "scripts": {
-    "generate:exports": "barrelsby -c ../../.barrelsby.json",
+    "generate:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
     "lint": "eslint ./src",
     "lint:fix": "pnpm lint --fix"
   },
   "devDependencies": {
+    "@config/barrelsby": "workspace:*",
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
     "@mocks-server/admin-api-client": "catalog:mocks",
-    "@mocks-server/admin-api-paths": "catalog:mocks"
+    "@mocks-server/admin-api-paths": "catalog:mocks",
+    "barrelsby": "catalog:common"
   }
 }

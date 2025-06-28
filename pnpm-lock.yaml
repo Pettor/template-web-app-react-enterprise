@@ -9,6 +9,9 @@ catalogs:
     '@fontsource/rubik':
       specifier: 5.2.5
       version: 5.2.5
+    barrelsby:
+      specifier: 2.8.1
+      version: 2.8.1
     cross-env:
       specifier: 7.0.3
       version: 7.0.3
@@ -168,9 +171,6 @@ importers:
       '@types/node':
         specifier: 22.15.31
         version: 22.15.31
-      barrelsby:
-        specifier: 2.8.1
-        version: 2.8.1
       concurrently:
         specifier: 9.1.2
         version: 9.1.2
@@ -444,6 +444,12 @@ importers:
         specifier: 7.3.0
         version: 7.3.0
 
+  configs/barrelsby:
+    devDependencies:
+      barrelsby:
+        specifier: catalog:common
+        version: 2.8.1
+
   configs/eslint:
     devDependencies:
       '@eslint/js':
@@ -521,12 +527,18 @@ importers:
         specifier: catalog:vite
         version: 5.1.4(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.31)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.0))
     devDependencies:
+      '@config/barrelsby':
+        specifier: workspace:*
+        version: link:../barrelsby
       '@config/eslint':
         specifier: workspace:*
         version: link:../eslint
       '@config/typescript':
         specifier: workspace:*
         version: link:../typescript
+      barrelsby:
+        specifier: catalog:common
+        version: 2.8.1
       typescript:
         specifier: 5.8.3
         version: 5.8.3
@@ -549,15 +561,24 @@ importers:
         specifier: '>=3.0.0'
         version: 3.25.67
     devDependencies:
+      '@config/barrelsby':
+        specifier: workspace:*
+        version: link:../../configs/barrelsby
       '@config/eslint':
         specifier: workspace:*
         version: link:../../configs/eslint
       '@config/typescript':
         specifier: workspace:*
         version: link:../../configs/typescript
+      barrelsby:
+        specifier: catalog:common
+        version: 2.8.1
 
   packages/mocks:
     devDependencies:
+      '@config/barrelsby':
+        specifier: workspace:*
+        version: link:../../configs/barrelsby
       '@config/eslint':
         specifier: workspace:*
         version: link:../../configs/eslint
@@ -570,6 +591,9 @@ importers:
       '@mocks-server/admin-api-paths':
         specifier: catalog:mocks
         version: 5.0.0
+      barrelsby:
+        specifier: catalog:common
+        version: 2.8.1
 
   packages/react:
     dependencies:
@@ -583,6 +607,9 @@ importers:
         specifier: '>=19.0.0'
         version: 19.1.0
     devDependencies:
+      '@config/barrelsby':
+        specifier: workspace:*
+        version: link:../../configs/barrelsby
       '@config/eslint':
         specifier: workspace:*
         version: link:../../configs/eslint
@@ -592,6 +619,9 @@ importers:
       '@types/react':
         specifier: catalog:react19
         version: 19.1.8
+      barrelsby:
+        specifier: catalog:common
+        version: 2.8.1
       usehooks-ts:
         specifier: 3.1.1
         version: 3.1.1(react@19.1.0)
@@ -611,6 +641,9 @@ importers:
         specifier: '>=19.0.0'
         version: 19.1.0(react@19.1.0)
     devDependencies:
+      '@config/barrelsby':
+        specifier: workspace:*
+        version: link:../../configs/barrelsby
       '@config/eslint':
         specifier: workspace:*
         version: link:../../configs/eslint
@@ -620,6 +653,9 @@ importers:
       '@package/react':
         specifier: workspace:*
         version: link:../react
+      barrelsby:
+        specifier: catalog:common
+        version: 2.8.1
 
   packages/ui:
     dependencies:
@@ -648,6 +684,9 @@ importers:
         specifier: '>=19.0.0'
         version: 19.1.0(react@19.1.0)
     devDependencies:
+      '@config/barrelsby':
+        specifier: workspace:*
+        version: link:../../configs/barrelsby
       '@config/eslint':
         specifier: workspace:*
         version: link:../../configs/eslint
@@ -675,6 +714,9 @@ importers:
       '@vitest/coverage-v8':
         specifier: catalog:vitest
         version: 3.2.3(@vitest/browser@3.2.3)(vitest@3.2.3)
+      barrelsby:
+        specifier: catalog:common
+        version: 2.8.1
       tailwindcss:
         specifier: catalog:tailwind
         version: 4.1.10

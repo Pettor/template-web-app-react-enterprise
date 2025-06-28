@@ -8,12 +8,16 @@
   "types": "./src/index.ts",
   "version": "0.6.0",
   "scripts": {
-    "generate:exports": "barrelsby -c .barrelsby.json",
+    "generate:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
     "lint": "eslint ./src",
     "lint:fix": "pnpm lint --fix"
   },
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },  
   "dependencies": {
     "@config/tailwind": "workspace:*",
     "@heroui/react": "2.8.0-beta.6",
@@ -22,11 +26,8 @@
     "framer-motion": "12.15.0",
     "jotai": "2.12.4"
   },
-  "peerDependencies": {
-    "react": ">=19.0.0",
-    "react-dom": ">=19.0.0"
-  },
   "devDependencies": {
+    "@config/barrelsby": "workspace:*",
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
     "@faker-js/faker": "9.8.0",
@@ -36,14 +37,10 @@
     "@vitejs/plugin-react": "catalog:vite",
     "@vitest/browser": "catalog:vitest",
     "@vitest/coverage-v8": "catalog:vitest",
+    "barrelsby": "catalog:common",
     "tailwindcss": "catalog:tailwind",
     "vite": "catalog:vite",
     "vite-tsconfig-paths": "catalog:vite",
     "vitest": "catalog:vitest"
-  },
-  "jest-junit": {
-    "suiteName": "@package/ui tests",
-    "outputDirectory": ".junit",
-    "outputName": "@package/ui.xml"
   }
 }

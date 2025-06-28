@@ -5,7 +5,7 @@
   "types": "./src/index.ts",
   "version": "0.6.0",
   "scripts": {
-    "generate:exports": "barrelsby -c ../../.barrelsby.json",
+    "generate:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules"
   },
@@ -15,8 +15,10 @@
     "react-dom": ">=19.0.0"
   },
   "devDependencies": {
+    "@config/barrelsby": "workspace:*",
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
-    "@package/react": "workspace:*"
+    "@package/react": "workspace:*",
+    "barrelsby": "catalog:common"
   }
 }
