@@ -43,6 +43,7 @@
     "tailwindcss": "catalog:tailwind",
     "typescript-config": "workspace:*",
     "vite": "catalog:vite",
+    "vite-config": "workspace:*",
     "vite-tsconfig-paths": "catalog:vite",
     "vitest": "catalog:vitest"
   }

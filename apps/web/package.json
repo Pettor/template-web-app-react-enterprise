@@ -52,6 +52,7 @@
     "typescript-config": "workspace:*",
     "usehooks-ts": "3.1.1",
     "vite": "catalog:vite",
+    "vite-config": "workspace:*",
     "vite-plugin-http2-proxy": "catalog:vite",
     "vite-plugin-mkcert": "catalog:vite",
     "vite-plugin-pwa": "catalog:vite",

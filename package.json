@@ -45,6 +45,7 @@
     "prettier-plugin-tailwindcss": "0.6.11",
     "rimraf": "catalog:common",
     "sherif": "1.6.1",
+    "tsup": "8.5.0",
     "turbo": "2.5.4",
     "wait-on": "8.0.3"
   },

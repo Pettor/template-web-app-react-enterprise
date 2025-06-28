@@ -1,91 +1,17 @@
-import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react";
-import type { UserConfig } from "vite";
 import { defineConfig, loadEnv, mergeConfig } from "vite";
 import proxy from "vite-plugin-http2-proxy";
 import mkcert from "vite-plugin-mkcert";
-import { VitePWA } from "vite-plugin-pwa";
-import tsconfigPaths from "vite-tsconfig-paths";
-import { defineConfig as defineConfigVitest } from "vitest/config";
-
-const ReactCompilerConfig = {
-  target: "19",
-};
+import { createBaseConfig, createPWAConfig, createReactConfig } from "vite-config";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
-  const commonConfig: UserConfig = {
-    plugins: [
-      react({
-        babel: {
-          plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]],
-        },
-      }),
-      tailwindcss(),
-      tsconfigPaths(),
-      VitePWA({
-        devOptions: {
-          enabled: false,
-        },
-        includeAssets: [
-          "favicon.ico",
-          "apple-touch-icon.png",
-          "pwa-192x192.png",
-          "pwa-512x512.png",
-          "screenshot-desktop.png",
-          "screenshot-phone.png",
-        ],
-        injectRegister: "auto",
-        manifest: {
-          background_color: "#ffffff",
-          display: "standalone",
-          description: "React Enterprise Template using Turborepo, TailwindCSS, HeroUI and Vite.",
-          name: "ReactEnterpriseTemplate",
-          icons: [
-            {
-              src: "pwa-192x192.png",
-              sizes: "192x192",
-              type: "image/png",
-            },
-            {
-              src: "pwa-512x512.png",
-              sizes: "512x512",
-              type: "image/png",
-            },
-          ],
-          screenshots: [
-            {
-              src: "screenshot-desktop.png",
-              sizes: "690x670",
-              type: "image/png",
-              form_factor: "wide",
-              label: "WebTemplate on Desktop",
-            },
-            {
-              src: "screenshot-phone.png",
-              sizes: "435x608",
-              type: "image/png",
-              form_factor: "narrow",
-              label: "WebTemplate on Phone",
-            },
-          ],
-          short_name: "WebTemplate",
-          theme_color: "#ffffff",
-        },
-        registerType: "autoUpdate",
-        workbox: {
-          globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
-          navigateFallbackDenylist: [/storybook/],
-        },
-      }),
-    ],
-  };
+  const config = mergeConfig(createBaseConfig(), mergeConfig(createReactConfig(), createPWAConfig()));
 
   switch (command) {
     case "build":
-      return mergeConfig(commonConfig, {
+      return mergeConfig(config, {
         base: "./",
         build: {
           commonjsOptions: {
@@ -94,7 +20,7 @@ export default defineConfig(({ mode, command }) => {
         },
       });
     case "serve":
-      return mergeConfig(commonConfig, {
+      return mergeConfig(config, {
         server: {
           cors: true,
           https: true,
