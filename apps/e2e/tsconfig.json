@@ -1,6 +1,6 @@
 {
   "exclude": ["dist"],
-  "extends": "typescript-config/base.json",
+  "extends": "@config/typescript/base.json",
   "compilerOptions": {
     // Build & Resolve
     "target": "ESNext",
@@ -11,7 +11,7 @@
     "paths": {
       "~/*": ["./src/*"]
     },
-    "types": ["typescript-config/types"]
+    "types": ["@config/typescript/types"]
   },
   "include": ["./src"]
 }

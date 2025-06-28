@@ -1,0 +1,11 @@
+{
+  "name": "@config/barrelsby",
+  "exports": {
+    "./base": "./base.js"
+  },
+  "type": "module",
+  "version": "0.6.0",
+  "devDependencies": {
+    "barrelsby": "catalog:common"
+  }
+}

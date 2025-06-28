@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { validateCrypto } from "react-package";
+import { validateCrypto } from "@package/react";
 import { AppLocales } from "./AppLocales";
 import { PwaProviderModule } from "~/components/modules/pwa-provider-module/PwaProviderModule";
 import { AuthProvider } from "./auth/AuthProvider";

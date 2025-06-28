@@ -1,7 +1,7 @@
-import { usePostRefreshTokenMutate } from "api-package";
+import { usePostRefreshTokenMutate } from "@package/api";
 import type { ReactNode, ReactElement } from "react";
 import { useReducer } from "react";
-import { useRunOnce } from "react-package";
+import { useRunOnce } from "@package/react";
 import { AuthReducer } from "./AuthReducer";
 import { AuthContext } from "./AuthContext";
 import type { AuthState } from "~/classes/auth/AuthState";

@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { useIntl } from "react-intl";
-import { BasicLayout, BlueFadeBackground, GridBackground } from "ui-package";
+import { BasicLayout, BlueFadeBackground, GridBackground } from "@package/ui";
 import type { ForgotPasswordFormProps } from "../../forms/forgot-password/ForgotPasswordForm";
 import { ForgotPasswordForm } from "../../forms/forgot-password/ForgotPasswordForm";
 import { Card, CardHeader, Button, CardBody, Spacer } from "@heroui/react";

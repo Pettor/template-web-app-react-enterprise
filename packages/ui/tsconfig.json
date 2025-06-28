@@ -1,5 +1,5 @@
 {
-  "extends": "typescript-config/react.json",
+  "extends": "@config/typescript/react.json",
   "compilerOptions": {
     "allowImportingTsExtensions": true,
     "baseUrl": "src",
@@ -9,7 +9,7 @@
     "paths": {
       ".": ["."]
     },
-    "types": ["typescript-config/types"]
+    "types": ["@config/typescript/types"]
   },
   "include": ["**/*.ts", "**/*.tsx"]
 }

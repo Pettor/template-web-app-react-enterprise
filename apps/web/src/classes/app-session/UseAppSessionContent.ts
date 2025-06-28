@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useFetchPersonalProfileQuery } from "api-package";
+import { useFetchPersonalProfileQuery } from "@package/api";
 import { useNavigate } from "react-router-dom";
 import type { IAppSessionContent } from "./IAppSessionContent";
 import { useAuth } from "~/core/auth/UseAuth";

@@ -1,27 +1,29 @@
 {
-  "name": "react-package",
+  "name": "@package/react",
   "main": "./src/index.ts",
   "type": "module",
   "types": "./src/index.ts",
   "version": "0.6.0",
   "scripts": {
-    "generate:exports": "barrelsby -c ../../.barrelsby.json",
+    "generate:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
     "lint": "eslint ./src",
     "lint:fix": "pnpm lint --fix"
   },
+  "peerDependencies": {
+    "react": ">=19.0.0"
+  },  
   "dependencies": {
     "buffer": "6.0.3",
     "idb-keyval": "6.2.2"
   },
-  "peerDependencies": {
-    "react": ">=19.0.0"
-  },
   "devDependencies": {
+    "@config/barrelsby": "workspace:*",
+    "@config/eslint": "workspace:*",
+    "@config/typescript": "workspace:*",
     "@types/react": "catalog:react19",
-    "eslint-config": "workspace:*",
-    "typescript-config": "workspace:*",
+    "barrelsby": "catalog:common",
     "usehooks-ts": "3.1.1",
     "utility-types": "3.11.0"
   }

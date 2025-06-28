@@ -1,7 +1,7 @@
-import { usePostForgotPasswordMutate } from "api-package";
+import { usePostForgotPasswordMutate } from "@package/api";
 import { useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
-import { useToastNotifier } from "ui-package";
+import { useToastNotifier } from "@package/ui";
 import type { FormForgotPassword } from "~/components/forms/forgot-password/ForgotPasswordForm";
 import type { ForgotPasswordViewProps } from "~/components/views/forgot-password/ForgotPasswordView";
 import { useAppInfo } from "~/core/config/UseAppInfo";

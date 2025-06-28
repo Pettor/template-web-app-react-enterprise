@@ -9,9 +9,9 @@
 @import "@fontsource/rubik/900.css";
 
 /* Tailwind configuration */
-@import "../node_modules/tailwind-config/tailwind.css";
+@import "../node_modules/@config/tailwind/tailwind.css";
 
 /* Tailwind sources */
 @source "./**/**.{js,ts,jsx,tsx}";
-@source "../node_modules/ui-package";
-@source "../node_modules/storybook-package";
+@source "../node_modules/@package/ui";
+@source "../node_modules/@package/storybook";

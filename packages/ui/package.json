@@ -1,5 +1,5 @@
 {
-  "name": "ui-package",
+  "name": "@package/ui",
   "files": [
     "dist"
   ],
@@ -8,42 +8,39 @@
   "types": "./src/index.ts",
   "version": "0.6.0",
   "scripts": {
-    "generate:exports": "barrelsby -c .barrelsby.json",
+    "generate:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
     "lint": "eslint ./src",
     "lint:fix": "pnpm lint --fix"
   },
-  "dependencies": {
-    "@heroui/react": "2.8.0-beta.6",
-    "clsx": "2.1.1",
-    "framer-motion": "12.15.0",
-    "jotai": "2.12.4",
-    "react-package": "workspace:*",
-    "tailwind-config": "workspace:*"
-  },
   "peerDependencies": {
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0"
+  },  
+  "dependencies": {
+    "@config/tailwind": "workspace:*",
+    "@heroui/react": "2.8.0-beta.6",
+    "@package/react": "workspace:*",
+    "clsx": "2.1.1",
+    "framer-motion": "12.15.0",
+    "jotai": "2.12.4"
   },
   "devDependencies": {
+    "@config/barrelsby": "workspace:*",
+    "@config/eslint": "workspace:*",
+    "@config/typescript": "workspace:*",
     "@faker-js/faker": "9.8.0",
+    "@package/storybook": "workspace:*",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
     "@vitejs/plugin-react": "catalog:vite",
     "@vitest/browser": "catalog:vitest",
     "@vitest/coverage-v8": "catalog:vitest",
-    "eslint-config": "workspace:*",
-    "storybook-package": "workspace:*",
+    "barrelsby": "catalog:common",
     "tailwindcss": "catalog:tailwind",
-    "typescript-config": "workspace:*",
     "vite": "catalog:vite",
     "vite-tsconfig-paths": "catalog:vite",
     "vitest": "catalog:vitest"
-  },
-  "jest-junit": {
-    "suiteName": "ui-package tests",
-    "outputDirectory": ".junit",
-    "outputName": "ui-package.xml"
   }
 }

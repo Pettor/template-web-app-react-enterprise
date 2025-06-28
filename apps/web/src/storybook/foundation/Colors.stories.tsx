@@ -1,7 +1,7 @@
 import { Card, CardBody, Spacer } from "@heroui/react";
 import clsx from "clsx";
 import { type ReactElement, type ReactNode } from "react";
-import { DocumentationDecorator, DocumentationLayout } from "storybook-package";
+import { DocumentationDecorator, DocumentationLayout } from "@package/storybook";
 
 export default {
   title: "Design System/Colors",

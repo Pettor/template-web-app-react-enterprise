@@ -1,2 +1,2 @@
-import { config } from "eslint-config/react";
+import { config } from "@config/eslint/react";
 export default config;

@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { useIntl } from "react-intl";
-import { BasicLayout, BlueFadeBackground, GridBackground } from "ui-package";
+import { BasicLayout, BlueFadeBackground, GridBackground } from "@package/ui";
 import type { SignUpFormProps } from "~/components/forms/sign-up/SignUpForm";
 import { SignUpForm } from "~/components/forms/sign-up/SignUpForm";
 import { Card, CardHeader, Button, CardBody, Spacer } from "@heroui/react";

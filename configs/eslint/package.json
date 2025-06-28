@@ -1,5 +1,5 @@
 {
-  "name": "eslint-config",
+  "name": "@config/eslint",
   "exports": {
     "./base": "./base.js",
     "./react": "./react.js"

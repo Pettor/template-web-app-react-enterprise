@@ -1,13 +1,13 @@
 {
-  "name": "tailwind-config",
+  "name": "@config/tailwind",
   "files": [
     "*.css"
   ],
   "version": "0.6.0",
   "devDependencies": {
+    "@package/storybook": "workspace:*",
     "@tailwindcss/aspect-ratio": "catalog:tailwind",
     "@tailwindcss/typography": "catalog:tailwind",
-    "storybook-package": "workspace:*",
     "tailwindcss": "catalog:tailwind"
   }
 }

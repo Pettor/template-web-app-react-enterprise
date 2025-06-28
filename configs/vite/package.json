@@ -1,0 +1,38 @@
+{
+  "name": "@config/vite",
+  "version": "0.6.0",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "generate:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
+    "clean": "rimraf dist",
+    "clean:all": "pnpm clean node_modules",
+    "build": "tsup src/index.ts --format esm --dts",
+    "build:old": "tsc --project tsconfig.json"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.0.0"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "catalog:tailwind",
+    "@vitejs/plugin-react": "catalog:vite",
+    "vite": "catalog:vite",
+    "vite-plugin-http2-proxy": "catalog:vite",
+    "vite-plugin-mkcert": "catalog:vite",
+    "vite-plugin-pwa": "catalog:vite",
+    "vite-tsconfig-paths": "catalog:vite"
+  },
+
+  "devDependencies": {
+    "@config/barrelsby": "workspace:*",
+    "@config/eslint": "workspace:*",
+    "@config/typescript": "workspace:*",
+    "barrelsby": "catalog:common",
+    "typescript": "catalog:typescript"
+  }
+}

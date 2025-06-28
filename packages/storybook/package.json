@@ -1,11 +1,11 @@
 {
-  "name": "storybook-package",
+  "name": "@package/storybook",
   "main": "./src/index.ts",
   "type": "module",
   "types": "./src/index.ts",
   "version": "0.6.0",
   "scripts": {
-    "generate:exports": "barrelsby -c ../../.barrelsby.json",
+    "generate:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules"
   },
@@ -15,8 +15,10 @@
     "react-dom": ">=19.0.0"
   },
   "devDependencies": {
-    "eslint-config": "workspace:*",
-    "react-package": "workspace:*",
-    "typescript-config": "workspace:*"
+    "@config/barrelsby": "workspace:*",
+    "@config/eslint": "workspace:*",
+    "@config/typescript": "workspace:*",
+    "@package/react": "workspace:*",
+    "barrelsby": "catalog:common"
   }
 }
