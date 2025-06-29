@@ -1,0 +1,27 @@
+{
+  "name": "@config/design-tokens",
+  "version": "0.6.0",
+  "description": "Brand design tokens using Style Dictionary with W3C format",
+  "type": "module",
+  "exports": {
+    "./css": "./dist/css/variables.css",
+    "./tailwind": "./dist/tailwind/theme.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "style-dictionary build --config style-dictionary.config.js",
+    "clean": "rimraf dist",
+    "dev": "pnpm build --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "style-dictionary": "^4.2.0"
+  },
+  "devDependencies": {
+    "@config/typescript": "workspace:*",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "color": {
+    "brand": {
+      "primary": {
+        "$type": "color",
+        "$value": "#7877c6",
+        "$description": "Primary brand color used for gradients and accents"
+      },
+      "secondary": {
+        "$type": "color", 
+        "$value": "#c677c6",
+        "$description": "Secondary brand color for gradients"
+      }
+    },
+    "background": {
+      "radial-gradient": {
+        "primary": {
+          "$type": "color",
+          "$value": "rgba(120,119,198,0.3)",
+          "$description": "Primary color for radial gradient backgrounds"
+        },
+        "fallback": {
+          "$type": "color",
+          "$value": "rgba(255,255,255,0)",
+          "$description": "Fallback transparent color for gradients"
+        }
+      }
+    }
+  },
+  "typography": {
+    "font-family": {
+      "primary": {
+        "$type": "fontFamily",
+        "$value": ["Rubik", "sans-serif", "system-ui"],
+        "$description": "Primary font family for the application"
+      }
+    },
+    "font-weight": {
+      "light": {
+        "$type": "fontWeight",
+        "$value": 300
+      },
+      "regular": {
+        "$type": "fontWeight", 
+        "$value": 400
+      },
+      "medium": {
+        "$type": "fontWeight",
+        "$value": 500
+      },
+      "semibold": {
+        "$type": "fontWeight",
+        "$value": 600
+      },
+      "bold": {
+        "$type": "fontWeight",
+        "$value": 700
+      },
+      "extrabold": {
+        "$type": "fontWeight",
+        "$value": 800
+      },
+      "black": {
+        "$type": "fontWeight",
+        "$value": 900
+      }
+    },
+    "font-size": {
+      "hero": {
+        "mobile": {
+          "$type": "fontSize",
+          "$value": "2.25rem",
+          "$description": "Hero text size on mobile (36px)"
+        },
+        "tablet": {
+          "$type": "fontSize", 
+          "$value": "3rem",
+          "$description": "Hero text size on tablet (48px)"
+        },
+        "desktop": {
+          "$type": "fontSize",
+          "$value": "4.5rem", 
+          "$description": "Hero text size on desktop (72px)"
+        }
+      },
+      "subtitle": {
+        "$type": "fontSize",
+        "$value": "1.25rem",
+        "$description": "Subtitle text size (20px)"
+      }
+    }
+  },
+  "spacing": {
+    "hero": {
+      "vertical": {
+        "$type": "spacing",
+        "$value": "2rem",
+        "$description": "Vertical spacing for hero sections"
+      }
+    },
+    "grid": {
+      "gap": {
+        "$type": "spacing", 
+        "$value": "1rem",
+        "$description": "Standard grid gap spacing"
+      }
+    },
+    "container": {
+      "padding": {
+        "mobile": {
+          "$type": "spacing",
+          "$value": "1rem",
+          "$description": "Container padding on mobile"
+        },
+        "desktop": {
+          "$type": "spacing",
+          "$value": "0",
+          "$description": "Container padding on desktop"
+        }
+      }
+    }
+  },
+  "gradient": {
+    "brand": {
+      "primary-to-secondary": {
+        "$type": "gradient",
+        "$value": {
+          "type": "linear",
+          "angle": "to right",
+          "stops": [
+            {
+              "color": "{color.brand.primary}",
+              "position": 0
+            },
+            {
+              "color": "{color.brand.secondary}",
+              "position": 1
+            }
+          ]
+        },
+        "$description": "Primary brand gradient from primary to secondary"
+      }
+    },
+    "background": {
+      "radial-fade": {
+        "$type": "gradient",
+        "$value": {
+          "type": "radial",
+          "shape": "ellipse",
+          "size": "80% 80%",
+          "position": "50% -20%",
+          "stops": [
+            {
+              "color": "{color.background.radial-gradient.primary}",
+              "position": 0
+            },
+            {
+              "color": "{color.background.radial-gradient.fallback}",
+              "position": 1
+            }
+          ]
+        },
+        "$description": "Radial gradient for background fade effect"
+      }
+    }
+  }
+}

@@ -1,3 +1,7 @@
+/* Design Tokens */
+/* @import "@package/design-tokens/css"; */
+@import "../../node_modules/@config/design-tokens/dist/css";
+
 /* Tailwind confugration */
 @import "tailwindcss";
 
