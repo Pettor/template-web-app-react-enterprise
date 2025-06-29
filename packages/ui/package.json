@@ -20,7 +20,7 @@
   },  
   "dependencies": {
     "@config/tailwind": "workspace:*",
-    "@heroui/react": "2.8.0-beta.6",
+    "@heroui/react": "catalog:design",
     "@package/react": "workspace:*",
     "clsx": "2.1.1",
     "framer-motion": "12.15.0",

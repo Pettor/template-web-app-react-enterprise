@@ -19,9 +19,9 @@
   },
   "dependencies": {
     "@config/tailwind": "workspace:*",
-    "@fontsource/rubik": "5.2.5",
-    "@heroicons/react": "2.2.0",
-    "@heroui/react": "2.8.0-beta.6",
+    "@fontsource/rubik": "catalog:design",
+    "@heroicons/react": "catalog:design",
+    "@heroui/react": "catalog:design",
     "@hookform/resolvers": "catalog:validation",
     "@package/api": "workspace:*",
     "@package/react": "workspace:*",
