@@ -7,6 +7,7 @@
 /* HeroUI theme */
 @plugin './hero.ts';
 
+/* Hoisted to be placed in the root */
 @source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 @custom-variant dark (&:is(.dark *));
 

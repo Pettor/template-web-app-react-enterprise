@@ -5,6 +5,7 @@
   ],
   "version": "0.6.0",
   "devDependencies": {
+    "@heroui/react": "catalog:design",
     "@package/storybook": "workspace:*",
     "@tailwindcss/aspect-ratio": "catalog:tailwind",
     "@tailwindcss/typography": "catalog:tailwind",
