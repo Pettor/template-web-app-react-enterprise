@@ -7,19 +7,26 @@
       "cache": true,
       "inputs": [".husky/**", "package.json"]
     },
+    "design:build": {
+      "cache": true,
+      "inputs": ["src/**/*.json", "style-dictionary.config.js", "package.json"],
+      "outputs": ["dist/**"]
+    },
     "generate:exports": {
       "cache": true,
-      "inputs": ["src/**/*.ts", "src/**/*.tsx", ".barrelsby.json"],
+      "inputs": ["src/**/*.ts", "src/**/*.tsx", ".barrelsby.json", "barrelsby.json", "package.json"],
       "outputs": ["src/index.ts"]
     },
     "build": {
-      "dependsOn": ["generate:exports", "^build"],
-      "inputs": ["src/**", "package.json", "tsconfig.json"],
+      "dependsOn": ["design:build", "generate:exports", "^build"],
+      "inputs": ["src/**", "package.json", "tsconfig.json", "vite.config.ts", "eslint.config.js"],
       "outputs": ["dist/**", "build/**"]
     },
     "deploy": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", "output/deployment/**"]
+      "dependsOn": ["build", "storybook:build"],
+      "cache": true,
+      "inputs": ["dist/**", "build/**", "storybook-static/**"],
+      "outputs": ["output/deployment/**"]
     },
     "dev": {
       "cache": false,
@@ -31,6 +38,10 @@
       "dependsOn": ["^build"], 
       "persistent": true
     },
+    "mocks": {
+      "cache": false,
+      "persistent": true
+    },
     "clean": {
       "cache": false
     },
@@ -39,41 +50,52 @@
     },
     "lint": {
       "cache": true,
-      "inputs": ["src/**", ".eslintrc.*", "package.json"],
+      "inputs": ["src/**", "eslint.config.js", ".eslintrc.*", "package.json", "tsconfig.json"],
       "outputs": []
     },
     "lint:fix": {
-      "cache": false
+      "cache": false,
+      "inputs": ["src/**", "eslint.config.js", ".eslintrc.*", "package.json", "tsconfig.json"]
     },
     "test": {
       "cache": true,
-      "inputs": ["src/**", "test/**", "package.json"],
-      "outputs": []
+      "inputs": ["src/**", "test/**", "vitest.config.ts", "package.json", "tsconfig.json"],
+      "outputs": ["coverage/**"]
+    },
+    "test:e2e": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["src/**", "playwright.config.ts", "package.json"],
+      "outputs": [".test-results/**", "test-results/**"]
     },
     "test:e2e:env": {
-      "cache": false
+      "cache": false,
+      "persistent": true
     },
     "test:coverage": {
       "cache": true,
-      "inputs": ["src/**", "test/**", "package.json"],
-      "outputs": ["**/.coverage/**/*"]
+      "inputs": ["src/**", "test/**", "vitest.config.ts", "package.json", "tsconfig.json"],
+      "outputs": ["coverage/**", ".coverage/**"]
     },
     "test:coverage:ci": {
       "cache": true,
-      "inputs": ["src/**", "test/**", "package.json"]
+      "inputs": ["src/**", "test/**", "vitest.config.ts", "package.json", "tsconfig.json"],
+      "outputs": ["coverage/**"]
     },
     "storybook": {
       "cache": false,
+      "dependsOn": ["^build"],
       "persistent": true
     },
     "storybook:build": {
       "cache": true,
       "dependsOn": ["^build"],
-      "inputs": ["src/**/*.tsx", "src/**/*.ts", ".storybook/**", "package.json"],
-      "outputs": ["**/storybook-static/**"]
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", ".storybook/**", "package.json", "tsconfig.json", "vite.config.ts"],
+      "outputs": ["storybook-static/**"]
     },
     "storybook:move": {
       "cache": true,
+      "dependsOn": ["storybook:build"],
       "inputs": ["storybook-static/**"],
       "outputs": ["output/storybook-static/**"]
     }

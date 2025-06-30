@@ -1,8 +1,10 @@
 {
   "name": "@app/e2e",
+  "version": "0.6.0",
+  "description": "End-to-end tests for the web application using Playwright",
   "license": "MIT",
   "private": true,
-  "version": "0.6.0",
+  "type": "module",
   "scripts": {
     "prepare": "playwright install",
     "clean": "rimraf .test-results",

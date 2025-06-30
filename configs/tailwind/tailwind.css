@@ -1,3 +1,6 @@
+/* Design Tokens */
+@import "@design/tokens/css";
+
 /* Tailwind confugration */
 @import "tailwindcss";
 
@@ -12,6 +15,20 @@
 @custom-variant dark (&:is(.dark *));
 
 
+/* Theme extensions from design tokens */
+@theme {
+  /* Typography */
+  --font-family-primary: var(--typography-font-family-primary);
+  
+  --font-weight-light: var(--typography-font-weight-light);
+  --font-weight-regular: var(--typography-font-weight-regular);
+  --font-weight-medium: var(--typography-font-weight-medium);
+  --font-weight-semibold: var(--typography-font-weight-semibold);
+  --font-weight-bold: var(--typography-font-weight-bold);
+  --font-weight-extrabold: var(--typography-font-weight-extrabold);
+  --font-weight-black: var(--typography-font-weight-black);
+}
+
 body {
-  font-family: "Rubik", sans-serif, system-ui;
+  font-family: var(--typography-font-family-primary);
 }

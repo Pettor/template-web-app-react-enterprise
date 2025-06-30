@@ -1,10 +1,13 @@
 {
   "name": "@config/barrelsby",
+  "version": "0.6.0",
+  "description": "Barrelsby configuration for generating index files in TypeScript projects",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
   "exports": {
     "./base": "./base.js"
   },
-  "type": "module",
-  "version": "0.6.0",
   "devDependencies": {
     "barrelsby": "catalog:common"
   }

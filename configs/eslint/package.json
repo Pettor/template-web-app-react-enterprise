@@ -1,11 +1,17 @@
 {
   "name": "@config/eslint",
+  "version": "0.6.0",
+  "description": "ESLint configuration for TypeScript and React projects",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
   "exports": {
     "./base": "./base.js",
     "./react": "./react.js"
   },
-  "type": "module",
-  "version": "0.6.0",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "clean:all": "rimraf dist node_modules"
   },

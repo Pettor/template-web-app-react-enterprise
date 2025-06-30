@@ -1,0 +1,9 @@
+{
+  "layout": {
+    "disabledOpacity": {
+      "$type": "opacity",
+      "$value": "0.5",
+      "$description": "Opacity value for disabled elements"
+    }
+  }
+}

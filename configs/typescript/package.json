@@ -1,7 +1,11 @@
 {
   "name": "@config/typescript",
+  "version": "0.6.0",
+  "description": "TypeScript configuration for the web application",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
   "files": [
     "*.d.ts"
-  ],
-  "version": "0.0.0"
+  ]
 }
