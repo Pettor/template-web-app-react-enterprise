@@ -36,30 +36,6 @@
         "$type": "fontWeight",
         "$value": 900
       }
-    },
-    "font-size": {
-      "hero": {
-        "mobile": {
-          "$type": "fontSize",
-          "$value": "2.25rem",
-          "$description": "Hero text size on mobile (36px)"
-        },
-        "tablet": {
-          "$type": "fontSize",
-          "$value": "3rem",
-          "$description": "Hero text size on tablet (48px)"
-        },
-        "desktop": {
-          "$type": "fontSize",
-          "$value": "4.5rem",
-          "$description": "Hero text size on desktop (72px)"
-        }
-      },
-      "subtitle": {
-        "$type": "fontSize",
-        "$value": "1.25rem",
-        "$description": "Subtitle text size (20px)"
-      }
     }
   }
 }

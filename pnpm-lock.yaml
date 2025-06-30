@@ -31,6 +31,9 @@ catalogs:
     '@heroui/react':
       specifier: 2.8.0-beta.6
       version: 2.8.0-beta.6
+    style-dictionary:
+      specifier: 4.2.0
+      version: 4.2.0
   eslint:
     '@eslint/js':
       specifier: 9.27.0
@@ -463,18 +466,12 @@ importers:
   configs/design-tokens:
     dependencies:
       style-dictionary:
-        specifier: ^4.2.0
-        version: 4.4.0
+        specifier: catalog:design
+        version: 4.2.0(prettier@3.5.3)
     devDependencies:
       '@config/typescript':
         specifier: workspace:*
         version: link:../typescript
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-      typescript:
-        specifier: 5.8.3
-        version: 5.8.3
 
   configs/eslint:
     devDependencies:
@@ -4113,10 +4110,6 @@ packages:
     resolution: {integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==}
     engines: {node: '>= 0.8'}
 
-  commander@12.1.0:
-    resolution: {integrity: sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==}
-    engines: {node: '>=18'}
-
   commander@14.0.0:
     resolution: {integrity: sha512-2uM9rYjPvyq39NwLRqaiLtWHyDC1FvryJDa2ATTVims5YAS4PupsEQsDvP14FqhFr0P49CYDugi59xaxJlTXRA==}
     engines: {node: '>=20'}
@@ -6188,8 +6181,8 @@ packages:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
 
-  path-unified@0.2.0:
-    resolution: {integrity: sha512-MNKqvrKbbbb5p7XHXV6ZAsf/1f/yJQa13S/fcX0uua8ew58Tgc6jXV+16JyAbnR/clgCH+euKDxrF2STxMHdrg==}
+  path-unified@0.1.0:
+    resolution: {integrity: sha512-/Oaz9ZJforrkmFrwkR/AcvjVsCAwGSJHO0X6O6ISj8YeFbATjIEBXLDcZfnK3MO4uvCBrJTdVIxdOc79PMqSdg==}
 
   path@0.12.7:
     resolution: {integrity: sha512-aXXC6s+1w7otVF9UletFkFcDsJeO7lSZBPUQhtb5O0xJe8LtYhj/GxldoL09bBj9+ZmE2hNoHqQSFMN5fikh4Q==}
@@ -6976,10 +6969,12 @@ packages:
   strip-literal@3.0.0:
     resolution: {integrity: sha512-TcccoMhJOM3OebGhSBEmp3UZ2SfDMZUEBdRA/9ynfLi8yYajyWX3JiXArcJt4Umh4vISpspkQIY8ZZoCqjbviA==}
 
-  style-dictionary@4.4.0:
-    resolution: {integrity: sha512-+xU0IA1StzqAqFs/QtXkK+XJa7wpS4X5H+JQccRKsRCElgeLGocFU1U/UMvMUylKFw6vwGV+Y/a2wb2pm5rFFQ==}
+  style-dictionary@4.2.0:
+    resolution: {integrity: sha512-bjynavc9g80Zl9GpR3cw+ibqtbMbak9YXpuZteTsRTzoacUTjh7GLu1nlT1ukf264Nw5Vhu/ICQpY5xxOquvtA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
+    peerDependencies:
+      prettier: 3.x
 
   sucrase@3.35.0:
     resolution: {integrity: sha512-8EbVDiu9iN/nESwxeSxDKe0dunta1GOlHufmSSXxMD2z2/tMZpDMpvXQGsc+ajGo8y2uYUmixaSRUc/QPoQ0GA==}
@@ -12448,8 +12443,6 @@ snapshots:
     dependencies:
       delayed-stream: 1.0.0
 
-  commander@12.1.0: {}
-
   commander@14.0.0: {}
 
   commander@2.20.3: {}
@@ -14657,7 +14650,7 @@ snapshots:
 
   path-type@4.0.0: {}
 
-  path-unified@0.2.0: {}
+  path-unified@0.1.0: {}
 
   path@0.12.7:
     dependencies:
@@ -15464,7 +15457,7 @@ snapshots:
     dependencies:
       js-tokens: 9.0.1
 
-  style-dictionary@4.4.0:
+  style-dictionary@4.2.0(prettier@3.5.3):
     dependencies:
       '@bundled-es-modules/deepmerge': 4.3.1
       '@bundled-es-modules/glob': 10.4.2
@@ -15472,11 +15465,11 @@ snapshots:
       '@zip.js/zip.js': 2.7.62
       chalk: 5.4.1
       change-case: 5.4.4
-      commander: 12.1.0
+      commander: 8.3.0
       is-plain-obj: 4.1.0
       json5: 2.2.3
       patch-package: 8.0.0
-      path-unified: 0.2.0
+      path-unified: 0.1.0
       prettier: 3.5.3
       tinycolor2: 1.6.0
 

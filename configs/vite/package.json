@@ -1,12 +1,14 @@
 {
   "name": "@config/vite",
   "version": "0.6.0",
+  "description": "Vite configuration for the web application",
   "license": "MIT",
-  "type": "module",
+  "private": true,
   "files": [
     "dist"
   ],
   "main": "./dist/index.js",
+  "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
     "generate:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",

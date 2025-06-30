@@ -1,9 +1,12 @@
 {
   "name": "@package/api",
+  "version": "0.6.0",
+  "description": "API client for the web application using Axios and React Query",  
+  "license": "MIT",
+  "private": true,
   "main": "./src/index.ts",
   "type": "module",
   "types": "./src/index.ts",
-  "version": "0.6.0",
   "scripts": {
     "generate:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
     "clean": "rimraf dist",

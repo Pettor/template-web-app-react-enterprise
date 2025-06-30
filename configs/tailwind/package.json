@@ -1,9 +1,13 @@
 {
   "name": "@config/tailwind",
+  "version": "0.6.0",
+  "description": "Tailwind CSS configuration for the web application",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
   "files": [
     "*.css"
   ],
-  "version": "0.6.0",
   "devDependencies": {
     "@config/design-tokens": "workspace:*",
     "@config/typescript": "workspace:*",

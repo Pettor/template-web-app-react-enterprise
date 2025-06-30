@@ -1,9 +1,12 @@
 {
   "name": "@package/storybook",
+  "version": "0.6.0",
+  "description": "Storybook configuration for the web application",
+  "license": "MIT",
+  "private": true,
   "main": "./src/index.ts",
   "type": "module",
   "types": "./src/index.ts",
-  "version": "0.6.0",
   "scripts": {
     "generate:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
     "clean": "rimraf dist",
