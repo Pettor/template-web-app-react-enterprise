@@ -1,0 +1,132 @@
+{
+  "color": {
+    "theme": {
+      "dark": {
+        "primary": {
+          "50": {
+            "$type": "color",
+            "$value": "#18172a",
+            "$description": "Primary color shade 50 for dark theme"
+          },
+          "100": {
+            "$type": "color",
+            "$value": "#2f2e4d",
+            "$description": "Primary color shade 100 for dark theme"
+          },
+          "200": {
+            "$type": "color",
+            "$value": "#474670",
+            "$description": "Primary color shade 200 for dark theme"
+          },
+          "300": {
+            "$type": "color",
+            "$value": "#5f5d93",
+            "$description": "Primary color shade 300 for dark theme"
+          },
+          "400": {
+            "$type": "color",
+            "$value": "#7775b6",
+            "$description": "Primary color shade 400 for dark theme"
+          },
+          "500": {
+            "$type": "color",
+            "$value": "#7877c6",
+            "$description": "Primary color base shade for dark theme"
+          },
+          "600": {
+            "$type": "color",
+            "$value": "#9694d1",
+            "$description": "Primary color shade 600 for dark theme"
+          },
+          "700": {
+            "$type": "color",
+            "$value": "#b4b2dc",
+            "$description": "Primary color shade 700 for dark theme"
+          },
+          "800": {
+            "$type": "color",
+            "$value": "#d2d1e7",
+            "$description": "Primary color shade 800 for dark theme"
+          },
+          "900": {
+            "$type": "color",
+            "$value": "#f0eff3",
+            "$description": "Primary color shade 900 for dark theme"
+          },
+          "DEFAULT": {
+            "$type": "color",
+            "$value": "#7877c6",
+            "$description": "Default primary color for dark theme"
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "#000000",
+            "$description": "Primary foreground color for dark theme"
+          }
+        },
+        "secondary": {
+          "50": {
+            "$type": "color",
+            "$value": "#2a172a",
+            "$description": "Secondary color shade 50 for dark theme"
+          },
+          "100": {
+            "$type": "color",
+            "$value": "#4d2e4d",
+            "$description": "Secondary color shade 100 for dark theme"
+          },
+          "200": {
+            "$type": "color",
+            "$value": "#704670",
+            "$description": "Secondary color shade 200 for dark theme"
+          },
+          "300": {
+            "$type": "color",
+            "$value": "#935d93",
+            "$description": "Secondary color shade 300 for dark theme"
+          },
+          "400": {
+            "$type": "color",
+            "$value": "#b675b6",
+            "$description": "Secondary color shade 400 for dark theme"
+          },
+          "500": {
+            "$type": "color",
+            "$value": "#c677c6",
+            "$description": "Secondary color base shade for dark theme"
+          },
+          "600": {
+            "$type": "color",
+            "$value": "#d194d1",
+            "$description": "Secondary color shade 600 for dark theme"
+          },
+          "700": {
+            "$type": "color",
+            "$value": "#dcb2dc",
+            "$description": "Secondary color shade 700 for dark theme"
+          },
+          "800": {
+            "$type": "color",
+            "$value": "#e7d1e7",
+            "$description": "Secondary color shade 800 for dark theme"
+          },
+          "900": {
+            "$type": "color",
+            "$value": "#f3eff3",
+            "$description": "Secondary color shade 900 for dark theme"
+          },
+          "DEFAULT": {
+            "$type": "color",
+            "$value": "#c677c6",
+            "$description": "Default secondary color for dark theme"
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "#000000",
+            "$description": "Secondary foreground color for dark theme"
+          }
+        }
+      }
+    }
+  }
+}

@@ -15,6 +15,38 @@
 @custom-variant dark (&:is(.dark *));
 
 
+/* Theme extensions from design tokens */
+@theme {
+  --font-family-primary: var(--typography-font-family-primary);
+  
+  --font-size-hero-mobile: var(--typography-font-size-hero-mobile);
+  --font-size-hero-tablet: var(--typography-font-size-hero-tablet);
+  --font-size-hero-desktop: var(--typography-font-size-hero-desktop);
+  --font-size-subtitle: var(--typography-font-size-subtitle);
+  
+  --font-weight-light: var(--typography-font-weight-light);
+  --font-weight-regular: var(--typography-font-weight-regular);
+  --font-weight-medium: var(--typography-font-weight-medium);
+  --font-weight-semibold: var(--typography-font-weight-semibold);
+  --font-weight-bold: var(--typography-font-weight-bold);
+  --font-weight-extrabold: var(--typography-font-weight-extrabold);
+  --font-weight-black: var(--typography-font-weight-black);
+  
+  --spacing-hero-vertical: var(--spacing-hero-vertical);
+  --spacing-grid-gap: var(--spacing-grid-gap);
+  --spacing-container-mobile: var(--spacing-container-padding-mobile);
+  --spacing-container-desktop: var(--spacing-container-padding-desktop);
+  
+  --color-brand-primary: var(--color-brand-primary);
+  --color-brand-secondary: var(--color-brand-secondary);
+  --color-background-radial-primary: var(--color-background-radial-gradient-primary);
+  --color-background-radial-fallback: var(--color-background-radial-gradient-fallback);
+  --color-text-hero: var(--text-hero-primary);
+  
+  --background-image-brand-gradient: var(--gradient-brand-primary-to-secondary);
+  --background-image-radial-fade: var(--gradient-background-radial-fade);
+}
+
 body {
   font-family: var(--typography-font-family-primary);
 }

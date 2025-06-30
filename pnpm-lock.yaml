@@ -517,6 +517,9 @@ importers:
       '@config/design-tokens':
         specifier: workspace:*
         version: link:../design-tokens
+      '@config/typescript':
+        specifier: workspace:*
+        version: link:../typescript
       '@heroui/react':
         specifier: catalog:design
         version: 2.8.0-beta.6(@types/react@19.1.8)(framer-motion@12.15.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)

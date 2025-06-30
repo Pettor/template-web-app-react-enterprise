@@ -23,6 +23,11 @@ export default {
           format: "javascript/es6",
           filter: (token) => token.$type !== "gradient",
         },
+        {
+          destination: "theme.d.ts",
+          format: "typescript/es6-declarations",
+          filter: (token) => token.$type !== "gradient",
+        },
       ],
     },
   },
