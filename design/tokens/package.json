@@ -1,5 +1,5 @@
 {
-  "name": "@config/design-tokens",
+  "name": "@design/tokens",
   "version": "0.6.0",
   "description": "Brand design tokens using Style Dictionary with W3C format",
   "license": "MIT",

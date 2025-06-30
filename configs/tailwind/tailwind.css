@@ -1,5 +1,5 @@
 /* Design Tokens */
-@import "@config/design-tokens/css";
+@import "@design/tokens/css";
 
 /* Tailwind confugration */
 @import "tailwindcss";

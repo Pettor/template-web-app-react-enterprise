@@ -463,16 +463,6 @@ importers:
         specifier: catalog:common
         version: 2.8.1
 
-  configs/design-tokens:
-    dependencies:
-      style-dictionary:
-        specifier: catalog:design
-        version: 4.2.0(prettier@3.5.3)
-    devDependencies:
-      '@config/typescript':
-        specifier: workspace:*
-        version: link:../typescript
-
   configs/eslint:
     devDependencies:
       '@eslint/js':
@@ -511,12 +501,12 @@ importers:
 
   configs/tailwind:
     devDependencies:
-      '@config/design-tokens':
-        specifier: workspace:*
-        version: link:../design-tokens
       '@config/typescript':
         specifier: workspace:*
         version: link:../typescript
+      '@design/tokens':
+        specifier: workspace:*
+        version: link:../../design/tokens
       '@heroui/react':
         specifier: catalog:design
         version: 2.8.0-beta.6(@types/react@19.1.8)(framer-motion@12.15.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
@@ -574,6 +564,16 @@ importers:
       typescript:
         specifier: 5.8.3
         version: 5.8.3
+
+  design/tokens:
+    dependencies:
+      style-dictionary:
+        specifier: catalog:design
+        version: 4.2.0(prettier@3.5.3)
+    devDependencies:
+      '@config/typescript':
+        specifier: workspace:*
+        version: link:../../configs/typescript
 
   packages/api:
     dependencies:

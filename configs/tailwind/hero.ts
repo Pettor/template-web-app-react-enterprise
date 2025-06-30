@@ -173,7 +173,7 @@ import {
   ColorThemeDarkOverlay,
   // Layout
   LayoutDisabledOpacity,
-} from "@config/design-tokens/tailwind";
+} from "@design/tokens/tailwind";
 
 const config = heroui({
   themes: {

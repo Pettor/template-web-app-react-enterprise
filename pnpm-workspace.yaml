@@ -1,6 +1,7 @@
 packages:
 - apps/*
 - configs/*
+- design/*
 - packages/*
 catalogs:
   common:
