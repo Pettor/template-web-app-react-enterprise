@@ -1,0 +1,32 @@
+{
+  "spacing": {
+    "hero": {
+      "vertical": {
+        "$type": "spacing",
+        "$value": "2rem",
+        "$description": "Vertical spacing for hero sections"
+      }
+    },
+    "grid": {
+      "gap": {
+        "$type": "spacing",
+        "$value": "1rem",
+        "$description": "Standard grid gap spacing"
+      }
+    },
+    "container": {
+      "padding": {
+        "mobile": {
+          "$type": "spacing",
+          "$value": "1rem",
+          "$description": "Container padding on mobile"
+        },
+        "desktop": {
+          "$type": "spacing",
+          "$value": "0",
+          "$description": "Container padding on desktop"
+        }
+      }
+    }
+  }
+}

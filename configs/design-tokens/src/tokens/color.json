@@ -1,0 +1,30 @@
+{
+  "color": {
+    "brand": {
+      "primary": {
+        "$type": "color",
+        "$value": "#7877c6",
+        "$description": "Primary brand color used for gradients and accents"
+      },
+      "secondary": {
+        "$type": "color", 
+        "$value": "#c677c6",
+        "$description": "Secondary brand color for gradients"
+      }
+    },
+    "background": {
+      "radial-gradient": {
+        "primary": {
+          "$type": "color",
+          "$value": "rgba(120,119,198,0.3)",
+          "$description": "Primary color for radial gradient backgrounds"
+        },
+        "fallback": {
+          "$type": "color",
+          "$value": "rgba(255,255,255,0)",
+          "$description": "Fallback transparent color for gradients"
+        }
+      }
+    }
+  }
+}

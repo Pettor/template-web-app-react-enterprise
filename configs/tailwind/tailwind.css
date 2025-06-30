@@ -17,6 +17,7 @@
 
 /* Theme extensions from design tokens */
 @theme {
+  /* Typography */
   --font-family-primary: var(--typography-font-family-primary);
   
   --font-size-hero-mobile: var(--typography-font-size-hero-mobile);
@@ -32,19 +33,36 @@
   --font-weight-extrabold: var(--typography-font-weight-extrabold);
   --font-weight-black: var(--typography-font-weight-black);
   
+  /* Spacing */
   --spacing-hero-vertical: var(--spacing-hero-vertical);
   --spacing-grid-gap: var(--spacing-grid-gap);
   --spacing-container-mobile: var(--spacing-container-padding-mobile);
   --spacing-container-desktop: var(--spacing-container-padding-desktop);
   
-  --color-brand-primary: var(--color-brand-primary);
-  --color-brand-secondary: var(--color-brand-secondary);
-  --color-background-radial-primary: var(--color-background-radial-gradient-primary);
-  --color-background-radial-fallback: var(--color-background-radial-gradient-fallback);
-  --color-text-hero: var(--text-hero-primary);
-  
+  /* Gradients */
   --background-image-brand-gradient: var(--gradient-brand-primary-to-secondary);
   --background-image-radial-fade: var(--gradient-background-radial-fade);
+  
+  /* Theme Colors - Light */
+  --color-theme-light-background: var(--color-theme-light-background);
+  --color-theme-light-foreground: var(--color-theme-light-foreground);
+  --color-theme-light-primary: var(--color-theme-light-primary-default);
+  --color-theme-light-secondary: var(--color-theme-light-secondary-default);
+  --color-theme-light-success: var(--color-theme-light-success-default);
+  --color-theme-light-warning: var(--color-theme-light-warning-default);
+  --color-theme-light-danger: var(--color-theme-light-danger-default);
+  
+  /* Theme Colors - Dark */
+  --color-theme-dark-background: var(--color-theme-dark-background);
+  --color-theme-dark-foreground: var(--color-theme-dark-foreground);
+  --color-theme-dark-primary: var(--color-theme-dark-primary-default);
+  --color-theme-dark-secondary: var(--color-theme-dark-secondary-default);
+  --color-theme-dark-success: var(--color-theme-dark-success-default);
+  --color-theme-dark-warning: var(--color-theme-dark-warning-default);
+  --color-theme-dark-danger: var(--color-theme-dark-danger-default);
+  
+  /* Layout */
+  --layout-disabled-opacity: var(--layout-disabled-opacity);
 }
 
 body {
