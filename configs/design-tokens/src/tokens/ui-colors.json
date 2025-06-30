@@ -1,0 +1,200 @@
+{
+  "color": {
+    "ui": {
+      "light": {
+        "background": {
+          "$type": "color",
+          "$value": "oklch(0.9911 0 0)",
+          "$description": "Primary background color for light theme"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "oklch(0.2046 0 0)",
+          "$description": "Primary foreground color for light theme"
+        },
+        "card": {
+          "$type": "color",
+          "$value": "oklch(0.9911 0 0)",
+          "$description": "Card background color for light theme"
+        },
+        "card-foreground": {
+          "$type": "color",
+          "$value": "oklch(0.2046 0 0)",
+          "$description": "Card foreground color for light theme"
+        },
+        "popover": {
+          "$type": "color",
+          "$value": "oklch(0.9911 0 0)",
+          "$description": "Popover background color for light theme"
+        },
+        "popover-foreground": {
+          "$type": "color",
+          "$value": "oklch(0.4386 0 0)",
+          "$description": "Popover foreground color for light theme"
+        },
+        "primary": {
+          "$type": "color",
+          "$value": "oklch(0.8348 0.1302 160.9080)",
+          "$description": "Primary UI color for light theme"
+        },
+        "primary-foreground": {
+          "$type": "color",
+          "$value": "oklch(0.2626 0.0147 166.4589)",
+          "$description": "Primary foreground color for light theme"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "oklch(0.9940 0 0)",
+          "$description": "Secondary UI color for light theme"
+        },
+        "secondary-foreground": {
+          "$type": "color",
+          "$value": "oklch(0.2046 0 0)",
+          "$description": "Secondary foreground color for light theme"
+        },
+        "muted": {
+          "$type": "color",
+          "$value": "oklch(0.9461 0 0)",
+          "$description": "Muted color for light theme"
+        },
+        "muted-foreground": {
+          "$type": "color",
+          "$value": "oklch(0.2435 0 0)",
+          "$description": "Muted foreground color for light theme"
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "oklch(0.9461 0 0)",
+          "$description": "Accent color for light theme"
+        },
+        "accent-foreground": {
+          "$type": "color",
+          "$value": "oklch(0.2435 0 0)",
+          "$description": "Accent foreground color for light theme"
+        },
+        "destructive": {
+          "$type": "color",
+          "$value": "oklch(0.5523 0.1927 32.7272)",
+          "$description": "Destructive color for light theme"
+        },
+        "destructive-foreground": {
+          "$type": "color",
+          "$value": "oklch(0.9934 0.0032 17.2118)",
+          "$description": "Destructive foreground color for light theme"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "oklch(0.9037 0 0)",
+          "$description": "Border color for light theme"
+        },
+        "input": {
+          "$type": "color",
+          "$value": "oklch(0.9731 0 0)",
+          "$description": "Input background color for light theme"
+        },
+        "ring": {
+          "$type": "color",
+          "$value": "oklch(0.8348 0.1302 160.9080)",
+          "$description": "Focus ring color for light theme"
+        }
+      },
+      "dark": {
+        "background": {
+          "$type": "color",
+          "$value": "oklch(0.1822 0 0)",
+          "$description": "Primary background color for dark theme"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "oklch(0.9288 0.0126 255.5078)",
+          "$description": "Primary foreground color for dark theme"
+        },
+        "card": {
+          "$type": "color",
+          "$value": "oklch(0.2046 0 0)",
+          "$description": "Card background color for dark theme"
+        },
+        "card-foreground": {
+          "$type": "color",
+          "$value": "oklch(0.9288 0.0126 255.5078)",
+          "$description": "Card foreground color for dark theme"
+        },
+        "popover": {
+          "$type": "color",
+          "$value": "oklch(0.2603 0 0)",
+          "$description": "Popover background color for dark theme"
+        },
+        "popover-foreground": {
+          "$type": "color",
+          "$value": "oklch(0.7348 0 0)",
+          "$description": "Popover foreground color for dark theme"
+        },
+        "primary": {
+          "$type": "color",
+          "$value": "oklch(0.4365 0.1044 156.7556)",
+          "$description": "Primary UI color for dark theme"
+        },
+        "primary-foreground": {
+          "$type": "color",
+          "$value": "oklch(0.9213 0.0135 167.1556)",
+          "$description": "Primary foreground color for dark theme"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "oklch(0.2603 0 0)",
+          "$description": "Secondary UI color for dark theme"
+        },
+        "secondary-foreground": {
+          "$type": "color",
+          "$value": "oklch(0.9851 0 0)",
+          "$description": "Secondary foreground color for dark theme"
+        },
+        "muted": {
+          "$type": "color",
+          "$value": "oklch(0.2393 0 0)",
+          "$description": "Muted color for dark theme"
+        },
+        "muted-foreground": {
+          "$type": "color",
+          "$value": "oklch(0.7122 0 0)",
+          "$description": "Muted foreground color for dark theme"
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "oklch(0.3132 0 0)",
+          "$description": "Accent color for dark theme"
+        },
+        "accent-foreground": {
+          "$type": "color",
+          "$value": "oklch(0.9851 0 0)",
+          "$description": "Accent foreground color for dark theme"
+        },
+        "destructive": {
+          "$type": "color",
+          "$value": "oklch(0.3123 0.0852 29.7877)",
+          "$description": "Destructive color for dark theme"
+        },
+        "destructive-foreground": {
+          "$type": "color",
+          "$value": "oklch(0.9368 0.0045 34.3092)",
+          "$description": "Destructive foreground color for dark theme"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "oklch(0.2809 0 0)",
+          "$description": "Border color for dark theme"
+        },
+        "input": {
+          "$type": "color",
+          "$value": "oklch(0.2603 0 0)",
+          "$description": "Input background color for dark theme"
+        },
+        "ring": {
+          "$type": "color",
+          "$value": "oklch(0.8003 0.1821 151.7110)",
+          "$description": "Focus ring color for dark theme"
+        }
+      }
+    }
+  }
+}

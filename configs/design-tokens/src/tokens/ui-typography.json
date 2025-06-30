@@ -1,0 +1,53 @@
+{
+  "typography": {
+    "font-family": {
+      "sans": {
+        "$type": "fontFamily",
+        "$value": ["Outfit", "sans-serif"],
+        "$description": "Sans-serif font family for UI"
+      },
+      "serif": {
+        "$type": "fontFamily", 
+        "$value": ["ui-serif", "Georgia", "Cambria", "Times New Roman", "Times", "serif"],
+        "$description": "Serif font family for UI"
+      },
+      "mono": {
+        "$type": "fontFamily",
+        "$value": ["monospace"],
+        "$description": "Monospace font family for UI"
+      }
+    },
+    "letter-spacing": {
+      "tighter": {
+        "$type": "letterSpacing",
+        "$value": "-0.025em",
+        "$description": "Tighter letter spacing"
+      },
+      "tight": {
+        "$type": "letterSpacing", 
+        "$value": "0em",
+        "$description": "Tight letter spacing"
+      },
+      "normal": {
+        "$type": "letterSpacing",
+        "$value": "0.025em",
+        "$description": "Normal letter spacing"
+      },
+      "wide": {
+        "$type": "letterSpacing",
+        "$value": "0.05em", 
+        "$description": "Wide letter spacing"
+      },
+      "wider": {
+        "$type": "letterSpacing",
+        "$value": "0.075em",
+        "$description": "Wider letter spacing"
+      },
+      "widest": {
+        "$type": "letterSpacing",
+        "$value": "0.125em",
+        "$description": "Widest letter spacing"
+      }
+    }
+  }
+}
