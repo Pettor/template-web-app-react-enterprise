@@ -4,7 +4,6 @@
   "description": "Mock server for the web application",
   "license": "MIT",
   "private": true,
-  "type": "module",
   "scripts": {
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
