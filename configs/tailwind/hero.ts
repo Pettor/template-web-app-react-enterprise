@@ -1,28 +1,70 @@
-import { colors, heroui } from "@heroui/react";
+import { heroui } from "@heroui/react";
 
-export default heroui();
-
-// export default heroui({
-//   theme: {
-//     extend: {
-//       colors: {
-//         brand: {
-//           primary: ColorBrandPrimary,
-//           secondary: ColorBrandSecondary,
-//         },
-//       },
-//       fontFamily: {
-//         sans: TypographyFontFamilyPrimary,
-//       },
-//       fontSize: {
-//         "hero-mobile": TypographyFontSizeHeroMobile,
-//         "hero-tablet": TypographyFontSizeHeroTablet,
-//         "hero-desktop": TypographyFontSizeHeroDesktop,
-//       },
-//       spacing: {
-//         "grid-gap": SpacingGridGap,
-//         "hero-spacing": SpacingHeroVertical,
-//       },
-//     },
-//   },
-// });
+export default heroui({
+  themes: {
+    light: {
+      colors: {
+        primary: {
+          50: "color-mix(in srgb, var(--color-brand-primary) 10%, white)",
+          100: "color-mix(in srgb, var(--color-brand-primary) 20%, white)",
+          200: "color-mix(in srgb, var(--color-brand-primary) 30%, white)",
+          300: "color-mix(in srgb, var(--color-brand-primary) 40%, white)",
+          400: "color-mix(in srgb, var(--color-brand-primary) 50%, white)",
+          500: "var(--color-brand-primary)",
+          600: "color-mix(in srgb, var(--color-brand-primary) 80%, black)",
+          700: "color-mix(in srgb, var(--color-brand-primary) 60%, black)",
+          800: "color-mix(in srgb, var(--color-brand-primary) 40%, black)",
+          900: "color-mix(in srgb, var(--color-brand-primary) 20%, black)",
+          DEFAULT: "var(--color-brand-primary)",
+          foreground: "white",
+        },
+        secondary: {
+          50: "color-mix(in srgb, var(--color-brand-secondary) 10%, white)",
+          100: "color-mix(in srgb, var(--color-brand-secondary) 20%, white)",
+          200: "color-mix(in srgb, var(--color-brand-secondary) 30%, white)",
+          300: "color-mix(in srgb, var(--color-brand-secondary) 40%, white)",
+          400: "color-mix(in srgb, var(--color-brand-secondary) 50%, white)",
+          500: "var(--color-brand-secondary)",
+          600: "color-mix(in srgb, var(--color-brand-secondary) 80%, black)",
+          700: "color-mix(in srgb, var(--color-brand-secondary) 60%, black)",
+          800: "color-mix(in srgb, var(--color-brand-secondary) 40%, black)",
+          900: "color-mix(in srgb, var(--color-brand-secondary) 20%, black)",
+          DEFAULT: "var(--color-brand-secondary)",
+          foreground: "white",
+        },
+      },
+    },
+    dark: {
+      colors: {
+        primary: {
+          50: "color-mix(in srgb, var(--color-brand-primary) 10%, black)",
+          100: "color-mix(in srgb, var(--color-brand-primary) 20%, black)",
+          200: "color-mix(in srgb, var(--color-brand-primary) 30%, black)",
+          300: "color-mix(in srgb, var(--color-brand-primary) 40%, black)",
+          400: "color-mix(in srgb, var(--color-brand-primary) 50%, black)",
+          500: "var(--color-brand-primary)",
+          600: "color-mix(in srgb, var(--color-brand-primary) 70%, white)",
+          700: "color-mix(in srgb, var(--color-brand-primary) 50%, white)",
+          800: "color-mix(in srgb, var(--color-brand-primary) 30%, white)",
+          900: "color-mix(in srgb, var(--color-brand-primary) 10%, white)",
+          DEFAULT: "var(--color-brand-primary)",
+          foreground: "black",
+        },
+        secondary: {
+          50: "color-mix(in srgb, var(--color-brand-secondary) 10%, black)",
+          100: "color-mix(in srgb, var(--color-brand-secondary) 20%, black)",
+          200: "color-mix(in srgb, var(--color-brand-secondary) 30%, black)",
+          300: "color-mix(in srgb, var(--color-brand-secondary) 40%, black)",
+          400: "color-mix(in srgb, var(--color-brand-secondary) 50%, black)",
+          500: "var(--color-brand-secondary)",
+          600: "color-mix(in srgb, var(--color-brand-secondary) 70%, white)",
+          700: "color-mix(in srgb, var(--color-brand-secondary) 50%, white)",
+          800: "color-mix(in srgb, var(--color-brand-secondary) 30%, white)",
+          900: "color-mix(in srgb, var(--color-brand-secondary) 10%, white)",
+          DEFAULT: "var(--color-brand-secondary)",
+          foreground: "black",
+        },
+      },
+    },
+  },
+});

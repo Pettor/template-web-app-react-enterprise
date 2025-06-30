@@ -27,7 +27,7 @@ export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
         <div className="grid w-full place-items-center">
           <Spacer y={8} />
           <div className="bg-base-100 items-center justify-center gap-2 p-2 text-center">
-            <span className="text-hero-mobile md:text-hero-tablet lg:text-hero-desktop inline-block font-medium">
+            <span className="inline-block text-4xl font-medium md:text-5xl lg:text-7xl">
               {intl.formatMessage({
                 description: "HomeView - Header title ending",
                 defaultMessage: "Welcome to",
@@ -35,7 +35,7 @@ export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
               })}
               &nbsp;
             </span>
-            <span className="from-brand-primary to-brand-secondary text-hero-mobile md:text-hero-tablet lg:text-hero-desktop inline-block bg-gradient-to-r bg-clip-text font-bold text-transparent">
+            <span className="from-primary to-secondary inline-block bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl lg:text-7xl">
               {intl.formatMessage({
                 description: "HomeView - Header title start",
                 defaultMessage: "React",
@@ -43,7 +43,7 @@ export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
               })}
               &nbsp;
             </span>
-            <span className="text-hero-mobile md:text-hero-tablet lg:text-hero-desktop inline-block font-medium">
+            <span className="inline-block text-4xl font-medium md:text-5xl lg:text-7xl">
               {intl.formatMessage({
                 description: "HomeView - Header title ending",
                 defaultMessage: "Template",
@@ -61,7 +61,7 @@ export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
             <Spacer y={4} />
           </div>
         </div>
-        <div className="gap-grid-gap grid grid-cols-1 md:grid-cols-3 md:grid-rows-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2">
           <GridItem
             imageSrc={reactImgSrc}
             title={intl.formatMessage({

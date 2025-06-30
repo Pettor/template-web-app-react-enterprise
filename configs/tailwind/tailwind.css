@@ -1,6 +1,5 @@
 /* Design Tokens */
-/* @import "@package/design-tokens/css"; */
-@import "../../node_modules/@config/design-tokens/dist/css";
+@import "@config/design-tokens/css";
 
 /* Tailwind confugration */
 @import "tailwindcss";
@@ -17,5 +16,5 @@
 
 
 body {
-  font-family: "Rubik", sans-serif, system-ui;
+  font-family: var(--typography-font-family-primary);
 }
