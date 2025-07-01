@@ -1,7 +1,7 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
-  addons: ["@storybook/addon-themes", "@storybook/addon-vitest"],
+  addons: ["@storybook/addon-a11y", "@storybook/addon-themes", "@storybook/addon-vitest"],
   core: {
     builder: {
       name: "@storybook/builder-vite",
