@@ -26,6 +26,7 @@
     "storybook": "turbo run storybook",
     "storybook:build": "turbo run storybook:build",
     "test": "turbo run test --parallel --no-daemon",
+    "test:ci": "turbo run test:ci",
     "test:coverage": "turbo run test:coverage --parallel --no-daemon",
     "test:coverage:ci": "turbo run test:coverage:ci --parallel --no-daemon",
     "test:e2e": "concurrently -k -s \"command-e2e:headless\" -n \"e2e:headless,e2e:env\" -c \"magenta,blue\" \"pnpm test:e2e:headless\" \"pnpm test:e2e:env\"",

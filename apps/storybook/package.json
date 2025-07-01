@@ -12,6 +12,7 @@
     "deploy:build": "pnpm storybook:build",
     "deploy:move": "move-cli storybook-static \"../../output/deployment/storybook\" --mkdirp",
     "test": "vitest --project=storybook",
+    "test:ci": "vitest --project=storybook --outputFile=.test-results/unit-test.xml --reporter=junit",
     "test:coverage": "vitest --project=storybook --coverage",
     "test:coverage:ci": "pnpm test:coverage && pnpm test:coverage:ci:move",
     "test:coverage:ci:move": "move-cli ./coverage/cobertura-coverage.xml \"../../output/coverage/web.xml\" --mkdirp",

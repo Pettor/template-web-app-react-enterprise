@@ -62,6 +62,11 @@
       "inputs": ["src/**", "test/**", "vitest.config.ts", "package.json", "tsconfig.json"],
       "outputs": ["coverage/**"]
     },
+    "test:ci": {
+      "cache": true,
+      "inputs": ["src/**", "test/**", "vitest.config.ts", "package.json", "tsconfig.json"],
+      "outputs": [".test-results/**"]
+    },
     "test:e2e": {
       "cache": true,
       "dependsOn": ["^build"],
