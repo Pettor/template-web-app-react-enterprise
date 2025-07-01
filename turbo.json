@@ -64,6 +64,7 @@
     },
     "test:ci": {
       "cache": true,
+      "dependsOn": ["^build"],
       "inputs": ["src/**", "test/**", "vitest.config.ts", "package.json", "tsconfig.json"],
       "outputs": [".test-results/**"]
     },
@@ -84,6 +85,7 @@
     },
     "test:coverage:ci": {
       "cache": true,
+      "dependsOn": ["^build"],
       "inputs": ["src/**", "test/**", "vitest.config.ts", "package.json", "tsconfig.json"],
       "outputs": ["coverage/**"]
     },
