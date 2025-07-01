@@ -89,7 +89,7 @@ jobs:
         run: pnpm build
 
   test-components:
-    name: Unit tests
+    name: Test components
     runs-on: ubuntu-latest
     container:
       # Make sure to grab the latest version of the Playwright image
@@ -140,11 +140,11 @@ jobs:
         uses: mikepenz/action-junit-report@v5
         with:
           report_paths: "**/.test-results/*.xml"
-          check_name: "Unit test summary"
+          check_name: "Test components summary"
         if: always()
 
   test-e2e:
-    name: E2E tests
+    name: Test E2E
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -190,7 +190,7 @@ jobs:
         uses: mikepenz/action-junit-report@v5
         with:
           report_paths: "**/.test-results/*.xml"
-          check_name: "E2E test summary"
+          check_name: "Test E2E summary"
         if: always()
 
   test-coverage:
