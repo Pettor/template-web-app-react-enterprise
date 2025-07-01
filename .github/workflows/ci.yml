@@ -88,8 +88,60 @@ jobs:
       - name: Build application
         run: pnpm build
 
+  test-components:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    container:
+      # Make sure to grab the latest version of the Playwright image
+      # https://playwright.dev/docs/docker#pull-the-image
+      image: mcr.microsoft.com/playwright:v1.52.0-noble
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4.1.0
+        id: pnpm-install
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run tests
+        run: pnpm test:ci
+        continue-on-error: false
+
+      - name: Publish test summary
+        uses: mikepenz/action-junit-report@v5
+        with:
+          report_paths: "**/.test-results/*.xml"
+          check_name: "Unit test summary"
+        if: always()
+
   test-e2e:
-    name: Test E2E
+    name: E2E tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -135,16 +187,12 @@ jobs:
         uses: mikepenz/action-junit-report@v5
         with:
           report_paths: "**/.test-results/*.xml"
-          check_name: "Test Summary E2E"
+          check_name: "E2E test summary"
         if: always()
 
-  test-components:
-    name: Test Components
+  test-coverage:
+    name: Test coverage
     runs-on: ubuntu-latest
-    container:
-      # Make sure to grab the latest version of the Playwright image
-      # https://playwright.dev/docs/docker#pull-the-image
-      image: mcr.microsoft.com/playwright:v1.52.0-noble
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -178,11 +226,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-
-      - name: Build Storybook
-        run: pnpm storybook:build
-        env:
-          NODE_OPTIONS: "--max_old_space_size=4096"
 
       - name: Run tests and coverage
         run: pnpm test:coverage:ci
