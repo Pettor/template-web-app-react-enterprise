@@ -43,7 +43,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Lint application
         run: pnpm lint
@@ -83,7 +83,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Build application
         run: pnpm build
@@ -135,7 +135,7 @@ jobs:
           key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Install Playwright
         run: pnpm --filter=e2e exec playwright install --with-deps --no-shell
@@ -186,8 +186,24 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(grep -A 3 'playwright:' pnpm-workspace.yaml | grep '"playwright":' | awk '{print $2}')" >> $GITHUB_OUTPUT
+      
+      - name: Cache playwright binaries
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Install Playwright
+        run: pnpm --filter=e2e exec playwright install --with-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Build application
         run: pnpm build
@@ -236,8 +252,24 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(grep -A 3 'playwright:' pnpm-workspace.yaml | grep '"playwright":' | awk '{print $2}')" >> $GITHUB_OUTPUT
+      
+      - name: Cache playwright binaries
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
+
       - name: Install dependencies
-        run: pnpm install --ignore-scripts
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Install Playwright
+        run: pnpm --filter=e2e exec playwright install --with-deps --no-shell
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Build application
         run: pnpm build
