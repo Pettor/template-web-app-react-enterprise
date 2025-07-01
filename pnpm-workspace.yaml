@@ -40,6 +40,7 @@ catalogs:
     react: 19.1.0
     react-dom: 19.1.0
   storybook:
+    '@storybook/addon-a11y': 9.0.12
     '@storybook/addon-themes': 9.0.12
     '@storybook/addon-vitest': 9.0.12
     '@storybook/builder-vite': 9.0.12
