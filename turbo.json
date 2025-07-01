@@ -80,6 +80,7 @@
     },
     "test:coverage": {
       "cache": true,
+      "dependsOn": ["^build"],
       "inputs": ["src/**", "test/**", "vitest.config.ts", "package.json", "tsconfig.json"],
       "outputs": ["coverage/**", ".coverage/**"]
     },

@@ -129,6 +129,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Install Playwright
+        run: pnpm exec playwright install
+
       - name: Run tests
         run: pnpm test:ci
         continue-on-error: false
@@ -226,6 +229,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Build application
+        run: pnpm build
 
       - name: Run tests and coverage
         run: pnpm test:coverage:ci
