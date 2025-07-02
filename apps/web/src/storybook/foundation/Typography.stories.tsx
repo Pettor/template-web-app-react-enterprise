@@ -6,6 +6,9 @@ export default {
   tags: ["no-tests"],
   decorators: [DocumentationDecorator],
   parameters: {
+    a11y: {
+      test: "off",
+    },
     layout: "fullscreen",
   },
 };

@@ -20,6 +20,9 @@ const preview: Preview = {
     }),
   ],
   parameters: {
+    a11y: {
+      test: "error",
+    },
     options: {
       storySort: {
         method: "alphabetical",
