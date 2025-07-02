@@ -11,11 +11,10 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "generate:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
-    "build": "tsup src/index.ts --format esm --dts",
-    "build:old": "tsc --project tsconfig.json"
+    "build:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
+    "build:libs": "tsup src/index.ts --format esm --dts"
   },
   "peerDependencies": {
     "typescript": ">=5.0.0"

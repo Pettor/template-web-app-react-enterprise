@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "style-dictionary build --config style-dictionary.config.js"
+    "build:libs": "style-dictionary build --config style-dictionary.config.js"
   },
   "dependencies": {
     "style-dictionary": "catalog:design"
