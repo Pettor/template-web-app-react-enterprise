@@ -8,7 +8,7 @@
       "inputs": [".husky/**", "package.json"]
     },
     "build": {
-      "dependsOn": ["design:build", "build:exports", "^build"],
+      "dependsOn": ["^build:libs", "^build"],
       "inputs": ["src/**", "package.json", "tsconfig.json", "vite.config.ts", "eslint.config.js"],
       "outputs": ["dist/**", "build/**"]
     },
@@ -19,7 +19,7 @@
     },
     "build:libs": {
       "cache": true,
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build:exports"],
       "inputs": ["src/**", "package.json", "tsconfig.json", "vite.config.ts", "eslint.config.js"],
       "outputs": ["dist/**"]
     },
@@ -31,12 +31,12 @@
     },
     "dev": {
       "cache": false,
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build:libs"],
       "persistent": true
     },
     "dev:mocks": {
       "cache": false,
-      "dependsOn": ["^build"], 
+      "dependsOn": ["^build:libs"], 
       "persistent": true
     },
     "mocks": {
@@ -65,13 +65,13 @@
     },
     "test:ci": {
       "cache": true,
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build:libs"],
       "inputs": ["src/**", "test/**", "vitest.config.ts", "package.json", "tsconfig.json"],
       "outputs": [".test-results/**"]
     },
     "test:e2e": {
       "cache": true,
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build:libs"],
       "inputs": ["src/**", "playwright.config.ts", "package.json"],
       "outputs": [".test-results/**", "test-results/**"]
     },
@@ -81,24 +81,24 @@
     },
     "test:coverage": {
       "cache": true,
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build:libs"],
       "inputs": ["src/**", "test/**", "vitest.config.ts", "package.json", "tsconfig.json"],
       "outputs": ["coverage/**", ".coverage/**"]
     },
     "test:coverage:ci": {
       "cache": true,
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build:libs"],
       "inputs": ["src/**", "test/**", "vitest.config.ts", "package.json", "tsconfig.json"],
       "outputs": ["coverage/**"]
     },
     "storybook": {
       "cache": false,
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build:libs"],
       "persistent": true
     },
     "storybook:build": {
       "cache": true,
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build:libs"],
       "inputs": ["src/**/*.tsx", "src/**/*.ts", ".storybook/**", "package.json", "tsconfig.json", "vite.config.ts"],
       "outputs": ["storybook-static/**"]
     },
