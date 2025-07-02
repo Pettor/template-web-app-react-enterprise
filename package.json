@@ -11,7 +11,7 @@
   },
   "scripts": {
     "prepare": "husky",
-    "generate:exports": "turbo run generate:exports",
+    "build:exports": "turbo run build:exports",
     "clean": "pnpm clean:root && turbo run clean",
     "clean:all": "pnpm clean:root && turbo run clean:all",
     "clean:root": "rimraf output",

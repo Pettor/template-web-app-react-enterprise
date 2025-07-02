@@ -7,20 +7,21 @@
       "cache": true,
       "inputs": [".husky/**", "package.json"]
     },
-    "design:build": {
-      "cache": true,
-      "inputs": ["src/**/*.json", "style-dictionary.config.js", "package.json"],
-      "outputs": ["dist/**"]
+    "build": {
+      "dependsOn": ["design:build", "build:exports", "^build"],
+      "inputs": ["src/**", "package.json", "tsconfig.json", "vite.config.ts", "eslint.config.js"],
+      "outputs": ["dist/**", "build/**"]
     },
-    "generate:exports": {
+    "build:exports": {
       "cache": true,
       "inputs": ["src/**/*.ts", "src/**/*.tsx", ".barrelsby.json", "barrelsby.json", "package.json"],
       "outputs": ["src/index.ts"]
     },
-    "build": {
-      "dependsOn": ["design:build", "generate:exports", "^build"],
+    "build:libs": {
+      "cache": true,
+      "dependsOn": ["^build"],
       "inputs": ["src/**", "package.json", "tsconfig.json", "vite.config.ts", "eslint.config.js"],
-      "outputs": ["dist/**", "build/**"]
+      "outputs": ["dist/**"]
     },
     "deploy": {
       "dependsOn": ["build", "storybook:build"],
