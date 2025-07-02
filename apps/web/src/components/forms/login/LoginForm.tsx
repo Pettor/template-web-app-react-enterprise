@@ -1,11 +1,11 @@
 import { useState, type ReactElement } from "react";
 import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import { Button, Checkbox, Form, Input, Link } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
-import { Button, Checkbox, Form, Input, Link } from "@heroui/react";
 
 export interface FormLogin {
   email: string;
@@ -23,9 +23,11 @@ export interface LoginFormProps {
 
 export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit }: LoginFormProps): ReactElement {
   const intl = useIntl();
-
   const [isVisible, setIsVisible] = useState(false);
-  const toggleVisibility = (): void => setIsVisible(!isVisible);
+
+  function toggleVisibility(): void {
+    setIsVisible(!isVisible);
+  }
 
   const schema = z.object({
     email: z
@@ -103,14 +105,14 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
           {intl.formatMessage({
             description: "LoginForm - Remember me checkbox label",
             defaultMessage: "Remember me",
-            id: "3k1Z5e",
+            id: "eSCI59",
           })}
         </Checkbox>
         <Link className="text-default-500 cursor-pointer" size="sm" onPress={onForgotPassword}>
           {intl.formatMessage({
             description: "LoginForm - Forgot password link",
             defaultMessage: "Forgot password?",
-            id: "2k1Z5e",
+            id: "Zz40WB",
           })}
         </Link>
       </div>
@@ -124,7 +126,7 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
         {intl.formatMessage({
           description: "LoginForm - Submit button text",
           defaultMessage: "Login",
-          id: "ojcPit",
+          id: "/83/VX",
         })}
       </Button>
       {error && <div className="text-small text-danger">{error}</div>}
@@ -133,7 +135,7 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
           {intl.formatMessage({
             description: "LoginForm - Sign up link",
             defaultMessage: "Don't have an account? Sign up",
-            id: "r3YQJ5",
+            id: "FroJyb",
           })}
         </Link>
       </p>

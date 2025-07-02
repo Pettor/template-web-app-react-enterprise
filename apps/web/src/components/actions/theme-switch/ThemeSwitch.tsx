@@ -1,5 +1,5 @@
-import { Switch } from "@heroui/react";
 import type { ReactElement } from "react";
+import { Switch } from "@heroui/react";
 import type { ThemeMode } from "~/classes/theme/ThemeMode";
 
 export interface ThemeSwitchProps {
@@ -7,7 +7,7 @@ export interface ThemeSwitchProps {
   onSwitch: () => void;
 }
 
-export const MoonIcon = (props: { className: string }): ReactElement => {
+export function MoonIcon(props: { className: string }): ReactElement {
   return (
     <svg
       aria-hidden="true"
@@ -24,9 +24,9 @@ export const MoonIcon = (props: { className: string }): ReactElement => {
       />
     </svg>
   );
-};
+}
 
-export const SunIcon = (props: { className: string }): ReactElement => {
+export function SunIcon(props: { className: string }): ReactElement {
   return (
     <svg
       aria-hidden="true"
@@ -43,7 +43,7 @@ export const SunIcon = (props: { className: string }): ReactElement => {
       </g>
     </svg>
   );
-};
+}
 
 export function ThemeSwitch({ mode, onSwitch }: ThemeSwitchProps): ReactElement {
   return (

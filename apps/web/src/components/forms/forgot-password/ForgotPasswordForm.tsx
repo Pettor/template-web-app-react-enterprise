@@ -1,11 +1,11 @@
 import type { ReactElement } from "react";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
+import { Button, Form, Input, Spacer } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
-import { Button, Form, Input, Spacer } from "@heroui/react";
 
 export interface FormForgotPassword {
   email: string;
@@ -57,7 +57,7 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
         label={intl.formatMessage({
           description: "ForgotPasswordFormValidation - Email label",
           defaultMessage: "Email",
-          id: "2k1Z5e",
+          id: "0YmbIp",
         })}
         startContent={<EnvelopeIcon className="h-5 w-5" />}
         isInvalid={!!errors.email}

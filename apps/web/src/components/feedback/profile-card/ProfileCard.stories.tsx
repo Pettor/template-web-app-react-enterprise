@@ -1,6 +1,6 @@
+import { CenterDecorator } from "@package/storybook";
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect } from "storybook/test";
-import { CenterDecorator } from "@package/storybook";
 import { ProfileCard as Component } from "./ProfileCard";
 import type { ProfileCardProps as Props } from "./ProfileCard";
 import { AppSessionData } from "~/storybook/data/AppSessionData";

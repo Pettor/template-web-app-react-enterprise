@@ -1,9 +1,9 @@
 import type { ReactElement } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
-import { useIntl } from "react-intl";
-import { BasicLayout, BlueFadeBackground, GridBackground } from "@package/ui";
-import { AboutDetails, type AboutDetailsProps } from "~/components/feedback/about-details/AboutDetails";
 import { Button, Card, CardBody, CardHeader, Divider, Spacer } from "@heroui/react";
+import { BasicLayout, BlueFadeBackground, GridBackground } from "@package/ui";
+import { useIntl } from "react-intl";
+import { AboutDetails, type AboutDetailsProps } from "~/components/feedback/about-details/AboutDetails";
 
 export interface AboutViewProps extends AboutDetailsProps {
   onBack: () => void;

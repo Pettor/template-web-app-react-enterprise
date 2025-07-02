@@ -1,5 +1,5 @@
-import { Logo } from "../../Branding/Logo/Logo";
 import type { ReactElement, ReactNode } from "react";
+import { Logo } from "../../Branding/Logo/Logo";
 
 export interface NavbarLayoutProps {
   navbarElement: ReactNode;
