@@ -1,5 +1,5 @@
-import { Card, CardBody, CardHeader, Divider, Spacer } from "@heroui/react";
 import type { ReactElement } from "react";
+import { Card, CardBody, CardHeader, Divider, Spacer } from "@heroui/react";
 
 export interface GridItemProps {
   title: string;
