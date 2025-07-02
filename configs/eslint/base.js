@@ -4,6 +4,7 @@ import prettierEslint from "eslint-plugin-prettier/recommended";
 import prettierConfigEslint from "eslint-config-prettier";
 import importEslint from "eslint-plugin-import";
 import formatjsEslint from "eslint-plugin-formatjs";
+import storybookEslint from "eslint-plugin-storybook";
 
 /**
  * A shared ESLint configuration for the repository.
@@ -13,6 +14,7 @@ import formatjsEslint from "eslint-plugin-formatjs";
 export const config = [
   jsEslint.configs.recommended,
   ...tsEslint.configs.recommended,
+  ...storybookEslint.configs["flat/recommended"],
   {
     ignores: ["*.js", "dist", "public", "node_modules", "storybook-static"],
     files: ["*.ts", "*.tsx"],
