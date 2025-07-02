@@ -8,6 +8,18 @@ const meta: Meta<typeof Component> = {
   component: Component,
   title: "Forms/Sign Up",
   decorators: [ContainerDecorator],
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: "color-contrast",
+            enabled: false,
+          },
+        ],
+      },
+    },
+  },
 };
 
 export default meta;

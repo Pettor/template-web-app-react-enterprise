@@ -28,11 +28,23 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
       <Spacer y={2} />
       <Divider />
       <Spacer y={2} />
-      <Listbox>
+      <Listbox
+        role="group"
+        aria-label={intl.formatMessage({
+          description: "ProfileCard - Menu aria label",
+          defaultMessage: "Profile menu",
+          id: "yS5N1i",
+        })}
+      >
         <ListboxItem
           startContent={<InformationCircleIcon className="h-5 w-5" />}
           onPress={onAbout}
           data-testid="profile-card__info-button"
+          aria-label={intl.formatMessage({
+            description: "ProfileCard - Info aria label",
+            defaultMessage: "About",
+            id: "TJ0KjQ",
+          })}
         >
           <span className="text-base">
             {intl.formatMessage({
@@ -46,6 +58,11 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
           startContent={<ArrowLeftStartOnRectangleIcon className="h-5 w-5" />}
           onPress={onLogout}
           data-testid="profile-card__logout-button"
+          aria-label={intl.formatMessage({
+            description: "ProfileCard - Logout aria label",
+            defaultMessage: "Logout",
+            id: "kVNu3C",
+          })}
         >
           <span className="text-base">
             {intl.formatMessage({

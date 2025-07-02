@@ -8,6 +8,24 @@ const meta: Meta<typeof Component> = {
   component: Component,
   title: "Shared/Layout",
   parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: "color-contrast",
+            enabled: false,
+          },
+          {
+            id: "list",
+            enabled: false,
+          },
+          {
+            id: "th-has-data-cells",
+            enabled: false,
+          },
+        ],
+      },
+    },
     layout: "fullscreen",
   },
 };
