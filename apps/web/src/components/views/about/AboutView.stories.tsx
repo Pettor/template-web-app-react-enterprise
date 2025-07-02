@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { FullSizeDecorator } from "@package/storybook";
+import type { Meta, StoryObj } from "@storybook/react";
 import { AboutView as Component } from "./AboutView";
 import type { AboutViewProps as Props } from "./AboutView";
 

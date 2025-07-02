@@ -17,7 +17,7 @@ export const config = [
   ...storybookEslint.configs["flat/recommended"],
   {
     ignores: ["*.js", "dist", "public", "node_modules", "storybook-static"],
-    files: ["*.ts", "*.tsx"],
+    files: ["**/*.{ts,tsx,js,json}"],
     plugins: {
       formatjs: formatjsEslint,
       import: importEslint,

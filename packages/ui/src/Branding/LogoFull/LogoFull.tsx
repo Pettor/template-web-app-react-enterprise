@@ -7,7 +7,7 @@ export interface LogoFullProps {
 }
 
 export function LogoFull({ appName, size = "large" }: LogoFullProps): ReactElement {
-  const logoTextClass = (): string => {
+  function logoTextClass(): string {
     switch (size) {
       case "small":
         return "text-4xl";
@@ -16,7 +16,7 @@ export function LogoFull({ appName, size = "large" }: LogoFullProps): ReactEleme
       case "large":
         return "text-6xl";
     }
-  };
+  }
 
   return (
     <div className="flex flex-row">

@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { CommonDecorator } from "@package/storybook";
+import type { Meta, StoryObj } from "@storybook/react";
 import type { ToastProps as Props } from "./Toast";
 import { Toast as Component } from "./Toast";
 

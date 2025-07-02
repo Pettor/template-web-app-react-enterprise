@@ -11,7 +11,7 @@ export interface ToastProps {
 }
 
 export function Toast({ message, severity, positionX, positionY, disablePosition, onClose }: ToastProps): ReactElement {
-  const typeClass = (): string => {
+  function typeClass(): string {
     switch (severity) {
       case "success":
         return "alert-success";
@@ -24,9 +24,9 @@ export function Toast({ message, severity, positionX, positionY, disablePosition
       default:
         return "alert-info";
     }
-  };
+  }
 
-  const positionClass = (): string => {
+  function positionClass(): string {
     let x = "end";
     let y = "bottom";
 
@@ -52,7 +52,7 @@ export function Toast({ message, severity, positionX, positionY, disablePosition
     }
 
     return `toast-${x} toast-${y}`;
-  };
+  }
 
   return (
     <div className={disablePosition ? "" : clsx(positionClass(), "toast")}>

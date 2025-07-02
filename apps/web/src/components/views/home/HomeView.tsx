@@ -1,8 +1,9 @@
 import type { ReactElement } from "react";
-import { useIntl } from "react-intl";
+import { Divider, Spacer } from "@heroui/react";
 import { BlueFadeBackground, NavbarLayout } from "@package/ui";
-import herouiImgSrc from "~/assets/images/logo/heroui.png";
+import { useIntl } from "react-intl";
 import githubImgSrc from "~/assets/images/logo/github.png";
+import herouiImgSrc from "~/assets/images/logo/heroui.png";
 import mocksServerImgSrc from "~/assets/images/logo/mocks-server.png";
 import netImgSrc from "~/assets/images/logo/net.png";
 import playwrightImgSrc from "~/assets/images/logo/playwright.png";
@@ -10,9 +11,8 @@ import reactImgSrc from "~/assets/images/logo/react.png";
 import storybookImgSrc from "~/assets/images/logo/storybook.png";
 import turborepoImgSrc from "~/assets/images/logo/turborepo.png";
 import viteImgSrc from "~/assets/images/logo/vite.png";
-import { Appbar, type AppbarProps } from "~/components/navigation/appbar";
 import { GridItem } from "~/components/display/grid-item/GridItem";
-import { Divider, Spacer } from "@heroui/react";
+import { Appbar, type AppbarProps } from "~/components/navigation/appbar";
 
 export interface HomeViewProps {
   appNavbarProps: AppbarProps;
@@ -81,13 +81,13 @@ export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
             title={intl.formatMessage({
               description: "HomeView - Vite title",
               defaultMessage: "Vite",
-              id: "/+IE0C",
+              id: "uv+avb",
             })}
             description={intl.formatMessage({
               description: "HomeView - Turborepo description",
               defaultMessage:
                 "Vite is a blazing fast frontend build tool powering the next generation of web applications. ",
-              id: "5pk6t0",
+              id: "LYrkXr",
             })}
           />
           <GridItem
@@ -109,13 +109,13 @@ export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
             title={intl.formatMessage({
               description: "HomeView - TailwindCSS + HeroUI title",
               defaultMessage: "TailwindCSS + HeroUI",
-              id: "y7sgTV",
+              id: "aX+vzi",
             })}
             description={intl.formatMessage({
               description: "HomeView - TailwindCSS + HeroUI description",
               defaultMessage:
                 "Tailwind CSS is a utility-first CSS framework for building custom designs quickly, while HeroUI extends Tailwind CSS with ready-to-use components for faster frontend development.",
-              id: "+Bnmz6",
+              id: "LsxAoM",
             })}
           />
           <GridItem

@@ -1,9 +1,9 @@
-import { usePostRefreshTokenMutate } from "@package/api";
 import type { ReactNode, ReactElement } from "react";
 import { useReducer } from "react";
+import { usePostRefreshTokenMutate } from "@package/api";
 import { useRunOnce } from "@package/react";
-import { AuthReducer } from "./AuthReducer";
 import { AuthContext } from "./AuthContext";
+import { AuthReducer } from "./AuthReducer";
 import type { AuthState } from "~/classes/auth/AuthState";
 
 export interface AuthProviderProps {

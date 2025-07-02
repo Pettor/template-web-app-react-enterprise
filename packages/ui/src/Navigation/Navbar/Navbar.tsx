@@ -1,7 +1,7 @@
 import { useState, type ReactElement, type ReactNode } from "react";
-import { Logo } from "../../Branding/Logo/Logo";
 import type { NavbarMenuItem } from "@heroui/react";
 import { Navbar as HeroNavbar, NavbarContent, NavbarMenuToggle, NavbarBrand, NavbarMenu } from "@heroui/react";
+import { Logo } from "../../Branding/Logo/Logo";
 
 export interface NavbarProps {
   title: string;

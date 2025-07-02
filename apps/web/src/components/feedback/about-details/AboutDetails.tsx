@@ -1,5 +1,5 @@
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
 import type { ReactElement } from "react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
 import { useIntl } from "react-intl";
 
 export interface AboutDetailsProps {

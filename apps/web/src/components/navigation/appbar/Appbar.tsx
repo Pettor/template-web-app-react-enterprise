@@ -1,5 +1,4 @@
 import { type ReactElement } from "react";
-import { GithubIcon, LinkedInIcon, Navbar } from "@package/ui";
 import {
   Avatar,
   Button,
@@ -11,6 +10,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@heroui/react";
+import { GithubIcon, LinkedInIcon, Navbar } from "@package/ui";
 import type { IAppSocialLinks } from "~/classes/app-social-links/IAppSocialLinks";
 import type { ThemeSwitchProps } from "~/components/actions/theme-switch/ThemeSwitch";
 import { ThemeSwitch } from "~/components/actions/theme-switch/ThemeSwitch";

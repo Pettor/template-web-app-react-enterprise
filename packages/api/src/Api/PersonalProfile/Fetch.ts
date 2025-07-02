@@ -3,9 +3,9 @@ import { useQuery, type FetchQueryOptions } from "@tanstack/react-query";
 import { apiClient } from "../../Client/ApiClient";
 import { ServiceErrorFactory } from "../../Service/ServiceErrorFactory";
 import { QUERY_KEY_PROFILE_INFO, type ProfileInfo } from "./Classes";
+import { personalProfileConvertFromDto } from "./Convert";
 import type { ProfileInfoDto } from "./Schema";
 import { profileInfoSchema } from "./Schema";
-import { personalProfileConvertFromDto } from "./Convert";
 
 export async function fetchPersonalProfile(): Promise<ProfileInfo> {
   try {

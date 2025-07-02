@@ -48,7 +48,7 @@
     "@storybook/react": "catalog:storybook",
     "@tailwindcss/vite": "catalog:tailwind",
     "@vitejs/plugin-react": "catalog:vite",
-    "babel-plugin-react-compiler": "19.1.0-rc.2",
+    "babel-plugin-react-compiler": "catalog:react19",
     "storybook": "catalog:storybook",
     "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:typescript",

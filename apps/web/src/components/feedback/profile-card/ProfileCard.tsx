@@ -1,8 +1,8 @@
 import type { ReactElement } from "react";
 import { InformationCircleIcon, ArrowLeftStartOnRectangleIcon } from "@heroicons/react/20/solid";
+import { Divider, Listbox, ListboxItem, Skeleton, Spacer, User } from "@heroui/react";
 import { useIntl } from "react-intl";
 import type { IAppSessionContent } from "~/classes/app-session/IAppSessionContent";
-import { Divider, Listbox, ListboxItem, Skeleton, Spacer, User } from "@heroui/react";
 
 export interface ProfileCardProps extends IAppSessionContent {}
 
@@ -15,7 +15,7 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
         {intl.formatMessage({
           description: "ProfileCard - Personal",
           defaultMessage: "Personal",
-          id: "3k1Z4e",
+          id: "hErN+M",
         })}
       </p>
       <div className="mt-2 flex flex-row gap-4 py-2">

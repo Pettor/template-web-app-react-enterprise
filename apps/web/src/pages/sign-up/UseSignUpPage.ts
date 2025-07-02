@@ -1,7 +1,7 @@
 import { usePostSelfRegister } from "@package/api";
+import { useToastNotifier } from "@package/ui";
 import { useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
-import { useToastNotifier } from "@package/ui";
 import type { FormSignUp } from "~/components/forms/sign-up/SignUpForm";
 import type { SignUpViewProps } from "~/components/views/sign-up/SignUpView";
 import { useAppInfo } from "~/core/config/UseAppInfo";

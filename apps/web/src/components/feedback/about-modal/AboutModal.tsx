@@ -1,8 +1,8 @@
 import type { ReactElement } from "react";
-import type { AboutDetailsProps } from "../about-details/AboutDetails";
-import { AboutDetails } from "../about-details/AboutDetails";
 import { Modal, ModalBody, ModalContent, ModalHeader, Spacer, type ModalProps } from "@heroui/react";
 import { useIntl } from "react-intl";
+import type { AboutDetailsProps } from "../about-details/AboutDetails";
+import { AboutDetails } from "../about-details/AboutDetails";
 
 export interface AboutModalProps {
   modal: Omit<ModalProps, "children">;

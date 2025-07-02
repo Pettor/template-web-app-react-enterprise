@@ -1,10 +1,10 @@
 import type { ReactElement } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { validateCrypto } from "@package/react";
-import { AppLocales } from "./AppLocales";
-import { PwaProviderModule } from "~/components/modules/pwa-provider-module/PwaProviderModule";
-import { AuthProvider } from "./auth/AuthProvider";
 import { HeroUIProvider } from "@heroui/react";
+import { validateCrypto } from "@package/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AppLocales } from "./AppLocales";
+import { AuthProvider } from "./auth/AuthProvider";
+import { PwaProviderModule } from "~/components/modules/pwa-provider-module/PwaProviderModule";
 
 const queryClient = new QueryClient();
 

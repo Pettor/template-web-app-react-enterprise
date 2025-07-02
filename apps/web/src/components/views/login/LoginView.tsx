@@ -1,10 +1,10 @@
 import type { ReactElement } from "react";
 import { InformationCircleIcon } from "@heroicons/react/20/solid";
-import { useIntl } from "react-intl";
+import { Card, CardHeader, Button, CardBody, Spacer } from "@heroui/react";
 import { BasicLayout, BlueFadeBackground, GridBackground, Logo } from "@package/ui";
+import { useIntl } from "react-intl";
 import type { LoginFormProps } from "~/components/forms/login/LoginForm";
 import { LoginForm } from "~/components/forms/login/LoginForm";
-import { Card, CardHeader, Button, CardBody, Spacer } from "@heroui/react";
 
 export interface LoginViewProps {
   appName: string;
@@ -37,7 +37,7 @@ export function LoginView({ appName, loginForm, onAbout }: LoginViewProps): Reac
                 aria-label={intl.formatMessage({
                   description: "AboutView - About button aria label",
                   defaultMessage: "About",
-                  id: "ZTBga3",
+                  id: "rpJImF",
                 })}
               >
                 <InformationCircleIcon className="h-6 w-6" />
