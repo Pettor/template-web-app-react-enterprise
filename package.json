@@ -30,7 +30,7 @@
     "test:ci": "turbo run test:ci",
     "test:coverage": "turbo run test:coverage",
     "test:coverage:ci": "turbo run test:coverage:ci",
-    "test:e2e": "concurrently -k -s \"command-e2e:headless\" -n \"e2e:headless,e2e:env\" -c \"magenta,blue\" \"pnpm test:e2e:headless\" \"pnpm test:e2e:env\"",
+    "test:e2e": "turbo run build:libs && concurrently -k -s \"command-e2e:headless\" -n \"e2e:headless,e2e:env\" -c \"magenta,blue\" \"pnpm test:e2e:headless\" \"pnpm test:e2e:env\"",
     "test:e2e:headless": "pnpm wait-on --timeout 30s tcp:5173 && pnpm --filter=e2e test:e2e",
     "test:e2e:env": "turbo run test:e2e:env"
   },
