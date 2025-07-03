@@ -53,10 +53,6 @@
     "wait-on": "8.0.3"
   },
   "pnpm": {
-    "overrides": {
-      "typescript": "5.8.3",
-      "vite": "6.3.5"
-    },
     "onlyBuiltDependencies": [
       "@heroui/shared-utils"
     ]
