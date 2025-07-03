@@ -2,7 +2,6 @@ import { type ReactElement } from "react";
 import {
   Avatar,
   Button,
-  Divider,
   Link,
   NavbarItem,
   NavbarMenuItem,
@@ -57,23 +56,29 @@ export function Appbar({ profile, socialLinks, themeSwitch }: AppbarProps): Reac
 
   const endElement = (
     <>
-      <Popover placement="bottom-end">
-        <PopoverTrigger data-testid="home-page__menu-button">
-          <Avatar size="sm" />
-        </PopoverTrigger>
-        <PopoverContent>
-          <ProfileCard {...profile} />
-        </PopoverContent>
-      </Popover>
-      <Divider orientation="vertical" />
-      <ThemeSwitch {...themeSwitch} />
-      <Divider orientation="vertical" />
-      <Button isIconOnly className="p-2" color="default" onPress={onGithubClick}>
-        <GithubIcon />
-      </Button>
-      <Button isIconOnly className="p-2" color="default" onPress={onLinkedInClick}>
-        <LinkedInIcon />
-      </Button>
+      <NavbarItem>
+        <Popover placement="bottom-end">
+          <PopoverTrigger role="button" data-testid="home-page__menu-button">
+            <Avatar size="sm" />
+          </PopoverTrigger>
+          <PopoverContent>
+            <ProfileCard {...profile} />
+          </PopoverContent>
+        </Popover>
+      </NavbarItem>
+      <NavbarItem>
+        <ThemeSwitch {...themeSwitch} />
+      </NavbarItem>
+      <NavbarItem>
+        <Button isIconOnly className="p-2" color="default" onPress={onGithubClick}>
+          <GithubIcon />
+        </Button>
+      </NavbarItem>
+      <NavbarItem>
+        <Button isIconOnly className="p-2" color="default" onPress={onLinkedInClick}>
+          <LinkedInIcon />
+        </Button>
+      </NavbarItem>
     </>
   );
 

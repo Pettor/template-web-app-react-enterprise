@@ -91,7 +91,15 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
         autoComplete="current-password"
         startContent={<LockClosedIcon className="h-5 w-5" />}
         endContent={
-          <button type="button" onClick={toggleVisibility}>
+          <button
+            type="button"
+            onClick={toggleVisibility}
+            aria-label={intl.formatMessage({
+              defaultMessage: "Toggle password visibility",
+              id: "KjXbli",
+              description: "LoginForm - Toggle password visibility button aria label",
+            })}
+          >
             {isVisible ? <EyeIcon className="h-5 w-5" /> : <EyeSlashIcon className="h-5 w-5" />}
           </button>
         }

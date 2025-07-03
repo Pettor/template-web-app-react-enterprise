@@ -15,13 +15,11 @@ export function Navbar({ title, centerElement, endElement, menuElement }: Navbar
 
   return (
     <HeroNavbar shouldHideOnScroll isBordered onMenuOpenChange={setIsMenuOpen}>
-      <NavbarContent>
-        <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} className="sm:hidden" />
-        <NavbarBrand>
-          <Logo size="small" />
-          <p className="font-bold text-inherit">{title}</p>
-        </NavbarBrand>
-      </NavbarContent>
+      <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} className="sm:hidden" />
+      <NavbarBrand>
+        <Logo size="small" />
+        <p className="font-bold text-inherit">{title}</p>
+      </NavbarBrand>
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
         {centerElement}
       </NavbarContent>
