@@ -42,8 +42,10 @@ export const config = [
   },
   reactCompilerEslint.configs.recommended,
   {
-    files: ["**/*.stories.tsx"],
+    files: ["**/*.stories.tsx", "**/*Decorator.tsx"],
     rules: {
+      "func-style": "off",
+      "react/function-component-definition": "off",
       "@typescript-eslint/explicit-function-return-type": "off",
     },
   },
