@@ -205,9 +205,6 @@ jobs:
         run: pnpm --filter=e2e exec playwright install --with-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
-      - name: Build application
-        run: pnpm build
-
       - name: Run tests
         run: pnpm test:e2e
 
@@ -270,9 +267,6 @@ jobs:
       - name: Install Playwright
         run: pnpm --filter=e2e exec playwright install --with-deps --no-shell
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-
-      - name: Build application
-        run: pnpm build
 
       - name: Run tests and coverage
         run: pnpm test:coverage:ci
