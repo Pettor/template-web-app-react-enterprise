@@ -4,8 +4,7 @@
     "baseUrl": "src",
     "paths": {
       ".": ["."]
-    },
-    "types": ["@config/typescript/types"]
+    }
   },
   "include": ["src/**/*"],
 }

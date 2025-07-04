@@ -8,15 +8,15 @@
   "type": "module",
   "types": "./src/index.ts",
   "scripts": {
-    "generate:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
     "lint": "eslint ./src",
-    "lint:fix": "pnpm lint --fix"
+    "lint:fix": "pnpm lint --fix",
+    "build:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json"
   },
   "peerDependencies": {
     "react": ">=19.0.0"
-  },  
+  },
   "dependencies": {
     "buffer": "6.0.3",
     "idb-keyval": "6.2.2"
