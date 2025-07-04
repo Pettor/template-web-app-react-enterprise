@@ -5,7 +5,7 @@ on:
     types:
       - closed
 
-permissions: 
+permissions:
   contents: write
 
 jobs:
@@ -18,6 +18,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
+
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
 
       - name: Setup node
         uses: actions/setup-node@v4
