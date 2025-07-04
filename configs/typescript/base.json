@@ -23,9 +23,18 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "types": ["@config/typescript/types"]
   },
-  "exclude": ["**/node_modules", "**/dist", "**/build", "**/coverage", "**/output", "**/storybook-static", "**/.junit"],
+  "exclude": [
+    "**/.junit",
+    "**/build",
+    "**/coverage",
+    "**/dist",
+    "**/node_modules",
+    "**/output",
+    "**/storybook-static"
+  ],
   "typescript.preferences": {
     "includePackageJsonAutoImports": "off"
   }

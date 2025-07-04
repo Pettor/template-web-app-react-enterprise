@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ThemeSwitch as Component } from "./ThemeSwitch";
 import type { ThemeSwitchProps as ComponentProps } from "./ThemeSwitch";
 

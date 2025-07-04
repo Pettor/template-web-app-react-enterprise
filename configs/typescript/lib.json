@@ -7,7 +7,6 @@
     "declaration": true,
     "declarationMap": true,
     "noEmit": false,
-    "sourceMap": true,
-    "types": ["@config/typescript/types"]
+    "sourceMap": true
   }
 }

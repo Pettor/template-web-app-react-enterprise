@@ -5,8 +5,7 @@
     // Paths & Types
     "paths": {
       "~/*": ["../web/src/*"]
-    },
-    "types": ["@config/typescript/types"]
+    }
   },
-  "include": ["**/*.ts", "**/*.tsx", ".storybook/vite.config.ts", "vitest.config.ts"],
+  "include": ["**/*.ts", "**/*.tsx", ".storybook/vite.config.ts", "vitest.config.ts"]
 }

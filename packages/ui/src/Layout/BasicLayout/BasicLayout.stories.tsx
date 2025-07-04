@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { StorybookTableContentComponent } from "../../Storybook/Components/StorybookTableContentComponent";
 import { BasicLayout as Component } from "./BasicLayout";
 

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { GridItem as Component } from "./GridItem";
 import type { GridItemProps as ComponentProps } from "./GridItem";
 import storbookImgSrc from "~/assets/images/logo/storybook.png";

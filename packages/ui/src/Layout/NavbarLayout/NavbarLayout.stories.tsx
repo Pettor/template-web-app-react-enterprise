@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { StorybookNavbarComponent } from "../../Storybook/Components/StorybookNavbarComponent";
 import { StorybookTableContentComponent } from "../../Storybook/Components/StorybookTableContentComponent";
 import { NavbarLayout as Component } from "./NavbarLayout";

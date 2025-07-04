@@ -1,5 +1,5 @@
 import { CommonDecorator } from "@package/storybook";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useSetAtom } from "jotai";
 import { toastAddAtom } from "./Atoms/ToastAtoms";
 import { ToastNotifier as Component } from "./ToastNotifier";

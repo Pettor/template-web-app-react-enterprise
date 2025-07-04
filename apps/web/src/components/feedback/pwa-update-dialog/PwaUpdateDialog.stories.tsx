@@ -1,5 +1,5 @@
 import { CommonDecorator } from "@package/storybook";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { PwaUpdateDialog as Component } from "./PwaUpdateDialog";
 import type { PwaUpdateDialogProps as Props } from "./PwaUpdateDialog";
 
