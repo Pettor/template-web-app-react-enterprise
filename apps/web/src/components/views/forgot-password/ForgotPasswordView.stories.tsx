@@ -1,5 +1,5 @@
 import { FullSizeDecorator } from "@package/storybook";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ForgotPasswordView as Component } from "./ForgotPasswordView";
 import type { ForgotPasswordViewProps as Props } from "./ForgotPasswordView";
 

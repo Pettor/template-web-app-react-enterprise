@@ -1,4 +1,4 @@
-import type { Decorator } from "@storybook/react";
+import type { Decorator } from "@storybook/react-vite";
 
 export const FullSizeDecorator: Decorator = (Story) => {
   return (

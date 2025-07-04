@@ -1,5 +1,5 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/react-vite";
 import { IntlProvider } from "react-intl";
 import { INITIAL_VIEWPORTS } from "storybook/viewport";
 import "../src/main.css";

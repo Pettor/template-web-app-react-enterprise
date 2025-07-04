@@ -1,5 +1,5 @@
 import { FullSizeDecorator } from "@package/storybook";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { LoginView as Component } from "./LoginView";
 import type { LoginViewProps as Props } from "./LoginView";
 

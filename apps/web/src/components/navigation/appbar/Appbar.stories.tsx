@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Appbar as Component } from "./Appbar";
 import type { AppbarProps as Props } from "./Appbar";
 import { AppbarCommonData } from "~/storybook/data/AppbarData";

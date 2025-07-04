@@ -1,5 +1,5 @@
 import { ContainerDecorator } from "@package/storybook";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 import { SignUpForm as Component } from "./SignUpForm";
 import type { SignUpFormProps as Props } from "./SignUpForm";
