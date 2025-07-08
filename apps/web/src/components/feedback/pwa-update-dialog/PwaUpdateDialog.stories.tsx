@@ -1,25 +1,35 @@
-import { CommonDecorator } from "@package/storybook";
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { PwaUpdateDialog as Component } from "./PwaUpdateDialog";
-import type { PwaUpdateDialogProps as Props } from "./PwaUpdateDialog";
+import { Button, addToast } from "@heroui/react";
+import { CommonDecorator, ToastDecorator } from "@package/storybook";
+import type { StoryObj } from "@storybook/react-vite";
+import { useIntl } from "react-intl";
+import { PwaUpdateDialogProps } from "./PwaUpdateDialog";
 
-const meta: Meta<typeof Component> = {
-  component: Component,
+const meta = {
   title: "Feedback/Progressive Web App",
-  decorators: [CommonDecorator],
+  decorators: [CommonDecorator, ToastDecorator],
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const defaultArgs = {
-  appName: "AppName",
-  open: true,
-  onUpdate: () => {
-    console.log("Refresh");
-  },
-} satisfies Props;
-
 export const UpdateDialog: Story = {
-  args: defaultArgs,
+  render: () => {
+    const intl = useIntl();
+    return (
+      <Button
+        onPress={() =>
+          addToast(
+            PwaUpdateDialogProps(
+              intl,
+              "App",
+              () => console.log("onClose"),
+              () => console.log("onUpdate")
+            )
+          )
+        }
+      >
+        Show Toast
+      </Button>
+    );
+  },
 };
