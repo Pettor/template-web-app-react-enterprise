@@ -1,12 +1,16 @@
+import { useCallback, useEffect } from "react";
+import { addToast } from "@heroui/react";
+import { useIntl } from "react-intl";
 import { useRegisterSW } from "virtual:pwa-register/react";
 import { PWA_VERSION_INTERVAL } from "./PwaProviderModuleConstants";
+import { PwaOfflineDialogProps } from "~/components/feedback/pwa-offline-dialog/PwaOfflineDialog";
+import { PwaUpdateDialogProps } from "~/components/feedback/pwa-update-dialog/PwaUpdateDialog";
+import { useAppInfo } from "~/core/config/UseAppInfo";
 
-export function usePwaProviderModule(): {
-  offlineReady: boolean;
-  needRefresh: boolean;
-  handleRefresh: () => Promise<void>;
-  handleOfflineClose: () => void;
-} {
+export function usePwaProviderModule(): void {
+  const intl = useIntl();
+  const { appName } = useAppInfo();
+
   function checkPwaUpdate(registration: ServiceWorkerRegistration): void {
     setInterval(() => {
       // Check for PWA updates
@@ -16,7 +20,7 @@ export function usePwaProviderModule(): {
 
   const {
     offlineReady: [offlineReady, setOfflineReady],
-    needRefresh: [needRefresh],
+    needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker,
   } = useRegisterSW({
     onRegistered(registration) {
@@ -30,19 +34,28 @@ export function usePwaProviderModule(): {
     },
   });
 
-  async function handleRefresh(): Promise<void> {
+  const handleRefresh = useCallback(async () => {
     await updateServiceWorker(true);
     window.location.reload();
-  }
+  }, [updateServiceWorker]);
 
-  function handleOfflineClose(): void {
+  const handleRefreshClose = useCallback((): void => {
+    setNeedRefresh(false);
+  }, [setNeedRefresh]);
+
+  const handleOfflineClose = useCallback((): void => {
     setOfflineReady(false);
-  }
+  }, [setOfflineReady]);
 
-  return {
-    offlineReady,
-    needRefresh,
-    handleRefresh,
-    handleOfflineClose,
-  };
+  useEffect(() => {
+    if (offlineReady) {
+      addToast(PwaOfflineDialogProps(intl, handleOfflineClose));
+    }
+  }, [handleOfflineClose, intl, offlineReady, setOfflineReady]);
+
+  useEffect(() => {
+    if (needRefresh) {
+      addToast(PwaUpdateDialogProps(intl, appName, handleRefreshClose, handleRefresh));
+    }
+  }, [appName, handleRefresh, handleRefreshClose, intl, needRefresh]);
 }

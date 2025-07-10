@@ -1,22 +1,22 @@
-import { CommonDecorator } from "@package/storybook";
+import { addToast, Button } from "@heroui/react";
+import { CommonDecorator, ToastDecorator } from "@package/storybook";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { PwaOfflineDialog as Component } from "./PwaOfflineDialog";
-import type { PwaOfflineDialogProps as Props } from "./PwaOfflineDialog";
+import { useIntl } from "react-intl";
+import { PwaOfflineDialogProps } from "./PwaOfflineDialog";
 
-const meta: Meta<typeof Component> = {
-  component: Component,
+const meta: Meta = {
   title: "Feedback/Progressive Web App",
-  decorators: [CommonDecorator],
+  decorators: [CommonDecorator, ToastDecorator],
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const defaultArgs: Props = {
-  open: true,
-  onClose: () => console.log("onClose"),
-};
-
 export const OfflineDialog: Story = {
-  args: defaultArgs,
+  render: () => {
+    const intl = useIntl();
+    return (
+      <Button onPress={() => addToast(PwaOfflineDialogProps(intl, () => console.log("onClose")))}>Show Toast</Button>
+    );
+  },
 };
