@@ -9,9 +9,5 @@ export default defineConfig(() => {
   return mergeConfig(createBaseConfig(), {
     base: "./",
     plugins: [tailwindcss() as PluginOption, tsconfigPaths() as PluginOption],
-    // Add storybook-specific dependencies to pre-optimization
-    optimizeDeps: {
-      include: ["@storybook/addon-interactions"],
-    },
   });
 });

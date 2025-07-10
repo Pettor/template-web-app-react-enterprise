@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { GithubIcon } from "./GithubIcon";
 import { LinkedInIcon } from "./LinkedInIcon";
@@ -10,16 +11,14 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+function render(children?: ReactNode) {
+  return <div className="h-8 w-8">{children}</div>;
+}
+
 export const Github: Story = {
-  args: {
-    size: "medium",
-  },
-  render: (args) => <GithubIcon {...args} />,
+  render: (args) => render(<GithubIcon {...args} />),
 };
 
 export const Linkedin: Story = {
-  args: {
-    size: "medium",
-  },
-  render: (args) => <LinkedInIcon {...args} />,
+  render: (args) => render(<LinkedInIcon {...args} />),
 };

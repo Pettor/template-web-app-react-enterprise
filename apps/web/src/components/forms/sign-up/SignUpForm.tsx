@@ -2,7 +2,7 @@ import type { ReactElement } from "react";
 import { Button, Form, Input } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
 
@@ -90,107 +90,152 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
       path: ["confirmPassword"],
     });
 
-  const {
-    handleSubmit: handleFormSubmit,
-    register,
-    formState: { errors },
-  } = useForm({
+  const { control, handleSubmit, register } = useForm({
     resolver: zodResolver(schema),
   });
 
   return (
-    <Form onSubmit={handleFormSubmit(onSubmit)} className="md:min-w-sm">
-      <Input
-        autoFocus
-        id="userName"
-        type="text"
-        placeholder={intl.formatMessage({
-          description: "SignUpFormLabel - User Name",
-          defaultMessage: "What should we call you?",
-          id: "f2xRFX",
-        })}
-        isInvalid={!!errors.userName}
-        errorMessage={errors.userName?.message}
-        {...register("userName")}
-        data-testid="sign-up-form__username-input"
+    <Form onSubmit={handleSubmit(onSubmit)} className="md:min-w-sm">
+      <Controller
+        control={control}
+        name="userName"
+        render={({ fieldState: { invalid, error } }) => (
+          <Input
+            {...register("userName")}
+            autoFocus
+            id="userName"
+            type="text"
+            placeholder={intl.formatMessage({
+              description: "SignUpFormLabel - User Name",
+              defaultMessage: "What should we call you?",
+              id: "f2xRFX",
+            })}
+            errorMessage={error?.message}
+            isInvalid={invalid}
+            validationBehavior="aria"
+            data-testid="sign-up-form__username-input"
+          />
+        )}
       />
-      <Input
-        id="firstName"
-        type="text"
-        placeholder={intl.formatMessage({
-          description: "SignUpFormLabel - First Name",
-          defaultMessage: "What is your first name?",
-          id: "NFDCUF",
-        })}
-        isInvalid={!!errors.firstName}
-        errorMessage={errors.firstName?.message}
-        {...register("firstName")}
-        data-testid="sign-up-form__firstname-input"
+      <Controller
+        control={control}
+        name="firstName"
+        render={({ fieldState: { invalid, error } }) => (
+          <Input
+            {...register("firstName")}
+            id="firstName"
+            type="text"
+            placeholder={intl.formatMessage({
+              description: "SignUpFormLabel - First Name",
+              defaultMessage: "What is your first name?",
+              id: "NFDCUF",
+            })}
+            errorMessage={error?.message}
+            isInvalid={invalid}
+            validationBehavior="aria"
+            data-testid="sign-up-form__firstname-input"
+          />
+        )}
       />
-      <Input
-        id="lastName"
-        type="text"
-        placeholder={intl.formatMessage({
-          description: "SignUpFormLabel - Last Name",
-          defaultMessage: "What is your last name?",
-          id: "3YTbxI",
-        })}
-        isInvalid={!!errors.lastName}
-        errorMessage={errors.lastName?.message}
-        {...register("lastName")}
-        data-testid="sign-up-form__lastname-input"
+      <Controller
+        control={control}
+        name="lastName"
+        render={({ fieldState: { invalid, error } }) => (
+          <Input
+            {...register("lastName")}
+            id="lastName"
+            type="text"
+            placeholder={intl.formatMessage({
+              description: "SignUpFormLabel - Last Name",
+              defaultMessage: "What is your last name?",
+              id: "3YTbxI",
+            })}
+            errorMessage={error?.message}
+            isInvalid={invalid}
+            validationBehavior="aria"
+            data-testid="sign-up-form__lastname-input"
+          />
+        )}
       />
-      <Input
-        id="email"
-        type="email"
-        placeholder={intl.formatMessage({
-          description: "SignUpFormLabel - Email",
-          defaultMessage: "What's your email?",
-          id: "tZBQgk",
-        })}
-        isInvalid={!!errors.email}
-        errorMessage={errors.email?.message}
-        {...register("email")}
-        data-testid="sign-up-form__email-input"
+      <Controller
+        control={control}
+        name="email"
+        render={({ fieldState: { invalid, error } }) => (
+          <Input
+            {...register("email")}
+            id="email"
+            type="email"
+            placeholder={intl.formatMessage({
+              description: "SignUpFormLabel - Email",
+              defaultMessage: "What's your email?",
+              id: "tZBQgk",
+            })}
+            errorMessage={error?.message}
+            isInvalid={invalid}
+            validationBehavior="aria"
+            data-testid="sign-up-form__email-input"
+          />
+        )}
       />
-      <Input
-        id="phoneNumber"
-        type="tel"
-        placeholder={intl.formatMessage({
-          description: "SignUpFormLabel - Phone Number",
-          defaultMessage: "What's your phone number?",
-          id: "UjAA8C",
-        })}
-        isInvalid={!!errors.phoneNumber}
-        errorMessage={errors.phoneNumber?.message}
-        {...register("phoneNumber")}
-        data-testid="sign-up-form__phonenumber-input"
+      <Controller
+        control={control}
+        name="phoneNumber"
+        render={({ fieldState: { invalid, error } }) => (
+          <Input
+            {...register("phoneNumber")}
+            id="phoneNumber"
+            type="tel"
+            placeholder={intl.formatMessage({
+              description: "SignUpFormLabel - Phone Number",
+              defaultMessage: "What's your phone number?",
+              id: "UjAA8C",
+            })}
+            errorMessage={error?.message}
+            isInvalid={invalid}
+            validationBehavior="aria"
+            data-testid="sign-up-form__phonenumber-input"
+          />
+        )}
       />
-      <Input
-        id="password"
-        type="password"
-        placeholder={intl.formatMessage({
-          description: "SignUpFormLabel - Password",
-          defaultMessage: "Create a password",
-          id: "ppqAda",
-        })}
-        isInvalid={!!errors.password}
-        errorMessage={errors.password?.message}
-        {...register("password")}
-        data-testid="sign-up-form__password-input"
+      <Controller
+        control={control}
+        name="password"
+        render={({ fieldState: { invalid, error } }) => (
+          <Input
+            {...register("password")}
+            id="password"
+            type="password"
+            placeholder={intl.formatMessage({
+              description: "SignUpFormLabel - Password",
+              defaultMessage: "Create a password",
+              id: "ppqAda",
+            })}
+            errorMessage={error?.message}
+            isInvalid={invalid}
+            validationBehavior="aria"
+            data-testid="sign-up-form__password-input"
+          />
+        )}
       />
-      <Input
-        id="confirmPassword"
-        type="password"
-        placeholder={intl.formatMessage({
-          description: "SignUpFormLabel - Confirm Password",
-          defaultMessage: "Confirm password",
-          id: "dU9xzq",
-        })}
-        isInvalid={!!errors.confirmPassword}
-        errorMessage={errors.confirmPassword?.message}
-        {...register("confirmPassword")}
-        data-testid="sign-up-form__confirmpassword-input"
+      <Controller
+        control={control}
+        name="confirmPassword"
+        render={({ fieldState: { invalid, error } }) => (
+          <Input
+            {...register("confirmPassword")}
+            id="confirmPassword"
+            type="password"
+            placeholder={intl.formatMessage({
+              description: "SignUpFormLabel - Confirm Password",
+              defaultMessage: "Confirm password",
+              id: "dU9xzq",
+            })}
+            errorMessage={error?.message}
+            isInvalid={invalid}
+            validationBehavior="aria"
+            data-testid="sign-up-form__confirmpassword-input"
+          />
+        )}
       />
       <Button
         isLoading={loading}
