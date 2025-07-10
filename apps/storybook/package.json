@@ -17,7 +17,9 @@
     "test:coverage:ci": "pnpm test:coverage && pnpm test:coverage:ci:move",
     "test:coverage:ci:move": "move-cli ./coverage/cobertura-coverage.xml \"../../output/coverage/web.xml\" --mkdirp",
     "storybook": "storybook dev -p 9050",
-    "storybook:build": "storybook build -o storybook-static"
+    "storybook:build": "storybook build -o storybook-static",
+    "storybook:nopen": "pnpm storybook --no-open"
+
   },
   "dependencies": {
     "@app/web": "workspace:*",
@@ -35,6 +37,7 @@
     "@config/vite": "workspace:*",
     "@package/storybook": "workspace:*",
     "@storybook/addon-a11y": "catalog:storybook",
+    "@storybook/addon-docs": "catalog:storybook",
     "@storybook/addon-themes": "catalog:storybook",
     "@storybook/addon-vitest": "catalog:storybook",
     "@storybook/builder-vite": "catalog:storybook",

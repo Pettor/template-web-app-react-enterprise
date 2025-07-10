@@ -3,7 +3,7 @@ import { LogoFull as Component } from "./LogoFull";
 
 const meta: Meta<typeof Component> = {
   component: Component,
-  title: "Shared/Layout/Logo/Full",
+  title: "Shared/Branding/Logo/Full",
   tags: ["autodocs"],
 };
 

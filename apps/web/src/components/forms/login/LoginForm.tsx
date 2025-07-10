@@ -3,7 +3,7 @@ import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon } from "@heroicons/
 import { Button, Checkbox, Form, Input, Link } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
 
@@ -58,55 +58,73 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
     remember: z.boolean().optional(),
   });
 
-  const {
-    handleSubmit: handleFormSubmit,
-    register,
-    formState: { errors },
-  } = useForm({
+  const { control, handleSubmit, register } = useForm({
     resolver: zodResolver(schema),
   });
 
   return (
-    <Form onSubmit={handleFormSubmit(onSubmit)} className="flex flex-col justify-center">
-      <Input
-        fullWidth
-        autoFocus
-        id="email"
-        type="text"
-        variant="bordered"
-        placeholder="Email"
-        autoComplete="username"
-        startContent={<EnvelopeIcon className="h-5 w-5" />}
-        isInvalid={!!errors.email}
-        errorMessage={errors.email?.message}
-        data-testid="login-form__email-input"
-        {...register("email")}
-      />
-      <Input
-        fullWidth
-        id="password"
-        type={isVisible ? "text" : "password"}
-        variant="bordered"
-        placeholder="Password"
-        autoComplete="current-password"
-        startContent={<LockClosedIcon className="h-5 w-5" />}
-        endContent={
-          <button
-            type="button"
-            onClick={toggleVisibility}
-            aria-label={intl.formatMessage({
-              defaultMessage: "Toggle password visibility",
-              id: "KjXbli",
-              description: "LoginForm - Toggle password visibility button aria label",
+    <Form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center">
+      <Controller
+        control={control}
+        name="email"
+        render={({ fieldState: { invalid, error } }) => (
+          <Input
+            {...register("email")}
+            fullWidth
+            autoFocus
+            id="email"
+            type="text"
+            variant="bordered"
+            placeholder={intl.formatMessage({
+              description: "LoginForm - Email input placeholder",
+              defaultMessage: "Email",
+              id: "P2Xl0E",
             })}
-          >
-            {isVisible ? <EyeIcon className="h-5 w-5" /> : <EyeSlashIcon className="h-5 w-5" />}
-          </button>
-        }
-        isInvalid={!!errors.password}
-        errorMessage={errors.password?.message}
-        data-testid="login-form__password-input"
-        {...register("password")}
+            autoComplete="username"
+            startContent={<EnvelopeIcon className="h-5 w-5" />}
+            errorMessage={error?.message}
+            isInvalid={invalid}
+            validationBehavior="aria"
+            data-testid="login-form__email-input"
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="password"
+        render={({ fieldState: { invalid, error } }) => (
+          <Input
+            {...register("password")}
+            fullWidth
+            id="password"
+            type={isVisible ? "text" : "password"}
+            variant="bordered"
+            placeholder={intl.formatMessage({
+              description: "LoginForm - Password input placeholder",
+              defaultMessage: "Password",
+              id: "2hRtil",
+            })}
+            autoComplete="current-password"
+            startContent={<LockClosedIcon className="h-5 w-5" />}
+            endContent={
+              <button
+                type="button"
+                onClick={toggleVisibility}
+                aria-label={intl.formatMessage({
+                  defaultMessage: "Toggle password visibility",
+                  id: "KjXbli",
+                  description: "LoginForm - Toggle password visibility button aria label",
+                })}
+              >
+                {isVisible ? <EyeIcon className="h-5 w-5" /> : <EyeSlashIcon className="h-5 w-5" />}
+              </button>
+            }
+            errorMessage={error?.message}
+            isInvalid={invalid}
+            validationBehavior="aria"
+            data-testid="login-form__password-input"
+          />
+        )}
       />
       <div className="flex w-full items-center justify-between px-1 py-2">
         <Checkbox defaultSelected size="sm" {...register("remember")}>

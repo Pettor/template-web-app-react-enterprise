@@ -107,6 +107,11 @@
       "dependsOn": ["storybook:build"],
       "inputs": ["storybook-static/**"],
       "outputs": ["output/storybook-static/**"]
+    },
+    "storybook:nopen": {
+      "cache": false,
+      "dependsOn": ["^build:libs"],
+      "persistent": true
     }
   }
 }

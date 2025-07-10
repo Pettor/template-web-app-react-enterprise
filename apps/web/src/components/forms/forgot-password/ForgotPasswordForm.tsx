@@ -3,7 +3,7 @@ import { EnvelopeIcon } from "@heroicons/react/24/outline";
 import { Button, Form, Input, Spacer } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
 
@@ -39,31 +39,34 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
       ),
   });
 
-  const {
-    handleSubmit: handleFormSubmit,
-    register,
-    formState: { errors },
-  } = useForm({
+  const { control, handleSubmit, register } = useForm({
     resolver: zodResolver(schema),
   });
 
   return (
-    <Form onSubmit={handleFormSubmit(onSubmit)} className="md:min-w-sm">
-      <Input
-        autoFocus
-        id="email"
-        type="email"
-        fullWidth
-        label={intl.formatMessage({
-          description: "ForgotPasswordFormValidation - Email label",
-          defaultMessage: "Email",
-          id: "0YmbIp",
-        })}
-        startContent={<EnvelopeIcon className="h-5 w-5" />}
-        isInvalid={!!errors.email}
-        errorMessage={errors.email?.message}
-        {...register("email")}
-        data-testid="forgot-password-form__email-input"
+    <Form onSubmit={handleSubmit(onSubmit)} className="md:min-w-sm">
+      <Controller
+        control={control}
+        name="email"
+        render={({ fieldState: { invalid, error } }) => (
+          <Input
+            {...register("email")}
+            autoFocus
+            id="email"
+            type="email"
+            fullWidth
+            label={intl.formatMessage({
+              description: "ForgotPasswordFormValidation - Email label",
+              defaultMessage: "Email",
+              id: "0YmbIp",
+            })}
+            startContent={<EnvelopeIcon className="h-5 w-5" />}
+            errorMessage={error?.message}
+            isInvalid={invalid}
+            validationBehavior="aria"
+            data-testid="forgot-password-form__email-input"
+          />
+        )}
       />
       <Spacer />
       <Button
