@@ -1,5 +1,5 @@
+import { addToast } from "@heroui/react";
 import { usePostSelfRegister } from "@package/api";
-import { useToastNotifier } from "@package/ui";
 import { useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
 import type { FormSignUp } from "~/components/forms/sign-up/SignUpForm";
@@ -11,25 +11,23 @@ export function useSignUpPage(): SignUpViewProps {
   const intl = useIntl();
   const { appNameCapital } = useAppInfo();
   const { isPending, mutateAsync: submit } = usePostSelfRegister();
-  const { addToast, clearToasts } = useToastNotifier();
 
   function handleOnBack(): void {
     navigate("/login");
   }
 
   async function handleOnSubmit(data: FormSignUp): Promise<void> {
-    clearToasts();
     try {
       await submit(data);
       navigate("/");
     } catch {
-      addToast(
-        intl.formatMessage({
+      addToast({
+        title: intl.formatMessage({
           description: "SignUpPage - Sign up error alert title",
           defaultMessage: "Something went wrong",
           id: "CrlHXH",
-        })
-      );
+        }),
+      });
     }
   }
 
