@@ -146,9 +146,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
       - name: Get installed Playwright version
         id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(grep -A 3 'playwright:' pnpm-workspace.yaml | grep '"playwright":' | awk '{print $2}')" >> $GITHUB_OUTPUT
+        run: echo "PLAYWRIGHT_VERSION=$(pnpm list --filter=@app/e2e | grep "playwright " | awk '{print $2}')" >> $GITHUB_OUTPUT
 
       - name: Cache playwright binaries
         uses: actions/cache@v4
@@ -158,11 +161,8 @@ jobs:
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
-
       - name: Install Playwright
-        run: pnpm --filter=e2e exec playwright install --with-deps --no-shell
+        run: pnpm --filter=e2e exec playwright install --with-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Run tests
@@ -210,17 +210,20 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v4
-        name: Setup pnpm cache
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
         with:
           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
       - name: Get installed Playwright version
         id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(grep -A 3 'playwright:' pnpm-workspace.yaml | grep '"playwright":' | awk '{print $2}')" >> $GITHUB_OUTPUT
+        run: echo "PLAYWRIGHT_VERSION=$(pnpm list --filter=@app/e2e | grep "playwright " | awk '{print $2}')" >> $GITHUB_OUTPUT
 
       - name: Cache playwright binaries
         uses: actions/cache@v4
@@ -229,9 +232,6 @@ jobs:
           path: |
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Install Playwright
         run: pnpm --filter=e2e exec playwright install --with-deps
@@ -289,9 +289,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
       - name: Get installed Playwright version
         id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(grep -A 3 'playwright:' pnpm-workspace.yaml | grep '"playwright":' | awk '{print $2}')" >> $GITHUB_OUTPUT
+        run: echo "PLAYWRIGHT_VERSION=$(pnpm list --filter=@app/e2e | grep "playwright " | awk '{print $2}')" >> $GITHUB_OUTPUT
 
       - name: Cache playwright binaries
         uses: actions/cache@v4
@@ -301,11 +304,8 @@ jobs:
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
-
       - name: Install Playwright
-        run: pnpm --filter=e2e exec playwright install --with-deps --no-shell
+        run: pnpm --filter=e2e exec playwright install --with-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Run tests and coverage
