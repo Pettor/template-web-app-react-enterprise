@@ -34,7 +34,7 @@
     "jotai-effect": "2.0.4",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
-    "react-hook-form": "7.56.4",
+    "react-hook-form": "7.60.0",
     "react-intl": "7.1.11",
     "react-router-dom": "7.6.3",
     "zod": "catalog:validation"

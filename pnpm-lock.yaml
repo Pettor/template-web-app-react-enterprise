@@ -370,7 +370,7 @@ importers:
         version: 2.8.0-beta.15(@types/react@19.1.8)(framer-motion@12.23.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.11)
       '@hookform/resolvers':
         specifier: catalog:validation
-        version: 5.1.1(react-hook-form@7.56.4(react@19.1.0))
+        version: 5.1.1(react-hook-form@7.60.0(react@19.1.0))
       '@package/api':
         specifier: workspace:*
         version: link:../../packages/api
@@ -402,8 +402,8 @@ importers:
         specifier: catalog:react19
         version: 19.1.0(react@19.1.0)
       react-hook-form:
-        specifier: 7.56.4
-        version: 7.56.4(react@19.1.0)
+        specifier: 7.60.0
+        version: 7.60.0(react@19.1.0)
       react-intl:
         specifier: 7.1.11
         version: 7.1.11(react@19.1.0)(typescript@5.8.3)
@@ -6314,8 +6314,8 @@ packages:
     peerDependencies:
       react: ^19.1.0
 
-  react-hook-form@7.56.4:
-    resolution: {integrity: sha512-Rob7Ftz2vyZ/ZGsQZPaRdIefkgOSrQSPXfqBdvOPwJfoGnjwRJUs7EM7Kc1mcoDv3NOtqBzPGbcMB8CGn9CKgw==}
+  react-hook-form@7.60.0:
+    resolution: {integrity: sha512-SBrYOvMbDB7cV8ZfNpaiLcgjH/a1c7aK0lK+aNigpf4xWLO8q+o4tcvVurv3c4EOyzn/3dCsYt4GKD42VvJ/+A==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
@@ -9708,10 +9708,10 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
-  '@hookform/resolvers@5.1.1(react-hook-form@7.56.4(react@19.1.0))':
+  '@hookform/resolvers@5.1.1(react-hook-form@7.60.0(react@19.1.0))':
     dependencies:
       '@standard-schema/utils': 0.3.0
-      react-hook-form: 7.56.4(react@19.1.0)
+      react-hook-form: 7.60.0(react@19.1.0)
 
   '@humanfs/core@0.19.1': {}
 
@@ -14384,7 +14384,7 @@ snapshots:
       react: 19.1.0
       scheduler: 0.26.0
 
-  react-hook-form@7.56.4(react@19.1.0):
+  react-hook-form@7.60.0(react@19.1.0):
     dependencies:
       react: 19.1.0
 
