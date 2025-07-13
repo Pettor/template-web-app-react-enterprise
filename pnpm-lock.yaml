@@ -148,8 +148,8 @@ catalogs:
       specifier: 5.0.1
       version: 5.0.1
     zod:
-      specifier: 3.24.2
-      version: 3.24.2
+      specifier: 3.25.76
+      version: 3.25.76
   vite:
     '@vitejs/plugin-react':
       specifier: 4.6.0
@@ -412,7 +412,7 @@ importers:
         version: 7.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       zod:
         specifier: catalog:validation
-        version: 3.24.2
+        version: 3.25.76
     devDependencies:
       '@config/eslint':
         specifier: workspace:*
@@ -7642,11 +7642,11 @@ packages:
     peerDependencies:
       zod: ^3.25.0
 
-  zod@3.24.2:
-    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
-
   zod@3.25.67:
     resolution: {integrity: sha512-idA2YXwpCdqUSKRCACDE6ItZD9TZzy3OZMtpfLoh6oPR47lipysRrJfjzMqFxQ3uJuUPyUeWe1r9vLH33xO/Qw==}
+
+  zod@3.25.76:
+    resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
 snapshots:
 
@@ -15883,6 +15883,6 @@ snapshots:
     dependencies:
       zod: 3.25.67
 
-  zod@3.24.2: {}
-
   zod@3.25.67: {}
+
+  zod@3.25.76: {}
