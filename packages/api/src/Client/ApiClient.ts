@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore - this is worker syntax
 import type { LoginData } from "../Api/Login/Classes";
 import ApiWorker from "../Worker/ApiWorker?worker";
 import { ApiWorkerCommunication } from "../Worker/ApiWorkerCommunication";
