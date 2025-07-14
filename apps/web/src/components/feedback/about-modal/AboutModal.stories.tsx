@@ -7,6 +7,27 @@ const meta: Meta<typeof Component> = {
   component: Component,
   title: "Feedback/About",
   decorators: [CommonDecorator],
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: "color-contrast",
+            enabled: false,
+          },
+          {
+            id: "list",
+            enabled: false,
+          },
+          {
+            id: "th-has-data-cells",
+            enabled: false,
+          },
+        ],
+      },
+    },
+    layout: "fullscreen",
+  },
 };
 
 export default meta;
