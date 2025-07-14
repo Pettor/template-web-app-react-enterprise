@@ -1,5 +1,4 @@
-import type { PluginOption, UserConfig } from "vite";
-import { mergeConfig } from "vite";
+import type { UserConfig } from "vite";
 import { VitePWA, type VitePWAOptions } from "vite-plugin-pwa";
 import { type ReactViteConfigOptions } from "./react";
 
