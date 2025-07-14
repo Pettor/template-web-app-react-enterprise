@@ -123,9 +123,9 @@ async function messageHandler({ data: sentData, ports: [port] }: MessageEvent<Ap
         } as ApiError;
       }
     }
-  } catch (e) {
-    if (isFetchError(e)) {
-      const { message, code, name, cause, status } = e;
+  } catch (error) {
+    if (isFetchError(error)) {
+      const { message, code, name, cause, status } = error;
       apiResponse = {
         message,
         code,
@@ -136,7 +136,7 @@ async function messageHandler({ data: sentData, ports: [port] }: MessageEvent<Ap
     } else {
       apiResponse = {
         name: "Unknown error",
-        message: (e as Error).message ?? "Unknown error",
+        message: (error as Error).message ?? "Unknown error",
         status: 500,
       } satisfies ApiError;
     }
