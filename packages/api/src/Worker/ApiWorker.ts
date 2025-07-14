@@ -1,9 +1,8 @@
-import axios from "axios";
 import type { LoginData } from "../Api/Login/Classes";
-import { client } from "../Client/AxiosClient";
+import { client } from "../Client/FetchClient";
 import { clearToken, setToken } from "../Token/TokenStorage";
 import { ALLOWED_URLS } from "./ApiWorkerAllowedUrls";
-import { ApiWorkerClient } from "./ApiWorkerClient";
+import { ApiWorkerClient, isFetchError } from "./ApiWorkerClient";
 import type { ApiError, ApiResponseTypes } from "./ApiWorkerReponse";
 
 // Request and Response types
@@ -69,8 +68,9 @@ async function messageHandler({ data: sentData, ports: [port] }: MessageEvent<Ap
       case "request/patch":
         {
           const { payload, url } = sentData;
-          const { data, status, statusText } = await apiWorkerClient.patch(url, payload);
-          apiResponse = { data, status, statusText };
+          const response = await apiWorkerClient.patch(url, payload);
+          const data = response.status === 204 ? null : await response.json();
+          apiResponse = { data, status: response.status, statusText: response.statusText };
         }
         break;
 
@@ -78,8 +78,9 @@ async function messageHandler({ data: sentData, ports: [port] }: MessageEvent<Ap
       case "request/post":
         {
           const { payload, url } = sentData;
-          const { data, status, statusText } = await apiWorkerClient.post(url, payload);
-          apiResponse = { data, status, statusText };
+          const response = await apiWorkerClient.post(url, payload);
+          const data = response.status === 204 ? null : await response.json();
+          apiResponse = { data, status: response.status, statusText: response.statusText };
         }
         break;
 
@@ -87,8 +88,9 @@ async function messageHandler({ data: sentData, ports: [port] }: MessageEvent<Ap
       case "request/put":
         {
           const { url, payload } = sentData;
-          const { data, status, statusText } = await apiWorkerClient.put(url, payload);
-          apiResponse = { data, status, statusText };
+          const response = await apiWorkerClient.put(url, payload);
+          const data = response.status === 204 ? null : await response.json();
+          apiResponse = { data, status: response.status, statusText: response.statusText };
         }
         break;
 
@@ -96,8 +98,9 @@ async function messageHandler({ data: sentData, ports: [port] }: MessageEvent<Ap
       case "request/get":
         {
           const { url } = sentData;
-          const { data, status, statusText } = await apiWorkerClient.get(url);
-          apiResponse = { data, status, statusText };
+          const response = await apiWorkerClient.get(url);
+          const data = response.status === 204 ? null : await response.json();
+          apiResponse = { data, status: response.status, statusText: response.statusText };
         }
         break;
 
@@ -105,8 +108,9 @@ async function messageHandler({ data: sentData, ports: [port] }: MessageEvent<Ap
       case "request/delete":
         {
           const { url } = sentData;
-          const { data, status, statusText } = await apiWorkerClient.delete(url);
-          apiResponse = { data, status, statusText };
+          const response = await apiWorkerClient.delete(url);
+          const data = response.status === 204 ? null : await response.json();
+          apiResponse = { data, status: response.status, statusText: response.statusText };
         }
         break;
 
@@ -119,20 +123,20 @@ async function messageHandler({ data: sentData, ports: [port] }: MessageEvent<Ap
         } as ApiError;
       }
     }
-  } catch (e) {
-    if (axios.isAxiosError(e)) {
-      const { message, code, name, cause } = e;
+  } catch (error) {
+    if (isFetchError(error)) {
+      const { message, code, name, cause, status } = error;
       apiResponse = {
         message,
         code,
         name,
         cause,
-        status: e.response?.status || 500,
+        status,
       } as ApiError;
     } else {
       apiResponse = {
         name: "Unknown error",
-        message: (e as Error).message ?? "Unknown error",
+        message: (error as Error).message ?? "Unknown error",
         status: 500,
       } satisfies ApiError;
     }

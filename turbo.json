@@ -39,7 +39,7 @@
       "dependsOn": ["^build:libs"], 
       "persistent": true
     },
-    "mocks": {
+    "dev:mocks:cli": {
       "cache": false,
       "persistent": true
     },

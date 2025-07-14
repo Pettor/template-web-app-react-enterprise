@@ -16,7 +16,7 @@
     "clean:root": "rimraf output",
     "dev": "turbo run dev",
     "dev:mocks": "turbo run dev:mocks",
-    "dev:mocks:cli": "pnpm --filter=mock mocks",
+    "dev:mocks:cli": "pnpm --filter=@app/mock dev:mocks:cli",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix && sherif --fix",

@@ -1,7 +1,7 @@
 {
   "name": "@package/api",
   "version": "0.6.0",
-  "description": "API client for the web application using Axios and React Query",
+  "description": "API client for the web application using native fetch and React Query",
   "license": "MIT",
   "private": true,
   "main": "./src/index.ts",
@@ -19,14 +19,13 @@
     "zod": ">=3.0.0"
   },
   "dependencies": {
-    "axios": "1.10.0",
-    "axios-auth-refresh": "3.3.6",
     "immer": "10.1.1"
   },
   "devDependencies": {
     "@config/barrelsby": "workspace:*",
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
-    "barrelsby": "catalog:common"
+    "barrelsby": "catalog:common",
+    "vite": "catalog:vite"
   }
 }

@@ -18,7 +18,7 @@ export * from "./Api/RefreshToken/Post";
 export * from "./Api/SelfRegister/Classes";
 export * from "./Api/SelfRegister/Post";
 export * from "./Client/ApiClient";
-export * from "./Client/AxiosClient";
+export * from "./Client/FetchClient";
 export * from "./Service/ServiceError";
 export * from "./Service/ServiceErrorFactory";
 export * from "./Token/JwtToken";
