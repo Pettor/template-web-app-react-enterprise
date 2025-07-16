@@ -1,4 +1,4 @@
-import { createBaseConfig, createPWAConfig, createReactConfig } from "@config/vite";
+import { createBaseConfig, createPWAConfig, createReactConfig, mergeConfigs } from "@config/vite";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import { defineConfig, loadEnv, mergeConfig } from "vite";
 import proxy from "vite-plugin-http2-proxy";
@@ -6,8 +6,7 @@ import proxy from "vite-plugin-http2-proxy";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd(), "");
-
-  const config = mergeConfig(createBaseConfig(), mergeConfig(createReactConfig(), createPWAConfig()));
+  const config = mergeConfigs([createBaseConfig(), createReactConfig(), createPWAConfig()]);
 
   switch (command) {
     case "build":
