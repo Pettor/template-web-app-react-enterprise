@@ -60,7 +60,7 @@
           },
           "foreground": {
             "$type": "color",
-            "$value": "#000",
+            "$value": "#11181C",
             "$description": "Default foreground color for light theme"
           }
         },
@@ -246,7 +246,7 @@
           },
           "foreground": {
             "$type": "color",
-            "$value": "#000",
+            "$value": "#11181C",
             "$description": "Success foreground color for light theme"
           }
         },
@@ -308,7 +308,7 @@
           },
           "foreground": {
             "$type": "color",
-            "$value": "#000",
+            "$value": "#11181C",
             "$description": "Warning foreground color for light theme"
           }
         },
@@ -370,7 +370,7 @@
           },
           "foreground": {
             "$type": "color",
-            "$value": "#000",
+            "$value": "#11181C",
             "$description": "Danger foreground color for light theme"
           }
         },
@@ -381,7 +381,7 @@
         },
         "foreground": {
           "$type": "color",
-          "$value": "#000000",
+          "$value": "#11181C",
           "$description": "Foreground color for light theme"
         },
         "content1": {
@@ -392,7 +392,7 @@
           },
           "foreground": {
             "$type": "color",
-            "$value": "#000",
+            "$value": "#11181C",
             "$description": "Content 1 foreground for light theme"
           }
         },
@@ -404,7 +404,7 @@
           },
           "foreground": {
             "$type": "color",
-            "$value": "#000",
+            "$value": "#11181C",
             "$description": "Content 2 foreground for light theme"
           }
         },
@@ -416,7 +416,7 @@
           },
           "foreground": {
             "$type": "color",
-            "$value": "#000",
+            "$value": "#11181C",
             "$description": "Content 3 foreground for light theme"
           }
         },
@@ -428,7 +428,7 @@
           },
           "foreground": {
             "$type": "color",
-            "$value": "#000",
+            "$value": "#11181C",
             "$description": "Content 4 foreground for light theme"
           }
         },
