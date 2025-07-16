@@ -128,13 +128,15 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
       />
       <div className="flex w-full items-center justify-between px-1 py-2">
         <Checkbox defaultSelected size="sm" {...register("remember")}>
-          {intl.formatMessage({
-            description: "LoginForm - Remember me checkbox label",
-            defaultMessage: "Remember me",
-            id: "eSCI59",
-          })}
+          <p className="text-xs sm:text-sm">
+            {intl.formatMessage({
+              description: "LoginForm - Remember me checkbox label",
+              defaultMessage: "Remember me",
+              id: "eSCI59",
+            })}
+          </p>
         </Checkbox>
-        <Link className="text-default-500 cursor-pointer" size="sm" onPress={onForgotPassword}>
+        <Link className="cursor-pointer text-xs sm:text-sm" size="sm" onPress={onForgotPassword}>
           {intl.formatMessage({
             description: "LoginForm - Forgot password link",
             defaultMessage: "Forgot password?",

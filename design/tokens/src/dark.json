@@ -5,52 +5,52 @@
         "default": {
           "50": {
             "$type": "color",
-            "$value": "#0d0d0e",
+            "$value": "#18181b",
             "$description": "Default color shade 50 for dark theme"
           },
           "100": {
             "$type": "color",
-            "$value": "#19191c",
+            "$value": "#27272a",
             "$description": "Default color shade 100 for dark theme"
           },
           "200": {
             "$type": "color",
-            "$value": "#26262a",
+            "$value": "#3f3f46",
             "$description": "Default color shade 200 for dark theme"
           },
           "300": {
             "$type": "color",
-            "$value": "#323238",
+            "$value": "#52525b",
             "$description": "Default color shade 300 for dark theme"
           },
           "400": {
             "$type": "color",
-            "$value": "#3f3f46",
+            "$value": "#71717a",
             "$description": "Default color shade 400 for dark theme"
           },
           "500": {
             "$type": "color",
-            "$value": "#65656b",
+            "$value": "#a1a1aa",
             "$description": "Default color shade 500 for dark theme"
           },
           "600": {
             "$type": "color",
-            "$value": "#8c8c90",
+            "$value": "#d4d4d8",
             "$description": "Default color shade 600 for dark theme"
           },
           "700": {
             "$type": "color",
-            "$value": "#b2b2b5",
+            "$value": "#e4e4e7",
             "$description": "Default color shade 700 for dark theme"
           },
           "800": {
             "$type": "color",
-            "$value": "#d9d9da",
+            "$value": "#f4f4f5",
             "$description": "Default color shade 800 for dark theme"
           },
           "900": {
             "$type": "color",
-            "$value": "#ffffff",
+            "$value": "#fafafa",
             "$description": "Default color shade 900 for dark theme"
           },
           "DEFAULT": {
@@ -60,91 +60,91 @@
           },
           "foreground": {
             "$type": "color",
-            "$value": "#fff",
+            "$value": "#ECEDEE",
             "$description": "Default foreground color for dark theme"
           }
         },
         "primary": {
           "50": {
             "$type": "color",
-            "$value": "#002147",
+            "$value": "#001731",
             "$description": "Primary color shade 50 for dark theme"
           },
           "100": {
             "$type": "color",
-            "$value": "#003571",
+            "$value": "#002e62",
             "$description": "Primary color shade 100 for dark theme"
           },
           "200": {
             "$type": "color",
-            "$value": "#00489b",
+            "$value": "#004493",
             "$description": "Primary color shade 200 for dark theme"
           },
           "300": {
             "$type": "color",
-            "$value": "#005cc4",
+            "$value": "#005bc4",
             "$description": "Primary color shade 300 for dark theme"
           },
           "400": {
             "$type": "color",
-            "$value": "#006fee",
+            "$value": "#006FEE",
             "$description": "Primary color shade 400 for dark theme"
           },
           "500": {
             "$type": "color",
-            "$value": "#2d88f1",
+            "$value": "#338ef7",
             "$description": "Primary color base shade for dark theme"
           },
           "600": {
             "$type": "color",
-            "$value": "#59a1f4",
+            "$value": "#66aaf9",
             "$description": "Primary color shade 600 for dark theme"
           },
           "700": {
             "$type": "color",
-            "$value": "#86bbf7",
+            "$value": "#99c7fb",
             "$description": "Primary color shade 700 for dark theme"
           },
           "800": {
             "$type": "color",
-            "$value": "#b3d4fa",
+            "$value": "#cce3fd",
             "$description": "Primary color shade 800 for dark theme"
           },
           "900": {
             "$type": "color",
-            "$value": "#dfedfd",
+            "$value": "#e6f1fe",
             "$description": "Primary color shade 900 for dark theme"
           },
           "DEFAULT": {
             "$type": "color",
-            "$value": "#006fee",
+            "$value": "#006FEE",
             "$description": "Default primary color for dark theme"
           },
           "foreground": {
             "$type": "color",
-            "$value": "#fff",
+            "$value": "#ECEDEE",
             "$description": "Primary foreground color for dark theme"
           }
         },
         "secondary": {
           "50": {
             "$type": "color",
-            "$value": "#240c3c",
+            "$value": "#180828",
             "$description": "Secondary color shade 50 for dark theme"
           },
           "100": {
             "$type": "color",
-            "$value": "#39135f",
+            "$value": "#301050",
             "$description": "Secondary color shade 100 for dark theme"
           },
           "200": {
             "$type": "color",
-            "$value": "#4e1a82",
+            "$value": "#481878",
             "$description": "Secondary color shade 200 for dark theme"
           },
           "300": {
             "$type": "color",
-            "$value": "#6321a5",
+            "$value": "#6020a0",
             "$description": "Secondary color shade 300 for dark theme"
           },
           "400": {
@@ -154,59 +154,59 @@
           },
           "500": {
             "$type": "color",
-            "$value": "#904ed2",
+            "$value": "#9353d3",
             "$description": "Secondary color base shade for dark theme"
           },
           "600": {
             "$type": "color",
-            "$value": "#a773db",
+            "$value": "#ae7ede",
             "$description": "Secondary color shade 600 for dark theme"
           },
           "700": {
             "$type": "color",
-            "$value": "#bf99e5",
+            "$value": "#c9a9e9",
             "$description": "Secondary color shade 700 for dark theme"
           },
           "800": {
             "$type": "color",
-            "$value": "#d7bfef",
+            "$value": "#e4d4f4",
             "$description": "Secondary color shade 800 for dark theme"
           },
           "900": {
             "$type": "color",
-            "$value": "#eee4f8",
+            "$value": "#f2eafa",
             "$description": "Secondary color shade 900 for dark theme"
           },
           "DEFAULT": {
             "$type": "color",
-            "$value": "#7828c8",
+            "$value": "#9353d3",
             "$description": "Default secondary color for dark theme"
           },
           "foreground": {
             "$type": "color",
-            "$value": "#fff",
+            "$value": "#ECEDEE",
             "$description": "Secondary foreground color for dark theme"
           }
         },
         "success": {
           "50": {
             "$type": "color",
-            "$value": "#073c1e",
+            "$value": "#052814",
             "$description": "Success color shade 50 for dark theme"
           },
           "100": {
             "$type": "color",
-            "$value": "#0b5f30",
+            "$value": "#095028",
             "$description": "Success color shade 100 for dark theme"
           },
           "200": {
             "$type": "color",
-            "$value": "#0f8341",
+            "$value": "#0e793c",
             "$description": "Success color shade 200 for dark theme"
           },
           "300": {
             "$type": "color",
-            "$value": "#13a653",
+            "$value": "#12a150",
             "$description": "Success color shade 300 for dark theme"
           },
           "400": {
@@ -216,27 +216,27 @@
           },
           "500": {
             "$type": "color",
-            "$value": "#40d27f",
+            "$value": "#45d483",
             "$description": "Success color base shade for dark theme"
           },
           "600": {
             "$type": "color",
-            "$value": "#68dc9a",
+            "$value": "#74dfa2",
             "$description": "Success color shade 600 for dark theme"
           },
           "700": {
             "$type": "color",
-            "$value": "#91e5b5",
+            "$value": "#a2e9c1",
             "$description": "Success color shade 700 for dark theme"
           },
           "800": {
             "$type": "color",
-            "$value": "#b9efd1",
+            "$value": "#d1f4e0",
             "$description": "Success color shade 800 for dark theme"
           },
           "900": {
             "$type": "color",
-            "$value": "#e2f8ec",
+            "$value": "#e8faf0",
             "$description": "Success color shade 900 for dark theme"
           },
           "DEFAULT": {
@@ -253,22 +253,22 @@
         "warning": {
           "50": {
             "$type": "color",
-            "$value": "#4a320b",
+            "$value": "#312107",
             "$description": "Warning color shade 50 for dark theme"
           },
           "100": {
             "$type": "color",
-            "$value": "#744e11",
+            "$value": "#62420e",
             "$description": "Warning color shade 100 for dark theme"
           },
           "200": {
             "$type": "color",
-            "$value": "#9f6b17",
+            "$value": "#936316",
             "$description": "Warning color shade 200 for dark theme"
           },
           "300": {
             "$type": "color",
-            "$value": "#ca881e",
+            "$value": "#c4841d",
             "$description": "Warning color shade 300 for dark theme"
           },
           "400": {
@@ -278,27 +278,27 @@
           },
           "500": {
             "$type": "color",
-            "$value": "#f7b54a",
+            "$value": "#f7b750",
             "$description": "Warning color base shade for dark theme"
           },
           "600": {
             "$type": "color",
-            "$value": "#f9c571",
+            "$value": "#f9c97c",
             "$description": "Warning color shade 600 for dark theme"
           },
           "700": {
             "$type": "color",
-            "$value": "#fad497",
+            "$value": "#fbdba7",
             "$description": "Warning color shade 700 for dark theme"
           },
           "800": {
             "$type": "color",
-            "$value": "#fce4bd",
+            "$value": "#fdedd3",
             "$description": "Warning color shade 800 for dark theme"
           },
           "900": {
             "$type": "color",
-            "$value": "#fef4e4",
+            "$value": "#fefce8",
             "$description": "Warning color shade 900 for dark theme"
           },
           "DEFAULT": {
@@ -315,22 +315,22 @@
         "danger": {
           "50": {
             "$type": "color",
-            "$value": "#49051d",
+            "$value": "#310413",
             "$description": "Danger color shade 50 for dark theme"
           },
           "100": {
             "$type": "color",
-            "$value": "#73092e",
+            "$value": "#610726",
             "$description": "Danger color shade 100 for dark theme"
           },
           "200": {
             "$type": "color",
-            "$value": "#9e0c3e",
+            "$value": "#920b3a",
             "$description": "Danger color shade 200 for dark theme"
           },
           "300": {
             "$type": "color",
-            "$value": "#c80f4f",
+            "$value": "#c20e4d",
             "$description": "Danger color shade 300 for dark theme"
           },
           "400": {
@@ -340,27 +340,27 @@
           },
           "500": {
             "$type": "color",
-            "$value": "#f53b7c",
+            "$value": "#f54180",
             "$description": "Danger color base shade for dark theme"
           },
           "600": {
             "$type": "color",
-            "$value": "#f76598",
+            "$value": "#f871a0",
             "$description": "Danger color shade 600 for dark theme"
           },
           "700": {
             "$type": "color",
-            "$value": "#f98eb3",
+            "$value": "#faa0bf",
             "$description": "Danger color shade 700 for dark theme"
           },
           "800": {
             "$type": "color",
-            "$value": "#fbb8cf",
+            "$value": "#fdd0df",
             "$description": "Danger color shade 800 for dark theme"
           },
           "900": {
             "$type": "color",
-            "$value": "#fee1eb",
+            "$value": "#fee7ef",
             "$description": "Danger color shade 900 for dark theme"
           },
           "DEFAULT": {
@@ -381,7 +381,7 @@
         },
         "foreground": {
           "$type": "color",
-          "$value": "#ffffff",
+          "$value": "#ECEDEE",
           "$description": "Foreground color for dark theme"
         },
         "content1": {
@@ -392,7 +392,7 @@
           },
           "foreground": {
             "$type": "color",
-            "$value": "#fff",
+            "$value": "#ECEDEE",
             "$description": "Content 1 foreground for dark theme"
           }
         },
@@ -404,7 +404,7 @@
           },
           "foreground": {
             "$type": "color",
-            "$value": "#fff",
+            "$value": "#ECEDEE",
             "$description": "Content 2 foreground for dark theme"
           }
         },
@@ -416,7 +416,7 @@
           },
           "foreground": {
             "$type": "color",
-            "$value": "#fff",
+            "$value": "#ECEDEE",
             "$description": "Content 3 foreground for dark theme"
           }
         },
@@ -428,7 +428,7 @@
           },
           "foreground": {
             "$type": "color",
-            "$value": "#fff",
+            "$value": "#ECEDEE",
             "$description": "Content 4 foreground for dark theme"
           }
         },
