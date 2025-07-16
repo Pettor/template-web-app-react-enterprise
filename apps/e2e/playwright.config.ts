@@ -1,14 +1,7 @@
 import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
-  testDir: "src",
-  retries: 1,
-  use: {
-    baseURL: "https://localhost:5173",
-    screenshot: "only-on-failure",
-    video: "retain-on-failure",
-    trace: "retain-on-failure",
-  },
+  globalSetup: "./global-setup.ts",
   projects: [
     {
       name: "chromium",
@@ -17,4 +10,21 @@ export default defineConfig({
     },
   ],
   reporter: [["list"], ["json", { outputFile: "./test-results/test-results.json" }]],
+  retries: 1,
+  testDir: "src",
+  use: {
+    baseURL: "https://localhost:5173",
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
+    trace: "retain-on-failure",
+  },
+  webServer: {
+    command: "pnpm -w run test:e2e:env",
+    url: "https://localhost:5173",
+    reuseExistingServer: true,
+    ignoreHTTPSErrors: true,
+    timeout: 15000,
+    stdout: 'pipe',
+    stderr: 'pipe',
+  },
 });

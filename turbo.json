@@ -70,10 +70,11 @@
       "outputs": [".test-results/**"]
     },
     "test:e2e": {
-      "cache": true,
+      "cache": false,
       "dependsOn": ["^build:libs"],
       "inputs": ["src/**", "playwright.config.ts", "package.json"],
-      "outputs": [".test-results/**", "test-results/**"]
+      "outputs": [".test-results/**", "test-results/**"],
+      "persistent": false
     },
     "test:e2e:env": {
       "cache": false,
