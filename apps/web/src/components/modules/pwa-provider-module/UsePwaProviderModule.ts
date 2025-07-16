@@ -48,14 +48,16 @@ export function usePwaProviderModule(): void {
   }, [setOfflineReady]);
 
   useEffect(() => {
-    if (offlineReady) {
-      addToast(PwaOfflineDialogProps(intl, handleOfflineClose));
+    if (!offlineReady) {
+      return;
     }
+    addToast(PwaOfflineDialogProps(intl, handleOfflineClose));
   }, [handleOfflineClose, intl, offlineReady, setOfflineReady]);
 
   useEffect(() => {
-    if (needRefresh) {
-      addToast(PwaUpdateDialogProps(intl, appName, handleRefreshClose, handleRefresh));
+    if (!needRefresh) {
+      return;
     }
+    addToast(PwaUpdateDialogProps(intl, appName, handleRefreshClose, handleRefresh));
   }, [appName, handleRefresh, handleRefreshClose, intl, needRefresh]);
 }
