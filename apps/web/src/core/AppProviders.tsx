@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { HeroUIProvider } from "@heroui/react";
+import { ToastProvider } from "@heroui/toast";
 import { validateCrypto } from "@package/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AppLocales } from "./AppLocales";
@@ -17,6 +18,7 @@ export function AppProviders({ children }: AppProvidersProps): ReactElement {
   typeof window !== "undefined" && validateCrypto();
   return (
     <HeroUIProvider>
+      <ToastProvider />
       <AppLocales>
         <PwaProviderModule>
           <QueryClientProvider client={queryClient}>

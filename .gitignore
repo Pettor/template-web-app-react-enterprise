@@ -17,7 +17,8 @@ node_modules
 .test-results
 .turbo
 build/
-coverage
+coverage/
+dev-dist/
 dist/
 test-results/
 out/
