@@ -39,6 +39,11 @@ export const config = [
       ],
       "react-hooks/exhaustive-deps": "error",
     },
+    settings: {
+      react: {
+        version: "19",
+      },
+    },
   },
   reactCompilerEslint.configs.recommended,
   {
