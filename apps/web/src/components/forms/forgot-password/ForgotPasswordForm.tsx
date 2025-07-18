@@ -1,9 +1,7 @@
 import type { ReactElement } from "react";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
 import { Button, Form, Input, Spacer } from "@heroui/react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { SubmitHandler } from "react-hook-form";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "@tanstack/react-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
 
@@ -13,7 +11,7 @@ export interface FormForgotPassword {
 
 export interface ForgotPasswordFormProps {
   loading: boolean;
-  onSubmit: SubmitHandler<FormForgotPassword>;
+  onSubmit: (data: FormForgotPassword) => void;
 }
 
 export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProps): ReactElement {
@@ -39,18 +37,34 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
       ),
   });
 
-  const { control, handleSubmit, register } = useForm({
-    resolver: zodResolver(schema),
+  const form = useForm({
+    defaultValues: {
+      email: "",
+    },
+    onSubmit: async ({ value }) => {
+      onSubmit(value);
+    },
   });
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} className="md:min-w-sm">
-      <Controller
-        control={control}
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        form.handleSubmit();
+      }}
+      className="md:min-w-sm"
+    >
+      <form.Field
         name="email"
-        render={({ fieldState: { invalid, error } }) => (
+        validators={{
+          onChange: ({ value }) => {
+            const result = schema.shape.email.safeParse(value);
+            return result.success ? undefined : result.error.format()._errors[0];
+          },
+        }}
+        children={(field) => (
           <Input
-            {...register("email")}
             autoFocus
             id="email"
             type="email"
@@ -61,8 +75,11 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
               id: "0YmbIp",
             })}
             startContent={<EnvelopeIcon className="h-5 w-5" />}
-            errorMessage={error?.message}
-            isInvalid={invalid}
+            value={field.state.value}
+            onChange={(e) => field.handleChange(e.target.value)}
+            onBlur={field.handleBlur}
+            errorMessage={field.state.meta.errors.join(", ")}
+            isInvalid={field.state.meta.errors.length > 0}
             validationBehavior="aria"
             data-testid="forgot-password-form__email-input"
           />
