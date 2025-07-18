@@ -23,7 +23,6 @@
     "@fontsource/rubik": "catalog:design",
     "@heroicons/react": "catalog:design",
     "@heroui/react": "catalog:design",
-    "@hookform/resolvers": "catalog:validation",
     "@package/api": "workspace:*",
     "@package/react": "workspace:*",
     "@package/ui": "workspace:*",
@@ -35,7 +34,6 @@
     "jotai-effect": "2.0.4",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
-    "react-hook-form": "7.60.0",
     "react-intl": "7.1.11",
     "react-router-dom": "7.7.0",
     "zod": "catalog:validation"
