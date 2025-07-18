@@ -27,6 +27,7 @@
     "@package/api": "workspace:*",
     "@package/react": "workspace:*",
     "@package/ui": "workspace:*",
+    "@tanstack/react-form": "1.14.1",
     "@tanstack/react-query": "5.83.0",
     "clsx": "2.1.1",
     "immer": "10.1.1",
