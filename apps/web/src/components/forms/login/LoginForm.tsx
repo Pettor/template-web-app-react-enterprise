@@ -1,9 +1,7 @@
 import { useState, type ReactElement } from "react";
 import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { Button, Checkbox, Form, Input, Link } from "@heroui/react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { SubmitHandler } from "react-hook-form";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "@tanstack/react-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
 
@@ -18,7 +16,7 @@ export interface LoginFormProps {
   error?: string;
   onForgotPassword(): void;
   onSignUp(): void;
-  onSubmit: SubmitHandler<FormLogin>;
+  onSubmit: (data: FormLogin) => void;
 }
 
 export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit }: LoginFormProps): ReactElement {
@@ -58,18 +56,36 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
     remember: z.boolean().optional(),
   });
 
-  const { control, handleSubmit, register } = useForm({
-    resolver: zodResolver(schema),
+  const form = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+      remember: false,
+    },
+    onSubmit: async ({ value }) => {
+      onSubmit(value);
+    },
   });
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center">
-      <Controller
-        control={control}
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        form.handleSubmit();
+      }}
+      className="flex flex-col justify-center"
+    >
+      <form.Field
         name="email"
-        render={({ fieldState: { invalid, error } }) => (
+        validators={{
+          onChange: ({ value }) => {
+            const result = schema.shape.email.safeParse(value);
+            return result.success ? undefined : result.error.format()._errors[0];
+          },
+        }}
+        children={(field) => (
           <Input
-            {...register("email")}
             fullWidth
             autoFocus
             id="email"
@@ -82,19 +98,26 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
             })}
             autoComplete="username"
             startContent={<EnvelopeIcon className="h-5 w-5" />}
-            errorMessage={error?.message}
-            isInvalid={invalid}
+            value={field.state.value}
+            onChange={(e) => field.handleChange(e.target.value)}
+            onBlur={field.handleBlur}
+            errorMessage={field.state.meta.errors.join(", ")}
+            isInvalid={field.state.meta.errors.length > 0}
             validationBehavior="aria"
             data-testid="login-form__email-input"
           />
         )}
       />
-      <Controller
-        control={control}
+      <form.Field
         name="password"
-        render={({ fieldState: { invalid, error } }) => (
+        validators={{
+          onChange: ({ value }) => {
+            const result = schema.shape.password.safeParse(value);
+            return result.success ? undefined : result.error.format()._errors[0];
+          },
+        }}
+        children={(field) => (
           <Input
-            {...register("password")}
             fullWidth
             id="password"
             type={isVisible ? "text" : "password"}
@@ -119,23 +142,31 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
                 {isVisible ? <EyeIcon className="h-5 w-5" /> : <EyeSlashIcon className="h-5 w-5" />}
               </button>
             }
-            errorMessage={error?.message}
-            isInvalid={invalid}
+            value={field.state.value}
+            onChange={(e) => field.handleChange(e.target.value)}
+            onBlur={field.handleBlur}
+            errorMessage={field.state.meta.errors.join(", ")}
+            isInvalid={field.state.meta.errors.length > 0}
             validationBehavior="aria"
             data-testid="login-form__password-input"
           />
         )}
       />
       <div className="flex w-full items-center justify-between px-1 py-2">
-        <Checkbox defaultSelected size="sm" {...register("remember")}>
-          <p className="text-xs sm:text-sm">
-            {intl.formatMessage({
-              description: "LoginForm - Remember me checkbox label",
-              defaultMessage: "Remember me",
-              id: "eSCI59",
-            })}
-          </p>
-        </Checkbox>
+        <form.Field
+          name="remember"
+          children={(field) => (
+            <Checkbox size="sm" isSelected={field.state.value} onValueChange={(value) => field.handleChange(value)}>
+              <p className="text-xs sm:text-sm">
+                {intl.formatMessage({
+                  description: "LoginForm - Remember me checkbox label",
+                  defaultMessage: "Remember me",
+                  id: "eSCI59",
+                })}
+              </p>
+            </Checkbox>
+          )}
+        />
         <Link className="cursor-pointer text-xs sm:text-sm" size="sm" onPress={onForgotPassword}>
           {intl.formatMessage({
             description: "LoginForm - Forgot password link",
