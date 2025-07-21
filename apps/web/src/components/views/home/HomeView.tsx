@@ -26,7 +26,7 @@ export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
       <div className="flex flex-1 flex-col p-4 sm:p-0">
         <div className="grid w-full place-items-center">
           <Spacer y={8} />
-          <div className="bg-base-100 items-center justify-center gap-2 p-2 text-center">
+          <div className="items-center justify-center gap-2 p-2 text-center">
             <span className="inline-block text-4xl font-medium md:text-5xl lg:text-7xl">
               {intl.formatMessage({
                 description: "HomeView - Header title ending",

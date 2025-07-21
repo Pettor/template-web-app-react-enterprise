@@ -14,7 +14,6 @@ export function AboutView({ onBack, ...aboutProps }: AboutViewProps): ReactEleme
 
   return (
     <BasicLayout
-      className="dark:bg-base-300/70"
       backgroundElement={
         <>
           <BlueFadeBackground />
@@ -23,7 +22,7 @@ export function AboutView({ onBack, ...aboutProps }: AboutViewProps): ReactEleme
       }
     >
       <div className="flex w-full flex-col items-center justify-center gap-1 p-4 lg:flex-row-reverse">
-        <div className="bg-base-100 h-full min-h-[550px] w-full shrink-0 sm:w-[550px]">
+        <div className="h-full min-h-[550px] w-full shrink-0 sm:w-[550px]">
           <Card className="min-h-[550px]">
             <CardHeader className="flex w-full items-end justify-between">
               <div className="flex"></div>
