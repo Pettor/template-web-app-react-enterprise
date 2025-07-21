@@ -18,7 +18,6 @@ export function LoginView({ appName, loginForm, onAbout }: LoginViewProps): Reac
 
   return (
     <BasicLayout
-      className="dark:bg-base-300/40"
       backgroundElement={
         <>
           <BlueFadeBackground />

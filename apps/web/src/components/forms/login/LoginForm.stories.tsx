@@ -54,7 +54,7 @@ export const EmailMissing: Story = {
     await userEvent.type(canvas.getByTestId("login-form__password-input"), "password");
     await userEvent.click(canvas.getByTestId("login-form__submit-button"));
 
-    await expect(canvas.getByText("Email is required")).toBeInTheDocument();
+    await expect(canvas.getByText("Email must be valid")).toBeInTheDocument();
   },
 } satisfies Story;
 
@@ -75,6 +75,6 @@ export const PasswordMissing: Story = {
     await userEvent.type(canvas.getByTestId("login-form__email-input"), "email@provider.com");
     await userEvent.click(canvas.getByTestId("login-form__submit-button"));
 
-    await expect(canvas.getByText("Password is required")).toBeInTheDocument();
+    await expect(canvas.getByText("Password is too short - should be 8 chars minimum")).toBeInTheDocument();
   },
 };

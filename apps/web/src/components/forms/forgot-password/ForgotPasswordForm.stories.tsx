@@ -49,6 +49,6 @@ export const IncorrectEmail: Story = {
   play: async ({ canvas, userEvent }) => {
     await userEvent.click(canvas.getByTestId("forgot-password-form__submit-button"));
 
-    await expect(canvas.getByText("Email is required")).toBeInTheDocument();
+    await expect(canvas.getByText("Email must be valid")).toBeInTheDocument();
   },
 };

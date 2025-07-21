@@ -1,5 +1,5 @@
-import { test, expect } from "@playwright/test";
 import { mocksClient } from "@package/mocks";
+import { test, expect } from "@playwright/test";
 
 test.describe("auth.loggedin", () => {
   test.beforeEach(async () => {
@@ -14,7 +14,7 @@ test.describe("auth.loggedin", () => {
     }).toPass();
 
     await page.getByTestId("login-form__email-input").fill("root@admin.com");
-    await page.getByTestId("login-form__password-input").fill("pass");
+    await page.getByTestId("login-form__password-input").fill("password");
     await page.getByTestId("login-form__submit-button").click();
 
     await expect(async () => {

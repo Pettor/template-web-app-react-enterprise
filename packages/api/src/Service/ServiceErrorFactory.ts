@@ -12,7 +12,13 @@ export class ServiceErrorFactory {
     }
 
     if (e instanceof ZodError) {
-      console.error("Validation error", e.errors);
+      return {
+        name: "ValidationError",
+        message: e.message,
+        status: 400,
+        code: "VALIDATION_ERROR",
+        cause: e,
+      };
     }
 
     return {

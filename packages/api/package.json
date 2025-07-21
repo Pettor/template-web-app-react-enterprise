@@ -16,7 +16,7 @@
   },
   "peerDependencies": {
     "@tanstack/react-query": ">=5.0.0",
-    "zod": ">=3.0.0"
+    "zod": ">=4.0.0"
   },
   "dependencies": {
     "immer": "10.1.1"

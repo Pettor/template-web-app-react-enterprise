@@ -1,4 +1,5 @@
 import type { ReactElement } from "react";
+import { Button } from "@heroui/react";
 import { useIntl } from "react-intl";
 import { useNotFoundPage } from "./UseNotFoundPage";
 
@@ -15,13 +16,13 @@ export function NotFoundPage(): ReactElement {
           id: "+LJQ+U",
         })}
       </span>
-      <button className="btn btn-primary" onClick={handleClick}>
+      <Button onPress={handleClick}>
         {intl.formatMessage({
           description: "NotFoundPage - Button",
           defaultMessage: "Click",
           id: "0259Tx",
         })}
-      </button>
+      </Button>
     </div>
   );
 }

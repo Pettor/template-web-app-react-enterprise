@@ -1,11 +1,10 @@
 import { useState, type ReactElement } from "react";
 import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import { Button, Checkbox, Form, Input, Link } from "@heroui/react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { SubmitHandler } from "react-hook-form";
-import { useForm, Controller } from "react-hook-form";
+import { Button, Checkbox, Form, Link } from "@heroui/react";
+import { useForm } from "@tanstack/react-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
+import { InputField } from "~/components/input/InputField";
 
 export interface FormLogin {
   email: string;
@@ -18,7 +17,7 @@ export interface LoginFormProps {
   error?: string;
   onForgotPassword(): void;
   onSignUp(): void;
-  onSubmit: SubmitHandler<FormLogin>;
+  onSubmit: (data: FormLogin) => void;
 }
 
 export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit }: LoginFormProps): ReactElement {
@@ -30,73 +29,77 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
   }
 
   const schema = z.object({
-    email: z
-      .string()
-      .min(
-        1,
-        intl.formatMessage({
-          description: "LoginFormValidation - Email is required",
-          defaultMessage: "Email is required",
-          id: "sJG6e/",
-        })
-      )
-      .email(
-        intl.formatMessage({
-          description: "LoginFormValidation - Email must be valid",
-          defaultMessage: "Email must be valid",
-          id: "+2i1XS",
-        })
-      ),
-    password: z.string().min(
-      1,
+    email: z.email(
       intl.formatMessage({
-        description: "LoginFormValidation - Password is required",
-        defaultMessage: "Password is required",
-        id: "+ADOR2",
+        description: "LoginFormValidation - Email must be valid",
+        defaultMessage: "Email must be valid",
+        id: "+2i1XS",
       })
     ),
-    remember: z.boolean().optional(),
+    password: z.string().min(
+      8,
+      intl.formatMessage({
+        description: "SignUpFormValidation - Password is too short - min 8 characters",
+        defaultMessage: "Password is too short - should be 8 chars minimum",
+        id: "YzHSuh",
+      })
+    ),
+    remember: z.boolean(),
   });
 
-  const { control, handleSubmit, register } = useForm({
-    resolver: zodResolver(schema),
+  const form = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+      remember: false,
+    },
+    validators: {
+      onSubmit: schema,
+    },
+    onSubmit: async (values) => {
+      onSubmit(values.value);
+    },
   });
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center">
-      <Controller
-        control={control}
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        form.handleSubmit();
+      }}
+      className="flex flex-col justify-center"
+    >
+      <form.Field
         name="email"
-        render={({ fieldState: { invalid, error } }) => (
-          <Input
-            {...register("email")}
-            fullWidth
-            autoFocus
-            id="email"
-            type="text"
-            variant="bordered"
-            placeholder={intl.formatMessage({
-              description: "LoginForm - Email input placeholder",
-              defaultMessage: "Email",
-              id: "P2Xl0E",
-            })}
-            autoComplete="username"
-            startContent={<EnvelopeIcon className="h-5 w-5" />}
-            errorMessage={error?.message}
-            isInvalid={invalid}
-            validationBehavior="aria"
-            data-testid="login-form__email-input"
-          />
-        )}
+        children={(field) => {
+          return (
+            <InputField
+              fullWidth
+              autoFocus
+              field={field}
+              autoComplete="username"
+              id={field.name}
+              type="email"
+              variant="bordered"
+              placeholder={intl.formatMessage({
+                description: "LoginForm - Email input placeholder",
+                defaultMessage: "Email",
+                id: "P2Xl0E",
+              })}
+              startContent={<EnvelopeIcon className="h-5 w-5" />}
+              data-testid="login-form__email-input"
+            />
+          );
+        }}
       />
-      <Controller
-        control={control}
+      <form.Field
         name="password"
-        render={({ fieldState: { invalid, error } }) => (
-          <Input
-            {...register("password")}
+        children={(field) => (
+          <InputField
             fullWidth
-            id="password"
+            field={field}
+            autoComplete="current-password"
             type={isVisible ? "text" : "password"}
             variant="bordered"
             placeholder={intl.formatMessage({
@@ -104,7 +107,6 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
               defaultMessage: "Password",
               id: "2hRtil",
             })}
-            autoComplete="current-password"
             startContent={<LockClosedIcon className="h-5 w-5" />}
             endContent={
               <button
@@ -119,23 +121,25 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
                 {isVisible ? <EyeIcon className="h-5 w-5" /> : <EyeSlashIcon className="h-5 w-5" />}
               </button>
             }
-            errorMessage={error?.message}
-            isInvalid={invalid}
-            validationBehavior="aria"
             data-testid="login-form__password-input"
           />
         )}
       />
       <div className="flex w-full items-center justify-between px-1 py-2">
-        <Checkbox defaultSelected size="sm" {...register("remember")}>
-          <p className="text-xs sm:text-sm">
-            {intl.formatMessage({
-              description: "LoginForm - Remember me checkbox label",
-              defaultMessage: "Remember me",
-              id: "eSCI59",
-            })}
-          </p>
-        </Checkbox>
+        <form.Field
+          name="remember"
+          children={(field) => (
+            <Checkbox size="sm" isSelected={field.state.value} onValueChange={(value) => field.handleChange(value)}>
+              <p className="text-xs sm:text-sm">
+                {intl.formatMessage({
+                  description: "LoginForm - Remember me checkbox label",
+                  defaultMessage: "Remember me",
+                  id: "eSCI59",
+                })}
+              </p>
+            </Checkbox>
+          )}
+        />
         <Link className="cursor-pointer text-xs sm:text-sm" size="sm" onPress={onForgotPassword}>
           {intl.formatMessage({
             description: "LoginForm - Forgot password link",
@@ -144,19 +148,26 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
           })}
         </Link>
       </div>
-      <Button
-        isLoading={loading}
-        className="w-full"
-        color="primary"
-        type="submit"
-        data-testid="login-form__submit-button"
-      >
-        {intl.formatMessage({
-          description: "LoginForm - Submit button text",
-          defaultMessage: "Login",
-          id: "/83/VX",
-        })}
-      </Button>
+      <form.Subscribe
+        selector={(state) => [state.canSubmit]}
+        children={([canSubmit]) => (
+          <Button
+            fullWidth
+            isLoading={loading}
+            disabled={!canSubmit}
+            color="primary"
+            type="submit"
+            onPress={() => form.handleSubmit()}
+            data-testid="login-form__submit-button"
+          >
+            {intl.formatMessage({
+              description: "LoginForm - Submit button text",
+              defaultMessage: "Login",
+              id: "/83/VX",
+            })}
+          </Button>
+        )}
+      />
       {error && <div className="text-small text-danger">{error}</div>}
       <p className="text-small text-center">
         <Link className="cursor-pointer" size="sm" onPress={onSignUp}>
