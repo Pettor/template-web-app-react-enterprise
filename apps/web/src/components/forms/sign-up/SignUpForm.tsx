@@ -94,13 +94,14 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
         e.stopPropagation();
         form.handleSubmit();
       }}
-      className="md:min-w-sm"
+      className="md:min-w-sm min-w-full"
     >
       <form.Field
         name="userName"
         children={(field) => (
           <InputField
             autoFocus
+            fullWidth
             field={field}
             type="text"
             placeholder={intl.formatMessage({
