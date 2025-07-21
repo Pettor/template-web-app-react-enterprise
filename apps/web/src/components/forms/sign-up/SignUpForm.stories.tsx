@@ -63,8 +63,8 @@ export const MissingFields: Story = {
     await userEvent.click(canvas.getByTestId("sign-up-form__submit-button"));
 
     await expect(canvas.getByText("We need to call you something")).toBeInTheDocument();
-    await expect(canvas.getByText("Email is required")).toBeInTheDocument();
-    await expect(canvas.getByText("Password is required")).toBeInTheDocument();
+    await expect(canvas.getByText("Email must be valid")).toBeInTheDocument();
+    await expect(canvas.getByText("Password is too short - should be 8 chars minimum")).toBeInTheDocument();
     await expect(canvas.getByText("Password must be confirmed")).toBeInTheDocument();
   },
 };

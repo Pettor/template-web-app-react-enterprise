@@ -28,7 +28,6 @@
     "@package/ui": "workspace:*",
     "@tanstack/react-form": "1.14.1",
     "@tanstack/react-query": "5.83.0",
-    "@tanstack/zod-form-adapter": "^0.42.1",
     "clsx": "2.1.1",
     "immer": "10.1.1",
     "jotai": "2.12.5",
