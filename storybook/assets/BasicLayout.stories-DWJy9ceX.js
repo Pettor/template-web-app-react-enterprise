@@ -1,0 +1,5 @@
+import{j as t}from"./iframe-oH_DC80A.js";import{S as r}from"./StorybookTableContentComponent-CSYmg16e.js";import{B as m}from"./BasicLayout-oxynBBiP.js";import"./chunk-F3UDT23P-C8j_jg0V.js";import"./chunk-3HKZRFKK-CI1EtVuS.js";import"./index-CQujp2HH.js";import"./index-gFDqmumT.js";import"./chunk-BDGLNRCW-kbLzW4Gq.js";import"./chunk-RJKRL3AU-CzlZidxD.js";import"./index-B6F8FKAz.js";import"./chunk-GQT3YUX3-DlgZpYdS.js";import"./FocusScope-BYg8OLd_.js";import"./useControlledState-Bs-o5zaq.js";import"./getScrollParent-BxXDVjU_.js";import"./chunk-XJ2YRSUP-DfMebxck.js";import"./useToggleState-EZ3asViI.js";import"./index-B6pczB3M.js";import"./chunk-ICU6NNET-6kEIbKs9.js";import"./useToggle-BS_YkbXo.js";import"./useFormReset-2lNVFKVQ.js";import"./chunk-AWMMSYR4-BvRM6c9T.js";import"./chunk-S574QCAN-oED5SgeT.js";const E={component:m,title:"Shared/Layout"},o={args:{children:t.jsx(r,{})}};o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`{
+  args: {
+    children: <StorybookTableContentComponent />
+  }
+}`,...o.parameters?.docs?.source}}};const T=["BasicLayout"];export{o as BasicLayout,T as __namedExportsOrder,E as default};

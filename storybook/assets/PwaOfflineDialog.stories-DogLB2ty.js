@@ -1,0 +1,6 @@
+import{u as e,j as s}from"./iframe-oH_DC80A.js";import{C as a,T as n,c as i}from"./DocumentationLayout-DAgG1-ZX.js";import{b as l}from"./chunk-WBUKVQRU-D8fPY8qX.js";import"./chunk-3HKZRFKK-CI1EtVuS.js";import"./index-CQujp2HH.js";import"./index-gFDqmumT.js";import"./chunk-GQT3YUX3-DlgZpYdS.js";import"./chunk-BDGLNRCW-kbLzW4Gq.js";import"./index-BQ3rQu0T.js";import"./chunk-RJKRL3AU-CzlZidxD.js";import"./proxy-Saq8bX4Y.js";import"./chunk-O24IAYCG-CgsVN_sE.js";import"./chunk-6VC6TS2O-D8_K1fXx.js";function m(r,t){return{title:r.formatMessage({description:"PwaOfflineDialog- Ready to work offline description",defaultMessage:"Ready to work offline",id:"HQHLM4"}),color:"primary",onClose:t}}const C={title:"Feedback/Progressive Web App",decorators:[a,n]},o={render:()=>{const r=e();return s.jsx(l,{onPress:()=>i(m(r,()=>console.log("onClose"))),children:"Show Toast"})}};o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`{
+  render: () => {
+    const intl = useIntl();
+    return <Button onPress={() => addToast(PwaOfflineDialogProps(intl, () => console.log("onClose")))}>Show Toast</Button>;
+  }
+}`,...o.parameters?.docs?.source}}};const h=["OfflineDialog"];export{o as OfflineDialog,h as __namedExportsOrder,C as default};
