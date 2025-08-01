@@ -31,11 +31,11 @@
     "clsx": "2.1.1",
     "immer": "10.1.1",
     "jotai": "2.12.5",
-    "jotai-effect": "2.0.4",
+    "jotai-effect": "2.0.5",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
     "react-intl": "7.1.11",
-    "react-router-dom": "7.7.0",
+    "react-router-dom": "7.7.1",
     "zod": "catalog:validation"
   },
   "devDependencies": {
