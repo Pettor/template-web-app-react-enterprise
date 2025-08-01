@@ -26,7 +26,7 @@
     "@heroui/react": "catalog:design",
     "@package/react": "workspace:*",
     "clsx": "2.1.1",
-    "framer-motion": "12.23.3",
+    "framer-motion": "12.23.9",
     "jotai": "2.12.5"
   },
   "devDependencies": {
