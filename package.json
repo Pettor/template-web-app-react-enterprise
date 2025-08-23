@@ -38,7 +38,7 @@
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "@commitlint/types": "19.8.1",
-    "@types/node": "22.17.1",
+    "@types/node": "22.17.2",
     "husky": "9.1.7",
     "lint-staged": "16.1.5",
     "move-cli": "catalog:common",
@@ -47,7 +47,7 @@
     "rimraf": "catalog:common",
     "sherif": "1.6.1",
     "tsup": "8.5.0",
-    "turbo": "2.5.5"
+    "turbo": "2.5.6"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
