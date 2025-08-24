@@ -145,8 +145,8 @@ catalogs:
       version: 5.9.2
   validation:
     zod:
-      specifier: 4.1.0
-      version: 4.1.0
+      specifier: 4.1.1
+      version: 4.1.1
   vite:
     '@vitejs/plugin-basic-ssl':
       specifier: 2.1.0
@@ -397,7 +397,7 @@ importers:
         version: 7.8.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       zod:
         specifier: catalog:validation
-        version: 4.1.0
+        version: 4.1.1
     devDependencies:
       '@config/eslint':
         specifier: workspace:*
@@ -7639,8 +7639,8 @@ packages:
   zod@4.0.5:
     resolution: {integrity: sha512-/5UuuRPStvHXu7RS+gmvRf4NXrNxpSllGwDnCBcJZtQsKrviYXm54yDGV2KYNLT5kq0lHGcl7lqWJLgSaG+tgA==}
 
-  zod@4.1.0:
-    resolution: {integrity: sha512-UWxluYj2IDX9MHRXTMbB/2eeWrAMmmMSESM+MfT9MQw8U1qo9q5ASW08anoJh6AJ7pkt099fLdNFmfI+4aChHg==}
+  zod@4.1.1:
+    resolution: {integrity: sha512-SgMZK/h8Tigt9nnKkfJMvB/mKjiJXaX26xegP4sa+0wHIFVFWVlsQGdhklDmuargBD3Hsi3rsQRIzwJIhTPJHA==}
 
 snapshots:
 
@@ -17927,4 +17927,4 @@ snapshots:
 
   zod@4.0.5: {}
 
-  zod@4.1.0: {}
+  zod@4.1.1: {}
