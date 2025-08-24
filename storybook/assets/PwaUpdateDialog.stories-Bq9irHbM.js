@@ -1,0 +1,8 @@
+import{j as e,u as p}from"./iframe-BpyOjFLk.js";import{C as i,T as d}from"./DocumentationLayout-d6vKNLxX.js";import{b as r}from"./chunk-WBUKVQRU-WlTGW6dN.js";import{a as l}from"./chunk-U2DWYKGQ-BzLyAsdS.js";import"./preload-helper-D9Z9MdNV.js";import"./chunk-YFAKJTDR-BsxcyD9O.js";import"./chunk-JGY6VQQQ-BkFehgb2.js";import"./index-D5GmdqLr.js";import"./index-CC97iVX2.js";import"./useLocalizedStringFormatter-BVKxZ1rM.js";import"./chunk-ZQGNWTBN-Dn2EqAO6.js";import"./chunk-YFAKJTDR-Di6-d6KD.js";import"./proxy-DDcP7Dkb.js";import"./is-motion-value-gRKpgmBu.js";import"./chunk-6VC6TS2O-DKTOnU5X.js";import"./global-config-B5DaTUF1.js";import"./chunk-O24IAYCG-CC6h-P0A.js";function m(o,a,s,n){return{title:o.formatMessage({description:"PwaUpdateDialog - Update available description",defaultMessage:"A new version of {appName} is available",id:"Dbak+i"},{appName:a}),color:"secondary",endContent:e.jsx(r,{color:"primary",size:"sm",onPress:n,children:o.formatMessage({description:"PwaUpdateDialog - Update button",defaultMessage:"Update",id:"Blpjtp"})}),onClose:s}}const B={title:"Feedback/Progressive Web App",decorators:[i,d]},t={render:()=>{const o=p();return e.jsx(r,{onPress:()=>l(m(o,"App",()=>console.log("onClose"),()=>console.log("onUpdate"))),children:"Show Toast"})}};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`{
+  render: () => {
+    const intl = useIntl();
+    return <Button onPress={() => addToast(PwaUpdateDialogProps(intl, "App", () => console.log("onClose"), () => console.log("onUpdate")))}>
+        Show Toast
+      </Button>;
+  }
+}`,...t.parameters?.docs?.source}}};const S=["UpdateDialog"];export{t as UpdateDialog,S as __namedExportsOrder,B as default};
