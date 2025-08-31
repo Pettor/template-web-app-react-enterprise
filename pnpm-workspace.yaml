@@ -13,7 +13,7 @@ catalogs:
   design:
     '@fontsource/rubik': 5.2.6
     '@heroicons/react': 2.2.0
-    '@heroui/react': 2.8.2
+    '@heroui/react': 2.8.3
     'style-dictionary': 5.0.4
   eslint:
     '@eslint/js': 9.34.0
