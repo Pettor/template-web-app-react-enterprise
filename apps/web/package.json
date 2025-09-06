@@ -31,7 +31,7 @@
     "clsx": "2.1.1",
     "immer": "10.1.1",
     "jotai": "2.13.1",
-    "jotai-effect": "2.0.5",
+    "jotai-effect": "2.1.0",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
     "react-intl": "7.1.11",

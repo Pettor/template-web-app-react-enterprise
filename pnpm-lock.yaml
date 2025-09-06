@@ -381,8 +381,8 @@ importers:
         specifier: 2.13.1
         version: 2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.1.12)(react@19.1.1)
       jotai-effect:
-        specifier: 2.0.5
-        version: 2.0.5(jotai@2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.1.12)(react@19.1.1))
+        specifier: 2.1.0
+        version: 2.1.0(jotai@2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.1.12)(react@19.1.1))
       react:
         specifier: catalog:react19
         version: 19.1.1
@@ -5321,8 +5321,8 @@ packages:
     resolution: {integrity: sha512-twQoecYPiVA5K/h6SxtORw/Bs3ar+mLUtoPSc7iMXzQzK8d7eJ/R09wmTwAjiamETn1cXYPGfNnu7DMoHgu12w==}
     hasBin: true
 
-  jotai-effect@2.0.5:
-    resolution: {integrity: sha512-SUCStiMDWMQIV5Wh95Dq0qvl3tsI1vKDSRHFBQg2bHS5BCIyDB6ykFpIFYhX+d2yYk3dJjOgNKZaTJEUmFFcdA==}
+  jotai-effect@2.1.0:
+    resolution: {integrity: sha512-1nD6D4JizwCH3z2kun71ZUkxeeE5PknUkuP98NqQdCanidct2BHIhSwRxnfA0C2CPAn9H+5NF0EHU6gPkdhh7Q==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       jotai: '>=2.12.1'
@@ -15524,7 +15524,7 @@ snapshots:
 
   jiti@2.5.1: {}
 
-  jotai-effect@2.0.5(jotai@2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.1.12)(react@19.1.1)):
+  jotai-effect@2.1.0(jotai@2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.1.12)(react@19.1.1)):
     dependencies:
       jotai: 2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.1.12)(react@19.1.1)
 
