@@ -16,8 +16,8 @@ catalogs:
     '@heroui/react': 2.8.3
     'style-dictionary': 5.0.4
   eslint:
-    '@eslint/js': 9.34.0
-    eslint: 9.34.0
+    '@eslint/js': 9.35.0
+    eslint: 9.35.0
     eslint-config-prettier: 10.1.8
     eslint-plugin-formatjs: 5.4.0
     eslint-plugin-import: 2.32.0
