@@ -57,7 +57,7 @@ catalogs:
   typescript:
     typescript: 5.9.2
   validation:
-    '@hookform/resolvers': 5.2.1
+    '@hookform/resolvers': 5.2.2
     zod: 4.1.5
   vite:
     '@vitejs/plugin-basic-ssl': 2.1.0
