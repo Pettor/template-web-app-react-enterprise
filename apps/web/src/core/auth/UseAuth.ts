@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import type { LoginData } from "@package/api";
 import { usePostLoginMutate, usePostLogoutMutate } from "@package/api";
+import { useNavigate, useRouter } from "@tanstack/react-router";
 import { AuthContext } from "./AuthContext";
 import type { AuthStatus } from "./AuthReducer";
 
@@ -11,6 +12,8 @@ export function useAuth(): {
   loginLoading: boolean;
   logoutLoading: boolean;
 } {
+  const router = useRouter();
+  const navigate = useNavigate();
   const {
     state: { status },
     dispatch,
@@ -29,6 +32,9 @@ export function useAuth(): {
     await logoutFunc();
     dispatch({
       type: "auth/logout",
+    });
+    router.invalidate().finally(() => {
+      navigate({ to: "/" });
     });
   }
 

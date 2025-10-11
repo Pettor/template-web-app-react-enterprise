@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "@tanstack/react-router";
 import { useAboutPage } from "../UseAboutPage";
 import type { AboutModalProps } from "~/components/feedback/about-modal/AboutModal";
 
 export function useAboutModalPage(serverVersion: string): AboutModalProps {
-  const navigate = useNavigate();
+  const router = useRouter();
   const aboutProps = useAboutPage(serverVersion);
 
   function handleOnClose(): void {
-    navigate(-1);
+    router.history.back();
   }
 
   return {

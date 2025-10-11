@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import { useFetchPersonalProfileQuery } from "@package/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 import type { IAppSessionContent } from "./IAppSessionContent";
 import { useAuth } from "~/core/auth/UseAuth";
 
-export function useAppSessionContent(aboutRoute: string = "/about"): IAppSessionContent {
+export function useAppSessionContent(aboutRoute: string = "/version"): IAppSessionContent {
   const navigate = useNavigate();
   const { logout } = useAuth();
   const { data: profileInfo } = useFetchPersonalProfileQuery();
@@ -30,7 +30,7 @@ export function useAppSessionContent(aboutRoute: string = "/about"): IAppSession
   }
 
   function handleOnAbout(): void {
-    navigate(aboutRoute);
+    navigate({ to: aboutRoute as "/version" });
   }
 
   return {

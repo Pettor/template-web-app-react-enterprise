@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { useIntl } from "react-intl";
-import { useNavigate } from "react-router-dom";
 import type { LoginViewProps } from "../../components/views/login/LoginView";
 import type { FormLogin } from "~/components/forms/login/LoginForm";
 import { useAuth } from "~/core/auth/UseAuth";
@@ -22,7 +22,7 @@ export function useLoginPage(): LoginViewProps {
         password: data.password,
         rememberMe: data.remember,
       });
-      navigate("/");
+      navigate({ to: "/" });
     } catch {
       setLoginError(
         intl.formatMessage({
@@ -35,15 +35,15 @@ export function useLoginPage(): LoginViewProps {
   }
 
   function handleOnAbout(): void {
-    navigate("/about");
+    navigate({ to: "/about" });
   }
 
   function handleForgotPassword(): void {
-    navigate("/forgot-password", { state: { something: "Incoming!" } });
+    navigate({ to: "/forgot-password" });
   }
 
   function handleSignUp(): void {
-    navigate("/sign-up");
+    navigate({ to: "/sign-up" });
   }
 
   return {
