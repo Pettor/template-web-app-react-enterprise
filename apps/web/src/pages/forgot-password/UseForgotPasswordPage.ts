@@ -1,7 +1,7 @@
 import { addToast } from "@heroui/react";
 import { usePostForgotPasswordMutate } from "@package/api";
+import { useNavigate } from "@tanstack/react-router";
 import { useIntl } from "react-intl";
-import { useNavigate } from "react-router-dom";
 import type { FormForgotPassword } from "~/components/forms/forgot-password/ForgotPasswordForm";
 import type { ForgotPasswordViewProps } from "~/components/views/forgot-password/ForgotPasswordView";
 import { useAppInfo } from "~/core/config/UseAppInfo";
@@ -14,7 +14,7 @@ export function useForgotPasswordPage(): ForgotPasswordViewProps {
 
   function handleOnBack(): void {
     console.log("handleBack");
-    navigate("/login");
+    navigate({ to: "/login" });
   }
 
   async function handleOnSubmit(data: FormForgotPassword): Promise<void> {
@@ -22,7 +22,7 @@ export function useForgotPasswordPage(): ForgotPasswordViewProps {
 
     try {
       await submit(email);
-      navigate("/");
+      navigate({ to: "/" });
     } catch {
       addToast({
         title: intl.formatMessage({
