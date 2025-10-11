@@ -52,7 +52,7 @@ catalogs:
   tailwind:
     tailwindcss: 4.1.13
     '@tailwindcss/aspect-ratio': 0.4.2
-    '@tailwindcss/typography': 0.5.16
+    '@tailwindcss/typography': 0.5.19
     '@tailwindcss/vite': 4.1.13
   typescript:
     typescript: 5.9.2
