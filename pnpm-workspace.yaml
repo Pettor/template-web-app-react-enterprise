@@ -55,7 +55,7 @@ catalogs:
     '@tailwindcss/typography': 0.5.19
     '@tailwindcss/vite': 4.1.13
   typescript:
-    typescript: 5.9.2
+    typescript: 5.9.3
   validation:
     '@hookform/resolvers': 5.2.2
     zod: 4.1.12
