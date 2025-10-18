@@ -40,7 +40,7 @@
     "@commitlint/types": "20.0.0",
     "@types/node": "22.18.9",
     "husky": "9.1.7",
-    "lint-staged": "16.2.3",
+    "lint-staged": "16.2.4",
     "move-cli": "catalog:common",
     "prettier": "3.6.2",
     "prettier-plugin-tailwindcss": "0.6.14",
