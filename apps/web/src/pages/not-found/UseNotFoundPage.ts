@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 
 export function useNotFoundPage(): {
   handleClick: () => void;
@@ -6,7 +6,7 @@ export function useNotFoundPage(): {
   const navigate = useNavigate();
 
   function handleClick(): void {
-    navigate("/login");
+    navigate({ to: "/login" });
   }
 
   return {

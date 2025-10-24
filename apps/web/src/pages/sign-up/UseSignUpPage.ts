@@ -1,7 +1,7 @@
 import { addToast } from "@heroui/react";
 import { usePostSelfRegister } from "@package/api";
+import { useNavigate } from "@tanstack/react-router";
 import { useIntl } from "react-intl";
-import { useNavigate } from "react-router-dom";
 import type { FormSignUp } from "~/components/forms/sign-up/SignUpForm";
 import type { SignUpViewProps } from "~/components/views/sign-up/SignUpView";
 import { useAppInfo } from "~/core/config/UseAppInfo";
@@ -13,13 +13,13 @@ export function useSignUpPage(): SignUpViewProps {
   const { isPending, mutateAsync: submit } = usePostSelfRegister();
 
   function handleOnBack(): void {
-    navigate("/login");
+    navigate({ to: "/login" });
   }
 
   async function handleOnSubmit(data: FormSignUp): Promise<void> {
     try {
       await submit(data);
-      navigate("/");
+      navigate({ to: "/" });
     } catch {
       addToast({
         title: intl.formatMessage({
