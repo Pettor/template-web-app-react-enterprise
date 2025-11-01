@@ -378,11 +378,11 @@ importers:
         specifier: 10.2.0
         version: 10.2.0
       jotai:
-        specifier: 2.13.1
-        version: 2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0)
+        specifier: 2.15.1
+        version: 2.15.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0)
       jotai-effect:
         specifier: 2.1.0
-        version: 2.1.0(jotai@2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0))
+        version: 2.1.0(jotai@2.15.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0))
       react:
         specifier: catalog:react19
         version: 19.2.0
@@ -704,8 +704,8 @@ importers:
         specifier: 12.23.12
         version: 12.23.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       jotai:
-        specifier: 2.13.1
-        version: 2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.1.0)
+        specifier: 2.15.1
+        version: 2.15.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.1.0)
       react:
         specifier: '>=19.0.0'
         version: 19.1.0
@@ -5262,8 +5262,8 @@ packages:
     peerDependencies:
       jotai: '>=2.12.1'
 
-  jotai@2.13.1:
-    resolution: {integrity: sha512-cRsw6kFeGC9Z/D3egVKrTXRweycZ4z/k7i2MrfCzPYsL9SIWcPXTyqv258/+Ay8VUEcihNiE/coBLE6Kic6b8A==}
+  jotai@2.15.1:
+    resolution: {integrity: sha512-yHT1HAZ3ba2Q8wgaUQ+xfBzEtcS8ie687I8XVCBinfg4bNniyqLIN+utPXWKQE93LMF5fPbQSVRZqgpcN5yd6Q==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@babel/core': '>=7.0.0'
@@ -15315,18 +15315,18 @@ snapshots:
 
   jiti@2.6.1: {}
 
-  jotai-effect@2.1.0(jotai@2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0)):
+  jotai-effect@2.1.0(jotai@2.15.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0)):
     dependencies:
-      jotai: 2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0)
+      jotai: 2.15.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0)
 
-  jotai@2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.1.0):
+  jotai@2.15.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.1.0):
     optionalDependencies:
       '@babel/core': 7.28.0
       '@babel/template': 7.27.2
       '@types/react': 19.2.2
       react: 19.1.0
 
-  jotai@2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0):
+  jotai@2.15.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0):
     optionalDependencies:
       '@babel/core': 7.28.0
       '@babel/template': 7.27.2
