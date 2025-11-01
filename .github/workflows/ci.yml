@@ -28,7 +28,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v6
         with:
-          node-version: "22"
+          node-version: "24"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4.2.0
@@ -76,7 +76,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v6
         with:
-          node-version: "22"
+          node-version: "24"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4.2.0
@@ -124,7 +124,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v6
         with:
-          node-version: "22"
+          node-version: "24"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4.2.0
@@ -196,7 +196,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v6
         with:
-          node-version: "22"
+          node-version: "24"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4.2.0
@@ -267,7 +267,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v6
         with:
-          node-version: "22"
+          node-version: "24"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4.2.0
