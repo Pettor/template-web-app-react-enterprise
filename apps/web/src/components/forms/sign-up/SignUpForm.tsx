@@ -94,7 +94,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
         e.stopPropagation();
         form.handleSubmit();
       }}
-      className="md:min-w-sm min-w-full"
+      className="min-w-full md:min-w-sm"
     >
       <form.Field
         name="userName"
