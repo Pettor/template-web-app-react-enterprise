@@ -58,7 +58,7 @@
     "vite-plugin-pwa": "catalog:vite",
     "vite-tsconfig-paths": "catalog:vite",
     "vitest": "catalog:vitest",
-    "workbox-window": "7.3.0"
+    "workbox-window": "7.4.0"
   },
   "jest-junit": {
     "suiteName": "web tests",
