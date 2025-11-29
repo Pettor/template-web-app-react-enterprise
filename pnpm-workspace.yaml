@@ -65,7 +65,7 @@ catalogs:
     vite: 7.2.4
     vite-tsconfig-paths: 5.1.4
     vite-plugin-http2-proxy: 0.5.1
-    vite-plugin-pwa: 1.1.0
+    vite-plugin-pwa: 1.2.0
   vitest:
     vitest: 3.2.4
     '@vitest/browser': 3.2.4
