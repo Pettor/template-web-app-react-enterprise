@@ -62,7 +62,7 @@ catalogs:
   vite:
     '@vitejs/plugin-basic-ssl': 2.1.0
     '@vitejs/plugin-react': 4.7.0
-    vite: 7.2.4
+    vite: 7.2.6
     vite-tsconfig-paths: 5.1.4
     vite-plugin-http2-proxy: 0.5.1
     vite-plugin-pwa: 1.2.0
