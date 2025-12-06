@@ -35,7 +35,7 @@
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
     "react-intl": "7.1.11",
-    "react-router-dom": "7.9.4",
+    "react-router-dom": "7.10.1",
     "zod": "catalog:validation"
   },
   "devDependencies": {
