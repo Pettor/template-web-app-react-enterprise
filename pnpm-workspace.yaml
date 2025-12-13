@@ -25,7 +25,7 @@ catalogs:
     eslint-plugin-react: 7.37.5
     eslint-plugin-react-compiler: 19.1.0-rc.2
     eslint-plugin-react-hooks: 7.0.1
-    eslint-plugin-storybook: 10.1.4
+    eslint-plugin-storybook: 10.1.8
     typescript-eslint: 8.48.1
   mocks:
     '@mocks-server/admin-api-client': 7.0.1
@@ -41,14 +41,14 @@ catalogs:
     react: 19.2.3
     react-dom: 19.2.3
   storybook:
-    '@storybook/addon-a11y': 10.1.4
-    '@storybook/addon-docs': 10.1.4
-    '@storybook/addon-themes': 10.1.4
-    '@storybook/addon-vitest': 10.1.4
-    '@storybook/builder-vite': 10.1.4
-    '@storybook/react': 10.1.4
-    '@storybook/react-vite': 10.1.4
-    storybook: 10.1.4
+    '@storybook/addon-a11y': 10.1.8
+    '@storybook/addon-docs': 10.1.8
+    '@storybook/addon-themes': 10.1.8
+    '@storybook/addon-vitest': 10.1.8
+    '@storybook/builder-vite': 10.1.8
+    '@storybook/react': 10.1.8
+    '@storybook/react-vite': 10.1.8
+    storybook: 10.1.8
   tailwind:
     tailwindcss: 4.1.17
     '@tailwindcss/aspect-ratio': 0.4.2
