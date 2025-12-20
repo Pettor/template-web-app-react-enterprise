@@ -38,7 +38,7 @@
     "@commitlint/cli": "20.2.0",
     "@commitlint/config-conventional": "20.2.0",
     "@commitlint/types": "20.2.0",
-    "@types/node": "24.10.1",
+    "@types/node": "24.10.3",
     "husky": "9.1.7",
     "lint-staged": "16.2.7",
     "move-cli": "catalog:common",
