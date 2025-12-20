@@ -29,7 +29,7 @@
     "@tanstack/react-form": "1.27.3",
     "@tanstack/react-query": "5.83.0",
     "clsx": "2.1.1",
-    "immer": "11.0.1",
+    "immer": "11.1.0",
     "jotai": "2.13.1",
     "jotai-effect": "2.1.0",
     "react": "catalog:react19",
