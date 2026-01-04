@@ -145,8 +145,8 @@ catalogs:
       version: 5.9.3
   validation:
     zod:
-      specifier: 4.3.4
-      version: 4.3.4
+      specifier: 4.3.5
+      version: 4.3.5
   vite:
     '@vitejs/plugin-basic-ssl':
       specifier: 2.1.0
@@ -397,7 +397,7 @@ importers:
         version: 7.11.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       zod:
         specifier: catalog:validation
-        version: 4.3.4
+        version: 4.3.5
     devDependencies:
       '@config/eslint':
         specifier: workspace:*
@@ -7593,11 +7593,11 @@ packages:
   zod@4.0.5:
     resolution: {integrity: sha512-/5UuuRPStvHXu7RS+gmvRf4NXrNxpSllGwDnCBcJZtQsKrviYXm54yDGV2KYNLT5kq0lHGcl7lqWJLgSaG+tgA==}
 
-  zod@4.2.1:
-    resolution: {integrity: sha512-0wZ1IRqGGhMP76gLqz8EyfBXKk0J2qo2+H3fi4mcUP/KtTocoX08nmIAHl1Z2kJIZbZee8KOpBCSNPRgauucjw==}
-
   zod@4.3.4:
     resolution: {integrity: sha512-Zw/uYiiyF6pUT1qmKbZziChgNPRu+ZRneAsMUDU6IwmXdWt5JwcUfy2bvLOCUtz5UniaN/Zx5aFttZYbYc7O/A==}
+
+  zod@4.3.5:
+    resolution: {integrity: sha512-k7Nwx6vuWx1IJ9Bjuf4Zt1PEllcwe7cls3VNzm4CQ1/hgtFUK2bRNG3rvnpPUhFjmqJKAKtjV576KnUkHocg/g==}
 
 snapshots:
 
@@ -14479,8 +14479,8 @@ snapshots:
       '@babel/parser': 7.28.0
       eslint: 9.39.2(jiti@2.6.1)
       hermes-parser: 0.25.1
-      zod: 4.2.1
-      zod-validation-error: 3.5.2(zod@4.2.1)
+      zod: 4.3.4
+      zod-validation-error: 3.5.2(zod@4.3.4)
     transitivePeerDependencies:
       - supports-color
 
@@ -17835,14 +17835,14 @@ snapshots:
     dependencies:
       zod: 3.25.76
 
-  zod-validation-error@3.5.2(zod@4.2.1):
+  zod-validation-error@3.5.2(zod@4.3.4):
     dependencies:
-      zod: 4.2.1
+      zod: 4.3.4
 
   zod@3.25.76: {}
 
   zod@4.0.5: {}
 
-  zod@4.2.1: {}
-
   zod@4.3.4: {}
+
+  zod@4.3.5: {}
