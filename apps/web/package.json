@@ -42,7 +42,7 @@
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
     "@config/vite": "workspace:*",
-    "@formatjs/cli": "6.8.7",
+    "@formatjs/cli": "6.8.8",
     "@package/storybook": "workspace:*",
     "@storybook/react": "catalog:storybook",
     "@tailwindcss/vite": "catalog:tailwind",
