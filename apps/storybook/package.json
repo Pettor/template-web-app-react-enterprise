@@ -29,7 +29,7 @@
     "@package/ui": "workspace:*",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
-    "react-intl": "8.0.9"
+    "react-intl": "8.0.10"
   },
   "devDependencies": {
     "@config/eslint": "workspace:*",
