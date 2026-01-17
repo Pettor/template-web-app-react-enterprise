@@ -45,8 +45,8 @@ catalogs:
       specifier: 10.1.8
       version: 10.1.8
     eslint-plugin-formatjs:
-      specifier: 6.0.10
-      version: 6.0.10
+      specifier: 6.1.0
+      version: 6.1.0
     eslint-plugin-import:
       specifier: 2.32.0
       version: 2.32.0
@@ -278,8 +278,8 @@ importers:
         specifier: catalog:react19
         version: 19.2.3(react@19.2.3)
       react-intl:
-        specifier: 8.0.10
-        version: 8.0.10(@types/react@19.2.8)(react@19.2.3)(typescript@5.9.3)
+        specifier: 8.1.0
+        version: 8.1.0(@types/react@19.2.8)(react@19.2.3)(typescript@5.9.3)
     devDependencies:
       '@config/eslint':
         specifier: workspace:*
@@ -390,8 +390,8 @@ importers:
         specifier: catalog:react19
         version: 19.2.3(react@19.2.3)
       react-intl:
-        specifier: 8.0.10
-        version: 8.0.10(@types/react@19.2.8)(react@19.2.3)(typescript@5.9.3)
+        specifier: 8.1.0
+        version: 8.1.0(@types/react@19.2.8)(react@19.2.3)(typescript@5.9.3)
       react-router-dom:
         specifier: 7.12.0
         version: 7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -479,7 +479,7 @@ importers:
         version: 10.1.8(eslint@9.39.2(jiti@2.6.1))
       eslint-plugin-formatjs:
         specifier: catalog:eslint
-        version: 6.0.10(@types/eslint@9.6.1)(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
+        version: 6.1.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       eslint-plugin-import:
         specifier: catalog:eslint
         version: 2.32.0(@typescript-eslint/parser@8.53.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))
@@ -1662,58 +1662,43 @@ packages:
   '@formatjs/ecma402-abstract@2.3.6':
     resolution: {integrity: sha512-HJnTFeRM2kVFVr5gr5kH1XP6K0JcJtE7Lzvtr3FS/so5f1kpsqqqxy5JF+FRaO6H2qmcMfAUIox7AJteieRtVw==}
 
-  '@formatjs/ecma402-abstract@3.0.7':
-    resolution: {integrity: sha512-U55Yulf37vBXN0C7gHm7hrxULVrcrhpQBcdLmIN2rpYpLfC5eIpa1JRX9efjU74gfzjK/MSmSG3Lxv3E4ZNZIw==}
-
-  '@formatjs/ecma402-abstract@3.0.8':
-    resolution: {integrity: sha512-NRiqvxAvhbARZRFSRFPjN0y8txxmVutv2vMYvW2HSdCVf58w9l4osLj6Ujif643vImwZBcbKqhiKE0IOhY+DvA==}
+  '@formatjs/ecma402-abstract@3.1.0':
+    resolution: {integrity: sha512-CjP1sUzM7XiQW6YluDreN+dMvcKZysO/J4ikvuDjDyd6nSOoSqAK9gvD1s75ZFaJVXtYOsz+y3CUXPZ1sKxcxw==}
 
   '@formatjs/fast-memoize@2.2.7':
     resolution: {integrity: sha512-Yabmi9nSvyOMrlSeGGWDiH7rf3a7sIwplbvo/dlz9WCIjzIQAfy1RMf4S0X3yG724n5Ghu2GmEl5NJIV6O9sZQ==}
 
-  '@formatjs/fast-memoize@3.0.2':
-    resolution: {integrity: sha512-YFApUDWFmjpPwAE7VcY7PYVjm6JaLZOAo0UfCQj1/OGi/1QtduG9kIBHmVC551M6AI01qvuP5kjbDebrZOT4Vg==}
-
-  '@formatjs/fast-memoize@3.0.3':
-    resolution: {integrity: sha512-CArYtQKGLAOruCMeq5/RxCg6vUXFx3OuKBdTm30Wn/+gCefehmZ8Y2xSMxMrO2iel7hRyE3HKfV56t3vAU6D4Q==}
+  '@formatjs/fast-memoize@3.1.0':
+    resolution: {integrity: sha512-b5mvSWCI+XVKiz5WhnBCY3RJ4ZwfjAidU0yVlKa3d3MSgKmH1hC3tBGEAtYyN5mqL7N0G5x0BOUYyO8CEupWgg==}
 
   '@formatjs/icu-messageformat-parser@2.11.4':
     resolution: {integrity: sha512-7kR78cRrPNB4fjGFZg3Rmj5aah8rQj9KPzuLsmcSn4ipLXQvC04keycTI1F7kJYDwIXtT2+7IDEto842CfZBtw==}
 
-  '@formatjs/icu-messageformat-parser@3.2.1':
-    resolution: {integrity: sha512-DEECn8HEHtI4dvfKtTfvDOZ9nCTAJ2ESXGPRGKe4dkn/RE9w/G0NjgP/kFAQJbwIKWHo+BRxpee1bQKJ4lF6pg==}
-
-  '@formatjs/icu-messageformat-parser@3.3.0':
-    resolution: {integrity: sha512-dqxGSwH22ZfBwa6EVvrrIo+8kHHUSjuw9iZy6HkkN5XgH5/8ny9zDGhvC6ZOFYp01PAbwHvUTIHqznC6Z1nIbA==}
+  '@formatjs/icu-messageformat-parser@3.4.0':
+    resolution: {integrity: sha512-2bSQc59NFiEuN5VW0dUh7Txn5Qbeib5kZtzxFDXXqxUljvwhA3Qsrv2AwuVCRMISjbgOYwA2Rp5HW6tbdTnv9g==}
 
   '@formatjs/icu-skeleton-parser@1.8.16':
     resolution: {integrity: sha512-H13E9Xl+PxBd8D5/6TVUluSpxGNvFSlN/b3coUp0e0JpuWXXnQDiavIpY3NnvSp4xhEMoXyyBvVfdFX8jglOHQ==}
 
-  '@formatjs/icu-skeleton-parser@2.0.7':
-    resolution: {integrity: sha512-/LEeQ2gOU7ujm7LJk07OYYOpsOtIH/6ma78vTHvZNGZ6m0wn3gxQqU39HEpXZfez6aIhGh7Psde2H2ILj5wb0Q==}
-
-  '@formatjs/icu-skeleton-parser@2.0.8':
-    resolution: {integrity: sha512-Z493tGxtKu0xNcSZjS8HrWNfq25HMscqbq5qwRFBYz14b70k1DHmhqVAwYDdDK0Ytj9YG1nvY4+IRq53LVNFdA==}
+  '@formatjs/icu-skeleton-parser@2.1.0':
+    resolution: {integrity: sha512-wNer4imHDFBVAJnMb2OGoSyM4wL/uuLnuo5mrenliqkDaNjRbG4jzlJcwTTDEBhai8iCjnzUsE7xwNJC29SfWw==}
 
   '@formatjs/intl-localematcher@0.6.2':
     resolution: {integrity: sha512-XOMO2Hupl0wdd172Y06h6kLpBz6Dv+J4okPLl4LPtzbr8f66WbIoy4ev98EBuZ6ZK4h5ydTN6XneT4QVpD7cdA==}
 
-  '@formatjs/intl-localematcher@0.7.4':
-    resolution: {integrity: sha512-AWsSZupIBMU/y04Nj24CjohyNVyfItMJPxSzX5OJwedDEIbGLOHkPxCjAeLeiLF2dw4xmQA8psktdi9MaebBQw==}
+  '@formatjs/intl-localematcher@0.8.0':
+    resolution: {integrity: sha512-zgMYWdUlmEZpX2Io+v3LHrfq9xZ6khpQVf9UAw2xYWhGerGgI9XgH1HvL/A34jWiruUJpYlP5pk4g8nIcaDrXQ==}
 
-  '@formatjs/intl-localematcher@0.7.5':
-    resolution: {integrity: sha512-7/nd90cn5CT7SVF71/ybUKAcnvBlr9nZlJJp8O8xIZHXFgYOC4SXExZlSdgHv2l6utjw1byidL06QzChvQMHwA==}
-
-  '@formatjs/intl@4.0.8':
-    resolution: {integrity: sha512-+tf/K6NPHe0X5e2xTl7zsIeBMv2/G1czennknmPbNDxBbeCrWKBSIQHv1Pd92Jnwv59BnXL1ajn18bParbGdpg==}
+  '@formatjs/intl@4.1.0':
+    resolution: {integrity: sha512-L1Jx2QHZ3kXDSCLqKuRcPuvPIIH2pZFalMDMgwzVHR053zE4xelagxxFuQ4sL1paR74LR8E34so3hvSG0YWHGw==}
     peerDependencies:
       typescript: ^5.6.0
     peerDependenciesMeta:
       typescript:
         optional: true
 
-  '@formatjs/ts-transformer@4.2.0':
-    resolution: {integrity: sha512-i5Z173W2WgJof+U/iEh3HoVy09Xv5Ae+qA6tfefvj8+L942PlwnZoC4hv8xv1peFYEe3noY6O1AhAug+nK0NUw==}
+  '@formatjs/ts-transformer@4.3.0':
+    resolution: {integrity: sha512-MysLOCkExSX3bN/DgaBJqacv8w/9DG7EfEBlnPAy9TT4ajvL5MPi2adEGqDBnO+2TvCDVM52HYb3NZBLJyCYEg==}
     peerDependencies:
       ts-jest: ^29
     peerDependenciesMeta:
@@ -3403,8 +3388,8 @@ packages:
   '@types/minimist@1.2.5':
     resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
 
-  '@types/node@22.18.10':
-    resolution: {integrity: sha512-anNG/V/Efn/YZY4pRzbACnKxNKoBng2VTFydVu8RRs5hQjikP8CQfaeAV59VFSCzKNp90mXiVXW2QzV56rwMrg==}
+  '@types/node@22.19.7':
+    resolution: {integrity: sha512-MciR4AKGHWl7xwxkBa6xUGxQJ4VBOmPTF7sL+iGzuahOFaO0jHCsuEfS80pan1ef4gWId1oWOweIhrDEYLuaOw==}
 
   '@types/node@24.10.6':
     resolution: {integrity: sha512-B8h60xgJMR/xmgyX9fncRzEW9gCxoJjdenUhke2v1JGOd/V66KopmWrLPXi5oUI4VuiGK+d+HlXJjDRZMj21EQ==}
@@ -3422,9 +3407,6 @@ packages:
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
     peerDependencies:
       '@types/react': ^19.2.0
-
-  '@types/react@19.2.7':
-    resolution: {integrity: sha512-MWtvHrGZLFttgeEj28VXHxpmwYbor/ATPYbBfSFZEIRK0ecCFLl2Qo55z52Hss+UV9CRN7trSeq1zbgx7YDWWg==}
 
   '@types/react@19.2.8':
     resolution: {integrity: sha512-3MbSL37jEchWZz2p2mjntRZtPt837ij10ApxKfgmXCTuHWagYg7iA5bqPw6C8BMPfwidlvfPI/fxOc42HLhcyg==}
@@ -3471,12 +3453,6 @@ packages:
     peerDependencies:
       typescript: '>=4.8.4 <6.0.0'
 
-  '@typescript-eslint/project-service@8.51.0':
-    resolution: {integrity: sha512-Luv/GafO07Z7HpiI7qeEW5NW8HUtZI/fo/kE0YbtQEFpJRUuR0ajcWfCE5bnMvL7QQFrmT/odMe8QZww8X2nfQ==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-    peerDependencies:
-      typescript: '>=4.8.4 <6.0.0'
-
   '@typescript-eslint/project-service@8.53.0':
     resolution: {integrity: sha512-Bl6Gdr7NqkqIP5yP9z1JU///Nmes4Eose6L1HwpuVHwScgDPPuEWbUVhvlZmb8hy0vX9syLk5EGNL700WcBlbg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -3487,22 +3463,12 @@ packages:
     resolution: {integrity: sha512-mfRx06Myt3T4vuoHaKi8ZWNTPdzKPNBhiblze5N50//TSHOAQQevl/aolqA/BcqqbJ88GUnLqjjcBc8EWdBcVw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@typescript-eslint/scope-manager@8.51.0':
-    resolution: {integrity: sha512-JhhJDVwsSx4hiOEQPeajGhCWgBMBwVkxC/Pet53EpBVs7zHHtayKefw1jtPaNRXpI9RA2uocdmpdfE7T+NrizA==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
   '@typescript-eslint/scope-manager@8.53.0':
     resolution: {integrity: sha512-kWNj3l01eOGSdVBnfAF2K1BTh06WS0Yet6JUgb9Cmkqaz3Jlu0fdVUjj9UI8gPidBWSMqDIglmEXifSgDT/D0g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@typescript-eslint/tsconfig-utils@8.50.1':
     resolution: {integrity: sha512-ooHmotT/lCWLXi55G4mvaUF60aJa012QzvLK0Y+Mp4WdSt17QhMhWOaBWeGTFVkb2gDgBe19Cxy1elPXylslDw==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-    peerDependencies:
-      typescript: '>=4.8.4 <6.0.0'
-
-  '@typescript-eslint/tsconfig-utils@8.51.0':
-    resolution: {integrity: sha512-Qi5bSy/vuHeWyir2C8u/uqGMIlIDu8fuiYWv48ZGlZ/k+PRPHtaAu7erpc7p5bzw2WNNSniuxoMSO4Ar6V9OXw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '>=4.8.4 <6.0.0'
@@ -3530,10 +3496,6 @@ packages:
     resolution: {integrity: sha512-v5lFIS2feTkNyMhd7AucE/9j/4V9v5iIbpVRncjk/K0sQ6Sb+Np9fgYS/63n6nwqahHQvbmujeBL7mp07Q9mlA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@typescript-eslint/types@8.51.0':
-    resolution: {integrity: sha512-TizAvWYFM6sSscmEakjY3sPqGwxZRSywSsPEiuZF6d5GmGD9Gvlsv0f6N8FvAAA0CD06l3rIcWNbsN1e5F/9Ag==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
   '@typescript-eslint/types@8.52.0':
     resolution: {integrity: sha512-LWQV1V4q9V4cT4H5JCIx3481iIFxH1UkVk+ZkGGAV1ZGcjGI9IoFOfg3O6ywz8QqCDEp7Inlg6kovMofsNRaGg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -3544,12 +3506,6 @@ packages:
 
   '@typescript-eslint/typescript-estree@8.50.1':
     resolution: {integrity: sha512-woHPdW+0gj53aM+cxchymJCrh0cyS7BTIdcDxWUNsclr9VDkOSbqC13juHzxOmQ22dDkMZEpZB+3X1WpUvzgVQ==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-    peerDependencies:
-      typescript: '>=4.8.4 <6.0.0'
-
-  '@typescript-eslint/typescript-estree@8.51.0':
-    resolution: {integrity: sha512-1qNjGqFRmlq0VW5iVlcyHBbCjPB7y6SxpBkrbhNWMy/65ZoncXCEPJxkRZL8McrseNH6lFhaxCIaX+vBuFnRng==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '>=4.8.4 <6.0.0'
@@ -3567,13 +3523,6 @@ packages:
       eslint: ^8.57.0 || ^9.0.0
       typescript: '>=4.8.4 <6.0.0'
 
-  '@typescript-eslint/utils@8.51.0':
-    resolution: {integrity: sha512-11rZYxSe0zabiKaCP2QAwRf/dnmgFgvTmeDTtZvUvXG3UuAdg/GU02NExmmIXzz3vLGgMdtrIosI84jITQOxUA==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-    peerDependencies:
-      eslint: ^8.57.0 || ^9.0.0
-      typescript: '>=4.8.4 <6.0.0'
-
   '@typescript-eslint/utils@8.53.0':
     resolution: {integrity: sha512-XDY4mXTez3Z1iRDI5mbRhH4DFSt46oaIFsLg+Zn97+sYrXACziXSQcSelMybnVZ5pa1P6xYkPr5cMJyunM1ZDA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -3583,10 +3532,6 @@ packages:
 
   '@typescript-eslint/visitor-keys@8.50.1':
     resolution: {integrity: sha512-IrDKrw7pCRUR94zeuCSUWQ+w8JEf5ZX5jl/e6AHGSLi1/zIr0lgutfn/7JpfCey+urpgQEdrZVYzCaVVKiTwhQ==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@typescript-eslint/visitor-keys@8.51.0':
-    resolution: {integrity: sha512-mM/JRQOzhVN1ykejrvwnBRV3+7yTKK8tVANVN3o1O0t0v7o+jqdVu9crPy5Y9dov15TJk/FTIgoUGHrTOVL3Zg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@typescript-eslint/visitor-keys@8.53.0':
@@ -4278,6 +4223,9 @@ packages:
   decimal.js@10.5.0:
     resolution: {integrity: sha512-8vDa8Qxvr/+d94hSh5P3IJwI5t8/c0KsMp+g8bNw9cY2icONa5aPfvKeieW1WlG0WQYwwhJ7mjui2xtiePQSXw==}
 
+  decimal.js@10.6.0:
+    resolution: {integrity: sha512-YpgQiITW3JXGntzdUmyUR1V812Hn8T1YVXhCu+wO3OpS4eU9l4YdD3qjyiKdV6mvV29zapkMeD390UVEf2lkUg==}
+
   decompress-response@3.3.0:
     resolution: {integrity: sha512-BzRPQuY1ip+qDonAOz42gRm/pg9F768C+npV/4JOsxRC2sq+Rlk+Q4ZCAsOhnIaMrgarILY+RMUIvMmmX1qAEA==}
     engines: {node: '>=4'}
@@ -4384,10 +4332,6 @@ packages:
 
   electron-to-chromium@1.5.173:
     resolution: {integrity: sha512-2bFhXP2zqSfQHugjqJIDFVwa+qIxyNApenmXTp9EjaKtdPrES5Qcn9/aSFy/NaP2E+fWG/zxKu/LBvY36p5VNQ==}
-
-  emoji-regex-xs@2.0.1:
-    resolution: {integrity: sha512-1QFuh8l7LqUcKe24LsPUNzjrzJQ7pgRwp1QMcZ5MX6mFplk2zQ08NVCM84++1cveaUUYtcCYHmeFEuNg16sU4g==}
-    engines: {node: '>=10.0.0'}
 
   emoji-regex@10.4.0:
     resolution: {integrity: sha512-EC+0oUMY1Rqm4O6LLrgjtYDvcVYTy7chDnM4Q7030tP4Kwj3u/pR6gP9ygnp2CJMK5Gq+9Q2oqmrFJAz01DXjw==}
@@ -4519,10 +4463,9 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
 
-  eslint-plugin-formatjs@6.0.10:
-    resolution: {integrity: sha512-VNmIEkEgYIgDv8FQi8Y/VxmVxiMJF6DDsgAR1usG5F6wxSbU8XtrG9aK9mhyGuGwEuAOLxn/pVID6/no5kWe6g==}
+  eslint-plugin-formatjs@6.1.0:
+    resolution: {integrity: sha512-n1qwF3lifP51QGpVi62BwvS0ztboWAiJpvkNaUVQaJYpl1kCaf448+VK5kcDjJ2ae/GZUBxV9XMXdVZ+/lAgRA==}
     peerDependencies:
-      '@types/eslint': '9'
       eslint: '9'
 
   eslint-plugin-import@2.32.0:
@@ -5096,8 +5039,8 @@ packages:
   intl-messageformat@10.7.18:
     resolution: {integrity: sha512-m3Ofv/X/tV8Y3tHXLohcuVuhWKo7BBq62cqY15etqmLxg2DZ34AGGgQDeR+SCta2+zICb1NX83af0GJmbQ1++g==}
 
-  intl-messageformat@11.0.8:
-    resolution: {integrity: sha512-q2Md8nj28CSkXxkBaAOWhTjQAdea24fpcZxqR1pMsCwzDYLQF68iOOPNTLgFFF+HKJKNUiJ+Mkjp0zXvG88UFA==}
+  intl-messageformat@11.1.0:
+    resolution: {integrity: sha512-5QJbBIRJqqBX0cD1z+r4e3B5HGmyLYzTFAW5WmSlGuwc3kHSOR0x9fEE/Z9wL2+Px9P1kwqj+wE6QzCoyooBSA==}
 
   ipaddr.js@1.9.1:
     resolution: {integrity: sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==}
@@ -6341,10 +6284,10 @@ packages:
     peerDependencies:
       react: ^19.2.3
 
-  react-intl@8.0.10:
-    resolution: {integrity: sha512-+8L+/kClosP/z9B1lgVKyX6f4vs1aEQXFIO4l2/xSjapzXnJI/TJ50qVTZrn1idJTtO9MqlmZn64b1JlYtMHFg==}
+  react-intl@8.1.0:
+    resolution: {integrity: sha512-Vr7bMOshBNhiIf/UufF50gJDgaHyShLFWukJZ4KaAo5oao/jjHgOCxz/TSGpHtUwc9tTVaz82fKJqZTOCcgH2g==}
     peerDependencies:
-      '@types/react': '19'
+      '@types/react': ^19.2.8
       react: 16 || 17 || 18 || 19
       typescript: ^5.6.0
     peerDependenciesMeta:
@@ -7209,9 +7152,6 @@ packages:
   unicode-canonical-property-names-ecmascript@2.0.1:
     resolution: {integrity: sha512-dA8WbNeb2a6oQzAQ55YlT5vQAWGV9WXOsi3SskE3bcCdM0P4SDd+24zS/OCacdRq5BkdsRj9q3Pg6YyQoxIGqg==}
     engines: {node: '>=4'}
-
-  unicode-emoji-utils@1.3.1:
-    resolution: {integrity: sha512-6PiQxmnlsOsqzZCZz0sykSyMy/r1HiJiOWWXV98+BDva583DU4CtBeyDNsi4wMYUIbjUtMs4RgAuyft0EKLoVw==}
 
   unicode-match-property-ecmascript@2.0.0:
     resolution: {integrity: sha512-5kaZCrbp5mmbz5ulBkDkbY0SsPOjKqVS35VpL9ulMPfSl0J0Xsm+9Evphv9CoIZFwre7aJoa94AY6seMKGVN5Q==}
@@ -8747,29 +8687,18 @@ snapshots:
       decimal.js: 10.5.0
       tslib: 2.8.1
 
-  '@formatjs/ecma402-abstract@3.0.7':
+  '@formatjs/ecma402-abstract@3.1.0':
     dependencies:
-      '@formatjs/fast-memoize': 3.0.2
-      '@formatjs/intl-localematcher': 0.7.4
-      decimal.js: 10.5.0
-      tslib: 2.8.1
-
-  '@formatjs/ecma402-abstract@3.0.8':
-    dependencies:
-      '@formatjs/fast-memoize': 3.0.3
-      '@formatjs/intl-localematcher': 0.7.5
-      decimal.js: 10.5.0
+      '@formatjs/fast-memoize': 3.1.0
+      '@formatjs/intl-localematcher': 0.8.0
+      decimal.js: 10.6.0
       tslib: 2.8.1
 
   '@formatjs/fast-memoize@2.2.7':
     dependencies:
       tslib: 2.8.1
 
-  '@formatjs/fast-memoize@3.0.2':
-    dependencies:
-      tslib: 2.8.1
-
-  '@formatjs/fast-memoize@3.0.3':
+  '@formatjs/fast-memoize@3.1.0':
     dependencies:
       tslib: 2.8.1
 
@@ -8779,16 +8708,10 @@ snapshots:
       '@formatjs/icu-skeleton-parser': 1.8.16
       tslib: 2.8.1
 
-  '@formatjs/icu-messageformat-parser@3.2.1':
+  '@formatjs/icu-messageformat-parser@3.4.0':
     dependencies:
-      '@formatjs/ecma402-abstract': 3.0.7
-      '@formatjs/icu-skeleton-parser': 2.0.7
-      tslib: 2.8.1
-
-  '@formatjs/icu-messageformat-parser@3.3.0':
-    dependencies:
-      '@formatjs/ecma402-abstract': 3.0.8
-      '@formatjs/icu-skeleton-parser': 2.0.8
+      '@formatjs/ecma402-abstract': 3.1.0
+      '@formatjs/icu-skeleton-parser': 2.1.0
       tslib: 2.8.1
 
   '@formatjs/icu-skeleton-parser@1.8.16':
@@ -8796,44 +8719,34 @@ snapshots:
       '@formatjs/ecma402-abstract': 2.3.6
       tslib: 2.8.1
 
-  '@formatjs/icu-skeleton-parser@2.0.7':
+  '@formatjs/icu-skeleton-parser@2.1.0':
     dependencies:
-      '@formatjs/ecma402-abstract': 3.0.7
-      tslib: 2.8.1
-
-  '@formatjs/icu-skeleton-parser@2.0.8':
-    dependencies:
-      '@formatjs/ecma402-abstract': 3.0.8
+      '@formatjs/ecma402-abstract': 3.1.0
       tslib: 2.8.1
 
   '@formatjs/intl-localematcher@0.6.2':
     dependencies:
       tslib: 2.8.1
 
-  '@formatjs/intl-localematcher@0.7.4':
+  '@formatjs/intl-localematcher@0.8.0':
     dependencies:
-      '@formatjs/fast-memoize': 3.0.2
+      '@formatjs/fast-memoize': 3.1.0
       tslib: 2.8.1
 
-  '@formatjs/intl-localematcher@0.7.5':
+  '@formatjs/intl@4.1.0(typescript@5.9.3)':
     dependencies:
-      '@formatjs/fast-memoize': 3.0.3
-      tslib: 2.8.1
-
-  '@formatjs/intl@4.0.8(typescript@5.9.3)':
-    dependencies:
-      '@formatjs/ecma402-abstract': 3.0.7
-      '@formatjs/fast-memoize': 3.0.2
-      '@formatjs/icu-messageformat-parser': 3.2.1
-      intl-messageformat: 11.0.8
+      '@formatjs/ecma402-abstract': 3.1.0
+      '@formatjs/fast-memoize': 3.1.0
+      '@formatjs/icu-messageformat-parser': 3.4.0
+      intl-messageformat: 11.1.0
       tslib: 2.8.1
     optionalDependencies:
       typescript: 5.9.3
 
-  '@formatjs/ts-transformer@4.2.0':
+  '@formatjs/ts-transformer@4.3.0':
     dependencies:
-      '@formatjs/icu-messageformat-parser': 3.3.0
-      '@types/node': 22.18.10
+      '@formatjs/icu-messageformat-parser': 3.4.0
+      '@types/node': 22.19.7
       chalk: 4.1.2
       json-stable-stringify: 1.3.0
       tslib: 2.8.1
@@ -13215,6 +13128,7 @@ snapshots:
     dependencies:
       '@types/estree': 1.0.8
       '@types/json-schema': 7.0.15
+    optional: true
 
   '@types/estree@0.0.39': {}
 
@@ -13222,7 +13136,7 @@ snapshots:
 
   '@types/hoist-non-react-statics@3.3.6':
     dependencies:
-      '@types/react': 19.2.7
+      '@types/react': 19.2.8
       hoist-non-react-statics: 3.3.2
 
   '@types/json-schema@7.0.15': {}
@@ -13237,7 +13151,7 @@ snapshots:
 
   '@types/minimist@1.2.5': {}
 
-  '@types/node@22.18.10':
+  '@types/node@22.19.7':
     dependencies:
       undici-types: 6.21.0
 
@@ -13254,10 +13168,6 @@ snapshots:
   '@types/react-dom@19.2.3(@types/react@19.2.8)':
     dependencies:
       '@types/react': 19.2.8
-
-  '@types/react@19.2.7':
-    dependencies:
-      csstype: 3.2.3
 
   '@types/react@19.2.8':
     dependencies:
@@ -13318,15 +13228,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/project-service@8.51.0(typescript@5.9.3)':
-    dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.52.0(typescript@5.9.3)
-      '@typescript-eslint/types': 8.52.0
-      debug: 4.4.3
-      typescript: 5.9.3
-    transitivePeerDependencies:
-      - supports-color
-
   '@typescript-eslint/project-service@8.53.0(typescript@5.9.3)':
     dependencies:
       '@typescript-eslint/tsconfig-utils': 8.53.0(typescript@5.9.3)
@@ -13341,21 +13242,12 @@ snapshots:
       '@typescript-eslint/types': 8.50.1
       '@typescript-eslint/visitor-keys': 8.50.1
 
-  '@typescript-eslint/scope-manager@8.51.0':
-    dependencies:
-      '@typescript-eslint/types': 8.51.0
-      '@typescript-eslint/visitor-keys': 8.51.0
-
   '@typescript-eslint/scope-manager@8.53.0':
     dependencies:
       '@typescript-eslint/types': 8.53.0
       '@typescript-eslint/visitor-keys': 8.53.0
 
   '@typescript-eslint/tsconfig-utils@8.50.1(typescript@5.9.3)':
-    dependencies:
-      typescript: 5.9.3
-
-  '@typescript-eslint/tsconfig-utils@8.51.0(typescript@5.9.3)':
     dependencies:
       typescript: 5.9.3
 
@@ -13381,8 +13273,6 @@ snapshots:
 
   '@typescript-eslint/types@8.50.1': {}
 
-  '@typescript-eslint/types@8.51.0': {}
-
   '@typescript-eslint/types@8.52.0': {}
 
   '@typescript-eslint/types@8.53.0': {}
@@ -13393,21 +13283,6 @@ snapshots:
       '@typescript-eslint/tsconfig-utils': 8.50.1(typescript@5.9.3)
       '@typescript-eslint/types': 8.50.1
       '@typescript-eslint/visitor-keys': 8.50.1
-      debug: 4.4.3
-      minimatch: 9.0.5
-      semver: 7.7.3
-      tinyglobby: 0.2.15
-      ts-api-utils: 2.4.0(typescript@5.9.3)
-      typescript: 5.9.3
-    transitivePeerDependencies:
-      - supports-color
-
-  '@typescript-eslint/typescript-estree@8.51.0(typescript@5.9.3)':
-    dependencies:
-      '@typescript-eslint/project-service': 8.51.0(typescript@5.9.3)
-      '@typescript-eslint/tsconfig-utils': 8.51.0(typescript@5.9.3)
-      '@typescript-eslint/types': 8.51.0
-      '@typescript-eslint/visitor-keys': 8.51.0
       debug: 4.4.3
       minimatch: 9.0.5
       semver: 7.7.3
@@ -13443,17 +13318,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/utils@8.51.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)':
-    dependencies:
-      '@eslint-community/eslint-utils': 4.8.0(eslint@9.39.2(jiti@2.6.1))
-      '@typescript-eslint/scope-manager': 8.51.0
-      '@typescript-eslint/types': 8.51.0
-      '@typescript-eslint/typescript-estree': 8.51.0(typescript@5.9.3)
-      eslint: 9.39.2(jiti@2.6.1)
-      typescript: 5.9.3
-    transitivePeerDependencies:
-      - supports-color
-
   '@typescript-eslint/utils@8.53.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.2(jiti@2.6.1))
@@ -13468,11 +13332,6 @@ snapshots:
   '@typescript-eslint/visitor-keys@8.50.1':
     dependencies:
       '@typescript-eslint/types': 8.50.1
-      eslint-visitor-keys: 4.2.1
-
-  '@typescript-eslint/visitor-keys@8.51.0':
-    dependencies:
-      '@typescript-eslint/types': 8.51.0
       eslint-visitor-keys: 4.2.1
 
   '@typescript-eslint/visitor-keys@8.53.0':
@@ -14250,6 +14109,8 @@ snapshots:
 
   decimal.js@10.5.0: {}
 
+  decimal.js@10.6.0: {}
+
   decompress-response@3.3.0:
     dependencies:
       mimic-response: 1.0.1
@@ -14337,8 +14198,6 @@ snapshots:
       jake: 10.9.2
 
   electron-to-chromium@1.5.173: {}
-
-  emoji-regex-xs@2.0.1: {}
 
   emoji-regex@10.4.0: {}
 
@@ -14535,18 +14394,16 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-formatjs@6.0.10(@types/eslint@9.6.1)(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3):
+  eslint-plugin-formatjs@6.1.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3):
     dependencies:
-      '@formatjs/icu-messageformat-parser': 3.3.0
-      '@formatjs/ts-transformer': 4.2.0
-      '@types/eslint': 9.6.1
+      '@formatjs/icu-messageformat-parser': 3.4.0
+      '@formatjs/ts-transformer': 4.3.0
       '@types/picomatch': 4.0.2
-      '@typescript-eslint/utils': 8.51.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
+      '@typescript-eslint/utils': 8.53.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       eslint: 9.39.2(jiti@2.6.1)
       magic-string: 0.30.21
       picomatch: 4.0.3
       tslib: 2.8.1
-      unicode-emoji-utils: 1.3.1
     transitivePeerDependencies:
       - supports-color
       - ts-jest
@@ -15272,11 +15129,11 @@ snapshots:
       '@formatjs/icu-messageformat-parser': 2.11.4
       tslib: 2.8.1
 
-  intl-messageformat@11.0.8:
+  intl-messageformat@11.1.0:
     dependencies:
-      '@formatjs/ecma402-abstract': 3.0.7
-      '@formatjs/fast-memoize': 3.0.2
-      '@formatjs/icu-messageformat-parser': 3.2.1
+      '@formatjs/ecma402-abstract': 3.1.0
+      '@formatjs/fast-memoize': 3.1.0
+      '@formatjs/icu-messageformat-parser': 3.4.0
       tslib: 2.8.1
 
   ipaddr.js@1.9.1: {}
@@ -16399,15 +16256,15 @@ snapshots:
       react: 19.2.3
       scheduler: 0.27.0
 
-  react-intl@8.0.10(@types/react@19.2.8)(react@19.2.3)(typescript@5.9.3):
+  react-intl@8.1.0(@types/react@19.2.8)(react@19.2.3)(typescript@5.9.3):
     dependencies:
-      '@formatjs/ecma402-abstract': 3.0.7
-      '@formatjs/icu-messageformat-parser': 3.2.1
-      '@formatjs/intl': 4.0.8(typescript@5.9.3)
+      '@formatjs/ecma402-abstract': 3.1.0
+      '@formatjs/icu-messageformat-parser': 3.4.0
+      '@formatjs/intl': 4.1.0(typescript@5.9.3)
       '@types/hoist-non-react-statics': 3.3.6
       '@types/react': 19.2.8
       hoist-non-react-statics: 3.3.2
-      intl-messageformat: 11.0.8
+      intl-messageformat: 11.1.0
       react: 19.2.3
       tslib: 2.8.1
     optionalDependencies:
@@ -17382,10 +17239,6 @@ snapshots:
   undici-types@7.16.0: {}
 
   unicode-canonical-property-names-ecmascript@2.0.1: {}
-
-  unicode-emoji-utils@1.3.1:
-    dependencies:
-      emoji-regex-xs: 2.0.1
 
   unicode-match-property-ecmascript@2.0.0:
     dependencies:

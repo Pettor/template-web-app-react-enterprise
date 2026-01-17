@@ -34,7 +34,7 @@
     "jotai-effect": "2.1.0",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
-    "react-intl": "8.0.10",
+    "react-intl": "8.1.0",
     "react-router-dom": "7.12.0",
     "zod": "catalog:validation"
   },
