@@ -38,16 +38,16 @@
     "@commitlint/cli": "20.3.1",
     "@commitlint/config-conventional": "20.3.1",
     "@commitlint/types": "20.3.1",
-    "@types/node": "24.10.7",
+    "@types/node": "24.10.9",
     "husky": "9.1.7",
     "lint-staged": "16.2.7",
     "move-cli": "catalog:common",
-    "prettier": "3.7.4",
+    "prettier": "3.8.0",
     "prettier-plugin-tailwindcss": "0.7.2",
     "rimraf": "catalog:common",
-    "sherif": "1.9.0",
+    "sherif": "1.10.0",
     "tsup": "8.5.1",
-    "turbo": "2.7.3"
+    "turbo": "2.7.5"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
