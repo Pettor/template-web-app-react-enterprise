@@ -278,8 +278,8 @@ importers:
         specifier: catalog:react19
         version: 19.2.4(react@19.2.4)
       react-intl:
-        specifier: 8.1.0
-        version: 8.1.0(@types/react@19.2.10)(react@19.2.4)(typescript@5.9.3)
+        specifier: 8.1.1
+        version: 8.1.1(@types/react@19.2.10)(react@19.2.4)(typescript@5.9.3)
     devDependencies:
       '@config/eslint':
         specifier: workspace:*
@@ -390,8 +390,8 @@ importers:
         specifier: catalog:react19
         version: 19.2.4(react@19.2.4)
       react-intl:
-        specifier: 8.1.0
-        version: 8.1.0(@types/react@19.2.10)(react@19.2.4)(typescript@5.9.3)
+        specifier: 8.1.1
+        version: 8.1.1(@types/react@19.2.10)(react@19.2.4)(typescript@5.9.3)
       react-router-dom:
         specifier: 7.13.0
         version: 7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1674,9 +1674,6 @@ packages:
   '@formatjs/icu-messageformat-parser@2.11.4':
     resolution: {integrity: sha512-7kR78cRrPNB4fjGFZg3Rmj5aah8rQj9KPzuLsmcSn4ipLXQvC04keycTI1F7kJYDwIXtT2+7IDEto842CfZBtw==}
 
-  '@formatjs/icu-messageformat-parser@3.4.0':
-    resolution: {integrity: sha512-2bSQc59NFiEuN5VW0dUh7Txn5Qbeib5kZtzxFDXXqxUljvwhA3Qsrv2AwuVCRMISjbgOYwA2Rp5HW6tbdTnv9g==}
-
   '@formatjs/icu-messageformat-parser@3.5.0':
     resolution: {integrity: sha512-Q01XuvtbDVCJQsG/E2MSfMZ+UdUoZV8v4Aex8tTH44SqKJZCeu5LjuclaKFUS0o1YoXndfEinJen5k1T1GR1vg==}
 
@@ -1692,8 +1689,8 @@ packages:
   '@formatjs/intl-localematcher@0.8.0':
     resolution: {integrity: sha512-zgMYWdUlmEZpX2Io+v3LHrfq9xZ6khpQVf9UAw2xYWhGerGgI9XgH1HvL/A34jWiruUJpYlP5pk4g8nIcaDrXQ==}
 
-  '@formatjs/intl@4.1.0':
-    resolution: {integrity: sha512-L1Jx2QHZ3kXDSCLqKuRcPuvPIIH2pZFalMDMgwzVHR053zE4xelagxxFuQ4sL1paR74LR8E34so3hvSG0YWHGw==}
+  '@formatjs/intl@4.1.1':
+    resolution: {integrity: sha512-88qfxk5XK5UApY3I8ocY2WJyA64MlVQKwmqAjkaVkX25mZb9qZokDDH4+MWD6UX67uqZlsrwUg36yZr/R4X3Jw==}
     peerDependencies:
       typescript: ^5.6.0
     peerDependenciesMeta:
@@ -3429,9 +3426,6 @@ packages:
   '@types/react@19.2.10':
     resolution: {integrity: sha512-WPigyYuGhgZ/cTPRXB2EwUw+XvsRA3GqHlsP4qteqrnnjDrApbS7MxcGr/hke5iUoeB7E/gQtrs9I37zAJ0Vjw==}
 
-  '@types/react@19.2.9':
-    resolution: {integrity: sha512-Lpo8kgb/igvMIPeNV2rsYKTgaORYdO1XGVZ4Qz3akwOj0ySGYMPlQWa8BaLn0G63D1aSaAQ5ldR06wCpChQCjA==}
-
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
 
@@ -5046,8 +5040,8 @@ packages:
   intl-messageformat@10.7.18:
     resolution: {integrity: sha512-m3Ofv/X/tV8Y3tHXLohcuVuhWKo7BBq62cqY15etqmLxg2DZ34AGGgQDeR+SCta2+zICb1NX83af0GJmbQ1++g==}
 
-  intl-messageformat@11.1.0:
-    resolution: {integrity: sha512-5QJbBIRJqqBX0cD1z+r4e3B5HGmyLYzTFAW5WmSlGuwc3kHSOR0x9fEE/Z9wL2+Px9P1kwqj+wE6QzCoyooBSA==}
+  intl-messageformat@11.1.1:
+    resolution: {integrity: sha512-vnrF2f4vfsdaFY6tuLZfzGcx1GZFMFAq6c7QdK3HSXNcGXEIQncNgbeAcnpjAOszQzq3Jbol2SwgshIGY08WyA==}
 
   ipaddr.js@1.9.1:
     resolution: {integrity: sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==}
@@ -6300,8 +6294,8 @@ packages:
     peerDependencies:
       react: ^19.2.4
 
-  react-intl@8.1.0:
-    resolution: {integrity: sha512-Vr7bMOshBNhiIf/UufF50gJDgaHyShLFWukJZ4KaAo5oao/jjHgOCxz/TSGpHtUwc9tTVaz82fKJqZTOCcgH2g==}
+  react-intl@8.1.1:
+    resolution: {integrity: sha512-mXqmFZ5SCvUk1NUgRBBtCKPB8oPs0dLfWGhYf71FbP9XTF6UGdWQzkH5kE+iIu9twIqiomiLTOuNEymUH2S1IQ==}
     peerDependencies:
       '@types/react': ^19.2.8
       react: 16 || 17 || 18 || 19
@@ -8716,12 +8710,6 @@ snapshots:
       '@formatjs/icu-skeleton-parser': 1.8.16
       tslib: 2.8.1
 
-  '@formatjs/icu-messageformat-parser@3.4.0':
-    dependencies:
-      '@formatjs/ecma402-abstract': 3.1.0
-      '@formatjs/icu-skeleton-parser': 2.1.0
-      tslib: 2.8.1
-
   '@formatjs/icu-messageformat-parser@3.5.0':
     dependencies:
       '@formatjs/ecma402-abstract': 3.1.0
@@ -8747,12 +8735,12 @@ snapshots:
       '@formatjs/fast-memoize': 3.1.0
       tslib: 2.8.1
 
-  '@formatjs/intl@4.1.0(typescript@5.9.3)':
+  '@formatjs/intl@4.1.1(typescript@5.9.3)':
     dependencies:
       '@formatjs/ecma402-abstract': 3.1.0
       '@formatjs/fast-memoize': 3.1.0
-      '@formatjs/icu-messageformat-parser': 3.4.0
-      intl-messageformat: 11.1.0
+      '@formatjs/icu-messageformat-parser': 3.5.0
+      intl-messageformat: 11.1.1
       tslib: 2.8.1
     optionalDependencies:
       typescript: 5.9.3
@@ -13146,7 +13134,7 @@ snapshots:
 
   '@types/hoist-non-react-statics@3.3.6':
     dependencies:
-      '@types/react': 19.2.9
+      '@types/react': 19.2.10
       hoist-non-react-statics: 3.3.2
 
   '@types/json-schema@7.0.15': {}
@@ -13180,10 +13168,6 @@ snapshots:
       '@types/react': 19.2.10
 
   '@types/react@19.2.10':
-    dependencies:
-      csstype: 3.2.3
-
-  '@types/react@19.2.9':
     dependencies:
       csstype: 3.2.3
 
@@ -15136,11 +15120,11 @@ snapshots:
       '@formatjs/icu-messageformat-parser': 2.11.4
       tslib: 2.8.1
 
-  intl-messageformat@11.1.0:
+  intl-messageformat@11.1.1:
     dependencies:
       '@formatjs/ecma402-abstract': 3.1.0
       '@formatjs/fast-memoize': 3.1.0
-      '@formatjs/icu-messageformat-parser': 3.4.0
+      '@formatjs/icu-messageformat-parser': 3.5.0
       tslib: 2.8.1
 
   ipaddr.js@1.9.1: {}
@@ -16265,15 +16249,15 @@ snapshots:
       react: 19.2.4
       scheduler: 0.27.0
 
-  react-intl@8.1.0(@types/react@19.2.10)(react@19.2.4)(typescript@5.9.3):
+  react-intl@8.1.1(@types/react@19.2.10)(react@19.2.4)(typescript@5.9.3):
     dependencies:
       '@formatjs/ecma402-abstract': 3.1.0
-      '@formatjs/icu-messageformat-parser': 3.4.0
-      '@formatjs/intl': 4.1.0(typescript@5.9.3)
+      '@formatjs/icu-messageformat-parser': 3.5.0
+      '@formatjs/intl': 4.1.1(typescript@5.9.3)
       '@types/hoist-non-react-statics': 3.3.6
       '@types/react': 19.2.10
       hoist-non-react-statics: 3.3.2
-      intl-messageformat: 11.1.0
+      intl-messageformat: 11.1.1
       react: 19.2.4
       tslib: 2.8.1
     optionalDependencies:
