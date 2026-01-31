@@ -35,11 +35,11 @@ catalogs:
     '@playwright/test': 1.58.1
     playwright: 1.58.1
   react19:
-    '@types/react': 19.2.9
+    '@types/react': 19.2.10
     '@types/react-dom': 19.2.3
     babel-plugin-react-compiler: 19.1.0-rc.3
-    react: 19.2.3
-    react-dom: 19.2.3
+    react: 19.2.4
+    react-dom: 19.2.4
   storybook:
     '@storybook/addon-a11y': 10.2.0
     '@storybook/addon-docs': 10.2.0
