@@ -42,7 +42,7 @@
     "husky": "9.1.7",
     "lint-staged": "16.2.7",
     "move-cli": "catalog:common",
-    "prettier": "3.8.0",
+    "prettier": "3.8.1",
     "prettier-plugin-tailwindcss": "0.7.2",
     "rimraf": "catalog:common",
     "sherif": "1.10.0",
