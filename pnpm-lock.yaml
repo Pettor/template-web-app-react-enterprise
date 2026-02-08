@@ -409,8 +409,8 @@ importers:
         specifier: workspace:*
         version: link:../../configs/vite
       '@formatjs/cli':
-        specifier: 6.12.0
-        version: 6.12.0
+        specifier: 6.12.1
+        version: 6.12.1
       '@package/storybook':
         specifier: workspace:*
         version: link:../../packages/storybook
@@ -1619,8 +1619,8 @@ packages:
   '@fontsource/rubik@5.2.8':
     resolution: {integrity: sha512-PIc8QR7FqWPcYhbdRiGff56vQlKqg/ytES1YqecSq1GkgxiH4TBshrFvDEOZ9JonUF9m1qQ+qXxJj7wD5zgXEw==}
 
-  '@formatjs/cli@6.12.0':
-    resolution: {integrity: sha512-mF3U8XxwEWR+ttlG5e4onYO+M5T22jnnQq7Ce/WK10CTVYR8Us433hbML6vgBLkiTS/MuCq61L0op3yNRSp2Kg==}
+  '@formatjs/cli@6.12.1':
+    resolution: {integrity: sha512-fHCOP6N34gq6JIQ0iOMn8T+fV0uVSu0x4qHGf07xHIhJOpq61iuj+CMhAK2ikZBsjmDW6s/3eoQzJ2v9Vgp8Gw==}
     engines: {node: '>= 16'}
     hasBin: true
     peerDependencies:
@@ -8575,7 +8575,7 @@ snapshots:
 
   '@fontsource/rubik@5.2.8': {}
 
-  '@formatjs/cli@6.12.0': {}
+  '@formatjs/cli@6.12.1': {}
 
   '@formatjs/ecma402-abstract@2.3.6':
     dependencies:
