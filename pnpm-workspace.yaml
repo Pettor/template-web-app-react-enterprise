@@ -50,10 +50,10 @@ catalogs:
     '@storybook/react-vite': 10.2.10
     storybook: 10.2.10
   tailwind:
-    tailwindcss: 4.1.18
+    tailwindcss: 4.2.0
     '@tailwindcss/aspect-ratio': 0.4.2
     '@tailwindcss/typography': 0.5.19
-    '@tailwindcss/vite': 4.1.18
+    '@tailwindcss/vite': 4.2.0
   typescript:
     typescript: 5.9.3
   validation:
