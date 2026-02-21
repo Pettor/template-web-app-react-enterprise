@@ -45,8 +45,8 @@ catalogs:
       specifier: 10.1.8
       version: 10.1.8
     eslint-plugin-formatjs:
-      specifier: 6.1.3
-      version: 6.1.3
+      specifier: 6.1.4
+      version: 6.1.4
     eslint-plugin-import:
       specifier: 2.32.0
       version: 2.32.0
@@ -479,7 +479,7 @@ importers:
         version: 10.1.8(eslint@10.0.1(jiti@2.6.1))
       eslint-plugin-formatjs:
         specifier: catalog:eslint
-        version: 6.1.3(eslint@10.0.1(jiti@2.6.1))(typescript@5.9.3)
+        version: 6.1.4(eslint@10.0.1(jiti@2.6.1))
       eslint-plugin-import:
         specifier: catalog:eslint
         version: 2.32.0(@typescript-eslint/parser@8.55.0(eslint@10.0.1(jiti@2.6.1))(typescript@5.9.3))(eslint@10.0.1(jiti@2.6.1))
@@ -1685,8 +1685,9 @@ packages:
       typescript:
         optional: true
 
-  '@formatjs/ts-transformer@4.3.3':
-    resolution: {integrity: sha512-jXh2NRP1wwYt57KAHaMiI8qZ6m6HFkPSOuAoVbOIzI+cP4++X1CVAtoQhTdEAyHhn04T4IyMdsFIGjYvtTZSAA==}
+  '@formatjs/ts-transformer@4.4.0':
+    resolution: {integrity: sha512-lFDp9Rbpxk5Dt8O1/I9VG5btqKbOkjT4snSa73HO1YTJ9KGeXPKA7aWVgHFXJVVq0KluhbZiCoPJVHC4ZREgxw==}
+    engines: {node: '>= 20.12.0'}
     peerDependencies:
       ts-jest: ^29
     peerDependenciesMeta:
@@ -4615,8 +4616,8 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
 
-  eslint-plugin-formatjs@6.1.3:
-    resolution: {integrity: sha512-JZnRP76EZAfbVFluNuK5hM2AlxlsYkgjZRkMoUq+QXobCuCs3AQ7ywlRVn1ni+Os14ccPuv44o6LRw7dlW/32A==}
+  eslint-plugin-formatjs@6.1.4:
+    resolution: {integrity: sha512-lo7CfmPTF13nfqi7Sg22zzE1OevOEH8rhZh625fYsWMFdFFvNf0tolRyGfPJu6jKfH1vS8/7Y1xvxgfFryVfdQ==}
     peerDependencies:
       eslint: '9'
 
@@ -8832,11 +8833,10 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
 
-  '@formatjs/ts-transformer@4.3.3':
+  '@formatjs/ts-transformer@4.4.0':
     dependencies:
       '@formatjs/icu-messageformat-parser': 3.5.1
       '@types/node': 22.19.7
-      chalk: 4.1.2
       json-stable-stringify: 1.3.0
       tslib: 2.8.1
       typescript: 5.9.3
@@ -14969,21 +14969,18 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-formatjs@6.1.3(eslint@10.0.1(jiti@2.6.1))(typescript@5.9.3):
+  eslint-plugin-formatjs@6.1.4(eslint@10.0.1(jiti@2.6.1)):
     dependencies:
       '@formatjs/icu-messageformat-parser': 3.5.1
-      '@formatjs/ts-transformer': 4.3.3
+      '@formatjs/ts-transformer': 4.4.0
       '@types/picomatch': 4.0.2
-      '@typescript-eslint/utils': 8.54.0(eslint@10.0.1(jiti@2.6.1))(typescript@5.9.3)
       '@unicode/unicode-17.0.0': 1.6.16
       eslint: 10.0.1(jiti@2.6.1)
       magic-string: 0.30.21
       picomatch: 4.0.3
       tslib: 2.8.1
     transitivePeerDependencies:
-      - supports-color
       - ts-jest
-      - typescript
 
   eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.55.0(eslint@10.0.1(jiti@2.6.1))(typescript@5.9.3))(eslint@10.0.1(jiti@2.6.1)):
     dependencies:
@@ -17536,7 +17533,7 @@ snapshots:
   terser@5.43.1:
     dependencies:
       '@jridgewell/source-map': 0.3.6
-      acorn: 8.15.0
+      acorn: 8.16.0
       commander: 2.20.3
       source-map-support: 0.5.21
 
