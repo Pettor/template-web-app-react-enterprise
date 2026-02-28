@@ -27,7 +27,7 @@
     "@package/react": "workspace:*",
     "clsx": "2.1.1",
     "framer-motion": "12.34.3",
-    "jotai": "2.13.1"
+    "jotai": "2.18.0"
   },
   "devDependencies": {
     "@config/barrelsby": "workspace:*",
