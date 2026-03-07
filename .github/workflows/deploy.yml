@@ -66,7 +66,7 @@ jobs:
           NODE_OPTIONS: "--max_old_space_size=4096"
 
       - name: Check GitHub Pages status
-        uses: crazy-max/ghaction-github-status@v4
+        uses: crazy-max/ghaction-github-status@v5
         with:
           pages_threshold: major_outage
 
