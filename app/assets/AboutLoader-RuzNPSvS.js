@@ -1,0 +1,1 @@
+import"./react-DtrESx-C.js";import"./compiler-runtime-BEbGkjUr.js";import"./jsx-runtime-Dgu1dJqn.js";import{c as e,l as t}from"./src-C0ZV6L0b.js";async function n(n){let r=e(),{version:i}=n.getQueryData(t)??await n.fetchQuery(r);return{serverVersion:i}}export{n as loader};

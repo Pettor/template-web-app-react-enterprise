@@ -1,0 +1,1 @@
+function e(){return{githubLink:`https://github.com/Pettor/template-web-app-react`,linkedInLink:`https://www.linkedin.com/in/petter-hancock/`}}export{e as loader};

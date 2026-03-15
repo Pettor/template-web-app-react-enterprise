@@ -1,0 +1,16 @@
+import{n as e}from"./chunk-zsgVPwQN.js";import{n as t,r as n,t as r}from"./iframe-DoxRYFdJ.js";import{A as i,O as a,j as o,k as s,o as c,t as l}from"./dist-BZx8yPnd.js";import{i as u,t as d}from"./src-Bp5RcZhR.js";import{n as f,t as p}from"./esm-T62MhQGi.js";import{n as m,t as h}from"./ForgotPasswordForm-BGasFlI_.js";import{n as g,r as _,t as v}from"./src-ClAks6BB.js";import{t as y}from"./BasicLayout-dmMf4X0e.js";function b({appName:e,resetForm:n,onBack:r}){let l=t();return(0,x.jsx)(y,{backgroundElement:(0,x.jsxs)(x.Fragment,{children:[(0,x.jsx)(_,{}),(0,x.jsx)(g,{})]}),children:(0,x.jsx)(`div`,{className:`flex w-full flex-col items-center justify-center gap-1 p-4 lg:flex-row-reverse`,children:(0,x.jsx)(`div`,{className:`h-full min-h-[550px] w-full shrink-0 sm:w-[550px]`,children:(0,x.jsxs)(a,{className:`min-h-[550px]`,children:[(0,x.jsxs)(s,{className:`flex w-full items-end justify-between`,children:[(0,x.jsx)(`div`,{className:`flex`}),(0,x.jsx)(o,{isIconOnly:!0,onPress:r,title:l.formatMessage({description:`AboutView - Back button title`,defaultMessage:`Back`,id:`72q+Ui`}),"aria-label":l.formatMessage({description:`AboutView - Back button aria label`,defaultMessage:`Back`,id:`ZTBga3`}),children:(0,x.jsx)(f,{className:`h-6 w-6`})})]}),(0,x.jsxs)(i,{className:`flex flex-col items-center`,children:[(0,x.jsx)(`span`,{className:`mt-8 p-4 text-center text-base`,children:l.formatMessage({description:`ForgotPasswordView - Reset password description`,defaultMessage:`Enter your {appName} email adress that you used to register. We'll send you an email with your username and a link to reset your password.`,id:`02xDV+`},{appName:e})}),(0,x.jsx)(c,{y:4}),(0,x.jsx)(h,{...n})]})]})})})})}var x,S=e((()=>{p(),l(),v(),r(),m(),x=n(),b.__docgenInfo={description:``,methods:[],displayName:`ForgotPasswordView`,props:{appName:{required:!0,tsType:{name:`string`},description:``},resetForm:{required:!0,tsType:{name:`ForgotPasswordFormProps`},description:``},onBack:{required:!0,tsType:{name:`signature`,type:`function`,raw:`() => void`,signature:{arguments:[],return:{name:`void`}}},description:``}}}})),C,w,T,E,D;e((()=>{d(),S(),C={component:b,title:`Views/Forgot Password`,parameters:{layout:`fullscreen`},argTypes:{resetForm:{table:{disable:!0}}}},w={appName:`My App`,resetForm:{loading:!1,onSubmit:()=>console.log(`onSubmit`)},onBack:()=>console.log(`onBack`)},T={args:w,decorators:[u],parameters:{viewport:{value:`full`}}},E={args:w,globals:{viewport:{value:`iphonex`}}},T.parameters={...T.parameters,docs:{...T.parameters?.docs,source:{originalSource:`{
+  args: defaultArgs,
+  decorators: [FullSizeDecorator],
+  parameters: {
+    viewport: {
+      value: "full"
+    }
+  }
+}`,...T.parameters?.docs?.source}}},E.parameters={...E.parameters,docs:{...E.parameters?.docs,source:{originalSource:`{
+  args: defaultArgs,
+  globals: {
+    viewport: {
+      value: "iphonex"
+    }
+  }
+}`,...E.parameters?.docs?.source}}},D=[`Fullscreen`,`Phone`]}))();export{T as Fullscreen,E as Phone,D as __namedExportsOrder,C as default};

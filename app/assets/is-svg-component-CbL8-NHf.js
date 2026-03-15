@@ -1,0 +1,1 @@
+var e=[`animate`,`circle`,`defs`,`desc`,`ellipse`,`g`,`image`,`line`,`filter`,`marker`,`mask`,`metadata`,`path`,`pattern`,`polygon`,`polyline`,`rect`,`stop`,`switch`,`symbol`,`svg`,`text`,`tspan`,`use`,`view`];function t(t){return typeof t!=`string`||t.includes(`-`)?!1:!!(e.indexOf(t)>-1||/[A-Z]/u.test(t))}export{t};

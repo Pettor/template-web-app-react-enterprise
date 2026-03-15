@@ -1,0 +1,3 @@
+import{n as e}from"./chunk-zsgVPwQN.js";import{i as t,n,r,t as i}from"./storybook-D_TgTTTe.js";var a,o,s,c;e((()=>{t(),i(),a={title:`Display/Grid Item`,component:r},o={title:`Title`,imageSrc:n,description:`Description`},s={args:o},s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
+  args: defaultArgs
+}`,...s.parameters?.docs?.source}}},c=[`Default`]}))();export{s as Default,c as __namedExportsOrder,a as default};

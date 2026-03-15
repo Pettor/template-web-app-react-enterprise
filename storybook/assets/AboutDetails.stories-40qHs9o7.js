@@ -1,0 +1,3 @@
+import{n as e}from"./chunk-zsgVPwQN.js";import{s as t,t as n}from"./src-Bp5RcZhR.js";import{n as r,t as i}from"./AboutDetails-ClPk67nH.js";var a,o,s,c;e((()=>{n(),r(),a={component:i,title:`Feedback/About`,decorators:[t]},o={appName:`My App`,appVersion:`1.0.0`,serverVersion:`1.0.0`},s={args:o},s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
+  args: defaultArgs
+}`,...s.parameters?.docs?.source}}},c=[`Details`]}))();export{s as Details,c as __namedExportsOrder,a as default};

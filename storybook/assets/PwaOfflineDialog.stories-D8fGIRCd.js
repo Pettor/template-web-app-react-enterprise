@@ -1,0 +1,6 @@
+import{n as e}from"./chunk-zsgVPwQN.js";import{n as t,r as n,t as r}from"./iframe-DoxRYFdJ.js";import{j as i,n as a,t as o}from"./dist-BZx8yPnd.js";import{r as s,s as c,t as l}from"./src-Bp5RcZhR.js";function u(e,t){return{title:e.formatMessage({description:`PwaOfflineDialog- Ready to work offline description`,defaultMessage:`Ready to work offline`,id:`HQHLM4`}),color:`primary`,onClose:t}}var d=e((()=>{})),f,p,m,h;e((()=>{o(),l(),r(),d(),f=n(),p={title:`Feedback/Progressive Web App`,decorators:[c,s]},m={render:()=>{let e=t();return(0,f.jsx)(i,{onPress:()=>a(u(e,()=>console.log(`onClose`))),children:`Show Toast`})}},m.parameters={...m.parameters,docs:{...m.parameters?.docs,source:{originalSource:`{
+  render: () => {
+    const intl = useIntl();
+    return <Button onPress={() => addToast(PwaOfflineDialogProps(intl, () => console.log("onClose")))}>Show Toast</Button>;
+  }
+}`,...m.parameters?.docs?.source}}},h=[`OfflineDialog`]}))();export{m as OfflineDialog,h as __namedExportsOrder,p as default};

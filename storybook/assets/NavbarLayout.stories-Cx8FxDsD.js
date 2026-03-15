@@ -1,0 +1,4 @@
+import{n as e}from"./chunk-zsgVPwQN.js";import{r as t}from"./iframe-DoxRYFdJ.js";import{i as n,n as r,r as i,t as a}from"./StorybookNavbarComponent-DztJcAhz.js";import{n as o,t as s}from"./StorybookTableContentComponent-CbhS_XIM.js";function c(e){return(0,l.jsx)(i,{...e,children:(0,l.jsx)(s,{})})}var l,u,d,f,p;e((()=>{r(),o(),n(),l=t(),u={component:i,title:`Shared/Layout`,parameters:{a11y:{config:{rules:[{id:`color-contrast`,enabled:!1},{id:`list`,enabled:!1},{id:`th-has-data-cells`,enabled:!1}]}},layout:`fullscreen`}},d={navbarElement:(0,l.jsx)(a,{}),footer:!0},f={args:d,render:c},f.parameters={...f.parameters,docs:{...f.parameters?.docs,source:{originalSource:`{
+  args: defaultArgs,
+  render
+}`,...f.parameters?.docs?.source}}},p=[`NavbarLayout`]}))();export{f as NavbarLayout,p as __namedExportsOrder,u as default};
