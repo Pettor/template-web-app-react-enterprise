@@ -45,8 +45,8 @@ catalogs:
       specifier: 10.1.8
       version: 10.1.8
     eslint-plugin-formatjs:
-      specifier: 6.3.0
-      version: 6.3.0
+      specifier: 6.4.0
+      version: 6.4.0
     eslint-plugin-import:
       specifier: 2.32.0
       version: 2.32.0
@@ -479,7 +479,7 @@ importers:
         version: 10.1.8(eslint@10.0.3(jiti@2.6.1))
       eslint-plugin-formatjs:
         specifier: catalog:eslint
-        version: 6.3.0(eslint@10.0.3(jiti@2.6.1))
+        version: 6.4.0(eslint@10.0.3(jiti@2.6.1))
       eslint-plugin-import:
         specifier: catalog:eslint
         version: 2.32.0(@typescript-eslint/parser@8.57.0(eslint@10.0.3(jiti@2.6.1))(typescript@5.9.3))(eslint@10.0.3(jiti@2.6.1))
@@ -4597,8 +4597,8 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
 
-  eslint-plugin-formatjs@6.3.0:
-    resolution: {integrity: sha512-f3YKLJMnH0UCeyqbb6j6KUnZj3m8lGeSsdNvG4riJmbl+UUvPOZbw8+bplxe5N/9JNtifBqLvYxkhFdGFJt/Tg==}
+  eslint-plugin-formatjs@6.4.0:
+    resolution: {integrity: sha512-IfSchytfKn5PhEmsd79/c44e5ZoXbiteD9/AmBgNNtyMmJ+wBWby3jotF3pSZoz3PHoggmhdEh3K3wxYuYqQng==}
     peerDependencies:
       eslint: 9 || 10
 
@@ -14672,7 +14672,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-formatjs@6.3.0(eslint@10.0.3(jiti@2.6.1)):
+  eslint-plugin-formatjs@6.4.0(eslint@10.0.3(jiti@2.6.1)):
     dependencies:
       '@formatjs/icu-messageformat-parser': 3.5.1
       '@formatjs/ts-transformer': 4.4.0
