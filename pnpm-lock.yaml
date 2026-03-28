@@ -149,8 +149,8 @@ catalogs:
       version: 4.3.6
   vite:
     '@vitejs/plugin-basic-ssl':
-      specifier: 2.2.0
-      version: 2.2.0
+      specifier: 2.3.0
+      version: 2.3.0
     '@vitejs/plugin-react':
       specifier: 4.7.0
       version: 4.7.0
@@ -422,7 +422,7 @@ importers:
         version: 4.2.2(vite@8.0.3(@types/node@24.12.0)(esbuild@0.27.0)(jiti@2.6.1)(terser@5.43.1)(yaml@2.8.2))
       '@vitejs/plugin-basic-ssl':
         specifier: catalog:vite
-        version: 2.2.0(vite@8.0.3(@types/node@24.12.0)(esbuild@0.27.0)(jiti@2.6.1)(terser@5.43.1)(yaml@2.8.2))
+        version: 2.3.0(vite@8.0.3(@types/node@24.12.0)(esbuild@0.27.0)(jiti@2.6.1)(terser@5.43.1)(yaml@2.8.2))
       '@vitejs/plugin-react':
         specifier: catalog:vite
         version: 4.7.0(vite@8.0.3(@types/node@24.12.0)(esbuild@0.27.0)(jiti@2.6.1)(terser@5.43.1)(yaml@2.8.2))
@@ -3643,8 +3643,8 @@ packages:
   '@unicode/unicode-17.0.0@1.6.16':
     resolution: {integrity: sha512-advq5p36zZ+PDRUpDkWcHHR++R19kx0LYB5iG3bj0KB8mYVKg0ywS996e2bXeXxDb8XdOF7KTivcx7VkYie1pg==}
 
-  '@vitejs/plugin-basic-ssl@2.2.0':
-    resolution: {integrity: sha512-nmyQ1HGRkfUxjsv3jw0+hMhEdZdrtkvMTdkzRUaRWfiO6PCWw2V2Pz3gldCq96Tn9S8htcgdTxw/gmbLLEbfYw==}
+  '@vitejs/plugin-basic-ssl@2.3.0':
+    resolution: {integrity: sha512-bdyo8rB3NnQbikdMpHaML9Z1OZPBu6fFOBo+OtxsBlvMJtysWskmBcnbIDhUqgC8tcxNv/a+BcV5U+2nQMm1OQ==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     peerDependencies:
       vite: ^6.0.0 || ^7.0.0 || ^8.0.0
@@ -13437,7 +13437,7 @@ snapshots:
 
   '@unicode/unicode-17.0.0@1.6.16': {}
 
-  '@vitejs/plugin-basic-ssl@2.2.0(vite@8.0.3(@types/node@24.12.0)(esbuild@0.27.0)(jiti@2.6.1)(terser@5.43.1)(yaml@2.8.2))':
+  '@vitejs/plugin-basic-ssl@2.3.0(vite@8.0.3(@types/node@24.12.0)(esbuild@0.27.0)(jiti@2.6.1)(terser@5.43.1)(yaml@2.8.2))':
     dependencies:
       vite: 8.0.3(@types/node@24.12.0)(esbuild@0.27.0)(jiti@2.6.1)(terser@5.43.1)(yaml@2.8.2)
 
