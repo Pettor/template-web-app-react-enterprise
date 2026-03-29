@@ -2,12 +2,11 @@
   "extends": "@config/typescript/react.json",
   "compilerOptions": {
     "allowImportingTsExtensions": true,
-    "baseUrl": "src",
     "module": "Preserve",
     "moduleResolution": "Bundler",
     "noEmit": true,
     "paths": {
-      ".": ["."]
+      ".": ["./src"]
     },
     "types": ["@config/typescript/types"]
   },
