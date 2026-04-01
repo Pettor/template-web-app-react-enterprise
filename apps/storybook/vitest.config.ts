@@ -25,6 +25,9 @@ export default defineConfig({
     projects: [
       {
         extends: true,
+        resolve: {
+          dedupe: ["react", "react-dom"],
+        },
         optimizeDeps: {
           include: ["react/jsx-dev-runtime"],
         },
