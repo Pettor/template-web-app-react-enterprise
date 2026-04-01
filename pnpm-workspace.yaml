@@ -60,6 +60,7 @@ catalogs:
     '@hookform/resolvers': 5.2.2
     zod: 4.3.6
   vite:
+    '@rolldown/plugin-babel': 0.2.2
     '@vitejs/plugin-basic-ssl': 2.3.0
     '@vitejs/plugin-react': 6.0.1
     vite: 8.0.3
