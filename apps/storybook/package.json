@@ -46,6 +46,7 @@
     "@tailwindcss/vite": "catalog:tailwind",
     "@vitejs/plugin-react": "catalog:vite",
     "@vitest/browser": "catalog:vitest",
+    "@vitest/browser-playwright": "catalog:vitest",
     "@vitest/coverage-v8": "catalog:vitest",
     "storybook": "catalog:storybook",
     "tailwindcss": "catalog:tailwind",
