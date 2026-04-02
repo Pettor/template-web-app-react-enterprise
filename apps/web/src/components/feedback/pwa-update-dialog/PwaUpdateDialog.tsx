@@ -1,11 +1,13 @@
 import type { ReactElement } from "react";
 import type { IntlShape } from "react-intl";
+import { toast } from "@heroui/react";
 
 export function PwaUpdateDialogProps(
   intl: IntlShape,
   appName: string,
-  onClose: () => void
-): [ReactElement | string, { onClose: () => void }] {
+  onClose: () => void,
+  onRefresh: () => void
+): [ReactElement | string, options?: Parameters<typeof toast>[1]] {
   return [
     intl.formatMessage(
       {
@@ -19,6 +21,14 @@ export function PwaUpdateDialogProps(
     ),
     {
       onClose,
+      actionProps: {
+        children: intl.formatMessage({
+          description: "PwaUpdateDialog - Update available action",
+          defaultMessage: "Update",
+          id: "qj8n2b",
+        }),
+        onPress: onRefresh,
+      },
     },
   ];
 }
