@@ -78,7 +78,7 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
         e.stopPropagation();
         form.handleSubmit();
       }}
-      className="flex flex-col justify-center"
+      className="flex flex-col justify-center gap-4"
     >
       <form.Field
         name="email"
