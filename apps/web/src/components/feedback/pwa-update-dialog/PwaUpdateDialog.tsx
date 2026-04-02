@@ -1,12 +1,10 @@
 import type { ReactElement } from "react";
-import { Button } from "@heroui/react";
 import type { IntlShape } from "react-intl";
 
 export function PwaUpdateDialogProps(
   intl: IntlShape,
   appName: string,
-  onClose: () => void,
-  onUpdate: () => void
+  onClose: () => void
 ): [ReactElement | string, { onClose: () => void }] {
   return [
     intl.formatMessage(
