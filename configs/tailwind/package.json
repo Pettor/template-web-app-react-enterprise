@@ -15,6 +15,7 @@
     "@package/storybook": "workspace:*",
     "@tailwindcss/aspect-ratio": "catalog:tailwind",
     "@tailwindcss/typography": "catalog:tailwind",
-    "tailwindcss": "catalog:tailwind"
+    "tailwindcss": "catalog:tailwind",
+    "tw-animate-css": "catalog:tailwind"
   }
 }

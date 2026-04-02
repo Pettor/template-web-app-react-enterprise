@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import { Button, Form } from "@heroui/react";
+import { Button, Form, Spinner } from "@heroui/react";
 import { useForm } from "@tanstack/react-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
@@ -207,13 +207,13 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
         selector={(state) => [state.canSubmit]}
         children={([canSubmit]) => (
           <Button
-            isLoading={loading}
-            disabled={!canSubmit}
-            color="primary"
+            isDisabled={!canSubmit || loading}
+            variant="primary"
             type="submit"
             onPress={() => form.handleSubmit()}
             data-testid="sign-up-form__submit-button"
           >
+            {loading && <Spinner size="sm" />}
             {intl.formatMessage({
               description: "SignUpFormButton - Sign Up",
               defaultMessage: "Sign Up",

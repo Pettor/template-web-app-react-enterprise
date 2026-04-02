@@ -12,6 +12,7 @@ export function useAboutModalPage(serverVersion: string): AboutModalProps {
 
   return {
     modal: {
+      isOpen: true,
       size: "full",
       isDismissable: true,
       onClose: handleOnClose,

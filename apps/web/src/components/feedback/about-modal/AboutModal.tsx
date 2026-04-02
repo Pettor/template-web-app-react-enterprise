@@ -1,11 +1,24 @@
 import type { ReactElement } from "react";
-import { Modal, ModalBody, ModalContent, ModalHeader, Spacer, type ModalProps } from "@heroui/react";
+import {
+  Modal,
+  ModalBackdrop,
+  ModalBody,
+  ModalContainer,
+  ModalDialog,
+  ModalHeader,
+  type ModalContainerProps,
+} from "@heroui/react";
 import { useIntl } from "react-intl";
 import type { AboutDetailsProps } from "../about-details/AboutDetails";
 import { AboutDetails } from "../about-details/AboutDetails";
 
 export interface AboutModalProps {
-  modal: Omit<ModalProps, "children">;
+  modal: {
+    isOpen?: boolean;
+    isDismissable?: boolean;
+    size?: ModalContainerProps["size"];
+    onClose?: () => void;
+  };
   aboutDetails: AboutDetailsProps;
 }
 
@@ -13,22 +26,31 @@ export function AboutModal({ modal, aboutDetails }: AboutModalProps): ReactEleme
   const intl = useIntl();
 
   return (
-    <Modal {...modal}>
-      <ModalContent>
-        <ModalHeader>
-          <p>
-            {intl.formatMessage({
-              description: "About - Title",
-              defaultMessage: "About",
-              id: "2Rm6Lp",
-            })}
-          </p>
-        </ModalHeader>
-        <ModalBody>
-          <AboutDetails {...aboutDetails} />
-          <Spacer y={4} />
-        </ModalBody>
-      </ModalContent>
+    <Modal
+      isOpen={modal.isOpen}
+      onOpenChange={(open) => {
+        if (!open) modal.onClose?.();
+      }}
+    >
+      <ModalBackdrop isDismissable={modal.isDismissable}>
+        <ModalContainer size={modal.size}>
+          <ModalDialog>
+            <ModalHeader>
+              <p>
+                {intl.formatMessage({
+                  description: "About - Title",
+                  defaultMessage: "About",
+                  id: "2Rm6Lp",
+                })}
+              </p>
+            </ModalHeader>
+            <ModalBody>
+              <AboutDetails {...aboutDetails} />
+              <div className="h-4" />
+            </ModalBody>
+          </ModalDialog>
+        </ModalContainer>
+      </ModalBackdrop>
     </Modal>
   );
 }

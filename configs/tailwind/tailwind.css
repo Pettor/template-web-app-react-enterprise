@@ -4,14 +4,24 @@
 /* Tailwind confugration */
 @import "tailwindcss";
 
+/* Animation utilities (required by HeroUI components) */
+@import "tw-animate-css";
+
 /* Tailwind plugins */
 @plugin "@tailwindcss/typography";
 
-/* HeroUI theme */
-@plugin './hero.ts';
+/* HeroUI base styles */
+@import "@heroui/styles/base";
 
-/* Hoisted to be placed in the root */
-@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+/* HeroUI component styles */
+@import "@heroui/styles/components/index.css" layer(components);
+
+/* HeroUI theme (variables + component overrides) */
+@import "@heroui/styles/themes/default";
+
+/* HeroUI utilities and variants */
+@import "@heroui/styles/utilities";
+@import "@heroui/styles/variants";
 @custom-variant dark (&:is(.dark *));
 
 

@@ -1,5 +1,5 @@
 import { type ReactElement, type ReactNode } from "react";
-import { Card, CardBody, Spacer } from "@heroui/react";
+import { Card, CardContent } from "@heroui/react";
 import { DocumentationDecorator, DocumentationLayout } from "@package/storybook";
 import clsx from "clsx";
 
@@ -19,7 +19,7 @@ function ColorSection({ title, children }: { title: string; children: ReactNode 
   return (
     <div>
       <p className="text-xl font-medium">{title}</p>
-      <Spacer y={2} />
+      <div className="h-2" />
       <div className="flex h-full w-full flex-row flex-wrap items-center justify-start px-4 py-1">{children}</div>
     </div>
   );
@@ -28,11 +28,11 @@ function ColorSection({ title, children }: { title: string; children: ReactNode 
 function ColorItem({ text, bgColor, invert }: { text: string; bgColor: string; invert?: boolean }): ReactElement {
   return (
     <Card className={`m-2 h-25 w-25 ${bgColor}`}>
-      <CardBody
+      <CardContent
         className={clsx("items-center justify-center truncate text-xs", invert ? "text-background" : "text-foreground")}
       >
         {text}
-      </CardBody>
+      </CardContent>
     </Card>
   );
 }
@@ -40,7 +40,7 @@ function ColorItem({ text, bgColor, invert }: { text: string; bgColor: string; i
 export function Colors(): ReactElement {
   return (
     <DocumentationLayout label="Colors">
-      <Spacer y={8} />
+      <div className="h-8" />
       <div className="flex flex-col gap-4">
         <ColorSection title="Layout">
           <ColorItem text="background" bgColor="bg-background" />
