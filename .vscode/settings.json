@@ -5,7 +5,7 @@
   },
   "files.eol": "\n",
   "files.associations": {
-    "*.css": "tailwindcss"
+    "*.css": "css"
   },
   "typescript.preferences.importModuleSpecifier": "shortest"
 }

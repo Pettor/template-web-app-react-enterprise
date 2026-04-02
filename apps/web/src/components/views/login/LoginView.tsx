@@ -32,6 +32,7 @@ export function LoginView({ appName, loginForm, onAbout }: LoginViewProps): Reac
               <div className="flex" />
               <Button
                 isIconOnly
+                variant="tertiary"
                 onPress={onAbout}
                 aria-label={intl.formatMessage({
                   description: "AboutView - About button aria label",
