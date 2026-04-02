@@ -19,6 +19,9 @@
 /* HeroUI theme (variables + component overrides) */
 @import "@heroui/styles/themes/default";
 
+/* Design token overrides for HeroUI v3 CSS variables */
+@import "./hero.css";
+
 /* HeroUI utilities and variants */
 @import "@heroui/styles/utilities";
 @import "@heroui/styles/variants";
