@@ -10,6 +10,7 @@ export default defineConfig(({ mode, command }) => {
     createBaseConfig(),
     createReactConfig({ enableReactCompiler: command === "build" }),
     createPWAConfig(),
+    { resolve: { dedupe: ["react", "react-dom"] } },
   ]);
 
   switch (command) {
