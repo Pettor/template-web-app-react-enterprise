@@ -20,6 +20,7 @@
     "typescript": ">=5.0.0"
   },
   "dependencies": {
+    "@rolldown/plugin-babel": "catalog:vite",
     "@tailwindcss/vite": "catalog:tailwind",
     "@vitejs/plugin-react": "catalog:vite",
     "vite": "catalog:vite",

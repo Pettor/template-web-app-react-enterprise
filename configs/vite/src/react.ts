@@ -1,4 +1,5 @@
-import react from "@vitejs/plugin-react";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
+import babel from "@rolldown/plugin-babel";
 import type { UserConfig } from "vite";
 import { type BaseViteConfigOptions } from "./base";
 
@@ -12,9 +13,7 @@ export interface ReactViteConfigOptions extends BaseViteConfigOptions {
   /**
    * React Compiler configuration
    */
-  reactCompilerConfig?: {
-    target?: string;
-  };
+  reactCompilerConfig?: Parameters<typeof reactCompilerPreset>[0];
 
   /**
    * Additional React plugin options
@@ -23,17 +22,12 @@ export interface ReactViteConfigOptions extends BaseViteConfigOptions {
 }
 
 export function createReactConfig(options: ReactViteConfigOptions = {}): UserConfig {
-  const { enableReactCompiler = true, reactCompilerConfig = { target: "19" }, reactOptions = {} } = options;
-
-  const reactPluginOptions = {
-    ...reactOptions,
-    babel: {
-      ...reactOptions.babel,
-      plugins: [...(enableReactCompiler ? [["babel-plugin-react-compiler", reactCompilerConfig]] : [])],
-    },
-  };
+  const { enableReactCompiler = true, reactCompilerConfig, reactOptions = {} } = options;
 
   return {
-    plugins: [react(reactPluginOptions)],
+    plugins: [
+      react(reactOptions),
+      ...(enableReactCompiler ? [babel({ presets: [reactCompilerPreset(reactCompilerConfig)] })] : []),
+    ],
   } satisfies UserConfig;
 }

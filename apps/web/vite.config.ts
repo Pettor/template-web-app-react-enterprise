@@ -6,7 +6,12 @@ import proxy from "vite-plugin-http2-proxy";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const config = mergeConfigs([createBaseConfig(), createReactConfig(), createPWAConfig()]);
+  const config = mergeConfigs([
+    createBaseConfig(),
+    createReactConfig({ enableReactCompiler: command === "build" }),
+    createPWAConfig(),
+    { resolve: { dedupe: ["react", "react-dom"] } },
+  ]);
 
   switch (command) {
     case "build":
