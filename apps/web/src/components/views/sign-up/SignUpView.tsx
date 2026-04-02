@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
-import { Card, CardHeader, Button, CardBody, Spacer } from "@heroui/react";
+import { Card, CardHeader, Button, CardContent } from "@heroui/react";
 import { BasicLayout, BlueFadeBackground, GridBackground } from "@package/ui";
 import { useIntl } from "react-intl";
 import type { SignUpFormProps } from "~/components/forms/sign-up/SignUpForm";
@@ -32,11 +32,6 @@ export function SignUpView({ signUpForm, onBack }: SignUpViewProps): ReactElemen
               <Button
                 isIconOnly
                 onPress={onBack}
-                title={intl.formatMessage({
-                  description: "AboutView - Back button title",
-                  defaultMessage: "Back",
-                  id: "72q+Ui",
-                })}
                 aria-label={intl.formatMessage({
                   description: "AboutView - Back button aria label",
                   defaultMessage: "Back",
@@ -46,7 +41,7 @@ export function SignUpView({ signUpForm, onBack }: SignUpViewProps): ReactElemen
                 <XMarkIcon className="h-6 w-6" />
               </Button>
             </CardHeader>
-            <CardBody className="flex flex-col items-center">
+            <CardContent className="flex flex-col items-center">
               <p className="my-2 text-center">
                 {intl.formatMessage({
                   description: "SignUpView - Sign up description",
@@ -55,8 +50,8 @@ export function SignUpView({ signUpForm, onBack }: SignUpViewProps): ReactElemen
                 })}
               </p>
               <SignUpForm {...signUpForm} />
-              <Spacer y={4} />
-            </CardBody>
+              <div className="h-4" />
+            </CardContent>
           </Card>
         </div>
       </div>

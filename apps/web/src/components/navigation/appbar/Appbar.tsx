@@ -1,14 +1,5 @@
 import { type ReactElement } from "react";
-import {
-  Avatar,
-  Button,
-  Link,
-  NavbarItem,
-  NavbarMenuItem,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@heroui/react";
+import { Avatar, Button, Link, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 import { GithubIcon, LinkedInIcon, Navbar } from "@package/ui";
 import type { IAppSocialLinks } from "~/classes/app-social-links/IAppSocialLinks";
 import type { ThemeSwitchProps } from "~/components/actions/theme-switch/ThemeSwitch";
@@ -27,58 +18,40 @@ export function Appbar({ profile, socialLinks, themeSwitch }: AppbarProps): Reac
 
   const menuRender = (
     <>
-      <NavbarMenuItem key="1">
+      <div key="1">
         <Link href="#">something</Link>
-      </NavbarMenuItem>
-      <NavbarMenuItem key="2">something</NavbarMenuItem>
+      </div>
+      <div key="2">something</div>
     </>
   );
 
   const centerElement = (
     <>
-      <NavbarItem>
-        <Link color="foreground" href="#">
-          Features
-        </Link>
-      </NavbarItem>
-      <NavbarItem isActive>
-        <Link aria-current="page" href="#">
-          Customers
-        </Link>
-      </NavbarItem>
-      <NavbarItem>
-        <Link color="foreground" href="#">
-          Integrations
-        </Link>
-      </NavbarItem>
+      <Link href="#">Features</Link>
+      <Link aria-current="page" href="#">
+        Customers
+      </Link>
+      <Link href="#">Integrations</Link>
     </>
   );
 
   const endElement = (
     <>
-      <NavbarItem>
-        <Popover placement="bottom-end">
-          <PopoverTrigger role="button" data-testid="home-page__menu-button">
-            <Avatar size="sm" />
-          </PopoverTrigger>
-          <PopoverContent>
-            <ProfileCard {...profile} />
-          </PopoverContent>
-        </Popover>
-      </NavbarItem>
-      <NavbarItem>
-        <ThemeSwitch {...themeSwitch} />
-      </NavbarItem>
-      <NavbarItem>
-        <Button isIconOnly className="p-2" color="default" onPress={onGithubClick}>
-          <GithubIcon />
-        </Button>
-      </NavbarItem>
-      <NavbarItem>
-        <Button isIconOnly className="p-2" color="default" onPress={onLinkedInClick}>
-          <LinkedInIcon />
-        </Button>
-      </NavbarItem>
+      <Popover>
+        <PopoverTrigger role="button" data-testid="home-page__menu-button">
+          <Avatar size="sm" />
+        </PopoverTrigger>
+        <PopoverContent placement="bottom end">
+          <ProfileCard {...profile} />
+        </PopoverContent>
+      </Popover>
+      <ThemeSwitch {...themeSwitch} />
+      <Button isIconOnly className="p-2" onPress={onGithubClick}>
+        <GithubIcon />
+      </Button>
+      <Button isIconOnly className="p-2" onPress={onLinkedInClick}>
+        <LinkedInIcon />
+      </Button>
     </>
   );
 

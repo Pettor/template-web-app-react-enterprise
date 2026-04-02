@@ -1,4 +1,4 @@
-import { addToast } from "@heroui/react";
+import { toast } from "@heroui/react";
 import { usePostSelfRegister } from "@package/api";
 import { useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
@@ -21,13 +21,13 @@ export function useSignUpPage(): SignUpViewProps {
       await submit(data);
       navigate("/");
     } catch {
-      addToast({
-        title: intl.formatMessage({
+      toast(
+        intl.formatMessage({
           description: "SignUpPage - Sign up error alert title",
           defaultMessage: "Something went wrong",
           id: "CrlHXH",
-        }),
-      });
+        })
+      );
     }
   }
 

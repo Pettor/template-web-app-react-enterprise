@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { addToast } from "@heroui/react";
+import { toast } from "@heroui/react";
 import { useIntl } from "react-intl";
 import { useRegisterSW } from "virtual:pwa-register/react";
 import { PWA_VERSION_INTERVAL } from "./PwaProviderModuleConstants";
@@ -51,13 +51,15 @@ export function usePwaProviderModule(): void {
     if (!offlineReady) {
       return;
     }
-    addToast(PwaOfflineDialogProps(intl, handleOfflineClose));
+    const [msg, opts] = PwaOfflineDialogProps(intl, handleOfflineClose);
+    toast(msg, opts);
   }, [handleOfflineClose, intl, offlineReady, setOfflineReady]);
 
   useEffect(() => {
     if (!needRefresh) {
       return;
     }
-    addToast(PwaUpdateDialogProps(intl, appName, handleRefreshClose, handleRefresh));
+    const [msg, opts] = PwaUpdateDialogProps(intl, appName, handleRefreshClose, handleRefresh);
+    toast(msg, opts);
   }, [appName, handleRefresh, handleRefreshClose, intl, needRefresh]);
 }

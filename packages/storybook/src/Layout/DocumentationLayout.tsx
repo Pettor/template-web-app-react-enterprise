@@ -1,5 +1,5 @@
 import type { ReactElement, ReactNode } from "react";
-import { Card, CardBody } from "@heroui/react";
+import { Card, CardContent } from "@heroui/react";
 
 interface Props {
   label: string;
@@ -10,10 +10,10 @@ export function DocumentationLayout({ label, children }: Props): ReactElement {
   return (
     <div className="md:m-4">
       <Card className="p-4">
-        <CardBody>
+        <CardContent>
           <p className="text-3xl md:text-5xl">{label}</p>
           {children}
-        </CardBody>
+        </CardContent>
       </Card>
     </div>
   );

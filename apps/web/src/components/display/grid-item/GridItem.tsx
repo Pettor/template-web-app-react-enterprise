@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import { Card, CardBody, CardHeader, Divider, Spacer } from "@heroui/react";
+import { Card, CardContent, CardHeader, Separator } from "@heroui/react";
 import { useIntl } from "react-intl";
 
 export interface GridItemProps {
@@ -11,7 +11,7 @@ export interface GridItemProps {
 export function GridItem({ title, imageSrc, description }: GridItemProps): ReactElement {
   const intl = useIntl();
   return (
-    <Card isBlurred className="p-4">
+    <Card className="p-4">
       <CardHeader className="gap-2">
         {imageSrc && (
           <img
@@ -26,13 +26,13 @@ export function GridItem({ title, imageSrc, description }: GridItemProps): React
         )}
         <p className="text-lg font-bold">{title}</p>
       </CardHeader>
-      <CardBody>
+      <CardContent>
         <div className="px-2">
-          <Divider />
-          <Spacer y={2} />
+          <Separator />
+          <div className="h-2" />
           <p>{description}</p>
         </div>
-      </CardBody>
+      </CardContent>
     </Card>
   );
 }
