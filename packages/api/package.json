@@ -12,7 +12,11 @@
     "clean:all": "pnpm clean node_modules",
     "lint": "eslint ./src",
     "lint:fix": "pnpm lint --fix",
-    "build:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json"
+    "build:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
+    "test": "vitest run",
+    "test:ci": "vitest run --reporter=junit --outputFile=.test-results/unit-test.xml",
+    "test:coverage": "vitest run --coverage",
+    "test:coverage:ci": "pnpm test:coverage"
   },
   "peerDependencies": {
     "@tanstack/react-query": ">=5.0.0",
@@ -26,7 +30,10 @@
     "@config/barrelsby": "workspace:*",
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
+    "@vitest/coverage-v8": "catalog:vitest",
     "barrelsby": "catalog:common",
-    "vite": "catalog:vite"
+    "vite": "catalog:vite",
+    "vitest": "catalog:vitest",
+    "zod": "catalog:validation"
   }
 }
