@@ -41,6 +41,10 @@
     --surface-tertiary: var(--color-theme-light-content3-default);
     --surface-tertiary-foreground: var(--color-theme-light-content3-foreground);
 
+    /* Form fields — must stay in sync with --surface to avoid blending with --background */
+    --field-background: var(--color-theme-light-content1-default);
+    --field-foreground: var(--color-theme-light-foreground);
+
     --disabled-opacity: var(--layout-disabled-opacity);
   }
 
@@ -73,6 +77,10 @@
     --surface-secondary-foreground: var(--color-theme-dark-content2-foreground);
     --surface-tertiary: var(--color-theme-dark-content3-default);
     --surface-tertiary-foreground: var(--color-theme-dark-content3-foreground);
+
+    /* Form fields — content1 (#18181b) gives subtle elevation above #000000 background */
+    --field-background: var(--color-theme-dark-content1-default);
+    --field-foreground: var(--color-theme-dark-foreground);
 
     --disabled-opacity: var(--layout-disabled-opacity);
   }
