@@ -5,121 +5,297 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Essential Commands
 
 ### Development
-- `pnpm dev` - Start development server (main app at localhost:5173)
-- `pnpm dev:mocks` - Start development with mock server enabled
-- `pnpm dev:mocks:cli` - Start standalone mock server
-- `pnpm storybook` - Start Storybook development server
+- `pnpm dev` - Start development server (main app at https://localhost:5173)
+- `pnpm dev:mocks` - Start development with mock server enabled (API on port 3100)
+- `pnpm dev:mocks:cli` - Start standalone mock server only
+- `pnpm storybook` - Start Storybook development server (localhost:9050)
 
 ### Build & Deploy
 - `pnpm build` - Build all apps for production
-- `pnpm deploy` - Build and prepare deployment artifacts
+- `pnpm deploy` - Build and prepare deployment artifacts in `output/deployment/`
 - `pnpm storybook:build` - Build Storybook static files
 
 ### Testing
-- `pnpm test` - Run all unit tests with Vitest
-- `pnpm test:coverage` - Run tests with coverage report
-- `pnpm test:e2e` - Run Playwright end-to-end tests (requires dev server running)
+- `pnpm test` - Run all unit/component tests with Vitest (browser-based via Playwright)
+- `pnpm test:coverage` - Run tests with Cobertura coverage report
+- `pnpm test:e2e` - Run Playwright E2E tests (auto-starts dev server)
 - `pnpm test:e2e:headless` - Run E2E tests in headless mode
 
 ### Code Quality
 - `pnpm lint` - Run ESLint across all packages
-- `pnpm lint:fix` - Auto-fix linting issues
+- `pnpm lint:fix` - Auto-fix linting issues (also runs `sherif --fix` for dependency consistency)
 - `pnpm format` - Format code with Prettier
 
 ### Utilities
 - `pnpm clean` - Clean build artifacts
-- `pnpm generate:exports` - Generate barrel exports for packages
+- `pnpm generate:exports` - Regenerate barrel exports for all packages (run after adding new files)
 
-## Architecture Overview
+### Package-Scoped Commands
+- `pnpm --filter=@app/web [script]` - Run script in a specific package
+- `pnpm -w run [script]` - Run script in workspace root context
 
-This is a **Turborepo monorepo** with a layered architecture:
+## Repository Structure
 
-### Apps Structure
-- `apps/web/` - Main React application (Vite + React 19)
-- `apps/storybook/` - Storybook configuration and stories
-- `apps/e2e/` - Playwright end-to-end tests
-- `apps/mock/` - Mock server configuration using Mocks Server
+This is a **Turborepo monorepo** managed with **pnpm workspaces** (pnpm 10.33.0, Node 18–<25).
 
-### Packages Structure
-- `packages/ui/` - Shared UI components with Storybook stories
-- `packages/api/` - API client, data fetching, and authentication logic
-- `packages/react/` - React utilities and custom hooks
-- `packages/mocks/` - Mock data and test utilities
-- `packages/storybook/` - Storybook decorators and utilities
+```
+root/
+├── apps/
+│   ├── web/          # Main React application (Vite + React 19)
+│   ├── storybook/    # Storybook configuration and stories
+│   ├── e2e/          # Playwright end-to-end tests
+│   └── mock/         # Mocks Server for API mocking
+├── packages/
+│   ├── ui/           # (@package/ui) Shared UI components
+│   ├── api/          # (@package/api) API client, auth, data fetching
+│   ├── react/        # (@package/react) React utilities and hooks
+│   ├── mocks/        # (@package/mocks) Mock data and test utilities
+│   └── storybook/    # (@package/storybook) Storybook decorators
+├── configs/
+│   ├── eslint/       # (@config/eslint) Shared ESLint configs
+│   ├── tailwind/     # (@config/tailwind) Shared Tailwind config
+│   ├── typescript/   # (@config/typescript) Shared tsconfig bases
+│   ├── vite/         # (@config/vite) Vite config factory functions
+│   └── barrelsby/    # (@config/barrelsby) Barrel export generator config
+├── design/
+│   └── tokens/       # (@design/tokens) Style Dictionary design tokens
+├── output/           # Build artifacts (gitignored)
+└── .husky/           # Git hooks (pre-commit, commit-msg)
+```
 
-### Configs Structure
-- `configs/eslint/` - Shared ESLint configurations
-- `configs/tailwind/` - Shared Tailwind CSS configurations
-- `configs/typescript/` - Shared TypeScript configurations
+## Apps
+
+### `apps/web` — Main React Application
+- **URL**: https://localhost:5173 (HTTPS enabled via `vite-plugin-basic-ssl`)
+- **Stack**: React 19, React Router v6, Vite 8, Tailwind CSS 4, HeroUI, React Query 5, Jotai 2, React Intl 10, Zod 4, TanStack Form
+- **Features**: PWA (workbox), offline support, dark/light theme, i18n, hash-based routing, lazy-loaded routes
+
+### `apps/storybook` — Component Documentation
+- **URL**: localhost:9050
+- **Stack**: Storybook 10 with React/Vite builder, addon-vitest (Playwright/Chromium), addon-a11y, addon-docs
+- **Stories**: Pulls from `@app/web` and `@package/ui` node_modules
+
+### `apps/e2e` — End-to-End Tests
+- **Stack**: Playwright 1.58, Chromium, JUnit XML reporter
+- **Config**: `apps/e2e/playwright.config.ts`, base URL https://localhost:5173, 1 retry, screenshots/traces on failure
+
+### `apps/mock` — API Mock Server
+- **Stack**: Mocks Server 4.1, runs on port 3100
+- **Activation**: `pnpm dev:mocks` sets `--mode mocks` which switches `VITE_CONNECT_PORT` to 3100
+
+## Packages
+
+### `@package/api` — API Client & Authentication
+Key exports:
+- `ApiClient` — Main HTTP client that offloads requests to a **Web Worker** for non-blocking execution
+- `FetchClient` — Low-level fetch wrapper
+- `TokenStorage`, `JwtToken` — JWT token management
+- `ServiceError`, `ServiceErrorFactory` — Typed error handling
+- API endpoint services: `Login`, `Logout`, `RefreshToken`, `ForgotPassword`, `SelfRegister`, `ApplicationInfo`, `PersonalProfile`
+- Classes, Schemas, Converters, Fetch utilities
+
+### `@package/ui` — Shared UI Components
+Key exports: `Logo`, `LogoFull`, `GithubIcon`, `LinkedInIcon`, `BasicLayout`, `NavbarLayout`, `BlueFadeBackground`, `GridBackground`, `Navbar`
+
+### `@package/react` — React Utilities & Hooks
+Key exports: `UseMediaQuery`, `UseRunOnce`, `LocalStorage`, `IndexDbStorage`, `GetCrypto`, `Base64`, `SHA256`, `JoinChildren`, `Sleep`
+
+### `@package/mocks` — Mock Data & Test Utilities
+Key exports: `AdminApiClient`, helpers for mock server integration (used in `apps/mock`)
+
+### `@design/tokens` — Design System Tokens
+- Built with **Style Dictionary 5** in W3C token format
+- Exports: `./css` → `variables.css` (CSS custom properties), `./tailwind` → `theme.js` (Tailwind color palette)
+- Provides semantic color system for light/dark themes
+
+## Web App Architecture (`apps/web/src/`)
+
+```
+src/
+├── main.tsx              # Entry point — mounts React into #root
+├── main.css              # Global styles (imports Tailwind + design tokens)
+├── core/                 # App shell, providers, routing, auth
+│   ├── App.tsx           # Root component: wraps AppProviders → AppTheme → AppRoutes
+│   ├── AppProviders.tsx  # Provider stack (see hierarchy below)
+│   ├── AppTheme.tsx      # Theme initialization hook
+│   ├── AppLocales.tsx    # React Intl i18n setup
+│   ├── auth/             # Auth context, reducer, provider, useAuth hook
+│   ├── config/           # App-level configuration constants
+│   └── routes/           # Route definitions and protection logic
+│       ├── AppRoutes.tsx
+│       ├── PrivateRoutes.tsx
+│       ├── PublicRoutes.tsx
+│       ├── RouteProviders.tsx
+│       └── logic/        # PrivateRouteLogic, PublicRouteLogic
+├── atoms/                # Jotai atoms (e.g., ThemeAtoms.ts with atomEffect)
+├── classes/              # TypeScript interfaces and business logic classes
+│   ├── auth/             # AuthState, AuthStatus
+│   ├── theme/            # ThemeMode, UseTheme
+│   ├── appbar/
+│   ├── app-social-links/
+│   └── app-session/
+├── pages/                # Route-level components (one folder per route)
+│   ├── home/
+│   ├── login/
+│   ├── sign-up/
+│   ├── forgot-password/
+│   ├── about/            # Example of nested route with modal
+│   └── not-found/
+├── components/           # Reusable UI components by category
+│   ├── actions/          # Action-triggered components
+│   ├── display/          # Presentation-only components
+│   ├── feedback/         # Toast notifications, etc.
+│   ├── forms/            # Form components
+│   ├── input/            # Input controls
+│   ├── modules/          # Feature modules (e.g., PWA prompt)
+│   ├── navigation/       # Navigation components
+│   └── views/            # Page layout wrappers
+└── assets/               # Static assets (images, fonts)
+```
+
+### Provider Hierarchy
+```
+HeroUIProvider
+  └── ToastProvider
+        └── AppLocales (React Intl)
+              └── PwaProviderModule
+                    └── QueryClientProvider (React Query)
+                          └── AuthProvider (React Context)
+                                └── AppTheme + AppRoutes
+```
 
 ## Key Architectural Patterns
 
-### Web App Architecture (`apps/web/src/`)
-- **Core**: Application setup, providers, theming, routing, and authentication
-- **Pages**: Route-level components with loaders and hooks
-- **Components**: Reusable UI components organized by category (actions, forms, views, etc.)
-- **Classes**: TypeScript interfaces and business logic
-- **Atoms**: Jotai state management atoms
-
 ### Authentication Flow
-- Uses JWT tokens with refresh token mechanism
-- AuthProvider manages global authentication state via useReducer
-- PrivateRouteLogic/PublicRouteLogic handle route protection
-- Token refresh attempted on app initialization
+- JWT-based with refresh token mechanism stored via `TokenStorage`
+- `AuthProvider` wraps auth state in React Context with `useReducer`
+- Token refresh is attempted on app initialization via `useRunOnce` hook
+- Dispatched actions: `auth/login`, `auth/logout`
+- Route guards: `PrivateRouteLogic` (redirects unauthenticated users), `PublicRouteLogic` (redirects authenticated users away from login)
 
 ### Routing Strategy
-- Hash-based routing with React Router v6
-- Lazy-loaded routes for code splitting
-- Separate route definitions for public/private routes
-- Route-level data loading with React Query
+- **Hash-based routing** (`#/`) with React Router v6
+- Routes are **lazy-loaded** via `React.lazy()` for code splitting
+- Public and private routes defined separately in `PrivateRoutes.tsx` / `PublicRoutes.tsx`
+- Route-level data fetching uses React Query via loaders
 
 ### State Management
-- **Global State**: Jotai atoms for theme and app-level state
-- **Server State**: React Query for API data fetching and caching
-- **Authentication**: React Context with useReducer pattern
-- **Component State**: React hooks for local component state
+| Scope | Tool | Location |
+|-------|------|----------|
+| Theme / global app | Jotai atoms + `atomEffect` (localStorage persistence) | `src/atoms/` |
+| Server / API data | React Query (`useQuery`, `useMutation`) | page-level hooks |
+| Authentication | React Context + `useReducer` | `src/core/auth/` |
+| Component-local | `useState`, `useReducer` | inline |
 
-### Styling Approach
-- Tailwind CSS for utility-first styling
-- HeroUI component library for consistent design system
-- CSS-in-JS via Tailwind for dynamic theming
-- Responsive design with mobile-first approach
+### API Client Pattern
+- API calls are delegated to a **Web Worker** (`ApiWorker`) to avoid blocking the main thread
+- Service classes encapsulate each endpoint (typed request/response)
+- Errors are normalized through `ServiceErrorFactory`
 
-## Development Workflow
+### Styling Conventions
+- **Tailwind CSS 4** utility classes, ordered by `prettier-plugin-tailwindcss`
+- **HeroUI** components for design system consistency (Button, Input, Modal, etc.)
+- Dark mode toggled by adding/removing `.dark` class on `<html>` via `atomEffect`
+- Design tokens (CSS variables) imported globally in `main.css`
+- Line length: 120 chars; use `clsx()` for conditional classes
 
-### Making Changes
-1. Work in feature branches from `main`
-2. Use TypeScript for all new code
-3. Follow existing naming conventions and file structure
-4. Add Storybook stories for new UI components
-5. Write tests for new functionality
+## Naming & File Conventions
 
-### Testing Requirements
-- Unit tests with Vitest for utilities and hooks
-- Component tests via Storybook testing
-- E2E tests with Playwright for critical user flows
-- Visual regression testing via Storybook
+| Thing | Convention | Example |
+|-------|-----------|---------|
+| React components | PascalCase file + function declaration | `LoginRoute.tsx`, `function LoginRoute()` |
+| Hooks | PascalCase with `Use` prefix | `UseAuth.ts`, `UseRunOnce.ts` |
+| Utilities / classes | PascalCase | `TokenStorage.ts`, `JwtToken.ts` |
+| Jotai atoms | camelCase + `Atom` suffix | `themeModeAtom` |
+| Barrel exports | Auto-generated `index.ts` via barrelsby | do not edit manually |
+| Page routes | `[Name]Route.tsx` | `LoginRoute.tsx`, `HomeRoute.tsx` |
+| Stories | Co-located `[Component].stories.tsx` | `Logo.stories.tsx` |
+| Props interfaces | `[ComponentName]Props` | `NavbarProps` |
 
-### Build Process
-- Turborepo orchestrates builds across all packages
-- Vite handles web app bundling and optimization
-- Automatic barrel exports generation for packages
-- Deployment artifacts generated in `output/` directory
+**Function style**: Prefer **function declarations** over arrow functions for components and named utilities. Arrow functions are acceptable for callbacks and inline handlers. (ESLint enforces this.)
+
+**Import order**: React/framework first, then external packages alphabetically, then internal packages, then relative imports. ESLint enforces ordering automatically.
+
+## TypeScript Guidelines
+- Strict mode is enabled across all packages
+- Explicit return types required on public APIs
+- Prefer `interface` over `type` for object shapes
+- Use `import type` for type-only imports
+- Schemas defined with Zod; converters map API responses to domain types
+
+## Testing Guidelines
+
+### Unit/Component Tests (Vitest + Storybook)
+- Tests run in **Chromium browser** via Playwright (not jsdom)
+- Test files co-located with components as `*.test.ts(x)` or via Storybook play functions
+- Coverage: Cobertura format, excludes stories, index barrels, and `.d.ts` files
+- Run: `pnpm test`
+
+### E2E Tests (Playwright)
+- Located in `apps/e2e/src/**/*.spec.ts`
+- Dev server auto-starts on test run
+- Uses `https://localhost:5173` with HTTPS certificate bypass
+- Screenshots, videos, and traces captured on failure
+- Run: `pnpm test:e2e`
+
+### Storybook Component Testing
+- Stories serve as visual + interactive documentation
+- Accessibility tested via `@storybook/addon-a11y`
+- Every new UI component in `@package/ui` or `apps/web` **must** have a story
+
+## Build Pipeline (Turbo)
+
+Task execution order enforced by Turborepo:
+1. `build:exports` — barrelsby generates `src/index.ts` barrel files
+2. `build:libs` — compiles packages with their barrel exports
+3. `build` — Vite bundles apps (depends on `build:libs`)
+4. `storybook:build` — builds Storybook static site
+5. `deploy` — copies `dist/` and `storybook-static/` to `output/deployment/`
+
+Turborepo caches outputs; use `--force` to bypass cache when debugging build issues.
+
+## Environment Variables
+
+| Variable | Default | Mocks |
+|----------|---------|-------|
+| `VITE_APP_VERSION` | `0.6.0` | `0.6.0` |
+| `VITE_CONNECT_HOST` | `http://localhost` | `http://127.0.0.1` |
+| `VITE_CONNECT_PORT` | `5000` | `3100` |
+
+- `.env` — development defaults
+- `.env.mocks` — overrides for mock server mode
+- `.env.*.local` — local overrides (gitignored), invalidate Turbo cache
+
+## Code Quality & Git Hooks
+
+**Pre-commit** (`lint-staged`): Runs Prettier on staged `*.js`, `*.ts`, `*.tsx`, `*.scss` files.
+
+**Commit-msg** (`commitlint`): Enforces Conventional Commits format:
+```
+feat: add user profile page
+fix: correct token refresh timing
+docs: update API usage examples
+refactor: simplify auth reducer
+```
+
+**Prettier** settings: printWidth 120, tabWidth 2, double quotes, trailingComma es5, `prettier-plugin-tailwindcss` for class ordering.
+
+**Sherif**: Checks monorepo dependency consistency. Run `pnpm lint:fix` to auto-fix mismatches.
+
+## Adding New Features — Checklist
+
+1. **New package export**: Add file → run `pnpm generate:exports` to regenerate barrel
+2. **New UI component**: Create in `packages/ui/src/` or `apps/web/src/components/`, add `.stories.tsx`
+3. **New page/route**: Create folder in `apps/web/src/pages/`, add route entry in `PrivateRoutes.tsx` or `PublicRoutes.tsx`
+4. **New API endpoint**: Add service class in `packages/api/src/`, export via barrel
+5. **New Jotai atom**: Add to `apps/web/src/atoms/`
+6. **New hook**: Add to `packages/react/src/hooks/` or co-locate with feature
 
 ## Important Notes
 
-### Package Management
-- Uses pnpm with workspace configuration
-- Specific package versions locked via pnpm overrides
-- Node.js 18+ required, < 23.0.0
-
-### Environment Setup
-- Enable corepack for automatic pnpm usage
-- Mock server runs on different port for API mocking
-- PWA configuration for offline functionality
-
-### Code Organization
-- Barrel exports auto-generated via barrelsby
-- Consistent folder structure across packages
-- TypeScript strict mode enabled
-- Husky pre-commit hooks for code quality
+- **pnpm only** — do not use npm or yarn; enforced via `packageManager` field
+- **HTTPS in dev** — the dev server uses a self-signed cert; browser will show a warning on first visit
+- **Hash routing** — all routes use `#/` prefix; account for this in links and tests
+- **Barrel index files** — never edit `src/index.ts` files manually; they are auto-generated by barrelsby
+- **React Compiler** — enabled during production builds for automatic memoization; disabled in dev for faster HMR
+- **Web Worker API** — API calls go through `ApiWorker`; do not call `FetchClient` directly from components
