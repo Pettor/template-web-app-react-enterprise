@@ -42,49 +42,49 @@ export function Colors(): ReactElement {
     <DocumentationLayout label="Colors">
       <div className="h-8" />
       <div className="flex flex-col gap-4">
-        <ColorSection title="Base">
-          <ColorItem text="background" bgColor="bg-background" />
-          <ColorItem text="foreground" bgColor="bg-foreground" invert />
-          <ColorItem text="overlay" bgColor="bg-overlay" />
-          <ColorItem text="muted" bgColor="bg-muted" />
+        <ColorSection title="Base Colors">
+          <ColorItem text="--white" bgColor="bg-[var(--white)]" />
+          <ColorItem text="--black" bgColor="bg-[var(--black)]" invert />
+          <ColorItem text="--snow" bgColor="bg-[var(--snow)]" />
+          <ColorItem text="--eclipse" bgColor="bg-[var(--eclipse)]" invert />
         </ColorSection>
-        <ColorSection title="Surface">
-          <ColorItem text="surface" bgColor="bg-surface" />
-          <ColorItem text="surface-secondary" bgColor="bg-surface-secondary" />
-          <ColorItem text="surface-tertiary" bgColor="bg-surface-tertiary" />
+        <ColorSection title="Background & Surface">
+          <ColorItem text="--background" bgColor="bg-background" />
+          <ColorItem text="--foreground" bgColor="bg-foreground" invert />
+          <ColorItem text="--surface" bgColor="bg-surface" />
+          <ColorItem text="--surface-foreground" bgColor="bg-surface-foreground" invert />
+          <ColorItem text="--overlay" bgColor="bg-overlay" />
+          <ColorItem text="--overlay-foreground" bgColor="bg-overlay-foreground" invert />
         </ColorSection>
-        <ColorSection title="Semantic">
-          <ColorItem text="default" bgColor="bg-default" />
-          <ColorItem text="accent" bgColor="bg-accent" invert />
-          <ColorItem text="success" bgColor="bg-success" />
-          <ColorItem text="warning" bgColor="bg-warning" />
-          <ColorItem text="danger" bgColor="bg-danger" invert />
+        <ColorSection title="Primary Colors">
+          <ColorItem text="--accent" bgColor="bg-accent" invert />
+          <ColorItem text="--accent-foreground" bgColor="bg-accent-foreground" />
+          <ColorItem text="--accent-soft" bgColor="bg-accent-soft" />
+          <ColorItem text="--accent-soft-foreground" bgColor="bg-accent-soft-foreground" invert />
         </ColorSection>
-        <ColorSection title="Hover">
-          <ColorItem text="default-hover" bgColor="bg-default-hover" />
-          <ColorItem text="accent-hover" bgColor="bg-accent-hover" invert />
-          <ColorItem text="success-hover" bgColor="bg-success-hover" />
-          <ColorItem text="warning-hover" bgColor="bg-warning-hover" />
-          <ColorItem text="danger-hover" bgColor="bg-danger-hover" invert />
+        <ColorSection title="Status Colors">
+          <ColorItem text="--success" bgColor="bg-success" />
+          <ColorItem text="--success-foreground" bgColor="bg-success-foreground" invert />
+          <ColorItem text="--warning" bgColor="bg-warning" />
+          <ColorItem text="--warning-foreground" bgColor="bg-warning-foreground" invert />
+          <ColorItem text="--danger" bgColor="bg-danger" invert />
+          <ColorItem text="--danger-foreground" bgColor="bg-danger-foreground" />
         </ColorSection>
-        <ColorSection title="Soft">
-          <ColorItem text="accent-soft" bgColor="bg-accent-soft" />
-          <ColorItem text="success-soft" bgColor="bg-success-soft" />
-          <ColorItem text="warning-soft" bgColor="bg-warning-soft" />
-          <ColorItem text="danger-soft" bgColor="bg-danger-soft" />
+        <ColorSection title="Form Field Colors">
+          <ColorItem text="--field-background" bgColor="bg-field" />
+          <ColorItem text="--field-foreground" bgColor="bg-field-foreground" invert />
+          <ColorItem text="--field-placeholder" bgColor="bg-field-placeholder" />
+          <ColorItem text="--field-border" bgColor="bg-field-border" />
         </ColorSection>
-        <ColorSection title="Foreground">
-          <ColorItem text="default-fg" bgColor="bg-default-foreground" invert />
-          <ColorItem text="accent-fg" bgColor="bg-accent-foreground" />
-          <ColorItem text="success-fg" bgColor="bg-success-foreground" />
-          <ColorItem text="warning-fg" bgColor="bg-warning-foreground" />
-          <ColorItem text="danger-fg" bgColor="bg-danger-foreground" />
-        </ColorSection>
-        <ColorSection title="Miscellaneous">
-          <ColorItem text="border" bgColor="bg-border" />
-          <ColorItem text="separator" bgColor="bg-separator" />
-          <ColorItem text="focus" bgColor="bg-focus" invert />
-          <ColorItem text="field" bgColor="bg-field" />
+        <ColorSection title="Other Colors">
+          <ColorItem text="--default" bgColor="bg-default" />
+          <ColorItem text="--default-foreground" bgColor="bg-default-foreground" invert />
+          <ColorItem text="--muted" bgColor="bg-muted" />
+          <ColorItem text="--border" bgColor="bg-border" />
+          <ColorItem text="--focus" bgColor="bg-focus" invert />
+          <ColorItem text="--link" bgColor="bg-link" invert />
+          <ColorItem text="--backdrop" bgColor="bg-[var(--backdrop)]" invert />
+          <ColorItem text="--scrollbar" bgColor="bg-[var(--scrollbar)]" />
         </ColorSection>
       </div>
     </DocumentationLayout>
