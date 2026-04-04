@@ -12,7 +12,7 @@ export function AboutDetails({ appName, appVersion, serverVersion }: AboutDetail
   const intl = useIntl();
 
   return (
-    <div className="items-left flex flex-1 flex-col px-4 md:mt-4">
+    <div className="flex flex-1 flex-col">
       <Table aria-label="Example static collection table">
         <TableContent>
           <TableHeader>

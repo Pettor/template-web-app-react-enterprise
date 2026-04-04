@@ -47,7 +47,7 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
         e.stopPropagation();
         form.handleSubmit();
       }}
-      className="md:min-w-sm"
+      className="flex flex-col gap-4 md:min-w-sm"
     >
       <form.Field
         name="email"
@@ -71,6 +71,7 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
         selector={(state) => [state.canSubmit]}
         children={([canSubmit]) => (
           <Button
+            fullWidth
             isDisabled={!canSubmit || loading}
             variant="primary"
             type="submit"

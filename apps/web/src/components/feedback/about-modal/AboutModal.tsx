@@ -46,7 +46,6 @@ export function AboutModal({ modal, aboutDetails }: AboutModalProps): ReactEleme
             </ModalHeader>
             <ModalBody>
               <AboutDetails {...aboutDetails} />
-              <div className="h-4" />
             </ModalBody>
           </ModalDialog>
         </ModalContainer>

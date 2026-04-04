@@ -25,9 +25,9 @@ export function LoginView({ appName, loginForm, onAbout }: LoginViewProps): Reac
         </>
       }
     >
-      <div className="flex w-full flex-col items-center justify-center gap-1 p-4 lg:flex-row-reverse">
-        <div className="h-full min-h-[550px] w-full shrink-0 sm:w-[550px]">
-          <Card className="min-h-[550px]">
+      <div className="flex w-full flex-col items-center justify-center p-4 lg:flex-row-reverse">
+        <div className="w-full shrink-0 sm:w-[500px]">
+          <Card className="p-2">
             <CardHeader className="flex w-full items-end justify-between">
               <div className="flex" />
               <Button
@@ -43,15 +43,14 @@ export function LoginView({ appName, loginForm, onAbout }: LoginViewProps): Reac
                 <InformationCircleIcon className="h-6 w-6" />
               </Button>
             </CardHeader>
-            <CardContent className="flex flex-col items-center">
+            <CardContent className="flex flex-col items-center gap-4">
               <div className="flex justify-center md:hidden">
                 <Logo size="medium" />
               </div>
               <div className="flex justify-center max-md:hidden">
                 <Logo size="large" />
               </div>
-              <p className="text-5xl">{appName}</p>
-              <div className="h-6" />
+              <p className="text-4xl font-semibold tracking-tight">{appName}</p>
               <LoginForm {...loginForm} />
             </CardContent>
           </Card>

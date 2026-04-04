@@ -24,9 +24,9 @@ export function SignUpView({ signUpForm, onBack }: SignUpViewProps): ReactElemen
         </>
       }
     >
-      <div className="flex w-full flex-col items-center justify-center gap-1 p-4 lg:flex-row-reverse">
-        <div className="h-full min-h-[550px] w-full shrink-0 sm:w-[550px]">
-          <Card className="min-h-[550px]">
+      <div className="flex w-full flex-col items-center justify-center p-4 lg:flex-row-reverse">
+        <div className="w-full shrink-0 sm:w-[500px]">
+          <Card className="p-2">
             <CardHeader className="flex w-full items-end justify-between">
               <div className="flex" />
               <Button
@@ -41,8 +41,8 @@ export function SignUpView({ signUpForm, onBack }: SignUpViewProps): ReactElemen
                 <XMarkIcon className="h-6 w-6" />
               </Button>
             </CardHeader>
-            <CardContent className="flex flex-col items-center">
-              <p className="my-2 text-center">
+            <CardContent className="flex flex-col items-center gap-4">
+              <p className="text-foreground/70 text-center text-base">
                 {intl.formatMessage({
                   description: "SignUpView - Sign up description",
                   defaultMessage: "Sign up with your email address",
@@ -50,7 +50,6 @@ export function SignUpView({ signUpForm, onBack }: SignUpViewProps): ReactElemen
                 })}
               </p>
               <SignUpForm {...signUpForm} />
-              <div className="h-4" />
             </CardContent>
           </Card>
         </div>

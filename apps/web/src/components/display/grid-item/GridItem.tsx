@@ -11,11 +11,11 @@ export interface GridItemProps {
 export function GridItem({ title, imageSrc, description }: GridItemProps): ReactElement {
   const intl = useIntl();
   return (
-    <Card className="p-4">
-      <CardHeader className="gap-2">
+    <Card className="p-4 transition-shadow hover:shadow-lg">
+      <CardHeader className="gap-3">
         {imageSrc && (
           <img
-            className="h-6 w-6"
+            className="h-7 w-7"
             src={imageSrc}
             aria-label={intl.formatMessage({
               description: "GridItem - Image alt text",
@@ -26,12 +26,9 @@ export function GridItem({ title, imageSrc, description }: GridItemProps): React
         )}
         <p className="text-lg font-bold">{title}</p>
       </CardHeader>
-      <CardContent>
-        <div className="px-2">
-          <Separator />
-          <div className="h-2" />
-          <p>{description}</p>
-        </div>
+      <CardContent className="flex flex-col gap-3">
+        <Separator />
+        <p className="text-foreground/70 text-sm">{description}</p>
       </CardContent>
     </Card>
   );

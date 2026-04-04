@@ -207,6 +207,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
         selector={(state) => [state.canSubmit]}
         children={([canSubmit]) => (
           <Button
+            fullWidth
             isDisabled={!canSubmit || loading}
             variant="primary"
             type="submit"

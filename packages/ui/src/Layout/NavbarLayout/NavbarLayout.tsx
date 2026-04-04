@@ -1,4 +1,5 @@
 import type { ReactElement, ReactNode } from "react";
+import { Separator } from "@heroui/react";
 import { Logo } from "../../Branding/Logo/Logo";
 
 export interface NavbarLayoutProps {
@@ -16,11 +17,12 @@ export function NavbarLayout({ backgroundElement, navbarElement, footer, childre
         {navbarElement}
         <main className="container m-auto">{children}</main>
         {footer && (
-          <footer className="container mx-auto my-auto mt-8 flex max-w-7xl flex-col place-items-center px-12 pb-12">
-            <div className="grid place-items-center gap-0.5">
+          <footer className="container mx-auto mt-12 flex max-w-7xl flex-col place-items-center px-12 pb-12">
+            <Separator className="mb-8 max-w-md" />
+            <div className="grid place-items-center gap-1">
               <Logo size="large" />
               <p className="text-base font-bold">Made with ☕ by Petter Hancock</p>
-              <p>Copyright © 2024 - All right reserved</p>
+              <p className="text-foreground/60 text-sm">Copyright © 2024 - All right reserved</p>
             </div>
           </footer>
         )}

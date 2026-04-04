@@ -10,23 +10,23 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
   const intl = useIntl();
 
   return (
-    <div className="w-80 p-4">
-      <p className="text-xl">
+    <div className="flex w-80 flex-col gap-3 p-4">
+      <p className="text-lg font-semibold">
         {intl.formatMessage({
           description: "ProfileCard - Personal",
           defaultMessage: "Personal",
           id: "hErN+M",
         })}
       </p>
-      <div className="mt-2 flex flex-row gap-4 py-2" data-testid="profile-card__details">
-        <div className="flex flex-col">
+      <div className="flex flex-row gap-4" data-testid="profile-card__details">
+        <div className="flex flex-col gap-0.5">
           <span className="font-semibold">{name ? name : <Skeleton className="my-1 h-4 w-30 rounded-2xl" />}</span>
-          <span className="text-sm">{email ? email : <Skeleton className="my-1 h-3 w-30 rounded-2xl" />}</span>
+          <span className="text-foreground/70 text-sm">
+            {email ? email : <Skeleton className="my-1 h-3 w-30 rounded-2xl" />}
+          </span>
         </div>
       </div>
-      <div className="h-2" />
       <Separator />
-      <div className="h-2" />
       <ListBox
         aria-label={intl.formatMessage({
           description: "ProfileCard - Menu aria label",

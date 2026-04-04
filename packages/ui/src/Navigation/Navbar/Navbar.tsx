@@ -40,7 +40,7 @@ export function Navbar({ title, centerElement, endElement, menuElement }: Navbar
           <p className="font-bold">{title}</p>
         </div>
         {centerElement && <div className="hidden gap-4 sm:flex">{centerElement}</div>}
-        <div className="flex items-center">{endElement}</div>
+        <div className="flex items-center gap-2">{endElement}</div>
       </div>
       {isMenuOpen && menuElement && (
         <div className="bg-background absolute left-0 w-full border-b sm:hidden">{menuElement}</div>

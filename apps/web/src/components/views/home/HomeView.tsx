@@ -25,43 +25,45 @@ export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
     <NavbarLayout footer navbarElement={<Appbar {...appNavbarProps} />} backgroundElement={<BlueFadeBackground />}>
       <div className="flex flex-1 flex-col p-4 sm:p-0">
         <div className="grid w-full place-items-center">
-          <div className="h-8" />
-          <div className="items-center justify-center gap-2 p-2 text-center">
-            <span className="inline-block text-4xl font-medium md:text-5xl lg:text-7xl">
-              {intl.formatMessage({
-                description: "HomeView - Header title ending",
-                defaultMessage: "Welcome to",
-                id: "1/+0+G",
-              })}
-              &nbsp;
-            </span>
-            <span className="from-primary to-secondary inline-block bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl lg:text-7xl">
-              {intl.formatMessage({
-                description: "HomeView - Header title start",
-                defaultMessage: "React",
-                id: "oAy59O",
-              })}
-              &nbsp;
-            </span>
-            <span className="inline-block text-4xl font-medium md:text-5xl lg:text-7xl">
-              {intl.formatMessage({
-                description: "HomeView - Header title ending",
-                defaultMessage: "Template",
-                id: "ojp/AE",
-              })}
-            </span>
-            <p className="py-6 text-xl">
+          <div className="h-10" />
+          <div className="flex flex-col items-center justify-center gap-2 p-2 text-center">
+            <div>
+              <span className="inline-block text-4xl font-medium tracking-tight md:text-5xl lg:text-7xl">
+                {intl.formatMessage({
+                  description: "HomeView - Header title ending",
+                  defaultMessage: "Welcome to",
+                  id: "1/+0+G",
+                })}
+                &nbsp;
+              </span>
+              <span className="from-primary to-secondary inline-block bg-gradient-to-r bg-clip-text text-4xl font-bold tracking-tight text-transparent md:text-5xl lg:text-7xl">
+                {intl.formatMessage({
+                  description: "HomeView - Header title start",
+                  defaultMessage: "React",
+                  id: "oAy59O",
+                })}
+                &nbsp;
+              </span>
+              <span className="inline-block text-4xl font-medium tracking-tight md:text-5xl lg:text-7xl">
+                {intl.formatMessage({
+                  description: "HomeView - Header title ending",
+                  defaultMessage: "Template",
+                  id: "ojp/AE",
+                })}
+              </span>
+            </div>
+            <p className="text-foreground/70 max-w-2xl py-4 text-lg">
               {intl.formatMessage({
                 description: "HomeView - Header description",
                 defaultMessage: "Highly opinionated and optimized using Turborepo, React and TailwindCSS.",
                 id: "NlMkKm",
               })}
             </p>
-            <Separator />
+            <Separator className="max-w-md" />
             <div className="h-4" />
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2">
+        <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-3 md:grid-rows-2">
           <GridItem
             imageSrc={reactImgSrc}
             title={intl.formatMessage({
