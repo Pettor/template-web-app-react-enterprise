@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import { Separator } from "@heroui/react";
-import { BlueFadeBackground, NavbarLayout } from "@package/ui";
+import { NavbarLayout } from "@package/ui";
 import { useIntl } from "react-intl";
 import githubImgSrc from "~/assets/images/logo/github.png";
 import herouiImgSrc from "~/assets/images/logo/heroui.png";
@@ -22,7 +22,7 @@ export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
   const intl = useIntl();
 
   return (
-    <NavbarLayout footer navbarElement={<Appbar {...appNavbarProps} />} backgroundElement={<BlueFadeBackground />}>
+    <NavbarLayout footer navbarElement={<Appbar {...appNavbarProps} />}>
       <div className="flex flex-1 flex-col p-4 sm:p-0">
         <div className="grid w-full place-items-center">
           <div className="h-8" />
