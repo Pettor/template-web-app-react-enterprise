@@ -1,5 +1,5 @@
-import { ZodError } from "zod";
 import { describe, expect, it } from "vitest";
+import { ZodError } from "zod";
 import { ServiceErrorFactory } from "./ServiceErrorFactory";
 
 describe("ServiceErrorFactory.create", () => {
