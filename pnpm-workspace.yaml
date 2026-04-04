@@ -17,7 +17,7 @@ catalogs:
     'style-dictionary': 5.4.0
   eslint:
     '@eslint/js': 10.0.1
-    eslint: 10.1.0
+    eslint: 10.2.0
     eslint-config-prettier: 10.1.8
     eslint-plugin-formatjs: 6.4.4
     eslint-plugin-import: 2.32.0
