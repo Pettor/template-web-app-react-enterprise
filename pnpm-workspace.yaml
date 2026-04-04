@@ -3,6 +3,7 @@ packages:
 - configs/*
 - design/*
 - packages/*
+- tools/*
 catalogs:
   common:
     '@fontsource/rubik': 5.2.8
