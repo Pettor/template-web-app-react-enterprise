@@ -2,7 +2,7 @@ import jsEslint from "@eslint/js";
 import tsEslint from "typescript-eslint";
 import prettierEslint from "eslint-plugin-prettier/recommended";
 import prettierConfigEslint from "eslint-config-prettier";
-import importEslint from "eslint-plugin-import";
+import importEslint from "eslint-plugin-import-x";
 import formatjsEslint from "eslint-plugin-formatjs";
 import storybookEslint from "eslint-plugin-storybook";
 

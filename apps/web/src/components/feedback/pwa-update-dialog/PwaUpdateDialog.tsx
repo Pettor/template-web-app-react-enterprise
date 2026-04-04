@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
+import type { toast } from "@heroui/react";
 import type { IntlShape } from "react-intl";
-import { toast } from "@heroui/react";
 
 export function PwaUpdateDialogProps(
   intl: IntlShape,
@@ -25,7 +25,7 @@ export function PwaUpdateDialogProps(
         children: intl.formatMessage({
           description: "PwaUpdateDialog - Update available action",
           defaultMessage: "Update",
-          id: "qj8n2b",
+          id: "LZF+Z8",
         }),
         onPress: onRefresh,
       },
