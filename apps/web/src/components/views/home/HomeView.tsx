@@ -35,7 +35,7 @@ export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
               })}
               &nbsp;
             </span>
-            <span className="from-primary to-secondary inline-block bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl lg:text-7xl">
+            <span className="from-accent to-danger inline-block bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl lg:text-7xl">
               {intl.formatMessage({
                 description: "HomeView - Header title start",
                 defaultMessage: "React",

@@ -91,7 +91,6 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
               autoComplete="username"
               id={field.name}
               type="email"
-              variant="secondary"
               placeholder={intl.formatMessage({
                 description: "LoginForm - Email input placeholder",
                 defaultMessage: "Email",
@@ -111,7 +110,6 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
             field={field}
             autoComplete="current-password"
             type={isVisible ? "text" : "password"}
-            variant="secondary"
             placeholder={intl.formatMessage({
               description: "LoginForm - Password input placeholder",
               defaultMessage: "Password",
