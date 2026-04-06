@@ -53,4 +53,10 @@ export const config = [
   },
   prettierEslint,
   prettierConfigEslint,
+  {
+    files: ["**/*.test.ts", "**/*.test.tsx"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": "off",
+    },
+  },
 ];

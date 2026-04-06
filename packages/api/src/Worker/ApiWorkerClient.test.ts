@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { FetchClient } from "../Client/FetchClient";
+import type { FetchClient } from "../Client/FetchClient";
 import { ApiWorkerClient, FetchError, isFetchError } from "./ApiWorkerClient";
 
 // Mock TokenStorage so tests control what "current token" is

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { ZodError } from "zod";
 import { ServiceErrorFactory } from "./ServiceErrorFactory";
+import { z } from "zod";
 
 describe("ServiceErrorFactory.create", () => {
   describe("when given an ApiError (has message + status)", () => {
@@ -31,8 +32,6 @@ describe("ServiceErrorFactory.create", () => {
   describe("when given a ZodError", () => {
     function makeZodError(): ZodError {
       try {
-        // Force a parse failure to get a real ZodError instance
-        const { z } = require("zod");
         z.object({ name: z.string() }).parse({ name: 42 });
       } catch (e) {
         if (e instanceof ZodError) return e;
