@@ -15,6 +15,19 @@ export interface AppbarProps {
 
 export function Appbar({ profile, socialLinks, themeSwitch }: AppbarProps): ReactElement {
   const { onGithubClick, onLinkedInClick } = socialLinks;
+  const { name } = profile;
+
+  function getAvatarFallback(name: string): string {
+    const names = name.split(" ");
+    if (!names || !names[0]) {
+      return "";
+    }
+
+    if (names.length === 1 || !names[1]) {
+      return names[0].charAt(0).toUpperCase();
+    }
+    return names[0].charAt(0).toUpperCase() + names[1].charAt(0).toUpperCase();
+  }
 
   const menuRender = (
     <>
@@ -36,23 +49,25 @@ export function Appbar({ profile, socialLinks, themeSwitch }: AppbarProps): Reac
   );
 
   const endElement = (
-    <>
+    <div className="flex gap-1">
       <Popover>
         <PopoverTrigger role="button" data-testid="home-page__menu-button">
-          <Avatar size="sm" />
+          <Avatar size="sm">
+            <Avatar.Fallback>{getAvatarFallback(name)}</Avatar.Fallback>
+          </Avatar>
         </PopoverTrigger>
         <PopoverContent placement="bottom end">
           <ProfileCard {...profile} />
         </PopoverContent>
       </Popover>
       <ThemeSwitch {...themeSwitch} />
-      <Button isIconOnly className="p-2" onPress={onGithubClick}>
+      <Button className="fill-black dark:fill-white" variant="secondary" isIconOnly onPress={onGithubClick}>
         <GithubIcon />
       </Button>
-      <Button isIconOnly className="p-2" onPress={onLinkedInClick}>
+      <Button className="fill-black dark:fill-white" variant="secondary" isIconOnly onPress={onLinkedInClick}>
         <LinkedInIcon />
       </Button>
-    </>
+    </div>
   );
 
   return <Navbar title="App" centerElement={centerElement} menuElement={menuRender} endElement={endElement} />;

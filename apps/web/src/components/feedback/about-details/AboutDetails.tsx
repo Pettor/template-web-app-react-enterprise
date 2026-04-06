@@ -21,34 +21,34 @@ export function AboutDetails({ appName, appVersion, serverVersion }: AboutDetail
           </TableHeader>
           <TableBody>
             <TableRow key="1">
-              <TableCell className="text-lg font-semibold">
+              <TableCell className="font-semibold">
                 {intl.formatMessage({
                   description: "AboutView - App name",
                   defaultMessage: "Name:",
                   id: "S5SFCm",
                 })}
               </TableCell>
-              <TableCell className="text-lg">{appName}</TableCell>
+              <TableCell className="">{appName}</TableCell>
             </TableRow>
             <TableRow key="2">
-              <TableCell className="text-lg font-semibold">
+              <TableCell className="font-semibold">
                 {intl.formatMessage({
                   description: "AboutView - App version",
                   defaultMessage: "App Version",
                   id: "3kCFcr",
                 })}
               </TableCell>
-              <TableCell className="text-lg">{appVersion}</TableCell>
+              <TableCell>{appVersion}</TableCell>
             </TableRow>
             <TableRow key="3">
-              <TableCell className="text-lg font-semibold">
+              <TableCell className="font-semibold">
                 {intl.formatMessage({
                   description: "AboutView - Server version",
                   defaultMessage: "Server version",
                   id: "7klmPZ",
                 })}
               </TableCell>
-              <TableCell className="text-lg">{serverVersion}</TableCell>
+              <TableCell>{serverVersion}</TableCell>
             </TableRow>
           </TableBody>
         </TableContent>

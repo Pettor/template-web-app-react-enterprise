@@ -26,11 +26,12 @@ export function ForgotPasswordView({ appName, resetForm, onBack }: ForgotPasswor
     >
       <div className="flex w-full flex-col items-center justify-center gap-1 p-4 lg:flex-row-reverse">
         <div className="h-full min-h-[550px] w-full shrink-0 sm:w-[550px]">
-          <Card className="min-h-[550px]">
+          <Card className="min-h-[550px]" variant="tertiary">
             <CardHeader className="flex w-full items-end justify-between">
               <div className="flex" />
               <Button
                 isIconOnly
+                variant="secondary"
                 onPress={onBack}
                 aria-label={intl.formatMessage({
                   description: "AboutView - Back button aria label",

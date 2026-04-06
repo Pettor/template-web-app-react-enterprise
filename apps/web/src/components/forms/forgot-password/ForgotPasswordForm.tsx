@@ -47,7 +47,7 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
         e.stopPropagation();
         form.handleSubmit();
       }}
-      className="md:min-w-sm"
+      className="flex flex-col justify-center gap-4"
     >
       <form.Field
         name="email"

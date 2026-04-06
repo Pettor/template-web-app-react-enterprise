@@ -23,12 +23,13 @@ export function AboutView({ onBack, ...aboutProps }: AboutViewProps): ReactEleme
     >
       <div className="flex w-full flex-col items-center justify-center gap-1 p-4 lg:flex-row-reverse">
         <div className="h-full min-h-[550px] w-full shrink-0 sm:w-[550px]">
-          <Card className="min-h-[550px]">
+          <Card className="min-h-[550px]" variant="tertiary">
             <CardHeader className="flex w-full items-end justify-between">
               <div className="flex"></div>
               <Button
-                onPress={onBack}
                 isIconOnly
+                variant="secondary"
+                onPress={onBack}
                 aria-label={intl.formatMessage({
                   description: "AboutView - Back button aria label",
                   defaultMessage: "Back",
@@ -39,19 +40,7 @@ export function AboutView({ onBack, ...aboutProps }: AboutViewProps): ReactEleme
               </Button>
             </CardHeader>
             <CardContent>
-              <div className="p-4">
-                <p className="text-2xl font-bold">
-                  {intl.formatMessage({
-                    description: "About - Title",
-                    defaultMessage: "About",
-                    id: "2Rm6Lp",
-                  })}
-                </p>
-                <div className="h-4" />
-                <Separator />
-                <div className="h-4" />
-                <AboutDetails {...aboutProps} />
-              </div>
+              <AboutDetails {...aboutProps} />
             </CardContent>
           </Card>
         </div>
