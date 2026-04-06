@@ -5,32 +5,38 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Essential Commands
 
 ### Development
+
 - `pnpm dev` - Start development server (main app at https://localhost:5173)
 - `pnpm dev:mocks` - Start development with mock server enabled (API on port 3100)
 - `pnpm dev:mocks:cli` - Start standalone mock server only
 - `pnpm storybook` - Start Storybook development server (localhost:9050)
 
 ### Build & Deploy
+
 - `pnpm build` - Build all apps for production
 - `pnpm deploy` - Build and prepare deployment artifacts in `output/deployment/`
 - `pnpm storybook:build` - Build Storybook static files
 
 ### Testing
+
 - `pnpm test` - Run all unit/component tests with Vitest (browser-based via Playwright)
 - `pnpm test:coverage` - Run tests with Cobertura coverage report
 - `pnpm test:e2e` - Run Playwright E2E tests (auto-starts dev server)
 - `pnpm test:e2e:headless` - Run E2E tests in headless mode
 
 ### Code Quality
+
 - `pnpm lint` - Run ESLint across all packages
 - `pnpm lint:fix` - Auto-fix linting issues (also runs `sherif --fix` for dependency consistency)
 - `pnpm format` - Format code with Prettier
 
 ### Utilities
+
 - `pnpm clean` - Clean build artifacts
 - `pnpm generate:exports` - Regenerate barrel exports for all packages (run after adding new files)
 
 ### Package-Scoped Commands
+
 - `pnpm --filter=@app/web [script]` - Run script in a specific package
 - `pnpm -w run [script]` - Run script in workspace root context
 
@@ -66,27 +72,33 @@ root/
 ## Apps
 
 ### `apps/web` — Main React Application
+
 - **URL**: https://localhost:5173 (HTTPS enabled via `vite-plugin-basic-ssl`)
 - **Stack**: React 19, React Router v6, Vite 8, Tailwind CSS 4, HeroUI, React Query 5, Jotai 2, React Intl 10, Zod 4, TanStack Form
 - **Features**: PWA (workbox), offline support, dark/light theme, i18n, hash-based routing, lazy-loaded routes
 
 ### `apps/storybook` — Component Documentation
+
 - **URL**: localhost:9050
 - **Stack**: Storybook 10 with React/Vite builder, addon-vitest (Playwright/Chromium), addon-a11y, addon-docs
 - **Stories**: Pulls from `@app/web` and `@package/ui` node_modules
 
 ### `apps/e2e` — End-to-End Tests
+
 - **Stack**: Playwright 1.58, Chromium, JUnit XML reporter
 - **Config**: `apps/e2e/playwright.config.ts`, base URL https://localhost:5173, 1 retry, screenshots/traces on failure
 
 ### `apps/mock` — API Mock Server
+
 - **Stack**: Mocks Server 4.1, runs on port 3100
 - **Activation**: `pnpm dev:mocks` sets `--mode mocks` which switches `VITE_CONNECT_PORT` to 3100
 
 ## Packages
 
 ### `@package/api` — API Client & Authentication
+
 Key exports:
+
 - `ApiClient` — Main HTTP client that offloads requests to a **Web Worker** for non-blocking execution
 - `FetchClient` — Low-level fetch wrapper
 - `TokenStorage`, `JwtToken` — JWT token management
@@ -95,15 +107,19 @@ Key exports:
 - Classes, Schemas, Converters, Fetch utilities
 
 ### `@package/ui` — Shared UI Components
+
 Key exports: `Logo`, `LogoFull`, `GithubIcon`, `LinkedInIcon`, `BasicLayout`, `NavbarLayout`, `BlueFadeBackground`, `GridBackground`, `Navbar`
 
 ### `@package/react` — React Utilities & Hooks
+
 Key exports: `UseMediaQuery`, `UseRunOnce`, `LocalStorage`, `IndexDbStorage`, `GetCrypto`, `Base64`, `SHA256`, `JoinChildren`, `Sleep`
 
 ### `@package/mocks` — Mock Data & Test Utilities
+
 Key exports: `AdminApiClient`, helpers for mock server integration (used in `apps/mock`)
 
 ### `@design/tokens` — Design System Tokens
+
 - Built with **Style Dictionary 5** in W3C token format
 - Exports: `./css` → `variables.css` (CSS custom properties), `./tailwind` → `theme.js` (Tailwind color palette)
 - Provides semantic color system for light/dark themes
@@ -154,6 +170,7 @@ src/
 ```
 
 ### Provider Hierarchy
+
 ```
 HeroUIProvider
   └── ToastProvider
@@ -167,6 +184,7 @@ HeroUIProvider
 ## Key Architectural Patterns
 
 ### Authentication Flow
+
 - JWT-based with refresh token mechanism stored via `TokenStorage`
 - `AuthProvider` wraps auth state in React Context with `useReducer`
 - Token refresh is attempted on app initialization via `useRunOnce` hook
@@ -174,25 +192,29 @@ HeroUIProvider
 - Route guards: `PrivateRouteLogic` (redirects unauthenticated users), `PublicRouteLogic` (redirects authenticated users away from login)
 
 ### Routing Strategy
+
 - **Hash-based routing** (`#/`) with React Router v6
 - Routes are **lazy-loaded** via `React.lazy()` for code splitting
 - Public and private routes defined separately in `PrivateRoutes.tsx` / `PublicRoutes.tsx`
 - Route-level data fetching uses React Query via loaders
 
 ### State Management
-| Scope | Tool | Location |
-|-------|------|----------|
-| Theme / global app | Jotai atoms + `atomEffect` (localStorage persistence) | `src/atoms/` |
-| Server / API data | React Query (`useQuery`, `useMutation`) | page-level hooks |
-| Authentication | React Context + `useReducer` | `src/core/auth/` |
-| Component-local | `useState`, `useReducer` | inline |
+
+| Scope              | Tool                                                  | Location         |
+| ------------------ | ----------------------------------------------------- | ---------------- |
+| Theme / global app | Jotai atoms + `atomEffect` (localStorage persistence) | `src/atoms/`     |
+| Server / API data  | React Query (`useQuery`, `useMutation`)               | page-level hooks |
+| Authentication     | React Context + `useReducer`                          | `src/core/auth/` |
+| Component-local    | `useState`, `useReducer`                              | inline           |
 
 ### API Client Pattern
+
 - API calls are delegated to a **Web Worker** (`ApiWorker`) to avoid blocking the main thread
 - Service classes encapsulate each endpoint (typed request/response)
 - Errors are normalized through `ServiceErrorFactory`
 
 ### Styling Conventions
+
 - **Tailwind CSS 4** utility classes, ordered by `prettier-plugin-tailwindcss`
 - **HeroUI** components for design system consistency (Button, Input, Modal, etc.)
 - Dark mode toggled by adding/removing `.dark` class on `<html>` via `atomEffect`
@@ -201,22 +223,23 @@ HeroUIProvider
 
 ## Naming & File Conventions
 
-| Thing | Convention | Example |
-|-------|-----------|---------|
-| React components | PascalCase file + function declaration | `LoginRoute.tsx`, `function LoginRoute()` |
-| Hooks | PascalCase with `Use` prefix | `UseAuth.ts`, `UseRunOnce.ts` |
-| Utilities / classes | PascalCase | `TokenStorage.ts`, `JwtToken.ts` |
-| Jotai atoms | camelCase + `Atom` suffix | `themeModeAtom` |
-| Barrel exports | Auto-generated `index.ts` via barrelsby | do not edit manually |
-| Page routes | `[Name]Route.tsx` | `LoginRoute.tsx`, `HomeRoute.tsx` |
-| Stories | Co-located `[Component].stories.tsx` | `Logo.stories.tsx` |
-| Props interfaces | `[ComponentName]Props` | `NavbarProps` |
+| Thing               | Convention                              | Example                                   |
+| ------------------- | --------------------------------------- | ----------------------------------------- |
+| React components    | PascalCase file + function declaration  | `LoginRoute.tsx`, `function LoginRoute()` |
+| Hooks               | PascalCase with `Use` prefix            | `UseAuth.ts`, `UseRunOnce.ts`             |
+| Utilities / classes | PascalCase                              | `TokenStorage.ts`, `JwtToken.ts`          |
+| Jotai atoms         | camelCase + `Atom` suffix               | `themeModeAtom`                           |
+| Barrel exports      | Auto-generated `index.ts` via barrelsby | do not edit manually                      |
+| Page routes         | `[Name]Route.tsx`                       | `LoginRoute.tsx`, `HomeRoute.tsx`         |
+| Stories             | Co-located `[Component].stories.tsx`    | `Logo.stories.tsx`                        |
+| Props interfaces    | `[ComponentName]Props`                  | `NavbarProps`                             |
 
 **Function style**: Prefer **function declarations** over arrow functions for components and named utilities. Arrow functions are acceptable for callbacks and inline handlers. (ESLint enforces this.)
 
 **Import order**: React/framework first, then external packages alphabetically, then internal packages, then relative imports. ESLint enforces ordering automatically.
 
 ## TypeScript Guidelines
+
 - Strict mode is enabled across all packages
 - Explicit return types required on public APIs
 - Prefer `interface` over `type` for object shapes
@@ -226,12 +249,14 @@ HeroUIProvider
 ## Testing Guidelines
 
 ### Unit/Component Tests (Vitest + Storybook)
+
 - Tests run in **Chromium browser** via Playwright (not jsdom)
 - Test files co-located with components as `*.test.ts(x)` or via Storybook play functions
 - Coverage: Cobertura format, excludes stories, index barrels, and `.d.ts` files
 - Run: `pnpm test`
 
 ### E2E Tests (Playwright)
+
 - Located in `apps/e2e/src/**/*.spec.ts`
 - Dev server auto-starts on test run
 - Uses `https://localhost:5173` with HTTPS certificate bypass
@@ -239,6 +264,7 @@ HeroUIProvider
 - Run: `pnpm test:e2e`
 
 ### Storybook Component Testing
+
 - Stories serve as visual + interactive documentation
 - Accessibility tested via `@storybook/addon-a11y`
 - Every new UI component in `@package/ui` or `apps/web` **must** have a story
@@ -246,6 +272,7 @@ HeroUIProvider
 ## Build Pipeline (Turbo)
 
 Task execution order enforced by Turborepo:
+
 1. `build:exports` — barrelsby generates `src/index.ts` barrel files
 2. `build:libs` — compiles packages with their barrel exports
 3. `build` — Vite bundles apps (depends on `build:libs`)
@@ -256,11 +283,11 @@ Turborepo caches outputs; use `--force` to bypass cache when debugging build iss
 
 ## Environment Variables
 
-| Variable | Default | Mocks |
-|----------|---------|-------|
-| `VITE_APP_VERSION` | `0.6.0` | `0.6.0` |
+| Variable            | Default            | Mocks              |
+| ------------------- | ------------------ | ------------------ |
+| `VITE_APP_VERSION`  | `0.6.0`            | `0.6.0`            |
 | `VITE_CONNECT_HOST` | `http://localhost` | `http://127.0.0.1` |
-| `VITE_CONNECT_PORT` | `5000` | `3100` |
+| `VITE_CONNECT_PORT` | `5000`             | `3100`             |
 
 - `.env` — development defaults
 - `.env.mocks` — overrides for mock server mode
@@ -271,6 +298,7 @@ Turborepo caches outputs; use `--force` to bypass cache when debugging build iss
 **Pre-commit** (`lint-staged`): Runs Prettier on staged `*.js`, `*.ts`, `*.tsx`, `*.scss` files.
 
 **Commit-msg** (`commitlint`): Enforces Conventional Commits format:
+
 ```
 feat: add user profile page
 fix: correct token refresh timing

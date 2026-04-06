@@ -34,7 +34,13 @@ export function AboutModal({ modal, aboutDetails }: AboutModalProps): ReactEleme
     >
       <ModalBackdrop isDismissable={modal.isDismissable}>
         <ModalContainer size={modal.size}>
-          <ModalDialog>
+          <ModalDialog
+            aria-label={intl.formatMessage({
+              description: "About - Modal dialog label",
+              defaultMessage: "About",
+              id: "g9hJlN",
+            })}
+          >
             <ModalHeader>
               <p>
                 {intl.formatMessage({

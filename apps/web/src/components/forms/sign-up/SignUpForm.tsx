@@ -104,6 +104,11 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             fullWidth
             field={field}
             type="text"
+            label={intl.formatMessage({
+              description: "SignUpFormLabel - User Name label",
+              defaultMessage: "Username",
+              id: "JCIgkj",
+            })}
             placeholder={intl.formatMessage({
               description: "SignUpFormLabel - User Name",
               defaultMessage: "What should we call you?",
@@ -119,6 +124,11 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           <InputField
             field={field}
             type="text"
+            label={intl.formatMessage({
+              description: "SignUpFormLabel - First Name label",
+              defaultMessage: "First name",
+              id: "Jh5bEL",
+            })}
             placeholder={intl.formatMessage({
               description: "SignUpFormLabel - First Name",
               defaultMessage: "What is your first name?",
@@ -134,6 +144,11 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           <InputField
             field={field}
             type="text"
+            label={intl.formatMessage({
+              description: "SignUpFormLabel - Last Name label",
+              defaultMessage: "Last name",
+              id: "txpR8G",
+            })}
             placeholder={intl.formatMessage({
               description: "SignUpFormLabel - Last Name",
               defaultMessage: "What is your last name?",
@@ -149,6 +164,11 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           <InputField
             field={field}
             type="email"
+            label={intl.formatMessage({
+              description: "SignUpFormLabel - Email label",
+              defaultMessage: "Email",
+              id: "kcGGHB",
+            })}
             placeholder={intl.formatMessage({
               description: "SignUpFormLabel - Email",
               defaultMessage: "What's your email?",
@@ -164,6 +184,11 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           <InputField
             field={field}
             type="tel"
+            label={intl.formatMessage({
+              description: "SignUpFormLabel - Phone Number label",
+              defaultMessage: "Phone number",
+              id: "jdJhOL",
+            })}
             placeholder={intl.formatMessage({
               description: "SignUpFormLabel - Phone Number",
               defaultMessage: "What's your phone number?",
@@ -179,6 +204,11 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           <InputField
             field={field}
             type="password"
+            label={intl.formatMessage({
+              description: "SignUpFormLabel - Password label",
+              defaultMessage: "Password",
+              id: "IVFk2K",
+            })}
             placeholder={intl.formatMessage({
               description: "SignUpFormLabel - Password",
               defaultMessage: "Create a password",
@@ -194,6 +224,11 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           <InputField
             field={field}
             type="password"
+            label={intl.formatMessage({
+              description: "SignUpFormLabel - Confirm Password label",
+              defaultMessage: "Confirm password",
+              id: "MN04gk",
+            })}
             placeholder={intl.formatMessage({
               description: "SignUpFormLabel - Confirm Password",
               defaultMessage: "Confirm password",
