@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { ZodError } from "zod";
-import { ServiceErrorFactory } from "./ServiceErrorFactory";
 import { z } from "zod";
+import { ServiceErrorFactory } from "./ServiceErrorFactory";
 
 describe("ServiceErrorFactory.create", () => {
   describe("when given an ApiError (has message + status)", () => {
