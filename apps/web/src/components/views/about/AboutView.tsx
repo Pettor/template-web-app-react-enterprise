@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
-import { Button, Card, CardContent, CardHeader, Separator } from "@heroui/react";
+import { Button, Card, CardContent, CardHeader } from "@heroui/react";
 import { BasicLayout, BlueFadeBackground, GridBackground } from "@package/ui";
 import { useIntl } from "react-intl";
 import { AboutDetails, type AboutDetailsProps } from "~/components/feedback/about-details/AboutDetails";

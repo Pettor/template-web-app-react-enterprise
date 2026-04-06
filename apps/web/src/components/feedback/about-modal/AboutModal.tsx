@@ -38,7 +38,7 @@ export function AboutModal({ modal, aboutDetails }: AboutModalProps): ReactEleme
             aria-label={intl.formatMessage({
               description: "About - Modal dialog label",
               defaultMessage: "About",
-              id: "g9hJlN",
+              id: "jGUfQc",
             })}
           >
             <ModalHeader>

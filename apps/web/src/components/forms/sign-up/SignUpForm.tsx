@@ -107,7 +107,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             label={intl.formatMessage({
               description: "SignUpFormLabel - User Name label",
               defaultMessage: "Username",
-              id: "JCIgkj",
+              id: "i4DDAm",
             })}
             placeholder={intl.formatMessage({
               description: "SignUpFormLabel - User Name",
@@ -127,7 +127,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             label={intl.formatMessage({
               description: "SignUpFormLabel - First Name label",
               defaultMessage: "First name",
-              id: "Jh5bEL",
+              id: "FtoStp",
             })}
             placeholder={intl.formatMessage({
               description: "SignUpFormLabel - First Name",
@@ -147,7 +147,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             label={intl.formatMessage({
               description: "SignUpFormLabel - Last Name label",
               defaultMessage: "Last name",
-              id: "txpR8G",
+              id: "/Pzl99",
             })}
             placeholder={intl.formatMessage({
               description: "SignUpFormLabel - Last Name",
@@ -167,7 +167,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             label={intl.formatMessage({
               description: "SignUpFormLabel - Email label",
               defaultMessage: "Email",
-              id: "kcGGHB",
+              id: "bDmY/I",
             })}
             placeholder={intl.formatMessage({
               description: "SignUpFormLabel - Email",
@@ -187,7 +187,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             label={intl.formatMessage({
               description: "SignUpFormLabel - Phone Number label",
               defaultMessage: "Phone number",
-              id: "jdJhOL",
+              id: "YSdA0O",
             })}
             placeholder={intl.formatMessage({
               description: "SignUpFormLabel - Phone Number",
@@ -207,7 +207,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             label={intl.formatMessage({
               description: "SignUpFormLabel - Password label",
               defaultMessage: "Password",
-              id: "IVFk2K",
+              id: "Sw26VK",
             })}
             placeholder={intl.formatMessage({
               description: "SignUpFormLabel - Password",
@@ -227,7 +227,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             label={intl.formatMessage({
               description: "SignUpFormLabel - Confirm Password label",
               defaultMessage: "Confirm password",
-              id: "MN04gk",
+              id: "+CSkRq",
             })}
             placeholder={intl.formatMessage({
               description: "SignUpFormLabel - Confirm Password",

@@ -94,7 +94,7 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
               label={intl.formatMessage({
                 description: "LoginForm - Email input label",
                 defaultMessage: "Email",
-                id: "P2Xl0E",
+                id: "LX1rS2",
               })}
               placeholder={intl.formatMessage({
                 description: "LoginForm - Email input placeholder",
@@ -118,7 +118,7 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
             label={intl.formatMessage({
               description: "LoginForm - Password input label",
               defaultMessage: "Password",
-              id: "2hRtil",
+              id: "w1aUU6",
             })}
             placeholder={intl.formatMessage({
               description: "LoginForm - Password input placeholder",
