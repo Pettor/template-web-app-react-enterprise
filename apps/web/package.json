@@ -56,7 +56,6 @@
     "vite": "catalog:vite",
     "vite-plugin-http2-proxy": "catalog:vite",
     "vite-plugin-pwa": "catalog:vite",
-    "vite-tsconfig-paths": "catalog:vite",
     "vitest": "catalog:vitest",
     "workbox-window": "7.4.0"
   },

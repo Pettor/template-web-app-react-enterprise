@@ -43,7 +43,6 @@
     "barrelsby": "catalog:common",
     "tailwindcss": "catalog:tailwind",
     "vite": "catalog:vite",
-    "vite-tsconfig-paths": "catalog:vite",
     "vitest": "catalog:vitest"
   }
 }
