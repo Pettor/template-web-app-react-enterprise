@@ -151,7 +151,7 @@ jobs:
 
       - name: Get installed Playwright version
         id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(pnpm list --filter=@app/e2e | grep "playwright " | awk '{print $2}')" >> $GITHUB_OUTPUT
+        run: echo "PLAYWRIGHT_VERSION=$(grep -A5 '^  playwright:' pnpm-workspace.yaml | grep '^    playwright:' | awk '{print $2}')" >> $GITHUB_OUTPUT
 
       - name: Cache playwright binaries
         uses: actions/cache@v5
@@ -223,7 +223,7 @@ jobs:
 
       - name: Get installed Playwright version
         id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(pnpm list --filter=@app/e2e | grep "playwright " | awk '{print $2}')" >> $GITHUB_OUTPUT
+        run: echo "PLAYWRIGHT_VERSION=$(grep -A5 '^  playwright:' pnpm-workspace.yaml | grep '^    playwright:' | awk '{print $2}')" >> $GITHUB_OUTPUT
 
       - name: Cache playwright binaries
         uses: actions/cache@v5
@@ -294,7 +294,7 @@ jobs:
 
       - name: Get installed Playwright version
         id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(pnpm list --filter=@app/e2e | grep "playwright " | awk '{print $2}')" >> $GITHUB_OUTPUT
+        run: echo "PLAYWRIGHT_VERSION=$(grep -A5 '^  playwright:' pnpm-workspace.yaml | grep '^    playwright:' | awk '{print $2}')" >> $GITHUB_OUTPUT
 
       - name: Cache playwright binaries
         uses: actions/cache@v5
