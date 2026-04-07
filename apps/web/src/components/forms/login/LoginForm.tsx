@@ -1,6 +1,16 @@
 import { useState, type ReactElement } from "react";
 import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import { Button, Checkbox, Form, Link } from "@heroui/react";
+import {
+  Button,
+  Checkbox,
+  CheckboxControl,
+  CheckboxIndicator,
+  CheckboxContent,
+  Form,
+  Label,
+  Link,
+  Spinner,
+} from "@heroui/react";
 import { useForm } from "@tanstack/react-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
@@ -68,7 +78,7 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
         e.stopPropagation();
         form.handleSubmit();
       }}
-      className="flex flex-col justify-center"
+      className="flex flex-col justify-center gap-4"
     >
       <form.Field
         name="email"
@@ -81,7 +91,11 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
               autoComplete="username"
               id={field.name}
               type="email"
-              variant="bordered"
+              label={intl.formatMessage({
+                description: "LoginForm - Email input label",
+                defaultMessage: "Email",
+                id: "LX1rS2",
+              })}
               placeholder={intl.formatMessage({
                 description: "LoginForm - Email input placeholder",
                 defaultMessage: "Email",
@@ -101,7 +115,11 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
             field={field}
             autoComplete="current-password"
             type={isVisible ? "text" : "password"}
-            variant="bordered"
+            label={intl.formatMessage({
+              description: "LoginForm - Password input label",
+              defaultMessage: "Password",
+              id: "w1aUU6",
+            })}
             placeholder={intl.formatMessage({
               description: "LoginForm - Password input placeholder",
               defaultMessage: "Password",
@@ -129,18 +147,23 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
         <form.Field
           name="remember"
           children={(field) => (
-            <Checkbox size="sm" isSelected={field.state.value} onValueChange={(value) => field.handleChange(value)}>
-              <p className="text-xs sm:text-sm">
-                {intl.formatMessage({
-                  description: "LoginForm - Remember me checkbox label",
-                  defaultMessage: "Remember me",
-                  id: "eSCI59",
-                })}
-              </p>
+            <Checkbox id="remember" isSelected={field.state.value} onChange={(value) => field.handleChange(value)}>
+              <CheckboxControl>
+                <CheckboxIndicator />
+              </CheckboxControl>
+              <CheckboxContent>
+                <Label htmlFor="remember" className="text-xs sm:text-sm">
+                  {intl.formatMessage({
+                    description: "LoginForm - Remember me checkbox label",
+                    defaultMessage: "Remember me",
+                    id: "eSCI59",
+                  })}
+                </Label>
+              </CheckboxContent>
             </Checkbox>
           )}
         />
-        <Link className="cursor-pointer text-xs sm:text-sm" size="sm" onPress={onForgotPassword}>
+        <Link className="cursor-pointer text-xs sm:text-sm" onPress={onForgotPassword}>
           {intl.formatMessage({
             description: "LoginForm - Forgot password link",
             defaultMessage: "Forgot password?",
@@ -153,24 +176,27 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
         children={([canSubmit]) => (
           <Button
             fullWidth
-            isLoading={loading}
-            disabled={!canSubmit}
-            color="primary"
+            isDisabled={!canSubmit || loading}
+            variant="primary"
             type="submit"
             onPress={() => form.handleSubmit()}
             data-testid="login-form__submit-button"
           >
-            {intl.formatMessage({
-              description: "LoginForm - Submit button text",
-              defaultMessage: "Login",
-              id: "/83/VX",
-            })}
+            {loading ? (
+              <Spinner size="sm" />
+            ) : (
+              intl.formatMessage({
+                description: "LoginForm - Submit button text",
+                defaultMessage: "Login",
+                id: "/83/VX",
+              })
+            )}
           </Button>
         )}
       />
-      {error && <div className="text-small text-danger">{error}</div>}
-      <p className="text-small text-center">
-        <Link className="cursor-pointer" size="sm" onPress={onSignUp}>
+      {error && <div className="text-danger text-sm">{error}</div>}
+      <p className="text-center text-sm">
+        <Link className="cursor-pointer" onPress={onSignUp}>
           {intl.formatMessage({
             description: "LoginForm - Sign up link",
             defaultMessage: "Don't have an account? Sign up",

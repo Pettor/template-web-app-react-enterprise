@@ -20,7 +20,7 @@
     "eslint": "catalog:eslint",
     "eslint-config-prettier": "catalog:eslint",
     "eslint-plugin-formatjs": "catalog:eslint",
-    "eslint-plugin-import": "catalog:eslint",
+    "eslint-plugin-import-x": "catalog:eslint",
     "eslint-plugin-prettier": "catalog:eslint",
     "eslint-plugin-react": "catalog:eslint",
     "eslint-plugin-react-compiler": "catalog:eslint",

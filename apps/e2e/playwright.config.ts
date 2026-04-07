@@ -24,7 +24,7 @@ export default defineConfig({
     reuseExistingServer: true,
     ignoreHTTPSErrors: true,
     timeout: 15000,
-    stdout: 'pipe',
-    stderr: 'pipe',
+    stdout: "pipe",
+    stderr: "pipe",
   },
 });

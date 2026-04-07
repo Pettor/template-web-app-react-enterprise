@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import { InformationCircleIcon, ArrowLeftStartOnRectangleIcon } from "@heroicons/react/20/solid";
-import { Divider, Listbox, ListboxItem, Skeleton, Spacer, User } from "@heroui/react";
+import { ListBox, ListBoxItem, Separator, Skeleton } from "@heroui/react";
 import { useIntl } from "react-intl";
 import type { IAppSessionContent } from "~/classes/app-session/IAppSessionContent";
 
@@ -18,27 +18,29 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
           id: "hErN+M",
         })}
       </p>
-      <div className="mt-2 flex flex-row gap-4 py-2">
-        <User
-          name={name ? name : <Skeleton className="my-1 h-4 w-30 rounded-2xl" />}
-          description={email ? email : <Skeleton className="my-1 h-3 w-30 rounded-2xl" />}
-          data-testid="profile-card__details"
-        />
+      <div className="mt-2 flex flex-row gap-4 py-2" data-testid="profile-card__details">
+        <div className="flex flex-col">
+          <span className="font-semibold">{name ? name : <Skeleton className="my-1 h-4 w-30 rounded-2xl" />}</span>
+          <span className="text-sm">{email ? email : <Skeleton className="my-1 h-3 w-30 rounded-2xl" />}</span>
+        </div>
       </div>
-      <Spacer y={2} />
-      <Divider />
-      <Spacer y={2} />
-      <Listbox
-        role="group"
+      <div className="h-2" />
+      <Separator />
+      <div className="h-2" />
+      <ListBox
         aria-label={intl.formatMessage({
           description: "ProfileCard - Menu aria label",
           defaultMessage: "Profile menu",
           id: "yS5N1i",
         })}
+        onAction={(key) => {
+          if (key === "about") onAbout?.();
+          if (key === "logout") onLogout?.();
+        }}
       >
-        <ListboxItem
-          startContent={<InformationCircleIcon className="h-5 w-5" />}
-          onPress={onAbout}
+        <ListBoxItem
+          id="about"
+          textValue="About"
           data-testid="profile-card__info-button"
           aria-label={intl.formatMessage({
             description: "ProfileCard - Info aria label",
@@ -46,6 +48,7 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
             id: "TJ0KjQ",
           })}
         >
+          <InformationCircleIcon className="h-5 w-5" />
           <span className="text-base">
             {intl.formatMessage({
               description: "ProfileCard - Info",
@@ -53,10 +56,10 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
               id: "NfKNqH",
             })}
           </span>
-        </ListboxItem>
-        <ListboxItem
-          startContent={<ArrowLeftStartOnRectangleIcon className="h-5 w-5" />}
-          onPress={onLogout}
+        </ListBoxItem>
+        <ListBoxItem
+          id="logout"
+          textValue="Logout"
           data-testid="profile-card__logout-button"
           aria-label={intl.formatMessage({
             description: "ProfileCard - Logout aria label",
@@ -64,6 +67,7 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
             id: "kVNu3C",
           })}
         >
+          <ArrowLeftStartOnRectangleIcon className="h-5 w-5" />
           <span className="text-base">
             {intl.formatMessage({
               description: "ProfileCard - Logout",
@@ -71,8 +75,8 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
               id: "bXlo7I",
             })}
           </span>
-        </ListboxItem>
-      </Listbox>
+        </ListBoxItem>
+      </ListBox>
     </div>
   );
 }

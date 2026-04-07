@@ -1,0 +1,101 @@
+/*
+ * HeroUI v3 Design Token Bridge
+ *
+ * Maps @design/tokens CSS variables to HeroUI v3 CSS custom properties.
+ * HeroUI v3 uses a CSS-first theming approach — no Tailwind plugin required.
+ *
+ * Variable reference: @heroui/styles/dist/themes/default/variables.css
+ */
+
+@layer base {
+  :root,
+  .light,
+  [data-theme="light"] {
+    --background: var(--color-theme-light-background);
+    --foreground: var(--color-theme-light-foreground);
+
+    --surface: var(--color-theme-light-surface-default);
+    --surface-foreground: var(--color-theme-light-surface-foreground);
+
+    --surface-secondary: var(--color-theme-light-surface-secondary-default);
+    --surface-secondary-foreground: var(--color-theme-light-surface-secondary-foreground);
+
+    --surface-tertiary: var(--color-theme-light-surface-tertiary-default);
+    --surface-tertiary-foreground: var(--color-theme-light-surface-tertiary-foreground);
+
+    --overlay: var(--color-theme-light-overlay-default);
+    --overlay-foreground: var(--color-theme-light-overlay-foreground);
+
+    --muted: var(--color-theme-light-muted);
+
+    --default: var(--color-theme-light-default-default);
+    --default-foreground: var(--color-theme-light-default-foreground);
+
+    --accent: var(--color-theme-light-accent-default);
+    --accent-foreground: var(--color-theme-light-accent-foreground);
+
+    --success: var(--color-theme-light-success-default);
+    --success-foreground: var(--color-theme-light-success-foreground);
+
+    --warning: var(--color-theme-light-warning-default);
+    --warning-foreground: var(--color-theme-light-warning-foreground);
+
+    --danger: var(--color-theme-light-danger-default);
+    --danger-foreground: var(--color-theme-light-danger-foreground);
+
+    --focus: var(--color-theme-light-focus);
+    --border: var(--color-theme-light-border);
+    --separator: var(--color-theme-light-separator);
+
+    --field-background: var(--color-theme-light-field-background);
+    --field-foreground: var(--color-theme-light-field-foreground);
+    --field-placeholder: var(--color-theme-light-field-placeholder);
+
+    --disabled-opacity: var(--layout-disabled-opacity);
+  }
+
+  .dark,
+  [data-theme="dark"] {
+    --background: var(--color-theme-dark-background);
+    --foreground: var(--color-theme-dark-foreground);
+
+    --surface: var(--color-theme-dark-surface-default);
+    --surface-foreground: var(--color-theme-dark-surface-foreground);
+
+    --surface-secondary: var(--color-theme-dark-surface-secondary-default);
+    --surface-secondary-foreground: var(--color-theme-dark-surface-secondary-foreground);
+
+    --surface-tertiary: var(--color-theme-dark-surface-tertiary-default);
+    --surface-tertiary-foreground: var(--color-theme-dark-surface-tertiary-foreground);
+
+    --overlay: var(--color-theme-dark-overlay-default);
+    --overlay-foreground: var(--color-theme-dark-overlay-foreground);
+
+    --muted: var(--color-theme-dark-muted);
+
+    --default: var(--color-theme-dark-default-default);
+    --default-foreground: var(--color-theme-dark-default-foreground);
+
+    --accent: var(--color-theme-dark-accent-default);
+    --accent-foreground: var(--color-theme-dark-accent-foreground);
+
+    --success: var(--color-theme-dark-success-default);
+    --success-foreground: var(--color-theme-dark-success-foreground);
+
+    --warning: var(--color-theme-dark-warning-default);
+    --warning-foreground: var(--color-theme-dark-warning-foreground);
+
+    --danger: var(--color-theme-dark-danger-default);
+    --danger-foreground: var(--color-theme-dark-danger-foreground);
+
+    --focus: var(--color-theme-dark-focus);
+    --border: var(--color-theme-dark-border);
+    --separator: var(--color-theme-dark-separator);
+
+    --field-background: var(--color-theme-dark-field-background);
+    --field-foreground: var(--color-theme-dark-field-foreground);
+    --field-placeholder: var(--color-theme-dark-field-placeholder);
+
+    --disabled-opacity: var(--layout-disabled-opacity);
+  }
+}

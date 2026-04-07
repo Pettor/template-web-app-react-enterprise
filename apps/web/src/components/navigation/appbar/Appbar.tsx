@@ -1,14 +1,5 @@
 import { type ReactElement } from "react";
-import {
-  Avatar,
-  Button,
-  Link,
-  NavbarItem,
-  NavbarMenuItem,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@heroui/react";
+import { Avatar, Button, Link, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 import { GithubIcon, LinkedInIcon, Navbar } from "@package/ui";
 import type { IAppSocialLinks } from "~/classes/app-social-links/IAppSocialLinks";
 import type { ThemeSwitchProps } from "~/components/actions/theme-switch/ThemeSwitch";
@@ -24,62 +15,59 @@ export interface AppbarProps {
 
 export function Appbar({ profile, socialLinks, themeSwitch }: AppbarProps): ReactElement {
   const { onGithubClick, onLinkedInClick } = socialLinks;
+  const { name } = profile;
+
+  function getAvatarFallback(name: string): string {
+    const names = name.split(" ");
+    if (!names || !names[0]) {
+      return "";
+    }
+
+    if (names.length === 1 || !names[1]) {
+      return names[0].charAt(0).toUpperCase();
+    }
+    return names[0].charAt(0).toUpperCase() + names[1].charAt(0).toUpperCase();
+  }
 
   const menuRender = (
     <>
-      <NavbarMenuItem key="1">
+      <div key="1">
         <Link href="#">something</Link>
-      </NavbarMenuItem>
-      <NavbarMenuItem key="2">something</NavbarMenuItem>
+      </div>
+      <div key="2">something</div>
     </>
   );
 
   const centerElement = (
     <>
-      <NavbarItem>
-        <Link color="foreground" href="#">
-          Features
-        </Link>
-      </NavbarItem>
-      <NavbarItem isActive>
-        <Link aria-current="page" href="#">
-          Customers
-        </Link>
-      </NavbarItem>
-      <NavbarItem>
-        <Link color="foreground" href="#">
-          Integrations
-        </Link>
-      </NavbarItem>
+      <Link href="#">Features</Link>
+      <Link aria-current="page" href="#">
+        Customers
+      </Link>
+      <Link href="#">Integrations</Link>
     </>
   );
 
   const endElement = (
-    <>
-      <NavbarItem>
-        <Popover placement="bottom-end">
-          <PopoverTrigger role="button" data-testid="home-page__menu-button">
-            <Avatar size="sm" />
-          </PopoverTrigger>
-          <PopoverContent>
-            <ProfileCard {...profile} />
-          </PopoverContent>
-        </Popover>
-      </NavbarItem>
-      <NavbarItem>
-        <ThemeSwitch {...themeSwitch} />
-      </NavbarItem>
-      <NavbarItem>
-        <Button isIconOnly className="p-2" color="default" onPress={onGithubClick}>
-          <GithubIcon />
-        </Button>
-      </NavbarItem>
-      <NavbarItem>
-        <Button isIconOnly className="p-2" color="default" onPress={onLinkedInClick}>
-          <LinkedInIcon />
-        </Button>
-      </NavbarItem>
-    </>
+    <div className="flex gap-1">
+      <Popover>
+        <PopoverTrigger role="button" data-testid="home-page__menu-button">
+          <Avatar size="sm">
+            <Avatar.Fallback>{getAvatarFallback(name)}</Avatar.Fallback>
+          </Avatar>
+        </PopoverTrigger>
+        <PopoverContent placement="bottom end">
+          <ProfileCard {...profile} />
+        </PopoverContent>
+      </Popover>
+      <ThemeSwitch {...themeSwitch} />
+      <Button className="fill-black dark:fill-white" variant="secondary" isIconOnly onPress={onGithubClick}>
+        <GithubIcon />
+      </Button>
+      <Button className="fill-black dark:fill-white" variant="secondary" isIconOnly onPress={onLinkedInClick}>
+        <LinkedInIcon />
+      </Button>
+    </div>
   );
 
   return <Navbar title="App" centerElement={centerElement} menuElement={menuRender} endElement={endElement} />;

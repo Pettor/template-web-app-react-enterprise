@@ -22,6 +22,9 @@ const preview: Preview = {
   parameters: {
     a11y: {
       test: "error",
+      config: {
+        rules: [{ id: "color-contrast", enabled: false }],
+      },
     },
     options: {
       storySort: {

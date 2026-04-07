@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
-import { Button, Form, Spacer } from "@heroui/react";
+import { Button, Form, Spinner } from "@heroui/react";
 import { useForm } from "@tanstack/react-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
@@ -47,7 +47,7 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
         e.stopPropagation();
         form.handleSubmit();
       }}
-      className="md:min-w-sm"
+      className="flex flex-col justify-center gap-4"
     >
       <form.Field
         name="email"
@@ -67,20 +67,13 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
           />
         )}
       />
-      <Spacer />
       <form.Subscribe
         selector={(state) => [state.canSubmit]}
         children={([canSubmit]) => (
           <Button
-            isLoading={loading}
-            disabled={!canSubmit}
-            color="primary"
+            isDisabled={!canSubmit || loading}
+            variant="primary"
             type="submit"
-            title={intl.formatMessage({
-              description: "ForgotPasswordFormValidation - Send button title",
-              defaultMessage: "Submit",
-              id: "ojcPit",
-            })}
             aria-label={intl.formatMessage({
               description: "ForgotPasswordFormValidation - Send button title",
               defaultMessage: "Submit",
@@ -88,11 +81,15 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
             })}
             data-testid="forgot-password-form__submit-button"
           >
-            {intl.formatMessage({
-              description: "ForgotPasswordFormValidation - Send",
-              defaultMessage: "Send",
-              id: "r3YQJ5",
-            })}
+            {loading ? (
+              <Spinner size="sm" />
+            ) : (
+              intl.formatMessage({
+                description: "ForgotPasswordFormValidation - Send",
+                defaultMessage: "Send",
+                id: "r3YQJ5",
+              })
+            )}
           </Button>
         )}
       />

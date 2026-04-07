@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
-import { Divider, Spacer } from "@heroui/react";
-import { BlueFadeBackground, NavbarLayout } from "@package/ui";
+import { Separator } from "@heroui/react";
+import { NavbarLayout } from "@package/ui";
 import { useIntl } from "react-intl";
 import githubImgSrc from "~/assets/images/logo/github.png";
 import herouiImgSrc from "~/assets/images/logo/heroui.png";
@@ -22,10 +22,10 @@ export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
   const intl = useIntl();
 
   return (
-    <NavbarLayout footer navbarElement={<Appbar {...appNavbarProps} />} backgroundElement={<BlueFadeBackground />}>
+    <NavbarLayout footer navbarElement={<Appbar {...appNavbarProps} />}>
       <div className="flex flex-1 flex-col p-4 sm:p-0">
         <div className="grid w-full place-items-center">
-          <Spacer y={8} />
+          <div className="h-8" />
           <div className="items-center justify-center gap-2 p-2 text-center">
             <span className="inline-block text-4xl font-medium md:text-5xl lg:text-7xl">
               {intl.formatMessage({
@@ -35,7 +35,7 @@ export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
               })}
               &nbsp;
             </span>
-            <span className="from-primary to-secondary inline-block bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl lg:text-7xl">
+            <span className="from-accent to-danger inline-block bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl lg:text-7xl">
               {intl.formatMessage({
                 description: "HomeView - Header title start",
                 defaultMessage: "React",
@@ -57,8 +57,8 @@ export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
                 id: "NlMkKm",
               })}
             </p>
-            <Divider />
-            <Spacer y={4} />
+            <Separator />
+            <div className="h-4" />
           </div>
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2">

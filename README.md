@@ -9,6 +9,7 @@ A modern, production-ready React web application template designed to jumpstart 
 ## 🚀 Demo
 
 Experience the template in action:
+
 - **[Live Application Demo](https://pettor.github.io/template-web-app-react-enterprise/app/)** - See the main application
 - **[Storybook Component Library](https://pettor.github.io/template-web-app-react-enterprise/storybook/)** - Explore the component documentation
 
@@ -17,35 +18,41 @@ Experience the template in action:
 This template provides a complete modern web development stack with everything you need to build scalable applications:
 
 ### 🏗️ **Core Technologies**
+
 - **[React 19](https://reactjs.org/)** - Latest React with concurrent features and improved performance
 - **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript for better developer experience and fewer runtime errors
 - **[Vite](https://vitejs.dev/)** - Lightning-fast development server and optimized production builds
 - **[Turborepo](https://turbo.build/repo/)** - High-performance monorepo build system for scalable development
 
 ### 🎨 **Styling & UI**
+
 - **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework for rapid UI development
 - **[HeroUI](https://www.heroui.com/)** - Beautiful, semantic component library built on Tailwind
 - **Responsive Design** - Mobile-first approach with modern CSS Grid and Flexbox layouts
 
 ### 🧪 **Testing & Quality Assurance**
+
 - **[Vitest](https://vitest.dev/)** - Fast unit and integration testing with hot reload
 - **[Playwright](https://playwright.dev/)** - Reliable end-to-end testing across all browsers
 - **[Storybook Component Testing](https://storybook.js.org/docs/writing-tests/component-testing)** - Visual component testing and documentation
 - **Code Coverage Reports** - Comprehensive coverage tracking with detailed reporting
 
 ### 🔧 **Development Tools**
+
 - **[Storybook](https://storybook.js.org/)** - Component development environment and documentation
 - **[ESLint](https://eslint.org/)** - Advanced linting with React and TypeScript rules
 - **[Prettier](https://prettier.io/)** - Consistent code formatting across the entire codebase
 - **Hot Module Replacement** - Instant feedback during development
 
 ### 🚀 **DevOps & Deployment**
+
 - **[GitHub Actions](https://docs.github.com/en/actions)** - Automated CI/CD pipeline with comprehensive testing
 - **[GitHub Pages](https://pages.github.com/)** - Seamless deployment and hosting
 - **Automated Quality Gates** - Build, lint, and test validation on every pull request
 - **Branch Protection Rules** - Enforce code quality standards before merging
 
 ### 🌐 **Additional Integrations**
+
 - **Mock API Server** - [Mocks Server](https://mocks-server.org/) integration for frontend development
 - **Internationalization Ready** - Built-in i18n support with React Intl
 - **Environment Configuration** - Multi-environment setup with proper variable management
@@ -56,23 +63,27 @@ This template provides a complete modern web development stack with everything y
 Get up and running in minutes:
 
 ### Prerequisites
+
 - Node.js 22 or higher
 - pnpm (recommended package manager)
 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/Pettor/template-web-app-react.git
    cd template-web-app-react
    ```
 
 2. **Enable corepack for package manager**
+
    ```bash
    corepack enable
    ```
 
 3. **Install dependencies**
+
    ```bash
    pnpm install
    ```

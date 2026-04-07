@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
-import { Card, CardHeader, Button, CardBody, Spacer } from "@heroui/react";
+import { Card, CardHeader, Button, CardContent } from "@heroui/react";
 import { BasicLayout, BlueFadeBackground, GridBackground } from "@package/ui";
 import { useIntl } from "react-intl";
 import type { SignUpFormProps } from "~/components/forms/sign-up/SignUpForm";
@@ -26,17 +26,13 @@ export function SignUpView({ signUpForm, onBack }: SignUpViewProps): ReactElemen
     >
       <div className="flex w-full flex-col items-center justify-center gap-1 p-4 lg:flex-row-reverse">
         <div className="h-full min-h-[550px] w-full shrink-0 sm:w-[550px]">
-          <Card className="min-h-[550px]">
+          <Card className="min-h-[550px]" variant="tertiary">
             <CardHeader className="flex w-full items-end justify-between">
               <div className="flex" />
               <Button
                 isIconOnly
+                variant="secondary"
                 onPress={onBack}
-                title={intl.formatMessage({
-                  description: "AboutView - Back button title",
-                  defaultMessage: "Back",
-                  id: "72q+Ui",
-                })}
                 aria-label={intl.formatMessage({
                   description: "AboutView - Back button aria label",
                   defaultMessage: "Back",
@@ -46,7 +42,7 @@ export function SignUpView({ signUpForm, onBack }: SignUpViewProps): ReactElemen
                 <XMarkIcon className="h-6 w-6" />
               </Button>
             </CardHeader>
-            <CardBody className="flex flex-col items-center">
+            <CardContent className="flex flex-col items-center">
               <p className="my-2 text-center">
                 {intl.formatMessage({
                   description: "SignUpView - Sign up description",
@@ -55,8 +51,8 @@ export function SignUpView({ signUpForm, onBack }: SignUpViewProps): ReactElemen
                 })}
               </p>
               <SignUpForm {...signUpForm} />
-              <Spacer y={4} />
-            </CardBody>
+              <div className="h-4" />
+            </CardContent>
           </Card>
         </div>
       </div>

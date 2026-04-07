@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import { Switch } from "@heroui/react";
+import { Switch, SwitchControl, SwitchThumb, SwitchIcon } from "@heroui/react";
 import { useIntl } from "react-intl";
 import type { ThemeMode } from "~/classes/theme/ThemeMode";
 
@@ -48,20 +48,23 @@ export function SunIcon(props: { className: string }): ReactElement {
 
 export function ThemeSwitch({ mode, onSwitch }: ThemeSwitchProps): ReactElement {
   const intl = useIntl();
+  const isDark = mode === "dark";
   return (
     <Switch
-      isSelected={mode === "dark"}
-      color="primary"
+      isSelected={isDark}
       size="md"
-      thumbIcon={({ isSelected, className }) =>
-        isSelected ? <MoonIcon className={className} /> : <SunIcon className={className} />
-      }
       onChange={onSwitch}
       aria-label={intl.formatMessage({
         description: "ThemeSwitch - Toggle theme switch aria label",
         defaultMessage: "Toggle theme",
         id: "ew183D",
       })}
-    />
+    >
+      <SwitchControl>
+        <SwitchThumb>
+          <SwitchIcon>{isDark ? <MoonIcon className="h-4 w-4" /> : <SunIcon className="h-4 w-4" />}</SwitchIcon>
+        </SwitchThumb>
+      </SwitchControl>
+    </Switch>
   );
 }

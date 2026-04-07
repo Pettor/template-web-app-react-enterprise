@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
-import { Card, CardHeader, Button, CardBody, Spacer } from "@heroui/react";
+import { Card, CardHeader, Button, CardContent } from "@heroui/react";
 import { BasicLayout, BlueFadeBackground, GridBackground } from "@package/ui";
 import { useIntl } from "react-intl";
 import type { ForgotPasswordFormProps } from "../../forms/forgot-password/ForgotPasswordForm";
@@ -26,17 +26,13 @@ export function ForgotPasswordView({ appName, resetForm, onBack }: ForgotPasswor
     >
       <div className="flex w-full flex-col items-center justify-center gap-1 p-4 lg:flex-row-reverse">
         <div className="h-full min-h-[550px] w-full shrink-0 sm:w-[550px]">
-          <Card className="min-h-[550px]">
+          <Card className="min-h-[550px]" variant="tertiary">
             <CardHeader className="flex w-full items-end justify-between">
               <div className="flex" />
               <Button
                 isIconOnly
+                variant="secondary"
                 onPress={onBack}
-                title={intl.formatMessage({
-                  description: "AboutView - Back button title",
-                  defaultMessage: "Back",
-                  id: "72q+Ui",
-                })}
                 aria-label={intl.formatMessage({
                   description: "AboutView - Back button aria label",
                   defaultMessage: "Back",
@@ -46,7 +42,7 @@ export function ForgotPasswordView({ appName, resetForm, onBack }: ForgotPasswor
                 <XMarkIcon className="h-6 w-6" />
               </Button>
             </CardHeader>
-            <CardBody className="flex flex-col items-center">
+            <CardContent className="flex flex-col items-center">
               <span className="mt-8 p-4 text-center text-base">
                 {intl.formatMessage(
                   {
@@ -60,9 +56,9 @@ export function ForgotPasswordView({ appName, resetForm, onBack }: ForgotPasswor
                   }
                 )}
               </span>
-              <Spacer y={4} />
+              <div className="h-4" />
               <ForgotPasswordForm {...resetForm} />
-            </CardBody>
+            </CardContent>
           </Card>
         </div>
       </div>

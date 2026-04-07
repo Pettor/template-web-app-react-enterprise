@@ -28,7 +28,6 @@
     "vite-plugin-pwa": "catalog:vite",
     "vite-tsconfig-paths": "catalog:vite"
   },
-
   "devDependencies": {
     "@config/barrelsby": "workspace:*",
     "@config/eslint": "workspace:*",

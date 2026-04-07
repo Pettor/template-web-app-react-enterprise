@@ -1,4 +1,4 @@
-import { Button, addToast } from "@heroui/react";
+import { Button, toast } from "@heroui/react";
 import { CommonDecorator, ToastDecorator } from "@package/storybook";
 import type { StoryObj } from "@storybook/react-vite";
 import { useIntl } from "react-intl";
@@ -17,16 +17,15 @@ export const UpdateDialog: Story = {
     const intl = useIntl();
     return (
       <Button
-        onPress={() =>
-          addToast(
-            PwaUpdateDialogProps(
-              intl,
-              "App",
-              () => console.log("onClose"),
-              () => console.log("onUpdate")
-            )
-          )
-        }
+        onPress={() => {
+          const [msg, opts] = PwaUpdateDialogProps(
+            intl,
+            "App",
+            () => console.log("onClose"),
+            () => console.log("onUpdate")
+          );
+          toast(msg, opts);
+        }}
       >
         Show Toast
       </Button>
