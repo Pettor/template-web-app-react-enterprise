@@ -12,7 +12,7 @@ export default defineConfig(({ mode, command }) => {
     createReactConfig({ enableReactCompiler: command === "build" }),
     createPWAConfig(),
     {
-      plugins: [TanStackRouterVite()],
+      plugins: [TanStackRouterVite({ routeToken: "route" })],
     },
     { resolve: { dedupe: ["react", "react-dom"] } },
   ]);

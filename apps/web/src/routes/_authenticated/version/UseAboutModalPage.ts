@@ -1,5 +1,5 @@
 import { useRouter } from "@tanstack/react-router";
-import { useAboutPage } from "../UseAboutPage";
+import { useAboutPage } from "../../_public/about/UseAboutPage";
 import type { AboutModalProps } from "~/components/feedback/about-modal/AboutModal";
 
 export function useAboutModalPage(serverVersion: string): AboutModalProps {

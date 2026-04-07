@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useIntl } from "react-intl";
-import type { LoginViewProps } from "../../components/views/login/LoginView";
 import type { FormLogin } from "~/components/forms/login/LoginForm";
+import type { LoginViewProps } from "~/components/views/login/LoginView";
 import { useAuth } from "~/core/auth/UseAuth";
 import { useAppInfo } from "~/core/config/UseAppInfo";
 

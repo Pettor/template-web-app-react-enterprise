@@ -1,11 +1,19 @@
 import type { ReactElement } from "react";
 import { Button } from "@heroui/react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useIntl } from "react-intl";
-import { useNotFoundPage } from "./UseNotFoundPage";
 
-export function NotFoundPage(): ReactElement {
+export const Route = createFileRoute("/$")({
+  component: NotFoundPageRoute,
+});
+
+function NotFoundPageRoute(): ReactElement {
   const intl = useIntl();
-  const { handleClick } = useNotFoundPage();
+  const navigate = useNavigate();
+
+  function handleClick(): void {
+    navigate({ to: "/login" });
+  }
 
   return (
     <div>
