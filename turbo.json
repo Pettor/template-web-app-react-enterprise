@@ -59,12 +59,12 @@
       "inputs": ["src/**", "eslint.config.js", ".eslintrc.*", "package.json", "tsconfig.json"]
     },
     "test": {
-      "cache": true,
+      "cache": false,
       "inputs": ["src/**", "test/**", "vitest.config.ts", "package.json", "tsconfig.json"],
       "outputs": ["coverage/**"]
     },
     "test:ci": {
-      "cache": true,
+      "cache": false,
       "dependsOn": ["^build:libs"],
       "inputs": ["src/**", "test/**", "vitest.config.ts", "package.json", "tsconfig.json"],
       "outputs": [".test-results/**"]
