@@ -13,7 +13,6 @@ export function useForgotPasswordPage(): ForgotPasswordViewProps {
   const { isPending, mutateAsync: submit } = usePostForgotPasswordMutate();
 
   function handleOnBack(): void {
-    console.log("handleBack");
     navigate({ to: "/login" });
   }
 
