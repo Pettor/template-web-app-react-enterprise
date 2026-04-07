@@ -25,7 +25,7 @@ function AboutPageError(): ReactElement {
       serverVersion={intl.formatMessage({
         description: "AboutPage - Error server version N/A",
         defaultMessage: "N/A",
-        id: "tDfYMW",
+        id: "Chil1S",
       })}
     />
   );
