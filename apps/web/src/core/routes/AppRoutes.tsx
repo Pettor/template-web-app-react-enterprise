@@ -1,15 +1,8 @@
 import type { ReactElement } from "react";
-import type { QueryClient } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 import { RouterProvider, createHashHistory, createRouter } from "@tanstack/react-router";
 import { routeTree } from "../../routeTree.gen";
 import { useAuth } from "../auth/UseAuth";
-import type { AuthStatus } from "~/classes/auth/AuthStatus";
-
-export interface RouterContext {
-  queryClient: QueryClient;
-  authStatus: AuthStatus;
-}
 
 const hashHistory = createHashHistory();
 

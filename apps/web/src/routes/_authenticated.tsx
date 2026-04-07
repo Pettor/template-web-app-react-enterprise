@@ -8,7 +8,7 @@ export const Route = createFileRoute("/_authenticated")({
     const { authStatus } = context;
 
     // Redirect to login if user is not authenticated
-    if (authStatus === "unauthenticated" || authStatus === "authenticating") {
+    if (authStatus !== "authenticated") {
       throw redirect({
         to: "/login",
       });

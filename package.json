@@ -63,9 +63,5 @@
     "*.ts": "prettier --write",
     "*.tsx": "prettier --write",
     "*.scss": "prettier --write"
-  },
-  "dependencies": {
-    "@tanstack/react-router": "1.168.10",
-    "@tanstack/router-plugin": "1.167.12"
   }
 }

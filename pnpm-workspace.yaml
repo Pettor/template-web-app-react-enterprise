@@ -69,6 +69,9 @@ catalogs:
     vite-tsconfig-paths: 6.1.1
     vite-plugin-http2-proxy: 0.5.1
     vite-plugin-pwa: 1.2.0
+  tanstack:
+    '@tanstack/react-router': 1.168.10
+    '@tanstack/router-plugin': 1.167.12
   vitest:
     vitest: 4.1.2
     '@vitest/browser': 4.1.2
