@@ -1,5 +1,5 @@
 import type { ReactElement, ReactNode } from "react";
-import { ToastProvider } from "@heroui/toast";
+import { ToastProvider } from "@heroui/react";
 import { validateCrypto } from "@package/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AppLocales } from "./AppLocales";
@@ -18,7 +18,7 @@ export function AppProviders({ children, loadingFallback }: AppProvidersProps): 
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   typeof window !== "undefined" && validateCrypto();
   return (
-    <HeroUIProvider>
+    <>
       <ToastProvider />
       <AppLocales>
         <PwaProviderModule>
@@ -29,6 +29,6 @@ export function AppProviders({ children, loadingFallback }: AppProvidersProps): 
           </QueryClientProvider>
         </PwaProviderModule>
       </AppLocales>
-    </HeroUIProvider>
+    </>
   );
 }

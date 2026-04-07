@@ -1,5 +1,5 @@
-import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import { createBaseConfig, createPWAConfig, createReactConfig, mergeConfigs } from "@config/vite";
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import { defineConfig, loadEnv, mergeConfig } from "vite";
 import proxy from "vite-plugin-http2-proxy";

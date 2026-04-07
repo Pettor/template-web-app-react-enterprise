@@ -47,7 +47,7 @@
     "@package/storybook": "workspace:*",
     "@storybook/react": "catalog:storybook",
     "@tailwindcss/vite": "catalog:tailwind",
-    "@tanstack/router-plugin": "^1.103.0",
+    "@tanstack/router-plugin": "1.167.12",
     "@vitejs/plugin-basic-ssl": "catalog:vite",
     "@vitejs/plugin-react": "catalog:vite",
     "babel-plugin-react-compiler": "catalog:react19",
