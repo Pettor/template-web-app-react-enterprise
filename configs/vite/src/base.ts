@@ -1,5 +1,6 @@
 import tailwindcss from "@tailwindcss/vite";
 import type { UserConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export interface BaseViteConfigOptions {
   /**
@@ -29,15 +30,16 @@ export function createBaseConfig(options: BaseViteConfigOptions = {}): UserConfi
     plugins.push(tailwindcss());
   }
 
+  if (enableTsconfigPaths) {
+    plugins.push(tsconfigPaths());
+  }
+
   if (additionalPlugins) {
     plugins.push(...(Array.isArray(additionalPlugins) ? additionalPlugins : [additionalPlugins]));
   }
 
   return {
     plugins,
-    resolve: {
-      tsconfigPaths: enableTsconfigPaths,
-    },
     build: {
       commonjsOptions: {
         exclude: ["@faker-js/faker"],

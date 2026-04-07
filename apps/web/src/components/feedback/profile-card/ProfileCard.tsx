@@ -33,11 +33,14 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
           defaultMessage: "Profile menu",
           id: "yS5N1i",
         })}
+        onAction={(key) => {
+          if (key === "about") onAbout?.();
+          if (key === "logout") onLogout?.();
+        }}
       >
         <ListBoxItem
           id="about"
           textValue="About"
-          onPress={onAbout}
           data-testid="profile-card__info-button"
           aria-label={intl.formatMessage({
             description: "ProfileCard - Info aria label",
@@ -57,7 +60,6 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
         <ListBoxItem
           id="logout"
           textValue="Logout"
-          onPress={onLogout}
           data-testid="profile-card__logout-button"
           aria-label={intl.formatMessage({
             description: "ProfileCard - Logout aria label",

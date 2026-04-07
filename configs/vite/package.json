@@ -25,7 +25,8 @@
     "@vitejs/plugin-react": "catalog:vite",
     "vite": "catalog:vite",
     "vite-plugin-http2-proxy": "catalog:vite",
-    "vite-plugin-pwa": "catalog:vite"
+    "vite-plugin-pwa": "catalog:vite",
+    "vite-tsconfig-paths": "catalog:vite"
   },
   "devDependencies": {
     "@config/barrelsby": "workspace:*",

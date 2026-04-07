@@ -50,6 +50,7 @@
     "storybook": "catalog:storybook",
     "tailwindcss": "catalog:tailwind",
     "vite": "catalog:vite",
+    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "catalog:vitest"
   }
 }

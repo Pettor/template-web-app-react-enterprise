@@ -3,6 +3,7 @@ import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { playwright } from "@vitest/browser-playwright";
+import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vitest/config";
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
@@ -26,12 +27,16 @@ export default defineConfig({
         extends: true,
         resolve: {
           dedupe: ["react", "react-dom"],
-          tsconfigPaths: true,
         },
         optimizeDeps: {
           include: ["react/jsx-dev-runtime"],
         },
-        plugins: [react(), tailwindcss(), storybookTest({ configDir: path.join(__dirname, ".storybook") })],
+        plugins: [
+          react(),
+          tailwindcss(),
+          tsconfigPaths(),
+          storybookTest({ configDir: path.join(__dirname, ".storybook") }),
+        ],
         test: {
           name: "storybook",
           browser: {
