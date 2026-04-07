@@ -1,7 +1,9 @@
 {
   "extends": "@config/typescript/lib.json",
   "compilerOptions": {
+    "ignoreDeprecations": "6.0", // TODO: Ignore deprecation warnings for TypeScript 6.0, as Vite is not yet compatible with it.
     "outDir": "./dist",
+    "rootDir": "src",
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
