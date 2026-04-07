@@ -25,15 +25,15 @@
     "@config/tailwind": "workspace:*",
     "@heroui/react": "catalog:design",
     "@package/react": "workspace:*",
-    "clsx": "2.1.1",
-    "framer-motion": "12.38.0",
-    "jotai": "2.19.0"
+    "clsx": "catalog:common",
+    "framer-motion": "catalog:common",
+    "jotai": "catalog:common"
   },
   "devDependencies": {
     "@config/barrelsby": "workspace:*",
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
-    "@faker-js/faker": "10.4.0",
+    "@faker-js/faker": "catalog:common",
     "@package/storybook": "workspace:*",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",

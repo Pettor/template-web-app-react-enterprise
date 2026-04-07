@@ -24,7 +24,7 @@
     "zod": ">=4.0.0"
   },
   "dependencies": {
-    "immer": "11.1.4"
+    "immer": "catalog:common"
   },
   "devDependencies": {
     "@config/barrelsby": "workspace:*",

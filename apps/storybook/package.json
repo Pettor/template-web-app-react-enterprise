@@ -28,7 +28,7 @@
     "@package/ui": "workspace:*",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
-    "react-intl": "10.1.1"
+    "react-intl": "catalog:common"
   },
   "devDependencies": {
     "@config/eslint": "workspace:*",
@@ -50,7 +50,7 @@
     "storybook": "catalog:storybook",
     "tailwindcss": "catalog:tailwind",
     "vite": "catalog:vite",
-    "vite-tsconfig-paths": "^6.1.1",
+    "vite-tsconfig-paths": "catalog:vite",
     "vitest": "catalog:vitest"
   }
 }

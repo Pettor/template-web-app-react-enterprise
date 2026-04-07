@@ -18,8 +18,8 @@
     "react": ">=19.0.0"
   },
   "dependencies": {
-    "buffer": "6.0.3",
-    "idb-keyval": "6.2.2"
+    "buffer": "catalog:common",
+    "idb-keyval": "catalog:common"
   },
   "devDependencies": {
     "@config/barrelsby": "workspace:*",
@@ -27,7 +27,7 @@
     "@config/typescript": "workspace:*",
     "@types/react": "catalog:react19",
     "barrelsby": "catalog:common",
-    "usehooks-ts": "3.1.1",
-    "utility-types": "3.11.0"
+    "usehooks-ts": "catalog:common",
+    "utility-types": "catalog:common"
   }
 }
