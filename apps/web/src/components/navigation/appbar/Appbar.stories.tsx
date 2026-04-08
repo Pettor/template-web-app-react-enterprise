@@ -33,9 +33,5 @@ export const Desktop: Story = {
 
 export const Phone: Story = {
   args: defaultArgs,
-  parameters: {
-    viewport: {
-      defaultViewport: "iphonex",
-    },
-  },
+  globals: { viewport: { value: "iphonex" } },
 };
