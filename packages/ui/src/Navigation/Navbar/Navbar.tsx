@@ -1,4 +1,5 @@
-import { useState, type ReactElement, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactElement, type ReactNode } from "react";
+import clsx from "clsx";
 import { Logo } from "../../Branding/Logo/Logo";
 
 export interface NavbarProps {
@@ -10,9 +11,27 @@ export interface NavbarProps {
 
 export function Navbar({ title, centerElement, endElement, menuElement }: NavbarProps): ReactElement {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    function handleScroll(): void {
+      const currentScrollY = window.scrollY;
+      setVisible(currentScrollY < lastScrollY.current || currentScrollY < 10);
+      lastScrollY.current = currentScrollY;
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="bg-background sticky top-0 z-40 w-full border-b">
+    <header
+      className={clsx(
+        "bg-background/50 sticky top-0 z-40 w-full border-b backdrop-blur-lg transition-transform duration-300",
+        !visible && "-translate-y-full"
+      )}
+    >
       <div className="flex h-16 w-full items-center justify-between px-6">
         <div className="flex items-center gap-2">
           {menuElement && (
@@ -43,7 +62,7 @@ export function Navbar({ title, centerElement, endElement, menuElement }: Navbar
         <div className="flex items-center">{endElement}</div>
       </div>
       {isMenuOpen && menuElement && (
-        <div className="bg-background absolute left-0 w-full border-b sm:hidden">{menuElement}</div>
+        <div className="bg-background/70 absolute left-0 w-full border-b backdrop-blur-lg sm:hidden">{menuElement}</div>
       )}
     </header>
   );

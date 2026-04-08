@@ -1,19 +1,16 @@
 import { type ReactElement } from "react";
-import { Avatar, Button, Link, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
+import { Avatar, Button, Link, Modal, Surface } from "@heroui/react";
 import { GithubIcon, LinkedInIcon, Navbar } from "@package/ui";
-import type { ThemeSwitchProps } from "~/components/actions/theme-switch/ThemeSwitch";
-import { ThemeSwitch } from "~/components/actions/theme-switch/ThemeSwitch";
 import type { ProfileCardProps } from "~/components/feedback/profile-card/ProfileCard";
 import { ProfileCard } from "~/components/feedback/profile-card/ProfileCard";
 import type { AppSocialLinks } from "~/core/social-links/AppSocialLinks";
 
-export interface AppbarProps {
+export interface NavbarContentProps {
   profile: ProfileCardProps;
   socialLinks: AppSocialLinks;
-  themeSwitch: ThemeSwitchProps;
 }
 
-export function Appbar({ profile, socialLinks, themeSwitch }: AppbarProps): ReactElement {
+export function NavbarContent({ profile, socialLinks }: NavbarContentProps): ReactElement {
   const { onGithubClick, onLinkedInClick } = socialLinks;
   const { name } = profile;
 
@@ -50,17 +47,27 @@ export function Appbar({ profile, socialLinks, themeSwitch }: AppbarProps): Reac
 
   const endElement = (
     <div className="flex gap-1">
-      <Popover>
-        <PopoverTrigger role="button" data-testid="home-page__menu-button">
-          <Avatar size="sm">
+      <Modal>
+        <Modal.Trigger data-testid="home-page__menu-button">
+          <Avatar size="sm" className="cursor-pointer">
             <Avatar.Fallback>{getAvatarFallback(name)}</Avatar.Fallback>
           </Avatar>
-        </PopoverTrigger>
-        <PopoverContent placement="bottom end">
-          <ProfileCard {...profile} />
-        </PopoverContent>
-      </Popover>
-      <ThemeSwitch {...themeSwitch} />
+        </Modal.Trigger>
+        <Modal.Backdrop variant="blur">
+          <Modal.Container>
+            <Modal.Dialog>
+              <Modal.Header>
+                <Modal.CloseTrigger />
+              </Modal.Header>
+              <Modal.Body className="py-4">
+                <Surface variant="default">
+                  <ProfileCard {...profile} />
+                </Surface>
+              </Modal.Body>
+            </Modal.Dialog>
+          </Modal.Container>
+        </Modal.Backdrop>
+      </Modal>
       <Button className="fill-black dark:fill-white" variant="secondary" isIconOnly onPress={onGithubClick}>
         <GithubIcon />
       </Button>

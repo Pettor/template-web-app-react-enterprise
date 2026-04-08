@@ -11,23 +11,19 @@ export interface NavbarLayoutProps {
 
 export function NavbarLayout({ backgroundElement, navbarElement, footer, children }: NavbarLayoutProps): ReactElement {
   return (
-    <div className="relative flex h-full flex-col">
-      <div className="flex h-full flex-col">
-        <Surface className="h-full" variant="tertiary">
-          {backgroundElement}
-          {navbarElement}
-          <main className="container m-auto">{children}</main>
-          {footer && (
-            <footer className="container mx-auto my-auto mt-8 flex max-w-7xl flex-col place-items-center px-12 pb-12">
-              <div className="grid place-items-center gap-0.5">
-                <Logo size="large" />
-                <p className="text-base font-bold">Made with ☕ by Petter Hancock</p>
-                <p>Copyright © 2024 - All right reserved</p>
-              </div>
-            </footer>
-          )}
-        </Surface>
-      </div>
-    </div>
+    <Surface className="relative flex flex-col" variant="tertiary">
+      {backgroundElement}
+      {navbarElement}
+      <main className="container mx-auto flex-1 p-4">{children}</main>
+      {footer && (
+        <footer className="container mx-auto flex flex-col place-items-center px-12 pb-12">
+          <div className="grid place-items-center gap-0.5">
+            <Logo size="large" />
+            <p className="text-base font-bold">Made with ☕ by Petter Hancock</p>
+            <p>Copyright © 2024 - All right reserved</p>
+          </div>
+        </footer>
+      )}
+    </Surface>
   );
 }

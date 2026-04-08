@@ -2,15 +2,18 @@ import type { ReactElement } from "react";
 import { InformationCircleIcon, ArrowLeftStartOnRectangleIcon } from "@heroicons/react/20/solid";
 import { ListBox, ListBoxItem, Separator, Skeleton } from "@heroui/react";
 import { useIntl } from "react-intl";
+import { ThemeSelector } from "~/components/actions/theme-selector/ThemeSelector";
+import { useThemeSelector } from "~/components/actions/theme-selector/UseThemeSelector";
 import type { AppSessionContent } from "~/core/session/AppSessionContent";
 
 export interface ProfileCardProps extends AppSessionContent {}
 
 export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps): ReactElement {
   const intl = useIntl();
+  const themeSelector = useThemeSelector();
 
   return (
-    <div className="w-80 p-4">
+    <div className="w-full">
       <p className="text-xl">
         {intl.formatMessage({
           description: "ProfileCard - Personal",
@@ -24,6 +27,18 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
           <span className="text-sm">{email ? email : <Skeleton className="my-1 h-3 w-30 rounded-2xl" />}</span>
         </div>
       </div>
+      <div className="h-2" />
+      <Separator />
+      <div className="h-2" />
+      <p className="text-sm font-medium">
+        {intl.formatMessage({
+          description: "ProfileCard - Theme",
+          defaultMessage: "Theme",
+          id: "aZX0CI",
+        })}
+      </p>
+      <div className="h-2" />
+      <ThemeSelector {...themeSelector} />
       <div className="h-2" />
       <Separator />
       <div className="h-2" />

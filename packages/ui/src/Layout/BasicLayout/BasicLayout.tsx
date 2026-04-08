@@ -9,9 +9,9 @@ export interface BasicLayoutProps {
 
 export function BasicLayout({ className, backgroundElement, children }: BasicLayoutProps): ReactElement {
   return (
-    <div className={clsx(className, "flex min-h-screen flex-1")}>
+    <div className={clsx("relative flex min-h-dvh flex-col", className)}>
       {backgroundElement}
-      <main className="container m-auto">{children}</main>
+      <main className="flex flex-1 items-center justify-center p-4">{children}</main>
     </div>
   );
 }
