@@ -11,8 +11,4 @@ export const NavbarContentCommonData: NavbarContentProps = {
     onGithubClick: () => console.log("onGithubClick"),
     onLinkedInClick: () => console.log("onLinkedInClick"),
   },
-  themeSwitch: {
-    mode: "light",
-    onSwitch: () => console.log("onToggle"),
-  },
 };

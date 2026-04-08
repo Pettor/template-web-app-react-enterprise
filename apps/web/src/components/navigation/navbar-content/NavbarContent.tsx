@@ -1,8 +1,6 @@
 import { type ReactElement } from "react";
 import { Avatar, Button, Link, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 import { GithubIcon, LinkedInIcon, Navbar } from "@package/ui";
-import type { ThemeSwitchProps } from "~/components/actions/theme-switch/ThemeSwitch";
-import { ThemeSwitch } from "~/components/actions/theme-switch/ThemeSwitch";
 import type { ProfileCardProps } from "~/components/feedback/profile-card/ProfileCard";
 import { ProfileCard } from "~/components/feedback/profile-card/ProfileCard";
 import type { AppSocialLinks } from "~/core/social-links/AppSocialLinks";
@@ -10,10 +8,9 @@ import type { AppSocialLinks } from "~/core/social-links/AppSocialLinks";
 export interface NavbarContentProps {
   profile: ProfileCardProps;
   socialLinks: AppSocialLinks;
-  themeSwitch: ThemeSwitchProps;
 }
 
-export function NavbarContent({ profile, socialLinks, themeSwitch }: NavbarContentProps): ReactElement {
+export function NavbarContent({ profile, socialLinks }: NavbarContentProps): ReactElement {
   const { onGithubClick, onLinkedInClick } = socialLinks;
   const { name } = profile;
 
@@ -60,7 +57,6 @@ export function NavbarContent({ profile, socialLinks, themeSwitch }: NavbarConte
           <ProfileCard {...profile} />
         </PopoverContent>
       </Popover>
-      <ThemeSwitch {...themeSwitch} />
       <Button className="fill-black dark:fill-white" variant="secondary" isIconOnly onPress={onGithubClick}>
         <GithubIcon />
       </Button>
