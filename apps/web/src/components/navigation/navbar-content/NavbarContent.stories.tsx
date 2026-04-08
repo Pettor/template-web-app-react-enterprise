@@ -1,3 +1,4 @@
+import { FullSizeDecorator } from "@package/storybook/src/Decorators/FullSizeDecorator";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { NavbarContent as Component } from "./NavbarContent";
 import type { NavbarContentProps as Props } from "./NavbarContent";
@@ -24,11 +25,8 @@ export const Responsive: Story = {
 
 export const Desktop: Story = {
   args: defaultArgs,
-  parameters: {
-    viewport: {
-      defaultViewport: "full",
-    },
-  },
+  decorators: [FullSizeDecorator],
+  parameters: { viewport: { value: "full" } },
 };
 
 export const Phone: Story = {
