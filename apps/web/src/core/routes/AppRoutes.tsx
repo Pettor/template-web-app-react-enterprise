@@ -1,9 +1,9 @@
 import type { ReactElement } from "react";
-import { useContext } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { RouterProvider, createHashHistory, createRouter } from "@tanstack/react-router";
+import { useAtomValue } from "jotai";
 import { routeTree } from "../../routeTree.gen";
-import { AuthContext } from "../auth/AuthContext";
+import { authStatusAtom } from "~/atoms/AuthAtoms";
 
 const hashHistory = createHashHistory();
 
@@ -26,9 +26,7 @@ declare module "@tanstack/react-router" {
 
 export function AppRoutes(): ReactElement {
   const queryClient = useQueryClient();
-  const {
-    state: { status },
-  } = useContext(AuthContext);
+  const authStatus = useAtomValue(authStatusAtom);
 
-  return <RouterProvider router={router} context={{ queryClient, authStatus: status }} />;
+  return <RouterProvider router={router} context={{ queryClient, authStatus }} />;
 }

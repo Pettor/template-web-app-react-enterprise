@@ -4,13 +4,12 @@ import { validateCrypto } from "@package/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AppLocales } from "./AppLocales";
 import { AuthInitializer } from "./auth/AuthInitializer";
-import { AuthProvider } from "./auth/AuthProvider";
 import { PwaProviderModule } from "~/components/modules/pwa-provider-module/PwaProviderModule";
 
 const queryClient = new QueryClient();
 
 export interface AppProvidersProps {
-  children: (authStatus: "authenticated" | "unauthenticated") => ReactNode;
+  children: ReactNode;
   loadingFallback?: ReactNode;
 }
 
@@ -23,9 +22,7 @@ export function AppProviders({ children, loadingFallback }: AppProvidersProps): 
       <AppLocales>
         <PwaProviderModule>
           <QueryClientProvider client={queryClient}>
-            <AuthInitializer fallback={loadingFallback}>
-              {(authStatus) => <AuthProvider initialAuthStatus={authStatus}>{children(authStatus)}</AuthProvider>}
-            </AuthInitializer>
+            <AuthInitializer fallback={loadingFallback}>{children}</AuthInitializer>
           </QueryClientProvider>
         </PwaProviderModule>
       </AppLocales>
