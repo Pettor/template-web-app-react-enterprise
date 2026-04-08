@@ -1,6 +1,6 @@
-import type { IAppSessionContent } from "~/classes/app-session/IAppSessionContent";
+import type { AppSessionContent } from "~/core/session/AppSessionContent";
 
-export const AppSessionData: IAppSessionContent = {
+export const AppSessionData: AppSessionContent = {
   name: "John Doe",
   email: "john.doe@gmail.com",
   onAbout: () => console.log("onAbout"),

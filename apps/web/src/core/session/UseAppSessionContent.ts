@@ -1,19 +1,19 @@
 import { useMemo } from "react";
 import { useFetchPersonalProfileQuery } from "@package/api";
 import { useNavigate } from "@tanstack/react-router";
-import type { IAppSessionContent } from "./IAppSessionContent";
+import type { AppSessionContent } from "./AppSessionContent";
 import { useAuth } from "~/core/auth/UseAuth";
 
 interface NavigateTarget {
   to: string;
 }
 
-export function useAppSessionContent(aboutRoute: NavigateTarget = { to: "/version" }): IAppSessionContent {
+export function useAppSessionContent(aboutRoute: NavigateTarget = { to: "/version" }): AppSessionContent {
   const navigate = useNavigate();
   const { logout } = useAuth();
   const { data: profileInfo } = useFetchPersonalProfileQuery();
 
-  const { name: profileName, email: profileEmail }: Pick<IAppSessionContent, "email"> & { name: string } =
+  const { name: profileName, email: profileEmail }: Pick<AppSessionContent, "email"> & { name: string } =
     useMemo(() => {
       if (!profileInfo) {
         return {

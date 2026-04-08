@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import { Switch, SwitchControl, SwitchThumb, SwitchIcon } from "@heroui/react";
 import { useIntl } from "react-intl";
-import type { ThemeMode } from "~/classes/theme/ThemeMode";
+import type { ThemeMode } from "~/core/theme/ThemeMode";
 
 export interface ThemeSwitchProps {
   mode: ThemeMode;
