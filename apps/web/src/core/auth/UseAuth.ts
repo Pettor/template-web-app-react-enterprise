@@ -1,8 +1,8 @@
 import type { LoginData } from "@package/api";
 import { usePostLoginMutate, usePostLogoutMutate } from "@package/api";
 import { useNavigate, useRouter } from "@tanstack/react-router";
-import type { AuthStatus } from "~/classes/auth/AuthStatus";
 import { getAuthStatus, setAuthStatus } from "./AuthState";
+import type { AuthStatus } from "~/classes/auth/AuthStatus";
 
 export function useAuth(): {
   status: AuthStatus;

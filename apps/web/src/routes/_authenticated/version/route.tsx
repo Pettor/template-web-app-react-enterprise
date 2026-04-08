@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { aboutLoader } from "../../_public/about/AboutLoader";
-import { useAboutModalPage } from "./UseAboutModalPage";
+import { aboutLoader } from "../../_public/about/-AboutLoader";
+import { useAboutModalPage } from "./-UseAboutModalPage";
 import { AboutModal } from "~/components/feedback/about-modal/AboutModal";
 
 export const Route = createFileRoute("/_authenticated/version")({
