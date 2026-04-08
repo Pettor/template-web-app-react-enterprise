@@ -1,5 +1,5 @@
 import { postRefreshToken } from "@package/api";
-import { AuthStatus } from "./AuthStatus";
+import type { AuthStatus } from "./AuthStatus";
 
 let authStatus: AuthStatus = "idle";
 let authInitPromise: Promise<AuthStatus> | null = null;

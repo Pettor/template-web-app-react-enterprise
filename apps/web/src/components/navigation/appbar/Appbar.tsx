@@ -1,11 +1,11 @@
 import { type ReactElement } from "react";
 import { Avatar, Button, Link, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 import { GithubIcon, LinkedInIcon, Navbar } from "@package/ui";
-import type { AppSocialLinks } from "~/core/social-links/AppSocialLinks";
 import type { ThemeSwitchProps } from "~/components/actions/theme-switch/ThemeSwitch";
 import { ThemeSwitch } from "~/components/actions/theme-switch/ThemeSwitch";
 import type { ProfileCardProps } from "~/components/feedback/profile-card/ProfileCard";
 import { ProfileCard } from "~/components/feedback/profile-card/ProfileCard";
+import type { AppSocialLinks } from "~/core/social-links/AppSocialLinks";
 
 export interface AppbarProps {
   profile: ProfileCardProps;
