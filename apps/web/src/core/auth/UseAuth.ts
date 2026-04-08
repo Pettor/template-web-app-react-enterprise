@@ -1,7 +1,7 @@
 import type { LoginData } from "@package/api";
 import { usePostLoginMutate, usePostLogoutMutate } from "@package/api";
-import { useAtomValue, useSetAtom } from "jotai";
 import { useNavigate, useRouter } from "@tanstack/react-router";
+import { useAtomValue, useSetAtom } from "jotai";
 import { authStatusAtom } from "~/atoms/AuthAtoms";
 import type { AuthStatus } from "~/classes/auth/AuthStatus";
 
