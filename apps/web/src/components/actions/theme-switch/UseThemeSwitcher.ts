@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import type { ThemeSwitchProps } from "./ThemeSwitch";
-import { themeModeAtom } from "~/atoms/ThemeAtoms";
+import { themeModeAtom } from "~/core/theme/ThemeAtoms";
 
 export function useThemeSwitcher(): ThemeSwitchProps {
   const [themeMode, toggleTheme] = useAtom(themeModeAtom);

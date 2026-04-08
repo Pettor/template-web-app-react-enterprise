@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { themeModeEffect } from "~/atoms/ThemeAtoms";
+import { themeModeEffect } from "./ThemeAtoms";
 
 export function useTheme(): void {
   useAtom(themeModeEffect);

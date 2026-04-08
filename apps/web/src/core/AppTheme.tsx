@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import { useTheme } from "~/classes/theme/UseTheme";
+import { useTheme } from "~/core/theme/UseTheme";
 
 export interface AppThemeProps {
   children: ReactElement;

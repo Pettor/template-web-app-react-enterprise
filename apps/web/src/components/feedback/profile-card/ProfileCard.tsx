@@ -2,9 +2,9 @@ import type { ReactElement } from "react";
 import { InformationCircleIcon, ArrowLeftStartOnRectangleIcon } from "@heroicons/react/20/solid";
 import { ListBox, ListBoxItem, Separator, Skeleton } from "@heroui/react";
 import { useIntl } from "react-intl";
-import type { IAppSessionContent } from "~/classes/app-session/IAppSessionContent";
+import type { AppSessionContent } from "~/core/session/AppSessionContent";
 
-export interface ProfileCardProps extends IAppSessionContent {}
+export interface ProfileCardProps extends AppSessionContent {}
 
 export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps): ReactElement {
   const intl = useIntl();
