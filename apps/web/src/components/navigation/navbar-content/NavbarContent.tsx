@@ -1,5 +1,5 @@
 import { type ReactElement } from "react";
-import { Avatar, Button, Link, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
+import { Avatar, Button, Link, Modal, Surface } from "@heroui/react";
 import { GithubIcon, LinkedInIcon, Navbar } from "@package/ui";
 import type { ProfileCardProps } from "~/components/feedback/profile-card/ProfileCard";
 import { ProfileCard } from "~/components/feedback/profile-card/ProfileCard";
@@ -47,16 +47,27 @@ export function NavbarContent({ profile, socialLinks }: NavbarContentProps): Rea
 
   const endElement = (
     <div className="flex gap-1">
-      <Popover>
-        <PopoverTrigger role="button" data-testid="home-page__menu-button">
-          <Avatar size="sm">
+      <Modal>
+        <Modal.Trigger data-testid="home-page__menu-button">
+          <Avatar size="sm" className="cursor-pointer">
             <Avatar.Fallback>{getAvatarFallback(name)}</Avatar.Fallback>
           </Avatar>
-        </PopoverTrigger>
-        <PopoverContent placement="bottom end">
-          <ProfileCard {...profile} />
-        </PopoverContent>
-      </Popover>
+        </Modal.Trigger>
+        <Modal.Backdrop variant="blur">
+          <Modal.Container>
+            <Modal.Dialog>
+              <Modal.Header>
+                <Modal.CloseTrigger />
+              </Modal.Header>
+              <Modal.Body className="py-4">
+                <Surface variant="default">
+                  <ProfileCard {...profile} />
+                </Surface>
+              </Modal.Body>
+            </Modal.Dialog>
+          </Modal.Container>
+        </Modal.Backdrop>
+      </Modal>
       <Button className="fill-black dark:fill-white" variant="secondary" isIconOnly onPress={onGithubClick}>
         <GithubIcon />
       </Button>

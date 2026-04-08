@@ -13,7 +13,7 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
   const themeSelector = useThemeSelector();
 
   return (
-    <div className="w-80 p-4">
+    <div className="w-full">
       <p className="text-xl">
         {intl.formatMessage({
           description: "ProfileCard - Personal",
