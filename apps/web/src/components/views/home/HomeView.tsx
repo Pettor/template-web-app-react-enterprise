@@ -12,17 +12,17 @@ import storybookImgSrc from "~/assets/images/logo/storybook.png";
 import turborepoImgSrc from "~/assets/images/logo/turborepo.png";
 import viteImgSrc from "~/assets/images/logo/vite.png";
 import { GridItem } from "~/components/display/grid-item/GridItem";
-import { Appbar, type AppbarProps } from "~/components/navigation/appbar";
+import { NavbarContent, type NavbarContentProps } from "~/components/navigation/navbar-content";
 
 export interface HomeViewProps {
-  appNavbarProps: AppbarProps;
+  navbarContentProps: NavbarContentProps;
 }
 
-export function HomeView({ appNavbarProps }: HomeViewProps): ReactElement {
+export function HomeView({ navbarContentProps }: HomeViewProps): ReactElement {
   const intl = useIntl();
 
   return (
-    <NavbarLayout footer navbarElement={<Appbar {...appNavbarProps} />}>
+    <NavbarLayout footer navbarElement={<NavbarContent {...navbarContentProps} />}>
       <div className="grid w-full place-items-center">
         <div className="h-8" />
         <div className="items-center justify-center gap-2 p-2 text-center">

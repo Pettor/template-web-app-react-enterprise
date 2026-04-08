@@ -9,7 +9,7 @@ export function useHomePage(githubLink: string, linkedInLink: string): HomeViewP
   const socialLinkProps = useAppSocialLinks(githubLink, linkedInLink);
 
   return {
-    appNavbarProps: {
+    navbarContentProps: {
       profile: appSessionProps,
       socialLinks: socialLinkProps,
       themeSwitch: themeSwitchProps,

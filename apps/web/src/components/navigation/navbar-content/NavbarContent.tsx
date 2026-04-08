@@ -7,13 +7,13 @@ import type { ProfileCardProps } from "~/components/feedback/profile-card/Profil
 import { ProfileCard } from "~/components/feedback/profile-card/ProfileCard";
 import type { AppSocialLinks } from "~/core/social-links/AppSocialLinks";
 
-export interface AppbarProps {
+export interface NavbarContentProps {
   profile: ProfileCardProps;
   socialLinks: AppSocialLinks;
   themeSwitch: ThemeSwitchProps;
 }
 
-export function Appbar({ profile, socialLinks, themeSwitch }: AppbarProps): ReactElement {
+export function NavbarContent({ profile, socialLinks, themeSwitch }: NavbarContentProps): ReactElement {
   const { onGithubClick, onLinkedInClick } = socialLinks;
   const { name } = profile;
 

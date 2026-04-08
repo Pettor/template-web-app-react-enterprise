@@ -2,7 +2,7 @@ import { FullSizeDecorator } from "@package/storybook";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { HomeView as Component } from "./HomeView";
 import type { HomeViewProps as Props } from "./HomeView";
-import { AppbarCommonData } from "~/storybook/data/AppbarData";
+import { NavbarContentCommonData } from "~/storybook/data/NavbarContentData";
 
 const meta: Meta<typeof Component> = {
   component: Component,
@@ -16,7 +16,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
-  appNavbarProps: AppbarCommonData,
+  navbarContentProps: NavbarContentCommonData,
 } satisfies Props;
 
 export const Fullscreen: Story = {

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Appbar as Component } from "./Appbar";
-import type { AppbarProps as Props } from "./Appbar";
-import { AppbarCommonData } from "~/storybook/data/AppbarData";
+import { NavbarContent as Component } from "./NavbarContent";
+import type { NavbarContentProps as Props } from "./NavbarContent";
+import { NavbarContentCommonData } from "~/storybook/data/NavbarContentData";
 
 const meta: Meta<typeof Component> = {
   component: Component,
-  title: "Navigation/Appbar",
+  title: "Navigation/NavbarContent",
   parameters: {
     layout: "fullscreen",
   },
@@ -15,7 +15,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
-  ...AppbarCommonData,
+  ...NavbarContentCommonData,
 } satisfies Props;
 
 export const Responsive: Story = {

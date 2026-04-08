@@ -1,6 +1,6 @@
-import type { AppbarProps } from "~/components/navigation/appbar";
+import type { NavbarContentProps } from "~/components/navigation/navbar-content";
 
-export const AppbarCommonData: AppbarProps = {
+export const NavbarContentCommonData: NavbarContentProps = {
   profile: {
     name: "John Doe",
     email: "john.doe@mailcom",
