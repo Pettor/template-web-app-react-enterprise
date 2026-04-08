@@ -19,27 +19,25 @@ interface ThemeOptionProps {
 
 function ThemeOption({ value, label, icon, preview }: ThemeOptionProps): ReactElement {
   return (
-    <Radio value={value} className="group flex cursor-pointer flex-col items-center gap-1.5" aria-label={label}>
-      {({ isSelected }) => (
-        <>
-          <div
-            className={clsx(
-              "flex h-16 w-20 items-end overflow-hidden rounded-lg border-2 transition-colors",
-              isSelected ? "border-primary" : "border-default-200 group-hover:border-default-400"
-            )}
-          >
-            {preview}
-          </div>
-          <div className="flex items-center gap-1">
-            <span className={clsx("text-xs", isSelected ? "text-primary font-medium" : "text-default-500")}>
-              {icon}
-            </span>
-            <span className={clsx("text-xs", isSelected ? "text-primary font-medium" : "text-default-500")}>
-              {label}
-            </span>
-          </div>
-        </>
+    <Radio
+      value={value}
+      aria-label={label}
+      className={clsx(
+        "group relative flex-col items-center gap-1.5 rounded-xl border-2 border-transparent p-1 transition-all",
+        "data-[selected=true]:border-accent data-[selected=true]:bg-accent/10",
+        "data-[focus-visible=true]:border-accent data-[focus-visible=true]:bg-accent/10"
       )}
+    >
+      <Radio.Control className="absolute top-1 right-1 size-4">
+        <Radio.Indicator />
+      </Radio.Control>
+      <Radio.Content className="flex flex-col items-center gap-1.5">
+        <div className="h-14 w-18 overflow-hidden rounded-md">{preview}</div>
+        <div className="text-default-500 group-data-[selected=true]:text-accent flex items-center gap-1 text-xs">
+          {icon}
+          <span>{label}</span>
+        </div>
+      </Radio.Content>
     </Radio>
   );
 }
@@ -47,7 +45,7 @@ function ThemeOption({ value, label, icon, preview }: ThemeOptionProps): ReactEl
 function LightPreview(): ReactElement {
   return (
     <div className="flex h-full w-full flex-col bg-white">
-      <div className="h-2 w-full bg-gray-100" />
+      <div className="h-1.5 w-full bg-gray-100" />
       <div className="flex flex-1 gap-1 p-1.5">
         <div className="w-1/3 rounded-sm bg-gray-100" />
         <div className="flex flex-1 flex-col gap-1">
@@ -63,7 +61,7 @@ function LightPreview(): ReactElement {
 function DarkPreview(): ReactElement {
   return (
     <div className="flex h-full w-full flex-col bg-zinc-900">
-      <div className="h-2 w-full bg-zinc-800" />
+      <div className="h-1.5 w-full bg-zinc-800" />
       <div className="flex flex-1 gap-1 p-1.5">
         <div className="w-1/3 rounded-sm bg-zinc-800" />
         <div className="flex flex-1 flex-col gap-1">
@@ -80,14 +78,14 @@ function AutoPreview(): ReactElement {
   return (
     <div className="flex h-full w-full">
       <div className="flex w-1/2 flex-col overflow-hidden bg-white">
-        <div className="h-2 w-full bg-gray-100" />
+        <div className="h-1.5 w-full bg-gray-100" />
         <div className="flex flex-1 flex-col gap-1 p-1.5">
           <div className="h-1.5 w-3/4 rounded-sm bg-gray-200" />
           <div className="h-1 w-1/2 rounded-sm bg-gray-100" />
         </div>
       </div>
       <div className="flex w-1/2 flex-col overflow-hidden bg-zinc-900">
-        <div className="h-2 w-full bg-zinc-800" />
+        <div className="h-1.5 w-full bg-zinc-800" />
         <div className="flex flex-1 flex-col gap-1 p-1.5">
           <div className="h-1.5 w-3/4 rounded-sm bg-zinc-700" />
           <div className="h-1 w-1/2 rounded-sm bg-zinc-800" />
@@ -110,7 +108,7 @@ export function ThemeSelector({ mode, onSelect }: ThemeSelectorProps): ReactElem
         defaultMessage: "Theme",
         id: "OzfxPl",
       })}
-      className="flex gap-3"
+      className="flex gap-2"
     >
       <ThemeOption
         value="auto"
