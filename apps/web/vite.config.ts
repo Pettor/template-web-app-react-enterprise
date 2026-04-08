@@ -1,4 +1,5 @@
 import { createBaseConfig, createPWAConfig, createReactConfig, mergeConfigs } from "@config/vite";
+import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import { defineConfig, loadEnv, mergeConfig } from "vite";
 import proxy from "vite-plugin-http2-proxy";
@@ -10,6 +11,9 @@ export default defineConfig(({ mode, command }) => {
     createBaseConfig(),
     createReactConfig({ enableReactCompiler: command === "build" }),
     createPWAConfig(),
+    {
+      plugins: [tanstackRouter({ routeToken: "route" })],
+    },
     { resolve: { dedupe: ["react", "react-dom"] } },
   ]);
 

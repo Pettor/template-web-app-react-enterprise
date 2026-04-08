@@ -11,13 +11,13 @@ export function AuthReducer(baseState: AuthReducerProps, action: AuthActions): A
   return produce<AuthReducerProps>(baseState, (draft) => {
     switch (type) {
       case "auth/loading":
-        draft.status = "idle";
+        draft.status = "authenticating";
         break;
       case "auth/login":
         draft.status = "authenticated";
         break;
       case "auth/logout":
-        draft.status = "authenticating";
+        draft.status = "unauthenticated";
         break;
     }
   });
