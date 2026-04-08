@@ -28,7 +28,7 @@ export function Navbar({ title, centerElement, endElement, menuElement }: Navbar
   return (
     <header
       className={clsx(
-        "bg-background sticky top-0 z-40 w-full border-b transition-transform duration-300",
+        "bg-background/50 sticky top-0 z-40 w-full border-b backdrop-blur-lg transition-transform duration-300",
         !visible && "-translate-y-full"
       )}
     >
@@ -62,7 +62,7 @@ export function Navbar({ title, centerElement, endElement, menuElement }: Navbar
         <div className="flex items-center">{endElement}</div>
       </div>
       {isMenuOpen && menuElement && (
-        <div className="bg-background absolute left-0 w-full border-b sm:hidden">{menuElement}</div>
+        <div className="bg-background/70 absolute left-0 w-full border-b backdrop-blur-lg sm:hidden">{menuElement}</div>
       )}
     </header>
   );
