@@ -304,6 +304,8 @@ importers:
         specifier: catalog:playwright
         version: 1.59.1
 
+  apps/mock: {}
+
   apps/storybook:
     dependencies:
       '@app/web':

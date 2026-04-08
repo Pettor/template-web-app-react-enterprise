@@ -20,11 +20,9 @@ export function App(): ReactElement {
 
   return (
     <AppProviders loadingFallback={<RouteLoading />}>
-      {() => (
-        <AppTheme>
-          <AppRoutes />
-        </AppTheme>
-      )}
+      <AppTheme>
+        <AppRoutes />
+      </AppTheme>
     </AppProviders>
   );
 }

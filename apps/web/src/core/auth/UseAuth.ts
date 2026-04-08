@@ -1,9 +1,9 @@
-import { useContext } from "react";
 import type { LoginData } from "@package/api";
 import { usePostLoginMutate, usePostLogoutMutate } from "@package/api";
 import { useNavigate, useRouter } from "@tanstack/react-router";
-import { AuthContext } from "./AuthContext";
-import type { AuthStatus } from "./AuthReducer";
+import { useAtomValue, useSetAtom } from "jotai";
+import { authStatusAtom } from "~/atoms/AuthAtoms";
+import type { AuthStatus } from "~/classes/auth/AuthStatus";
 
 export function useAuth(): {
   status: AuthStatus;
@@ -14,25 +14,19 @@ export function useAuth(): {
 } {
   const router = useRouter();
   const navigate = useNavigate();
-  const {
-    state: { status },
-    dispatch,
-  } = useContext(AuthContext);
+  const status = useAtomValue(authStatusAtom);
+  const setAuthStatus = useSetAtom(authStatusAtom);
   const { mutateAsync: loginFunc, isPending: loginLoading } = usePostLoginMutate();
   const { mutateAsync: logoutFunc, isPending: logoutLoading } = usePostLogoutMutate();
 
   async function login(data: LoginData): Promise<void> {
     await loginFunc(data);
-    dispatch({
-      type: "auth/login",
-    });
+    setAuthStatus("authenticated");
   }
 
   async function logout(): Promise<void> {
     await logoutFunc();
-    dispatch({
-      type: "auth/logout",
-    });
+    setAuthStatus("unauthenticated");
     router.invalidate().finally(() => {
       navigate({ to: "/" });
     });
