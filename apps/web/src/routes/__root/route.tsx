@@ -1,8 +1,7 @@
-import type { ReactElement } from "react";
 import type { QueryClient } from "@tanstack/react-query";
-import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
+import { createRootRouteWithContext } from "@tanstack/react-router";
 import type { AuthStatus } from "~/classes/auth/AuthStatus";
-import { RouteProviders } from "~/core/routes/RouteProviders";
+import { getAuthStatus, initializeAuth } from "~/core/auth/AuthState";
 
 export interface RouterContext {
   queryClient: QueryClient;
@@ -10,13 +9,8 @@ export interface RouterContext {
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({
-  component: RootComponent,
+  beforeLoad: async () => {
+    await initializeAuth();
+    return { authStatus: getAuthStatus() };
+  },
 });
-
-function RootComponent(): ReactElement {
-  return (
-    <RouteProviders>
-      <Outlet />
-    </RouteProviders>
-  );
-}

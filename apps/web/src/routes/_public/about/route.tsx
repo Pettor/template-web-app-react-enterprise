@@ -1,8 +1,8 @@
 import type { ReactElement } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useIntl } from "react-intl";
-import { aboutLoader } from "./AboutLoader";
-import { useAboutPage } from "./UseAboutPage";
+import { aboutLoader } from "./-AboutLoader";
+import { useAboutPage } from "./-UseAboutPage";
 import { AboutView } from "~/components/views/about/AboutView";
 
 export const Route = createFileRoute("/_public/about")({

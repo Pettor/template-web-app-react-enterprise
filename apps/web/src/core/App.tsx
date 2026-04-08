@@ -2,7 +2,6 @@ import { type ReactElement, useEffect } from "react";
 import { AppProviders } from "./AppProviders";
 import { AppTheme } from "./AppTheme";
 import { AppRoutes } from "./routes/AppRoutes";
-import { RouteLoading } from "./routes/logic/RouteLoading";
 
 export function App(): ReactElement {
   function handlePreloadError(): void {
@@ -19,7 +18,7 @@ export function App(): ReactElement {
   }, []);
 
   return (
-    <AppProviders loadingFallback={<RouteLoading />}>
+    <AppProviders>
       <AppTheme>
         <AppRoutes />
       </AppTheme>
