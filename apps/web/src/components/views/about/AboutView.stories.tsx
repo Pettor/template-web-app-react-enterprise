@@ -1,4 +1,3 @@
-import { FullSizeDecorator } from "@package/storybook";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { AboutView as Component } from "./AboutView";
 import type { AboutViewProps as Props } from "./AboutView";
@@ -23,7 +22,6 @@ const defaultArgs = {
 
 export const Fullscreen: Story = {
   args: defaultArgs,
-  decorators: [FullSizeDecorator],
   parameters: { viewport: { value: "full" } },
 };
 
