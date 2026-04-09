@@ -8,7 +8,7 @@ export const NavbarContentCommonData: NavbarContentProps = {
     onLogout: () => console.log("onLogout"),
   },
   socialLinks: {
-    onGithubClick: () => console.log("onGithubClick"),
-    onLinkedInClick: () => console.log("onLinkedInClick"),
+    github: "https://github.com",
+    linkedIn: "https://linkedin.com",
   },
 };

@@ -1,22 +1,22 @@
-import { useState, type ReactElement } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactElement } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { Avatar, Button, Link, Modal, Separator, Surface, Tabs } from "@heroui/react";
-import { GithubIcon, LinkedInIcon, Navbar } from "@package/ui";
-import { NAV_MENU_ITEMS } from "./NavMenuItems";
+import { Avatar, Link, Modal, Separator, Surface, Tabs } from "@heroui/react";
+import { Navbar } from "@package/ui";
+import { createNavMenuItems, type NavMenuSocialLinks } from "./NavMenuItems";
 import type { AccountPanelProps } from "~/components/feedback/account-panel/AccountPanel";
 import { AccountPanel } from "~/components/feedback/account-panel/AccountPanel";
-import type { AppSocialLinks } from "~/core/social-links/AppSocialLinks";
 
 export interface NavbarContentProps {
   account: AccountPanelProps;
-  socialLinks: AppSocialLinks;
+  socialLinks: NavMenuSocialLinks;
 }
 
 export function NavbarContent({ account, socialLinks }: NavbarContentProps): ReactElement {
-  const { onGithubClick, onLinkedInClick } = socialLinks;
   const { name } = account;
-  const [activeTab, setActiveTab] = useState<string>("features");
+  const [activeTab, setActiveTab] = useState<string>("home");
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
+
+  const menuItems = useMemo(() => createNavMenuItems(socialLinks), [socialLinks]);
 
   function getAvatarFallback(displayName: string): string {
     const names = displayName.split(" ");
@@ -42,14 +42,30 @@ export function NavbarContent({ account, socialLinks }: NavbarContentProps): Rea
     });
   }
 
-  const featuresItem = NAV_MENU_ITEMS.find((item) => item.id === "features");
+  const activeItem = menuItems.find((item) => item.id === activeTab);
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
+  const [dropdownLeft, setDropdownLeft] = useState(0);
+
+  const updateDropdownPosition = useCallback(() => {
+    if (!tabsContainerRef.current || !activeItem?.children) {
+      return;
+    }
+    const activeTabEl = tabsContainerRef.current.querySelector('[aria-selected="true"]') as HTMLElement | null;
+    if (activeTabEl) {
+      setDropdownLeft(activeTabEl.offsetLeft);
+    }
+  }, [activeItem]);
+
+  useEffect(() => {
+    updateDropdownPosition();
+  }, [updateDropdownPosition]);
 
   const centerElement = (
-    <div className="relative">
+    <div className="relative" ref={tabsContainerRef}>
       <Tabs selectedKey={activeTab} onSelectionChange={(key) => setActiveTab(String(key))}>
         <Tabs.ListContainer>
           <Tabs.List aria-label="Navigation">
-            {NAV_MENU_ITEMS.map((item, index) => (
+            {menuItems.map((item, index) => (
               <Tabs.Tab key={item.id} id={item.id}>
                 {index > 0 && <Tabs.Separator />}
                 <span className="flex items-center gap-1">
@@ -63,12 +79,17 @@ export function NavbarContent({ account, socialLinks }: NavbarContentProps): Rea
           </Tabs.List>
         </Tabs.ListContainer>
       </Tabs>
-      {activeTab === "features" && featuresItem?.children && (
-        <div className="bg-background absolute top-full left-0 z-10 mt-2 flex flex-col gap-1 rounded-lg border p-2 shadow-lg">
-          {featuresItem.children.map((child) => (
+      {activeItem?.children && (
+        <div
+          style={{ left: dropdownLeft }}
+          className="bg-background absolute top-full z-10 mt-2 flex flex-col gap-1 rounded-lg border p-2 shadow-lg"
+        >
+          {activeItem.children.map((child) => (
             <Link
               key={child.id}
               href={child.href}
+              target={child.external ? "_blank" : undefined}
+              rel={child.external ? "noreferrer" : undefined}
               className="hover:bg-default-100 flex items-center gap-2 rounded-md px-3 py-2 text-sm"
             >
               {child.icon}
@@ -81,36 +102,28 @@ export function NavbarContent({ account, socialLinks }: NavbarContentProps): Rea
   );
 
   const endElement = (
-    <div className="flex gap-1">
-      <div className="hidden sm:block">
-        <Modal>
-          <Modal.Trigger data-testid="home-page__menu-button">
-            <Avatar variant="soft" className="cursor-pointer">
-              <Avatar.Fallback>{getAvatarFallback(name)}</Avatar.Fallback>
-            </Avatar>
-          </Modal.Trigger>
-          <Modal.Backdrop variant="blur">
-            <Modal.Container>
-              <Modal.Dialog>
-                <Modal.Header>
-                  <Modal.CloseTrigger />
-                </Modal.Header>
-                <Modal.Body className="py-4">
-                  <Surface variant="default">
-                    <AccountPanel {...account} />
-                  </Surface>
-                </Modal.Body>
-              </Modal.Dialog>
-            </Modal.Container>
-          </Modal.Backdrop>
-        </Modal>
-      </div>
-      <Button className="fill-black dark:fill-white" variant="secondary" isIconOnly onPress={onGithubClick}>
-        <GithubIcon />
-      </Button>
-      <Button className="fill-black dark:fill-white" variant="secondary" isIconOnly onPress={onLinkedInClick}>
-        <LinkedInIcon />
-      </Button>
+    <div className="hidden sm:block">
+      <Modal>
+        <Modal.Trigger data-testid="home-page__menu-button">
+          <Avatar variant="soft" className="cursor-pointer">
+            <Avatar.Fallback>{getAvatarFallback(name)}</Avatar.Fallback>
+          </Avatar>
+        </Modal.Trigger>
+        <Modal.Backdrop variant="blur">
+          <Modal.Container>
+            <Modal.Dialog>
+              <Modal.Header>
+                <Modal.CloseTrigger />
+              </Modal.Header>
+              <Modal.Body className="py-4">
+                <Surface variant="default">
+                  <AccountPanel {...account} />
+                </Surface>
+              </Modal.Body>
+            </Modal.Dialog>
+          </Modal.Container>
+        </Modal.Backdrop>
+      </Modal>
     </div>
   );
 
@@ -118,7 +131,7 @@ export function NavbarContent({ account, socialLinks }: NavbarContentProps): Rea
     <div className="flex h-full flex-col">
       <nav className="flex-1 px-4 py-4">
         <ul className="flex flex-col gap-1">
-          {NAV_MENU_ITEMS.map((item) => (
+          {menuItems.map((item) => (
             <li key={item.id}>
               {item.children ? (
                 <>
@@ -138,6 +151,8 @@ export function NavbarContent({ account, socialLinks }: NavbarContentProps): Rea
                         <li key={child.id}>
                           <Link
                             href={child.href}
+                            target={child.external ? "_blank" : undefined}
+                            rel={child.external ? "noreferrer" : undefined}
                             className="hover:bg-default-100 flex items-center gap-2 rounded-lg px-3 py-2"
                           >
                             {child.icon}
