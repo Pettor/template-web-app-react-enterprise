@@ -1,16 +1,12 @@
 import { useMemo } from "react";
 import { useFetchPersonalProfileQuery } from "@package/api";
-import { useNavigate } from "@tanstack/react-router";
 import type { AppSessionContent } from "./AppSessionContent";
 import { useAuth } from "~/core/auth/UseAuth";
+import { useSettingsModal } from "~/core/settings/UseSettingsModal";
 
-interface NavigateTarget {
-  to: string;
-}
-
-export function useAppSessionContent(aboutRoute: NavigateTarget = { to: "/version" }): AppSessionContent {
-  const navigate = useNavigate();
+export function useAppSessionContent(): AppSessionContent {
   const { logout } = useAuth();
+  const { open: openSettings } = useSettingsModal();
   const { data: profileInfo } = useFetchPersonalProfileQuery();
 
   const { name: profileName, email: profileEmail }: Pick<AppSessionContent, "email"> & { name: string } =
@@ -33,14 +29,14 @@ export function useAppSessionContent(aboutRoute: NavigateTarget = { to: "/versio
     logout();
   }
 
-  function handleOnAbout(): void {
-    navigate(aboutRoute);
+  function handleOnSettings(): void {
+    openSettings();
   }
 
   return {
     email: profileEmail,
     name: profileName,
-    onAbout: handleOnAbout,
+    onSettings: handleOnSettings,
     onLogout: handleOnLogout,
   };
 }

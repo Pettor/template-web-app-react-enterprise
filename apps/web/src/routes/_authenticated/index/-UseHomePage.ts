@@ -2,12 +2,16 @@ import type { HomeViewProps } from "~/components/views/home/HomeView";
 import { useAppSessionContent } from "~/core/session/UseAppSessionContent";
 
 export function useHomePage(githubLink: string, linkedInLink: string): HomeViewProps {
-  const appSessionProps = useAppSessionContent({ to: "/version" });
+  const sessionContent = useAppSessionContent();
 
   return {
     navbarContentProps: {
-      account: appSessionProps,
+      quickMenu: {
+        onSettings: sessionContent.onSettings,
+        onLogout: sessionContent.onLogout,
+      },
       socialLinks: { github: githubLink, linkedIn: linkedInLink },
+      avatarName: sessionContent.name,
     },
   };
 }

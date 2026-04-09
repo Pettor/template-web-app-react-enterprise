@@ -28,7 +28,7 @@ const defaultArgs = {
     onSignUp: () => console.log("handleSignUp"),
     onSubmit: () => console.log("onSubmit"),
   },
-  onAbout: () => console.log("onAbout"),
+  onSettings: () => console.log("onSettings"),
 } satisfies Props;
 
 export const Fullscreen: Story = {

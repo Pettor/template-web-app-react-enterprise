@@ -1,20 +1,21 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactElement } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { Avatar, Link, Modal, Separator, Surface, Tabs } from "@heroui/react";
+import { Avatar, Link, Popover, Separator, Tabs } from "@heroui/react";
 import { Navbar } from "@package/ui";
 import { createNavMenuItems, type NavMenuSocialLinks } from "./NavMenuItems";
-import type { AccountPanelProps } from "~/components/feedback/account-panel/AccountPanel";
-import { AccountPanel } from "~/components/feedback/account-panel/AccountPanel";
+import type { QuickMenuProps } from "~/components/actions/quick-menu/QuickMenu";
+import { QuickMenu } from "~/components/actions/quick-menu/QuickMenu";
 
 export interface NavbarContentProps {
-  account: AccountPanelProps;
+  quickMenu: QuickMenuProps;
   socialLinks: NavMenuSocialLinks;
+  avatarName: string;
 }
 
-export function NavbarContent({ account, socialLinks }: NavbarContentProps): ReactElement {
-  const { name } = account;
+export function NavbarContent({ quickMenu, socialLinks, avatarName }: NavbarContentProps): ReactElement {
   const [activeTab, setActiveTab] = useState<string>("home");
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const menuItems = useMemo(() => createNavMenuItems(socialLinks), [socialLinks]);
 
@@ -103,27 +104,27 @@ export function NavbarContent({ account, socialLinks }: NavbarContentProps): Rea
 
   const endElement = (
     <div className="hidden sm:block">
-      <Modal>
-        <Modal.Trigger data-testid="home-page__menu-button">
+      <Popover isOpen={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+        <Popover.Trigger data-testid="home-page__menu-button">
           <Avatar variant="soft" className="cursor-pointer">
-            <Avatar.Fallback>{getAvatarFallback(name)}</Avatar.Fallback>
+            <Avatar.Fallback>{getAvatarFallback(avatarName)}</Avatar.Fallback>
           </Avatar>
-        </Modal.Trigger>
-        <Modal.Backdrop variant="blur">
-          <Modal.Container>
-            <Modal.Dialog>
-              <Modal.Header>
-                <Modal.CloseTrigger />
-              </Modal.Header>
-              <Modal.Body className="py-4">
-                <Surface variant="default">
-                  <AccountPanel {...account} />
-                </Surface>
-              </Modal.Body>
-            </Modal.Dialog>
-          </Modal.Container>
-        </Modal.Backdrop>
-      </Modal>
+        </Popover.Trigger>
+        <Popover.Content placement="bottom end">
+          <Popover.Dialog className="p-2">
+            <QuickMenu
+              onSettings={() => {
+                setIsPopoverOpen(false);
+                quickMenu.onSettings();
+              }}
+              onLogout={() => {
+                setIsPopoverOpen(false);
+                quickMenu.onLogout();
+              }}
+            />
+          </Popover.Dialog>
+        </Popover.Content>
+      </Popover>
     </div>
   );
 
@@ -175,7 +176,7 @@ export function NavbarContent({ account, socialLinks }: NavbarContentProps): Rea
       </nav>
       <Separator />
       <div className="px-4 py-4">
-        <AccountPanel {...account} />
+        <QuickMenu {...quickMenu} />
       </div>
     </div>
   );

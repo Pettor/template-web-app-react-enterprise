@@ -1,6 +1,6 @@
 export interface AppSessionContent {
   name: string;
   email: string;
-  onAbout: () => void;
+  onSettings: () => void;
   onLogout: () => void;
 }
