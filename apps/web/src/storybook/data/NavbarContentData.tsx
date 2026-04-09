@@ -1,7 +1,7 @@
 import type { NavbarContentProps } from "~/components/navigation/navbar-content";
 
 export const NavbarContentCommonData: NavbarContentProps = {
-  profile: {
+  account: {
     name: "John Doe",
     email: "john.doe@mailcom",
     onAbout: () => console.log("onAbout"),

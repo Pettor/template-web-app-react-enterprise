@@ -8,7 +8,7 @@ export function useHomePage(githubLink: string, linkedInLink: string): HomeViewP
 
   return {
     navbarContentProps: {
-      profile: appSessionProps,
+      account: appSessionProps,
       socialLinks: socialLinkProps,
     },
   };
