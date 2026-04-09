@@ -11,7 +11,7 @@ export interface NavbarLayoutProps {
 
 export function NavbarLayout({ backgroundElement, navbarElement, footer, children }: NavbarLayoutProps): ReactElement {
   return (
-    <Surface className="relative flex flex-col" variant="tertiary">
+    <Surface className="relative flex h-full flex-col" variant="default">
       {backgroundElement}
       {navbarElement}
       <main className="container mx-auto flex-1 p-4">{children}</main>

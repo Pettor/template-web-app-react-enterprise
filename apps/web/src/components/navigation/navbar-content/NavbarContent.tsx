@@ -49,7 +49,7 @@ export function NavbarContent({ profile, socialLinks }: NavbarContentProps): Rea
     <div className="flex gap-1">
       <Modal>
         <Modal.Trigger data-testid="home-page__menu-button">
-          <Avatar size="sm" className="cursor-pointer">
+          <Avatar variant="soft" className="cursor-pointer">
             <Avatar.Fallback>{getAvatarFallback(name)}</Avatar.Fallback>
           </Avatar>
         </Modal.Trigger>

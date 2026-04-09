@@ -14,7 +14,7 @@ export function ProfileCard({ name, email, onAbout, onLogout }: ProfileCardProps
 
   return (
     <div className="w-full">
-      <p className="text-xl">
+      <p className="text-sm font-medium">
         {intl.formatMessage({
           description: "ProfileCard - Personal",
           defaultMessage: "Personal",

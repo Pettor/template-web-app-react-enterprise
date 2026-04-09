@@ -11,7 +11,7 @@ export interface GridItemProps {
 export function GridItem({ title, imageSrc, description }: GridItemProps): ReactElement {
   const intl = useIntl();
   return (
-    <Card className="p-4">
+    <Card variant="secondary" className="p-4">
       <CardHeader className="gap-2">
         {imageSrc && (
           <img
