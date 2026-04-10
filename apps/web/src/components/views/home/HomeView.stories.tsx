@@ -1,4 +1,3 @@
-import { FullSizeDecorator } from "@package/storybook";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { HomeView as Component } from "./HomeView";
 import type { HomeViewProps as Props } from "./HomeView";
@@ -21,7 +20,6 @@ const defaultArgs = {
 
 export const Fullscreen: Story = {
   args: defaultArgs,
-  decorators: [FullSizeDecorator],
   parameters: { viewport: { value: "full" } },
 };
 

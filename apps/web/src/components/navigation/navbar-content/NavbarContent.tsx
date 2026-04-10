@@ -1,21 +1,27 @@
-import { type ReactElement } from "react";
-import { Avatar, Button, Link, Modal, Surface } from "@heroui/react";
-import { GithubIcon, LinkedInIcon, Navbar } from "@package/ui";
-import type { ProfileCardProps } from "~/components/feedback/profile-card/ProfileCard";
-import { ProfileCard } from "~/components/feedback/profile-card/ProfileCard";
-import type { AppSocialLinks } from "~/core/social-links/AppSocialLinks";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactElement } from "react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { Avatar, Drawer, Link, Popover, Separator, Tabs } from "@heroui/react";
+import { Logo, Navbar } from "@package/ui";
+import { createNavMenuItems, type NavMenuSocialLinks } from "./NavMenuItems";
+import type { QuickMenuProps } from "~/components/actions/quick-menu/QuickMenu";
+import { QuickMenu } from "~/components/actions/quick-menu/QuickMenu";
 
 export interface NavbarContentProps {
-  profile: ProfileCardProps;
-  socialLinks: AppSocialLinks;
+  quickMenu: QuickMenuProps;
+  socialLinks: NavMenuSocialLinks;
+  avatarName: string;
 }
 
-export function NavbarContent({ profile, socialLinks }: NavbarContentProps): ReactElement {
-  const { onGithubClick, onLinkedInClick } = socialLinks;
-  const { name } = profile;
+export function NavbarContent({ quickMenu, socialLinks, avatarName }: NavbarContentProps): ReactElement {
+  const [activeTab, setActiveTab] = useState<string>("home");
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  function getAvatarFallback(name: string): string {
-    const names = name.split(" ");
+  const menuItems = useMemo(() => createNavMenuItems(socialLinks), [socialLinks]);
+
+  function getAvatarFallback(displayName: string): string {
+    const names = displayName.split(" ");
     if (!names || !names[0]) {
       return "";
     }
@@ -26,56 +32,195 @@ export function NavbarContent({ profile, socialLinks }: NavbarContentProps): Rea
     return names[0].charAt(0).toUpperCase() + names[1].charAt(0).toUpperCase();
   }
 
-  const menuRender = (
-    <>
-      <div key="1">
-        <Link href="#">something</Link>
-      </div>
-      <div key="2">something</div>
-    </>
-  );
+  function toggleExpanded(id: string): void {
+    setExpandedItems((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  }
+
+  const activeItem = menuItems.find((item) => item.id === activeTab);
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
+  const [dropdownLeft, setDropdownLeft] = useState(0);
+
+  const updateDropdownPosition = useCallback(() => {
+    if (!tabsContainerRef.current || !activeItem?.children) {
+      return;
+    }
+    const activeTabEl = tabsContainerRef.current.querySelector('[aria-selected="true"]') as HTMLElement | null;
+    if (activeTabEl) {
+      setDropdownLeft(activeTabEl.offsetLeft);
+    }
+  }, [activeItem]);
+
+  useEffect(() => {
+    updateDropdownPosition();
+  }, [updateDropdownPosition]);
 
   const centerElement = (
-    <>
-      <Link href="#">Features</Link>
-      <Link aria-current="page" href="#">
-        Customers
-      </Link>
-      <Link href="#">Integrations</Link>
-    </>
-  );
-
-  const endElement = (
-    <div className="flex gap-1">
-      <Modal>
-        <Modal.Trigger data-testid="home-page__menu-button">
-          <Avatar size="sm" className="cursor-pointer">
-            <Avatar.Fallback>{getAvatarFallback(name)}</Avatar.Fallback>
-          </Avatar>
-        </Modal.Trigger>
-        <Modal.Backdrop variant="blur">
-          <Modal.Container>
-            <Modal.Dialog>
-              <Modal.Header>
-                <Modal.CloseTrigger />
-              </Modal.Header>
-              <Modal.Body className="py-4">
-                <Surface variant="default">
-                  <ProfileCard {...profile} />
-                </Surface>
-              </Modal.Body>
-            </Modal.Dialog>
-          </Modal.Container>
-        </Modal.Backdrop>
-      </Modal>
-      <Button className="fill-black dark:fill-white" variant="secondary" isIconOnly onPress={onGithubClick}>
-        <GithubIcon />
-      </Button>
-      <Button className="fill-black dark:fill-white" variant="secondary" isIconOnly onPress={onLinkedInClick}>
-        <LinkedInIcon />
-      </Button>
+    <div className="relative" ref={tabsContainerRef}>
+      <Tabs selectedKey={activeTab} onSelectionChange={(key) => setActiveTab(String(key))}>
+        <Tabs.ListContainer>
+          <Tabs.List aria-label="Navigation">
+            {menuItems.map((item, index) => (
+              <Tabs.Tab key={item.id} id={item.id}>
+                {index > 0 && <Tabs.Separator />}
+                <span className="flex items-center gap-1">
+                  {item.icon}
+                  {item.name}
+                  {item.children && <ChevronDownIcon className="h-3 w-3" />}
+                </span>
+                <Tabs.Indicator />
+              </Tabs.Tab>
+            ))}
+          </Tabs.List>
+        </Tabs.ListContainer>
+        {menuItems.map((item) => (
+          <Tabs.Panel key={item.id} id={item.id} className="absolute top-full z-10 mt-2">
+            {item.children && (
+              <div
+                style={{ left: dropdownLeft }}
+                className="bg-background flex flex-col gap-1 rounded-lg border p-2 shadow-lg"
+              >
+                {item.children.map((child) => (
+                  <Link
+                    key={child.id}
+                    href={child.href}
+                    target={child.external ? "_blank" : undefined}
+                    rel={child.external ? "noreferrer" : undefined}
+                    className="hover:bg-default-100 flex items-center gap-2 rounded-md px-3 py-2 text-sm"
+                  >
+                    {child.icon}
+                    {child.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </Tabs.Panel>
+        ))}
+      </Tabs>
     </div>
   );
 
-  return <Navbar title="App" centerElement={centerElement} menuElement={menuRender} endElement={endElement} />;
+  const endElement = (
+    <div className="hidden sm:block">
+      <Popover isOpen={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+        <Popover.Trigger data-testid="home-page__menu-button">
+          <Avatar variant="soft" className="cursor-pointer">
+            <Avatar.Fallback>{getAvatarFallback(avatarName)}</Avatar.Fallback>
+          </Avatar>
+        </Popover.Trigger>
+        <Popover.Content placement="bottom end">
+          <Popover.Dialog className="p-2">
+            <QuickMenu
+              onSettings={() => {
+                setIsPopoverOpen(false);
+                quickMenu.onSettings();
+              }}
+              onLogout={() => {
+                setIsPopoverOpen(false);
+                quickMenu.onLogout();
+              }}
+            />
+          </Popover.Dialog>
+        </Popover.Content>
+      </Popover>
+    </div>
+  );
+
+  const startElement = (
+    <button className="sm:hidden" aria-label="Open menu" onClick={() => setIsDrawerOpen(true)}>
+      <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  );
+
+  return (
+    <>
+      <Navbar title="App" centerElement={centerElement} endElement={endElement} startElement={startElement} />
+      <Drawer isOpen={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+        <Drawer.Backdrop variant="blur">
+          <Drawer.Content placement="left">
+            <Drawer.Dialog aria-label="Navigation menu">
+              <Drawer.Header>
+                <div className="flex items-center gap-2">
+                  <Logo size="small" />
+                  <Drawer.Heading className="font-bold">App</Drawer.Heading>
+                </div>
+                <Drawer.CloseTrigger />
+              </Drawer.Header>
+              <Drawer.Body>
+                <nav>
+                  <ul className="flex flex-col gap-1">
+                    {menuItems.map((item) => (
+                      <li key={item.id}>
+                        {item.children ? (
+                          <>
+                            <button
+                              className="hover:bg-default-100 flex w-full items-center gap-3 rounded-lg px-3 py-2.5"
+                              onClick={() => toggleExpanded(item.id)}
+                            >
+                              {item.icon}
+                              <span className="flex-1 text-left font-medium">{item.name}</span>
+                              <ChevronDownIcon
+                                className={`h-4 w-4 transition-transform ${expandedItems.has(item.id) ? "rotate-180" : ""}`}
+                              />
+                            </button>
+                            {expandedItems.has(item.id) && (
+                              <ul className="ml-8 flex flex-col gap-1 py-1">
+                                {item.children.map((child) => (
+                                  <li key={child.id}>
+                                    <Link
+                                      href={child.href}
+                                      target={child.external ? "_blank" : undefined}
+                                      rel={child.external ? "noreferrer" : undefined}
+                                      className="hover:bg-default-100 flex items-center gap-2 rounded-lg px-3 py-2"
+                                    >
+                                      {child.icon}
+                                      <span className="text-sm">{child.name}</span>
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </>
+                        ) : (
+                          <Link
+                            href={item.href}
+                            className="hover:bg-default-100 flex items-center gap-3 rounded-lg px-3 py-2.5"
+                          >
+                            {item.icon}
+                            <span className="font-medium">{item.name}</span>
+                          </Link>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </Drawer.Body>
+              <Drawer.Footer className="flex-col">
+                <Separator />
+                <QuickMenu
+                  onSettings={() => {
+                    setIsDrawerOpen(false);
+                    quickMenu.onSettings();
+                  }}
+                  onLogout={() => {
+                    setIsDrawerOpen(false);
+                    quickMenu.onLogout();
+                  }}
+                />
+              </Drawer.Footer>
+            </Drawer.Dialog>
+          </Drawer.Content>
+        </Drawer.Backdrop>
+      </Drawer>
+    </>
+  );
 }

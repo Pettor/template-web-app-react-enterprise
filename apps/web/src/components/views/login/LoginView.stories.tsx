@@ -1,4 +1,3 @@
-import { FullSizeDecorator } from "@package/storybook";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { LoginView as Component } from "./LoginView";
 import type { LoginViewProps as Props } from "./LoginView";
@@ -29,12 +28,11 @@ const defaultArgs = {
     onSignUp: () => console.log("handleSignUp"),
     onSubmit: () => console.log("onSubmit"),
   },
-  onAbout: () => console.log("onAbout"),
+  onSettings: () => console.log("onSettings"),
 } satisfies Props;
 
 export const Fullscreen: Story = {
   args: defaultArgs,
-  decorators: [FullSizeDecorator],
   parameters: { viewport: { value: "full" } },
 };
 

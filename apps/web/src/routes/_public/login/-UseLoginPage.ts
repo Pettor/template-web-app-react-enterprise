@@ -5,12 +5,14 @@ import type { FormLogin } from "~/components/forms/login/LoginForm";
 import type { LoginViewProps } from "~/components/views/login/LoginView";
 import { useAuth } from "~/core/auth/UseAuth";
 import { useAppInfo } from "~/core/config/UseAppInfo";
+import { useSettingsModal } from "~/core/settings/UseSettingsModal";
 
 export function useLoginPage(): LoginViewProps {
   const navigate = useNavigate();
   const intl = useIntl();
   const { appName } = useAppInfo();
   const { login, loginLoading } = useAuth();
+  const { open: openSettings } = useSettingsModal();
   const [loginError, setLoginError] = useState<string>("");
 
   async function handleSubmit(data: FormLogin): Promise<void> {
@@ -34,8 +36,8 @@ export function useLoginPage(): LoginViewProps {
     }
   }
 
-  function handleOnAbout(): void {
-    navigate({ to: "/about" });
+  function handleOnSettings(): void {
+    openSettings("about");
   }
 
   function handleForgotPassword(): void {
@@ -55,6 +57,6 @@ export function useLoginPage(): LoginViewProps {
       onForgotPassword: handleForgotPassword,
       onSubmit: handleSubmit,
     },
-    onAbout: handleOnAbout,
+    onSettings: handleOnSettings,
   };
 }

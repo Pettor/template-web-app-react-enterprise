@@ -15,7 +15,7 @@ export function AboutDetails({ appName, appVersion, serverVersion }: AboutDetail
     <div className="items-left flex flex-1 flex-col px-4 md:mt-4">
       <Table aria-label="Example static collection table">
         <TableContent>
-          <TableHeader>
+          <TableHeader hidden={true}>
             <TableColumn>NAME</TableColumn>
             <TableColumn>ROLE</TableColumn>
           </TableHeader>

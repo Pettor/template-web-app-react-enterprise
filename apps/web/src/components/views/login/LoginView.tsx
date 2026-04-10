@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import { InformationCircleIcon } from "@heroicons/react/20/solid";
+import { Cog6ToothIcon } from "@heroicons/react/20/solid";
 import { Card, CardHeader, Button, CardContent } from "@heroui/react";
 import { BasicLayout, BlueFadeBackground, GridBackground, Logo } from "@package/ui";
 import { useIntl } from "react-intl";
@@ -10,10 +10,10 @@ export interface LoginViewProps {
   appName: string;
   loginForm: LoginFormProps;
   error?: string;
-  onAbout(): void;
+  onSettings(): void;
 }
 
-export function LoginView({ appName, loginForm, onAbout }: LoginViewProps): ReactElement {
+export function LoginView({ appName, loginForm, onSettings }: LoginViewProps): ReactElement {
   const intl = useIntl();
 
   return (
@@ -31,14 +31,14 @@ export function LoginView({ appName, loginForm, onAbout }: LoginViewProps): Reac
           <Button
             isIconOnly
             variant="tertiary"
-            onPress={onAbout}
+            onPress={onSettings}
             aria-label={intl.formatMessage({
-              description: "AboutView - About button aria label",
-              defaultMessage: "About",
-              id: "rpJImF",
+              description: "LoginView - Settings button aria label",
+              defaultMessage: "Settings",
+              id: "5ZVCd4",
             })}
           >
-            <InformationCircleIcon className="h-6 w-6" />
+            <Cog6ToothIcon className="h-6 w-6" />
           </Button>
         </CardHeader>
         <CardContent className="flex flex-col items-center">

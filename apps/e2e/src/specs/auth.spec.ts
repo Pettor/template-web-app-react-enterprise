@@ -50,7 +50,7 @@ test.describe("auth.logout", () => {
     }).toPass();
 
     await page.getByTestId("home-page__menu-button").click();
-    await page.getByTestId("profile-card__logout-button").click();
+    await page.getByTestId("quick-menu__logout-button").click();
 
     await expect(async () => {
       expect(await page.title()).toBe("Login");
