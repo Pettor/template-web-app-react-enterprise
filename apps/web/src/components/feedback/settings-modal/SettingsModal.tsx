@@ -1,6 +1,6 @@
 import { useState, useEffect, type ReactElement } from "react";
 import { InformationCircleIcon, SwatchIcon, UserCircleIcon } from "@heroicons/react/20/solid";
-import { ListBox, ListBoxItem, Modal, Separator } from "@heroui/react";
+import { Modal, Tabs } from "@heroui/react";
 import { useIntl } from "react-intl";
 import type { SettingsAboutSectionProps } from "./SettingsAboutSection";
 import { SettingsAboutSection } from "./SettingsAboutSection";
@@ -19,9 +19,9 @@ export interface SettingsModalProps {
 }
 
 const SECTION_ICONS: Record<SettingsSection, ReactElement> = {
-  account: <UserCircleIcon className="h-5 w-5" />,
-  appearance: <SwatchIcon className="h-5 w-5" />,
-  about: <InformationCircleIcon className="h-5 w-5" />,
+  account: <UserCircleIcon className="h-4 w-4" />,
+  appearance: <SwatchIcon className="h-4 w-4" />,
+  about: <InformationCircleIcon className="h-4 w-4" />,
 };
 
 export function SettingsModal({
@@ -98,34 +98,61 @@ export function SettingsModal({
             </Modal.Header>
             <Modal.Body className="p-0">
               <div className="flex flex-col sm:min-h-[400px] sm:flex-row">
-                <nav className="border-b p-2 sm:w-48 sm:shrink-0 sm:border-r sm:border-b-0 sm:p-4">
-                  <ListBox
-                    aria-label={intl.formatMessage({
-                      description: "SettingsModal - Navigation label",
-                      defaultMessage: "Settings navigation",
-                      id: "c51bvr",
-                    })}
-                    selectedKeys={[activeSection]}
-                    selectionMode="single"
-                    onSelectionChange={(keys) => {
-                      const selected = [...keys][0] as SettingsSection | undefined;
-                      if (selected) {
-                        setActiveSection(selected);
-                      }
-                    }}
-                  >
-                    {sections.map((section) => (
-                      <ListBoxItem key={section} id={section} textValue={getSectionLabel(section)}>
-                        <div className="flex items-center gap-2">
-                          {SECTION_ICONS[section]}
-                          <span>{getSectionLabel(section)}</span>
-                        </div>
-                      </ListBoxItem>
-                    ))}
-                  </ListBox>
-                </nav>
-                <Separator className="sm:hidden" />
-                <div className="flex-1 p-4 sm:p-6">{renderContent()}</div>
+                <Tabs
+                  variant="secondary"
+                  orientation="vertical"
+                  selectedKey={activeSection}
+                  onSelectionChange={(key) => setActiveSection(key as SettingsSection)}
+                  className="hidden border-r sm:flex"
+                >
+                  <Tabs.ListContainer>
+                    <Tabs.List
+                      aria-label={intl.formatMessage({
+                        description: "SettingsModal - Navigation label",
+                        defaultMessage: "Settings navigation",
+                        id: "c51bvr",
+                      })}
+                    >
+                      {sections.map((section, index) => (
+                        <Tabs.Tab key={section} id={section}>
+                          {index > 0 && <Tabs.Separator />}
+                          <span className="flex items-center gap-2">
+                            {SECTION_ICONS[section]}
+                            {getSectionLabel(section)}
+                          </span>
+                          <Tabs.Indicator />
+                        </Tabs.Tab>
+                      ))}
+                    </Tabs.List>
+                  </Tabs.ListContainer>
+                </Tabs>
+                <Tabs
+                  selectedKey={activeSection}
+                  onSelectionChange={(key) => setActiveSection(key as SettingsSection)}
+                  className="sm:hidden"
+                >
+                  <Tabs.ListContainer className="border-b px-2">
+                    <Tabs.List
+                      aria-label={intl.formatMessage({
+                        description: "SettingsModal - Navigation label",
+                        defaultMessage: "Settings navigation",
+                        id: "c51bvr",
+                      })}
+                    >
+                      {sections.map((section, index) => (
+                        <Tabs.Tab key={section} id={section}>
+                          {index > 0 && <Tabs.Separator />}
+                          <span className="flex items-center gap-1">
+                            {SECTION_ICONS[section]}
+                            {getSectionLabel(section)}
+                          </span>
+                          <Tabs.Indicator />
+                        </Tabs.Tab>
+                      ))}
+                    </Tabs.List>
+                  </Tabs.ListContainer>
+                </Tabs>
+                <div className="flex-1 px-4 sm:px-6">{renderContent()}</div>
               </div>
             </Modal.Body>
           </Modal.Dialog>
