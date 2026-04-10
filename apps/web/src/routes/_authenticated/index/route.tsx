@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useDocumentTitle } from "usehooks-ts";
 import { homeLoader } from "./-HomeLoader";
 import { useHomePage } from "./-UseHomePage";
+import { SettingsModalModule } from "~/components/modules/settings-modal/SettingsModalModule";
 import { HomeView } from "~/components/views/home/HomeView";
 
 export const Route = createFileRoute("/_authenticated/")({
@@ -16,5 +17,10 @@ function HomePageRoute(): ReactElement {
   const { githubLink, linkedInLink } = Route.useLoaderData();
   const homeProps = useHomePage(githubLink, linkedInLink);
 
-  return <HomeView {...homeProps} />;
+  return (
+    <>
+      <HomeView {...homeProps} />
+      <SettingsModalModule />
+    </>
+  );
 }

@@ -2,7 +2,6 @@ import { type ReactElement, useEffect } from "react";
 import { AppProviders } from "./AppProviders";
 import { AppTheme } from "./AppTheme";
 import { AppRoutes } from "./routes/AppRoutes";
-import { SettingsModalModule } from "~/components/modules/settings-modal/SettingsModalModule";
 
 export function App(): ReactElement {
   function handlePreloadError(): void {
@@ -23,7 +22,6 @@ export function App(): ReactElement {
       <AppTheme>
         <AppRoutes />
       </AppTheme>
-      <SettingsModalModule />
     </AppProviders>
   );
 }
