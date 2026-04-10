@@ -80,26 +80,30 @@ export function NavbarContent({ quickMenu, socialLinks, avatarName }: NavbarCont
             ))}
           </Tabs.List>
         </Tabs.ListContainer>
+        {menuItems.map((item) => (
+          <Tabs.Panel key={item.id} id={item.id} className="absolute top-full z-10 mt-2">
+            {item.children && (
+              <div
+                style={{ left: dropdownLeft }}
+                className="bg-background flex flex-col gap-1 rounded-lg border p-2 shadow-lg"
+              >
+                {item.children.map((child) => (
+                  <Link
+                    key={child.id}
+                    href={child.href}
+                    target={child.external ? "_blank" : undefined}
+                    rel={child.external ? "noreferrer" : undefined}
+                    className="hover:bg-default-100 flex items-center gap-2 rounded-md px-3 py-2 text-sm"
+                  >
+                    {child.icon}
+                    {child.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </Tabs.Panel>
+        ))}
       </Tabs>
-      {activeItem?.children && (
-        <div
-          style={{ left: dropdownLeft }}
-          className="bg-background absolute top-full z-10 mt-2 flex flex-col gap-1 rounded-lg border p-2 shadow-lg"
-        >
-          {activeItem.children.map((child) => (
-            <Link
-              key={child.id}
-              href={child.href}
-              target={child.external ? "_blank" : undefined}
-              rel={child.external ? "noreferrer" : undefined}
-              className="hover:bg-default-100 flex items-center gap-2 rounded-md px-3 py-2 text-sm"
-            >
-              {child.icon}
-              {child.name}
-            </Link>
-          ))}
-        </div>
-      )}
     </div>
   );
 

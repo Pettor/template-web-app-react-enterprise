@@ -104,9 +104,9 @@ export function SettingsModal({
                   orientation="vertical"
                   selectedKey={activeSection}
                   onSelectionChange={(key) => setActiveSection(key as SettingsSection)}
-                  className="border-r"
+                  className="flex-1"
                 >
-                  <Tabs.ListContainer>
+                  <Tabs.ListContainer className="border-r">
                     <Tabs.List
                       aria-label={intl.formatMessage({
                         description: "SettingsModal - Navigation label",
@@ -115,7 +115,7 @@ export function SettingsModal({
                       })}
                     >
                       {sections.map((section, index) => (
-                        <Tabs.Tab key={section} id={section}>
+                        <Tabs.Tab className="justify-start" key={section} id={section}>
                           {index > 0 && <Tabs.Separator />}
                           <span className="flex items-center gap-2">
                             {SECTION_ICONS[section]}
@@ -126,8 +126,12 @@ export function SettingsModal({
                       ))}
                     </Tabs.List>
                   </Tabs.ListContainer>
+                  {sections.map((section) => (
+                    <Tabs.Panel key={section} id={section} className="flex-1 px-6">
+                      {renderSection(section)}
+                    </Tabs.Panel>
+                  ))}
                 </Tabs>
-                <div className="flex-1 px-6">{renderSection(activeSection)}</div>
               </div>
 
               {/* Mobile: all sections stacked vertically */}
