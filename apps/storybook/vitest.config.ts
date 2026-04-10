@@ -25,6 +25,9 @@ export default defineConfig({
       {
         extends: true,
         resolve: {
+          alias: {
+            "~": path.resolve(__dirname, "../web/src"),
+          },
           dedupe: ["react", "react-dom"],
           tsconfigPaths: true,
         },
