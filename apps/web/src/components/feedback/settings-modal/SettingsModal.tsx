@@ -1,6 +1,6 @@
 import { useState, useEffect, type ReactElement } from "react";
 import { InformationCircleIcon, SwatchIcon, UserCircleIcon } from "@heroicons/react/20/solid";
-import { Modal, Tabs } from "@heroui/react";
+import { Modal, Separator, Tabs } from "@heroui/react";
 import { useIntl } from "react-intl";
 import type { SettingsAboutSectionProps } from "./SettingsAboutSection";
 import { SettingsAboutSection } from "./SettingsAboutSection";
@@ -64,8 +64,8 @@ export function SettingsModal({
     }
   }
 
-  function renderContent(): ReactElement {
-    switch (activeSection) {
+  function renderSection(section: SettingsSection): ReactElement {
+    switch (section) {
       case "account":
         return account ? <SettingsAccountSection {...account} /> : <></>;
       case "appearance":
@@ -97,13 +97,14 @@ export function SettingsModal({
               <Modal.CloseTrigger />
             </Modal.Header>
             <Modal.Body className="p-0">
-              <div className="flex flex-col sm:min-h-[400px] sm:flex-row">
+              {/* Desktop: vertical tabs with content pane */}
+              <div className="hidden sm:flex sm:min-h-[400px] sm:flex-row">
                 <Tabs
                   variant="secondary"
                   orientation="vertical"
                   selectedKey={activeSection}
                   onSelectionChange={(key) => setActiveSection(key as SettingsSection)}
-                  className="hidden border-r sm:flex"
+                  className="border-r"
                 >
                   <Tabs.ListContainer>
                     <Tabs.List
@@ -126,33 +127,17 @@ export function SettingsModal({
                     </Tabs.List>
                   </Tabs.ListContainer>
                 </Tabs>
-                <Tabs
-                  selectedKey={activeSection}
-                  onSelectionChange={(key) => setActiveSection(key as SettingsSection)}
-                  className="sm:hidden"
-                >
-                  <Tabs.ListContainer className="border-b px-2">
-                    <Tabs.List
-                      aria-label={intl.formatMessage({
-                        description: "SettingsModal - Navigation label",
-                        defaultMessage: "Settings navigation",
-                        id: "c51bvr",
-                      })}
-                    >
-                      {sections.map((section, index) => (
-                        <Tabs.Tab key={section} id={section}>
-                          {index > 0 && <Tabs.Separator />}
-                          <span className="flex items-center gap-1">
-                            {SECTION_ICONS[section]}
-                            {getSectionLabel(section)}
-                          </span>
-                          <Tabs.Indicator />
-                        </Tabs.Tab>
-                      ))}
-                    </Tabs.List>
-                  </Tabs.ListContainer>
-                </Tabs>
-                <div className="flex-1 px-4 sm:px-6">{renderContent()}</div>
+                <div className="flex-1 px-6">{renderSection(activeSection)}</div>
+              </div>
+
+              {/* Mobile: all sections stacked vertically */}
+              <div className="flex flex-col gap-6 px-4 pb-4 sm:hidden">
+                {sections.map((section, index) => (
+                  <div key={section}>
+                    {index > 0 && <Separator className="mb-6" />}
+                    {renderSection(section)}
+                  </div>
+                ))}
               </div>
             </Modal.Body>
           </Modal.Dialog>
