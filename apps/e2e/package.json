@@ -6,7 +6,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prepare": "playwright install --with-deps",
+    "prepare": "playwright install",
     "clean": "rimraf .test-results",
     "clean:all": "pnpm clean node_modules",
     "test:e2e": "cross-env PLAYWRIGHT_JUNIT_OUTPUT_NAME=\"./.test-results/results.xml\" pnpm playwright test --reporter=junit"
