@@ -1,6 +1,5 @@
 import type { ReactElement } from "react";
-import { BoltIcon, CodeBracketIcon, HomeIcon, SparklesIcon, SwatchIcon, UsersIcon } from "@heroicons/react/20/solid";
-import { GithubIcon, LinkedInIcon } from "@package/ui";
+import { ChartBarSquareIcon, HomeIcon } from "@heroicons/react/20/solid";
 
 export interface NavMenuItem {
   id: string;
@@ -16,7 +15,8 @@ export interface NavMenuSocialLinks {
   linkedIn: string;
 }
 
-export function createNavMenuItems(socialLinks: NavMenuSocialLinks): NavMenuItem[] {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function createNavMenuItems(_socialLinks: NavMenuSocialLinks): NavMenuItem[] {
   return [
     {
       id: "home",
@@ -25,55 +25,10 @@ export function createNavMenuItems(socialLinks: NavMenuSocialLinks): NavMenuItem
       icon: <HomeIcon className="h-5 w-5" />,
     },
     {
-      id: "features",
-      name: "Features",
-      href: "#",
-      icon: <SparklesIcon className="h-5 w-5" />,
-      children: [
-        {
-          id: "react",
-          name: "React",
-          href: "https://react.dev",
-          icon: <CodeBracketIcon className="h-4 w-4" />,
-          external: true,
-        },
-        {
-          id: "vite",
-          name: "Vite",
-          href: "https://vite.dev",
-          icon: <BoltIcon className="h-4 w-4" />,
-          external: true,
-        },
-        {
-          id: "tailwind",
-          name: "Tailwind CSS",
-          href: "https://tailwindcss.com",
-          icon: <SwatchIcon className="h-4 w-4" />,
-          external: true,
-        },
-      ],
-    },
-    {
-      id: "social",
-      name: "Social",
-      href: "#",
-      icon: <UsersIcon className="h-5 w-5" />,
-      children: [
-        {
-          id: "github",
-          name: "GitHub",
-          href: socialLinks.github,
-          icon: <GithubIcon />,
-          external: true,
-        },
-        {
-          id: "linkedin",
-          name: "LinkedIn",
-          href: socialLinks.linkedIn,
-          icon: <LinkedInIcon />,
-          external: true,
-        },
-      ],
+      id: "dashboard",
+      name: "Dashboard",
+      href: "#/dashboard",
+      icon: <ChartBarSquareIcon className="h-5 w-5" />,
     },
   ];
 }
