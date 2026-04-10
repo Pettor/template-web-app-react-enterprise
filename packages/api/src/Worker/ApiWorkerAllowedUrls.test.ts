@@ -27,7 +27,7 @@ describe("ALLOWED_URLS", () => {
     expect(ALLOWED_URLS).not.toContain("/api/tokens/refresh");
   });
 
-  it("contains exactly 4 entries", () => {
-    expect(ALLOWED_URLS).toHaveLength(4);
+  it("contains exactly 5 entries", () => {
+    expect(ALLOWED_URLS).toHaveLength(5);
   });
 });
