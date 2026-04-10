@@ -1,13 +1,19 @@
+import { createRequire } from "node:module";
+import path from "node:path";
 import { createBaseConfig } from "@config/vite";
-import tailwindcss from "@tailwindcss/vite";
-import type { PluginOption } from "vite";
 import { defineConfig, mergeConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
+
+const require = createRequire(import.meta.url);
+const webAppSrc = path.resolve(path.dirname(require.resolve("@app/web/package.json")), "src");
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
   return mergeConfig(createBaseConfig(), {
     base: "./",
-    plugins: [tailwindcss() as PluginOption, tsconfigPaths() as PluginOption],
+    resolve: {
+      alias: {
+        "~": webAppSrc,
+      },
+    },
   });
 });
