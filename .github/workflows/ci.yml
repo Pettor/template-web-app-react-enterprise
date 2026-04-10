@@ -4,6 +4,9 @@ on:
   pull_request:
     branches: ["main"]
 
+permissions:
+  contents: read
+
 env:
   COPILOT_AGENT_FIREWALL_ALLOW_LIST_ADDITIONS: "playwright.dev,storybook.js.org"
 
