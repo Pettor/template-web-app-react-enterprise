@@ -1,9 +1,13 @@
+import { createRequire } from "node:module";
 import path from "node:path";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { playwright } from "@vitest/browser-playwright";
 import { defineConfig } from "vitest/config";
+
+const require = createRequire(import.meta.url);
+const webAppSrc = path.resolve(path.dirname(require.resolve("@app/web/package.json")), "src");
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
@@ -26,7 +30,7 @@ export default defineConfig({
         extends: true,
         resolve: {
           alias: {
-            "~": path.resolve(__dirname, "../web/src"),
+            "~": webAppSrc,
           },
           dedupe: ["react", "react-dom"],
           tsconfigPaths: true,
