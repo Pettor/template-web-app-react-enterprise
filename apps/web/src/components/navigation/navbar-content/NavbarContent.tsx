@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactElement } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { Avatar, Link, Popover, Separator, Tabs } from "@heroui/react";
-import { Navbar } from "@package/ui";
+import { Avatar, Drawer, Link, Popover, Separator, Tabs } from "@heroui/react";
+import { Logo, Navbar } from "@package/ui";
 import { createNavMenuItems, type NavMenuSocialLinks } from "./NavMenuItems";
 import type { QuickMenuProps } from "~/components/actions/quick-menu/QuickMenu";
 import { QuickMenu } from "~/components/actions/quick-menu/QuickMenu";
@@ -16,6 +16,7 @@ export function NavbarContent({ quickMenu, socialLinks, avatarName }: NavbarCont
   const [activeTab, setActiveTab] = useState<string>("home");
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const menuItems = useMemo(() => createNavMenuItems(socialLinks), [socialLinks]);
 
@@ -128,58 +129,94 @@ export function NavbarContent({ quickMenu, socialLinks, avatarName }: NavbarCont
     </div>
   );
 
-  const menuElement = (
-    <div className="flex h-full flex-col">
-      <nav className="flex-1 px-4 py-4">
-        <ul className="flex flex-col gap-1">
-          {menuItems.map((item) => (
-            <li key={item.id}>
-              {item.children ? (
-                <>
-                  <button
-                    className="hover:bg-default-100 flex w-full items-center gap-3 rounded-lg px-3 py-2.5"
-                    onClick={() => toggleExpanded(item.id)}
-                  >
-                    {item.icon}
-                    <span className="flex-1 text-left font-medium">{item.name}</span>
-                    <ChevronDownIcon
-                      className={`h-4 w-4 transition-transform ${expandedItems.has(item.id) ? "rotate-180" : ""}`}
-                    />
-                  </button>
-                  {expandedItems.has(item.id) && (
-                    <ul className="ml-8 flex flex-col gap-1 py-1">
-                      {item.children.map((child) => (
-                        <li key={child.id}>
-                          <Link
-                            href={child.href}
-                            target={child.external ? "_blank" : undefined}
-                            rel={child.external ? "noreferrer" : undefined}
-                            className="hover:bg-default-100 flex items-center gap-2 rounded-lg px-3 py-2"
-                          >
-                            {child.icon}
-                            <span className="text-sm">{child.name}</span>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </>
-              ) : (
-                <Link href={item.href} className="hover:bg-default-100 flex items-center gap-3 rounded-lg px-3 py-2.5">
-                  {item.icon}
-                  <span className="font-medium">{item.name}</span>
-                </Link>
-              )}
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <Separator />
-      <div className="px-4 py-4">
-        <QuickMenu {...quickMenu} />
-      </div>
-    </div>
+  const startElement = (
+    <button className="sm:hidden" aria-label="Open menu" onClick={() => setIsDrawerOpen(true)}>
+      <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
   );
 
-  return <Navbar title="App" centerElement={centerElement} menuElement={menuElement} endElement={endElement} />;
+  return (
+    <>
+      <Navbar title="App" centerElement={centerElement} endElement={endElement} startElement={startElement} />
+      <Drawer isOpen={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+        <Drawer.Backdrop variant="blur">
+          <Drawer.Content placement="left">
+            <Drawer.Dialog aria-label="Navigation menu">
+              <Drawer.Header>
+                <div className="flex items-center gap-2">
+                  <Logo size="small" />
+                  <Drawer.Heading className="font-bold">App</Drawer.Heading>
+                </div>
+                <Drawer.CloseTrigger />
+              </Drawer.Header>
+              <Drawer.Body>
+                <nav>
+                  <ul className="flex flex-col gap-1">
+                    {menuItems.map((item) => (
+                      <li key={item.id}>
+                        {item.children ? (
+                          <>
+                            <button
+                              className="hover:bg-default-100 flex w-full items-center gap-3 rounded-lg px-3 py-2.5"
+                              onClick={() => toggleExpanded(item.id)}
+                            >
+                              {item.icon}
+                              <span className="flex-1 text-left font-medium">{item.name}</span>
+                              <ChevronDownIcon
+                                className={`h-4 w-4 transition-transform ${expandedItems.has(item.id) ? "rotate-180" : ""}`}
+                              />
+                            </button>
+                            {expandedItems.has(item.id) && (
+                              <ul className="ml-8 flex flex-col gap-1 py-1">
+                                {item.children.map((child) => (
+                                  <li key={child.id}>
+                                    <Link
+                                      href={child.href}
+                                      target={child.external ? "_blank" : undefined}
+                                      rel={child.external ? "noreferrer" : undefined}
+                                      className="hover:bg-default-100 flex items-center gap-2 rounded-lg px-3 py-2"
+                                    >
+                                      {child.icon}
+                                      <span className="text-sm">{child.name}</span>
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </>
+                        ) : (
+                          <Link
+                            href={item.href}
+                            className="hover:bg-default-100 flex items-center gap-3 rounded-lg px-3 py-2.5"
+                          >
+                            {item.icon}
+                            <span className="font-medium">{item.name}</span>
+                          </Link>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </Drawer.Body>
+              <Drawer.Footer className="flex-col">
+                <Separator />
+                <QuickMenu
+                  onSettings={() => {
+                    setIsDrawerOpen(false);
+                    quickMenu.onSettings();
+                  }}
+                  onLogout={() => {
+                    setIsDrawerOpen(false);
+                    quickMenu.onLogout();
+                  }}
+                />
+              </Drawer.Footer>
+            </Drawer.Dialog>
+          </Drawer.Content>
+        </Drawer.Backdrop>
+      </Drawer>
+    </>
+  );
 }
