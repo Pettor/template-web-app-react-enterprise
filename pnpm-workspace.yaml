@@ -16,7 +16,7 @@ catalogs:
     framer-motion: 12.38.0
     idb-keyval: 6.2.2
     immer: 11.1.4
-    jotai: 2.19.0
+    jotai: 2.19.1
     jotai-effect: 2.2.3
     move-cli: 2.0.0
     react-intl: 10.1.1
