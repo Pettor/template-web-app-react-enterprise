@@ -5,11 +5,12 @@ import { homeLoader } from "./-HomeLoader";
 import { useHomePage } from "./-UseHomePage";
 import { SettingsModalModule } from "~/components/modules/settings-modal/SettingsModalModule";
 import { HomeView } from "~/components/views/home/HomeView";
+import { RouteError } from "~/core/routes/logic/RouteError";
 
 export const Route = createFileRoute("/_authenticated/")({
   loader: () => homeLoader(),
   component: HomePageRoute,
-  errorComponent: ({ error }) => <div>Error loading home page: {error.message}</div>,
+  errorComponent: ({ error }) => <RouteError error={error} />,
 });
 
 function HomePageRoute(): ReactElement {

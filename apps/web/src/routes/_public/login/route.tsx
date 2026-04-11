@@ -4,9 +4,11 @@ import { useDocumentTitle } from "usehooks-ts";
 import { useLoginPage } from "./-UseLoginPage";
 import { SettingsModalModule } from "~/components/modules/settings-modal/SettingsModalModule";
 import { LoginView } from "~/components/views/login/LoginView";
+import { RouteError } from "~/core/routes/logic/RouteError";
 
 export const Route = createFileRoute("/_public/login")({
   component: LoginPageRoute,
+  errorComponent: ({ error }) => <RouteError error={error} />,
 });
 
 function LoginPageRoute(): ReactElement {

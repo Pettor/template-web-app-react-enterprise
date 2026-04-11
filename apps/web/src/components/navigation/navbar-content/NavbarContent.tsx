@@ -151,7 +151,15 @@ export function NavbarContent({
 
   const startElement = (
     <button className="sm:hidden" aria-label="Open menu" onClick={() => setIsDrawerOpen(true)}>
-      <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        focusable="false"
+      >
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
@@ -181,15 +189,18 @@ export function NavbarContent({
                             <button
                               className="hover:bg-default-100 flex w-full items-center gap-3 rounded-lg px-3 py-2.5"
                               onClick={() => toggleExpanded(item.id)}
+                              aria-expanded={expandedItems.has(item.id)}
+                              aria-controls={`nav-submenu-${item.id}`}
                             >
                               {item.icon}
                               <span className="flex-1 text-left font-medium">{item.name}</span>
                               <ChevronDownIcon
                                 className={`h-4 w-4 transition-transform ${expandedItems.has(item.id) ? "rotate-180" : ""}`}
+                                aria-hidden="true"
                               />
                             </button>
                             {expandedItems.has(item.id) && (
-                              <ul className="ml-8 flex flex-col gap-1 py-1">
+                              <ul id={`nav-submenu-${item.id}`} className="ml-8 flex flex-col gap-1 py-1">
                                 {item.children.map((child) => (
                                   <li key={child.id}>
                                     <Link
