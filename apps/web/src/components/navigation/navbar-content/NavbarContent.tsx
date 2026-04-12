@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactElement } 
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Avatar, Drawer, Link, Popover, Separator, Tabs } from "@heroui/react";
 import { Logo, Navbar } from "@package/ui";
+import { useIntl } from "react-intl";
 import { createNavMenuItems, type NavMenuSocialLinks } from "./NavMenuItems";
 import type { QuickMenuProps } from "~/components/actions/quick-menu/QuickMenu";
 import { QuickMenu } from "~/components/actions/quick-menu/QuickMenu";
@@ -19,12 +20,13 @@ export function NavbarContent({
   avatarName,
   activeTab: activeTabProp = "home",
 }: NavbarContentProps): ReactElement {
+  const intl = useIntl();
   const [activeTab, setActiveTab] = useState<string>(activeTabProp);
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const menuItems = useMemo(() => createNavMenuItems(socialLinks), [socialLinks]);
+  const menuItems = useMemo(() => createNavMenuItems(socialLinks, intl), [socialLinks, intl]);
 
   function getAvatarFallback(displayName: string): string {
     const names = displayName.split(" ");
@@ -82,7 +84,13 @@ export function NavbarContent({
         }}
       >
         <Tabs.ListContainer>
-          <Tabs.List aria-label="Navigation">
+          <Tabs.List
+            aria-label={intl.formatMessage({
+              description: "NavbarContent - Navigation tabs aria label",
+              defaultMessage: "Navigation",
+              id: "Aka9wA",
+            })}
+          >
             {menuItems.map((item, index) => (
               <Tabs.Tab key={item.id} id={item.id}>
                 {index > 0 && <Tabs.Separator />}
@@ -150,7 +158,15 @@ export function NavbarContent({
   );
 
   const startElement = (
-    <button className="sm:hidden" aria-label="Open menu" onClick={() => setIsDrawerOpen(true)}>
+    <button
+      className="sm:hidden"
+      aria-label={intl.formatMessage({
+        description: "NavbarContent - Open mobile menu button aria label",
+        defaultMessage: "Open menu",
+        id: "C2cjsj",
+      })}
+      onClick={() => setIsDrawerOpen(true)}
+    >
       <svg
         className="h-6 w-6"
         fill="none"
@@ -167,15 +183,36 @@ export function NavbarContent({
 
   return (
     <>
-      <Navbar title="App" centerElement={centerElement} endElement={endElement} startElement={startElement} />
+      <Navbar
+        title={intl.formatMessage({
+          description: "NavbarContent - App title in navbar",
+          defaultMessage: "App",
+          id: "uk7U9w",
+        })}
+        centerElement={centerElement}
+        endElement={endElement}
+        startElement={startElement}
+      />
       <Drawer isOpen={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
         <Drawer.Backdrop variant="blur">
           <Drawer.Content placement="left">
-            <Drawer.Dialog aria-label="Navigation menu">
+            <Drawer.Dialog
+              aria-label={intl.formatMessage({
+                description: "NavbarContent - Navigation drawer aria label",
+                defaultMessage: "Navigation menu",
+                id: "iETYfS",
+              })}
+            >
               <Drawer.Header>
                 <div className="flex items-center gap-2">
                   <Logo size="small" />
-                  <Drawer.Heading className="font-bold">App</Drawer.Heading>
+                  <Drawer.Heading className="font-bold">
+                    {intl.formatMessage({
+                      description: "NavbarContent - App title in drawer heading",
+                      defaultMessage: "App",
+                      id: "iQtPAp",
+                    })}
+                  </Drawer.Heading>
                 </div>
                 <Drawer.CloseTrigger />
               </Drawer.Header>

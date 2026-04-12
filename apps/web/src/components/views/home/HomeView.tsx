@@ -22,7 +22,20 @@ export function HomeView({ navbarContentProps }: HomeViewProps): ReactElement {
   const intl = useIntl();
 
   return (
-    <NavbarLayout footer navbarElement={<NavbarContent {...navbarContentProps} />}>
+    <NavbarLayout
+      footer
+      footerText={intl.formatMessage({
+        description: "NavbarLayout - Footer attribution text",
+        defaultMessage: "Made with ☕ by Petter Hancock",
+        id: "rnZMTQ",
+      })}
+      footerCopyright={intl.formatMessage({
+        description: "NavbarLayout - Footer copyright text",
+        defaultMessage: "Copyright © 2024 - All rights reserved",
+        id: "ZSiTwu",
+      })}
+      navbarElement={<NavbarContent {...navbarContentProps} />}
+    >
       <div className="grid w-full place-items-center">
         <div className="h-8" />
         <div className="items-center justify-center gap-2 p-2 text-center">

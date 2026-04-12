@@ -55,6 +55,7 @@ function StatCard({
 }
 
 function RevenueChart({ data }: { data: DashboardChartPoint[] }): ReactElement {
+  const intl = useIntl();
   const maxValue = Math.max(...data.flatMap((d) => [d.revenue, d.expenses]));
   const chartHeight = 200;
   const yTicks = [0, Math.round(maxValue * 0.25), Math.round(maxValue * 0.5), Math.round(maxValue * 0.75), maxValue];
@@ -63,11 +64,35 @@ function RevenueChart({ data }: { data: DashboardChartPoint[] }): ReactElement {
     return val >= 1000 ? `$${(val / 1000).toFixed(0)}k` : `$${val}`;
   }
 
+  const revenueLabel = intl.formatMessage({
+    description: "DashboardView - Revenue label",
+    defaultMessage: "Revenue",
+    id: "aSS3Pq",
+  });
+
+  const expensesLabel = intl.formatMessage({
+    description: "DashboardView - Expenses label",
+    defaultMessage: "Expenses",
+    id: "1QivPD",
+  });
+
   return (
     <Card variant="secondary" className="col-span-1 md:col-span-2">
       <Card.Header>
-        <Card.Title>Revenue Overview</Card.Title>
-        <Card.Description>Monthly revenue and expenses</Card.Description>
+        <Card.Title>
+          {intl.formatMessage({
+            description: "DashboardView - Revenue chart title",
+            defaultMessage: "Revenue Overview",
+            id: "P69U8Y",
+          })}
+        </Card.Title>
+        <Card.Description>
+          {intl.formatMessage({
+            description: "DashboardView - Revenue chart description",
+            defaultMessage: "Monthly revenue and expenses",
+            id: "rwk7rn",
+          })}
+        </Card.Description>
       </Card.Header>
       <Card.Content>
         <div className="flex">
@@ -89,12 +114,12 @@ function RevenueChart({ data }: { data: DashboardChartPoint[] }): ReactElement {
                   <div
                     className="bg-accent min-h-1 w-3 min-w-2 rounded-md sm:w-4 md:w-5"
                     style={{ height: `${(point.revenue / maxValue) * 100}%` }}
-                    title={`Revenue: $${point.revenue.toLocaleString()}`}
+                    title={`${revenueLabel}: $${point.revenue.toLocaleString()}`}
                   />
                   <div
                     className="bg-default-300 min-h-1 w-3 min-w-2 rounded-md sm:w-4 md:w-5"
                     style={{ height: `${(point.expenses / maxValue) * 100}%` }}
-                    title={`Expenses: $${point.expenses.toLocaleString()}`}
+                    title={`${expensesLabel}: $${point.expenses.toLocaleString()}`}
                   />
                 </div>
               ))}
@@ -115,11 +140,11 @@ function RevenueChart({ data }: { data: DashboardChartPoint[] }): ReactElement {
         <div className="mt-4 flex items-center gap-4 text-xs">
           <div className="flex items-center gap-1">
             <div className="bg-accent h-2 w-2 rounded-full" />
-            <span>Revenue</span>
+            <span>{revenueLabel}</span>
           </div>
           <div className="flex items-center gap-1">
             <div className="bg-default-300 h-2 w-2 rounded-full" />
-            <span>Expenses</span>
+            <span>{expensesLabel}</span>
           </div>
         </div>
       </Card.Content>
@@ -128,22 +153,40 @@ function RevenueChart({ data }: { data: DashboardChartPoint[] }): ReactElement {
 }
 
 function ActiveUsersCard({ stats }: { stats: DashboardStats }): ReactElement {
+  const intl = useIntl();
   const activePercentage = Math.round((stats.activeUsers / stats.totalUsers) * 100);
   const inactiveUsers = stats.totalUsers - stats.activeUsers;
 
   return (
     <Card variant="secondary">
       <Card.Header>
-        <Card.Title>Active Users</Card.Title>
+        <Card.Title>
+          {intl.formatMessage({
+            description: "DashboardView - Active users card title",
+            defaultMessage: "Active Users",
+            id: "PsQgHK",
+          })}
+        </Card.Title>
         <Card.Description>
-          {stats.activeUsers} of {stats.totalUsers} users
+          {intl.formatMessage(
+            {
+              description: "DashboardView - Active users card description",
+              defaultMessage: "{activeUsers} of {totalUsers} users",
+              id: "Yd+W2u",
+            },
+            { activeUsers: stats.activeUsers, totalUsers: stats.totalUsers }
+          )}
         </Card.Description>
       </Card.Header>
       <Card.Content className="flex flex-col gap-4">
         {/* Donut chart */}
         <div className="flex items-center justify-center py-2">
           <ProgressCircle
-            aria-label="Active users percentage"
+            aria-label={intl.formatMessage({
+              description: "DashboardView - Active users percentage aria label",
+              defaultMessage: "Active users percentage",
+              id: "98PEE4",
+            })}
             value={activePercentage}
             color="accent"
             className="h-28 w-28"
@@ -158,7 +201,13 @@ function ActiveUsersCard({ stats }: { stats: DashboardStats }): ReactElement {
 
         {/* Active rate */}
         <div className="flex justify-between text-sm">
-          <span className="text-default-500">Active rate</span>
+          <span className="text-default-500">
+            {intl.formatMessage({
+              description: "DashboardView - Active rate label",
+              defaultMessage: "Active rate",
+              id: "MEWO8P",
+            })}
+          </span>
           <span className="font-medium">{activePercentage}%</span>
         </div>
 
@@ -168,14 +217,26 @@ function ActiveUsersCard({ stats }: { stats: DashboardStats }): ReactElement {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="bg-accent h-2 w-2 rounded-full" />
-              <span className="text-default-500">Active</span>
+              <span className="text-default-500">
+                {intl.formatMessage({
+                  description: "DashboardView - Active users legend label",
+                  defaultMessage: "Active",
+                  id: "lSBOvl",
+                })}
+              </span>
             </div>
             <span className="font-medium">{stats.activeUsers.toLocaleString()}</span>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="bg-default-300 h-2 w-2 rounded-full" />
-              <span className="text-default-500">Inactive</span>
+              <span className="text-default-500">
+                {intl.formatMessage({
+                  description: "DashboardView - Inactive users legend label",
+                  defaultMessage: "Inactive",
+                  id: "k36Eoc",
+                })}
+              </span>
             </div>
             <span className="font-medium">{inactiveUsers.toLocaleString()}</span>
           </div>
@@ -186,20 +247,64 @@ function ActiveUsersCard({ stats }: { stats: DashboardStats }): ReactElement {
 }
 
 function TransactionsTable({ transactions }: { transactions: DashboardTransaction[] }): ReactElement {
+  const intl = useIntl();
+
   return (
     <Card variant="secondary" className="col-span-1 md:col-span-3">
       <Card.Header>
-        <Card.Title>Recent Transactions</Card.Title>
-        <Card.Description>Latest customer transactions</Card.Description>
+        <Card.Title>
+          {intl.formatMessage({
+            description: "DashboardView - Recent transactions card title",
+            defaultMessage: "Recent Transactions",
+            id: "yQ8ml+",
+          })}
+        </Card.Title>
+        <Card.Description>
+          {intl.formatMessage({
+            description: "DashboardView - Recent transactions card description",
+            defaultMessage: "Latest customer transactions",
+            id: "TV0D76",
+          })}
+        </Card.Description>
       </Card.Header>
       <Card.Content>
-        <Table aria-label="Recent transactions">
+        <Table
+          aria-label={intl.formatMessage({
+            description: "DashboardView - Recent transactions table aria label",
+            defaultMessage: "Recent transactions",
+            id: "Ws8DxF",
+          })}
+        >
           <Table.Content>
             <Table.Header>
-              <Table.Column isRowHeader>Customer</Table.Column>
-              <Table.Column>Amount</Table.Column>
-              <Table.Column>Status</Table.Column>
-              <Table.Column>Date</Table.Column>
+              <Table.Column isRowHeader>
+                {intl.formatMessage({
+                  description: "DashboardView - Customer column header",
+                  defaultMessage: "Customer",
+                  id: "zymkVS",
+                })}
+              </Table.Column>
+              <Table.Column>
+                {intl.formatMessage({
+                  description: "DashboardView - Amount column header",
+                  defaultMessage: "Amount",
+                  id: "Oyg9J8",
+                })}
+              </Table.Column>
+              <Table.Column>
+                {intl.formatMessage({
+                  description: "DashboardView - Status column header",
+                  defaultMessage: "Status",
+                  id: "p0UMLn",
+                })}
+              </Table.Column>
+              <Table.Column>
+                {intl.formatMessage({
+                  description: "DashboardView - Date column header",
+                  defaultMessage: "Date",
+                  id: "1nhQq6",
+                })}
+              </Table.Column>
             </Table.Header>
             <Table.Body items={transactions}>
               {(tx) => (
@@ -257,7 +362,20 @@ export function DashboardView({
   const intl = useIntl();
 
   return (
-    <NavbarLayout footer navbarElement={<NavbarContent {...navbarContentProps} />}>
+    <NavbarLayout
+      footer
+      footerText={intl.formatMessage({
+        description: "NavbarLayout - Footer attribution text",
+        defaultMessage: "Made with ☕ by Petter Hancock",
+        id: "rnZMTQ",
+      })}
+      footerCopyright={intl.formatMessage({
+        description: "NavbarLayout - Footer copyright text",
+        defaultMessage: "Copyright © 2024 - All rights reserved",
+        id: "ZSiTwu",
+      })}
+      navbarElement={<NavbarContent {...navbarContentProps} />}
+    >
       <div className="mx-auto w-full max-w-7xl px-4 py-6">
         <div className="mb-6">
           <h1 className="text-2xl font-bold md:text-3xl">
