@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { ChartBarSquareIcon, HomeIcon } from "@heroicons/react/20/solid";
+import type { IntlShape } from "react-intl";
 
 export interface NavMenuItem {
   id: string;
@@ -15,18 +16,25 @@ export interface NavMenuSocialLinks {
   linkedIn: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function createNavMenuItems(_socialLinks: NavMenuSocialLinks): NavMenuItem[] {
+export function createNavMenuItems(_socialLinks: NavMenuSocialLinks, intl: IntlShape): NavMenuItem[] {
   return [
     {
       id: "home",
-      name: "Home",
+      name: intl.formatMessage({
+        description: "NavMenuItems - Home menu item",
+        defaultMessage: "Home",
+        id: "ciFxoL",
+      }),
       href: "#/",
       icon: <HomeIcon className="h-5 w-5" />,
     },
     {
       id: "dashboard",
-      name: "Dashboard",
+      name: intl.formatMessage({
+        description: "NavMenuItems - Dashboard menu item",
+        defaultMessage: "Dashboard",
+        id: "JZPB0K",
+      }),
       href: "#/dashboard",
       icon: <ChartBarSquareIcon className="h-5 w-5" />,
     },
