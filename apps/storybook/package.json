@@ -37,6 +37,7 @@
     "@package/storybook": "workspace:*",
     "@storybook/addon-a11y": "catalog:storybook",
     "@storybook/addon-docs": "catalog:storybook",
+    "@storybook/addon-mcp": "catalog:storybook",
     "@storybook/addon-themes": "catalog:storybook",
     "@storybook/addon-vitest": "catalog:storybook",
     "@storybook/builder-vite": "catalog:storybook",
