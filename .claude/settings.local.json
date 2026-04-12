@@ -1,0 +1,6 @@
+{
+  "enabledMcpjsonServers": [
+    "heroui-migration"
+  ],
+  "enableAllProjectMcpServers": true
+}

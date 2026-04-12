@@ -319,6 +319,111 @@ refactor: simplify auth reducer
 5. **New Jotai atom**: Add to `apps/web/src/atoms/`
 6. **New hook**: Add to `packages/react/src/hooks/` or co-locate with feature
 
+## MANDATORY: HeroUI v3 Components
+
+**All UI components in this project MUST use HeroUI v3.** Do NOT use raw HTML elements, other component libraries, or HeroUI v2 patterns when a HeroUI v3 component exists for the purpose.
+
+### Before Writing Any Component
+
+1. **Fetch the HeroUI v3 LLM reference** to understand available components and APIs:
+   - `https://heroui.com/docs/react/getting-started/llms-txt` — overview of all components
+   - `https://heroui.com/docs/react/getting-started/llms-full.txt` — complete API documentation
+2. If the `heroui-migration` MCP server is available, use its tools (`list_component_migration_guides`, `get_component_migration_guides`) to check for relevant guidance
+
+### HeroUI v3 Key Rules
+
+- **No Provider required** — HeroUI v3 components work directly without wrapping in a Provider
+- **Compound components** — Use dot notation: `Card.Header`, `Card.Content`, `Card.Footer`, `Table.Header`, `Table.Body`, etc.
+- **`onPress` not `onClick`** — Use `onPress` for HeroUI interactive components (Button, Link, etc.) for better accessibility
+- **React 19+ compatible** — Built on modern React features
+- **Tailwind CSS 4** — HeroUI v3 requires Tailwind CSS v4 (which this project uses)
+- **Import from `@heroui/react`** — All components are available from the main package
+
+### Icons: Use Heroicons
+
+**All icons MUST use [Heroicons](https://heroicons.com/) via `@heroicons/react`.** Do not use other icon libraries or inline SVGs when a Heroicon exists.
+
+- **Outline icons** (24px): `import { IconName } from "@heroicons/react/24/outline"`
+- **Solid icons** (20px): `import { IconName } from "@heroicons/react/20/solid"`
+- Browse available icons at https://heroicons.com/
+
+### When to Use HeroUI Components
+
+| Need | HeroUI Component |
+|---|---|
+| Buttons | `Button`, `ButtonGroup` |
+| Forms | `Input`, `Textarea`, `Select`, `Checkbox`, `Radio`, `RadioGroup`, `Switch` |
+| Layout | `Card`, `Divider`, `Spacer` |
+| Navigation | `Navbar`, `Tabs`, `Breadcrumbs`, `Link`, `Pagination` |
+| Feedback | `Modal`, `Popover`, `Tooltip`, `Alert`, `Spinner`, `Progress`, `Skeleton` |
+| Data display | `Table`, `Chip`, `Badge`, `Avatar`, `Accordion`, `Listbox` |
+| Overlay | `Dropdown`, `Modal`, `Drawer` |
+
+Always check the LLM docs first — HeroUI v3 may have components not listed here.
+
+## MANDATORY: Internationalization with react-intl
+
+**All user-visible strings MUST be internationalized using `react-intl`.** Components must NEVER contain raw hardcoded strings for labels, placeholders, error messages, button text, headings, or any other text visible to the user.
+
+### How to Use
+
+```tsx
+import { useIntl } from "react-intl";
+
+export function MyComponent(): ReactElement {
+  const intl = useIntl();
+
+  return (
+    <Button>
+      {intl.formatMessage({
+        description: "MyComponent - Submit button label",
+        defaultMessage: "Submit",
+        id: "uniqueId",
+      })}
+    </Button>
+  );
+}
+```
+
+### Key Rules
+
+- Use `useIntl()` hook to get the `intl` object
+- Use `intl.formatMessage({ description, defaultMessage, id })` for all visible strings
+- **`description`**: Context for translators — format as `"ComponentName - What this string is"`
+- **`defaultMessage`**: The English fallback text shown to users
+- **`id`**: A unique identifier for the message (use a short hash or descriptive key)
+- This applies to: labels, placeholders, button text, headings, error messages, tooltips, aria-labels, validation messages, and any other user-facing text
+- Strings used only in code logic (API keys, route paths, CSS classes) do NOT need intl
+
+## MANDATORY: Stories for All New Components
+
+**Every new UI component MUST have a co-located Storybook story file.** This is non-negotiable.
+
+### Requirements
+
+- Story file: `<ComponentName>.stories.tsx` in the same directory as the component
+- Must include `tags: ["autodocs"]` in meta for automatic documentation
+- Must have at least one story per meaningful component state/variant
+- Interactive components MUST include play functions for automated testing
+- Use `/add-component-test` skill for guidance on writing play functions
+
+### Story Discovery
+
+Stories are discovered by Storybook from:
+- `apps/web/src/**/*.stories.tsx` (via node_modules symlink)
+- `packages/ui/src/**/*.stories.tsx` (via node_modules symlink)
+
+## Available Skills (Slash Commands)
+
+Use these skills to follow established patterns when adding to the project:
+
+| Skill | Purpose |
+|---|---|
+| `/add-component` | Add a new UI component with HeroUI v3, Tailwind, React, and Storybook story |
+| `/add-e2e-test` | Add Playwright E2E tests, with optional new API services and mock definitions |
+| `/add-component-test` | Add component tests using Storybook play functions |
+| `/add-api-test` | Add unit tests for API schemas, converters, and utilities in `packages/api/` |
+
 ## Important Notes
 
 - **pnpm only** — do not use npm or yarn; enforced via `packageManager` field
