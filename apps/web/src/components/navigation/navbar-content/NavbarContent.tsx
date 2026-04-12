@@ -10,10 +10,16 @@ export interface NavbarContentProps {
   quickMenu: QuickMenuProps;
   socialLinks: NavMenuSocialLinks;
   avatarName: string;
+  activeTab?: string;
 }
 
-export function NavbarContent({ quickMenu, socialLinks, avatarName }: NavbarContentProps): ReactElement {
-  const [activeTab, setActiveTab] = useState<string>("home");
+export function NavbarContent({
+  quickMenu,
+  socialLinks,
+  avatarName,
+  activeTab: activeTabProp = "home",
+}: NavbarContentProps): ReactElement {
+  const [activeTab, setActiveTab] = useState<string>(activeTabProp);
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -64,7 +70,17 @@ export function NavbarContent({ quickMenu, socialLinks, avatarName }: NavbarCont
 
   const centerElement = (
     <div className="relative" ref={tabsContainerRef}>
-      <Tabs selectedKey={activeTab} onSelectionChange={(key) => setActiveTab(String(key))}>
+      <Tabs
+        selectedKey={activeTab}
+        onSelectionChange={(key) => {
+          const id = String(key);
+          setActiveTab(id);
+          const item = menuItems.find((m) => m.id === id);
+          if (item?.href && !item.children) {
+            window.location.hash = item.href.replace(/^#/, "");
+          }
+        }}
+      >
         <Tabs.ListContainer>
           <Tabs.List aria-label="Navigation">
             {menuItems.map((item, index) => (
