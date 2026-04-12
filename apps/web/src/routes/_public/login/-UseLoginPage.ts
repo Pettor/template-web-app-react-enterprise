@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { isServiceError } from "@package/api";
 import { useNavigate } from "@tanstack/react-router";
 import { useIntl } from "react-intl";
 import type { FormLogin } from "~/components/forms/login/LoginForm";
@@ -15,6 +16,37 @@ export function useLoginPage(): LoginViewProps {
   const { open: openSettings } = useSettingsModal();
   const [loginError, setLoginError] = useState<string>("");
 
+  function getLoginErrorMessage(error: unknown): string {
+    if (isServiceError(error)) {
+      if (error.status === 401 || error.status === 403) {
+        return intl.formatMessage({
+          description: "LoginPage - Invalid credentials error",
+          defaultMessage: "Incorrect username or password.",
+          id: "TS6b1h",
+        });
+      }
+      if (error.status === 429) {
+        return intl.formatMessage({
+          description: "LoginPage - Too many attempts error",
+          defaultMessage: "Too many login attempts. Please wait a moment and try again.",
+          id: "LVobZq",
+        });
+      }
+      if (error.status >= 500) {
+        return intl.formatMessage({
+          description: "LoginPage - Server error",
+          defaultMessage: "The service is temporarily unavailable. Please try again later.",
+          id: "J01Egq",
+        });
+      }
+    }
+    return intl.formatMessage({
+      description: "LoginPage - Unknown error",
+      defaultMessage: "An unexpected error occurred. Please try again.",
+      id: "+TNwRP",
+    });
+  }
+
   async function handleSubmit(data: FormLogin): Promise<void> {
     setLoginError("");
 
@@ -25,14 +57,8 @@ export function useLoginPage(): LoginViewProps {
         rememberMe: data.remember,
       });
       navigate({ to: "/" });
-    } catch {
-      setLoginError(
-        intl.formatMessage({
-          description: "LoginPage - Login error alert title",
-          defaultMessage: "Incorrect username or password.",
-          id: "Lh6FxC",
-        })
-      );
+    } catch (error) {
+      setLoginError(getLoginErrorMessage(error));
     }
   }
 
