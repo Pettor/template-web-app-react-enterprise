@@ -728,6 +728,9 @@ importers:
       '@storybook/react':
         specifier: catalog:storybook
         version: 10.3.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@10.3.5(@testing-library/dom@10.4.0)(prettier@3.8.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@6.0.2)
+      '@tanstack/react-router':
+        specifier: catalog:tanstack
+        version: 1.168.18(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react:
         specifier: '>=19.0.0'
         version: 19.1.0
@@ -11894,6 +11897,15 @@ snapshots:
       '@tanstack/query-core': 5.99.0
       react: 19.2.5
 
+  '@tanstack/react-router@1.168.18(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@tanstack/history': 1.161.6
+      '@tanstack/react-store': 0.9.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@tanstack/router-core': 1.168.14
+      isbot: 5.1.37
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
   '@tanstack/react-router@1.168.18(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
     dependencies:
       '@tanstack/history': 1.161.6
@@ -11902,6 +11914,13 @@ snapshots:
       isbot: 5.1.37
       react: 19.2.5
       react-dom: 19.2.5(react@19.2.5)
+
+  '@tanstack/react-store@0.9.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@tanstack/store': 0.9.3
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+      use-sync-external-store: 1.6.0(react@19.1.0)
 
   '@tanstack/react-store@0.9.3(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
     dependencies:

@@ -1,26 +1,14 @@
+import { RouterDecorator } from "@package/storybook";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { createMemoryHistory, createRootRoute, createRouter, RouterProvider } from "@tanstack/react-router";
 import { RouteError } from "./RouteError";
 
-function RouteErrorStory({ error }: { error?: Error }): React.ReactElement {
-  const rootRoute = createRootRoute({
-    component: () => <RouteError error={error} />,
-  });
-
-  const router = createRouter({
-    routeTree: rootRoute,
-    history: createMemoryHistory({ initialEntries: ["/"] }),
-  });
-
-  return <RouterProvider router={router} />;
-}
-
-const meta: Meta<typeof RouteErrorStory> = {
-  component: RouteErrorStory,
+const meta: Meta<typeof RouteError> = {
+  component: RouteError,
   title: "Route/Error",
   parameters: {
     layout: "fullscreen",
   },
+  decorators: [RouterDecorator],
 };
 
 export default meta;
