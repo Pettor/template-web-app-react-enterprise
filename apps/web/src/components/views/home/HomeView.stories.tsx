@@ -16,6 +16,8 @@ type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
   navbarContentProps: NavbarContentCommonData,
+  onGithubClick: () => {},
+  onLinkedInClick: () => {},
 } satisfies Props;
 
 export const Fullscreen: Story = {

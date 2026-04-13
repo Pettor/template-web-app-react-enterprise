@@ -1,4 +1,5 @@
 import type { ReactElement } from "react";
+import { EnvelopeIcon, IdentificationIcon, LockClosedIcon, PhoneIcon, UserIcon } from "@heroicons/react/24/outline";
 import { Button, Form, Spinner } from "@heroui/react";
 import { useForm } from "@tanstack/react-form";
 import { useIntl } from "react-intl";
@@ -104,6 +105,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             fullWidth
             field={field}
             type="text"
+            startContent={<UserIcon className="h-5 w-5" />}
             label={intl.formatMessage({
               description: "SignUpFormLabel - User Name label",
               defaultMessage: "Username",
@@ -118,52 +120,57 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           />
         )}
       />
-      <form.Field
-        name="firstName"
-        children={(field) => (
-          <InputField
-            field={field}
-            type="text"
-            label={intl.formatMessage({
-              description: "SignUpFormLabel - First Name label",
-              defaultMessage: "First name",
-              id: "FtoStp",
-            })}
-            placeholder={intl.formatMessage({
-              description: "SignUpFormLabel - First Name",
-              defaultMessage: "What is your first name?",
-              id: "NFDCUF",
-            })}
-            data-testid="sign-up-form__firstname-input"
-          />
-        )}
-      />
-      <form.Field
-        name="lastName"
-        children={(field) => (
-          <InputField
-            field={field}
-            type="text"
-            label={intl.formatMessage({
-              description: "SignUpFormLabel - Last Name label",
-              defaultMessage: "Last name",
-              id: "/Pzl99",
-            })}
-            placeholder={intl.formatMessage({
-              description: "SignUpFormLabel - Last Name",
-              defaultMessage: "What is your last name?",
-              id: "3YTbxI",
-            })}
-            data-testid="sign-up-form__lastname-input"
-          />
-        )}
-      />
+      <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+        <form.Field
+          name="firstName"
+          children={(field) => (
+            <InputField
+              field={field}
+              type="text"
+              startContent={<IdentificationIcon className="h-5 w-5" />}
+              label={intl.formatMessage({
+                description: "SignUpFormLabel - First Name label",
+                defaultMessage: "First name",
+                id: "FtoStp",
+              })}
+              placeholder={intl.formatMessage({
+                description: "SignUpFormLabel - First Name placeholder short",
+                defaultMessage: "First name",
+                id: "BvZwsU",
+              })}
+              data-testid="sign-up-form__firstname-input"
+            />
+          )}
+        />
+        <form.Field
+          name="lastName"
+          children={(field) => (
+            <InputField
+              field={field}
+              type="text"
+              startContent={<IdentificationIcon className="h-5 w-5" />}
+              label={intl.formatMessage({
+                description: "SignUpFormLabel - Last Name label",
+                defaultMessage: "Last name",
+                id: "/Pzl99",
+              })}
+              placeholder={intl.formatMessage({
+                description: "SignUpFormLabel - Last Name placeholder short",
+                defaultMessage: "Last name",
+                id: "S1h2Lp",
+              })}
+              data-testid="sign-up-form__lastname-input"
+            />
+          )}
+        />
+      </div>
       <form.Field
         name="email"
         children={(field) => (
           <InputField
             field={field}
             type="email"
+            startContent={<EnvelopeIcon className="h-5 w-5" />}
             label={intl.formatMessage({
               description: "SignUpFormLabel - Email label",
               defaultMessage: "Email",
@@ -184,6 +191,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           <InputField
             field={field}
             type="tel"
+            startContent={<PhoneIcon className="h-5 w-5" />}
             label={intl.formatMessage({
               description: "SignUpFormLabel - Phone Number label",
               defaultMessage: "Phone number",
@@ -198,46 +206,50 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
           />
         )}
       />
-      <form.Field
-        name="password"
-        children={(field) => (
-          <InputField
-            field={field}
-            type="password"
-            label={intl.formatMessage({
-              description: "SignUpFormLabel - Password label",
-              defaultMessage: "Password",
-              id: "Sw26VK",
-            })}
-            placeholder={intl.formatMessage({
-              description: "SignUpFormLabel - Password",
-              defaultMessage: "Create a password",
-              id: "ppqAda",
-            })}
-            data-testid="sign-up-form__password-input"
-          />
-        )}
-      />
-      <form.Field
-        name="confirmPassword"
-        children={(field) => (
-          <InputField
-            field={field}
-            type="password"
-            label={intl.formatMessage({
-              description: "SignUpFormLabel - Confirm Password label",
-              defaultMessage: "Confirm password",
-              id: "+CSkRq",
-            })}
-            placeholder={intl.formatMessage({
-              description: "SignUpFormLabel - Confirm Password",
-              defaultMessage: "Confirm password",
-              id: "dU9xzq",
-            })}
-            data-testid="sign-up-form__confirmpassword-input"
-          />
-        )}
-      />
+      <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+        <form.Field
+          name="password"
+          children={(field) => (
+            <InputField
+              field={field}
+              type="password"
+              startContent={<LockClosedIcon className="h-5 w-5" />}
+              label={intl.formatMessage({
+                description: "SignUpFormLabel - Password label",
+                defaultMessage: "Password",
+                id: "Sw26VK",
+              })}
+              placeholder={intl.formatMessage({
+                description: "SignUpFormLabel - Password",
+                defaultMessage: "Create a password",
+                id: "ppqAda",
+              })}
+              data-testid="sign-up-form__password-input"
+            />
+          )}
+        />
+        <form.Field
+          name="confirmPassword"
+          children={(field) => (
+            <InputField
+              field={field}
+              type="password"
+              startContent={<LockClosedIcon className="h-5 w-5" />}
+              label={intl.formatMessage({
+                description: "SignUpFormLabel - Confirm Password label",
+                defaultMessage: "Confirm password",
+                id: "+CSkRq",
+              })}
+              placeholder={intl.formatMessage({
+                description: "SignUpFormLabel - Confirm Password",
+                defaultMessage: "Confirm password",
+                id: "dU9xzq",
+              })}
+              data-testid="sign-up-form__confirmpassword-input"
+            />
+          )}
+        />
+      </div>
       <form.Subscribe
         selector={(state) => [state.canSubmit]}
         children={([canSubmit]) => (
@@ -245,6 +257,8 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             isDisabled={!canSubmit || loading}
             variant="primary"
             type="submit"
+            size="lg"
+            className="mt-2 w-full"
             onPress={() => form.handleSubmit()}
             data-testid="sign-up-form__submit-button"
           >

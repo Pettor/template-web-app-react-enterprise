@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
-import { Separator } from "@heroui/react";
-import { NavbarLayout } from "@package/ui";
+import { Button, Separator } from "@heroui/react";
+import { GithubIcon, LinkedInIcon, NavbarLayout } from "@package/ui";
 import { useIntl } from "react-intl";
 import githubImgSrc from "~/assets/images/logo/github.png";
 import herouiImgSrc from "~/assets/images/logo/heroui.png";
@@ -16,9 +16,11 @@ import { NavbarContent, type NavbarContentProps } from "~/components/navigation/
 
 export interface HomeViewProps {
   navbarContentProps: NavbarContentProps;
+  onGithubClick: () => void;
+  onLinkedInClick: () => void;
 }
 
-export function HomeView({ navbarContentProps }: HomeViewProps): ReactElement {
+export function HomeView({ navbarContentProps, onGithubClick, onLinkedInClick }: HomeViewProps): ReactElement {
   const intl = useIntl();
 
   return (
@@ -35,6 +37,38 @@ export function HomeView({ navbarContentProps }: HomeViewProps): ReactElement {
         id: "ZSiTwu",
       })}
       navbarElement={<NavbarContent {...navbarContentProps} />}
+      footerContent={
+        <div className="flex items-center gap-3">
+          <Button
+            isIconOnly
+            variant="secondary"
+            onPress={onGithubClick}
+            aria-label={intl.formatMessage({
+              description: "HomeView - GitHub social link aria label",
+              defaultMessage: "GitHub",
+              id: "vBCCR2",
+            })}
+          >
+            <span className="flex h-5 w-5 items-center justify-center fill-current">
+              <GithubIcon />
+            </span>
+          </Button>
+          <Button
+            isIconOnly
+            variant="secondary"
+            onPress={onLinkedInClick}
+            aria-label={intl.formatMessage({
+              description: "HomeView - LinkedIn social link aria label",
+              defaultMessage: "LinkedIn",
+              id: "GjAP1K",
+            })}
+          >
+            <span className="flex h-5 w-5 items-center justify-center fill-current">
+              <LinkedInIcon />
+            </span>
+          </Button>
+        </div>
+      }
     >
       <div className="grid w-full place-items-center">
         <div className="h-8" />

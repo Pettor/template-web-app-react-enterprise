@@ -47,7 +47,7 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
         e.stopPropagation();
         form.handleSubmit();
       }}
-      className="flex flex-col justify-center gap-4"
+      className="flex w-full flex-col justify-center gap-4"
     >
       <form.Field
         name="email"
@@ -74,6 +74,8 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
             isDisabled={!canSubmit || loading}
             variant="primary"
             type="submit"
+            size="lg"
+            className="mt-2 w-full"
             aria-label={intl.formatMessage({
               description: "ForgotPasswordFormValidation - Send button title",
               defaultMessage: "Submit",

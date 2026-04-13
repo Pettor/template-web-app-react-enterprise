@@ -63,7 +63,7 @@ export function useLoginPage(): LoginViewProps {
   }
 
   function handleOnSettings(): void {
-    openSettings("about");
+    openSettings("appearance");
   }
 
   function handleForgotPassword(): void {

@@ -8,6 +8,7 @@ export interface NavbarLayoutProps {
   footer?: boolean;
   footerText?: string;
   footerCopyright?: string;
+  footerContent?: ReactNode;
   children?: ReactNode;
 }
 
@@ -17,6 +18,7 @@ export function NavbarLayout({
   footer,
   footerText,
   footerCopyright,
+  footerContent,
   children,
 }: NavbarLayoutProps): ReactElement {
   return (
@@ -30,6 +32,7 @@ export function NavbarLayout({
             <Logo size="large" />
             <p className="text-base font-bold">{footerText ?? "Made with ☕ by Petter Hancock"}</p>
             <p>{footerCopyright ?? "Copyright © 2024 - All rights reserved"}</p>
+            {footerContent && <div className="mt-4">{footerContent}</div>}
           </div>
         </footer>
       )}
