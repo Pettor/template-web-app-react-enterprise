@@ -25,28 +25,38 @@ function StatCard({
   value,
   icon,
   trend,
+  iconGradient,
 }: {
   title: string;
   value: string;
   icon: ReactElement;
   trend?: { value: string; positive: boolean };
+  iconGradient: string;
 }): ReactElement {
   return (
-    <Card variant="secondary">
+    <Card variant="secondary" className="transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg">
       <Card.Header className="flex-row items-center justify-between pb-2">
-        <Card.Title className="text-sm font-medium">{title}</Card.Title>
-        <span className="text-default-400">{icon}</span>
+        <Card.Title className="text-default-500 text-sm font-medium">{title}</Card.Title>
+        <span
+          className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br text-white shadow-md ${iconGradient}`}
+        >
+          {icon}
+        </span>
       </Card.Header>
       <Card.Content>
-        <div className="text-2xl font-bold">{value}</div>
+        <div className="text-3xl font-bold tracking-tight">{value}</div>
         {trend && (
-          <div className="mt-1 flex items-center gap-1 text-xs">
-            {trend.positive ? (
-              <ArrowTrendingUpIcon className="text-success h-3 w-3" />
-            ) : (
-              <ArrowTrendingDownIcon className="text-danger h-3 w-3" />
-            )}
-            <span className={trend.positive ? "text-success" : "text-danger"}>{trend.value}</span>
+          <div className="mt-2 flex items-center gap-1 text-xs">
+            <span
+              className={`flex items-center gap-0.5 rounded-full px-1.5 py-0.5 font-medium ${trend.positive ? "bg-success/10 text-success" : "bg-danger/10 text-danger"}`}
+            >
+              {trend.positive ? (
+                <ArrowTrendingUpIcon className="h-3 w-3" />
+              ) : (
+                <ArrowTrendingDownIcon className="h-3 w-3" />
+              )}
+              {trend.value}
+            </span>
           </div>
         )}
       </Card.Content>
@@ -378,7 +388,7 @@ export function DashboardView({
     >
       <div className="mx-auto w-full max-w-7xl px-4 py-6">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold md:text-3xl">
+          <h1 className="from-accent to-danger bg-gradient-to-r bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-3xl">
             {intl.formatMessage({
               description: "DashboardView - Page title",
               defaultMessage: "Dashboard",
@@ -413,6 +423,7 @@ export function DashboardView({
             })}
             value={`$${stats.totalRevenue.toLocaleString()}`}
             icon={<BanknotesIcon className="h-5 w-5" />}
+            iconGradient="from-emerald-500 to-teal-600"
             trend={{ value: "+20.1%", positive: true }}
           />
           <StatCard
@@ -423,6 +434,7 @@ export function DashboardView({
             })}
             value={stats.totalUsers.toLocaleString()}
             icon={<UserGroupIcon className="h-5 w-5" />}
+            iconGradient="from-blue-500 to-indigo-600"
             trend={{ value: "+180", positive: true }}
           />
           <StatCard
@@ -433,6 +445,7 @@ export function DashboardView({
             })}
             value={stats.activeUsers.toLocaleString()}
             icon={<UserIcon className="h-5 w-5" />}
+            iconGradient="from-violet-500 to-purple-600"
             trend={{ value: "+19%", positive: true }}
           />
           <StatCard
@@ -443,6 +456,7 @@ export function DashboardView({
             })}
             value={`${stats.conversionRate}%`}
             icon={<ChartBarIcon className="h-5 w-5" />}
+            iconGradient="from-orange-500 to-rose-600"
             trend={{ value: "-2.1%", positive: false }}
           />
         </div>

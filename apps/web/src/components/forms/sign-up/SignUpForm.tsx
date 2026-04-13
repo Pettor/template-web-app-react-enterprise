@@ -136,7 +136,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
               placeholder={intl.formatMessage({
                 description: "SignUpFormLabel - First Name placeholder short",
                 defaultMessage: "First name",
-                id: "BvZwsU",
+                id: "hIZId8",
               })}
               data-testid="sign-up-form__firstname-input"
             />
@@ -157,7 +157,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
               placeholder={intl.formatMessage({
                 description: "SignUpFormLabel - Last Name placeholder short",
                 defaultMessage: "Last name",
-                id: "S1h2Lp",
+                id: "hSfaTy",
               })}
               data-testid="sign-up-form__lastname-input"
             />

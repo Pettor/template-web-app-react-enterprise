@@ -26,7 +26,7 @@ export function ForgotPasswordView({ appName, resetForm, onBack }: ForgotPasswor
       }
     >
       <Card className="min-h-[550px] w-full sm:w-[550px]" variant="tertiary">
-        <CardHeader className="flex w-full items-center justify-start">
+        <CardHeader className="flex w-full items-start justify-start">
           <Button
             isIconOnly
             variant="secondary"
@@ -34,7 +34,7 @@ export function ForgotPasswordView({ appName, resetForm, onBack }: ForgotPasswor
             aria-label={intl.formatMessage({
               description: "ForgotPasswordView - Back button aria label",
               defaultMessage: "Back",
-              id: "5m9Jlq",
+              id: "lJxJFw",
             })}
           >
             <ArrowLeftIcon className="h-6 w-6" />
@@ -48,7 +48,7 @@ export function ForgotPasswordView({ appName, resetForm, onBack }: ForgotPasswor
             {intl.formatMessage({
               description: "ForgotPasswordView - Heading",
               defaultMessage: "Forgot your password?",
-              id: "fW0+hH",
+              id: "SIVfky",
             })}
           </h1>
           <p className="text-default-500 mb-4 max-w-sm text-center text-sm">
@@ -57,7 +57,7 @@ export function ForgotPasswordView({ appName, resetForm, onBack }: ForgotPasswor
                 description: "ForgotPasswordView - Reset password description",
                 defaultMessage:
                   "Enter the email address you used to register for {appName}. We'll send you a link to reset your password.",
-                id: "t6ijUc",
+                id: "JYc8US",
               },
               { appName }
             )}

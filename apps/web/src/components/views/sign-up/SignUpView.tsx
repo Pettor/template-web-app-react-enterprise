@@ -26,7 +26,7 @@ export function SignUpView({ appName, signUpForm, onBack }: SignUpViewProps): Re
       }
     >
       <Card className="min-h-[550px] w-full sm:w-[600px]" variant="tertiary">
-        <CardHeader className="flex w-full items-center justify-start">
+        <CardHeader className="flex w-full items-start justify-start">
           <Button
             isIconOnly
             variant="secondary"
@@ -34,7 +34,7 @@ export function SignUpView({ appName, signUpForm, onBack }: SignUpViewProps): Re
             aria-label={intl.formatMessage({
               description: "SignUpView - Back button aria label",
               defaultMessage: "Back",
-              id: "GpTR8m",
+              id: "Gy2cjY",
             })}
           >
             <ArrowLeftIcon className="h-6 w-6" />
@@ -49,7 +49,7 @@ export function SignUpView({ appName, signUpForm, onBack }: SignUpViewProps): Re
               {
                 description: "SignUpView - Heading",
                 defaultMessage: "Join {appName}",
-                id: "fEU2Vn",
+                id: "GX4sWW",
               },
               { appName }
             )}
@@ -58,7 +58,7 @@ export function SignUpView({ appName, signUpForm, onBack }: SignUpViewProps): Re
             {intl.formatMessage({
               description: "SignUpView - Sign up description",
               defaultMessage: "Create your account in a few seconds and start exploring.",
-              id: "QU7G0y",
+              id: "EtC4oB",
             })}
           </p>
           <SignUpForm {...signUpForm} />

@@ -26,8 +26,7 @@ export function LoginView({ appName, loginForm, onSettings }: LoginViewProps): R
       }
     >
       <Card className="min-h-[550px] w-full sm:w-[550px]" variant="tertiary">
-        <CardHeader className="flex w-full items-end justify-between">
-          <div className="flex" />
+        <CardHeader className="flex w-full items-start justify-end">
           <Button
             isIconOnly
             variant="tertiary"
@@ -41,16 +40,26 @@ export function LoginView({ appName, loginForm, onSettings }: LoginViewProps): R
             <Cog6ToothIcon className="h-6 w-6" />
           </Button>
         </CardHeader>
-        <CardContent className="flex flex-col items-center">
+        <CardContent className="flex flex-col items-center gap-2 px-6 pb-8">
           <div className="flex justify-center md:hidden">
             <Logo size="medium" />
           </div>
           <div className="flex justify-center max-md:hidden">
             <Logo size="large" />
           </div>
-          <p className="text-5xl">{appName}</p>
-          <div className="h-6" />
-          <LoginForm {...loginForm} />
+          <h1 className="from-accent to-danger bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent">
+            {appName}
+          </h1>
+          <p className="text-default-500 mb-4 max-w-sm text-center text-sm">
+            {intl.formatMessage({
+              description: "LoginView - Welcome tagline",
+              defaultMessage: "Welcome back. Sign in to continue.",
+              id: "NMwN2/",
+            })}
+          </p>
+          <div className="w-full max-w-sm">
+            <LoginForm {...loginForm} />
+          </div>
         </CardContent>
       </Card>
     </BasicLayout>
