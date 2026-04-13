@@ -1,8 +1,10 @@
 import type { HomeViewProps } from "~/components/views/home/HomeView";
 import { useAppSessionContent } from "~/core/session/UseAppSessionContent";
+import { useAppSocialLinks } from "~/core/social-links/UseAppSocialLinks";
 
 export function useHomePage(githubLink: string, linkedInLink: string): HomeViewProps {
   const sessionContent = useAppSessionContent();
+  const { onGithubClick, onLinkedInClick } = useAppSocialLinks(githubLink, linkedInLink);
 
   return {
     navbarContentProps: {
@@ -13,5 +15,7 @@ export function useHomePage(githubLink: string, linkedInLink: string): HomeViewP
       socialLinks: { github: githubLink, linkedIn: linkedInLink },
       avatarName: sessionContent.name,
     },
+    onGithubClick,
+    onLinkedInClick,
   };
 }

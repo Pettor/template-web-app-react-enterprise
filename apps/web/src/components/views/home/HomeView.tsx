@@ -1,6 +1,7 @@
 import type { ReactElement } from "react";
-import { Separator } from "@heroui/react";
-import { NavbarLayout } from "@package/ui";
+import { SparklesIcon } from "@heroicons/react/20/solid";
+import { Button, Chip, Separator } from "@heroui/react";
+import { GithubIcon, LinkedInIcon, NavbarLayout } from "@package/ui";
 import { useIntl } from "react-intl";
 import githubImgSrc from "~/assets/images/logo/github.png";
 import herouiImgSrc from "~/assets/images/logo/heroui.png";
@@ -16,9 +17,11 @@ import { NavbarContent, type NavbarContentProps } from "~/components/navigation/
 
 export interface HomeViewProps {
   navbarContentProps: NavbarContentProps;
+  onGithubClick: () => void;
+  onLinkedInClick: () => void;
 }
 
-export function HomeView({ navbarContentProps }: HomeViewProps): ReactElement {
+export function HomeView({ navbarContentProps, onGithubClick, onLinkedInClick }: HomeViewProps): ReactElement {
   const intl = useIntl();
 
   return (
@@ -35,42 +38,85 @@ export function HomeView({ navbarContentProps }: HomeViewProps): ReactElement {
         id: "ZSiTwu",
       })}
       navbarElement={<NavbarContent {...navbarContentProps} />}
+      footerContent={
+        <div className="flex items-center gap-3">
+          <Button
+            isIconOnly
+            variant="secondary"
+            onPress={onGithubClick}
+            aria-label={intl.formatMessage({
+              description: "HomeView - GitHub social link aria label",
+              defaultMessage: "GitHub",
+              id: "SrEKCm",
+            })}
+          >
+            <span className="flex h-5 w-5 items-center justify-center fill-current">
+              <GithubIcon />
+            </span>
+          </Button>
+          <Button
+            isIconOnly
+            variant="secondary"
+            onPress={onLinkedInClick}
+            aria-label={intl.formatMessage({
+              description: "HomeView - LinkedIn social link aria label",
+              defaultMessage: "LinkedIn",
+              id: "4KBayS",
+            })}
+          >
+            <span className="flex h-5 w-5 items-center justify-center fill-current">
+              <LinkedInIcon />
+            </span>
+          </Button>
+        </div>
+      }
     >
       <div className="grid w-full place-items-center">
         <div className="h-8" />
-        <div className="items-center justify-center gap-2 p-2 text-center">
-          <span className="inline-block text-4xl font-medium md:text-5xl lg:text-7xl">
-            {intl.formatMessage({
-              description: "HomeView - Header title ending",
-              defaultMessage: "Welcome to",
-              id: "1/+0+G",
-            })}
-            &nbsp;
-          </span>
-          <span className="from-accent to-danger inline-block bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl lg:text-7xl">
-            {intl.formatMessage({
-              description: "HomeView - Header title start",
-              defaultMessage: "React",
-              id: "oAy59O",
-            })}
-            &nbsp;
-          </span>
-          <span className="inline-block text-4xl font-medium md:text-5xl lg:text-7xl">
-            {intl.formatMessage({
-              description: "HomeView - Header title ending",
-              defaultMessage: "Template",
-              id: "ojp/AE",
-            })}
-          </span>
-          <p className="py-6 text-xl">
+        <div className="flex flex-col items-center justify-center gap-4 p-2 text-center">
+          <Chip variant="soft" color="accent" className="gap-1">
+            <SparklesIcon className="h-3 w-3" />
+            <span className="text-xs font-medium">
+              {intl.formatMessage({
+                description: "HomeView - Hero badge",
+                defaultMessage: "Enterprise-ready · Open Source",
+                id: "wHEu48",
+              })}
+            </span>
+          </Chip>
+          <div>
+            <span className="inline-block text-4xl font-medium md:text-5xl lg:text-7xl">
+              {intl.formatMessage({
+                description: "HomeView - Header title ending",
+                defaultMessage: "Welcome to",
+                id: "1/+0+G",
+              })}
+              &nbsp;
+            </span>
+            <span className="from-accent to-danger inline-block bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl lg:text-7xl">
+              {intl.formatMessage({
+                description: "HomeView - Header title start",
+                defaultMessage: "React",
+                id: "oAy59O",
+              })}
+              &nbsp;
+            </span>
+            <span className="inline-block text-4xl font-medium md:text-5xl lg:text-7xl">
+              {intl.formatMessage({
+                description: "HomeView - Header title ending",
+                defaultMessage: "Template",
+                id: "ojp/AE",
+              })}
+            </span>
+          </div>
+          <p className="text-default-500 max-w-2xl text-lg md:text-xl">
             {intl.formatMessage({
               description: "HomeView - Header description",
               defaultMessage: "Highly opinionated and optimized using Turborepo, React and TailwindCSS.",
               id: "NlMkKm",
             })}
           </p>
-          <Separator />
-          <div className="h-4" />
+          <Separator className="my-4 w-full" />
         </div>
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2">
