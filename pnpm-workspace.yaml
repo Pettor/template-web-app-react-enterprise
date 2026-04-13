@@ -4,6 +4,11 @@ packages:
 - design/*
 - packages/*
 - tools/*
+overrides:
+  '@tanstack/react-query': catalog:tanstack
+  '@tanstack/query-core': 5.99.0
+  react: catalog:react19
+  react-dom: catalog:react19
 catalogs:
   common:
     '@faker-js/faker': 10.4.0
