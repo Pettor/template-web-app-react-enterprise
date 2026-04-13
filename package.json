@@ -52,11 +52,7 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "@heroui/shared-utils"
-    ],
-    "overrides": {
-      "@tanstack/react-query": "5.99.0",
-      "@tanstack/query-core": "5.99.0"
-    }
+    ]
   },
   "lint-staged": {
     "*.js": "prettier --write",
