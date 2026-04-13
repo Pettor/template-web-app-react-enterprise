@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useDocumentTitle } from "usehooks-ts";
 import { homeLoader } from "./-HomeLoader";
 import { useHomePage } from "./-UseHomePage";
+import { CommandPaletteModule } from "~/components/modules/command-palette-module/CommandPaletteModule";
 import { SettingsModalModule } from "~/components/modules/settings-modal/SettingsModalModule";
 import { HomeView } from "~/components/views/home/HomeView";
 import { RouteError } from "~/core/routes/logic/RouteError";
@@ -22,6 +23,7 @@ function HomePageRoute(): ReactElement {
     <>
       <HomeView {...homeProps} />
       <SettingsModalModule />
+      <CommandPaletteModule />
     </>
   );
 }
