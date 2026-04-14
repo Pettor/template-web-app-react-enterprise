@@ -34,7 +34,6 @@ export function CommandPaletteModule(): ReactElement {
   const setThemeMode = useSetAtom(themeModeAtom);
   const { isOpen, close } = useCommandPalette();
 
-
   const navigationGroup = intl.formatMessage({
     description: "CommandPaletteModule - Navigation group label",
     defaultMessage: "Navigation",

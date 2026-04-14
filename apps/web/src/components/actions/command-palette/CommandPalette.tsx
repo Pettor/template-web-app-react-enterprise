@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type ReactElement } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactElement } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { InputGroup, InputGroupInput, InputGroupPrefix, Kbd, Modal, TextField } from "@heroui/react";
 import { useIntl } from "react-intl";
@@ -73,6 +73,15 @@ export function CommandPalette({ isOpen, commands, onClose }: CommandPaletteProp
   const filtered = useMemo(() => filterCommands(commands, query), [commands, query]);
   const groups = useMemo(() => groupCommands(filtered), [filtered]);
 
+  // Mirror filtered + activeId into refs so the window-level keydown listener
+  // below can always read the latest values without re-subscribing.
+  const filteredRef = useRef(filtered);
+  filteredRef.current = filtered;
+  const activeIdRef = useRef(activeId);
+  activeIdRef.current = activeId;
+  const commandsRef = useRef(commands);
+  commandsRef.current = commands;
+
   // Keep the active item valid whenever the filtered list changes.
   useEffect(() => {
     if (filtered.length === 0) {
@@ -89,59 +98,85 @@ export function CommandPalette({ isOpen, commands, onClose }: CommandPaletteProp
     element?.scrollIntoView({ block: "nearest" });
   }, [activeId]);
 
-  function runCommand(id: string | undefined): void {
-    if (!id) return;
+  function runCommandById(id: string): void {
     const command = commands.find((c) => c.id === id);
     if (!command) return;
     onClose();
-    // Defer so the modal close animation can start before navigation/state change.
     queueMicrotask(() => command.perform());
   }
 
-  function moveActive(delta: number): void {
-    if (filtered.length === 0) return;
-    const currentIndex = activeId ? filtered.findIndex((c) => c.id === activeId) : -1;
-    const nextIndex = (currentIndex + delta + filtered.length) % filtered.length;
-    setActiveId(filtered[nextIndex]!.id);
-  }
+  // Mirror onClose into a ref so the document-level listener below can call
+  // the latest version without resubscribing.
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
-  function handleInputKeyDown(event: ReactKeyboardEvent<HTMLInputElement>): void {
-    switch (event.key) {
-      case "ArrowDown":
-        event.preventDefault();
-        moveActive(1);
-        return;
-      case "ArrowUp":
-        event.preventDefault();
-        moveActive(-1);
-        return;
-      case "Home":
-        if (filtered.length > 0) {
+  // Attach a native, capture-phase keydown listener on `document` while the
+  // palette is open. Native capture fires before any React synthetic handler
+  // (including react-aria's input handlers), which lets us intercept arrow
+  // keys while focus stays on the search input.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function onKeyDown(event: KeyboardEvent): void {
+      const list = filteredRef.current;
+      switch (event.key) {
+        case "ArrowDown": {
+          if (list.length === 0) return;
           event.preventDefault();
-          setActiveId(filtered[0]!.id);
+          event.stopPropagation();
+          const current = activeIdRef.current;
+          const i = current ? list.findIndex((c) => c.id === current) : -1;
+          setActiveId(list[(i + 1 + list.length) % list.length]!.id);
+          return;
         }
-        return;
-      case "End":
-        if (filtered.length > 0) {
+        case "ArrowUp": {
+          if (list.length === 0) return;
           event.preventDefault();
-          setActiveId(filtered[filtered.length - 1]!.id);
+          event.stopPropagation();
+          const current = activeIdRef.current;
+          const i = current ? list.findIndex((c) => c.id === current) : 0;
+          setActiveId(list[(i - 1 + list.length) % list.length]!.id);
+          return;
         }
-        return;
-      case "Enter":
-        event.preventDefault();
-        runCommand(activeId);
-        return;
-      case "Escape":
-        // Close in a single press: preempt TextField's clear-on-escape
-        // behavior and the Modal's own Escape handler.
-        event.preventDefault();
-        event.stopPropagation();
-        onClose();
-        return;
-      default:
-        return;
+        case "Home": {
+          if (list.length === 0) return;
+          event.preventDefault();
+          event.stopPropagation();
+          setActiveId(list[0]!.id);
+          return;
+        }
+        case "End": {
+          if (list.length === 0) return;
+          event.preventDefault();
+          event.stopPropagation();
+          setActiveId(list[list.length - 1]!.id);
+          return;
+        }
+        case "Enter": {
+          const id = activeIdRef.current;
+          if (!id) return;
+          event.preventDefault();
+          event.stopPropagation();
+          const command = commandsRef.current.find((c) => c.id === id);
+          if (!command) return;
+          onCloseRef.current();
+          queueMicrotask(() => command.perform());
+          return;
+        }
+        case "Escape": {
+          event.preventDefault();
+          event.stopPropagation();
+          onCloseRef.current();
+          return;
+        }
+        default:
+          return;
+      }
     }
-  }
+
+    document.addEventListener("keydown", onKeyDown, true);
+    return () => document.removeEventListener("keydown", onKeyDown, true);
+  }, [isOpen]);
 
   return (
     <Modal isOpen={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -165,7 +200,6 @@ export function CommandPalette({ isOpen, commands, onClose }: CommandPaletteProp
                     autoFocus
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    onKeyDown={handleInputKeyDown}
                     placeholder={intl.formatMessage({
                       description: "CommandPalette - Search placeholder",
                       defaultMessage: "Type a command or search…",
@@ -209,10 +243,12 @@ export function CommandPalette({ isOpen, commands, onClose }: CommandPaletteProp
                                 onMouseDown={(e) => {
                                   // Prevent the input from losing focus on click.
                                   e.preventDefault();
-                                  runCommand(command.id);
+                                  runCommandById(command.id);
                                 }}
                                 className={`flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ${
-                                  isActive ? "bg-default-100 text-default-900" : "text-default-700"
+                                  isActive
+                                    ? "border-accent bg-accent/10 text-default-900 font-medium"
+                                    : "text-default-700 border-transparent"
                                 }`}
                               >
                                 {command.icon && (

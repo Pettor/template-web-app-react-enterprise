@@ -2,7 +2,6 @@ import type { ReactElement } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useDocumentTitle } from "usehooks-ts";
 import { dashboardLoader } from "./-DashboardLoader";
-import { useDashboardPage } from "./-UseDashboardPage";
 import { CommandPaletteModule } from "~/components/modules/command-palette-module/CommandPaletteModule";
 import { SettingsModalModule } from "~/components/modules/settings-modal/SettingsModalModule";
 import { DashboardView } from "~/components/views/dashboard/DashboardView";
