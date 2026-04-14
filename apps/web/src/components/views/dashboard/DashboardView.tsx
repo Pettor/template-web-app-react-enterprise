@@ -9,12 +9,9 @@ import {
 } from "@heroicons/react/20/solid";
 import { Avatar, Card, Chip, ProgressCircle, Separator, Table } from "@heroui/react";
 import type { DashboardChartPoint, DashboardStats, DashboardTransaction } from "@package/api";
-import { NavbarLayout } from "@package/ui";
 import { useIntl } from "react-intl";
-import { NavbarContent, type NavbarContentProps } from "~/components/navigation/navbar-content";
 
 export interface DashboardViewProps {
-  navbarContentProps: NavbarContentProps;
   stats: DashboardStats;
   chartData: DashboardChartPoint[];
   recentTransactions: DashboardTransaction[];
@@ -363,115 +360,95 @@ function TransactionsTable({ transactions }: { transactions: DashboardTransactio
   );
 }
 
-export function DashboardView({
-  navbarContentProps,
-  stats,
-  chartData,
-  recentTransactions,
-}: DashboardViewProps): ReactElement {
+export function DashboardView({ stats, chartData, recentTransactions }: DashboardViewProps): ReactElement {
   const intl = useIntl();
 
   return (
-    <NavbarLayout
-      footer
-      footerText={intl.formatMessage({
-        description: "NavbarLayout - Footer attribution text",
-        defaultMessage: "Made with ☕ by Petter Hancock",
-        id: "rnZMTQ",
-      })}
-      footerCopyright={intl.formatMessage({
-        description: "NavbarLayout - Footer copyright text",
-        defaultMessage: "Copyright © 2024 - All rights reserved",
-        id: "ZSiTwu",
-      })}
-      navbarElement={<NavbarContent {...navbarContentProps} />}
-    >
-      <div className="mx-auto w-full max-w-7xl px-4 py-6">
-        <div className="mb-6">
-          <h1 className="from-accent to-danger bg-gradient-to-r bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-3xl">
-            {intl.formatMessage({
-              description: "DashboardView - Page title",
-              defaultMessage: "Dashboard",
-              id: "xWJ8VF",
-            })}
-          </h1>
-          <p className="text-default-500 text-sm">
-            {intl.formatMessage({
-              description: "DashboardView - Page subtitle",
-              defaultMessage: "Overview of your application metrics",
-              id: "R5PlmL",
-            })}
-          </p>
-        </div>
-
-        <Separator className="mb-6" />
-
-        {/* Stats cards */}
-        <h2 className="sr-only">
+    <div className="mx-auto w-full max-w-7xl px-4 py-6">
+      <div className="mb-6">
+        <h1 className="from-accent to-danger bg-gradient-to-r bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-3xl">
           {intl.formatMessage({
-            description: "DashboardView - Key metrics section heading",
-            defaultMessage: "Key Metrics",
-            id: "0MhjtM",
+            description: "DashboardView - Page title",
+            defaultMessage: "Dashboard",
+            id: "xWJ8VF",
           })}
-        </h2>
-        <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard
-            title={intl.formatMessage({
-              description: "DashboardView - Total revenue label",
-              defaultMessage: "Total Revenue",
-              id: "FF0yKY",
-            })}
-            value={`$${stats.totalRevenue.toLocaleString()}`}
-            icon={<BanknotesIcon className="h-5 w-5" />}
-            iconGradient="from-emerald-500 to-teal-600"
-            trend={{ value: "+20.1%", positive: true }}
-          />
-          <StatCard
-            title={intl.formatMessage({
-              description: "DashboardView - Total users label",
-              defaultMessage: "Total Users",
-              id: "uP3pvm",
-            })}
-            value={stats.totalUsers.toLocaleString()}
-            icon={<UserGroupIcon className="h-5 w-5" />}
-            iconGradient="from-blue-500 to-indigo-600"
-            trend={{ value: "+180", positive: true }}
-          />
-          <StatCard
-            title={intl.formatMessage({
-              description: "DashboardView - Active users label",
-              defaultMessage: "Active Users",
-              id: "Fin8Qi",
-            })}
-            value={stats.activeUsers.toLocaleString()}
-            icon={<UserIcon className="h-5 w-5" />}
-            iconGradient="from-violet-500 to-purple-600"
-            trend={{ value: "+19%", positive: true }}
-          />
-          <StatCard
-            title={intl.formatMessage({
-              description: "DashboardView - Conversion rate label",
-              defaultMessage: "Conversion Rate",
-              id: "nfa0S1",
-            })}
-            value={`${stats.conversionRate}%`}
-            icon={<ChartBarIcon className="h-5 w-5" />}
-            iconGradient="from-orange-500 to-rose-600"
-            trend={{ value: "-2.1%", positive: false }}
-          />
-        </div>
-
-        {/* Chart and active users */}
-        <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
-          <RevenueChart data={chartData} />
-          <ActiveUsersCard stats={stats} />
-        </div>
-
-        {/* Transactions table */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          <TransactionsTable transactions={recentTransactions} />
-        </div>
+        </h1>
+        <p className="text-default-500 text-sm">
+          {intl.formatMessage({
+            description: "DashboardView - Page subtitle",
+            defaultMessage: "Overview of your application metrics",
+            id: "R5PlmL",
+          })}
+        </p>
       </div>
-    </NavbarLayout>
+
+      <Separator className="mb-6" />
+
+      {/* Stats cards */}
+      <h2 className="sr-only">
+        {intl.formatMessage({
+          description: "DashboardView - Key metrics section heading",
+          defaultMessage: "Key Metrics",
+          id: "0MhjtM",
+        })}
+      </h2>
+      <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard
+          title={intl.formatMessage({
+            description: "DashboardView - Total revenue label",
+            defaultMessage: "Total Revenue",
+            id: "FF0yKY",
+          })}
+          value={`$${stats.totalRevenue.toLocaleString()}`}
+          icon={<BanknotesIcon className="h-5 w-5" />}
+          iconGradient="from-emerald-500 to-teal-600"
+          trend={{ value: "+20.1%", positive: true }}
+        />
+        <StatCard
+          title={intl.formatMessage({
+            description: "DashboardView - Total users label",
+            defaultMessage: "Total Users",
+            id: "uP3pvm",
+          })}
+          value={stats.totalUsers.toLocaleString()}
+          icon={<UserGroupIcon className="h-5 w-5" />}
+          iconGradient="from-blue-500 to-indigo-600"
+          trend={{ value: "+180", positive: true }}
+        />
+        <StatCard
+          title={intl.formatMessage({
+            description: "DashboardView - Active users label",
+            defaultMessage: "Active Users",
+            id: "Fin8Qi",
+          })}
+          value={stats.activeUsers.toLocaleString()}
+          icon={<UserIcon className="h-5 w-5" />}
+          iconGradient="from-violet-500 to-purple-600"
+          trend={{ value: "+19%", positive: true }}
+        />
+        <StatCard
+          title={intl.formatMessage({
+            description: "DashboardView - Conversion rate label",
+            defaultMessage: "Conversion Rate",
+            id: "nfa0S1",
+          })}
+          value={`${stats.conversionRate}%`}
+          icon={<ChartBarIcon className="h-5 w-5" />}
+          iconGradient="from-orange-500 to-rose-600"
+          trend={{ value: "-2.1%", positive: false }}
+        />
+      </div>
+
+      {/* Chart and active users */}
+      <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+        <RevenueChart data={chartData} />
+        <ActiveUsersCard stats={stats} />
+      </div>
+
+      {/* Transactions table */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <TransactionsTable transactions={recentTransactions} />
+      </div>
+    </div>
   );
 }

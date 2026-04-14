@@ -1,7 +1,6 @@
 import type { ReactElement } from "react";
 import { SparklesIcon } from "@heroicons/react/20/solid";
-import { Button, Chip, Separator } from "@heroui/react";
-import { GithubIcon, LinkedInIcon, NavbarLayout } from "@package/ui";
+import { Chip, Separator } from "@heroui/react";
 import { useIntl } from "react-intl";
 import githubImgSrc from "~/assets/images/logo/github.png";
 import herouiImgSrc from "~/assets/images/logo/heroui.png";
@@ -13,64 +12,12 @@ import storybookImgSrc from "~/assets/images/logo/storybook.png";
 import turborepoImgSrc from "~/assets/images/logo/turborepo.png";
 import viteImgSrc from "~/assets/images/logo/vite.png";
 import { GridItem } from "~/components/display/grid-item/GridItem";
-import { NavbarContent, type NavbarContentProps } from "~/components/navigation/navbar-content";
 
-export interface HomeViewProps {
-  navbarContentProps: NavbarContentProps;
-  onGithubClick: () => void;
-  onLinkedInClick: () => void;
-}
-
-export function HomeView({ navbarContentProps, onGithubClick, onLinkedInClick }: HomeViewProps): ReactElement {
+export function HomeView(): ReactElement {
   const intl = useIntl();
 
   return (
-    <NavbarLayout
-      footer
-      footerText={intl.formatMessage({
-        description: "NavbarLayout - Footer attribution text",
-        defaultMessage: "Made with ☕ by Petter Hancock",
-        id: "rnZMTQ",
-      })}
-      footerCopyright={intl.formatMessage({
-        description: "NavbarLayout - Footer copyright text",
-        defaultMessage: "Copyright © 2024 - All rights reserved",
-        id: "ZSiTwu",
-      })}
-      navbarElement={<NavbarContent {...navbarContentProps} />}
-      footerContent={
-        <div className="flex items-center gap-3">
-          <Button
-            isIconOnly
-            variant="secondary"
-            onPress={onGithubClick}
-            aria-label={intl.formatMessage({
-              description: "HomeView - GitHub social link aria label",
-              defaultMessage: "GitHub",
-              id: "SrEKCm",
-            })}
-          >
-            <span className="flex h-5 w-5 items-center justify-center fill-current">
-              <GithubIcon />
-            </span>
-          </Button>
-          <Button
-            isIconOnly
-            variant="secondary"
-            onPress={onLinkedInClick}
-            aria-label={intl.formatMessage({
-              description: "HomeView - LinkedIn social link aria label",
-              defaultMessage: "LinkedIn",
-              id: "4KBayS",
-            })}
-          >
-            <span className="flex h-5 w-5 items-center justify-center fill-current">
-              <LinkedInIcon />
-            </span>
-          </Button>
-        </div>
-      }
-    >
+    <>
       <div className="grid w-full place-items-center">
         <div className="h-8" />
         <div className="flex flex-col items-center justify-center gap-4 p-2 text-center">
@@ -246,6 +193,6 @@ export function HomeView({ navbarContentProps, onGithubClick, onLinkedInClick }:
           })}
         />
       </div>
-    </NavbarLayout>
+    </>
   );
 }
