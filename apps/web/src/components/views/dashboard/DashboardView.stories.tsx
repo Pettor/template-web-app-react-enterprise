@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { DashboardView as Component } from "./DashboardView";
 import type { DashboardViewProps as Props } from "./DashboardView";
 import { DashboardChartData, DashboardStatsData, DashboardTransactionsData } from "~/storybook/data/DashboardData";
-import { NavbarContentCommonData } from "~/storybook/data/NavbarContentData";
 
 const meta: Meta<typeof Component> = {
   component: Component,
@@ -16,7 +15,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
-  navbarContentProps: { ...NavbarContentCommonData, activeTab: "dashboard" },
   stats: DashboardStatsData,
   chartData: DashboardChartData,
   recentTransactions: DashboardTransactionsData,

@@ -12,6 +12,7 @@ export interface NavbarContentProps {
   socialLinks: NavMenuSocialLinks;
   avatarName: string;
   activeTab?: string;
+  onTabChange?: (id: string) => void;
 }
 
 export function NavbarContent({
@@ -19,9 +20,14 @@ export function NavbarContent({
   socialLinks,
   avatarName,
   activeTab: activeTabProp = "home",
+  onTabChange,
 }: NavbarContentProps): ReactElement {
   const intl = useIntl();
   const [activeTab, setActiveTab] = useState<string>(activeTabProp);
+
+  useEffect(() => {
+    setActiveTab(activeTabProp);
+  }, [activeTabProp]);
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -78,7 +84,12 @@ export function NavbarContent({
           const id = String(key);
           setActiveTab(id);
           const item = menuItems.find((m) => m.id === id);
-          if (item?.href && !item.children) {
+          if (item?.children) {
+            return;
+          }
+          if (onTabChange) {
+            onTabChange(id);
+          } else if (item?.href) {
             window.location.hash = item.href.replace(/^#/, "");
           }
         }}
