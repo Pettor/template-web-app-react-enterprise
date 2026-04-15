@@ -1,6 +1,6 @@
 {
   "name": "@package/api",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "API client for the web application using native fetch and React Query",
   "license": "MIT",
   "private": true,

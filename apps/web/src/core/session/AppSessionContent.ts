@@ -3,4 +3,5 @@ export interface AppSessionContent {
   email: string;
   onSettings: () => void;
   onLogout: () => void;
+  onSearch: () => void;
 }

@@ -4,6 +4,7 @@ export const NavbarContentCommonData: NavbarContentProps = {
   quickMenu: {
     onSettings: () => console.log("onSettings"),
     onLogout: () => console.log("onLogout"),
+    onSearch: () => console.log("onSearch"),
   },
   socialLinks: {
     github: "https://github.com",

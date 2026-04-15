@@ -1,6 +1,6 @@
 {
   "name": "@package/react",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "React components and hooks for the web application",
   "license": "MIT",
   "private": true,

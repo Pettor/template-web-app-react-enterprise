@@ -169,8 +169,8 @@ export function HomeView(): ReactElement {
           imageSrc={netImgSrc}
           title={intl.formatMessage({
             description: "HomeView - C# Backend title",
-            defaultMessage: ".NET 8 Backend Available",
-            id: "Jav64H",
+            defaultMessage: ".NET Backend Available",
+            id: "CBlC0E",
           })}
           description={intl.formatMessage({
             description: "HomeView - C# Backend description",

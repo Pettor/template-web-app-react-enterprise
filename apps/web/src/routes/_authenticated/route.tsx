@@ -61,6 +61,7 @@ function AuthenticatedLayout(): ReactElement {
           quickMenu={{
             onSettings: sessionContent.onSettings,
             onLogout: sessionContent.onLogout,
+            onSearch: sessionContent.onSearch,
           }}
           socialLinks={{ github: GITHUB_LINK, linkedIn: LINKEDIN_LINK }}
           avatarName={sessionContent.name}

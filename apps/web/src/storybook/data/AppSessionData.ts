@@ -5,4 +5,5 @@ export const AppSessionData: AppSessionContent = {
   email: "john.doe@gmail.com",
   onSettings: () => console.log("onSettings"),
   onLogout: () => console.log("onLogout"),
+  onSearch: () => console.log("onSearch"),
 };

@@ -117,14 +117,14 @@ function RevenueChart({ data }: { data: DashboardChartPoint[] }): ReactElement {
             {/* Bars area with border */}
             <div className="border-default-200 flex items-end border-b border-l" style={{ height: chartHeight }}>
               {data.map((point) => (
-                <div key={point.label} className="flex h-full flex-1 items-end justify-center gap-1 px-1">
+                <div key={point.label} className="flex h-full flex-1 items-end justify-center gap-1 p-1">
                   <div
                     className="bg-accent min-h-1 w-3 min-w-2 rounded-md sm:w-4 md:w-5"
                     style={{ height: `${(point.revenue / maxValue) * 100}%` }}
                     title={`${revenueLabel}: $${point.revenue.toLocaleString()}`}
                   />
                   <div
-                    className="bg-default-300 min-h-1 w-3 min-w-2 rounded-md sm:w-4 md:w-5"
+                    className="bg-success min-h-1 w-3 min-w-2 rounded-md sm:w-4 md:w-5"
                     style={{ height: `${(point.expenses / maxValue) * 100}%` }}
                     title={`${expensesLabel}: $${point.expenses.toLocaleString()}`}
                   />
@@ -150,7 +150,7 @@ function RevenueChart({ data }: { data: DashboardChartPoint[] }): ReactElement {
             <span>{revenueLabel}</span>
           </div>
           <div className="flex items-center gap-1">
-            <div className="bg-default-300 h-2 w-2 rounded-full" />
+            <div className="bg-success h-2 w-2 rounded-full" />
             <span>{expensesLabel}</span>
           </div>
         </div>
@@ -196,13 +196,12 @@ function ActiveUsersCard({ stats }: { stats: DashboardStats }): ReactElement {
             })}
             value={activePercentage}
             color="accent"
-            className="h-28 w-28"
+            className="h-40 w-40"
           >
-            <ProgressCircle.Track>
+            <ProgressCircle.Track className="h-30 w-30">
               <ProgressCircle.TrackCircle />
               <ProgressCircle.FillCircle />
             </ProgressCircle.Track>
-            <span className="text-xl font-bold">{activePercentage}%</span>
           </ProgressCircle>
         </div>
 
@@ -282,78 +281,80 @@ function TransactionsTable({ transactions }: { transactions: DashboardTransactio
             id: "Ws8DxF",
           })}
         >
-          <Table.Content>
-            <Table.Header>
-              <Table.Column isRowHeader>
-                {intl.formatMessage({
-                  description: "DashboardView - Customer column header",
-                  defaultMessage: "Customer",
-                  id: "zymkVS",
-                })}
-              </Table.Column>
-              <Table.Column>
-                {intl.formatMessage({
-                  description: "DashboardView - Amount column header",
-                  defaultMessage: "Amount",
-                  id: "Oyg9J8",
-                })}
-              </Table.Column>
-              <Table.Column>
-                {intl.formatMessage({
-                  description: "DashboardView - Status column header",
-                  defaultMessage: "Status",
-                  id: "p0UMLn",
-                })}
-              </Table.Column>
-              <Table.Column>
-                {intl.formatMessage({
-                  description: "DashboardView - Date column header",
-                  defaultMessage: "Date",
-                  id: "1nhQq6",
-                })}
-              </Table.Column>
-            </Table.Header>
-            <Table.Body items={transactions}>
-              {(tx) => (
-                <Table.Row id={tx.id}>
-                  <Table.Cell>
-                    <div className="flex items-center gap-2">
-                      <Avatar size="sm" variant="soft">
-                        <Avatar.Fallback>
-                          {tx.customer
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")
-                            .toUpperCase()
-                            .slice(0, 2)}
-                        </Avatar.Fallback>
-                      </Avatar>
-                      <div className="flex flex-col">
-                        <span className="text-sm font-medium">{tx.customer}</span>
-                        <span className="text-default-400 hidden text-xs sm:inline">{tx.email}</span>
+          <Table.ScrollContainer>
+            <Table.Content>
+              <Table.Header>
+                <Table.Column isRowHeader>
+                  {intl.formatMessage({
+                    description: "DashboardView - Customer column header",
+                    defaultMessage: "Customer",
+                    id: "zymkVS",
+                  })}
+                </Table.Column>
+                <Table.Column>
+                  {intl.formatMessage({
+                    description: "DashboardView - Amount column header",
+                    defaultMessage: "Amount",
+                    id: "Oyg9J8",
+                  })}
+                </Table.Column>
+                <Table.Column>
+                  {intl.formatMessage({
+                    description: "DashboardView - Status column header",
+                    defaultMessage: "Status",
+                    id: "p0UMLn",
+                  })}
+                </Table.Column>
+                <Table.Column>
+                  {intl.formatMessage({
+                    description: "DashboardView - Date column header",
+                    defaultMessage: "Date",
+                    id: "1nhQq6",
+                  })}
+                </Table.Column>
+              </Table.Header>
+              <Table.Body items={transactions}>
+                {(tx) => (
+                  <Table.Row id={tx.id}>
+                    <Table.Cell>
+                      <div className="flex items-center gap-2">
+                        <Avatar size="sm" variant="soft">
+                          <Avatar.Fallback>
+                            {tx.customer
+                              .split(" ")
+                              .map((n) => n[0])
+                              .join("")
+                              .toUpperCase()
+                              .slice(0, 2)}
+                          </Avatar.Fallback>
+                        </Avatar>
+                        <div className="flex flex-col">
+                          <span className="text-sm font-medium">{tx.customer}</span>
+                          <span className="text-default-400 hidden text-xs sm:inline">{tx.email}</span>
+                        </div>
                       </div>
-                    </div>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <span className="font-medium">${tx.amount.toFixed(2)}</span>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Chip
-                      size="sm"
-                      variant="soft"
-                      className="px-2"
-                      color={tx.status === "completed" ? "success" : "warning"}
-                    >
-                      {tx.status.charAt(0).toUpperCase() + tx.status.slice(1)}
-                    </Chip>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <span className="text-default-500 text-sm">{tx.date}</span>
-                  </Table.Cell>
-                </Table.Row>
-              )}
-            </Table.Body>
-          </Table.Content>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <span className="font-medium">${tx.amount.toFixed(2)}</span>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Chip
+                        size="sm"
+                        variant="soft"
+                        className="px-2"
+                        color={tx.status === "completed" ? "success" : "warning"}
+                      >
+                        {tx.status.charAt(0).toUpperCase() + tx.status.slice(1)}
+                      </Chip>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <span className="text-default-500 text-sm">{tx.date}</span>
+                    </Table.Cell>
+                  </Table.Row>
+                )}
+              </Table.Body>
+            </Table.Content>
+          </Table.ScrollContainer>
         </Table>
       </Card.Content>
     </Card>
