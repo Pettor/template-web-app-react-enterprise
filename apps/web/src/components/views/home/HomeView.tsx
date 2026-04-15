@@ -170,7 +170,7 @@ export function HomeView(): ReactElement {
           title={intl.formatMessage({
             description: "HomeView - C# Backend title",
             defaultMessage: ".NET Backend Available",
-            id: "Jav64H",
+            id: "CBlC0E",
           })}
           description={intl.formatMessage({
             description: "HomeView - C# Backend description",

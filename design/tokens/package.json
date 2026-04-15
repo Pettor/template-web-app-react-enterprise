@@ -1,6 +1,6 @@
 {
   "name": "@design/tokens",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Brand design tokens using Style Dictionary with W3C format",
   "license": "MIT",
   "private": true,
