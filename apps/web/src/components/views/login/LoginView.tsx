@@ -1,10 +1,12 @@
 import type { ReactElement } from "react";
 import { Cog6ToothIcon } from "@heroicons/react/20/solid";
-import { Card, CardHeader, Button, CardContent } from "@heroui/react";
+import { Alert, Card, CardHeader, Button, CardContent } from "@heroui/react";
 import { BasicLayout, BlueFadeBackground, GridBackground, Logo } from "@package/ui";
 import { useIntl } from "react-intl";
 import type { LoginFormProps } from "~/components/forms/login/LoginForm";
 import { LoginForm } from "~/components/forms/login/LoginForm";
+
+const IS_DEMO_MODE = import.meta.env.VITE_DEMO_MODE === "true";
 
 export interface LoginViewProps {
   appName: string;
@@ -57,6 +59,27 @@ export function LoginView({ appName, loginForm, onSettings }: LoginViewProps): R
               id: "NMwN2/",
             })}
           </p>
+          {IS_DEMO_MODE && (
+            <Alert status="warning" className="w-full max-w-sm">
+              <Alert.Indicator />
+              <Alert.Content>
+                <Alert.Title>
+                  {intl.formatMessage({
+                    description: "LoginView - Demo mode banner title",
+                    defaultMessage: "Demo Mode",
+                    id: "7DjQMQ",
+                  })}
+                </Alert.Title>
+                <Alert.Description>
+                  {intl.formatMessage({
+                    description: "LoginView - Demo mode banner description",
+                    defaultMessage: "This is a demo. Sign in with any valid email and password (min. 8 characters).",
+                    id: "wZXD0J",
+                  })}
+                </Alert.Description>
+              </Alert.Content>
+            </Alert>
+          )}
           <div className="w-full max-w-sm">
             <LoginForm {...loginForm} />
           </div>

@@ -5,6 +5,83 @@ import { ALLOWED_URLS } from "./ApiWorkerAllowedUrls";
 import { ApiWorkerClient, isFetchError } from "./ApiWorkerClient";
 import type { ApiError, ApiResponseTypes } from "./ApiWorkerReponse";
 
+const IS_DEMO_MODE = import.meta.env.VITE_DEMO_MODE === "true";
+
+function getDemoGetData(url: string): unknown {
+  switch (url) {
+    case "/api/personal/profile":
+      return {
+        id: "demo-user-id",
+        userName: "demo@example.com",
+        firstName: "Demo",
+        lastName: "User",
+        email: "demo@example.com",
+        isActive: true,
+        emailConfirmed: true,
+        phoneNumber: null,
+        imageUrl: null,
+      };
+    case "/api/dashboard":
+      return {
+        stats: { totalRevenue: 48295, totalUsers: 1284, activeUsers: 876, conversionRate: 3.8 },
+        chartData: [
+          { label: "Jan", revenue: 6800, expenses: 4200 },
+          { label: "Feb", revenue: 7200, expenses: 4800 },
+          { label: "Mar", revenue: 6100, expenses: 3900 },
+          { label: "Apr", revenue: 8400, expenses: 5100 },
+          { label: "May", revenue: 9200, expenses: 5800 },
+          { label: "Jun", revenue: 10595, expenses: 6200 },
+        ],
+        recentTransactions: [
+          {
+            id: "txn-001",
+            customer: "Alice Johnson",
+            email: "alice@example.com",
+            amount: 249.0,
+            status: "completed",
+            date: "2024-04-14",
+          },
+          {
+            id: "txn-002",
+            customer: "Bob Martinez",
+            email: "bob@example.com",
+            amount: 89.99,
+            status: "pending",
+            date: "2024-04-13",
+          },
+          {
+            id: "txn-003",
+            customer: "Carol Williams",
+            email: "carol@example.com",
+            amount: 399.0,
+            status: "completed",
+            date: "2024-04-12",
+          },
+          {
+            id: "txn-004",
+            customer: "David Lee",
+            email: "david@example.com",
+            amount: 149.5,
+            status: "failed",
+            date: "2024-04-11",
+          },
+          {
+            id: "txn-005",
+            customer: "Eva Chen",
+            email: "eva@example.com",
+            amount: 599.0,
+            status: "completed",
+            date: "2024-04-10",
+          },
+        ],
+      };
+    case "/api/application/info":
+      return { version: "demo" };
+    default:
+      return null;
+  }
+}
+
 // Request and Response types
 type ApiMessages =
   | { type: "token/request"; payload: LoginData }
@@ -97,6 +174,10 @@ async function messageHandler({ data: sentData, ports: [port] }: MessageEvent<Ap
       // Get request
       case "request/get":
         {
+          if (IS_DEMO_MODE) {
+            apiResponse = { data: getDemoGetData(sentData.url), status: 200, statusText: "OK" };
+            break;
+          }
           const { url } = sentData;
           const response = await apiWorkerClient.get(url);
           const data = response.status === 204 ? null : await response.json();

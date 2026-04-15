@@ -28,6 +28,11 @@ export async function initializeAuth(): Promise<AuthStatus> {
   }
 
   authInitPromise = (async () => {
+    if (import.meta.env.VITE_DEMO_MODE === "true") {
+      authStatus = "unauthenticated";
+      return authStatus;
+    }
+
     try {
       await postRefreshToken();
       authStatus = "authenticated";

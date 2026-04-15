@@ -17,13 +17,17 @@ export function useAuth(): {
   const { mutateAsync: logoutFunc, isPending: logoutLoading } = usePostLogoutMutate();
 
   async function login(data: LoginData): Promise<void> {
-    await loginFunc(data);
+    if (import.meta.env.VITE_DEMO_MODE !== "true") {
+      await loginFunc(data);
+    }
     setAuthStatus("authenticated");
     await router.invalidate();
   }
 
   async function logout(): Promise<void> {
-    await logoutFunc();
+    if (import.meta.env.VITE_DEMO_MODE !== "true") {
+      await logoutFunc();
+    }
     setAuthStatus("unauthenticated");
     await router.invalidate();
     await navigate({ to: "/" });
