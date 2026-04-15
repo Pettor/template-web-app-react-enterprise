@@ -24,6 +24,7 @@
     "build:exports": "turbo run build:exports",
     "build:libs": "turbo run build:libs",
     "deploy": "turbo run deploy",
+    "deploy:demo": "turbo run deploy:demo",
     "storybook": "turbo run storybook",
     "storybook:build": "turbo run storybook:build",
     "storybook:nopen": "turbo run storybook:nopen",

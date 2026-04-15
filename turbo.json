@@ -23,8 +23,19 @@
       "inputs": ["src/**", "package.json", "tsconfig.json", "vite.config.ts", "eslint.config.js"],
       "outputs": ["dist/**"]
     },
+    "build:demo": {
+      "dependsOn": ["^build:libs"],
+      "inputs": ["src/**", "package.json", "tsconfig.json", "vite.config.ts", "eslint.config.js", ".env.demo"],
+      "outputs": ["dist/**", "build/**"]
+    },
     "deploy": {
       "dependsOn": ["build", "storybook:build"],
+      "cache": true,
+      "inputs": ["dist/**", "build/**", "storybook-static/**"],
+      "outputs": ["output/deployment/**"]
+    },
+    "deploy:demo": {
+      "dependsOn": ["build:demo", "storybook:build"],
       "cache": true,
       "inputs": ["dist/**", "build/**", "storybook-static/**"],
       "outputs": ["output/deployment/**"]
