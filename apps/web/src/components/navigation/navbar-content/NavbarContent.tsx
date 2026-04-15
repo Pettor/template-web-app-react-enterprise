@@ -161,6 +161,10 @@ export function NavbarContent({
                 setIsPopoverOpen(false);
                 quickMenu.onLogout();
               }}
+              onSearch={() => {
+                setIsPopoverOpen(false);
+                quickMenu.onSearch();
+              }}
             />
           </Popover.Dialog>
         </Popover.Content>
@@ -227,7 +231,7 @@ export function NavbarContent({
                 </div>
                 <Drawer.CloseTrigger />
               </Drawer.Header>
-              <Drawer.Body>
+              <Drawer.Body onClick={() => setIsDrawerOpen(false)}>
                 <nav>
                   <ul className="flex flex-col gap-1">
                     {menuItems.map((item) => (
@@ -236,7 +240,10 @@ export function NavbarContent({
                           <>
                             <button
                               className="hover:bg-default-100 flex w-full items-center gap-3 rounded-lg px-3 py-2.5"
-                              onClick={() => toggleExpanded(item.id)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleExpanded(item.id);
+                              }}
                               aria-expanded={expandedItems.has(item.id)}
                               aria-controls={`nav-submenu-${item.id}`}
                             >
@@ -279,17 +286,12 @@ export function NavbarContent({
                   </ul>
                 </nav>
               </Drawer.Body>
-              <Drawer.Footer className="flex-col">
+              <Drawer.Footer className="flex-col" onClick={() => setIsDrawerOpen(false)}>
                 <Separator />
                 <QuickMenu
-                  onSettings={() => {
-                    setIsDrawerOpen(false);
-                    quickMenu.onSettings();
-                  }}
-                  onLogout={() => {
-                    setIsDrawerOpen(false);
-                    quickMenu.onLogout();
-                  }}
+                  onSettings={quickMenu.onSettings}
+                  onLogout={quickMenu.onLogout}
+                  onSearch={quickMenu.onSearch}
                 />
               </Drawer.Footer>
             </Drawer.Dialog>

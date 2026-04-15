@@ -1,14 +1,15 @@
 import type { ReactElement } from "react";
-import { ArrowLeftStartOnRectangleIcon, Cog6ToothIcon } from "@heroicons/react/20/solid";
+import { ArrowLeftStartOnRectangleIcon, Cog6ToothIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { ListBox, ListBoxItem } from "@heroui/react";
 import { useIntl } from "react-intl";
 
 export interface QuickMenuProps {
   onSettings: () => void;
   onLogout: () => void;
+  onSearch: () => void;
 }
 
-export function QuickMenu({ onSettings, onLogout }: QuickMenuProps): ReactElement {
+export function QuickMenu({ onSettings, onLogout, onSearch }: QuickMenuProps): ReactElement {
   const intl = useIntl();
 
   return (
@@ -19,10 +20,30 @@ export function QuickMenu({ onSettings, onLogout }: QuickMenuProps): ReactElemen
         id: "bPsPbO",
       })}
       onAction={(key) => {
+        if (key === "search") onSearch();
         if (key === "settings") onSettings();
         if (key === "logout") onLogout();
       }}
     >
+      <ListBoxItem
+        id="search"
+        textValue="Search"
+        data-testid="quick-menu__search-button"
+        aria-label={intl.formatMessage({
+          description: "QuickMenu - Search aria label",
+          defaultMessage: "Search",
+          id: "nPdv4+",
+        })}
+      >
+        <MagnifyingGlassIcon className="h-5 w-5" />
+        <span className="text-base">
+          {intl.formatMessage({
+            description: "QuickMenu - Search",
+            defaultMessage: "Search",
+            id: "ndwWCO",
+          })}
+        </span>
+      </ListBoxItem>
       <ListBoxItem
         id="settings"
         textValue="Settings"
