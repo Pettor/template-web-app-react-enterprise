@@ -212,7 +212,7 @@ export function CommandPalette({ isOpen, commands, onClose }: CommandPaletteProp
               </TextField>
             </Modal.Header>
             <Modal.Body className="min-h-0 flex-1 overflow-y-auto p-2">
-              <div ref={listRef} role="listbox" aria-label="Commands" className="h-full">
+              <div ref={listRef} className="h-full">
                 {filtered.length === 0 ? (
                   <div className="text-default-500 flex h-full items-center justify-center p-6 text-sm">
                     {intl.formatMessage({
@@ -222,7 +222,7 @@ export function CommandPalette({ isOpen, commands, onClose }: CommandPaletteProp
                     })}
                   </div>
                 ) : (
-                  <div className="flex flex-col gap-3">
+                  <div role="listbox" aria-label="Commands" className="flex flex-col gap-3">
                     {groups.map((group) => (
                       <div key={group.name}>
                         {group.name !== DEFAULT_GROUP && (
