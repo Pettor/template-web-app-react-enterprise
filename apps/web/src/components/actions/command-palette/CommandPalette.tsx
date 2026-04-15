@@ -188,9 +188,9 @@ export function CommandPalette({ isOpen, commands, onClose }: CommandPaletteProp
               defaultMessage: "Command palette",
               id: "h5GJcX",
             })}
-            className="overflow-hidden shadow-2xl"
+            className="flex h-[480px] flex-col overflow-hidden shadow-2xl"
           >
-            <Modal.Header className="border-b p-0">
+            <Modal.Header className="shrink-0 border-b p-0">
               <TextField aria-label="command-palette-search" className="w-full">
                 <InputGroup fullWidth className="border-0 shadow-none">
                   <InputGroupPrefix>
@@ -211,7 +211,7 @@ export function CommandPalette({ isOpen, commands, onClose }: CommandPaletteProp
                 </InputGroup>
               </TextField>
             </Modal.Header>
-            <Modal.Body className="h-96 overflow-y-auto p-2">
+            <Modal.Body className="min-h-0 flex-1 overflow-y-auto p-2">
               <div ref={listRef} role="listbox" aria-label="Commands" className="h-full">
                 {filtered.length === 0 ? (
                   <div className="text-default-500 flex h-full items-center justify-center p-6 text-sm">
