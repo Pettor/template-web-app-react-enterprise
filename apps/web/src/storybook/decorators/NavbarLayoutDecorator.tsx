@@ -1,11 +1,10 @@
-import type { ReactNode } from "react";
+import { NavbarLayout, StorybookNavbarContentComponent } from "@package/ui";
 import type { Decorator } from "@storybook/react-vite";
-import { NavbarLayout } from "@package/ui";
 
-export function NavbarLayoutDecorator(navbarElement?: ReactNode): Decorator {
+export function NavbarLayoutDecorator(): Decorator {
   return (Story) => (
     <NavbarLayout
-      navbarElement={navbarElement}
+      navbarElement={<StorybookNavbarContentComponent />}
       footer
       footerText="Made with ☕ by Petter Hancock"
       footerCopyright="Copyright © 2024 - All rights reserved"

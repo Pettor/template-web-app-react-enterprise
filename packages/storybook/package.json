@@ -13,7 +13,6 @@
     "build:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json"
   },
   "peerDependencies": {
-    "@package/ui": "workspace:*",
     "@storybook/react": "catalog:storybook",
     "@tanstack/react-router": "catalog:tanstack",
     "react": ">=19.0.0",
@@ -24,7 +23,6 @@
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
     "@package/react": "workspace:*",
-    "@package/ui": "workspace:*",
     "barrelsby": "catalog:common"
   }
 }

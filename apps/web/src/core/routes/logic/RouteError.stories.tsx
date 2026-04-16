@@ -1,6 +1,6 @@
-import { RouterDecorator } from "@package/storybook";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { RouteError } from "./RouteError";
+import { RouterDecorator } from "~/storybook/decorators/RouterDecorator";
 
 const meta: Meta<typeof RouteError> = {
   component: RouteError,

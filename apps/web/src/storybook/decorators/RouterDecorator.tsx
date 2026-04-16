@@ -1,5 +1,5 @@
-import type { AnyRoute, AnyRouter } from "@tanstack/react-router";
 import type { Decorator } from "@storybook/react-vite";
+import type { AnyRoute, AnyRouter } from "@tanstack/react-router";
 import { createMemoryHistory, createRootRoute, createRouter, RouterProvider } from "@tanstack/react-router";
 
 export const RouterDecorator: Decorator = (Story) => {
