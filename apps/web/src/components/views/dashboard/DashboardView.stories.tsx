@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { DashboardView as Component } from "./DashboardView";
 import type { DashboardViewProps as Props } from "./DashboardView";
 import { DashboardChartData, DashboardStatsData, DashboardTransactionsData } from "~/storybook/data/DashboardData";
+import { NavbarLayoutDecorator } from "~/storybook/decorators/NavbarLayoutDecorator";
 
 const meta: Meta<typeof Component> = {
   component: Component,
@@ -9,6 +10,7 @@ const meta: Meta<typeof Component> = {
   parameters: {
     layout: "fullscreen",
   },
+  decorators: [NavbarLayoutDecorator()],
 };
 
 export default meta;
