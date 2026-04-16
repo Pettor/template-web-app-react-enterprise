@@ -9,7 +9,7 @@
     "clean": "rimraf storybook-static coverage",
     "clean:all": "pnpm clean node_modules",
     "deploy": "pnpm deploy:build && pnpm deploy:move",
-    "deploy:demo": "pnpm deploy",
+    "deploy:demo": "pnpm deploy:build && pnpm deploy:move",
     "deploy:build": "pnpm storybook:build",
     "deploy:move": "move-cli storybook-static \"../../output/deployment/storybook\" --mkdirp",
     "test": "vitest --project=storybook",
