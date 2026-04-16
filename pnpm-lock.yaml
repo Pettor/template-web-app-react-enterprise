@@ -746,6 +746,9 @@ importers:
       '@package/react':
         specifier: workspace:*
         version: link:../react
+      '@package/ui':
+        specifier: workspace:*
+        version: link:../ui
       barrelsby:
         specifier: catalog:common
         version: 2.8.1

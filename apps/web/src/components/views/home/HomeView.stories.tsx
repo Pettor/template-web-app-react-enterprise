@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { NavbarLayoutDecorator } from "@package/storybook";
+import { StorybookNavbarContentComponent } from "~/storybook/components/StorybookNavbarContentComponent";
 import { HomeView as Component } from "./HomeView";
 
 const meta: Meta<typeof Component> = {
@@ -7,6 +9,7 @@ const meta: Meta<typeof Component> = {
   parameters: {
     layout: "fullscreen",
   },
+  decorators: [NavbarLayoutDecorator(<StorybookNavbarContentComponent />)],
 };
 
 export default meta;
