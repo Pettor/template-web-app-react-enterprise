@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { personalProfileConvertFromDto } from "./Convert";
-import type { ProfileInfoDto } from "./Schema";
+import type { ProfileInfoDto } from "./Types";
 
 const validDto: ProfileInfoDto = {
   id: "user-456",

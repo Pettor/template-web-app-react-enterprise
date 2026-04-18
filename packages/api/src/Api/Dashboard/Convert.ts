@@ -1,5 +1,4 @@
-import type { DashboardData } from "./Classes";
-import type { DashboardDataDto } from "./Schema";
+import type { DashboardData, DashboardDataDto } from "./Types";
 
 export function dashboardConvertFromDto(dto: DashboardDataDto): DashboardData {
   return {

@@ -1,5 +1,4 @@
-import type { ProfileInfo } from "./Classes";
-import type { ProfileInfoDto } from "./Schema";
+import type { ProfileInfo, ProfileInfoDto } from "./Types";
 
 export function personalProfileConvertFromDto(dto: ProfileInfoDto): ProfileInfo {
   return {

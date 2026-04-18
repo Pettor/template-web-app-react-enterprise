@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { applicationInfoSchema } from "./Schema";
+import { applicationInfoSchema } from "./Types";
 
 describe("applicationInfoSchema", () => {
   it("parses valid data with a string version", () => {

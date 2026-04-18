@@ -1,4 +1,4 @@
-import type { LoginData } from "../Api/Login/Classes";
+import type { LoginData } from "../Api/Login/Types";
 import ApiWorker from "../Worker/ApiWorker?worker";
 import { ApiWorkerCommunication } from "../Worker/ApiWorkerCommunication";
 import type { ApiResponse } from "../Worker/ApiWorkerReponse";
