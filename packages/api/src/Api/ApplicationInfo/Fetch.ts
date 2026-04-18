@@ -2,7 +2,12 @@ import type { FetchQueryOptions } from "@tanstack/react-query";
 import { apiClient } from "../../Client/ApiClient";
 import { ServiceErrorFactory } from "../../Service/ServiceErrorFactory";
 import { applicationInfoConvertFromDto } from "./Convert";
-import { applicationInfoSchema, QUERY_KEY_APPLICATION_INFO, type ApplicationInfo, type ApplicationInfoDto } from "./Types";
+import {
+  applicationInfoSchema,
+  QUERY_KEY_APPLICATION_INFO,
+  type ApplicationInfo,
+  type ApplicationInfoDto,
+} from "./Types";
 
 export async function fetchApplicationInfo(): Promise<ApplicationInfo> {
   try {
