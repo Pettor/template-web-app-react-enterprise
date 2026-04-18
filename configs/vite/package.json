@@ -13,7 +13,6 @@
   "scripts": {
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
-    "build:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
     "build:libs": "tsup src/index.ts --format esm --dts"
   },
   "peerDependencies": {
@@ -28,10 +27,8 @@
     "vite-plugin-pwa": "catalog:vite"
   },
   "devDependencies": {
-    "@config/barrelsby": "workspace:*",
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
-    "barrelsby": "catalog:common",
     "typescript": "catalog:typescript"
   }
 }

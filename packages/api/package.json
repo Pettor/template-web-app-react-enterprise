@@ -12,7 +12,6 @@
     "clean:all": "pnpm clean node_modules",
     "lint": "eslint ./src",
     "lint:fix": "pnpm lint --fix",
-    "build:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json",
     "test": "vitest run",
     "test:ci": "vitest run --reporter=junit --outputFile=.test-results/unit-test.xml",
     "test:coverage": "vitest run --coverage",
@@ -27,11 +26,9 @@
     "immer": "catalog:common"
   },
   "devDependencies": {
-    "@config/barrelsby": "workspace:*",
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
     "@vitest/coverage-v8": "catalog:vitest",
-    "barrelsby": "catalog:common",
     "vite": "catalog:vite",
     "vitest": "catalog:vitest",
     "zod": "catalog:validation"

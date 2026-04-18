@@ -21,7 +21,6 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix && sherif --fix",
     "build": "turbo run build",
-    "build:exports": "turbo run build:exports",
     "build:libs": "turbo run build:libs",
     "deploy": "turbo run deploy",
     "deploy:demo": "turbo run deploy:demo",

@@ -9,8 +9,7 @@
   "types": "./src/index.ts",
   "scripts": {
     "clean": "rimraf dist",
-    "clean:all": "pnpm clean node_modules",
-    "build:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json"
+    "clean:all": "pnpm clean node_modules"
   },
   "peerDependencies": {
     "@storybook/react": "catalog:storybook",
@@ -19,10 +18,8 @@
     "react-dom": ">=19.0.0"
   },
   "devDependencies": {
-    "@config/barrelsby": "workspace:*",
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
-    "@package/react": "workspace:*",
-    "barrelsby": "catalog:common"
+    "@package/react": "workspace:*"
   }
 }

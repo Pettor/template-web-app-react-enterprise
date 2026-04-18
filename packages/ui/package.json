@@ -14,8 +14,7 @@
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
     "lint": "eslint ./src",
-    "lint:fix": "pnpm lint --fix",
-    "build:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json"
+    "lint:fix": "pnpm lint --fix"
   },
   "peerDependencies": {
     "react": ">=19.0.0",
@@ -30,7 +29,6 @@
     "jotai": "catalog:common"
   },
   "devDependencies": {
-    "@config/barrelsby": "workspace:*",
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
     "@faker-js/faker": "catalog:common",
@@ -40,7 +38,6 @@
     "@vitejs/plugin-react": "catalog:vite",
     "@vitest/browser": "catalog:vitest",
     "@vitest/coverage-v8": "catalog:vitest",
-    "barrelsby": "catalog:common",
     "tailwindcss": "catalog:tailwind",
     "vite": "catalog:vite",
     "vitest": "catalog:vitest"
