@@ -6,7 +6,7 @@ packages:
 - tools/*
 overrides:
   '@tanstack/react-query': catalog:tanstack
-  '@tanstack/query-core': 5.99.0
+  '@tanstack/query-core': 5.99.1
   react: catalog:react19
   react-dom: catalog:react19
 catalogs:
@@ -89,7 +89,7 @@ catalogs:
     vite-plugin-pwa: 1.2.0
   tanstack:
     '@tanstack/react-form': 1.29.0
-    '@tanstack/react-query': 5.99.0
+    '@tanstack/react-query': 5.99.1
     '@tanstack/react-router': 1.168.18
     '@tanstack/router-plugin': 1.167.18
   vitest:
