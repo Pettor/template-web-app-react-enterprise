@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { BasicLayoutDecorator } from "~/storybook/decorators/BasicLayoutDecorator";
 import { LoginView as Component } from "./LoginView";
 import type { LoginViewProps as Props } from "./LoginView";
+import { BasicLayoutDecorator } from "~/storybook/decorators/BasicLayoutDecorator";
 
 const meta: Meta<typeof Component> = {
   component: Component,
