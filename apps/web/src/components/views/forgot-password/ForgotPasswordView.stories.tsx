@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { BasicLayoutDecorator } from "~/storybook/decorators/BasicLayoutDecorator";
 import { ForgotPasswordView as Component } from "./ForgotPasswordView";
 import type { ForgotPasswordViewProps as Props } from "./ForgotPasswordView";
 
@@ -8,6 +9,7 @@ const meta: Meta<typeof Component> = {
   parameters: {
     layout: "fullscreen",
   },
+  decorators: [BasicLayoutDecorator()],
   argTypes: {
     resetForm: {
       table: {

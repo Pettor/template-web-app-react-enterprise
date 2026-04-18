@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { BasicLayoutDecorator } from "~/storybook/decorators/BasicLayoutDecorator";
 import { SignUpView as Component } from "./SignUpView";
 import type { SignUpViewProps as Props } from "./SignUpView";
 
@@ -8,6 +9,7 @@ const meta: Meta<typeof Component> = {
   parameters: {
     layout: "fullscreen",
   },
+  decorators: [BasicLayoutDecorator()],
   argTypes: {
     signUpForm: {
       table: {
