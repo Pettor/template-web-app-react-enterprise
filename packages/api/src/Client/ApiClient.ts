@@ -3,6 +3,12 @@ import ApiWorker from "../Worker/ApiWorker?worker";
 import { ApiWorkerCommunication } from "../Worker/ApiWorkerCommunication";
 import type { ApiResponse } from "../Worker/ApiWorkerReponse";
 
+/**
+ * Main-thread entry point for the API. All requests are forwarded to a
+ * dedicated Web Worker via `postMessage`; the access token lives only in
+ * worker memory (see `Token/TokenStorage.ts`) and is never serialized back
+ * to the main thread. The worker injects `Authorization` headers internally.
+ */
 export class ApiClient {
   private _apiWorkerCommunication: ApiWorkerCommunication;
 
