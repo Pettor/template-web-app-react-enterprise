@@ -1,10 +1,8 @@
 import type { FetchQueryOptions } from "@tanstack/react-query";
 import { apiClient } from "../../Client/ApiClient";
 import { ServiceErrorFactory } from "../../Service/ServiceErrorFactory";
-import type { DashboardData } from "./Classes";
-import { QUERY_KEY_DASHBOARD } from "./Classes";
 import { dashboardConvertFromDto } from "./Convert";
-import { dashboardDataSchema, type DashboardDataDto } from "./Schema";
+import { dashboardDataSchema, QUERY_KEY_DASHBOARD, type DashboardData, type DashboardDataDto } from "./Types";
 
 export async function fetchDashboard(): Promise<DashboardData> {
   try {

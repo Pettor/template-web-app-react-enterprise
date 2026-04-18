@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { profileInfoSchema } from "./Schema";
+import { profileInfoSchema } from "./Types";
 
 const validProfile = {
   id: "user-123",

@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { apiClient } from "../../Client/ApiClient";
 import { ServiceErrorFactory } from "../../Service/ServiceErrorFactory";
 import type { ApiError } from "../../Worker/ApiWorkerReponse";
-import type { SelfRegisterData } from "./Classes";
+import type { SelfRegisterData } from "./Types";
 
 export async function Post(data: SelfRegisterData): Promise<void> {
   try {

@@ -1,5 +1,4 @@
-import type { ApplicationInfo } from "./Classes";
-import type { ApplicationInfoDto } from "./Schema";
+import type { ApplicationInfo, ApplicationInfoDto } from "./Types";
 
 export function applicationInfoConvertFromDto(dto: ApplicationInfoDto): ApplicationInfo {
   return {

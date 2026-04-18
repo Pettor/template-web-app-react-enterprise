@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { dashboardDataSchema } from "./Schema";
+import { dashboardDataSchema } from "./Types";
 
 const validData = {
   stats: {

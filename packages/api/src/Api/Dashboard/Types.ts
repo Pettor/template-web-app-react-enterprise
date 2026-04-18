@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export const QUERY_KEY_DASHBOARD = ["dashboard"] as const;
+
 export const dashboardStatsSchema = z.object({
   totalRevenue: z.number(),
   totalUsers: z.number(),
@@ -35,3 +37,10 @@ export const dashboardDataSchema = z.object({
 });
 
 export type DashboardDataDto = z.infer<typeof dashboardDataSchema>;
+
+// Domain shapes match the wire DTOs today; aliases keep a single source of truth
+// while preserving the domain-vs-DTO boundary for future divergence.
+export type DashboardStats = DashboardStatsDto;
+export type DashboardChartPoint = DashboardChartPointDto;
+export type DashboardTransaction = DashboardTransactionDto;
+export type DashboardData = DashboardDataDto;

@@ -105,7 +105,7 @@ Key exports:
 - `TokenStorage`, `JwtToken` — JWT token management
 - `ServiceError`, `ServiceErrorFactory` — Typed error handling
 - API endpoint services: `Login`, `Logout`, `RefreshToken`, `ForgotPassword`, `SelfRegister`, `ApplicationInfo`, `PersonalProfile`
-- Classes, Schemas, Converters, Fetch utilities
+- Types (Zod schemas + inferred DTOs + domain types co-located in `Types.ts`), Converters, Fetch utilities
 
 ### `@package/ui` — Shared UI Components
 
