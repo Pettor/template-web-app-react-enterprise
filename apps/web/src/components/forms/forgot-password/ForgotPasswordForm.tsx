@@ -4,6 +4,8 @@ import { Button, Form, Spinner } from "@heroui/react";
 import { useForm } from "@tanstack/react-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
+import { useFormValidation } from "../shared/FormValidation";
+import { forgotPasswordFormMessages } from "./ForgotPasswordForm.messages";
 import { InputField } from "~/components/input/InputField";
 
 export interface FormForgotPassword {
@@ -17,15 +19,10 @@ export interface ForgotPasswordFormProps {
 
 export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProps): ReactElement {
   const intl = useIntl();
+  const { emailSchema } = useFormValidation();
 
   const schema = z.object({
-    email: z.email(
-      intl.formatMessage({
-        description: "ForgotPasswordFormValidation - Email must be valid",
-        defaultMessage: "Email must be valid",
-        id: "4lmP9Q",
-      })
-    ),
+    email: emailSchema,
   });
 
   const form = useForm({
@@ -57,11 +54,7 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
             field={field}
             type="email"
             fullWidth
-            label={intl.formatMessage({
-              description: "ForgotPasswordFormValidation - Email label",
-              defaultMessage: "Email",
-              id: "0YmbIp",
-            })}
+            label={intl.formatMessage(forgotPasswordFormMessages.emailLabel)}
             startContent={<EnvelopeIcon className="h-5 w-5" />}
             data-testid="forgot-password-form__email-input"
           />
@@ -76,22 +69,10 @@ export function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProp
             type="submit"
             size="lg"
             className="mt-2 w-full"
-            aria-label={intl.formatMessage({
-              description: "ForgotPasswordFormValidation - Send button title",
-              defaultMessage: "Submit",
-              id: "ojcPit",
-            })}
+            aria-label={intl.formatMessage(forgotPasswordFormMessages.submitAriaLabel)}
             data-testid="forgot-password-form__submit-button"
           >
-            {loading ? (
-              <Spinner size="sm" />
-            ) : (
-              intl.formatMessage({
-                description: "ForgotPasswordFormValidation - Send",
-                defaultMessage: "Send",
-                id: "r3YQJ5",
-              })
-            )}
+            {loading ? <Spinner size="sm" /> : intl.formatMessage(forgotPasswordFormMessages.submit)}
           </Button>
         )}
       />
