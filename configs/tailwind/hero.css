@@ -98,4 +98,8 @@
 
     --disabled-opacity: var(--layout-disabled-opacity);
   }
+
+  html {
+    background-color: var(--background);
+  }
 }
