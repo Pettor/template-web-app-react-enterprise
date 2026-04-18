@@ -35,7 +35,7 @@ export function useFormValidation(): FormValidation {
   const intl = useIntl();
 
   return {
-    emailSchema: z.email(intl.formatMessage(messages.emailInvalid)),
+    emailSchema: z.string().email(intl.formatMessage(messages.emailInvalid)),
     passwordSchema: z.string().min(8, intl.formatMessage(messages.passwordTooShort)),
     passwordConfirmSchema: z.string().min(8, intl.formatMessage(messages.passwordConfirmRequired)),
     passwordsMustMatchMessage: intl.formatMessage(messages.passwordsMustMatch),
