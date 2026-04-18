@@ -5,22 +5,22 @@ const messages = defineMessages({
   emailInvalid: {
     description: "FormValidation - Email must be valid",
     defaultMessage: "Email must be valid",
-    id: "validation.email.invalid",
+    id: "8di2Oc",
   },
   passwordTooShort: {
     description: "FormValidation - Password is too short (minimum 8 characters)",
     defaultMessage: "Password is too short - should be 8 chars minimum",
-    id: "validation.password.tooShort",
+    id: "irK1Wl",
   },
   passwordConfirmRequired: {
     description: "FormValidation - Password confirmation is required",
     defaultMessage: "Password must be confirmed",
-    id: "validation.password.confirmRequired",
+    id: "EZrpOs",
   },
   passwordsMustMatch: {
     description: "FormValidation - Passwords must match",
     defaultMessage: "Passwords must match",
-    id: "validation.password.mustMatch",
+    id: "LYevZg",
   },
 });
 

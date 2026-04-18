@@ -4,9 +4,9 @@ import { Button, Form, Spinner } from "@heroui/react";
 import { useForm } from "@tanstack/react-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
-import { InputField } from "~/components/input/InputField";
 import { useFormValidation } from "../shared/FormValidation";
 import { forgotPasswordFormMessages } from "./ForgotPasswordForm.messages";
+import { InputField } from "~/components/input/InputField";
 
 export interface FormForgotPassword {
   email: string;

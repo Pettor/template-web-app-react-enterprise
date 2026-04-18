@@ -14,9 +14,9 @@ import {
 import { useForm } from "@tanstack/react-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
-import { InputField } from "~/components/input/InputField";
 import { useFormValidation } from "../shared/FormValidation";
 import { loginFormMessages } from "./LoginForm.messages";
+import { InputField } from "~/components/input/InputField";
 
 export interface FormLogin {
   email: string;
