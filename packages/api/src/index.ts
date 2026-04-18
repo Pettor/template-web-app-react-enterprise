@@ -21,7 +21,7 @@ export * from "./Api/SelfRegister/Types";
 export * from "./Client/ApiClient";
 export * from "./Client/FetchClient";
 export * from "./Service/ServiceError";
-export * from "./Service/ServiceErrorFactory";
+export * from "./Service/CreateServiceError";
 export * from "./Token/JwtToken";
 export * from "./Worker/ApiWorker";
 export * from "./Worker/ApiWorkerAllowedUrls";

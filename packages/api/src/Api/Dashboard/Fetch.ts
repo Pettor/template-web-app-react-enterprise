@@ -1,6 +1,6 @@
 import type { FetchQueryOptions } from "@tanstack/react-query";
 import { apiClient } from "../../Client/ApiClient";
-import { ServiceErrorFactory } from "../../Service/ServiceErrorFactory";
+import { createServiceError } from "../../Service/CreateServiceError";
 import { dashboardConvertFromDto } from "./Convert";
 import { dashboardDataSchema, QUERY_KEY_DASHBOARD, type DashboardData, type DashboardDataDto } from "./Types";
 
@@ -10,7 +10,7 @@ export async function fetchDashboard(): Promise<DashboardData> {
     const parsed = await dashboardDataSchema.parseAsync(data);
     return dashboardConvertFromDto(parsed);
   } catch (e: unknown) {
-    throw ServiceErrorFactory.create(e);
+    throw createServiceError(e);
   }
 }
 

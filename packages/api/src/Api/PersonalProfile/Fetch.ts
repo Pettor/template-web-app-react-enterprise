@@ -1,7 +1,7 @@
 import type { UseQueryResult } from "@tanstack/react-query";
 import { useQuery, type FetchQueryOptions } from "@tanstack/react-query";
 import { apiClient } from "../../Client/ApiClient";
-import { ServiceErrorFactory } from "../../Service/ServiceErrorFactory";
+import { createServiceError } from "../../Service/CreateServiceError";
 import { personalProfileConvertFromDto } from "./Convert";
 import { profileInfoSchema, QUERY_KEY_PROFILE_INFO, type ProfileInfo, type ProfileInfoDto } from "./Types";
 
@@ -11,7 +11,7 @@ export async function fetchPersonalProfile(): Promise<ProfileInfo> {
     const userSchema = await profileInfoSchema.parseAsync(data);
     return personalProfileConvertFromDto(userSchema);
   } catch (e: unknown) {
-    throw ServiceErrorFactory.create(e);
+    throw createServiceError(e);
   }
 }
 
