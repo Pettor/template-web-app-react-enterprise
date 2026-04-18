@@ -5,6 +5,8 @@ import { useForm } from "@tanstack/react-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
 import { InputField } from "~/components/input/InputField";
+import { useFormValidation } from "../shared/FormValidation";
+import { signUpFormMessages } from "./SignUpForm.messages";
 
 export interface FormSignUp {
   firstName?: string;
@@ -23,50 +25,20 @@ export interface SignUpFormProps {
 
 export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement {
   const intl = useIntl();
+  const { emailSchema, passwordSchema, passwordConfirmSchema, passwordsMustMatchMessage } = useFormValidation();
 
   const baseSchema = z.object({
     firstName: z.string(),
     lastName: z.string(),
-    userName: z.string().min(
-      1,
-      intl.formatMessage({
-        description: "SignUpFormValidation - Display Name is required",
-        defaultMessage: "We need to call you something",
-        id: "piUPAg",
-      })
-    ),
-    email: z.email(
-      intl.formatMessage({
-        description: "SignUpFormValidation - Email must be valid",
-        defaultMessage: "Email must be valid",
-        id: "SBRRVR",
-      })
-    ),
-    password: z.string().min(
-      8,
-      intl.formatMessage({
-        description: "SignUpFormValidation - Password is too short - min 8 characters",
-        defaultMessage: "Password is too short - should be 8 chars minimum",
-        id: "YzHSuh",
-      })
-    ),
-    confirmPassword: z.string().min(
-      8,
-      intl.formatMessage({
-        description: "SignUpFormValidation - PasswordConfirm is required",
-        defaultMessage: "Password must be confirmed",
-        id: "WZbH01",
-      })
-    ),
+    userName: z.string().min(1, intl.formatMessage(signUpFormMessages.userNameRequired)),
+    email: emailSchema,
+    password: passwordSchema,
+    confirmPassword: passwordConfirmSchema,
     phoneNumber: z.string(),
   });
 
   const schema = baseSchema.refine((data) => data.password === data.confirmPassword, {
-    message: intl.formatMessage({
-      description: "SignUpFormValidation - Passwords must match",
-      defaultMessage: "Passwords must match",
-      id: "IOLTJ0",
-    }),
+    message: passwordsMustMatchMessage,
     path: ["confirmPassword"],
   });
 
@@ -106,16 +78,8 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             field={field}
             type="text"
             startContent={<UserIcon className="h-5 w-5" />}
-            label={intl.formatMessage({
-              description: "SignUpFormLabel - User Name label",
-              defaultMessage: "Username",
-              id: "i4DDAm",
-            })}
-            placeholder={intl.formatMessage({
-              description: "SignUpFormLabel - User Name",
-              defaultMessage: "What should we call you?",
-              id: "f2xRFX",
-            })}
+            label={intl.formatMessage(signUpFormMessages.userNameLabel)}
+            placeholder={intl.formatMessage(signUpFormMessages.userNamePlaceholder)}
             data-testid="sign-up-form__username-input"
           />
         )}
@@ -128,16 +92,8 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
               field={field}
               type="text"
               startContent={<IdentificationIcon className="h-5 w-5" />}
-              label={intl.formatMessage({
-                description: "SignUpFormLabel - First Name label",
-                defaultMessage: "First name",
-                id: "FtoStp",
-              })}
-              placeholder={intl.formatMessage({
-                description: "SignUpFormLabel - First Name placeholder short",
-                defaultMessage: "First name",
-                id: "hIZId8",
-              })}
+              label={intl.formatMessage(signUpFormMessages.firstNameLabel)}
+              placeholder={intl.formatMessage(signUpFormMessages.firstNamePlaceholder)}
               data-testid="sign-up-form__firstname-input"
             />
           )}
@@ -149,16 +105,8 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
               field={field}
               type="text"
               startContent={<IdentificationIcon className="h-5 w-5" />}
-              label={intl.formatMessage({
-                description: "SignUpFormLabel - Last Name label",
-                defaultMessage: "Last name",
-                id: "/Pzl99",
-              })}
-              placeholder={intl.formatMessage({
-                description: "SignUpFormLabel - Last Name placeholder short",
-                defaultMessage: "Last name",
-                id: "hSfaTy",
-              })}
+              label={intl.formatMessage(signUpFormMessages.lastNameLabel)}
+              placeholder={intl.formatMessage(signUpFormMessages.lastNamePlaceholder)}
               data-testid="sign-up-form__lastname-input"
             />
           )}
@@ -171,16 +119,8 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             field={field}
             type="email"
             startContent={<EnvelopeIcon className="h-5 w-5" />}
-            label={intl.formatMessage({
-              description: "SignUpFormLabel - Email label",
-              defaultMessage: "Email",
-              id: "bDmY/I",
-            })}
-            placeholder={intl.formatMessage({
-              description: "SignUpFormLabel - Email",
-              defaultMessage: "What's your email?",
-              id: "tZBQgk",
-            })}
+            label={intl.formatMessage(signUpFormMessages.emailLabel)}
+            placeholder={intl.formatMessage(signUpFormMessages.emailPlaceholder)}
             data-testid="sign-up-form__email-input"
           />
         )}
@@ -192,16 +132,8 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             field={field}
             type="tel"
             startContent={<PhoneIcon className="h-5 w-5" />}
-            label={intl.formatMessage({
-              description: "SignUpFormLabel - Phone Number label",
-              defaultMessage: "Phone number",
-              id: "YSdA0O",
-            })}
-            placeholder={intl.formatMessage({
-              description: "SignUpFormLabel - Phone Number",
-              defaultMessage: "What's your phone number?",
-              id: "UjAA8C",
-            })}
+            label={intl.formatMessage(signUpFormMessages.phoneNumberLabel)}
+            placeholder={intl.formatMessage(signUpFormMessages.phoneNumberPlaceholder)}
             data-testid="sign-up-form__phonenumber-input"
           />
         )}
@@ -214,16 +146,8 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
               field={field}
               type="password"
               startContent={<LockClosedIcon className="h-5 w-5" />}
-              label={intl.formatMessage({
-                description: "SignUpFormLabel - Password label",
-                defaultMessage: "Password",
-                id: "Sw26VK",
-              })}
-              placeholder={intl.formatMessage({
-                description: "SignUpFormLabel - Password",
-                defaultMessage: "Create a password",
-                id: "ppqAda",
-              })}
+              label={intl.formatMessage(signUpFormMessages.passwordLabel)}
+              placeholder={intl.formatMessage(signUpFormMessages.passwordPlaceholder)}
               data-testid="sign-up-form__password-input"
             />
           )}
@@ -235,16 +159,8 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
               field={field}
               type="password"
               startContent={<LockClosedIcon className="h-5 w-5" />}
-              label={intl.formatMessage({
-                description: "SignUpFormLabel - Confirm Password label",
-                defaultMessage: "Confirm password",
-                id: "+CSkRq",
-              })}
-              placeholder={intl.formatMessage({
-                description: "SignUpFormLabel - Confirm Password",
-                defaultMessage: "Confirm password",
-                id: "dU9xzq",
-              })}
+              label={intl.formatMessage(signUpFormMessages.confirmPasswordLabel)}
+              placeholder={intl.formatMessage(signUpFormMessages.confirmPasswordPlaceholder)}
               data-testid="sign-up-form__confirmpassword-input"
             />
           )}
@@ -263,11 +179,7 @@ export function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement
             data-testid="sign-up-form__submit-button"
           >
             {loading && <Spinner size="sm" />}
-            {intl.formatMessage({
-              description: "SignUpFormButton - Sign Up",
-              defaultMessage: "Sign Up",
-              id: "oigOyc",
-            })}
+            {intl.formatMessage(signUpFormMessages.submit)}
           </Button>
         )}
       />
