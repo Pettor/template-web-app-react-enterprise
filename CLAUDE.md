@@ -103,7 +103,7 @@ Key exports:
 - `ApiClient` — Main HTTP client that offloads requests to a **Web Worker** for non-blocking execution
 - `FetchClient` — Low-level fetch wrapper
 - `TokenStorage`, `JwtToken` — JWT token management
-- `ServiceError`, `ServiceErrorFactory` — Typed error handling
+- `ServiceError`, `createServiceError` — Typed error handling
 - API endpoint services: `Login`, `Logout`, `RefreshToken`, `ForgotPassword`, `SelfRegister`, `ApplicationInfo`, `PersonalProfile`
 - Classes, Schemas, Converters, Fetch utilities
 
@@ -212,7 +212,7 @@ HeroUIProvider
 
 - API calls are delegated to a **Web Worker** (`ApiWorker`) to avoid blocking the main thread
 - Service classes encapsulate each endpoint (typed request/response)
-- Errors are normalized through `ServiceErrorFactory`
+- Errors are normalized through `createServiceError`
 
 ### Styling Conventions
 

@@ -1,6 +1,6 @@
 import type { FetchQueryOptions } from "@tanstack/react-query";
 import { apiClient } from "../../Client/ApiClient";
-import { ServiceErrorFactory } from "../../Service/ServiceErrorFactory";
+import { createServiceError } from "../../Service/CreateServiceError";
 import type { ApplicationInfo } from "./Classes";
 import { QUERY_KEY_APPLICATION_INFO } from "./Classes";
 import { applicationInfoConvertFromDto } from "./Convert";
@@ -12,7 +12,7 @@ export async function fetchApplicationInfo(): Promise<ApplicationInfo> {
     const userSchema = await applicationInfoSchema.parseAsync(data);
     return applicationInfoConvertFromDto(userSchema);
   } catch (e: unknown) {
-    throw ServiceErrorFactory.create(e);
+    throw createServiceError(e);
   }
 }
 
