@@ -26,7 +26,6 @@ export * from "./Client/FetchClient";
 export * from "./Service/ServiceError";
 export * from "./Service/ServiceErrorFactory";
 export * from "./Token/JwtToken";
-export * from "./Token/TokenStorage";
 export * from "./Worker/ApiWorker";
 export * from "./Worker/ApiWorkerAllowedUrls";
 export * from "./Worker/ApiWorkerClasses";
