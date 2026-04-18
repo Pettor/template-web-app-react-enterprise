@@ -102,10 +102,12 @@ Key exports:
 
 - `ApiClient` — Main HTTP client that offloads requests to a **Web Worker** for non-blocking execution
 - `FetchClient` — Low-level fetch wrapper
-- `TokenStorage`, `JwtToken` — JWT token management
+- `JwtToken` — JWT token type
 - `ServiceError`, `createServiceError` — Typed error handling
+
+> **Security note**: `TokenStorage` is intentionally NOT exported. The access token lives only in worker memory — `TokenStorage.ts` is excluded from the public barrel and must only be imported from worker-scope modules.
 - API endpoint services: `Login`, `Logout`, `RefreshToken`, `ForgotPassword`, `SelfRegister`, `ApplicationInfo`, `PersonalProfile`
-- Classes, Schemas, Converters, Fetch utilities
+- Types (Zod schemas + inferred DTOs + domain types co-located in `Types.ts`), Converters, Fetch utilities
 
 ### `@package/ui` — Shared UI Components
 

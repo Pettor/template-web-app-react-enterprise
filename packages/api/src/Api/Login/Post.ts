@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { apiClient } from "../../Client/ApiClient";
 import { createServiceError } from "../../Service/CreateServiceError";
 import type { ApiError } from "../../Worker/ApiWorkerReponse";
-import type { LoginData } from "./Classes";
+import type { LoginData } from "./Types";
 
 export async function postLogin(data: LoginData): Promise<void> {
   try {

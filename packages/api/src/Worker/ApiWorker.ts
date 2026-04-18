@@ -1,4 +1,4 @@
-import type { LoginData } from "../Api/Login/Classes";
+import type { LoginData } from "../Api/Login/Types";
 import { client } from "../Client/FetchClient";
 import { clearToken, setToken } from "../Token/TokenStorage";
 import { ALLOWED_URLS } from "./ApiWorkerAllowedUrls";

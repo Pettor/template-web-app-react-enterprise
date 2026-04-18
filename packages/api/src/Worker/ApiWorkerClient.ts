@@ -1,5 +1,5 @@
 import { produce } from "immer";
-import type { LoginData } from "../Api/Login/Classes";
+import type { LoginData } from "../Api/Login/Types";
 import type { FetchClient } from "../Client/FetchClient";
 import type { JwtToken } from "../Token/JwtToken";
 import { getToken } from "../Token/TokenStorage";

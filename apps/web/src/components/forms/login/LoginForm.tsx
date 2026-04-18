@@ -14,6 +14,8 @@ import {
 import { useForm } from "@tanstack/react-form";
 import { useIntl } from "react-intl";
 import { z } from "zod";
+import { useFormValidation } from "../shared/FormValidation";
+import { loginFormMessages } from "./LoginForm.messages";
 import { InputField } from "~/components/input/InputField";
 
 export interface FormLogin {
@@ -32,6 +34,7 @@ export interface LoginFormProps {
 
 export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit }: LoginFormProps): ReactElement {
   const intl = useIntl();
+  const { emailSchema, passwordSchema } = useFormValidation();
   const [isVisible, setIsVisible] = useState(false);
 
   function toggleVisibility(): void {
@@ -39,21 +42,8 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
   }
 
   const schema = z.object({
-    email: z.email(
-      intl.formatMessage({
-        description: "LoginFormValidation - Email must be valid",
-        defaultMessage: "Email must be valid",
-        id: "+2i1XS",
-      })
-    ),
-    password: z.string().min(
-      8,
-      intl.formatMessage({
-        description: "SignUpFormValidation - Password is too short - min 8 characters",
-        defaultMessage: "Password is too short - should be 8 chars minimum",
-        id: "YzHSuh",
-      })
-    ),
+    email: emailSchema,
+    password: passwordSchema,
     remember: z.boolean(),
   });
 
@@ -91,16 +81,8 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
               autoComplete="username"
               id={field.name}
               type="email"
-              label={intl.formatMessage({
-                description: "LoginForm - Email input label",
-                defaultMessage: "Email",
-                id: "LX1rS2",
-              })}
-              placeholder={intl.formatMessage({
-                description: "LoginForm - Email input placeholder",
-                defaultMessage: "Email",
-                id: "P2Xl0E",
-              })}
+              label={intl.formatMessage(loginFormMessages.emailLabel)}
+              placeholder={intl.formatMessage(loginFormMessages.emailPlaceholder)}
               startContent={<EnvelopeIcon className="h-5 w-5" />}
               data-testid="login-form__email-input"
             />
@@ -115,26 +97,14 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
             field={field}
             autoComplete="current-password"
             type={isVisible ? "text" : "password"}
-            label={intl.formatMessage({
-              description: "LoginForm - Password input label",
-              defaultMessage: "Password",
-              id: "w1aUU6",
-            })}
-            placeholder={intl.formatMessage({
-              description: "LoginForm - Password input placeholder",
-              defaultMessage: "Password",
-              id: "2hRtil",
-            })}
+            label={intl.formatMessage(loginFormMessages.passwordLabel)}
+            placeholder={intl.formatMessage(loginFormMessages.passwordPlaceholder)}
             startContent={<LockClosedIcon className="h-5 w-5" />}
             endContent={
               <button
                 type="button"
                 onClick={toggleVisibility}
-                aria-label={intl.formatMessage({
-                  defaultMessage: "Toggle password visibility",
-                  id: "KjXbli",
-                  description: "LoginForm - Toggle password visibility button aria label",
-                })}
+                aria-label={intl.formatMessage(loginFormMessages.togglePasswordVisibility)}
               >
                 {isVisible ? <EyeIcon className="h-5 w-5" /> : <EyeSlashIcon className="h-5 w-5" />}
               </button>
@@ -153,22 +123,14 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
               </CheckboxControl>
               <CheckboxContent>
                 <Label htmlFor="remember" className="text-xs sm:text-sm">
-                  {intl.formatMessage({
-                    description: "LoginForm - Remember me checkbox label",
-                    defaultMessage: "Remember me",
-                    id: "eSCI59",
-                  })}
+                  {intl.formatMessage(loginFormMessages.rememberMe)}
                 </Label>
               </CheckboxContent>
             </Checkbox>
           )}
         />
         <Link className="cursor-pointer text-xs sm:text-sm" onPress={onForgotPassword}>
-          {intl.formatMessage({
-            description: "LoginForm - Forgot password link",
-            defaultMessage: "Forgot password?",
-            id: "Zz40WB",
-          })}
+          {intl.formatMessage(loginFormMessages.forgotPassword)}
         </Link>
       </div>
       <form.Subscribe
@@ -182,26 +144,14 @@ export function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit
             onPress={() => form.handleSubmit()}
             data-testid="login-form__submit-button"
           >
-            {loading ? (
-              <Spinner size="sm" />
-            ) : (
-              intl.formatMessage({
-                description: "LoginForm - Submit button text",
-                defaultMessage: "Login",
-                id: "/83/VX",
-              })
-            )}
+            {loading ? <Spinner size="sm" /> : intl.formatMessage(loginFormMessages.submit)}
           </Button>
         )}
       />
       {error && <div className="text-danger text-sm">{error}</div>}
       <p className="text-center text-sm">
         <Link className="cursor-pointer" onPress={onSignUp}>
-          {intl.formatMessage({
-            description: "LoginForm - Sign up link",
-            defaultMessage: "Don't have an account? Sign up",
-            id: "FroJyb",
-          })}
+          {intl.formatMessage(loginFormMessages.signUpLink)}
         </Link>
       </p>
     </Form>
