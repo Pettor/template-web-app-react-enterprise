@@ -43,12 +43,12 @@
     "husky": "9.1.7",
     "lint-staged": "16.4.0",
     "move-cli": "catalog:common",
-    "prettier": "3.8.1",
+    "prettier": "3.8.2",
     "prettier-plugin-tailwindcss": "0.7.2",
     "rimraf": "catalog:common",
     "sherif": "1.11.1",
     "tsup": "8.5.1",
-    "turbo": "2.9.3"
+    "turbo": "2.9.6"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
