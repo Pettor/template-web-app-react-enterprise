@@ -1,6 +1,17 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(gh repo *)",
+      "Bash(gh api *)",
+      "Bash(pnpm why *)",
+      "Bash(pnpm -w why lodash)",
+      "Bash(pnpm list *)",
+      "Bash(npm view *)",
+      "Bash(pnpm install *)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "heroui-migration"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }
