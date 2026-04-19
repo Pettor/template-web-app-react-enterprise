@@ -30,14 +30,14 @@ function AuthenticatedLayout(): ReactElement {
     <NavbarLayout
       footer
       footerText={intl.formatMessage({
-        description: "NavbarLayout - Footer attribution text",
+        description: "AuthenticatedLayout: footer - attribution",
         defaultMessage: "Made with ☕ by Petter Hancock",
-        id: "rnZMTQ",
+        id: "Jy8iNC",
       })}
       footerCopyright={intl.formatMessage({
-        description: "NavbarLayout - Footer copyright text",
+        description: "AuthenticatedLayout: footer - copyright",
         defaultMessage: "Copyright © 2024 - All rights reserved",
-        id: "ZSiTwu",
+        id: "9mPCU7",
       })}
       navbarElement={
         <NavbarContent
@@ -59,9 +59,9 @@ function AuthenticatedLayout(): ReactElement {
             variant="secondary"
             onPress={socialLinks.onGithubClick}
             aria-label={intl.formatMessage({
-              description: "AuthenticatedLayout - GitHub social link aria label",
+              description: "AuthenticatedLayout: aria-label - GitHub social link",
               defaultMessage: "GitHub",
-              id: "SDErQK",
+              id: "MXiQP4",
             })}
           >
             <span className="flex h-5 w-5 items-center justify-center fill-current">
@@ -73,9 +73,9 @@ function AuthenticatedLayout(): ReactElement {
             variant="secondary"
             onPress={socialLinks.onLinkedInClick}
             aria-label={intl.formatMessage({
-              description: "AuthenticatedLayout - LinkedIn social link aria label",
+              description: "AuthenticatedLayout: aria-label - LinkedIn social link",
               defaultMessage: "LinkedIn",
-              id: "NrytMV",
+              id: "aM82tP",
             })}
           >
             <span className="flex h-5 w-5 items-center justify-center fill-current">

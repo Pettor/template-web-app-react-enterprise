@@ -2,18 +2,18 @@ import { defineMessages } from "react-intl";
 
 export const forgotPasswordFormMessages = defineMessages({
   emailLabel: {
-    description: "ForgotPasswordForm - Email label",
+    description: "ForgotPasswordForm: label - email input",
     defaultMessage: "Email",
-    id: "LwlF7h",
+    id: "zoMR5Z",
   },
   submitAriaLabel: {
-    description: "ForgotPasswordForm - Submit button aria label",
+    description: "ForgotPasswordForm: aria-label - submit button",
     defaultMessage: "Submit",
-    id: "ZCH44v",
+    id: "UF/bNZ",
   },
   submit: {
-    description: "ForgotPasswordForm - Submit button text",
+    description: "ForgotPasswordForm: button - submit send",
     defaultMessage: "Send",
-    id: "qwJKbX",
+    id: "ov7hhw",
   },
 });

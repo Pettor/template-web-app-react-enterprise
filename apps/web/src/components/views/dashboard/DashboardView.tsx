@@ -72,15 +72,15 @@ function RevenueChart({ data }: { data: DashboardChartPoint[] }): ReactElement {
   }
 
   const revenueLabel = intl.formatMessage({
-    description: "DashboardView - Revenue label",
+    description: "DashboardView: legend - revenue",
     defaultMessage: "Revenue",
-    id: "aSS3Pq",
+    id: "FhZWH2",
   });
 
   const expensesLabel = intl.formatMessage({
-    description: "DashboardView - Expenses label",
+    description: "DashboardView: legend - expenses",
     defaultMessage: "Expenses",
-    id: "1QivPD",
+    id: "KN6GsM",
   });
 
   return (
@@ -88,16 +88,16 @@ function RevenueChart({ data }: { data: DashboardChartPoint[] }): ReactElement {
       <Card.Header>
         <Card.Title>
           {intl.formatMessage({
-            description: "DashboardView - Revenue chart title",
+            description: "DashboardView: heading - revenue chart",
             defaultMessage: "Revenue Overview",
-            id: "P69U8Y",
+            id: "caWQu1",
           })}
         </Card.Title>
         <Card.Description>
           {intl.formatMessage({
-            description: "DashboardView - Revenue chart description",
+            description: "DashboardView: body - revenue chart description",
             defaultMessage: "Monthly revenue and expenses",
-            id: "rwk7rn",
+            id: "c1IlQ6",
           })}
         </Card.Description>
       </Card.Header>
@@ -169,17 +169,17 @@ function ActiveUsersCard({ stats }: { stats: DashboardStats }): ReactElement {
       <Card.Header>
         <Card.Title>
           {intl.formatMessage({
-            description: "DashboardView - Active users card title",
+            description: "DashboardView: heading - active users card",
             defaultMessage: "Active Users",
-            id: "PsQgHK",
+            id: "7E5xks",
           })}
         </Card.Title>
         <Card.Description>
           {intl.formatMessage(
             {
-              description: "DashboardView - Active users card description",
+              description: "DashboardView: body - active users card description",
               defaultMessage: "{activeUsers} of {totalUsers} users",
-              id: "Yd+W2u",
+              id: "nEiwM5",
             },
             { activeUsers: stats.activeUsers, totalUsers: stats.totalUsers }
           )}
@@ -190,9 +190,9 @@ function ActiveUsersCard({ stats }: { stats: DashboardStats }): ReactElement {
         <div className="flex items-center justify-center py-2">
           <ProgressCircle
             aria-label={intl.formatMessage({
-              description: "DashboardView - Active users percentage aria label",
+              description: "DashboardView: aria-label - active users progress",
               defaultMessage: "Active users percentage",
-              id: "98PEE4",
+              id: "Vhqzh3",
             })}
             value={activePercentage}
             color="accent"
@@ -209,9 +209,9 @@ function ActiveUsersCard({ stats }: { stats: DashboardStats }): ReactElement {
         <div className="flex justify-between text-sm">
           <span className="text-default-500">
             {intl.formatMessage({
-              description: "DashboardView - Active rate label",
+              description: "DashboardView: label - active rate",
               defaultMessage: "Active rate",
-              id: "MEWO8P",
+              id: "HoJIKm",
             })}
           </span>
           <span className="font-medium">{activePercentage}%</span>
@@ -225,9 +225,9 @@ function ActiveUsersCard({ stats }: { stats: DashboardStats }): ReactElement {
               <div className="bg-accent h-2 w-2 rounded-full" />
               <span className="text-default-500">
                 {intl.formatMessage({
-                  description: "DashboardView - Active users legend label",
+                  description: "DashboardView: legend - active users",
                   defaultMessage: "Active",
-                  id: "lSBOvl",
+                  id: "fmDjkD",
                 })}
               </span>
             </div>
@@ -238,9 +238,9 @@ function ActiveUsersCard({ stats }: { stats: DashboardStats }): ReactElement {
               <div className="bg-default-300 h-2 w-2 rounded-full" />
               <span className="text-default-500">
                 {intl.formatMessage({
-                  description: "DashboardView - Inactive users legend label",
+                  description: "DashboardView: legend - inactive users",
                   defaultMessage: "Inactive",
-                  id: "k36Eoc",
+                  id: "TaZVAt",
                 })}
               </span>
             </div>
@@ -260,25 +260,25 @@ function TransactionsTable({ transactions }: { transactions: DashboardTransactio
       <Card.Header>
         <Card.Title>
           {intl.formatMessage({
-            description: "DashboardView - Recent transactions card title",
+            description: "DashboardView: heading - recent transactions card",
             defaultMessage: "Recent Transactions",
-            id: "yQ8ml+",
+            id: "xKkcqg",
           })}
         </Card.Title>
         <Card.Description>
           {intl.formatMessage({
-            description: "DashboardView - Recent transactions card description",
+            description: "DashboardView: body - recent transactions card description",
             defaultMessage: "Latest customer transactions",
-            id: "TV0D76",
+            id: "LH4YbW",
           })}
         </Card.Description>
       </Card.Header>
       <Card.Content>
         <Table
           aria-label={intl.formatMessage({
-            description: "DashboardView - Recent transactions table aria label",
+            description: "DashboardView: aria-label - recent transactions table",
             defaultMessage: "Recent transactions",
-            id: "Ws8DxF",
+            id: "JDWuqe",
           })}
         >
           <Table.ScrollContainer>
@@ -286,30 +286,30 @@ function TransactionsTable({ transactions }: { transactions: DashboardTransactio
               <Table.Header>
                 <Table.Column isRowHeader>
                   {intl.formatMessage({
-                    description: "DashboardView - Customer column header",
+                    description: "DashboardView: column-header - customer",
                     defaultMessage: "Customer",
-                    id: "zymkVS",
+                    id: "knA2CA",
                   })}
                 </Table.Column>
                 <Table.Column>
                   {intl.formatMessage({
-                    description: "DashboardView - Amount column header",
+                    description: "DashboardView: column-header - amount",
                     defaultMessage: "Amount",
-                    id: "Oyg9J8",
+                    id: "a27n+Y",
                   })}
                 </Table.Column>
                 <Table.Column>
                   {intl.formatMessage({
-                    description: "DashboardView - Status column header",
+                    description: "DashboardView: column-header - status",
                     defaultMessage: "Status",
-                    id: "p0UMLn",
+                    id: "dJFPba",
                   })}
                 </Table.Column>
                 <Table.Column>
                   {intl.formatMessage({
-                    description: "DashboardView - Date column header",
+                    description: "DashboardView: column-header - date",
                     defaultMessage: "Date",
-                    id: "1nhQq6",
+                    id: "gTOf5O",
                   })}
                 </Table.Column>
               </Table.Header>
@@ -369,16 +369,16 @@ export function DashboardView({ stats, chartData, recentTransactions }: Dashboar
       <div className="mb-6">
         <h1 className="from-accent to-danger bg-gradient-to-r bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-3xl">
           {intl.formatMessage({
-            description: "DashboardView - Page title",
+            description: "DashboardView: heading - page title",
             defaultMessage: "Dashboard",
-            id: "xWJ8VF",
+            id: "85eYbc",
           })}
         </h1>
         <p className="text-default-500 text-sm">
           {intl.formatMessage({
-            description: "DashboardView - Page subtitle",
+            description: "DashboardView: body - page subtitle",
             defaultMessage: "Overview of your application metrics",
-            id: "R5PlmL",
+            id: "ONPRmg",
           })}
         </p>
       </div>
@@ -388,17 +388,17 @@ export function DashboardView({ stats, chartData, recentTransactions }: Dashboar
       {/* Stats cards */}
       <h2 className="sr-only">
         {intl.formatMessage({
-          description: "DashboardView - Key metrics section heading",
+          description: "DashboardView: heading - key metrics section (sr-only)",
           defaultMessage: "Key Metrics",
-          id: "0MhjtM",
+          id: "M5ptc6",
         })}
       </h2>
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
           title={intl.formatMessage({
-            description: "DashboardView - Total revenue label",
+            description: "DashboardView: label - total revenue metric",
             defaultMessage: "Total Revenue",
-            id: "FF0yKY",
+            id: "OWPCnz",
           })}
           value={`$${stats.totalRevenue.toLocaleString()}`}
           icon={<BanknotesIcon className="h-5 w-5" />}
@@ -407,9 +407,9 @@ export function DashboardView({ stats, chartData, recentTransactions }: Dashboar
         />
         <StatCard
           title={intl.formatMessage({
-            description: "DashboardView - Total users label",
+            description: "DashboardView: label - total users metric",
             defaultMessage: "Total Users",
-            id: "uP3pvm",
+            id: "TakCzh",
           })}
           value={stats.totalUsers.toLocaleString()}
           icon={<UserGroupIcon className="h-5 w-5" />}
@@ -418,9 +418,9 @@ export function DashboardView({ stats, chartData, recentTransactions }: Dashboar
         />
         <StatCard
           title={intl.formatMessage({
-            description: "DashboardView - Active users label",
+            description: "DashboardView: label - active users metric",
             defaultMessage: "Active Users",
-            id: "Fin8Qi",
+            id: "4ZtG6n",
           })}
           value={stats.activeUsers.toLocaleString()}
           icon={<UserIcon className="h-5 w-5" />}
@@ -429,9 +429,9 @@ export function DashboardView({ stats, chartData, recentTransactions }: Dashboar
         />
         <StatCard
           title={intl.formatMessage({
-            description: "DashboardView - Conversion rate label",
+            description: "DashboardView: label - conversion rate metric",
             defaultMessage: "Conversion Rate",
-            id: "nfa0S1",
+            id: "kVlIgJ",
           })}
           value={`${stats.conversionRate}%`}
           icon={<ChartBarIcon className="h-5 w-5" />}

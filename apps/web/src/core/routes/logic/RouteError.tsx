@@ -17,21 +17,21 @@ export function RouteError({ error }: RouteErrorProps): ReactElement {
   }
 
   const title = intl.formatMessage({
-    description: "RouteError - Error title",
+    description: "RouteError: heading - error title",
     defaultMessage: "Something went wrong",
-    id: "qx1QSx",
+    id: "lY27zk",
   });
 
   const description = intl.formatMessage({
-    description: "RouteError - Error description",
+    description: "RouteError: body - error description",
     defaultMessage: "An unexpected error occurred. Please try again.",
-    id: "tpZZtx",
+    id: "O+ukwO",
   });
 
   const retryLabel = intl.formatMessage({
-    description: "RouteError - Retry button",
+    description: "RouteError: button - retry",
     defaultMessage: "Try again",
-    id: "bEcK3E",
+    id: "xUgKrt",
   });
 
   return (

@@ -20,30 +20,30 @@ export function useLoginRoute(): LoginViewProps {
     if (isServiceError(error)) {
       if (error.status === 401 || error.status === 403) {
         return intl.formatMessage({
-          description: "LoginRoute -Invalid credentials error",
+          description: "LoginRoute: error - invalid credentials (401/403)",
           defaultMessage: "Incorrect username or password.",
-          id: "1ZCg/3",
+          id: "SoG8FD",
         });
       }
       if (error.status === 429) {
         return intl.formatMessage({
-          description: "LoginRoute -Too many attempts error",
+          description: "LoginRoute: error - too many attempts (429)",
           defaultMessage: "Too many login attempts. Please wait a moment and try again.",
-          id: "32Ixzb",
+          id: "flp4b9",
         });
       }
       if (error.status >= 500) {
         return intl.formatMessage({
-          description: "LoginRoute -Server error",
+          description: "LoginRoute: error - server error (5xx)",
           defaultMessage: "The service is temporarily unavailable. Please try again later.",
-          id: "pM/zT4",
+          id: "bVSFFb",
         });
       }
     }
     return intl.formatMessage({
-      description: "LoginRoute -Unknown error",
+      description: "LoginRoute: error - unknown error",
       defaultMessage: "An unexpected error occurred. Please try again.",
-      id: "xH7TcI",
+      id: "4iHlTO",
     });
   }
 

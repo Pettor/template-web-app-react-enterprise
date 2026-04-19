@@ -23,9 +23,9 @@ export function SignUpView({ appName, signUpForm, onBack }: SignUpViewProps): Re
           variant="secondary"
           onPress={onBack}
           aria-label={intl.formatMessage({
-            description: "SignUpView - Back button aria label",
+            description: "SignUpView: aria-label - back button",
             defaultMessage: "Back",
-            id: "Gy2cjY",
+            id: "REQI+U",
           })}
         >
           <ArrowLeftIcon className="h-6 w-6" />
@@ -38,18 +38,18 @@ export function SignUpView({ appName, signUpForm, onBack }: SignUpViewProps): Re
         <h1 className="text-2xl font-bold">
           {intl.formatMessage(
             {
-              description: "SignUpView - Heading",
+              description: "SignUpView: heading - join {appName}",
               defaultMessage: "Join {appName}",
-              id: "GX4sWW",
+              id: "bjgGWa",
             },
             { appName }
           )}
         </h1>
         <p className="text-default-500 mb-2 max-w-sm text-center text-sm">
           {intl.formatMessage({
-            description: "SignUpView - Sign up description",
+            description: "SignUpView: body - sign-up description",
             defaultMessage: "Create your account in a few seconds and start exploring.",
-            id: "EtC4oB",
+            id: "ESflda",
           })}
         </p>
         <SignUpForm {...signUpForm} />

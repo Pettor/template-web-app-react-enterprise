@@ -20,23 +20,23 @@ export function useForgotPasswordRoute(): ForgotPasswordViewProps {
     if (isServiceError(error)) {
       if (error.status === 429) {
         return intl.formatMessage({
-          description: "ForgotPasswordRoute -Too many requests error",
+          description: "ForgotPasswordRoute: toast - too many requests (429)",
           defaultMessage: "Too many requests. Please wait a moment and try again.",
-          id: "5i40oB",
+          id: "+E4hKk",
         });
       }
       if (error.status >= 500) {
         return intl.formatMessage({
-          description: "ForgotPasswordRoute -Server error",
+          description: "ForgotPasswordRoute: toast - server error (5xx)",
           defaultMessage: "The service is temporarily unavailable. Please try again later.",
-          id: "DBocet",
+          id: "YH/zTJ",
         });
       }
     }
     return intl.formatMessage({
-      description: "ForgotPasswordRoute -Forgot password error alert title",
+      description: "ForgotPasswordRoute: toast - generic error",
       defaultMessage: "Something went wrong. Please try again.",
-      id: "FI7hZs",
+      id: "T8YZ5k",
     });
   }
 

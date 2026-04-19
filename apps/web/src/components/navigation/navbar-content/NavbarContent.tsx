@@ -97,9 +97,9 @@ export function NavbarContent({
         <Tabs.ListContainer>
           <Tabs.List
             aria-label={intl.formatMessage({
-              description: "NavbarContent - Navigation tabs aria label",
+              description: "NavbarContent: aria-label - navigation tabs",
               defaultMessage: "Navigation",
-              id: "Aka9wA",
+              id: "3R8Sia",
             })}
           >
             {menuItems.map((item, index) => (
@@ -176,9 +176,9 @@ export function NavbarContent({
     <button
       className="sm:hidden"
       aria-label={intl.formatMessage({
-        description: "NavbarContent - Open mobile menu button aria label",
+        description: "NavbarContent: aria-label - open mobile menu button",
         defaultMessage: "Open menu",
-        id: "C2cjsj",
+        id: "AEMUUd",
       })}
       onClick={() => setIsDrawerOpen(true)}
     >
@@ -200,9 +200,9 @@ export function NavbarContent({
     <>
       <Navbar
         title={intl.formatMessage({
-          description: "NavbarContent - App title in navbar",
+          description: "NavbarContent: heading - app title in navbar",
           defaultMessage: "App",
-          id: "uk7U9w",
+          id: "15735C",
         })}
         centerElement={centerElement}
         endElement={endElement}
@@ -213,9 +213,9 @@ export function NavbarContent({
           <Drawer.Content placement="left">
             <Drawer.Dialog
               aria-label={intl.formatMessage({
-                description: "NavbarContent - Navigation drawer aria label",
+                description: "NavbarContent: aria-label - navigation drawer",
                 defaultMessage: "Navigation menu",
-                id: "iETYfS",
+                id: "he0Edo",
               })}
             >
               <Drawer.Header>
@@ -223,9 +223,9 @@ export function NavbarContent({
                   <Logo size="small" />
                   <Drawer.Heading className="font-bold">
                     {intl.formatMessage({
-                      description: "NavbarContent - App title in drawer heading",
+                      description: "NavbarContent: heading - app title in drawer",
                       defaultMessage: "App",
-                      id: "iQtPAp",
+                      id: "BNJJLW",
                     })}
                   </Drawer.Heading>
                 </div>

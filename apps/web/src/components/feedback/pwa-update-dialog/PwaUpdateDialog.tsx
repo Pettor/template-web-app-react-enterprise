@@ -11,9 +11,9 @@ export function PwaUpdateDialogProps(
   return [
     intl.formatMessage(
       {
-        description: "PwaUpdateDialog - Update available description",
+        description: "PwaUpdateDialog: toast - update available",
         defaultMessage: "A new version of {appName} is available",
-        id: "Dbak+i",
+        id: "WMIsMz",
       },
       {
         appName,
@@ -23,9 +23,9 @@ export function PwaUpdateDialogProps(
       onClose,
       actionProps: {
         children: intl.formatMessage({
-          description: "PwaUpdateDialog - Update available action",
+          description: "PwaUpdateDialog: button - update",
           defaultMessage: "Update",
-          id: "LZF+Z8",
+          id: "kaheVZ",
         }),
         onPress: onRefresh,
       },

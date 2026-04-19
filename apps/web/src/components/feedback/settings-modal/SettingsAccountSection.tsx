@@ -14,17 +14,17 @@ export function SettingsAccountSection({ name, email }: SettingsAccountSectionPr
     <div className="flex flex-col gap-4">
       <p className="text-lg font-semibold">
         {intl.formatMessage({
-          description: "SettingsAccountSection - Title",
+          description: "SettingsAccountSection: heading - section title",
           defaultMessage: "Account",
-          id: "60oySU",
+          id: "nYScHH",
         })}
       </p>
       <div className="flex flex-col gap-1">
         <span className="text-default-500 text-sm">
           {intl.formatMessage({
-            description: "SettingsAccountSection - Name label",
+            description: "SettingsAccountSection: label - name",
             defaultMessage: "Name",
-            id: "a3pTH9",
+            id: "kAOhT+",
           })}
         </span>
         <span className="font-medium">{name ? name : <Skeleton className="h-5 w-40 rounded-lg" />}</span>
@@ -32,9 +32,9 @@ export function SettingsAccountSection({ name, email }: SettingsAccountSectionPr
       <div className="flex flex-col gap-1">
         <span className="text-default-500 text-sm">
           {intl.formatMessage({
-            description: "SettingsAccountSection - Email label",
+            description: "SettingsAccountSection: label - email",
             defaultMessage: "Email",
-            id: "Ut9l8n",
+            id: "RsRJ5U",
           })}
         </span>
         <span className="font-medium">{email ? email : <Skeleton className="h-5 w-48 rounded-lg" />}</span>

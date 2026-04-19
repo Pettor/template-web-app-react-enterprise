@@ -14,16 +14,16 @@ export function SettingsAppearanceSection({ themeSelector }: SettingsAppearanceS
     <div className="flex flex-col gap-4">
       <p className="text-lg font-semibold">
         {intl.formatMessage({
-          description: "SettingsAppearanceSection - Title",
+          description: "SettingsAppearanceSection: heading - section title",
           defaultMessage: "Appearance",
-          id: "6wfjEs",
+          id: "WjIIT5",
         })}
       </p>
       <p className="text-default-500 text-sm">
         {intl.formatMessage({
-          description: "SettingsAppearanceSection - Description",
+          description: "SettingsAppearanceSection: body - section description",
           defaultMessage: "Choose your preferred theme for the application.",
-          id: "6VdpKO",
+          id: "e/5NIm",
         })}
       </p>
       <ThemeSelector {...themeSelector} />

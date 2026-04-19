@@ -23,9 +23,9 @@ export function AboutDetails({ appName, appVersion, serverVersion }: AboutDetail
             <TableRow key="1">
               <TableCell className="font-semibold">
                 {intl.formatMessage({
-                  description: "AboutView - App name",
+                  description: "AboutDetails: label - app name",
                   defaultMessage: "Name:",
-                  id: "S5SFCm",
+                  id: "MbFwnp",
                 })}
               </TableCell>
               <TableCell className="">{appName}</TableCell>
@@ -33,9 +33,9 @@ export function AboutDetails({ appName, appVersion, serverVersion }: AboutDetail
             <TableRow key="2">
               <TableCell className="font-semibold">
                 {intl.formatMessage({
-                  description: "AboutView - App version",
+                  description: "AboutDetails: label - app version",
                   defaultMessage: "App Version",
-                  id: "3kCFcr",
+                  id: "eTM4MF",
                 })}
               </TableCell>
               <TableCell>{appVersion}</TableCell>
@@ -43,9 +43,9 @@ export function AboutDetails({ appName, appVersion, serverVersion }: AboutDetail
             <TableRow key="3">
               <TableCell className="font-semibold">
                 {intl.formatMessage({
-                  description: "AboutView - Server version",
+                  description: "AboutDetails: label - server version",
                   defaultMessage: "Server version",
-                  id: "7klmPZ",
+                  id: "xBAyfF",
                 })}
               </TableCell>
               <TableCell>{serverVersion}</TableCell>

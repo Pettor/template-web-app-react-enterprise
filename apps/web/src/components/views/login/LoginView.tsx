@@ -26,9 +26,9 @@ export function LoginView({ appName, loginForm, onSettings }: LoginViewProps): R
           variant="tertiary"
           onPress={onSettings}
           aria-label={intl.formatMessage({
-            description: "LoginView - Settings button aria label",
+            description: "LoginView: aria-label - settings button",
             defaultMessage: "Settings",
-            id: "5ZVCd4",
+            id: "WYAsZQ",
           })}
         >
           <Cog6ToothIcon className="h-6 w-6" />
@@ -46,9 +46,9 @@ export function LoginView({ appName, loginForm, onSettings }: LoginViewProps): R
         </h1>
         <p className="text-default-500 mb-4 max-w-sm text-center text-sm">
           {intl.formatMessage({
-            description: "LoginView - Welcome tagline",
+            description: "LoginView: body - welcome tagline",
             defaultMessage: "Welcome back. Sign in to continue.",
-            id: "NMwN2/",
+            id: "Wf+Mha",
           })}
         </p>
         {IS_DEMO_MODE && (
@@ -57,16 +57,16 @@ export function LoginView({ appName, loginForm, onSettings }: LoginViewProps): R
             <Alert.Content>
               <Alert.Title>
                 {intl.formatMessage({
-                  description: "LoginView - Demo mode banner title",
+                  description: "LoginView: heading - demo mode banner",
                   defaultMessage: "Demo Mode",
-                  id: "7DjQMQ",
+                  id: "OGWvZY",
                 })}
               </Alert.Title>
               <Alert.Description>
                 {intl.formatMessage({
-                  description: "LoginView - Demo mode banner description",
+                  description: "LoginView: body - demo mode banner",
                   defaultMessage: "This is a demo. Sign in with any valid email and password (min. 8 characters).",
-                  id: "wZXD0J",
+                  id: "XTlyxQ",
                 })}
               </Alert.Description>
             </Alert.Content>

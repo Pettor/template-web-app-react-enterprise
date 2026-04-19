@@ -22,9 +22,9 @@ export function GridItem({ title, imageSrc, description }: GridItemProps): React
               className="h-6 w-6"
               src={imageSrc}
               aria-label={intl.formatMessage({
-                description: "GridItem - Image alt text",
+                description: "GridItem: aria-label - item image",
                 defaultMessage: "Grid item image",
-                id: "LIgdXO",
+                id: "MQeEmO",
               })}
             />
           </div>

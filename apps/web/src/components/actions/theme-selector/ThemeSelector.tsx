@@ -104,18 +104,18 @@ export function ThemeSelector({ mode, onSelect }: ThemeSelectorProps): ReactElem
       onChange={(value) => onSelect(value as ThemeMode)}
       orientation="horizontal"
       aria-label={intl.formatMessage({
-        description: "ThemeSelector - aria label",
+        description: "ThemeSelector: aria-label - theme radio group",
         defaultMessage: "Theme",
-        id: "OzfxPl",
+        id: "aTH1qx",
       })}
       className="flex gap-2"
     >
       <ThemeOption
         value="auto"
         label={intl.formatMessage({
-          description: "ThemeSelector - Auto label",
+          description: "ThemeSelector: label - auto option",
           defaultMessage: "Auto",
-          id: "2k1SHW",
+          id: "0nOfE7",
         })}
         icon={<ComputerDesktopIcon className="h-3 w-3" />}
         preview={<AutoPreview />}
@@ -123,9 +123,9 @@ export function ThemeSelector({ mode, onSelect }: ThemeSelectorProps): ReactElem
       <ThemeOption
         value="light"
         label={intl.formatMessage({
-          description: "ThemeSelector - Light label",
+          description: "ThemeSelector: label - light option",
           defaultMessage: "Light",
-          id: "dZ0E8S",
+          id: "34xMGO",
         })}
         icon={<SunIcon className="h-3 w-3" />}
         preview={<LightPreview />}
@@ -133,9 +133,9 @@ export function ThemeSelector({ mode, onSelect }: ThemeSelectorProps): ReactElem
       <ThemeOption
         value="dark"
         label={intl.formatMessage({
-          description: "ThemeSelector - Dark label",
+          description: "ThemeSelector: label - dark option",
           defaultMessage: "Dark",
-          id: "Bv70i1",
+          id: "yqsqER",
         })}
         icon={<MoonIcon className="h-3 w-3" />}
         preview={<DarkPreview />}

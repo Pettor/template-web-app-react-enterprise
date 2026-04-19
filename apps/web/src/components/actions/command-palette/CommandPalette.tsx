@@ -105,9 +105,9 @@ export function CommandPalette({ isOpen, commands, onClose }: CommandPaletteProp
         <Modal.Container size="md">
           <Modal.Dialog
             aria-label={intl.formatMessage({
-              description: "CommandPalette - Dialog aria label",
+              description: "CommandPalette: aria-label - dialog",
               defaultMessage: "Command palette",
-              id: "h5GJcX",
+              id: "dgEdHD",
             })}
             className="flex h-[480px] flex-col overflow-hidden shadow-2xl"
           >
@@ -122,9 +122,9 @@ export function CommandPalette({ isOpen, commands, onClose }: CommandPaletteProp
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder={intl.formatMessage({
-                      description: "CommandPalette - Search placeholder",
+                      description: "CommandPalette: placeholder - search",
                       defaultMessage: "Type a command or search…",
-                      id: "pOZo69",
+                      id: "jzHua/",
                     })}
                     aria-activedescendant={activeId ? `command-palette__option-${activeId}` : undefined}
                     data-testid="command-palette__search"
@@ -137,9 +137,9 @@ export function CommandPalette({ isOpen, commands, onClose }: CommandPaletteProp
                 {filtered.length === 0 ? (
                   <div className="text-default-500 flex h-full items-center justify-center p-6 text-sm">
                     {intl.formatMessage({
-                      description: "CommandPalette - Empty state",
+                      description: "CommandPalette: empty-state - no commands found",
                       defaultMessage: "No commands found",
-                      id: "vXSAj4",
+                      id: "TtuPpt",
                     })}
                   </div>
                 ) : (

@@ -33,19 +33,19 @@ export function useCommandPaletteController(): CommandPaletteProps {
   const { isOpen, close } = useCommandPalette();
 
   const navigationGroup = intl.formatMessage({
-    description: "CommandPaletteController - Navigation group label",
+    description: "CommandPaletteController: label - navigation group",
     defaultMessage: "Navigation",
-    id: "vEUsuB",
+    id: "RCtY7O",
   });
   const appearanceGroup = intl.formatMessage({
-    description: "CommandPaletteController - Appearance group label",
+    description: "CommandPaletteController: label - appearance group",
     defaultMessage: "Appearance",
-    id: "c6U7l1",
+    id: "vWoN3+",
   });
   const accountGroup = intl.formatMessage({
-    description: "CommandPaletteController - Account group label",
+    description: "CommandPaletteController: label - account group",
     defaultMessage: "Account",
-    id: "5Z4vri",
+    id: "9cU9e3",
   });
 
   const commands = useMemo<Command[]>(() => {
@@ -57,14 +57,14 @@ export function useCommandPaletteController(): CommandPaletteProps {
       {
         id: "goto-home",
         label: intl.formatMessage({
-          description: "CommandPaletteController - Go to home label",
+          description: "CommandPaletteController: label - go to home command",
           defaultMessage: "Go to Home",
-          id: "D8e3/v",
+          id: "0M2q2L",
         }),
         description: intl.formatMessage({
-          description: "CommandPaletteController - Go to home description",
+          description: "CommandPaletteController: caption - go to home command",
           defaultMessage: "Navigate to the home view",
-          id: "cvb6xv",
+          id: "rHCEXQ",
         }),
         group: navigationGroup,
         keywords: ["home", "start"],
@@ -77,14 +77,14 @@ export function useCommandPaletteController(): CommandPaletteProps {
       {
         id: "goto-dashboard",
         label: intl.formatMessage({
-          description: "CommandPaletteController - Go to dashboard label",
+          description: "CommandPaletteController: label - go to dashboard command",
           defaultMessage: "Go to Dashboard",
-          id: "Ha5oML",
+          id: "sPhJsx",
         }),
         description: intl.formatMessage({
-          description: "CommandPaletteController - Go to dashboard description",
+          description: "CommandPaletteController: caption - go to dashboard command",
           defaultMessage: "Open the dashboard view",
-          id: "D7tsxt",
+          id: "lHbB2E",
         }),
         group: navigationGroup,
         keywords: ["dashboard", "overview"],
@@ -97,9 +97,9 @@ export function useCommandPaletteController(): CommandPaletteProps {
       {
         id: "theme-auto",
         label: intl.formatMessage({
-          description: "CommandPaletteController - Theme system label",
+          description: "CommandPaletteController: label - theme system command",
           defaultMessage: "Theme: System",
-          id: "iFv3J1",
+          id: "xr2NN2",
         }),
         group: appearanceGroup,
         keywords: ["auto", "system", "theme"],
@@ -109,9 +109,9 @@ export function useCommandPaletteController(): CommandPaletteProps {
       {
         id: "theme-light",
         label: intl.formatMessage({
-          description: "CommandPaletteController - Theme light label",
+          description: "CommandPaletteController: label - theme light command",
           defaultMessage: "Theme: Light",
-          id: "gGAiHh",
+          id: "MibXHq",
         }),
         group: appearanceGroup,
         keywords: ["light", "theme"],
@@ -122,9 +122,9 @@ export function useCommandPaletteController(): CommandPaletteProps {
       {
         id: "theme-dark",
         label: intl.formatMessage({
-          description: "CommandPaletteController - Theme dark label",
+          description: "CommandPaletteController: label - theme dark command",
           defaultMessage: "Theme: Dark",
-          id: "iMmhhl",
+          id: "5ywSOX",
         }),
         group: appearanceGroup,
         keywords: ["dark", "theme"],
@@ -135,14 +135,14 @@ export function useCommandPaletteController(): CommandPaletteProps {
       {
         id: "logout",
         label: intl.formatMessage({
-          description: "CommandPaletteController - Logout label",
+          description: "CommandPaletteController: label - logout command",
           defaultMessage: "Log out",
-          id: "vdNNyC",
+          id: "9/X3Xw",
         }),
         description: intl.formatMessage({
-          description: "CommandPaletteController - Logout description",
+          description: "CommandPaletteController: caption - logout command",
           defaultMessage: "End the current session",
-          id: "L125qQ",
+          id: "oUdMPU",
         }),
         group: accountGroup,
         keywords: ["logout", "signout", "exit"],
