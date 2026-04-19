@@ -6,7 +6,7 @@ import type { FormForgotPassword } from "~/components/forms/forgot-password/Forg
 import type { ForgotPasswordViewProps } from "~/components/views/forgot-password/ForgotPasswordView";
 import { useAppInfo } from "~/core/config/UseAppInfo";
 
-export function useForgotPasswordPage(): ForgotPasswordViewProps {
+export function useForgotPasswordRoute(): ForgotPasswordViewProps {
   const { appName } = useAppInfo();
   const navigate = useNavigate();
   const intl = useIntl();
@@ -20,23 +20,23 @@ export function useForgotPasswordPage(): ForgotPasswordViewProps {
     if (isServiceError(error)) {
       if (error.status === 429) {
         return intl.formatMessage({
-          description: "ForgotPasswordPage - Too many requests error",
+          description: "ForgotPasswordRoute -Too many requests error",
           defaultMessage: "Too many requests. Please wait a moment and try again.",
-          id: "o/M2p+",
+          id: "5i40oB",
         });
       }
       if (error.status >= 500) {
         return intl.formatMessage({
-          description: "ForgotPasswordPage - Server error",
+          description: "ForgotPasswordRoute -Server error",
           defaultMessage: "The service is temporarily unavailable. Please try again later.",
-          id: "9sfBd8",
+          id: "DBocet",
         });
       }
     }
     return intl.formatMessage({
-      description: "ForgotPasswordPage - Forgot password error alert title",
+      description: "ForgotPasswordRoute -Forgot password error alert title",
       defaultMessage: "Something went wrong. Please try again.",
-      id: "pfuAJp",
+      id: "FI7hZs",
     });
   }
 

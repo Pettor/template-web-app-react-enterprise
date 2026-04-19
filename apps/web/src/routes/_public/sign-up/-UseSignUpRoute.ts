@@ -6,7 +6,7 @@ import type { FormSignUp } from "~/components/forms/sign-up/SignUpForm";
 import type { SignUpViewProps } from "~/components/views/sign-up/SignUpView";
 import { useAppInfo } from "~/core/config/UseAppInfo";
 
-export function useSignUpPage(): SignUpViewProps {
+export function useSignUpRoute(): SignUpViewProps {
   const navigate = useNavigate();
   const intl = useIntl();
   const { appNameCapital } = useAppInfo();
@@ -20,30 +20,30 @@ export function useSignUpPage(): SignUpViewProps {
     if (isServiceError(error)) {
       if (error.status === 409) {
         return intl.formatMessage({
-          description: "SignUpPage - Email already registered error",
+          description: "SignUpRoute -Email already registered error",
           defaultMessage: "An account with this email already exists.",
-          id: "AOmYMB",
+          id: "DbRfvu",
         });
       }
       if (error.status === 422) {
         return intl.formatMessage({
-          description: "SignUpPage - Validation error",
+          description: "SignUpRoute -Validation error",
           defaultMessage: "Please check your details and try again.",
-          id: "fNC/An",
+          id: "bB0KDs",
         });
       }
       if (error.status >= 500) {
         return intl.formatMessage({
-          description: "SignUpPage - Server error",
+          description: "SignUpRoute -Server error",
           defaultMessage: "The service is temporarily unavailable. Please try again later.",
-          id: "gPuMJ/",
+          id: "bWGHfa",
         });
       }
     }
     return intl.formatMessage({
-      description: "SignUpPage - Sign up error alert title",
+      description: "SignUpRoute -Sign up error alert title",
       defaultMessage: "Something went wrong. Please try again.",
-      id: "KFOdLu",
+      id: "2FMZ+k",
     });
   }
 

@@ -12,7 +12,8 @@
       "Bash(pnpm -r why ajv)",
       "Bash(pnpm lint:fix)",
       "Bash(pnpm build *)",
-      "Bash(pnpm test *)"
+      "Bash(pnpm test *)",
+      "Bash(git mv *)"
     ]
   },
   "enableAllProjectMcpServers": true,

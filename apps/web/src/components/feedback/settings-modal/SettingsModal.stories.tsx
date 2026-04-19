@@ -24,6 +24,13 @@ const aboutArgs = {
   serverVersion: "2.0.0",
 };
 
+const appearanceArgs = {
+  themeSelector: {
+    mode: "auto" as const,
+    onSelect: (mode: string) => console.log("onSelect", mode),
+  },
+};
+
 const allSections = ["account", "appearance", "about"] as Props["sections"];
 
 const defaultArgs = {
@@ -31,6 +38,7 @@ const defaultArgs = {
   sections: allSections,
   onClose: () => console.log("onClose"),
   account: accountArgs,
+  appearance: appearanceArgs,
   aboutDetails: aboutArgs,
 } satisfies Props;
 

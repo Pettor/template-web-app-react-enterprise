@@ -8,7 +8,7 @@ import { useAuth } from "~/core/auth/UseAuth";
 import { useAppInfo } from "~/core/config/UseAppInfo";
 import { useSettingsModal } from "~/core/settings/UseSettingsModal";
 
-export function useLoginPage(): LoginViewProps {
+export function useLoginRoute(): LoginViewProps {
   const navigate = useNavigate();
   const intl = useIntl();
   const { appName } = useAppInfo();
@@ -20,30 +20,30 @@ export function useLoginPage(): LoginViewProps {
     if (isServiceError(error)) {
       if (error.status === 401 || error.status === 403) {
         return intl.formatMessage({
-          description: "LoginPage - Invalid credentials error",
+          description: "LoginRoute -Invalid credentials error",
           defaultMessage: "Incorrect username or password.",
-          id: "TS6b1h",
+          id: "1ZCg/3",
         });
       }
       if (error.status === 429) {
         return intl.formatMessage({
-          description: "LoginPage - Too many attempts error",
+          description: "LoginRoute -Too many attempts error",
           defaultMessage: "Too many login attempts. Please wait a moment and try again.",
-          id: "LVobZq",
+          id: "32Ixzb",
         });
       }
       if (error.status >= 500) {
         return intl.formatMessage({
-          description: "LoginPage - Server error",
+          description: "LoginRoute -Server error",
           defaultMessage: "The service is temporarily unavailable. Please try again later.",
-          id: "J01Egq",
+          id: "pM/zT4",
         });
       }
     }
     return intl.formatMessage({
-      description: "LoginPage - Unknown error",
+      description: "LoginRoute -Unknown error",
       defaultMessage: "An unexpected error occurred. Please try again.",
-      id: "+TNwRP",
+      id: "xH7TcI",
     });
   }
 

@@ -6,6 +6,7 @@ import type { SettingsAboutSectionProps } from "./SettingsAboutSection";
 import { SettingsAboutSection } from "./SettingsAboutSection";
 import type { SettingsAccountSectionProps } from "./SettingsAccountSection";
 import { SettingsAccountSection } from "./SettingsAccountSection";
+import type { SettingsAppearanceSectionProps } from "./SettingsAppearanceSection";
 import { SettingsAppearanceSection } from "./SettingsAppearanceSection";
 import type { SettingsSection } from "~/core/settings/SettingsSection";
 
@@ -15,6 +16,7 @@ export interface SettingsModalProps {
   initialSection?: SettingsSection;
   onClose: () => void;
   account?: SettingsAccountSectionProps;
+  appearance: SettingsAppearanceSectionProps;
   aboutDetails: SettingsAboutSectionProps;
 }
 
@@ -30,6 +32,7 @@ export function SettingsModal({
   initialSection,
   onClose,
   account,
+  appearance,
   aboutDetails,
 }: SettingsModalProps): ReactElement {
   const intl = useIntl();
@@ -69,7 +72,7 @@ export function SettingsModal({
       case "account":
         return account ? <SettingsAccountSection {...account} /> : <></>;
       case "appearance":
-        return <SettingsAppearanceSection />;
+        return <SettingsAppearanceSection {...appearance} />;
       case "about":
         return <SettingsAboutSection {...aboutDetails} />;
     }

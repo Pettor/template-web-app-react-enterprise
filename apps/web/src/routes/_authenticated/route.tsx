@@ -2,15 +2,11 @@ import type { ReactElement } from "react";
 import { Suspense } from "react";
 import { Button } from "@heroui/react";
 import { GithubIcon, LinkedInIcon, NavbarLayout } from "@package/ui";
-import { Outlet, createFileRoute, redirect, useLocation, useNavigate } from "@tanstack/react-router";
+import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 import { useIntl } from "react-intl";
+import { useAuthenticatedRoute } from "./-UseAuthenticatedRoute";
 import { NavbarContent } from "~/components/navigation/navbar-content";
 import { RouteLoading } from "~/core/routes/logic/RouteLoading";
-import { useAppSessionContent } from "~/core/session/UseAppSessionContent";
-import { useAppSocialLinks } from "~/core/social-links/UseAppSocialLinks";
-
-const GITHUB_LINK = "https://github.com/Pettor/template-web-app-react";
-const LINKEDIN_LINK = "https://www.linkedin.com/in/petter-hancock/";
 
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: async ({ context }) => {
@@ -28,20 +24,7 @@ export const Route = createFileRoute("/_authenticated")({
 
 function AuthenticatedLayout(): ReactElement {
   const intl = useIntl();
-  const navigate = useNavigate();
-  const pathname = useLocation({ select: (state) => state.pathname });
-  const sessionContent = useAppSessionContent();
-  const { onGithubClick, onLinkedInClick } = useAppSocialLinks(GITHUB_LINK, LINKEDIN_LINK);
-
-  const activeTab = pathname.startsWith("/dashboard") ? "dashboard" : "home";
-
-  function handleTabChange(id: string): void {
-    if (id === "dashboard") {
-      navigate({ to: "/dashboard" });
-      return;
-    }
-    navigate({ to: "/" });
-  }
+  const { activeTab, onTabChange, sessionContent, socialLinks, githubLink, linkedInLink } = useAuthenticatedRoute();
 
   return (
     <NavbarLayout
@@ -63,10 +46,10 @@ function AuthenticatedLayout(): ReactElement {
             onLogout: sessionContent.onLogout,
             onSearch: sessionContent.onSearch,
           }}
-          socialLinks={{ github: GITHUB_LINK, linkedIn: LINKEDIN_LINK }}
+          socialLinks={{ github: githubLink, linkedIn: linkedInLink }}
           avatarName={sessionContent.name}
           activeTab={activeTab}
-          onTabChange={handleTabChange}
+          onTabChange={onTabChange}
         />
       }
       footerContent={
@@ -74,7 +57,7 @@ function AuthenticatedLayout(): ReactElement {
           <Button
             isIconOnly
             variant="secondary"
-            onPress={onGithubClick}
+            onPress={socialLinks.onGithubClick}
             aria-label={intl.formatMessage({
               description: "AuthenticatedLayout - GitHub social link aria label",
               defaultMessage: "GitHub",
@@ -88,7 +71,7 @@ function AuthenticatedLayout(): ReactElement {
           <Button
             isIconOnly
             variant="secondary"
-            onPress={onLinkedInClick}
+            onPress={socialLinks.onLinkedInClick}
             aria-label={intl.formatMessage({
               description: "AuthenticatedLayout - LinkedIn social link aria label",
               defaultMessage: "LinkedIn",

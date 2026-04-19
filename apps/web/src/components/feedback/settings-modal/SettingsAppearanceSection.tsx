@@ -1,11 +1,14 @@
 import type { ReactElement } from "react";
 import { useIntl } from "react-intl";
+import type { ThemeSelectorProps } from "~/components/actions/theme-selector/ThemeSelector";
 import { ThemeSelector } from "~/components/actions/theme-selector/ThemeSelector";
-import { useThemeSelector } from "~/components/actions/theme-selector/UseThemeSelector";
 
-export function SettingsAppearanceSection(): ReactElement {
+export interface SettingsAppearanceSectionProps {
+  themeSelector: ThemeSelectorProps;
+}
+
+export function SettingsAppearanceSection({ themeSelector }: SettingsAppearanceSectionProps): ReactElement {
   const intl = useIntl();
-  const themeSelector = useThemeSelector();
 
   return (
     <div className="flex flex-col gap-4">
