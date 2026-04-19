@@ -6,7 +6,7 @@ import type { FormSignUp } from "~/components/forms/sign-up/SignUpForm";
 import type { SignUpViewProps } from "~/components/views/sign-up/SignUpView";
 import { useAppInfo } from "~/core/config/UseAppInfo";
 
-export function useSignUpPage(): SignUpViewProps {
+export function useSignUpRoute(): SignUpViewProps {
   const navigate = useNavigate();
   const intl = useIntl();
   const { appNameCapital } = useAppInfo();
@@ -20,30 +20,30 @@ export function useSignUpPage(): SignUpViewProps {
     if (isServiceError(error)) {
       if (error.status === 409) {
         return intl.formatMessage({
-          description: "SignUpPage - Email already registered error",
+          description: "SignUpRoute: toast - email already registered (409)",
           defaultMessage: "An account with this email already exists.",
-          id: "AOmYMB",
+          id: "XDzdRz",
         });
       }
       if (error.status === 422) {
         return intl.formatMessage({
-          description: "SignUpPage - Validation error",
+          description: "SignUpRoute: toast - validation error (422)",
           defaultMessage: "Please check your details and try again.",
-          id: "fNC/An",
+          id: "oGNxvn",
         });
       }
       if (error.status >= 500) {
         return intl.formatMessage({
-          description: "SignUpPage - Server error",
+          description: "SignUpRoute: toast - server error (5xx)",
           defaultMessage: "The service is temporarily unavailable. Please try again later.",
-          id: "gPuMJ/",
+          id: "ttpFqW",
         });
       }
     }
     return intl.formatMessage({
-      description: "SignUpPage - Sign up error alert title",
+      description: "SignUpRoute: toast - generic sign-up error",
       defaultMessage: "Something went wrong. Please try again.",
-      id: "KFOdLu",
+      id: "gTtb6e",
     });
   }
 

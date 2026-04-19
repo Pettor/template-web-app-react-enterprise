@@ -15,9 +15,9 @@ export function QuickMenu({ onSettings, onLogout, onSearch }: QuickMenuProps): R
   return (
     <ListBox
       aria-label={intl.formatMessage({
-        description: "QuickMenu - Menu aria label",
+        description: "QuickMenu: aria-label - menu",
         defaultMessage: "Quick menu",
-        id: "bPsPbO",
+        id: "I8uzDd",
       })}
       onAction={(key) => {
         if (key === "search") onSearch();
@@ -30,17 +30,17 @@ export function QuickMenu({ onSettings, onLogout, onSearch }: QuickMenuProps): R
         textValue="Search"
         data-testid="quick-menu__search-button"
         aria-label={intl.formatMessage({
-          description: "QuickMenu - Search aria label",
+          description: "QuickMenu: aria-label - search menu item",
           defaultMessage: "Search",
-          id: "nPdv4+",
+          id: "kMdtRQ",
         })}
       >
         <MagnifyingGlassIcon className="h-5 w-5" />
         <span className="text-base">
           {intl.formatMessage({
-            description: "QuickMenu - Search",
+            description: "QuickMenu: menu-item - search",
             defaultMessage: "Search",
-            id: "ndwWCO",
+            id: "wv66GT",
           })}
         </span>
       </ListBoxItem>
@@ -49,17 +49,17 @@ export function QuickMenu({ onSettings, onLogout, onSearch }: QuickMenuProps): R
         textValue="Settings"
         data-testid="quick-menu__settings-button"
         aria-label={intl.formatMessage({
-          description: "QuickMenu - Settings aria label",
+          description: "QuickMenu: aria-label - settings menu item",
           defaultMessage: "Settings",
-          id: "RgSSfJ",
+          id: "ricuZW",
         })}
       >
         <Cog6ToothIcon className="h-5 w-5" />
         <span className="text-base">
           {intl.formatMessage({
-            description: "QuickMenu - Settings",
+            description: "QuickMenu: menu-item - settings",
             defaultMessage: "Settings",
-            id: "r6wPzh",
+            id: "WEd/gz",
           })}
         </span>
       </ListBoxItem>
@@ -68,17 +68,17 @@ export function QuickMenu({ onSettings, onLogout, onSearch }: QuickMenuProps): R
         textValue="Logout"
         data-testid="quick-menu__logout-button"
         aria-label={intl.formatMessage({
-          description: "QuickMenu - Logout aria label",
+          description: "QuickMenu: aria-label - logout menu item",
           defaultMessage: "Logout",
-          id: "ayezYz",
+          id: "oqInO0",
         })}
       >
         <ArrowLeftStartOnRectangleIcon className="h-5 w-5" />
         <span className="text-base">
           {intl.formatMessage({
-            description: "QuickMenu - Logout",
+            description: "QuickMenu: menu-item - logout",
             defaultMessage: "Logout",
-            id: "o7x+hU",
+            id: "dxC6lJ",
           })}
         </span>
       </ListBoxItem>

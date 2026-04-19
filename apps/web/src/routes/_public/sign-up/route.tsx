@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useDocumentTitle } from "usehooks-ts";
-import { useSignUpPage } from "./-UseSignUpPage";
+import { useSignUpRoute } from "./-UseSignUpRoute";
 import { SignUpView } from "~/components/views/sign-up/SignUpView";
 import { RouteError } from "~/core/routes/logic/RouteError";
 
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/_public/sign-up")({
 
 function SignUpPageRoute(): ReactElement {
   useDocumentTitle("Sign Up");
-  const signUpProps = useSignUpPage();
+  const signUpProps = useSignUpRoute();
 
   return <SignUpView {...signUpProps} />;
 }

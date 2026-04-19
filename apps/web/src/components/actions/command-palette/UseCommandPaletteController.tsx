@@ -1,4 +1,4 @@
-import { useMemo, type ReactElement } from "react";
+import { useMemo } from "react";
 import {
   ArrowLeftStartOnRectangleIcon,
   ComputerDesktopIcon,
@@ -10,7 +10,7 @@ import {
 import { useNavigate } from "@tanstack/react-router";
 import { useSetAtom } from "jotai";
 import { useIntl } from "react-intl";
-import { CommandPalette } from "~/components/actions/command-palette/CommandPalette";
+import type { CommandPaletteProps } from "./CommandPalette";
 import { useAuth } from "~/core/auth/UseAuth";
 import type { Command } from "~/core/command-palette/Command";
 import { useCommandPalette } from "~/core/command-palette/UseCommandPalette";
@@ -20,14 +20,12 @@ import { themeModeAtom } from "~/core/theme/ThemeAtoms";
 import type { ThemeMode } from "~/core/theme/ThemeMode";
 
 /**
- * Wires the presentational `CommandPalette` up to the app: registers the
- * Cmd/Ctrl+K shortcut, builds the default command list (navigation, theme,
- * logout) and dispatches each command to the right side effect.
- *
- * To add or change commands, extend the `commands` array returned from
- * `useMemo` below — `Command` is intentionally minimal.
+ * Builds the app's default command list (navigation, theme, logout), wires up
+ * the Cmd/Ctrl+K shortcut and per-command shortcuts, and returns props ready to
+ * spread onto `<CommandPalette>`. To add or change commands, extend the array
+ * returned from `useMemo` below — `Command` is intentionally minimal.
  */
-export function CommandPaletteModule(): ReactElement {
+export function useCommandPaletteController(): CommandPaletteProps {
   const intl = useIntl();
   const navigate = useNavigate();
   const { logout } = useAuth();
@@ -35,19 +33,19 @@ export function CommandPaletteModule(): ReactElement {
   const { isOpen, close } = useCommandPalette();
 
   const navigationGroup = intl.formatMessage({
-    description: "CommandPaletteModule - Navigation group label",
+    description: "CommandPaletteController: label - navigation group",
     defaultMessage: "Navigation",
-    id: "j1tsyC",
+    id: "RCtY7O",
   });
   const appearanceGroup = intl.formatMessage({
-    description: "CommandPaletteModule - Appearance group label",
+    description: "CommandPaletteController: label - appearance group",
     defaultMessage: "Appearance",
-    id: "bmHpDw",
+    id: "vWoN3+",
   });
   const accountGroup = intl.formatMessage({
-    description: "CommandPaletteModule - Account group label",
+    description: "CommandPaletteController: label - account group",
     defaultMessage: "Account",
-    id: "VCtMhT",
+    id: "9cU9e3",
   });
 
   const commands = useMemo<Command[]>(() => {
@@ -59,14 +57,14 @@ export function CommandPaletteModule(): ReactElement {
       {
         id: "goto-home",
         label: intl.formatMessage({
-          description: "CommandPaletteModule - Go to home label",
+          description: "CommandPaletteController: label - go to home command",
           defaultMessage: "Go to Home",
-          id: "Y4yO4h",
+          id: "0M2q2L",
         }),
         description: intl.formatMessage({
-          description: "CommandPaletteModule - Go to home description",
+          description: "CommandPaletteController: caption - go to home command",
           defaultMessage: "Navigate to the home view",
-          id: "pN542Q",
+          id: "rHCEXQ",
         }),
         group: navigationGroup,
         keywords: ["home", "start"],
@@ -79,14 +77,14 @@ export function CommandPaletteModule(): ReactElement {
       {
         id: "goto-dashboard",
         label: intl.formatMessage({
-          description: "CommandPaletteModule - Go to dashboard label",
+          description: "CommandPaletteController: label - go to dashboard command",
           defaultMessage: "Go to Dashboard",
-          id: "RG5SWG",
+          id: "sPhJsx",
         }),
         description: intl.formatMessage({
-          description: "CommandPaletteModule - Go to dashboard description",
+          description: "CommandPaletteController: caption - go to dashboard command",
           defaultMessage: "Open the dashboard view",
-          id: "ZjU8B8",
+          id: "lHbB2E",
         }),
         group: navigationGroup,
         keywords: ["dashboard", "overview"],
@@ -99,9 +97,9 @@ export function CommandPaletteModule(): ReactElement {
       {
         id: "theme-auto",
         label: intl.formatMessage({
-          description: "CommandPaletteModule - Theme system label",
+          description: "CommandPaletteController: label - theme system command",
           defaultMessage: "Theme: System",
-          id: "dRAKzT",
+          id: "xr2NN2",
         }),
         group: appearanceGroup,
         keywords: ["auto", "system", "theme"],
@@ -111,9 +109,9 @@ export function CommandPaletteModule(): ReactElement {
       {
         id: "theme-light",
         label: intl.formatMessage({
-          description: "CommandPaletteModule - Theme light label",
+          description: "CommandPaletteController: label - theme light command",
           defaultMessage: "Theme: Light",
-          id: "KmJBXs",
+          id: "MibXHq",
         }),
         group: appearanceGroup,
         keywords: ["light", "theme"],
@@ -124,9 +122,9 @@ export function CommandPaletteModule(): ReactElement {
       {
         id: "theme-dark",
         label: intl.formatMessage({
-          description: "CommandPaletteModule - Theme dark label",
+          description: "CommandPaletteController: label - theme dark command",
           defaultMessage: "Theme: Dark",
-          id: "uLZCKb",
+          id: "5ywSOX",
         }),
         group: appearanceGroup,
         keywords: ["dark", "theme"],
@@ -137,14 +135,14 @@ export function CommandPaletteModule(): ReactElement {
       {
         id: "logout",
         label: intl.formatMessage({
-          description: "CommandPaletteModule - Logout label",
+          description: "CommandPaletteController: label - logout command",
           defaultMessage: "Log out",
-          id: "UwhKeU",
+          id: "9/X3Xw",
         }),
         description: intl.formatMessage({
-          description: "CommandPaletteModule - Logout description",
+          description: "CommandPaletteController: caption - logout command",
           defaultMessage: "End the current session",
-          id: "ShqEhN",
+          id: "oUdMPU",
         }),
         group: accountGroup,
         keywords: ["logout", "signout", "exit"],
@@ -159,5 +157,5 @@ export function CommandPaletteModule(): ReactElement {
   useCommandPaletteShortcut();
   useCommandShortcuts(commands);
 
-  return <CommandPalette isOpen={isOpen} commands={commands} onClose={close} />;
+  return { isOpen, commands, onClose: close };
 }

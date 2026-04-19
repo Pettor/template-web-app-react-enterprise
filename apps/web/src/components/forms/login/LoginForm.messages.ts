@@ -2,48 +2,48 @@ import { defineMessages } from "react-intl";
 
 export const loginFormMessages = defineMessages({
   emailLabel: {
-    description: "LoginForm - Email input label",
+    description: "LoginForm: label - email input",
     defaultMessage: "Email",
-    id: "LX1rS2",
+    id: "KF8ZUM",
   },
   emailPlaceholder: {
-    description: "LoginForm - Email input placeholder",
+    description: "LoginForm: placeholder - email input",
     defaultMessage: "Email",
-    id: "P2Xl0E",
+    id: "rs4OwB",
   },
   passwordLabel: {
-    description: "LoginForm - Password input label",
+    description: "LoginForm: label - password input",
     defaultMessage: "Password",
-    id: "w1aUU6",
+    id: "TOJijj",
   },
   passwordPlaceholder: {
-    description: "LoginForm - Password input placeholder",
+    description: "LoginForm: placeholder - password input",
     defaultMessage: "Password",
-    id: "2hRtil",
+    id: "M//qVi",
   },
   togglePasswordVisibility: {
-    description: "LoginForm - Toggle password visibility button aria label",
+    description: "LoginForm: aria-label - toggle password visibility button",
     defaultMessage: "Toggle password visibility",
-    id: "KjXbli",
+    id: "gwNSqb",
   },
   rememberMe: {
-    description: "LoginForm - Remember me checkbox label",
+    description: "LoginForm: label - remember me checkbox",
     defaultMessage: "Remember me",
-    id: "eSCI59",
+    id: "c2o/01",
   },
   forgotPassword: {
-    description: "LoginForm - Forgot password link",
+    description: "LoginForm: link - forgot password",
     defaultMessage: "Forgot password?",
-    id: "Zz40WB",
+    id: "ZG5n7V",
   },
   submit: {
-    description: "LoginForm - Submit button text",
+    description: "LoginForm: button - submit login",
     defaultMessage: "Login",
-    id: "/83/VX",
+    id: "ihPsbT",
   },
   signUpLink: {
-    description: "LoginForm - Sign up link",
+    description: "LoginForm: link - sign up prompt",
     defaultMessage: "Don't have an account? Sign up",
-    id: "FroJyb",
+    id: "G5tm22",
   },
 });

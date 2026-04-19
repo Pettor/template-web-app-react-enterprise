@@ -6,6 +6,7 @@ import type { SettingsAboutSectionProps } from "./SettingsAboutSection";
 import { SettingsAboutSection } from "./SettingsAboutSection";
 import type { SettingsAccountSectionProps } from "./SettingsAccountSection";
 import { SettingsAccountSection } from "./SettingsAccountSection";
+import type { SettingsAppearanceSectionProps } from "./SettingsAppearanceSection";
 import { SettingsAppearanceSection } from "./SettingsAppearanceSection";
 import type { SettingsSection } from "~/core/settings/SettingsSection";
 
@@ -15,6 +16,7 @@ export interface SettingsModalProps {
   initialSection?: SettingsSection;
   onClose: () => void;
   account?: SettingsAccountSectionProps;
+  appearance: SettingsAppearanceSectionProps;
   aboutDetails: SettingsAboutSectionProps;
 }
 
@@ -30,6 +32,7 @@ export function SettingsModal({
   initialSection,
   onClose,
   account,
+  appearance,
   aboutDetails,
 }: SettingsModalProps): ReactElement {
   const intl = useIntl();
@@ -45,21 +48,21 @@ export function SettingsModal({
     switch (section) {
       case "account":
         return intl.formatMessage({
-          description: "SettingsModal - Account tab",
+          description: "SettingsModal: tab - account",
           defaultMessage: "Account",
-          id: "nO3mXm",
+          id: "itKwWQ",
         });
       case "appearance":
         return intl.formatMessage({
-          description: "SettingsModal - Appearance tab",
+          description: "SettingsModal: tab - appearance",
           defaultMessage: "Appearance",
-          id: "cHdANY",
+          id: "miFRsV",
         });
       case "about":
         return intl.formatMessage({
-          description: "SettingsModal - About tab",
+          description: "SettingsModal: tab - about",
           defaultMessage: "About",
-          id: "i5j6bp",
+          id: "pPj4qN",
         });
     }
   }
@@ -69,7 +72,7 @@ export function SettingsModal({
       case "account":
         return account ? <SettingsAccountSection {...account} /> : <></>;
       case "appearance":
-        return <SettingsAppearanceSection />;
+        return <SettingsAppearanceSection {...appearance} />;
       case "about":
         return <SettingsAboutSection {...aboutDetails} />;
     }
@@ -81,17 +84,17 @@ export function SettingsModal({
         <Modal.Container size="lg">
           <Modal.Dialog
             aria-label={intl.formatMessage({
-              description: "SettingsModal - Dialog label",
+              description: "SettingsModal: aria-label - dialog",
               defaultMessage: "Settings",
-              id: "483FyL",
+              id: "Br9aNm",
             })}
           >
             <Modal.Header>
               <Modal.Heading>
                 {intl.formatMessage({
-                  description: "SettingsModal - Title",
+                  description: "SettingsModal: heading - title",
                   defaultMessage: "Settings",
-                  id: "oKv7MA",
+                  id: "A5kccO",
                 })}
               </Modal.Heading>
               <Modal.CloseTrigger />
@@ -109,9 +112,9 @@ export function SettingsModal({
                   <Tabs.ListContainer className="border-r">
                     <Tabs.List
                       aria-label={intl.formatMessage({
-                        description: "SettingsModal - Navigation label",
+                        description: "SettingsModal: aria-label - settings navigation",
                         defaultMessage: "Settings navigation",
-                        id: "c51bvr",
+                        id: "QJ8Qdm",
                       })}
                     >
                       {sections.map((section, index) => (

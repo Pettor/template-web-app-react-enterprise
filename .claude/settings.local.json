@@ -9,7 +9,11 @@
       "Bash(npm view *)",
       "Bash(pnpm install *)",
       "Bash(pnpm lint *)",
-      "Bash(pnpm -r why ajv)"
+      "Bash(pnpm -r why ajv)",
+      "Bash(pnpm lint:fix)",
+      "Bash(pnpm build *)",
+      "Bash(pnpm test *)",
+      "Bash(git mv *)"
     ]
   },
   "enableAllProjectMcpServers": true,

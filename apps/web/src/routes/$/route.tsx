@@ -20,23 +20,23 @@ function NotFoundPageRoute(): ReactElement {
       <span className="text-default-300 text-6xl font-bold">404</span>
       <p className="text-base font-semibold">
         {intl.formatMessage({
-          description: "NotFoundPage - Message",
+          description: "NotFoundRoute: heading - page could not be found",
           defaultMessage: "Page could not be found",
-          id: "Sx2O7v",
+          id: "njMWxp",
         })}
       </p>
       <p className="text-default-500 max-w-sm text-sm">
         {intl.formatMessage({
-          description: "NotFoundPage - Subtext",
+          description: "NotFoundRoute: body - page-not-found description",
           defaultMessage: "The page you're looking for doesn't exist or has been moved.",
-          id: "Qb6FoK",
+          id: "PkMrnj",
         })}
       </p>
       <Button variant="primary" onPress={handleClick}>
         {intl.formatMessage({
-          description: "NotFoundPage - Go to login button",
+          description: "NotFoundRoute: button - go to login",
           defaultMessage: "Go to login",
-          id: "oXmM5Y",
+          id: "GkSHmr",
         })}
       </Button>
     </div>

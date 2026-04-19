@@ -3,24 +3,24 @@ import { z } from "zod";
 
 const messages = defineMessages({
   emailInvalid: {
-    description: "FormValidation - Email must be valid",
+    description: "FormValidation: error - email must be valid",
     defaultMessage: "Email must be valid",
-    id: "8di2Oc",
+    id: "s7lnsz",
   },
   passwordTooShort: {
-    description: "FormValidation - Password is too short (minimum 8 characters)",
+    description: "FormValidation: error - password too short (min 8 chars)",
     defaultMessage: "Password is too short - should be 8 chars minimum",
-    id: "irK1Wl",
+    id: "hYfjyQ",
   },
   passwordConfirmRequired: {
-    description: "FormValidation - Password confirmation is required",
+    description: "FormValidation: error - password confirmation required",
     defaultMessage: "Password must be confirmed",
-    id: "EZrpOs",
+    id: "Y342si",
   },
   passwordsMustMatch: {
-    description: "FormValidation - Passwords must match",
+    description: "FormValidation: error - passwords must match",
     defaultMessage: "Passwords must match",
-    id: "LYevZg",
+    id: "WJko8Q",
   },
 });
 

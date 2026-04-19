@@ -11,9 +11,9 @@ export function SettingsAboutSection(props: SettingsAboutSectionProps): ReactEle
     <div className="flex flex-col gap-4">
       <p className="text-lg font-semibold">
         {intl.formatMessage({
-          description: "SettingsAboutSection - Title",
+          description: "SettingsAboutSection: heading - section title",
           defaultMessage: "About",
-          id: "kUf27Y",
+          id: "pSAw7P",
         })}
       </p>
       <AboutDetails {...props} />

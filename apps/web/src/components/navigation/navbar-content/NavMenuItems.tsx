@@ -21,9 +21,9 @@ export function createNavMenuItems(_socialLinks: NavMenuSocialLinks, intl: IntlS
     {
       id: "home",
       name: intl.formatMessage({
-        description: "NavMenuItems - Home menu item",
+        description: "NavMenuItems: menu-item - home",
         defaultMessage: "Home",
-        id: "ciFxoL",
+        id: "dygLxQ",
       }),
       href: "#/",
       icon: <HomeIcon className="h-5 w-5" />,
@@ -31,9 +31,9 @@ export function createNavMenuItems(_socialLinks: NavMenuSocialLinks, intl: IntlS
     {
       id: "dashboard",
       name: intl.formatMessage({
-        description: "NavMenuItems - Dashboard menu item",
+        description: "NavMenuItems: menu-item - dashboard",
         defaultMessage: "Dashboard",
-        id: "JZPB0K",
+        id: "boO2/q",
       }),
       href: "#/dashboard",
       icon: <ChartBarSquareIcon className="h-5 w-5" />,
