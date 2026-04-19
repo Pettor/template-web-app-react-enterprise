@@ -1,12 +1,12 @@
-import { useMemo, type ReactElement } from "react";
+import { useMemo } from "react";
 import { fetchApplicationInfoQuery, fetchPersonalProfileQuery } from "@package/api";
 import { useQuery } from "@tanstack/react-query";
-import { SettingsModal } from "~/components/feedback/settings-modal/SettingsModal";
+import type { SettingsModalProps } from "./SettingsModal";
 import { getAuthStatus } from "~/core/auth/AuthState";
 import { useAppInfo } from "~/core/config/UseAppInfo";
 import { useSettingsModal } from "~/core/settings/UseSettingsModal";
 
-export function SettingsModalModule(): ReactElement {
+export function useSettingsModalController(): SettingsModalProps {
   const { isOpen, initialSection, sections, close } = useSettingsModal();
   const { appName } = useAppInfo();
   const isAuthenticated = getAuthStatus() === "authenticated";
@@ -37,14 +37,12 @@ export function SettingsModalModule(): ReactElement {
     [appName, appInfo]
   );
 
-  return (
-    <SettingsModal
-      isOpen={isOpen}
-      sections={sections}
-      initialSection={initialSection}
-      onClose={close}
-      account={account}
-      aboutDetails={aboutDetails}
-    />
-  );
+  return {
+    isOpen,
+    sections,
+    initialSection,
+    onClose: close,
+    account,
+    aboutDetails,
+  };
 }

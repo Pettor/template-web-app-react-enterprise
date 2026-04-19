@@ -1,8 +1,8 @@
 import type { ReactElement } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useDocumentTitle } from "usehooks-ts";
-import { CommandPaletteModule } from "~/components/modules/command-palette-module/CommandPaletteModule";
-import { SettingsModalModule } from "~/components/modules/settings-modal/SettingsModalModule";
+import { CommandPaletteController } from "~/components/actions/command-palette/CommandPaletteController";
+import { SettingsModalController } from "~/components/feedback/settings-modal/SettingsModalController";
 import { HomeView } from "~/components/views/home/HomeView";
 import { RouteError } from "~/core/routes/logic/RouteError";
 
@@ -17,8 +17,8 @@ function HomePageRoute(): ReactElement {
   return (
     <>
       <HomeView />
-      <SettingsModalModule />
-      <CommandPaletteModule />
+      <SettingsModalController />
+      <CommandPaletteController />
     </>
   );
 }

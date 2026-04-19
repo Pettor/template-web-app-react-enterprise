@@ -533,6 +533,8 @@ importers:
         specifier: catalog:common
         version: 7.4.0
 
+  configs/barrelsby: {}
+
   configs/eslint:
     devDependencies:
       '@eslint/js':

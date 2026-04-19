@@ -3,7 +3,7 @@ import { ToastProvider } from "@heroui/react";
 import { validateCrypto } from "@package/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AppLocales } from "./AppLocales";
-import { PwaProviderModule } from "~/components/modules/pwa-provider-module/PwaProviderModule";
+import { PwaLifecycle } from "./pwa/PwaLifecycle";
 
 const queryClient = new QueryClient();
 
@@ -18,9 +18,9 @@ export function AppProviders({ children }: AppProvidersProps): ReactElement {
     <>
       <ToastProvider />
       <AppLocales>
-        <PwaProviderModule>
+        <PwaLifecycle>
           <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-        </PwaProviderModule>
+        </PwaLifecycle>
       </AppLocales>
     </>
   );

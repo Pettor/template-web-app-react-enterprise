@@ -2,8 +2,8 @@ import type { ReactElement } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useDocumentTitle } from "usehooks-ts";
 import { dashboardLoader } from "./-DashboardLoader";
-import { CommandPaletteModule } from "~/components/modules/command-palette-module/CommandPaletteModule";
-import { SettingsModalModule } from "~/components/modules/settings-modal/SettingsModalModule";
+import { CommandPaletteController } from "~/components/actions/command-palette/CommandPaletteController";
+import { SettingsModalController } from "~/components/feedback/settings-modal/SettingsModalController";
 import { DashboardView } from "~/components/views/dashboard/DashboardView";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -23,8 +23,8 @@ function DashboardPageRoute(): ReactElement {
         chartData={dashboardData.chartData}
         recentTransactions={dashboardData.recentTransactions}
       />
-      <SettingsModalModule />
-      <CommandPaletteModule />
+      <SettingsModalController />
+      <CommandPaletteController />
     </>
   );
 }

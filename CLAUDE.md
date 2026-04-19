@@ -164,7 +164,6 @@ src/
 │   ├── feedback/         # Toast notifications, etc.
 │   ├── forms/            # Form components
 │   ├── input/            # Input controls
-│   ├── modules/          # Feature modules (e.g., PWA prompt)
 │   ├── navigation/       # Navigation components
 │   └── views/            # Page layout wrappers
 └── assets/               # Static assets (images, fonts)
@@ -176,7 +175,7 @@ src/
 HeroUIProvider
   └── ToastProvider
         └── AppLocales (React Intl)
-              └── PwaProviderModule
+              └── PwaLifecycle
                     └── QueryClientProvider (React Query)
                           └── AuthProvider (React Context)
                                 └── AppTheme + AppRoutes
