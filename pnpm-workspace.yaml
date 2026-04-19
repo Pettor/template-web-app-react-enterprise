@@ -9,6 +9,36 @@ overrides:
   '@tanstack/query-core': 5.99.1
   react: catalog:react19
   react-dom: catalog:react19
+  # Security fixes for transitive dev dependencies flagged by GitHub Dependabot.
+  # All chains terminate in dev-only tooling (@mocks-server/*, vite-plugin-pwa,
+  # workbox-build, eslint, tsup, move-cli, commitlint).
+  ajv: ^8.18.0
+  body-parser: ^1.20.3
+  cookie: ^0.7.2
+  express: ^4.21.2
+  flatted: ^3.4.2
+  form-data: ^4.0.4
+  got: ^11.8.5
+  handlebars: ^4.7.9
+  'js-yaml@3': ^3.14.2
+  'js-yaml@4': ^4.1.1
+  lodash: ^4.18.0
+  'minimatch@3': ^3.1.4
+  'minimatch@5': ^5.1.8
+  'minimatch@9': ^9.0.7
+  'path-to-regexp@0': ^0.1.13
+  'picomatch@2': ^2.3.2
+  'picomatch@4': ^4.0.4
+  qs: ^6.14.2
+  'rollup@2': ^2.80.0
+  'rollup@4': ^4.59.0
+  send: ^0.19.0
+  serialize-javascript: ^7.0.5
+  serve-static: ^1.16.0
+  tmp: ^0.2.4
+  'yaml@1': ^1.10.3
+  'yaml@2': ^2.8.3
+  'glob@10': ^10.5.0
 catalogs:
   common:
     '@faker-js/faker': 10.4.0
