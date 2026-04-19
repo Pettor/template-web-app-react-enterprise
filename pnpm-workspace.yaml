@@ -12,6 +12,10 @@ overrides:
   # Security fixes for transitive dev dependencies flagged by GitHub Dependabot.
   # All chains terminate in dev-only tooling (@mocks-server/*, vite-plugin-pwa,
   # workbox-build, eslint, tsup, move-cli, commitlint).
+  # Scoped to v8 only: ESLint depends on ajv@^6 and requires an internal file
+  # removed in v8, so a broad `ajv` override breaks lint. ajv <7 is not in the
+  # vulnerable range.
+  'ajv@8': ^8.18.0
   body-parser: ^1.20.3
   cookie: ^0.7.2
   express: ^4.21.2

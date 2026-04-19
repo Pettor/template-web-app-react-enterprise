@@ -231,6 +231,7 @@ overrides:
   '@tanstack/query-core': 5.99.2
   react: 19.2.5
   react-dom: 19.2.5
+  ajv@8: ^8.18.0
   body-parser: ^1.20.3
   cookie: ^0.7.2
   express: ^4.21.2
@@ -844,7 +845,7 @@ packages:
     resolution: {integrity: sha512-P+ZygBLZtkp0qqOAJJVX4oX/sFo5JR3eBWwwuqHHhK0GIgQOKWrAfiAaWX0aArHkRWHMuggFEgAZNxVPwPZYaA==}
     engines: {node: '>=10'}
     peerDependencies:
-      ajv: '>=8'
+      ajv: ^8.18.0
 
   '@babel/code-frame@7.27.1':
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
@@ -3293,9 +3294,6 @@ packages:
   ajv@6.14.0:
     resolution: {integrity: sha512-IWrosm/yrn43eiKqkfkHis7QioDleaXQHdDVPKg0FSwwd/DuvyX79TZnFOnYpB7dcsFAMmtFztZuXPDvSePkFw==}
 
-  ajv@8.12.0:
-    resolution: {integrity: sha512-sRu1kpcO9yLtYxBKvqfTeh9KzZEwO3STyX1HT+4CaDzC6HpTGYhIhPIzj9XuKU7KYDwnaeh5hcOwjy1QuJzBPA==}
-
   ajv@8.18.0:
     resolution: {integrity: sha512-PlXPeEWMXMZ7sPYOHqmDyCJzcfNrUr3fGNKtezX14ykXOEIvyK81d+qydx89KY5O71FKMPaQ2vBfBFI5NHR63A==}
 
@@ -3470,7 +3468,7 @@ packages:
     resolution: {integrity: sha512-UW+IsFycygIo7bclP9h5ugkNH8EjCSgqyFB/yQ4Hqqa1OEYDtb0uFIkYE0b6+CjkgJYVM5UKI/pJPxjYe9EZlA==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
-      ajv: 4.11.8 - 8
+      ajv: ^8.18.0
 
   binary-extensions@2.3.0:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
@@ -8459,8 +8457,8 @@ snapshots:
 
   '@mocks-server/config@1.4.1':
     dependencies:
-      ajv: 8.12.0
-      better-ajv-errors: 1.2.0(ajv@8.12.0)
+      ajv: 8.18.0
+      better-ajv-errors: 1.2.0(ajv@8.18.0)
       commander: 8.3.0
       cosmiconfig: 7.0.1
       deepmerge: 4.3.1
@@ -8476,8 +8474,8 @@ snapshots:
       '@mocks-server/config': 1.4.1
       '@mocks-server/logger': 1.1.2
       '@mocks-server/nested-collections': 2.0.0
-      ajv: 8.12.0
-      better-ajv-errors: 1.2.0(ajv@8.12.0)
+      ajv: 8.18.0
+      better-ajv-errors: 1.2.0(ajv@8.18.0)
       body-parser: 1.20.4
       cors: 2.8.5
       deepmerge: 4.3.1
@@ -9773,13 +9771,6 @@ snapshots:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
 
-  ajv@8.12.0:
-    dependencies:
-      fast-deep-equal: 3.1.3
-      json-schema-traverse: 1.0.0
-      require-from-string: 2.0.2
-      uri-js: 4.4.1
-
   ajv@8.18.0:
     dependencies:
       fast-deep-equal: 3.1.3
@@ -9980,11 +9971,11 @@ snapshots:
 
   base64-js@1.5.1: {}
 
-  better-ajv-errors@1.2.0(ajv@8.12.0):
+  better-ajv-errors@1.2.0(ajv@8.18.0):
     dependencies:
       '@babel/code-frame': 7.27.1
       '@humanwhocodes/momoa': 2.0.4
-      ajv: 8.12.0
+      ajv: 8.18.0
       chalk: 4.1.2
       jsonpointer: 5.0.1
       leven: 3.1.0
