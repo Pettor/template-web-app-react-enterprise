@@ -11,8 +11,7 @@
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
     "lint": "eslint ./src",
-    "lint:fix": "pnpm lint --fix",
-    "build:exports": "barrelsby -c node_modules/@config/barrelsby/barrelsby.json"
+    "lint:fix": "pnpm lint --fix"
   },
   "peerDependencies": {
     "react": ">=19.0.0"
@@ -22,11 +21,9 @@
     "idb-keyval": "catalog:common"
   },
   "devDependencies": {
-    "@config/barrelsby": "workspace:*",
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
     "@types/react": "catalog:react19",
-    "barrelsby": "catalog:common",
     "usehooks-ts": "catalog:common",
     "utility-types": "catalog:common"
   }

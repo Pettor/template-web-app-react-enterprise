@@ -14,7 +14,6 @@ catalogs:
     '@faker-js/faker': 10.4.0
     '@fontsource/rubik': 5.2.8
     '@formatjs/cli': 6.14.2
-    barrelsby: 2.8.1
     buffer: 6.0.3
     clsx: 2.1.1
     cross-env: 10.1.0
