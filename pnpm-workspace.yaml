@@ -18,7 +18,7 @@ overrides:
   'ajv@8': ^8.18.0
   body-parser: ^1.20.3
   cookie: ^0.7.2
-  express: ^4.21.2
+  express: ^5.0.0
   flatted: ^3.4.2
   form-data: ^4.0.4
   got: ^11.8.5
