@@ -16,7 +16,7 @@ overrides:
   # removed in v8, so a broad `ajv` override breaks lint. ajv <7 is not in the
   # vulnerable range.
   'ajv@8': ^8.18.0
-  body-parser: ^1.20.3
+  body-parser: ^2.0.0
   cookie: ^1.0.0
   express: ^5.0.0
   flatted: ^3.4.2
