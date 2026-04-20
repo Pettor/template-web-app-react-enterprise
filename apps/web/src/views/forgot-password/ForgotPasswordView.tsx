@@ -3,8 +3,8 @@ import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import { LockClosedIcon } from "@heroicons/react/24/outline";
 import { Card, CardHeader, Button, CardContent } from "@heroui/react";
 import { useIntl } from "react-intl";
-import type { ForgotPasswordFormProps } from "../../forms/forgot-password/ForgotPasswordForm";
-import { ForgotPasswordForm } from "../../forms/forgot-password/ForgotPasswordForm";
+import type { ForgotPasswordFormProps } from "~/components/forms/forgot-password/ForgotPasswordForm";
+import { ForgotPasswordForm } from "~/components/forms/forgot-password/ForgotPasswordForm";
 
 export interface ForgotPasswordViewProps {
   appName: string;

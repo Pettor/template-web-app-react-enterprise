@@ -131,14 +131,31 @@ Set up automatic deployment:
 
 ```
 ├── apps/
-│   └── web/                 # Main React application
-├── configs/                 # Shared configs
-├── packages/                # Shared packages and utilities
-├── .github/
-│   └── workflows/          # CI/CD pipeline definitions
-├── output/                 # Build artifacts
-└── storybook-static/       # Storybook build output
+│   ├── web/                # Main React application (React 19 + Vite 8 + HeroUI v3)
+│   ├── storybook/          # Storybook configuration and stories
+│   ├── e2e/                # Playwright end-to-end tests
+│   └── mock/               # Mocks Server for API mocking
+├── packages/
+│   ├── api/                # (@package/api) API client, auth, Web Worker
+│   ├── ui/                 # (@package/ui) Cross-app UI (logos, layouts, icons)
+│   ├── react/              # (@package/react) Framework-agnostic React utilities
+│   ├── mocks/              # (@package/mocks) Mocks Server admin client
+│   └── storybook/          # (@package/storybook) Storybook decorators
+├── configs/                # Shared ESLint, Tailwind, TypeScript, Vite configs
+├── design/tokens/          # (@design/tokens) Style Dictionary design tokens
+├── docs/                   # Architectural reference — start here for deeper detail
+├── .github/workflows/      # CI/CD pipeline definitions
+└── output/                 # Build artifacts
 ```
+
+### Architecture
+
+`apps/web` uses a **four-layer architecture** — `core/` (domain + app shell), `components/` (reusable UI), `views/` (page compositions), `routes/` (TanStack file-based routes). For the full picture, see:
+
+- [`docs/architecture.md`](./docs/architecture.md) — layers, provider hierarchy, data flow
+- [`docs/structure.md`](./docs/structure.md) — full directory tree with per-folder responsibilities
+- [`docs/patterns.md`](./docs/patterns.md) — Controller pattern, route hooks, atom co-location
+- [`docs/packages.md`](./docs/packages.md) — workspace package tour
 
 ## 🔗 Related Templates
 

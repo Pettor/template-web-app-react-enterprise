@@ -2,9 +2,9 @@ import { useEffect, useMemo, useRef, useState, type ReactElement } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { InputGroup, InputGroupInput, InputGroupPrefix, Kbd, Modal, TextField } from "@heroui/react";
 import { useIntl } from "react-intl";
-import { useCommandPaletteKeyboard } from "./UseCommandPaletteKeyboard";
 import type { Command } from "./Command";
 import { type CommandShortcut, isMac } from "./CommandShortcut";
+import { useCommandPaletteKeyboard } from "./UseCommandPaletteKeyboard";
 
 export interface CommandPaletteProps {
   isOpen: boolean;

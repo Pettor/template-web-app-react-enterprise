@@ -16,7 +16,7 @@ import { useIntl } from "react-intl";
 import { z } from "zod";
 import { useFormValidation } from "../shared/FormValidation";
 import { loginFormMessages } from "./LoginForm.messages";
-import { InputField } from "~/components/input/InputField";
+import { InputField } from "~/components/input/input-field/InputField";
 
 export interface FormLogin {
   email: string;

@@ -4,7 +4,7 @@ import { useDocumentTitle } from "usehooks-ts";
 import { dashboardLoader } from "./-DashboardLoader";
 import { CommandPaletteController } from "~/components/actions/command-palette/CommandPaletteController";
 import { SettingsModalController } from "~/components/feedback/settings-modal/SettingsModalController";
-import { DashboardView } from "~/components/views/dashboard/DashboardView";
+import { DashboardView } from "~/views/dashboard/DashboardView";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   loader: ({ context: { queryClient } }) => dashboardLoader(queryClient),

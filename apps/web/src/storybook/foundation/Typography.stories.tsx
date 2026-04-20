@@ -13,10 +13,10 @@ export default {
   },
 };
 
-export function Typograhy(): ReactElement {
+export function Typography(): ReactElement {
   return (
     <DocumentationLayout label="Typography">
-      <div className="prose mt-10">
+      <div className="prose dark:prose-invert mt-10">
         <h1>h1. Heading</h1>
         <h2>h2. Heading</h2>
         <h3>h3. Heading</h3>
@@ -24,7 +24,7 @@ export function Typograhy(): ReactElement {
         <h5>h5. Heading</h5>
         <h6>h6. Heading</h6>
       </div>
-      <div className="prose mt-2">
+      <div className="prose dark:prose-invert mt-2">
         <div className="font-thin">Thin - Font Weight</div>
         <div className="font-extralight">Extralight - Font Weight</div>
         <div className="font-light">Light - Font Weight</div>
@@ -35,7 +35,7 @@ export function Typograhy(): ReactElement {
         <div className="font-extrabold">Extrabold - Font Weight</div>
         <div className="font-black">Black - Font Weight</div>
       </div>
-      <div className="prose mt-2">
+      <div className="prose dark:prose-invert mt-2">
         <div>subtitle1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>
         <a>link. Lorem ipsum dolor sit amet</a>
         <blockquote>blockqoute. Lorem ipsum dolor sit amet</blockquote>

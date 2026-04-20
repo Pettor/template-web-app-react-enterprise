@@ -2,8 +2,8 @@ import type { ReactElement } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useDocumentTitle } from "usehooks-ts";
 import { useForgotPasswordRoute } from "./-UseForgotPasswordRoute";
-import { ForgotPasswordView } from "~/components/views/forgot-password/ForgotPasswordView";
 import { RouteError } from "~/core/routes/logic/RouteError";
+import { ForgotPasswordView } from "~/views/forgot-password/ForgotPasswordView";
 
 export const Route = createFileRoute("/_public/forgot-password")({
   component: ForgotPasswordPageRoute,

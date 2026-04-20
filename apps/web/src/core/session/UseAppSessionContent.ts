@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { useFetchPersonalProfileQuery } from "@package/api";
 import type { AppSessionContent } from "./AppSessionContent";
-import { useAuth } from "~/core/auth/UseAuth";
 import { useCommandPalette } from "~/components/actions/command-palette/UseCommandPalette";
+import { useAuth } from "~/core/auth/UseAuth";
 import { useSettingsModal } from "~/core/settings/UseSettingsModal";
 
 export function useAppSessionContent(): AppSessionContent {

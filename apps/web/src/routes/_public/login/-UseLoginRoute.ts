@@ -3,10 +3,10 @@ import { isServiceError } from "@package/api";
 import { useNavigate } from "@tanstack/react-router";
 import { useIntl } from "react-intl";
 import type { FormLogin } from "~/components/forms/login/LoginForm";
-import type { LoginViewProps } from "~/components/views/login/LoginView";
 import { useAuth } from "~/core/auth/UseAuth";
 import { useAppInfo } from "~/core/config/UseAppInfo";
 import { useSettingsModal } from "~/core/settings/UseSettingsModal";
+import type { LoginViewProps } from "~/views/login/LoginView";
 
 export function useLoginRoute(): LoginViewProps {
   const navigate = useNavigate();

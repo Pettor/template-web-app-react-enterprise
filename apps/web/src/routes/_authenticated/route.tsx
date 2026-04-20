@@ -5,7 +5,7 @@ import { GithubIcon, LinkedInIcon, NavbarLayout } from "@package/ui";
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 import { useIntl } from "react-intl";
 import { useAuthenticatedRoute } from "./-UseAuthenticatedRoute";
-import { NavbarContent } from "~/components/navigation/navbar-content";
+import { NavbarContent } from "~/components/navigation/navbar-content/NavbarContent";
 import { RouteLoading } from "~/core/routes/logic/RouteLoading";
 
 export const Route = createFileRoute("/_authenticated")({

@@ -14,9 +14,14 @@ Component tests in this project are written as Storybook **play functions** — 
 
 ### Locating the Story File
 
-- Stories are co-located with their components as `<ComponentName>.stories.tsx`
-- UI package components: `packages/ui/src/<Category>/<ComponentName>/<ComponentName>.stories.tsx`
-- Web app components: `apps/web/src/components/<category>/<component-name>/<ComponentName>.stories.tsx`
+Stories are co-located with their components as `<ComponentName>.stories.tsx`. The component's layer determines the path:
+
+- Shared UI: `packages/ui/src/<Category>/<ComponentName>/<ComponentName>.stories.tsx`
+- Reusable web-app UI: `apps/web/src/components/<category>/<component-name>/<ComponentName>.stories.tsx`
+- Page view: `apps/web/src/views/<name>/<Name>View.stories.tsx`
+- Core/router-level UI: `apps/web/src/core/routes/logic/<Name>.stories.tsx` (rare)
+
+Story titles follow the `Top-Level / Category / Component Name` convention — see [`docs/naming.md#story-titles`](../../docs/naming.md#story-titles).
 
 If a story file does not exist yet, create one following the pattern below.
 

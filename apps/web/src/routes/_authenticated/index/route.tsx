@@ -3,8 +3,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useDocumentTitle } from "usehooks-ts";
 import { CommandPaletteController } from "~/components/actions/command-palette/CommandPaletteController";
 import { SettingsModalController } from "~/components/feedback/settings-modal/SettingsModalController";
-import { HomeView } from "~/components/views/home/HomeView";
 import { RouteError } from "~/core/routes/logic/RouteError";
+import { HomeView } from "~/views/home/HomeView";
 
 export const Route = createFileRoute("/_authenticated/")({
   component: HomePageRoute,
