@@ -10,12 +10,12 @@ import {
 import { useNavigate } from "@tanstack/react-router";
 import { useSetAtom } from "jotai";
 import { useIntl } from "react-intl";
+import type { Command } from "./Command";
 import type { CommandPaletteProps } from "./CommandPalette";
+import { useCommandPalette } from "./UseCommandPalette";
+import { useCommandPaletteShortcut } from "./UseCommandPaletteShortcut";
+import { useCommandShortcuts } from "./UseCommandShortcuts";
 import { useAuth } from "~/core/auth/UseAuth";
-import type { Command } from "~/core/command-palette/Command";
-import { useCommandPalette } from "~/core/command-palette/UseCommandPalette";
-import { useCommandPaletteShortcut } from "~/core/command-palette/UseCommandPaletteShortcut";
-import { useCommandShortcuts } from "~/core/command-palette/UseCommandShortcuts";
 import { themeModeAtom } from "~/core/theme/ThemeAtoms";
 import type { ThemeMode } from "~/core/theme/ThemeMode";
 

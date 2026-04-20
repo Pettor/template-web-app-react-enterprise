@@ -5,7 +5,7 @@ import { useIntl } from "react-intl";
 import { PwaUpdateDialogProps } from "./PwaUpdateDialog";
 
 const meta = {
-  title: "Feedback/Progressive Web App",
+  title: "Feedback/PWA Update",
   decorators: [CommonDecorator, ToastDecorator],
 };
 

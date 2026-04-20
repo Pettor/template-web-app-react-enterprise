@@ -29,7 +29,19 @@ const preview: Preview = {
     options: {
       storySort: {
         method: "alphabetical",
-        order: ["Design System", "Views", "Actions", "Display", "Feedback", "Forms", "Layout", "Navigation", "Shared"],
+        order: [
+          "Design System",
+          "Views",
+          "Actions",
+          "Core",
+          "Display",
+          "Feedback",
+          "Forms",
+          "Input",
+          "Layout",
+          "Navigation",
+          "Shared",
+        ],
       },
     },
     viewport: {

@@ -6,7 +6,7 @@ import { useIntl } from "react-intl";
 import { z } from "zod";
 import { useFormValidation } from "../shared/FormValidation";
 import { forgotPasswordFormMessages } from "./ForgotPasswordForm.messages";
-import { InputField } from "~/components/input/InputField";
+import { InputField } from "~/components/input/input-field/InputField";
 
 export interface FormForgotPassword {
   email: string;

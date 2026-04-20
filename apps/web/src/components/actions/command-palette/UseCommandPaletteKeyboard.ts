@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import type { Command } from "~/core/command-palette/Command";
+import type { Command } from "./Command";
 
 export interface UseCommandPaletteKeyboardProps {
   isOpen: boolean;

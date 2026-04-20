@@ -3,7 +3,7 @@ import { RouteLoading as Component } from "./RouteLoading";
 
 const meta: Meta<typeof Component> = {
   component: Component,
-  title: "Route/Loading",
+  title: "Core/Route Loading",
   parameters: {
     layout: "fullscreen",
   },

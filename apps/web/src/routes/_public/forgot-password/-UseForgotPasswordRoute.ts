@@ -3,8 +3,8 @@ import { isServiceError, usePostForgotPasswordMutate } from "@package/api";
 import { useNavigate } from "@tanstack/react-router";
 import { useIntl } from "react-intl";
 import type { FormForgotPassword } from "~/components/forms/forgot-password/ForgotPasswordForm";
-import type { ForgotPasswordViewProps } from "~/components/views/forgot-password/ForgotPasswordView";
 import { useAppInfo } from "~/core/config/UseAppInfo";
+import type { ForgotPasswordViewProps } from "~/views/forgot-password/ForgotPasswordView";
 
 export function useForgotPasswordRoute(): ForgotPasswordViewProps {
   const { appName } = useAppInfo();

@@ -4,7 +4,7 @@ import { RouterDecorator } from "~/storybook/decorators/RouterDecorator";
 
 const meta: Meta<typeof RouteError> = {
   component: RouteError,
-  title: "Route/Error",
+  title: "Core/Route Error",
   parameters: {
     layout: "fullscreen",
   },

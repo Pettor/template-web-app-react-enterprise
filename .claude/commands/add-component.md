@@ -20,19 +20,48 @@ You MUST use HeroUI v3 components as the foundation for all UI elements. Before 
 4. Use `onPress` instead of `onClick` for HeroUI interactive components
 5. HeroUI v3 does NOT require a Provider wrapper — components work directly
 
-### Component Implementation
+### Decide Where the Component Belongs
 
-Follow these patterns based on where the component belongs:
+`apps/web` has a four-layer structure (`core/` / `components/` / `views/` / `routes/`). Reference: [`docs/structure.md`](../../docs/structure.md) and [`docs/architecture.md`](../../docs/architecture.md).
 
-**Shared UI components** go in `packages/ui/src/`:
-- Create a folder: `packages/ui/src/<Category>/<ComponentName>/`
-- Files: `<ComponentName>.tsx` and `<ComponentName>.stories.tsx`
-- Category examples: `Branding/`, `Icons/`, `Layout/`, `Navigation/`, `Display/`, `Feedback/`
+Pick the right home:
 
-**App-specific components** go in `apps/web/src/components/`:
-- Create a folder: `apps/web/src/components/<category>/<component-name>/`
-- Files: `<ComponentName>.tsx` and `<ComponentName>.stories.tsx`
-- Category examples: `actions/`, `display/`, `feedback/`, `forms/`, `input/`, `modules/`, `navigation/`, `views/`
+- **Shared across apps → `packages/ui/src/<Category>/<ComponentName>/`**
+  - Folder category is PascalCase. Examples: `Branding/`, `Icons/`, `Layout/`, `Navigation/`, `Display/`, `Feedback/`.
+  - Story title: `Shared/<Category>/<ComponentName>`.
+- **Reusable UI specific to `apps/web` → `apps/web/src/components/<category>/<component-name>/`**
+  - Category is kebab-case. Pick from: `actions/`, `display/`, `feedback/`, `forms/`, `input/`, `navigation/`.
+  - Story title: `<Category>/<Component Name>` (Title Case — see [`docs/naming.md`](../../docs/naming.md#story-titles)).
+- **Page-level composition for a specific route → `apps/web/src/views/<name>/<Name>View.tsx`**
+  - Views are pure presentational; they never call hooks from `core/`. All data and callbacks come from the route hook.
+  - Story title: `Views/<Name>`.
+- **Domain module (atoms, hooks, initializers) → `apps/web/src/core/<feature>/`**
+  - Not a rendered UI component in most cases — put atoms, hooks, and types here. Only keep domain-inseparable components here (e.g. `AuthInitializer`, `PwaLifecycle`).
+
+### Controller Pattern (When the Component Needs `core/` State)
+
+If the component needs to reach into `core/` for data/actions (modals, overlays, command palettes, app-wide action surfaces), use the **three-file Controller pattern** so the presentational component stays pure. See [`docs/patterns.md#controller-pattern`](../../docs/patterns.md#controller-pattern).
+
+```
+components/<category>/<component-name>/
+├── <ComponentName>.tsx              # Pure, props-in/JSX-out
+├── Use<ComponentName>Controller.ts  # Hook that assembles props from core/ hooks
+└── <ComponentName>Controller.tsx    # Two-line wrapper mounted by routes
+```
+
+The **wrapper** (`<ComponentName>Controller`) is the only symbol routes import. Reference examples: `components/feedback/settings-modal/`, `components/actions/command-palette/`.
+
+Skip the controller pattern if the component only needs props from its parent — write just the component file.
+
+### File Layout (`apps/web` component folder)
+
+```
+apps/web/src/components/<category>/<component-name>/
+├── <ComponentName>.tsx              # Required
+├── <ComponentName>.stories.tsx      # Required
+├── Use<ComponentName>Controller.ts  # Only if using Controller pattern
+└── <ComponentName>Controller.tsx    # Only if using Controller pattern
+```
 
 ### MANDATORY: Use Heroicons for Icons
 
@@ -168,15 +197,18 @@ export const WithInteraction: Story = {
 
 ## Checklist
 
+- [ ] Placed the component in the correct layer (`packages/ui` / `components/` / `views/` / `core/`) — see [`docs/structure.md`](../../docs/structure.md)
+- [ ] If the component reads/writes `core/` state, used the **Controller pattern** (`<Component>.tsx` + `Use<Component>Controller.ts` + `<Component>Controller.tsx`)
 - [ ] Fetched HeroUI v3 docs before writing component code
 - [ ] Used HeroUI v3 components where applicable
 - [ ] Used Heroicons (`@heroicons/react`) for all icons
 - [ ] All visible strings use `intl.formatMessage()` from `react-intl` (no raw strings)
 - [ ] Created component with proper Props interface and function declaration
 - [ ] Used Tailwind CSS 4 utilities and `clsx()` for styling
-- [ ] Created co-located `.stories.tsx` file with `tags: ["autodocs"]`
+- [ ] Created co-located `.stories.tsx` file with `tags: ["autodocs"]` and a story title that follows [`docs/naming.md#story-titles`](../../docs/naming.md#story-titles)
 - [ ] Added stories for all meaningful component states/variants
 - [ ] Added play functions for interactive components
-- [ ] Ran `pnpm generate:exports` to update barrel files
+- [ ] Used `~/` alias for cross-layer imports (not `../../`)
+- [ ] Ran `pnpm generate:exports` to update barrel files (packages only — `apps/web` has no barrel)
 - [ ] Ran `pnpm lint:fix`
 - [ ] Verified story renders in Storybook

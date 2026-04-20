@@ -3,8 +3,8 @@ import { isServiceError, usePostSelfRegister } from "@package/api";
 import { useNavigate } from "@tanstack/react-router";
 import { useIntl } from "react-intl";
 import type { FormSignUp } from "~/components/forms/sign-up/SignUpForm";
-import type { SignUpViewProps } from "~/components/views/sign-up/SignUpView";
 import { useAppInfo } from "~/core/config/UseAppInfo";
+import type { SignUpViewProps } from "~/views/sign-up/SignUpView";
 
 export function useSignUpRoute(): SignUpViewProps {
   const navigate = useNavigate();

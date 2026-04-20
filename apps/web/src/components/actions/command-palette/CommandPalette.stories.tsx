@@ -8,9 +8,9 @@ import {
   SunIcon,
 } from "@heroicons/react/20/solid";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Command } from "./Command";
 import { CommandPalette as Component } from "./CommandPalette";
 import type { CommandPaletteProps as Props } from "./CommandPalette";
-import type { Command } from "~/core/command-palette/Command";
 
 const meta: Meta<typeof Component> = {
   component: Component,
