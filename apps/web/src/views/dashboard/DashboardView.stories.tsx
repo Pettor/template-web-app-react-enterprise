@@ -1,7 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { DashboardView as Component } from "./DashboardView";
 import type { DashboardViewProps as Props } from "./DashboardView";
-import { DashboardChartData, DashboardStatsData, DashboardTransactionsData } from "~/storybook/data/DashboardData";
+import {
+  DashboardActivityData,
+  DashboardChannelsData,
+  DashboardChartData,
+  DashboardCohortsData,
+  DashboardKpisData,
+  DashboardStatsData,
+  DashboardTransactionsData,
+} from "~/storybook/data/DashboardData";
 import { NavbarLayoutDecorator } from "~/storybook/decorators/NavbarLayoutDecorator";
 
 const meta: Meta<typeof Component> = {
@@ -20,6 +28,10 @@ const defaultArgs = {
   stats: DashboardStatsData,
   chartData: DashboardChartData,
   recentTransactions: DashboardTransactionsData,
+  kpis: DashboardKpisData,
+  cohorts: DashboardCohortsData,
+  channels: DashboardChannelsData,
+  activity: DashboardActivityData,
 } satisfies Props;
 
 export const Fullscreen: Story = {

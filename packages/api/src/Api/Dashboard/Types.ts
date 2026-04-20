@@ -30,10 +30,58 @@ export const dashboardTransactionSchema = z.object({
 
 export type DashboardTransactionDto = z.infer<typeof dashboardTransactionSchema>;
 
+export const dashboardKpiIdSchema = z.enum(["revenue", "users", "active", "conversion"]);
+
+export type DashboardKpiIdDto = z.infer<typeof dashboardKpiIdSchema>;
+
+export const dashboardKpiSchema = z.object({
+  id: dashboardKpiIdSchema,
+  deltaPct: z.number(),
+  deltaAbs: z.number(),
+  spark: z.array(z.number()),
+});
+
+export type DashboardKpiDto = z.infer<typeof dashboardKpiSchema>;
+
+export const dashboardCohortKeySchema = z.enum(["dau", "wau", "mau"]);
+
+export const dashboardCohortSchema = z.object({
+  key: dashboardCohortKeySchema,
+  value: z.number(),
+  total: z.number(),
+});
+
+export type DashboardCohortDto = z.infer<typeof dashboardCohortSchema>;
+
+export const dashboardChannelKeySchema = z.enum(["direct", "organic", "referral", "paid", "other"]);
+
+export const dashboardChannelSchema = z.object({
+  key: dashboardChannelKeySchema,
+  pct: z.number(),
+});
+
+export type DashboardChannelDto = z.infer<typeof dashboardChannelSchema>;
+
+export const dashboardActivityColorSchema = z.enum(["success", "accent", "warning", "default"]);
+
+export const dashboardActivitySchema = z.object({
+  key: z.string(),
+  title: z.string(),
+  detail: z.string(),
+  relativeTime: z.string(),
+  color: dashboardActivityColorSchema,
+});
+
+export type DashboardActivityDto = z.infer<typeof dashboardActivitySchema>;
+
 export const dashboardDataSchema = z.object({
   stats: dashboardStatsSchema,
   chartData: z.array(dashboardChartPointSchema),
   recentTransactions: z.array(dashboardTransactionSchema),
+  kpis: z.array(dashboardKpiSchema),
+  cohorts: z.array(dashboardCohortSchema),
+  channels: z.array(dashboardChannelSchema),
+  activity: z.array(dashboardActivitySchema),
 });
 
 export type DashboardDataDto = z.infer<typeof dashboardDataSchema>;
@@ -43,4 +91,9 @@ export type DashboardDataDto = z.infer<typeof dashboardDataSchema>;
 export type DashboardStats = DashboardStatsDto;
 export type DashboardChartPoint = DashboardChartPointDto;
 export type DashboardTransaction = DashboardTransactionDto;
+export type DashboardKpiId = DashboardKpiIdDto;
+export type DashboardKpi = DashboardKpiDto;
+export type DashboardCohort = DashboardCohortDto;
+export type DashboardChannel = DashboardChannelDto;
+export type DashboardActivity = DashboardActivityDto;
 export type DashboardData = DashboardDataDto;

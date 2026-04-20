@@ -37,4 +37,4 @@ storybook-static/
 *.sw?
 
 # Ai
-.claude/
+.claude/settings.local.json
