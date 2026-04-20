@@ -5,7 +5,7 @@ import { NavbarContentCommonData } from "~/storybook/data/NavbarContentData";
 
 const meta: Meta<typeof Component> = {
   component: Component,
-  title: "Navigation/NavbarContent",
+  title: "Navigation/Navbar Content",
   parameters: {
     layout: "fullscreen",
   },

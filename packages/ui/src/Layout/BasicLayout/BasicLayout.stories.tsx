@@ -4,7 +4,7 @@ import { BasicLayout as Component } from "./BasicLayout";
 
 const meta: Meta<typeof Component> = {
   component: Component,
-  title: "Shared/Layout",
+  title: "Shared/Layout/Basic",
 };
 
 export default meta;

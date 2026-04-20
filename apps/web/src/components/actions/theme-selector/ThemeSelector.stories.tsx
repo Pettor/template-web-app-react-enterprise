@@ -4,7 +4,7 @@ import type { ThemeSelectorProps as Props } from "./ThemeSelector";
 
 const meta: Meta<typeof Component> = {
   component: Component,
-  title: "Actions/ThemeSelector",
+  title: "Actions/Theme Selector",
 };
 
 export default meta;

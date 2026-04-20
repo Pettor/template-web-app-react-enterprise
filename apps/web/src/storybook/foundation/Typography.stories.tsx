@@ -2,7 +2,7 @@ import type { ReactElement } from "react";
 import { DocumentationDecorator, DocumentationLayout } from "@package/storybook";
 
 export default {
-  title: "Design System/Typograhy",
+  title: "Design System/Typography",
   tags: ["no-tests"],
   decorators: [DocumentationDecorator],
   parameters: {

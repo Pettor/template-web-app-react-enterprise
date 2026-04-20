@@ -6,7 +6,7 @@ import type { NavbarLayoutProps as Props } from "./NavbarLayout";
 
 const meta: Meta<typeof Component> = {
   component: Component,
-  title: "Shared/Layout",
+  title: "Shared/Layout/Navbar",
   parameters: {
     a11y: {
       config: {

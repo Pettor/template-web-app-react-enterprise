@@ -10,7 +10,7 @@ import {
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CommandPalette as Component } from "./CommandPalette";
 import type { CommandPaletteProps as Props } from "./CommandPalette";
-import type { Command } from "~/core/command-palette/Command";
+import type { Command } from "./Command";
 
 const meta: Meta<typeof Component> = {
   component: Component,
