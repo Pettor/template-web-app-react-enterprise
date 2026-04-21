@@ -74,6 +74,66 @@ function getDemoGetData(url: string): unknown {
             date: "2024-04-10",
           },
         ],
+        kpis: [
+          { id: "revenue", deltaPct: 20.1, deltaAbs: 7582, spark: [22, 24, 23, 28, 26, 31, 30, 34, 33, 38, 36, 45] },
+          { id: "users", deltaPct: 18.0, deltaAbs: 180, spark: [12, 15, 14, 17, 16, 19, 18, 20, 22, 24, 23, 24] },
+          { id: "active", deltaPct: 19.0, deltaAbs: 201, spark: [8, 9, 9, 11, 12, 11, 13, 14, 14, 15, 14, 16] },
+          {
+            id: "conversion",
+            deltaPct: -2.1,
+            deltaAbs: -0.3,
+            spark: [14, 13.5, 14.2, 13, 13.5, 12.8, 13.1, 12.9, 12.6, 13.0, 12.8, 12.5],
+          },
+        ],
+        cohorts: [
+          { key: "dau", value: 876, total: 1284 },
+          { key: "wau", value: 1050, total: 1284 },
+          { key: "mau", value: 1220, total: 1284 },
+        ],
+        channels: [
+          { key: "direct", pct: 38 },
+          { key: "organic", pct: 26 },
+          { key: "referral", pct: 18 },
+          { key: "paid", pct: 12 },
+          { key: "other", pct: 6 },
+        ],
+        activity: [
+          {
+            key: "act-1",
+            title: "New user registered",
+            detail: "alice@example.com",
+            relativeTime: "2m ago",
+            color: "success",
+          },
+          {
+            key: "act-2",
+            title: "Payment received",
+            detail: "$249.00 from Alice Johnson",
+            relativeTime: "5m ago",
+            color: "accent",
+          },
+          {
+            key: "act-3",
+            title: "Subscription renewed",
+            detail: "Bob Martinez — Pro plan",
+            relativeTime: "12m ago",
+            color: "success",
+          },
+          {
+            key: "act-4",
+            title: "Payment failed",
+            detail: "$149.50 from David Lee",
+            relativeTime: "1h ago",
+            color: "warning",
+          },
+          {
+            key: "act-5",
+            title: "New user registered",
+            detail: "carol@example.com",
+            relativeTime: "2h ago",
+            color: "success",
+          },
+        ],
       };
     case "/api/application/info":
       return { version: "demo" };
