@@ -337,12 +337,38 @@ refactor: simplify auth reducer
 
 **Sherif**: Checks monorepo dependency consistency. Run `pnpm lint:fix` to auto-fix mismatches.
 
+## Reusability and Decomposition — Always Ask First
+
+**Before writing any new code, ask two questions:**
+
+1. **Is this component reusable?** If a component takes only props and renders UI with no view-specific logic, it likely belongs in `components/display/`, `components/feedback/`, etc. — not embedded in a view. Examples: a sparkline chart, a circular gauge, a status badge. If you can imagine using it in two different views, extract it.
+
+2. **Should this logic be a hook?** If a component has multiple `useState` calls, derived state via `useMemo`, or a non-trivial event handler, extract that logic to a `UseXxxHook.ts` co-located with the component. The component file should read clearly — just JSX and prop wiring, not state management.
+
+**Rule of thumb:** A view file (`XxxView.tsx`) should read like a layout — it imports panels, passes props, and renders them. A panel file should read like a form — it calls one hook and renders JSX. State goes in hooks, not in the render tree.
+
+**View decomposition pattern:**
+
+Large views should be split into focused sub-components co-located in the view's folder. Each panel gets its own file:
+
+```
+views/<name>/
+├── <Name>View.tsx              # Orchestrates panels, passes props down
+├── <Name>PageHeader.tsx        # Header / breadcrumb
+├── <Name>SomePanel.tsx         # A logical section of the view
+├── Use<Name>SomePanel.ts       # Hook for panel-local state (filter, sort, derived data)
+├── <Name>Utils.ts              # Pure utility functions shared across panels
+└── <Name>View.stories.tsx      # Story covering the full view
+```
+
+Hooks for panel-local state (filter, sort, range selection, derived totals) live alongside the panel, not inside it. The naming convention is `Use<PanelName>.ts`.
+
 ## Adding New Features — Checklist
 
 1. **New package export**: Add file → add `export * from "./Path/To/File"` to the package's `src/index.ts` (or run `pnpm generate:exports` where supported).
 2. **New shared UI component**: Create `packages/ui/src/<Category>/<ComponentName>/` with `.tsx` + `.stories.tsx`. Story title: `Shared/<Category>/<ComponentName>`.
 3. **New app-specific component**: Create `apps/web/src/components/<category>/<component-name>/` with `<ComponentName>.tsx` + `.stories.tsx`. Use the Controller pattern if it needs to reach into `core/` — see [`docs/patterns.md`](./docs/patterns.md).
-4. **New view**: Create `apps/web/src/views/<name>/<Name>View.tsx` + `.stories.tsx`. Views are pure — all hooks live in the route hook.
+4. **New view**: Create `apps/web/src/views/<name>/<Name>View.tsx` + `.stories.tsx`. Views are pure — all hooks live in the route hook. Decompose large views into panel sub-components and `Use<Panel>.ts` hooks in the same folder (see Reusability section above).
 5. **New route**: Create `apps/web/src/routes/<segment>/<name>/route.tsx` + `-Use<Name>Route.ts`. File layout determines the URL; prefix `-` files are ignored by the router.
 6. **New API endpoint**: Add `packages/api/src/Api/<EndpointName>/` with `Classes.ts`, `Schema.ts`, `Convert.ts`, `Get.ts`/`Post.ts`. Export via the package barrel.
 7. **New Jotai atom**: Co-locate next to the feature — `core/<feature>/XxxAtoms.ts` for global state, or beside the owning component for feature-local state. Do **not** create `src/atoms/`.
