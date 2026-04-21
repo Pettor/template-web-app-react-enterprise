@@ -22,6 +22,10 @@ function DashboardPageRoute(): ReactElement {
         stats={dashboardData.stats}
         chartData={dashboardData.chartData}
         recentTransactions={dashboardData.recentTransactions}
+        kpis={dashboardData.kpis}
+        cohorts={dashboardData.cohorts}
+        channels={dashboardData.channels}
+        activity={dashboardData.activity}
       />
       <SettingsModalController />
       <CommandPaletteController />

@@ -21,5 +21,27 @@ export function dashboardConvertFromDto(dto: DashboardDataDto): DashboardData {
       status: tx.status,
       date: tx.date,
     })),
+    kpis: dto.kpis.map((k) => ({
+      id: k.id,
+      deltaPct: k.deltaPct,
+      deltaAbs: k.deltaAbs,
+      spark: [...k.spark],
+    })),
+    cohorts: dto.cohorts.map((c) => ({
+      key: c.key,
+      value: c.value,
+      total: c.total,
+    })),
+    channels: dto.channels.map((c) => ({
+      key: c.key,
+      pct: c.pct,
+    })),
+    activity: dto.activity.map((a) => ({
+      key: a.key,
+      title: a.title,
+      detail: a.detail,
+      relativeTime: a.relativeTime,
+      color: a.color,
+    })),
   };
 }
