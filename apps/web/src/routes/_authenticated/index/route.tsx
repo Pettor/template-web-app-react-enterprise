@@ -1,9 +1,9 @@
 import type { ReactElement } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useDocumentTitle } from "usehooks-ts";
 import { CommandPaletteController } from "~/components/actions/command-palette/CommandPaletteController";
 import { SettingsModalController } from "~/components/feedback/settings-modal/SettingsModalController";
 import { RouteError } from "~/core/routes/logic/RouteError";
+import { useDocumentTitle } from "~/core/routes/logic/UseDocumentTitle";
 import { HomeView } from "~/views/home/HomeView";
 
 export const Route = createFileRoute("/_authenticated/")({

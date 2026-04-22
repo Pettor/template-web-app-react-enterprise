@@ -13,7 +13,6 @@ For the `apps/web` layered structure, see [structure.md](./structure.md).
 packages/
 ├── api/         # @package/api     — API client, auth, endpoints
 ├── ui/          # @package/ui      — cross-app UI (logos, layouts, icons)
-├── react/       # @package/react   — React utilities and hooks
 ├── mocks/       # @package/mocks   — mock server admin client + helpers
 └── storybook/   # @package/storybook — Storybook decorators and helpers
 
@@ -101,30 +100,6 @@ packages/ui/src/
 ```
 
 Every component folder has `<ComponentName>.tsx` + `<ComponentName>.stories.tsx`. Stories use the `Shared/<Category>/<ComponentName>` title pattern — see [naming.md#story-titles](./naming.md#story-titles).
-
-## `@package/react`
-
-Framework-agnostic React utilities and hooks.
-
-```
-packages/react/src/
-├── Crypto/
-│   └── GetCrypto.ts          # validateCrypto(), safe crypto accessor
-├── Element/
-│   └── JoinChildren.tsx      # Interleaves a separator between children
-├── Encoding/
-│   ├── Base64.ts
-│   └── Sha256.ts
-├── Framework/
-│   └── Sleep.ts
-├── Hooks/
-│   ├── UseMediaQuery.tsx
-│   └── UseRunOnce.tsx
-├── Storage/
-│   ├── IndexDb/              # IndexDbStorage
-│   └── LocalStorage/         # LocalStorage wrapper
-└── index.ts
-```
 
 ## `@package/mocks`
 

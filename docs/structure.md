@@ -180,8 +180,8 @@ Example `route.tsx`:
 ```tsx
 import type { ReactElement } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useDocumentTitle } from "usehooks-ts";
 import { useLoginRoute } from "./-UseLoginRoute";
+import { useDocumentTitle } from "~/core/routes/logic/UseDocumentTitle";
 import { LoginView } from "~/views/login/LoginView";
 
 export const Route = createFileRoute("/_public/login")({ component: LoginPageRoute });

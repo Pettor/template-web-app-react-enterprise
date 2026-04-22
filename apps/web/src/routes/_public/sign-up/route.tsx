@@ -1,8 +1,8 @@
 import type { ReactElement } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useDocumentTitle } from "usehooks-ts";
 import { useSignUpRoute } from "./-UseSignUpRoute";
 import { RouteError } from "~/core/routes/logic/RouteError";
+import { useDocumentTitle } from "~/core/routes/logic/UseDocumentTitle";
 import { SignUpView } from "~/views/sign-up/SignUpView";
 
 export const Route = createFileRoute("/_public/sign-up")({
