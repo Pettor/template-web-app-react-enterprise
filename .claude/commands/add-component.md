@@ -190,7 +190,7 @@ export const WithInteraction: Story = {
 
 ### After Creating Files
 
-1. Run `pnpm generate:exports` to regenerate barrel exports
+1. If the component is in `packages/*`, add an `export * from "./Path/To/File"` line to the package's `src/index.ts`
 2. Run `pnpm lint:fix` to ensure code quality
 3. Run `pnpm test` to verify tests pass (if play functions were added)
 4. Start Storybook with `pnpm storybook` and verify the story renders correctly
@@ -209,6 +209,6 @@ export const WithInteraction: Story = {
 - [ ] Added stories for all meaningful component states/variants
 - [ ] Added play functions for interactive components
 - [ ] Used `~/` alias for cross-layer imports (not `../../`)
-- [ ] Ran `pnpm generate:exports` to update barrel files (packages only — `apps/web` has no barrel)
+- [ ] Updated the package's `src/index.ts` barrel (packages only — `apps/web` has no barrel)
 - [ ] Ran `pnpm lint:fix`
 - [ ] Verified story renders in Storybook

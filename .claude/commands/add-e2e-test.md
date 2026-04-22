@@ -127,13 +127,13 @@ The mock server uses the OpenAPI definition to generate route variants. Each res
 
 If new helper functions are needed for test setup, add them to `packages/mocks/src/`.
 
-#### 4. Regenerate Exports
+#### 4. Update Package Barrels
 
-Run `pnpm generate:exports` after adding new files to any package.
+If you added any new files to a `packages/*` package, add an `export * from "./Path/To/File"` line to that package's `src/index.ts`.
 
 ### After Creating Files
 
-1. Run `pnpm generate:exports` to regenerate barrel exports
+1. Update the package `src/index.ts` barrel for any new files added to `packages/*`
 2. Run `pnpm lint:fix` to ensure code quality
 3. Start mock server and dev server: `pnpm dev:mocks`
 4. Run the specific test: `pnpm test:e2e` or target a specific file with `pnpm --filter=@app/e2e exec playwright test src/specs/<file>.spec.ts`
@@ -146,6 +146,6 @@ Run `pnpm generate:exports` after adding new files to any package.
 - [ ] Used `.toPass()` wrapper for async navigation assertions
 - [ ] If new API needed: created service files in `packages/api/src/Api/<Name>/`
 - [ ] If new API needed: added endpoint + schemas + examples to `tools/mock/mocks/fixtures/openapi.json`
-- [ ] Ran `pnpm generate:exports`
+- [ ] Updated any relevant `src/index.ts` barrels in `packages/*`
 - [ ] Ran `pnpm lint:fix`
 - [ ] Verified tests pass with `pnpm test:e2e`

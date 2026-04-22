@@ -65,6 +65,7 @@ root/
 ├── packages/
 │   ├── ui/           # (@package/ui) Shared UI components
 │   ├── api/          # (@package/api) API client, auth, data fetching
+│   ├── react/        # (@package/react) Reusable React 19 hooks
 │   ├── mocks/        # (@package/mocks) Mock data and test utilities
 │   └── storybook/    # (@package/storybook) Storybook decorators
 ├── configs/
@@ -117,6 +118,12 @@ Key exports:
 > **Security note**: `TokenStorage` is intentionally NOT exported. The access token lives only in worker memory — `TokenStorage.ts` is excluded from the public barrel and must only be imported from worker-scope modules.
 - API endpoint services: `Login`, `Logout`, `RefreshToken`, `ForgotPassword`, `SelfRegister`, `ApplicationInfo`, `PersonalProfile`
 - Types (Zod schemas + inferred DTOs + domain types co-located in `Types.ts`), Converters, Fetch utilities
+
+### `@package/react` — Reusable React 19 Hooks
+
+Zero runtime dependencies beyond React. Use these hooks instead of re-implementing common patterns.
+
+Key exports: `useDocumentTitle`, `useLocalStorage`, `useMediaQuery`, `useBreakpoint`, `useCopyToClipboard`, `useEventListener`, `useClickOutside`, `useIntersectionObserver`, `useDebounce`, `useIsMounted`, `useIsFirstRender`
 
 ### `@package/ui` — Shared UI Components
 
@@ -359,7 +366,7 @@ Hooks for panel-local state (filter, sort, range selection, derived totals) live
 
 ## Adding New Features — Checklist
 
-1. **New package export**: Add file → add `export * from "./Path/To/File"` to the package's `src/index.ts` (or run `pnpm generate:exports` where supported).
+1. **New package export**: Add file → add `export * from "./Path/To/File"` to the package's `src/index.ts`. Consumers can also bypass the barrel via the subpath export (`@package/<name>/<Path/To/File>`).
 2. **New shared UI component**: Create `packages/ui/src/<Category>/<ComponentName>/` with `.tsx` + `.stories.tsx`. Story title: `Shared/<Category>/<ComponentName>`.
 3. **New app-specific component**: Create `apps/web/src/components/<category>/<component-name>/` with `<ComponentName>.tsx` + `.stories.tsx`. Use the Controller pattern if it needs to reach into `core/` — see [`docs/patterns.md`](./docs/patterns.md).
 4. **New view**: Create `apps/web/src/views/<name>/<Name>View.tsx` + `.stories.tsx`. Views are pure — all hooks live in the route hook. Decompose large views into panel sub-components and `Use<Panel>.ts` hooks in the same folder (see Reusability section above).

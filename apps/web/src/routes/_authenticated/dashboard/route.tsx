@@ -1,9 +1,9 @@
 import type { ReactElement } from "react";
+import { useDocumentTitle } from "@package/react";
 import { createFileRoute } from "@tanstack/react-router";
 import { dashboardLoader } from "./-DashboardLoader";
 import { CommandPaletteController } from "~/components/actions/command-palette/CommandPaletteController";
 import { SettingsModalController } from "~/components/feedback/settings-modal/SettingsModalController";
-import { useDocumentTitle } from "~/core/routes/logic/UseDocumentTitle";
 import { DashboardView } from "~/views/dashboard/DashboardView";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({

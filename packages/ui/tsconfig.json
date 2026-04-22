@@ -1,14 +1,9 @@
 {
-  "extends": "@config/typescript/react.json",
+  "extends": "@config/typescript/composite.json",
   "compilerOptions": {
-    "allowImportingTsExtensions": true,
-    "module": "Preserve",
-    "moduleResolution": "Bundler",
-    "noEmit": true,
-    "paths": {
-      ".": ["./src"]
-    },
-    "types": ["@config/typescript/types"]
+    "jsx": "react-jsx",
+    "outDir": "./dist",
+    "rootDir": "./src"
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["src"]
 }

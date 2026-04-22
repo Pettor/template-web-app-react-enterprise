@@ -27,6 +27,7 @@
     "@heroicons/react": "catalog:design",
     "@heroui/react": "catalog:design",
     "@package/api": "workspace:*",
+    "@package/react": "workspace:*",
     "@package/ui": "workspace:*",
     "@tanstack/react-form": "catalog:tanstack",
     "@tanstack/react-query": "catalog:tanstack",
