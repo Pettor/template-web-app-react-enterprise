@@ -65,7 +65,7 @@ root/
 ├── packages/
 │   ├── ui/           # (@package/ui) Shared UI components
 │   ├── api/          # (@package/api) API client, auth, data fetching
-│   ├── react/        # (@package/react) React utilities and hooks
+│   ├── react/        # (@package/react) Reusable React 19 hooks
 │   ├── mocks/        # (@package/mocks) Mock data and test utilities
 │   └── storybook/    # (@package/storybook) Storybook decorators
 ├── configs/
@@ -119,13 +119,15 @@ Key exports:
 - API endpoint services: `Login`, `Logout`, `RefreshToken`, `ForgotPassword`, `SelfRegister`, `ApplicationInfo`, `PersonalProfile`
 - Types (Zod schemas + inferred DTOs + domain types co-located in `Types.ts`), Converters, Fetch utilities
 
+### `@package/react` — Reusable React 19 Hooks
+
+Zero runtime dependencies beyond React. Use these hooks instead of re-implementing common patterns.
+
+Key exports: `useDocumentTitle`, `useLocalStorage`, `useMediaQuery`, `useBreakpoint`, `useCopyToClipboard`, `useEventListener`, `useClickOutside`, `useIntersectionObserver`, `useDebounce`, `useIsMounted`, `useIsFirstRender`
+
 ### `@package/ui` — Shared UI Components
 
 Key exports: `Logo`, `LogoFull`, `GithubIcon`, `LinkedInIcon`, `BasicLayout`, `NavbarLayout`, `BlueFadeBackground`, `GridBackground`, `Navbar`
-
-### `@package/react` — React Utilities & Hooks
-
-Key exports: `UseMediaQuery`, `UseRunOnce`, `LocalStorage`, `IndexDbStorage`, `GetCrypto`, `Base64`, `SHA256`, `JoinChildren`, `Sleep`
 
 ### `@package/mocks` — Mock Data & Test Utilities
 
@@ -205,7 +207,6 @@ Files prefixed with `-` are ignored by TanStack Router. Detail: [`docs/patterns.
 
 - JWT-based with refresh token mechanism stored in **Web Worker memory** via `TokenStorage` (deliberately not exported from the barrel).
 - Auth state lives in Jotai atoms (`core/auth/AuthAtoms.ts`); `AuthInitializer` hydrates on mount.
-- Token refresh on app initialization via `useRunOnce`.
 - Route guards are applied by **layout segments**: `_authenticated/route.tsx` redirects unauthenticated users, `_public/route.tsx` redirects authenticated users away from login.
 
 ### Routing Strategy
@@ -247,7 +248,7 @@ Files prefixed with `-` are ignored by TanStack Router. Detail: [`docs/patterns.
 | --- | --- | --- |
 | React components | PascalCase file + function declaration | `LoginView.tsx`, `function LoginView()` |
 | Component folders | `kebab-case` | `command-palette/`, `input-field/` |
-| Hooks | PascalCase file with `Use` prefix | `UseAuth.ts`, `UseRunOnce.ts` |
+| Hooks | PascalCase file with `Use` prefix | `UseAuth.ts`, `UseDocumentTitle.ts` |
 | Route files | `route.tsx` (TanStack requirement) | `routes/_public/login/route.tsx` |
 | Route hooks | `-Use<Name>Route.ts` (leading `-` hides from router) | `-UseLoginRoute.ts` |
 | Controllers | `<Component>Controller.tsx` + `Use<Component>Controller.ts(x)` | `SettingsModalController.tsx` |
@@ -365,14 +366,14 @@ Hooks for panel-local state (filter, sort, range selection, derived totals) live
 
 ## Adding New Features — Checklist
 
-1. **New package export**: Add file → add `export * from "./Path/To/File"` to the package's `src/index.ts` (or run `pnpm generate:exports` where supported).
+1. **New package export**: Add file → add `export * from "./Path/To/File"` to the package's `src/index.ts`. Consumers can also bypass the barrel via the subpath export (`@package/<name>/<Path/To/File>`).
 2. **New shared UI component**: Create `packages/ui/src/<Category>/<ComponentName>/` with `.tsx` + `.stories.tsx`. Story title: `Shared/<Category>/<ComponentName>`.
 3. **New app-specific component**: Create `apps/web/src/components/<category>/<component-name>/` with `<ComponentName>.tsx` + `.stories.tsx`. Use the Controller pattern if it needs to reach into `core/` — see [`docs/patterns.md`](./docs/patterns.md).
 4. **New view**: Create `apps/web/src/views/<name>/<Name>View.tsx` + `.stories.tsx`. Views are pure — all hooks live in the route hook. Decompose large views into panel sub-components and `Use<Panel>.ts` hooks in the same folder (see Reusability section above).
 5. **New route**: Create `apps/web/src/routes/<segment>/<name>/route.tsx` + `-Use<Name>Route.ts`. File layout determines the URL; prefix `-` files are ignored by the router.
 6. **New API endpoint**: Add `packages/api/src/Api/<EndpointName>/` with `Classes.ts`, `Schema.ts`, `Convert.ts`, `Get.ts`/`Post.ts`. Export via the package barrel.
 7. **New Jotai atom**: Co-locate next to the feature — `core/<feature>/XxxAtoms.ts` for global state, or beside the owning component for feature-local state. Do **not** create `src/atoms/`.
-8. **New hook**: Co-locate with the feature. Only put in `packages/react/src/Hooks/` if it's framework-agnostic and reusable across apps.
+8. **New hook**: Co-locate with the feature it's used by.
 
 ## MANDATORY: HeroUI v3 Components
 

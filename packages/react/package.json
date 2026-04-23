@@ -1,12 +1,16 @@
 {
   "name": "@package/react",
   "version": "0.7.0",
-  "description": "React components and hooks for the web application",
+  "description": "Reusable best-practice hooks that complement React 19",
   "license": "MIT",
   "private": true,
   "main": "./src/index.ts",
   "type": "module",
   "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
@@ -16,15 +20,10 @@
   "peerDependencies": {
     "react": ">=19.0.0"
   },
-  "dependencies": {
-    "buffer": "catalog:common",
-    "idb-keyval": "catalog:common"
-  },
   "devDependencies": {
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
     "@types/react": "catalog:react19",
-    "usehooks-ts": "catalog:common",
-    "utility-types": "catalog:common"
+    "rimraf": "catalog:common"
   }
 }

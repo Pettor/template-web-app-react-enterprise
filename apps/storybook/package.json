@@ -25,7 +25,6 @@
     "@app/web": "workspace:*",
     "@config/tailwind": "workspace:*",
     "@fontsource/rubik": "catalog:common",
-    "@package/react": "workspace:*",
     "@package/ui": "workspace:*",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",

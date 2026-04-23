@@ -1,3 +1,10 @@
 {
-  "extends": "@config/typescript/vite.json"
+  "extends": "@config/typescript/composite.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "types": ["@config/typescript/types", "vite/client"]
+  },
+  "include": ["src"],
+  "exclude": ["**/*.test.ts", "**/*.test.tsx", "dist"]
 }

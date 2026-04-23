@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
+import { useDocumentTitle } from "@package/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useDocumentTitle } from "usehooks-ts";
 import { dashboardLoader } from "./-DashboardLoader";
 import { CommandPaletteController } from "~/components/actions/command-palette/CommandPaletteController";
 import { SettingsModalController } from "~/components/feedback/settings-modal/SettingsModalController";

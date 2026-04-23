@@ -12,8 +12,8 @@ For the `apps/web` layered structure, see [structure.md](./structure.md).
 ```
 packages/
 ├── api/         # @package/api     — API client, auth, endpoints
+├── react/       # @package/react   — reusable best-practice React 19 hooks
 ├── ui/          # @package/ui      — cross-app UI (logos, layouts, icons)
-├── react/       # @package/react   — React utilities and hooks
 ├── mocks/       # @package/mocks   — mock server admin client + helpers
 └── storybook/   # @package/storybook — Storybook decorators and helpers
 
@@ -78,6 +78,62 @@ Every endpoint under `Api/` follows the same file set:
 
 Co-located `*.test.ts` files run under Vitest with a Node.js environment. See [`/add-api-test`](../.claude/commands/add-api-test.md).
 
+## `@package/react`
+
+Reusable best-practice hooks that complement React 19. Zero runtime dependencies beyond React itself.
+
+```
+packages/react/src/
+├── Browser/              # Hooks for browser and window APIs
+│   ├── UseCopyToClipboard.ts
+│   ├── UseDocumentTitle.ts
+│   ├── UseLocalStorage.ts
+│   └── UseMediaQuery.ts
+├── Dom/                  # Hooks for DOM elements and events
+│   ├── UseClickOutside.ts
+│   ├── UseEventListener.ts
+│   └── UseIntersectionObserver.ts
+├── State/                # React state utility hooks
+│   └── UseDebounce.ts
+├── Lifecycle/            # Component lifecycle hooks
+│   ├── UseIsFirstRender.ts
+│   └── UseIsMounted.ts
+└── index.ts
+```
+
+### Hooks
+
+**Browser**
+
+| Hook | Signature | Purpose |
+| --- | --- | --- |
+| `useCopyToClipboard` | `() → { copiedText, copy(text) }` | Clipboard API wrapper; `copy` returns `true` on success |
+| `useDocumentTitle` | `(title: string) → void` | Sets `document.title` whenever `title` changes |
+| `useLocalStorage` | `<T>(key, initialValue) → [T, setter]` | `useState` backed by `localStorage`; syncs across tabs via the `storage` event |
+| `useMediaQuery` | `(query: string) → boolean` | Tracks a CSS media query using native `matchMedia`; reactive to viewport changes |
+| `useBreakpoint` | `(size: "sm"\|"md"\|"lg"\|"xl"\|"2xl") → boolean` | Tailwind-breakpoint shorthand over `useMediaQuery` |
+
+**Dom**
+
+| Hook | Signature | Purpose |
+| --- | --- | --- |
+| `useClickOutside` | `(ref, handler) → void` | Fires `handler` on `mousedown`/`touchstart` outside the ref'd element |
+| `useEventListener` | `(target, event, handler, options?) → void` | Attaches a DOM event listener with automatic cleanup; stable via `useRef` |
+| `useIntersectionObserver` | `(ref, options?) → IntersectionObserverEntry \| undefined` | Tracks when an element enters or exits the viewport |
+
+**State**
+
+| Hook | Signature | Purpose |
+| --- | --- | --- |
+| `useDebounce` | `<T>(value, delay) → T` | Returns a debounced copy of `value`; resets the timer on every change |
+
+**Lifecycle**
+
+| Hook | Signature | Purpose |
+| --- | --- | --- |
+| `useIsFirstRender` | `() → boolean` | Returns `true` only on the first render of a component |
+| `useIsMounted` | `() → () => boolean` | Returns a getter that is `true` while the component is mounted; safe for async callbacks |
+
 ## `@package/ui`
 
 Cross-app shared UI. Components here must be consumable by **any** app (not just `apps/web`).
@@ -101,30 +157,6 @@ packages/ui/src/
 ```
 
 Every component folder has `<ComponentName>.tsx` + `<ComponentName>.stories.tsx`. Stories use the `Shared/<Category>/<ComponentName>` title pattern — see [naming.md#story-titles](./naming.md#story-titles).
-
-## `@package/react`
-
-Framework-agnostic React utilities and hooks.
-
-```
-packages/react/src/
-├── Crypto/
-│   └── GetCrypto.ts          # validateCrypto(), safe crypto accessor
-├── Element/
-│   └── JoinChildren.tsx      # Interleaves a separator between children
-├── Encoding/
-│   ├── Base64.ts
-│   └── Sha256.ts
-├── Framework/
-│   └── Sleep.ts
-├── Hooks/
-│   ├── UseMediaQuery.tsx
-│   └── UseRunOnce.tsx
-├── Storage/
-│   ├── IndexDb/              # IndexDbStorage
-│   └── LocalStorage/         # LocalStorage wrapper
-└── index.ts
-```
 
 ## `@package/mocks`
 

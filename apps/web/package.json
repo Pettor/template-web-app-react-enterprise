@@ -56,7 +56,6 @@
     "storybook": "catalog:storybook",
     "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:typescript",
-    "usehooks-ts": "catalog:common",
     "vite": "catalog:vite",
     "vite-plugin-http2-proxy": "catalog:vite",
     "vite-plugin-pwa": "catalog:vite",

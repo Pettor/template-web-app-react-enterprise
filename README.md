@@ -138,7 +138,6 @@ Set up automatic deployment:
 ├── packages/
 │   ├── api/                # (@package/api) API client, auth, Web Worker
 │   ├── ui/                 # (@package/ui) Cross-app UI (logos, layouts, icons)
-│   ├── react/              # (@package/react) Framework-agnostic React utilities
 │   ├── mocks/              # (@package/mocks) Mocks Server admin client
 │   └── storybook/          # (@package/storybook) Storybook decorators
 ├── configs/                # Shared ESLint, Tailwind, TypeScript, Vite configs

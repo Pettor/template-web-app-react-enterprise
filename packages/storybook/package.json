@@ -7,6 +7,10 @@
   "main": "./src/index.ts",
   "type": "module",
   "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules"
@@ -19,7 +23,6 @@
   },
   "devDependencies": {
     "@config/eslint": "workspace:*",
-    "@config/typescript": "workspace:*",
-    "@package/react": "workspace:*"
+    "@config/typescript": "workspace:*"
   }
 }

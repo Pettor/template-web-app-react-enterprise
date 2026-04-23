@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
+import { useDocumentTitle } from "@package/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useDocumentTitle } from "usehooks-ts";
 import { useForgotPasswordRoute } from "./-UseForgotPasswordRoute";
 import { RouteError } from "~/core/routes/logic/RouteError";
 import { ForgotPasswordView } from "~/views/forgot-password/ForgotPasswordView";

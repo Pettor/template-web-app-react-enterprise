@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
+import { useDocumentTitle } from "@package/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useDocumentTitle } from "usehooks-ts";
 import { useLoginRoute } from "./-UseLoginRoute";
 import { SettingsModalController } from "~/components/feedback/settings-modal/SettingsModalController";
 import { RouteError } from "~/core/routes/logic/RouteError";
