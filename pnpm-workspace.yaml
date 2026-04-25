@@ -121,7 +121,7 @@ catalogs:
     '@tanstack/react-router': 1.168.24
     '@tanstack/router-plugin': 1.167.27
   vitest:
-    vitest: 4.1.4
-    '@vitest/browser': 4.1.4
-    '@vitest/browser-playwright': 4.1.4
-    '@vitest/coverage-v8': 4.1.4
+    vitest: 4.1.5
+    '@vitest/browser': 4.1.5
+    '@vitest/browser-playwright': 4.1.5
+    '@vitest/coverage-v8': 4.1.5
