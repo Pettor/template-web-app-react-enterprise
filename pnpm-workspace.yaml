@@ -6,7 +6,7 @@ packages:
 - tools/*
 overrides:
   '@tanstack/react-query': catalog:tanstack
-  '@tanstack/query-core': 5.99.2
+  '@tanstack/query-core': 5.100.5
   react: catalog:react19
   react-dom: catalog:react19
   # Security fixes for transitive dev dependencies flagged by GitHub Dependabot.
@@ -117,7 +117,7 @@ catalogs:
     vite-plugin-pwa: 1.2.0
   tanstack:
     '@tanstack/react-form': 1.29.1
-    '@tanstack/react-query': 5.99.2
+    '@tanstack/react-query': 5.100.5
     '@tanstack/react-router': 1.168.24
     '@tanstack/router-plugin': 1.167.27
   vitest:
