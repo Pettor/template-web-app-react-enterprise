@@ -31,7 +31,9 @@ export default defineConfig(({ mode, command }) => {
       return mergeConfig(config, {
         server: {
           cors: true,
+          // basicSsl() below provides the self-signed cert; https: true signals intent
           https: true,
+          port: 5173,
         },
         plugins: [
           basicSsl(),

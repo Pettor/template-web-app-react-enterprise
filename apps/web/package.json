@@ -19,7 +19,7 @@
     "deploy:demo": "pnpm deploy:demo:build && pnpm deploy:move",
     "deploy:demo:build": "pnpm build:demo",
     "deploy:move": "move-cli dist \"../../output/deployment/app\" --mkdirp",
-    "test:e2e:env": "pnpm dev:mocks"
+    "test:e2e:env": "vite --mode mocks --port 4173 --strictPort"
   },
   "dependencies": {
     "@config/tailwind": "workspace:*",
