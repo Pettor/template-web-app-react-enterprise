@@ -26,4 +26,7 @@ export const OfflineDialog: Story = {
       </Button>
     );
   },
+  play: async ({ canvas, userEvent }) => {
+    await userEvent.click(canvas.getByRole("button", { name: "Show Toast" }));
+  },
 };

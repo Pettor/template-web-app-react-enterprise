@@ -50,6 +50,20 @@ export default defineConfig({
           },
         },
       },
+      {
+        extends: true,
+        resolve: {
+          alias: {
+            "~": webAppSrc,
+          },
+          tsconfigPaths: true,
+        },
+        test: {
+          name: "unit",
+          environment: "node",
+          include: [`${webAppSrc}/**/*.test.{ts,tsx}`],
+        },
+      },
     ],
   },
 });
