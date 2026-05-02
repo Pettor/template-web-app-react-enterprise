@@ -118,8 +118,8 @@ catalogs:
   tanstack:
     '@tanstack/react-form': 1.29.1
     '@tanstack/react-query': 5.100.8
-    '@tanstack/react-router': 1.168.24
-    '@tanstack/router-plugin': 1.167.27
+    '@tanstack/react-router': 1.169.1
+    '@tanstack/router-plugin': 1.167.32
   vitest:
     vitest: 4.1.5
     '@vitest/browser': 4.1.5
