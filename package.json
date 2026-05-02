@@ -43,7 +43,7 @@
     "lint-staged": "16.4.0",
     "move-cli": "catalog:common",
     "prettier": "3.8.3",
-    "prettier-plugin-tailwindcss": "0.7.2",
+    "prettier-plugin-tailwindcss": "0.7.3",
     "rimraf": "catalog:common",
     "sherif": "1.11.1",
     "tsup": "8.5.1",
