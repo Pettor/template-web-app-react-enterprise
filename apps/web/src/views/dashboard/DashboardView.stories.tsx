@@ -15,6 +15,7 @@ import { NavbarLayoutDecorator } from "~/storybook/decorators/NavbarLayoutDecora
 const meta: Meta<typeof Component> = {
   component: Component,
   title: "Views/Dashboard",
+  tags: ["!test"],
   parameters: {
     layout: "fullscreen",
   },

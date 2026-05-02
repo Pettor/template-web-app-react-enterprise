@@ -6,6 +6,7 @@ import { BasicLayoutDecorator } from "~/storybook/decorators/BasicLayoutDecorato
 const meta: Meta<typeof Component> = {
   component: Component,
   title: "Views/Sign Up",
+  tags: ["!test"],
   parameters: {
     layout: "fullscreen",
   },

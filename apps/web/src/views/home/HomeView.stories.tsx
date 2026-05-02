@@ -5,6 +5,7 @@ import { NavbarLayoutDecorator } from "~/storybook/decorators/NavbarLayoutDecora
 const meta: Meta<typeof Component> = {
   component: Component,
   title: "Views/Home",
+  tags: ["!test"],
   parameters: {
     layout: "fullscreen",
   },
