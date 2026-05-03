@@ -102,7 +102,7 @@
       "outputs": ["coverage/**", ".coverage/**"]
     },
     "test:coverage:ci": {
-      "cache": true,
+      "cache": false,
       "dependsOn": ["^build:libs"],
       "inputs": ["src/**", "test/**", "vitest.config.ts", "package.json", "tsconfig.json"],
       "outputs": ["coverage/**"]
