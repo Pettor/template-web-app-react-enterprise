@@ -2,6 +2,7 @@ import { toast, Button } from "@heroui/react";
 import { CommonDecorator, ToastDecorator } from "@package/storybook";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useIntl } from "react-intl";
+import { expect, within } from "storybook/test";
 import { PwaOfflineDialogProps } from "./PwaOfflineDialog";
 
 const meta: Meta = {
@@ -28,5 +29,8 @@ export const OfflineDialog: Story = {
   },
   play: async ({ canvas, userEvent }) => {
     await userEvent.click(canvas.getByRole("button", { name: "Show Toast" }));
+
+    const body = within(document.body);
+    await expect(body.getByText(/ready to work offline/i)).toBeInTheDocument();
   },
 };

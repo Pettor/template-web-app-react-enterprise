@@ -2,6 +2,7 @@ import { Button, toast } from "@heroui/react";
 import { CommonDecorator, ToastDecorator } from "@package/storybook";
 import type { StoryObj } from "@storybook/react-vite";
 import { useIntl } from "react-intl";
+import { expect, within } from "storybook/test";
 import { PwaUpdateDialogProps } from "./PwaUpdateDialog";
 
 const meta = {
@@ -33,5 +34,9 @@ export const UpdateDialog: Story = {
   },
   play: async ({ canvas, userEvent }) => {
     await userEvent.click(canvas.getByRole("button", { name: "Show Toast" }));
+
+    const body = within(document.body);
+    await expect(body.getByText(/A new version of App is available/i)).toBeInTheDocument();
+    await expect(body.getByRole("button", { name: /update/i })).toBeInTheDocument();
   },
 };
