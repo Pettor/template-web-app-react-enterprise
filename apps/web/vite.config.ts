@@ -49,29 +49,17 @@ export default defineConfig(({ mode, command }) => {
             },
           }),
           // Istanbul instrumentation is only active when VITE_COVERAGE is set (E2E coverage runs).
-          // cwd is set to the repo root so that test-exclude can resolve workspace package paths
-          // (e.g. packages/api/src/**) correctly — without this, paths outside apps/web are
-          // outside the cwd and the **-glob fails to match parent-directory traversal segments.
+          // Only instrument apps/web/src — packages/api and packages/ui are covered by their
+          // own dedicated test runners (unit tests and Storybook) which produce separate
+          // coverage reports that are merged later. Including them here causes path-format
+          // conflicts between Istanbul (main-thread, URL paths) and Vitest V8 (absolute paths),
+          // and API code runs in a Web Worker so window.__coverage__ can't capture it anyway.
           ...(process.env.VITE_COVERAGE
             ? [
                 istanbul({
                   cwd: repoRoot,
-                  include: [
-                    "apps/web/src/**/*.ts",
-                    "apps/web/src/**/*.tsx",
-                    "packages/api/src/**/*.ts",
-                    "packages/ui/src/**/*.ts",
-                    "packages/ui/src/**/*.tsx",
-                  ],
-                  exclude: [
-                    "node_modules",
-                    "**/*.stories.*",
-                    "**/*.test.*",
-                    "**/*.spec.*",
-                    "**/index.ts",
-                    // Storybook-only helper components are not production code
-                    "packages/ui/src/Storybook/**",
-                  ],
+                  include: ["apps/web/src/**/*.ts", "apps/web/src/**/*.tsx"],
+                  exclude: ["node_modules", "**/*.stories.*", "**/*.test.*", "**/*.spec.*", "**/index.ts"],
                   extension: [".ts", ".tsx"],
                   requireEnv: false,
                 }),
