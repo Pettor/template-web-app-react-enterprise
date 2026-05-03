@@ -19,6 +19,9 @@ export default defineConfig({
   ],
   reporter: [["list"], ["json", { outputFile: "./test-results/test-results.json" }]],
   retries: 1,
+  // The mock server is shared state — run tests serially to prevent
+  // concurrent variant mutations causing flaky failures (same as playwright.config.ts).
+  workers: 1,
   testDir: "src",
   use: {
     baseURL: "https://localhost:4173",
