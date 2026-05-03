@@ -2,7 +2,9 @@ import { describe, expect, it, vi } from "vitest";
 import { PwaUpdateDialogProps } from "./PwaUpdateDialog";
 
 describe("PwaUpdateDialogProps", () => {
-  function makeMockIntl(formatMessage = (d: { defaultMessage: string }) => d.defaultMessage) {
+  function makeMockIntl(
+    formatMessage = (d: { defaultMessage: string }, _values?: Record<string, unknown>) => d.defaultMessage
+  ) {
     return { formatMessage: vi.fn(formatMessage) };
   }
 
@@ -13,7 +15,7 @@ describe("PwaUpdateDialogProps", () => {
   });
 
   it("formats the message with the provided appName", () => {
-    const intl = makeMockIntl((d, values) => {
+    const intl = makeMockIntl((d: { defaultMessage: string }, values?: Record<string, unknown>) => {
       if (values && "appName" in values) return `A new version of ${values.appName} is available`;
       return d.defaultMessage;
     });
