@@ -5,15 +5,9 @@ export default defineConfig({
     environment: "node",
     coverage: {
       provider: "v8",
-      reporter: ["cobertura", "text"],
+      reporter: ["cobertura", "text", "json"],
       include: ["src/**/*.ts"],
       exclude: ["src/index.ts", "src/**/*.d.ts", "src/**/*.test.ts"],
-      thresholds: {
-        lines: 85,
-        functions: 85,
-        branches: 85,
-        statements: 85,
-      },
     },
   },
 });

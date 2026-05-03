@@ -24,13 +24,7 @@ export default defineConfig({
         "**/{storybook,Storybook}/**/*.{ts,tsx}",
         "**/apps/web/src/views/**",
       ],
-      reporter: ["cobertura"],
-      thresholds: {
-        lines: 85,
-        functions: 85,
-        branches: 85,
-        statements: 85,
-      },
+      reporter: ["cobertura", "json"],
     },
     projects: [
       {

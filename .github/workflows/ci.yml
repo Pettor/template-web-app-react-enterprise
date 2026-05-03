@@ -315,10 +315,28 @@ jobs:
         run: pnpm test:coverage:ci
         continue-on-error: false
 
+      - name: Run E2E tests with coverage
+        run: pnpm --filter=@app/e2e test:e2e:coverage
+        continue-on-error: false
+
+      - name: Merge coverage reports
+        run: |
+          mkdir -p .nyc_all
+          [ -f apps/storybook/coverage/coverage-final.json ] && cp apps/storybook/coverage/coverage-final.json .nyc_all/storybook.json || true
+          [ -f packages/api/coverage/coverage-final.json ] && cp packages/api/coverage/coverage-final.json .nyc_all/api.json || true
+          if [ -d apps/e2e/.nyc_output ] && ls apps/e2e/.nyc_output/*.json 1>/dev/null 2>&1; then
+            cp apps/e2e/.nyc_output/*.json .nyc_all/
+          fi
+          node_modules/.bin/nyc merge .nyc_all
+          mkdir -p .nyc_merged && mv coverage.json .nyc_merged/merged.json
+          mkdir -p output/coverage
+          node_modules/.bin/nyc report --temp-dir=.nyc_merged --reporter=cobertura --report-dir=output/coverage
+          mv output/coverage/cobertura-coverage.xml output/coverage/combined.xml
+
       - name: Code coverage report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename: "**/output/coverage/*.xml"
+          filename: "output/coverage/combined.xml"
           badge: true
           fail_below_min: true
           format: markdown
@@ -326,7 +344,7 @@ jobs:
           hide_complexity: true
           indicators: true
           output: both
-          thresholds: "50 75"
+          thresholds: "85 85"
 
       - name: Update summary with coverage report
         run: |
