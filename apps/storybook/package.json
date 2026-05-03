@@ -14,7 +14,7 @@
     "deploy:move": "move-cli storybook-static \"../../output/deployment/storybook\" --mkdirp",
     "test": "vitest",
     "test:ci": "vitest --outputFile=.test-results/unit-test.xml --reporter=junit",
-    "test:coverage": "vitest run --coverage",
+    "test:coverage": "vitest run --coverage --project=unit",
     "test:coverage:ci": "pnpm test:coverage && pnpm test:coverage:ci:move",
     "test:coverage:ci:move": "move-cli ./coverage/cobertura-coverage.xml \"../../output/coverage/web.xml\" --mkdirp",
     "storybook": "storybook dev -p 9050",
