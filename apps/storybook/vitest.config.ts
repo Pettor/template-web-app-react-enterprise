@@ -37,7 +37,22 @@ export default defineConfig({
           tsconfigPaths: true,
         },
         optimizeDeps: {
-          include: ["react/jsx-dev-runtime"],
+          include: [
+            "react/jsx-dev-runtime",
+            "@storybook/addon-themes",
+            "react-intl",
+            "@heroicons/react/24/outline",
+            "@heroicons/react/20/solid",
+            "@heroui/react",
+            "@tanstack/react-form",
+            "@tanstack/react-router",
+            "@faker-js/faker",
+            "clsx",
+            "zod",
+          ],
+          // storybook/test is a virtual module provided by storybookTest() plugin at runtime;
+          // excluding it prevents esbuild from failing the dependency scan before the plugin loads.
+          exclude: ["storybook/test"],
         },
         plugins: [react(), tailwindcss(), storybookTest({ configDir: path.join(__dirname, ".storybook") })],
         test: {
@@ -48,6 +63,20 @@ export default defineConfig({
             provider: playwright(),
             instances: [{ browser: "chromium" }],
           },
+        },
+      },
+      {
+        extends: true,
+        resolve: {
+          alias: {
+            "~": webAppSrc,
+          },
+          tsconfigPaths: true,
+        },
+        test: {
+          name: "unit",
+          environment: "node",
+          include: [`${webAppSrc}/**/*.test.{ts,tsx}`],
         },
       },
     ],

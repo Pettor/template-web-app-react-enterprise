@@ -26,9 +26,17 @@ export const Default: Story = {
 
 export const Interaction: Story = {
   args: defaultArgs,
-  play: async ({ canvas }) => {
-    await expect(canvas.getByTestId("quick-menu__search-button")).toBeInTheDocument();
-    await expect(canvas.getByTestId("quick-menu__settings-button")).toBeInTheDocument();
-    await expect(canvas.getByTestId("quick-menu__logout-button")).toBeInTheDocument();
+  play: async ({ canvas, userEvent }) => {
+    const searchButton = canvas.getByTestId("quick-menu__search-button");
+    const settingsButton = canvas.getByTestId("quick-menu__settings-button");
+    const logoutButton = canvas.getByTestId("quick-menu__logout-button");
+
+    await expect(searchButton).toBeInTheDocument();
+    await expect(settingsButton).toBeInTheDocument();
+    await expect(logoutButton).toBeInTheDocument();
+
+    await userEvent.click(searchButton);
+    await userEvent.click(settingsButton);
+    await userEvent.click(logoutButton);
   },
 } satisfies Story;

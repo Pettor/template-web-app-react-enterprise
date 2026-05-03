@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect } from "storybook/test";
 import { StorybookNavbarContentComponent } from "../../Storybook/Components/StorybookNavbarContentComponent";
 import { Navbar as Component } from "./Navbar";
 import type { NavbarProps as Props } from "./Navbar";
@@ -38,6 +39,10 @@ const defaultArgs = {
 
 export const Standard: Story = {
   args: defaultArgs,
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText("This is a Header")).toBeInTheDocument();
+    await expect(canvas.getByRole("banner")).toBeInTheDocument();
+  },
 };
 
 export const WithComponents: Story = {
