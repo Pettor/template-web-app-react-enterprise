@@ -25,6 +25,7 @@ export default defineConfig({
         "**/{storybook,Storybook}/**/*.{ts,tsx}",
         "**/apps/web/src/views/**",
         "**/apps/web/src/routes/**",
+        "**/core/social-links/AppSocialLinks.ts",
       ],
       reporter: ["cobertura", "json"],
     },
