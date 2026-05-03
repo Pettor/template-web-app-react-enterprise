@@ -25,6 +25,12 @@ export default defineConfig({
         "**/apps/web/src/views/**",
       ],
       reporter: ["cobertura"],
+      thresholds: {
+        lines: 85,
+        functions: 85,
+        branches: 85,
+        statements: 85,
+      },
     },
     projects: [
       {
