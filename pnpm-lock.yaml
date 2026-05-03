@@ -518,6 +518,9 @@ importers:
       vite:
         specifier: catalog:vite
         version: 8.0.10(@types/node@24.12.2)(esbuild@0.27.0)(jiti@2.6.1)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.3)
+      vite-plugin-http2-proxy:
+        specifier: catalog:vite
+        version: 0.5.1(vite@8.0.10(@types/node@24.12.2)(esbuild@0.27.0)(jiti@2.6.1)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.3))
       vite-plugin-istanbul:
         specifier: catalog:coverage
         version: 8.0.0(vite@8.0.10(@types/node@24.12.2)(esbuild@0.27.0)(jiti@2.6.1)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.3))

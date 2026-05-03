@@ -59,6 +59,7 @@
     "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:typescript",
     "vite": "catalog:vite",
+    "vite-plugin-http2-proxy": "catalog:vite",
     "vite-plugin-istanbul": "catalog:coverage",
     "vite-plugin-pwa": "catalog:vite",
     "vitest": "catalog:vitest",
