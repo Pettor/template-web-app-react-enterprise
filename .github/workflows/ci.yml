@@ -327,29 +327,6 @@ jobs:
           if [ -d apps/e2e/.nyc_output ] && ls apps/e2e/.nyc_output/*.json 1>/dev/null 2>&1; then
             cp apps/e2e/.nyc_output/*.json .nyc_all/
           fi
-          # Normalize ALL coverage JSONs in .nyc_all/ — convert absolute filesystem paths
-          # and URL-style paths to repo-root-relative paths so nyc merge deduplicates them.
-          node -e "
-            const fs = require('fs');
-            const path = require('path');
-            const cwd = process.cwd();
-            const dir = '.nyc_all';
-            const files = fs.readdirSync(dir).filter(f => f.endsWith('.json')).map(f => path.join(dir, f));
-            for (const f of files) {
-              const data = JSON.parse(fs.readFileSync(f, 'utf8'));
-              const normalized = {};
-              for (const [key, val] of Object.entries(data)) {
-                let rel = key;
-                if (path.isAbsolute(key)) {
-                  rel = path.relative(cwd, key);
-                }
-                if (val && typeof val === 'object' && 'path' in val) val.path = rel;
-                normalized[rel] = val;
-              }
-              fs.writeFileSync(f, JSON.stringify(normalized));
-              console.log('Normalized', f, '-', Object.keys(normalized).length, 'entries');
-            }
-          "
           node_modules/.bin/nyc merge .nyc_all
           mkdir -p .nyc_merged && mv coverage.json .nyc_merged/merged.json
           mkdir -p output/coverage
