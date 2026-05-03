@@ -6,6 +6,8 @@ on:
 
 permissions:
   contents: read
+  checks: write
+  id-token: write
 
 env:
   COPILOT_AGENT_FIREWALL_ALLOW_LIST_ADDITIONS: "playwright.dev,storybook.js.org"
