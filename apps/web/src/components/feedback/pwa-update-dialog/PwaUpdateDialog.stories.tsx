@@ -36,7 +36,7 @@ export const UpdateDialog: Story = {
     await userEvent.click(canvas.getByRole("button", { name: "Show Toast" }));
 
     const body = within(document.body);
-    await expect(body.getByText(/A new version of App is available/i)).toBeInTheDocument();
-    await expect(body.getByRole("button", { name: /update/i })).toBeInTheDocument();
+    await expect(await body.findByText(/A new version of App is available/i)).toBeInTheDocument();
+    await expect(await body.findByRole("button", { name: /update/i })).toBeInTheDocument();
   },
 };

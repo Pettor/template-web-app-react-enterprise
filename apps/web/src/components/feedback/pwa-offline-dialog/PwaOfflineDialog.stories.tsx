@@ -31,6 +31,6 @@ export const OfflineDialog: Story = {
     await userEvent.click(canvas.getByRole("button", { name: "Show Toast" }));
 
     const body = within(document.body);
-    await expect(body.getByText(/ready to work offline/i)).toBeInTheDocument();
+    await expect(await body.findByText(/ready to work offline/i)).toBeInTheDocument();
   },
 };
