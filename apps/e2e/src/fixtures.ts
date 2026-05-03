@@ -12,7 +12,6 @@ export { expect };
  * the global coverage teardown.
  */
 export const test = base.extend<{ page: Page }>({
-  // eslint-disable-next-line no-empty-pattern
   page: async ({ page }, use) => {
     await use(page);
 
