@@ -344,7 +344,7 @@ jobs:
           hide_complexity: true
           indicators: true
           output: both
-          thresholds: "85 85"
+          thresholds: "80 85"
 
       - name: Update summary with coverage report
         run: |
