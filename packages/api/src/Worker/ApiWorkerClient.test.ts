@@ -210,6 +210,129 @@ describe("ApiWorkerClient", () => {
         })
       );
     });
+
+    it("sends a POST request without a body when data is omitted", async () => {
+      const mockClient = makeMockClient({ json: vi.fn().mockResolvedValue({}) });
+      const workerClient = new ApiWorkerClient(mockClient, ALLOWED);
+
+      await workerClient.post("/api/users/self-register");
+
+      expect(mockClient.request).toHaveBeenCalledWith(
+        "/api/users/self-register",
+        expect.objectContaining({ method: "POST", body: undefined })
+      );
+    });
+  });
+
+  describe("patch", () => {
+    it("sends a PATCH request with JSON body", async () => {
+      const mockClient = makeMockClient({ json: vi.fn().mockResolvedValue({}) });
+      const workerClient = new ApiWorkerClient(mockClient, ALLOWED);
+      const payload = { firstName: "Jane" };
+
+      await workerClient.patch("/api/personal/profile", payload);
+
+      expect(mockClient.request).toHaveBeenCalledWith(
+        "/api/personal/profile",
+        expect.objectContaining({
+          method: "PATCH",
+          body: JSON.stringify(payload),
+        })
+      );
+    });
+
+    it("sends a PATCH request without a body when data is omitted", async () => {
+      const mockClient = makeMockClient();
+      const workerClient = new ApiWorkerClient(mockClient, ALLOWED);
+
+      await workerClient.patch("/api/personal/profile");
+
+      expect(mockClient.request).toHaveBeenCalledWith(
+        "/api/personal/profile",
+        expect.objectContaining({ method: "PATCH", body: undefined })
+      );
+    });
+  });
+
+  describe("put", () => {
+    it("sends a PUT request with JSON body", async () => {
+      const mockClient = makeMockClient({ json: vi.fn().mockResolvedValue({}) });
+      const workerClient = new ApiWorkerClient(mockClient, ALLOWED);
+      const payload = { email: "new@example.com" };
+
+      await workerClient.put("/api/personal/profile", payload);
+
+      expect(mockClient.request).toHaveBeenCalledWith(
+        "/api/personal/profile",
+        expect.objectContaining({
+          method: "PUT",
+          body: JSON.stringify(payload),
+        })
+      );
+    });
+
+    it("sends a PUT request without a body when data is omitted", async () => {
+      const mockClient = makeMockClient();
+      const workerClient = new ApiWorkerClient(mockClient, ALLOWED);
+
+      await workerClient.put("/api/personal/profile");
+
+      expect(mockClient.request).toHaveBeenCalledWith(
+        "/api/personal/profile",
+        expect.objectContaining({ method: "PUT", body: undefined })
+      );
+    });
+  });
+
+  describe("delete", () => {
+    it("sends a DELETE request to an allowed URL", async () => {
+      const mockClient = makeMockClient();
+      const workerClient = new ApiWorkerClient(mockClient, ALLOWED);
+
+      await workerClient.delete("/api/personal/profile");
+
+      expect(mockClient.request).toHaveBeenCalledWith(
+        "/api/personal/profile",
+        expect.objectContaining({ method: "DELETE" })
+      );
+    });
+
+    it("throws when the URL is not in the allowed list", async () => {
+      const mockClient = makeMockClient();
+      const workerClient = new ApiWorkerClient(mockClient, ALLOWED);
+
+      await expect(workerClient.delete("/api/admin/users")).rejects.toThrow("URL /api/admin/users is not allowed");
+    });
+  });
+
+  describe("constructor tenant", () => {
+    it("uses root as the default tenant header", async () => {
+      const mockClient = makeMockClient({ json: vi.fn().mockResolvedValue({}) });
+      const workerClient = new ApiWorkerClient(mockClient, ALLOWED);
+
+      await workerClient.get("/api/application/info");
+
+      expect(mockClient.request).toHaveBeenCalledWith(
+        "/api/application/info",
+        expect.objectContaining({
+          headers: expect.objectContaining({ tenant: "root" }),
+        })
+      );
+    });
+
+    it("uses the provided tenant header when specified", async () => {
+      const mockClient = makeMockClient({ json: vi.fn().mockResolvedValue({}) });
+      const workerClient = new ApiWorkerClient(mockClient, ALLOWED, "acme");
+
+      await workerClient.get("/api/application/info");
+
+      expect(mockClient.request).toHaveBeenCalledWith(
+        "/api/application/info",
+        expect.objectContaining({
+          headers: expect.objectContaining({ tenant: "acme" }),
+        })
+      );
+    });
   });
 
   describe("_requestWithRetry (401 handling)", () => {
