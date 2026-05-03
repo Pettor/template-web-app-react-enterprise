@@ -327,6 +327,26 @@ jobs:
           if [ -d apps/e2e/.nyc_output ] && ls apps/e2e/.nyc_output/*.json 1>/dev/null 2>&1; then
             cp apps/e2e/.nyc_output/*.json .nyc_all/
           fi
+          # Normalize absolute paths to relative paths in Vitest coverage JSONs so they
+          # merge correctly with E2E Istanbul coverage which uses repo-root-relative paths.
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+            const cwd = process.cwd();
+            const files = ['.nyc_all/storybook.json', '.nyc_all/api.json'];
+            for (const f of files) {
+              if (!fs.existsSync(f)) continue;
+              const data = JSON.parse(fs.readFileSync(f, 'utf8'));
+              const normalized = {};
+              for (const [key, val] of Object.entries(data)) {
+                const rel = path.isAbsolute(key) ? path.relative(cwd, key) : key;
+                if (val && typeof val === 'object' && 'path' in val) val.path = rel;
+                normalized[rel] = val;
+              }
+              fs.writeFileSync(f, JSON.stringify(normalized));
+              console.log('Normalized', f, '-', Object.keys(normalized).length, 'entries');
+            }
+          "
           node_modules/.bin/nyc merge .nyc_all
           mkdir -p .nyc_merged && mv coverage.json .nyc_merged/merged.json
           mkdir -p output/coverage
