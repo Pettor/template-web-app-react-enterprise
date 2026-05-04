@@ -23,8 +23,10 @@ export default defineConfig({
         "**/src/**/index.ts",
         "**/{storybook,Storybook}/**/*.{ts,tsx}",
         "**/apps/web/src/views/**",
+        "**/apps/web/src/routes/**",
+        "**/core/social-links/AppSocialLinks.ts",
       ],
-      reporter: ["cobertura"],
+      reporter: ["cobertura", "json"],
     },
     projects: [
       {
@@ -77,6 +79,8 @@ export default defineConfig({
           name: "unit",
           environment: "node",
           include: [`${webAppSrc}/**/*.test.{ts,tsx}`],
+          // Force exit after unit tests — prevents hanging async ops in Node env
+          exit: true,
         },
       },
     ],

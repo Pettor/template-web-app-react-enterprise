@@ -19,7 +19,8 @@
     "deploy:demo": "pnpm deploy:demo:build && pnpm deploy:move",
     "deploy:demo:build": "pnpm build:demo",
     "deploy:move": "move-cli dist \"../../output/deployment/app\" --mkdirp",
-    "test:e2e:env": "vite --mode mocks --port 4173 --strictPort"
+    "test:e2e:env": "vite --mode mocks --port 4173 --strictPort",
+    "test:e2e:env:coverage": "cross-env VITE_COVERAGE=true vite --mode mocks --port 4173 --strictPort"
   },
   "dependencies": {
     "@config/tailwind": "workspace:*",
@@ -53,11 +54,13 @@
     "@vitejs/plugin-basic-ssl": "catalog:vite",
     "@vitejs/plugin-react": "catalog:vite",
     "babel-plugin-react-compiler": "catalog:react19",
+    "cross-env": "catalog:common",
     "storybook": "catalog:storybook",
     "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:typescript",
     "vite": "catalog:vite",
     "vite-plugin-http2-proxy": "catalog:vite",
+    "vite-plugin-istanbul": "catalog:coverage",
     "vite-plugin-pwa": "catalog:vite",
     "vitest": "catalog:vitest",
     "workbox-window": "catalog:common"

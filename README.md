@@ -2,6 +2,7 @@
 
 [![GitHub](https://img.shields.io/badge/license-MIT-green)](https://github.com/Pettor/template-web-app-react-enterprise/blob/main/LICENSE)
 [![Actions Main](../../actions/workflows/main.yml/badge.svg)](../../actions/workflows/main.yml)
+[![Coverage](https://img.shields.io/badge/coverage-%E2%89%A585%25-brightgreen)](../../actions/workflows/ci.yml)
 [![Storybook](https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg)](https://pettor.github.io/template-web-app-react-enterprise/storybook/)
 
 A modern, production-ready React web application template designed to jumpstart your next enterprise project with industry best practices, comprehensive tooling, and a robust development workflow.

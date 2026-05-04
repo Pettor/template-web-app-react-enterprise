@@ -108,6 +108,9 @@ catalogs:
   validation:
     '@hookform/resolvers': 5.2.2
     zod: 4.4.2
+  coverage:
+    nyc: 18.0.0
+    vite-plugin-istanbul: 8.0.0
   vite:
     '@rolldown/plugin-babel': 0.2.3
     '@vitejs/plugin-basic-ssl': 2.3.0

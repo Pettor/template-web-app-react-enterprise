@@ -26,11 +26,17 @@ export const FullMedium: Story = {
     appName: "My App",
     size: "medium",
   },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText("My App")).toBeInTheDocument();
+  },
 };
 
 export const FullLarge: Story = {
   args: {
     appName: "My App",
     size: "large",
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText("My App")).toBeInTheDocument();
   },
 };

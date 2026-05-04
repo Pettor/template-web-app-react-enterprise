@@ -8,7 +8,8 @@
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
     "dev:mocks:cli": "mocks-server",
-    "test:e2e:env": "mocks-server --no-plugins.inquirerCli.enabled --log=silent"
+    "test:e2e:env": "mocks-server --no-plugins.inquirerCli.enabled --log=silent",
+    "test:e2e:env:coverage": "mocks-server --no-plugins.inquirerCli.enabled --log=silent"
   },
   "devDependencies": {
     "@config/eslint": "workspace:*",

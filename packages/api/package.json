@@ -19,7 +19,8 @@
     "test": "vitest run",
     "test:ci": "vitest run --reporter=junit --outputFile=.test-results/unit-test.xml",
     "test:coverage": "vitest run --coverage",
-    "test:coverage:ci": "pnpm test:coverage"
+    "test:coverage:ci": "pnpm test:coverage && pnpm test:coverage:ci:move",
+    "test:coverage:ci:move": "move-cli ./coverage/cobertura-coverage.xml ../../output/coverage/api.xml --mkdirp"
   },
   "peerDependencies": {
     "@tanstack/react-query": ">=5.0.0",
@@ -33,6 +34,7 @@
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
     "@vitest/coverage-v8": "catalog:vitest",
+    "move-cli": "catalog:common",
     "vite": "catalog:vite",
     "vitest": "catalog:vitest",
     "zod": "catalog:validation"
