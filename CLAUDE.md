@@ -33,8 +33,8 @@ This file is the **rules** layer (what you must do); `docs/` is the **reference*
 
 - `pnpm test` - Run all unit/component tests with Vitest (browser-based via Playwright)
 - `pnpm test:coverage` - Run tests with Cobertura coverage report
-- `pnpm test:e2e` - Run Playwright E2E tests (auto-starts dev server)
-- `pnpm test:e2e:headless` - Run E2E tests in headless mode
+- `pnpm test:e2e` - Run E2E tests with Playwright UI (starts dev server + mocks automatically)
+- `pnpm test:e2e:ci` - Run E2E tests headless in the terminal (used by CI)
 
 ### Code Quality
 
@@ -290,7 +290,7 @@ Files prefixed with `-` are ignored by TanStack Router. Detail: [`docs/patterns.
 - Dev server auto-starts on test run
 - Uses `https://localhost:5173` with HTTPS certificate bypass
 - Screenshots, videos, and traces captured on failure
-- Run: `pnpm test:e2e`
+- Run: `pnpm test:e2e` (Playwright UI) or `pnpm test:e2e:ci` (headless, for CI)
 
 ### Storybook Component Testing
 
