@@ -77,9 +77,21 @@
     "test:e2e": {
       "cache": false,
       "dependsOn": ["^build:libs"],
+      "inputs": ["src/**", "playwright.ui.config.ts", "package.json"],
+      "persistent": true
+    },
+    "test:e2e:ci": {
+      "cache": false,
+      "dependsOn": ["^build:libs"],
       "inputs": ["src/**", "playwright.config.ts", "package.json"],
       "outputs": [".test-results/**", "test-results/**"],
       "persistent": false
+    },
+    "test:e2e:ui": {
+      "cache": false,
+      "dependsOn": ["^build:libs"],
+      "inputs": ["src/**", "playwright.ui.config.ts", "package.json"],
+      "persistent": true
     },
     "test:e2e:coverage": {
       "cache": false,
