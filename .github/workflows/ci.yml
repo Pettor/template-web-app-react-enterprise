@@ -317,6 +317,12 @@ jobs:
         run: pnpm test:coverage:ci
         continue-on-error: false
 
+      - name: Run storybook coverage
+        run: pnpm --filter=@app/storybook test:coverage:storybook:ci
+        # Storybook runs in Chromium — allow extra time and don't fail CI if it hangs
+        continue-on-error: true
+        timeout-minutes: 8
+
       - name: Run E2E tests with coverage
         run: pnpm --filter=@app/e2e test:e2e:coverage
         continue-on-error: false
@@ -331,11 +337,13 @@ jobs:
           #   - Merging additively gives wrong line counts (e.g. 1/10 instead of 100%).
           # Instead, we merge at the cobertura XML level, taking max hit count per line.
           #   - web.xml: storybook unit tests (V8, correct for unit-tested files)
+          #   - web-storybook.xml: storybook browser tests (V8, covers packages/ui)
           #   - e2e.xml: E2E Istanbul coverage (correct for browser-exercised files)
           #   - api.xml: API unit tests (V8, covers packages/api/src/**)
           node tools/merge-coverage.js \
             output/coverage/combined.xml \
             output/coverage/web.xml \
+            output/coverage/web-storybook.xml \
             output/coverage/e2e.xml \
             output/coverage/api.xml
 

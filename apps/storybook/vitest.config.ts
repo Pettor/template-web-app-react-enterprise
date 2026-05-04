@@ -12,7 +12,6 @@ const webAppSrc = path.resolve(path.dirname(require.resolve("@app/web/package.js
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   test: {
-    exit: true,
     coverage: {
       allowExternal: true,
       include: ["**/apps/**/src/**/*.{ts,tsx}", "**/packages/ui/**/src/**/*.{ts,tsx}"],
@@ -80,6 +79,8 @@ export default defineConfig({
           name: "unit",
           environment: "node",
           include: [`${webAppSrc}/**/*.test.{ts,tsx}`],
+          // Force exit after unit tests — prevents hanging async ops in Node env
+          exit: true,
         },
       },
     ],

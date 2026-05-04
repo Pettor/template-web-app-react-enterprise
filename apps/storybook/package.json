@@ -17,6 +17,9 @@
     "test:coverage": "vitest run --coverage --project=unit",
     "test:coverage:ci": "pnpm test:coverage && pnpm test:coverage:ci:move",
     "test:coverage:ci:move": "move-cli ./coverage/cobertura-coverage.xml \"../../output/coverage/web.xml\" --mkdirp",
+    "test:coverage:storybook": "vitest run --coverage --project=storybook",
+    "test:coverage:storybook:ci": "pnpm test:coverage:storybook && pnpm test:coverage:storybook:ci:move",
+    "test:coverage:storybook:ci:move": "move-cli ./coverage/cobertura-coverage.xml \"../../output/coverage/web-storybook.xml\" --mkdirp",
     "storybook": "storybook dev -p 9050",
     "storybook:build": "storybook build -o storybook-static",
     "storybook:nopen": "pnpm storybook --no-open"
