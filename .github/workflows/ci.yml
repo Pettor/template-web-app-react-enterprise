@@ -333,7 +333,7 @@ jobs:
           #   - web.xml: storybook unit tests (V8, correct for unit-tested files)
           #   - e2e.xml: E2E Istanbul coverage (correct for browser-exercised files)
           #   - api.xml: API unit tests (V8, covers packages/api/src/**)
-          python3 tools/merge-coverage.py \
+          node tools/merge-coverage.js \
             output/coverage/combined.xml \
             output/coverage/web.xml \
             output/coverage/e2e.xml \
