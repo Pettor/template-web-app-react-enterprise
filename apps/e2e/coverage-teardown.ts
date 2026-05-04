@@ -19,7 +19,10 @@ export default async function coverageTeardown(): Promise<void> {
     return;
   }
 
-  const reportDir = path.resolve(cwd, "../../output/coverage");
+  // Run nyc from the repo root so that relative paths stored by Istanbul
+  // (e.g. "apps/web/src/...") resolve correctly to actual source files.
+  const repoRoot = path.resolve(cwd, "../..");
+  const reportDir = path.resolve(repoRoot, "output/coverage");
   mkdirSync(reportDir, { recursive: true });
 
   const nyc = path.resolve(cwd, "node_modules/.bin/nyc");
@@ -27,7 +30,7 @@ export default async function coverageTeardown(): Promise<void> {
   console.log("[coverage] Generating E2E coverage report…");
   execFileSync(nyc, ["report", `--temp-dir=${nycOutputDir}`, "--reporter=cobertura", `--report-dir=${reportDir}`], {
     stdio: "inherit",
-    cwd,
+    cwd: repoRoot,
   });
 
   const src = path.join(reportDir, "cobertura-coverage.xml");
