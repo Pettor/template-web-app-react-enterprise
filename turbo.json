@@ -9,7 +9,7 @@
     },
     "build": {
       "dependsOn": ["^build:libs", "^build"],
-      "inputs": ["src/**", "package.json", "tsconfig.json", "vite.config.ts", "eslint.config.js"],
+      "inputs": ["src/**", "assets/**", "package.json", "tsconfig.json", "vite.config.ts", "pwa-assets.config.ts", "eslint.config.js"],
       "outputs": ["dist/**", "build/**"]
     },
     "build:libs": {
