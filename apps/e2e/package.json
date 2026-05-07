@@ -6,7 +6,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prepare": "playwright install",
+    "prepare": "playwright install chromium",
     "clean": "rimraf .test-results",
     "clean:all": "pnpm clean node_modules",
     "test:e2e": "pnpm playwright test --ui --config=playwright.ui.config.ts",

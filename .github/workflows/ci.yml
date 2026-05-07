@@ -166,9 +166,12 @@ jobs:
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
 
-      - name: Install Playwright
-        run: pnpm --filter=e2e exec playwright install --with-deps
+      - name: Install Playwright browsers
+        run: pnpm --filter=e2e exec playwright install chromium
         if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      - name: Install Playwright system dependencies
+        run: pnpm --filter=e2e exec playwright install-deps chromium
 
       - name: Run tests
         run: pnpm test:ci
@@ -238,9 +241,12 @@ jobs:
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
 
-      - name: Install Playwright
-        run: pnpm --filter=e2e exec playwright install --with-deps
+      - name: Install Playwright browsers
+        run: pnpm --filter=e2e exec playwright install chromium
         if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      - name: Install Playwright system dependencies
+        run: pnpm --filter=e2e exec playwright install-deps chromium
 
       - name: Run tests
         run: pnpm test:e2e:ci
@@ -309,9 +315,12 @@ jobs:
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
 
-      - name: Install Playwright
-        run: pnpm --filter=e2e exec playwright install --with-deps
+      - name: Install Playwright browsers
+        run: pnpm --filter=e2e exec playwright install chromium
         if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      - name: Install Playwright system dependencies
+        run: pnpm --filter=e2e exec playwright install-deps chromium
 
       - name: Run tests and coverage
         run: pnpm test:coverage:ci
