@@ -2,15 +2,15 @@ import type { ReactElement } from "react";
 import { SparklesIcon } from "@heroicons/react/20/solid";
 import { Chip, Separator } from "@heroui/react";
 import { useIntl } from "react-intl";
-import githubImgSrc from "~/assets/images/logo/github.png";
-import herouiImgSrc from "~/assets/images/logo/heroui.png";
-import mocksServerImgSrc from "~/assets/images/logo/mocks-server.png";
-import netImgSrc from "~/assets/images/logo/net.png";
-import playwrightImgSrc from "~/assets/images/logo/playwright.png";
-import reactImgSrc from "~/assets/images/logo/react.png";
-import storybookImgSrc from "~/assets/images/logo/storybook.png";
-import turborepoImgSrc from "~/assets/images/logo/turborepo.png";
-import viteImgSrc from "~/assets/images/logo/vite.png";
+import githubImgSrc from "~/assets/images/github.png";
+import herouiImgSrc from "~/assets/images/heroui.png";
+import mocksServerImgSrc from "~/assets/images/mocks-server.png";
+import netImgSrc from "~/assets/images/net.png";
+import playwrightImgSrc from "~/assets/images/playwright.png";
+import reactImgSrc from "~/assets/images/react.png";
+import storybookImgSrc from "~/assets/images/storybook.png";
+import turborepoImgSrc from "~/assets/images/turborepo.png";
+import viteImgSrc from "~/assets/images/vite.png";
 import { GridItem } from "~/components/display/grid-item/GridItem";
 
 export function HomeView(): ReactElement {
@@ -40,7 +40,7 @@ export function HomeView(): ReactElement {
               })}
               &nbsp;
             </span>
-            <span className="from-accent to-danger inline-block bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl lg:text-7xl">
+            <span className="from-accent to-danger inline-block bg-linear-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl lg:text-7xl">
               {intl.formatMessage({
                 description: "HomeView: heading - title accent",
                 defaultMessage: "React",

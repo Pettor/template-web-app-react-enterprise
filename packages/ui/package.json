@@ -14,6 +14,9 @@
     ".": "./src/index.ts",
     "./*": "./src/*"
   },
+  "bin": {
+    "generate-assets": "./scripts/generate-assets.mjs"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "clean:all": "pnpm clean node_modules",
