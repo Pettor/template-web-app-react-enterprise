@@ -1,4 +1,11 @@
 import { defineConfig } from "@vite-pwa/assets-generator/config";
+import { createRequire } from "node:module";
+import { dirname, resolve } from "node:path";
+
+const require = createRequire(import.meta.url);
+// Resolve the package root of @package/ui (main entry is src/index.ts, one level up → package root)
+const uiRoot = resolve(dirname(require.resolve("@package/ui")), "..");
+const svgPath = resolve(uiRoot, "src/Branding/assets/template-512x512.svg");
 
 export default defineConfig({
   preset: {
@@ -18,5 +25,5 @@ export default defineConfig({
       sizes: [],
     },
   },
-  images: ["src/assets/logo/template-512x512.svg"],
+  images: [svgPath],
 });

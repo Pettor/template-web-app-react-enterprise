@@ -12,7 +12,7 @@
     "dev:mocks": "vite --mode mocks",
     "lint": "eslint ./src",
     "lint:fix": "pnpm lint --fix",
-    "generate:assets": "node scripts/generate-assets.mjs",
+    "generate:assets": "generate-assets public",
     "build": "pnpm generate:assets && tsc && vite build",
     "build:demo": "tsc && vite build --mode demo",
     "deploy": "pnpm deploy:build && pnpm deploy:move",
