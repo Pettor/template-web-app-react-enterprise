@@ -18,5 +18,5 @@ export default defineConfig({
       sizes: [],
     },
   },
-  images: ["assets/template-512x512.svg"],
+  images: ["src/assets/logo/template-512x512.svg"],
 });

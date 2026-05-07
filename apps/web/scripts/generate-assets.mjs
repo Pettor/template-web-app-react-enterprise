@@ -8,7 +8,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const webDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const assetsDir = resolve(webDir, "assets");
+const assetsDir = resolve(webDir, "src/assets/logo");
 const publicDir = resolve(webDir, "public");
 
 execSync("pwa-assets-generator", { cwd: webDir, stdio: "inherit" });

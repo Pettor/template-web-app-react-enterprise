@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { GridItem as Component } from "./GridItem";
 import type { GridItemProps as ComponentProps } from "./GridItem";
-import storbookImgSrc from "~/assets/images/logo/storybook.png";
+import storbookImgSrc from "~/assets/images/storybook.png";
 
 const meta: Meta<typeof Component> = {
   title: "Display/Grid Item",
