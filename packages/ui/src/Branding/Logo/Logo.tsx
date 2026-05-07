@@ -1,4 +1,5 @@
 import type { ReactElement } from "react";
+import logoUrl from "../assets/template-512x512.svg";
 
 export interface LogoProps {
   size: "small" | "medium" | "large";
@@ -19,17 +20,8 @@ export function Logo({ size = "large" }: LogoProps): ReactElement {
   }
 
   return (
-    <div className="text-accent flex items-center">
-      <svg xmlns="http://www.w3.org/2000/svg" width={xy} height={xy} viewBox="0 0 512 512">
-        <g transform="translate(256,256)">
-          <g stroke="currentColor" strokeWidth="18" fill="none">
-            <ellipse rx="195" ry="74" />
-            <ellipse rx="195" ry="74" transform="rotate(60)" />
-            <ellipse rx="195" ry="74" transform="rotate(120)" />
-          </g>
-          <circle r="36" fill="currentColor" />
-        </g>
-      </svg>
+    <div className="flex items-center">
+      <img src={logoUrl} width={xy} height={xy} alt="Logo" />
     </div>
   );
 }
