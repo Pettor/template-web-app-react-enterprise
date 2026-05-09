@@ -25,8 +25,8 @@ catalogs:
       specifier: 12.38.0
       version: 12.38.0
     immer:
-      specifier: 11.1.4
-      version: 11.1.4
+      specifier: 11.1.8
+      version: 11.1.8
     jotai:
       specifier: 2.19.1
       version: 2.19.1
@@ -456,7 +456,7 @@ importers:
         version: 2.1.1
       immer:
         specifier: catalog:common
-        version: 11.1.4
+        version: 11.1.8
       jotai:
         specifier: catalog:common
         version: 2.19.1(@babel/core@7.29.0)(@babel/template@7.28.6)(@types/react@19.2.14)(react@19.2.5)
@@ -656,7 +656,7 @@ importers:
         version: 5.100.9(react@19.2.5)
       immer:
         specifier: catalog:common
-        version: 11.1.4
+        version: 11.1.8
       react:
         specifier: 19.2.5
         version: 19.2.5
@@ -2450,7 +2450,7 @@ packages:
     resolution: {integrity: sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==}
     engines: {node: '>= 8.0.0'}
     peerDependencies:
-      rollup: ^4.59.0
+      rollup: ^4.0.0
 
   '@rollup/pluginutils@5.2.0':
     resolution: {integrity: sha512-qWJ2ZTbmumwiLFomfzTyt5Kng4hwPi9rwCYN4SHb6eaRU1KNO4ccxINHr/VhH4GgPlt1XfSTLX2LBTme8ne4Zw==}
@@ -4736,8 +4736,8 @@ packages:
     resolution: {integrity: sha512-Hs59xBNfUIunMFgWAbGX5cq6893IbWg4KnrjbYwX3tx0ztorVgTDA6B2sxf8ejHJ4wz8BqGUMYlnzNBer5NvGg==}
     engines: {node: '>= 4'}
 
-  immer@11.1.4:
-    resolution: {integrity: sha512-XREFCPo6ksxVzP4E0ekD5aMdf8WMwmdNaz6vuvxgI40UaEiu6q3p8X52aU6GdyvLY3XXX/8R7JOTXStz/nBbRw==}
+  immer@11.1.8:
+    resolution: {integrity: sha512-/tbkHMW7y10Lx6i1crLjD4/OhNkRG+Fo7byZHtah0547nIeXYcpIXaUh0IAQY6gO5459qpGGYapcEOHtFXkIuA==}
 
   import-fresh@3.3.1:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
@@ -11550,7 +11550,7 @@ snapshots:
 
   ignore@7.0.5: {}
 
-  immer@11.1.4: {}
+  immer@11.1.8: {}
 
   import-fresh@3.3.1:
     dependencies:
