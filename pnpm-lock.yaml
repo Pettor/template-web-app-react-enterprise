@@ -186,8 +186,8 @@ catalogs:
       version: 6.0.3
   validation:
     zod:
-      specifier: 4.4.2
-      version: 4.4.2
+      specifier: 4.4.3
+      version: 4.4.3
   vite:
     '@rolldown/plugin-babel':
       specifier: 0.2.3
@@ -474,7 +474,7 @@ importers:
         version: 10.1.4(@types/react@19.2.14)(react@19.2.5)
       zod:
         specifier: catalog:validation
-        version: 4.4.2
+        version: 4.4.3
     devDependencies:
       '@config/eslint':
         specifier: workspace:*
@@ -681,7 +681,7 @@ importers:
         version: 4.1.5(@types/node@24.12.2)(@vitest/browser-playwright@4.1.5)(@vitest/coverage-v8@4.1.5)(vite@8.0.11(@types/node@24.12.2)(esbuild@0.27.0)(jiti@2.6.1)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.3))
       zod:
         specifier: catalog:validation
-        version: 4.4.2
+        version: 4.4.3
 
   packages/mocks:
     devDependencies:
@@ -7306,11 +7306,11 @@ packages:
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
-  zod@4.3.6:
-    resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
-
   zod@4.4.2:
     resolution: {integrity: sha512-IynmDyxsEsb9RKzO3J9+4SxXnl2FTFSzNBaKKaMV6tsSk0rw9gYw9gs+JFCq/qk2LCZ78KDwyj+Z289TijSkUw==}
+
+  zod@4.4.3:
+    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
 snapshots:
 
@@ -11035,8 +11035,8 @@ snapshots:
       '@babel/parser': 7.29.2
       eslint: 10.3.0(jiti@2.6.1)
       hermes-parser: 0.25.1
-      zod: 4.3.6
-      zod-validation-error: 3.5.2(zod@4.3.6)
+      zod: 4.4.2
+      zod-validation-error: 3.5.2(zod@4.4.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -14326,12 +14326,12 @@ snapshots:
     dependencies:
       zod: 3.25.76
 
-  zod-validation-error@3.5.2(zod@4.3.6):
+  zod-validation-error@3.5.2(zod@4.4.2):
     dependencies:
-      zod: 4.3.6
+      zod: 4.4.2
 
   zod@3.25.76: {}
 
-  zod@4.3.6: {}
-
   zod@4.4.2: {}
+
+  zod@4.4.3: {}
