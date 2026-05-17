@@ -15,5 +15,10 @@ export default defineConfig(() => {
         "~": webAppSrc,
       },
     },
+    server: {
+      watch: {
+        followSymlinks: true,
+      },
+    },
   });
 });
