@@ -35,7 +35,7 @@ export default defineConfig({
           alias: {
             "~": webAppSrc,
           },
-          dedupe: ["react", "react-dom"],
+          dedupe: ["react", "react-dom", "storybook"],
           tsconfigPaths: true,
         },
         optimizeDeps: {
