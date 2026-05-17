@@ -16,9 +16,10 @@
       "groupName": "dependencies",
       "matchDatasources": ["npm"],
       "matchDepTypes": ["dependencies"],
-      "matchUpdateTypes": ["major", "patch", "patch", "pin", "digest", "lockFileMaintenance", "rollback", "bump"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest", "lockFileMaintenance", "rollback", "bump"],
       "minimumReleaseAge": "7 days",
-      "semanticCommitType": "fix"
+      "semanticCommitType": "fix",
+      "separateMajorMinor": false
     }
   ],
   "schedule": ["every weekend"],
