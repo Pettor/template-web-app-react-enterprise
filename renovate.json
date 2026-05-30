@@ -18,10 +18,9 @@
       "matchDepTypes": ["dependencies"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest", "lockFileMaintenance", "rollback", "bump"],
       "minimumReleaseAge": "7 days",
-      "semanticCommitType": "fix",
-      "separateMajorMinor": false
+      "semanticCommitType": "fix"
     }
   ],
   "schedule": ["every weekend"],
-  "separateMajorMinor": true
+  "separateMajorMinor": false
 }
