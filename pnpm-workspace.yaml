@@ -61,7 +61,7 @@ catalogs:
     '@fontsource/rubik': 5.2.8
     '@heroicons/react': 2.2.0
     '@heroui/react': 3.0.5
-    'style-dictionary': 5.4.0
+    'style-dictionary': 5.4.2
   eslint:
     '@eslint/js': 10.0.1
     eslint: 10.4.1
