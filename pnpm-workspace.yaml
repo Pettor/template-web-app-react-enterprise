@@ -106,7 +106,7 @@ catalogs:
   typescript:
     typescript: 6.0.3
   validation:
-    '@hookform/resolvers': 5.2.2
+    '@hookform/resolvers': 5.4.0
     zod: 4.4.3
   coverage:
     nyc: 18.0.0
