@@ -6,6 +6,7 @@
   "packageRules": [
     {
       "groupName": "dev dependencies",
+      "groupSlug": "dev-dependencies",
       "matchDatasources": ["npm"],
       "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest", "lockFileMaintenance", "rollback", "bump"],
@@ -14,6 +15,7 @@
     },
     {
       "groupName": "dependencies",
+      "groupSlug": "all-dependencies",
       "matchDatasources": ["npm"],
       "matchDepTypes": ["dependencies"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest", "lockFileMaintenance", "rollback", "bump"],
