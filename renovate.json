@@ -1,12 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "automerge": true,
-  "extends": ["config:recommended", ":semanticCommits"],
+  "extends": [":semanticCommits"],
   "labels": ["dependency", "bot"],
   "packageRules": [
     {
       "groupName": "dev dependencies",
-      "groupSlug": "dev-dependencies",
       "matchDatasources": ["npm"],
       "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest", "lockFileMaintenance", "rollback", "bump"],
@@ -15,7 +14,6 @@
     },
     {
       "groupName": "dependencies",
-      "groupSlug": "all-dependencies",
       "matchDatasources": ["npm"],
       "matchDepTypes": ["dependencies"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest", "lockFileMaintenance", "rollback", "bump"],
