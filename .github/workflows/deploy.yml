@@ -65,11 +65,6 @@ jobs:
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
 
-      - name: Check GitHub Pages status
-        uses: crazy-max/ghaction-github-status@v5
-        with:
-          pages_threshold: major_outage
-
       - name: Create root redirect index.html
         run: |
           cat > output/deployment/index.html << 'EOF'
