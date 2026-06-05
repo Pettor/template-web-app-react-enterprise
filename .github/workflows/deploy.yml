@@ -70,17 +70,6 @@ jobs:
         with:
           pages_threshold: major_outage
 
-      - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v5
-        with:
-          build_dir: output/deployment
-          commit_message: "chore(deploy): deploy to github pages"
-          jekyll: false
-          keep_history: false
-          target_branch: deploy/main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Create root redirect index.html
         run: |
           cat > output/deployment/index.html << 'EOF'
@@ -91,3 +80,14 @@ jobs:
             </head>
           </html>
           EOF
+
+      - name: Deploy to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v5
+        with:
+          build_dir: output/deployment
+          commit_message: "chore(deploy): deploy to github pages"
+          jekyll: false
+          keep_history: false
+          target_branch: deploy/main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
