@@ -65,6 +65,17 @@ jobs:
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
 
+      - name: Create root redirect index.html
+        run: |
+          cat > output/deployment/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta http-equiv="refresh" content="0; url=/app/#/">
+            </head>
+          </html>
+          EOF
+
       - name: Check GitHub Pages status
         uses: crazy-max/ghaction-github-status@v5
         with:
