@@ -1,26 +1,25 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "automerge": true,
-  "extends": [":semanticCommits"],
+  "extends": [":semanticCommits", "config:recommended"],
   "labels": ["dependency", "bot"],
   "packageRules": [
     {
       "groupName": "dependencies",
+      "groupSlug": "prod-deps",
       "matchDatasources": ["npm"],
-      "matchDepTypes": ["dependencies", "peerDependencies", "common", "react19", "design", "tanstack", "validation"],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest", "lockFileMaintenance", "rollback", "bump"],
+      "matchDepTypes": ["dependencies"],
       "minimumReleaseAge": "7 days",
       "semanticCommitType": "fix"
     },
     {
       "groupName": "dev dependencies",
+      "groupSlug": "dev-deps",
       "matchDatasources": ["npm"],
-      "matchDepTypes": ["devDependencies", "eslint", "storybook", "playwright", "vite", "vitest", "mocks", "coverage", "typescript"],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest", "lockFileMaintenance", "rollback", "bump"],
+      "matchDepTypes": ["devDependencies"],
       "minimumReleaseAge": "7 days",
       "semanticCommitType": "chore"
     }
   ],
-  "schedule": ["every weekend"],
-  "separateMajorMinor": false
+  "schedule": ["every weekend"]
 }
