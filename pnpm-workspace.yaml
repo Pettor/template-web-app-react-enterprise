@@ -86,7 +86,7 @@ catalogs:
     '@types/react-dom': 19.2.3
     babel-plugin-react-compiler: 19.1.0-rc.3
     react: 19.2.6
-    react-dom: 19.2.6
+    react-dom: 19.2.7
   storybook:
     '@storybook/addon-a11y': 10.4.4
     '@storybook/addon-docs': 10.4.4
