@@ -5,20 +5,20 @@
   "labels": ["dependency", "bot"],
   "packageRules": [
     {
-      "groupName": "dev dependencies",
-      "matchDatasources": ["npm"],
-      "matchDepTypes": ["devDependencies"],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest", "lockFileMaintenance", "rollback", "bump"],
-      "minimumReleaseAge": "7 days",
-      "semanticCommitType": "chore"
-    },
-    {
       "groupName": "dependencies",
       "matchDatasources": ["npm"],
-      "matchDepTypes": ["dependencies"],
+      "matchDepTypes": ["dependencies", "peerDependencies", "common", "react19", "design", "tanstack", "validation"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest", "lockFileMaintenance", "rollback", "bump"],
       "minimumReleaseAge": "7 days",
       "semanticCommitType": "fix"
+    },
+    {
+      "groupName": "dev dependencies",
+      "matchDatasources": ["npm"],
+      "matchDepTypes": ["devDependencies", "eslint", "storybook", "playwright", "vite", "vitest", "mocks", "coverage", "typescript"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest", "lockFileMaintenance", "rollback", "bump"],
+      "minimumReleaseAge": "7 days",
+      "semanticCommitType": "chore"
     }
   ],
   "schedule": ["every weekend"],
