@@ -63,8 +63,8 @@ catalogs:
       specifier: 3.2.1
       version: 3.2.1
     style-dictionary:
-      specifier: 5.4.4
-      version: 5.4.4
+      specifier: 5.5.0
+      version: 5.5.0
   eslint:
     '@eslint/js':
       specifier: 10.0.1
@@ -643,7 +643,7 @@ importers:
     dependencies:
       style-dictionary:
         specifier: catalog:design
-        version: 5.4.4
+        version: 5.5.0
     devDependencies:
       '@config/typescript':
         specifier: workspace:*
@@ -6191,11 +6191,6 @@ packages:
       prettier-plugin-svelte:
         optional: true
 
-  prettier@3.8.3:
-    resolution: {integrity: sha512-7igPTM53cGHMW8xWuVTydi2KO233VFiTNyF5hLJqpilHfmn8C8gPf+PS7dUT64YcXFbiMGZxS9pCSxL/Dxm/Jw==}
-    engines: {node: '>=14'}
-    hasBin: true
-
   prettier@3.8.4:
     resolution: {integrity: sha512-N2MylSdi48+5N/6S5j+maeHbUSIzzZ5uOcX5Hm4QpV8Dkb1HFjfAKTKX6yNPJQD9AhcT3ifHNB66tWTTJDi11Q==}
     engines: {node: '>=14'}
@@ -6850,8 +6845,8 @@ packages:
   strnum@2.3.0:
     resolution: {integrity: sha512-ums3KNd42PGyx5xaoVTO1mjU1bH3NpY4vsrVlnv9PNGqQj8wd7rJ6nEypLrJ7z5vxK5RP0yMLo6J/Gsm62DI5Q==}
 
-  style-dictionary@5.4.4:
-    resolution: {integrity: sha512-Sd7dkEOLn33EpvlMyS8ykUu0us2EIFUqsysf4DSwZQ46nqQkZ2Q9o5mozu8cSizj3t7E220HaPk7EV1O7LjvDQ==}
+  style-dictionary@5.5.0:
+    resolution: {integrity: sha512-AGkOZtAc3OTz99wlzstrmj5OM5BWOW2IbmXD74sf0MXFPi271TGBdywokgd7bS3L0tKOk9M0FR+R9gnbXRSSfg==}
     engines: {node: '>=22.0.0'}
     hasBin: true
 
@@ -13174,8 +13169,6 @@ snapshots:
     dependencies:
       prettier: 3.8.4
 
-  prettier@3.8.3: {}
-
   prettier@3.8.4: {}
 
   pretty-bytes@5.6.0: {}
@@ -14000,7 +13993,7 @@ snapshots:
 
   strnum@2.3.0: {}
 
-  style-dictionary@5.4.4:
+  style-dictionary@5.5.0:
     dependencies:
       '@bundled-es-modules/deepmerge': 4.3.2
       '@bundled-es-modules/glob': 13.0.6
@@ -14013,7 +14006,7 @@ snapshots:
       is-plain-obj: 4.1.0
       json5: 2.2.3
       path-unified: 0.2.0
-      prettier: 3.8.3
+      prettier: 3.8.4
       tinycolor2: 1.6.0
 
   sucrase@3.35.0:
