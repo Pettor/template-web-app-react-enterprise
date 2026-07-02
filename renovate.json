@@ -10,7 +10,9 @@
       "matchDatasources": ["npm"],
       "matchDepTypes": ["dependencies"],
       "minimumReleaseAge": "7 days",
-      "semanticCommitType": "fix"
+      "semanticCommitType": "fix",
+      "separateMajorMinor": false,
+      "separateMultipleMajor": false
     },
     {
       "groupName": "dev dependencies",
@@ -18,7 +20,9 @@
       "matchDatasources": ["npm"],
       "matchDepTypes": ["devDependencies"],
       "minimumReleaseAge": "7 days",
-      "semanticCommitType": "chore"
+      "semanticCommitType": "chore",
+      "separateMajorMinor": false,
+      "separateMultipleMajor": false
     }
   ],
   "schedule": ["every weekend"]
