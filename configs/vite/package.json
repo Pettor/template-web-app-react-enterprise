@@ -19,16 +19,16 @@
     "typescript": ">=5.0.0"
   },
   "dependencies": {
-    "@rolldown/plugin-babel": "catalog:vite",
-    "@tailwindcss/vite": "catalog:tailwind",
-    "@vitejs/plugin-react": "catalog:vite",
-    "vite": "catalog:vite",
-    "vite-plugin-http2-proxy": "catalog:vite",
-    "vite-plugin-pwa": "catalog:vite"
+    "@rolldown/plugin-babel": "catalog:dev",
+    "@tailwindcss/vite": "catalog:dev",
+    "@vitejs/plugin-react": "catalog:dev",
+    "vite": "catalog:dev",
+    "vite-plugin-http2-proxy": "catalog:dev",
+    "vite-plugin-pwa": "catalog:dev"
   },
   "devDependencies": {
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
-    "typescript": "catalog:typescript"
+    "typescript": "catalog:dev"
   }
 }

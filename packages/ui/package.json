@@ -29,23 +29,23 @@
   },
   "dependencies": {
     "@config/tailwind": "workspace:*",
-    "@heroui/react": "catalog:design",
-    "clsx": "catalog:common",
-    "framer-motion": "catalog:common",
-    "jotai": "catalog:common"
+    "@heroui/react": "catalog:ui",
+    "clsx": "catalog:ui",
+    "framer-motion": "catalog:ui",
+    "jotai": "catalog:state"
   },
   "devDependencies": {
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
-    "@faker-js/faker": "catalog:common",
+    "@faker-js/faker": "catalog:dev",
     "@package/storybook": "workspace:*",
-    "@types/react": "catalog:react19",
-    "@types/react-dom": "catalog:react19",
-    "@vitejs/plugin-react": "catalog:vite",
-    "@vitest/browser": "catalog:vitest",
-    "@vitest/coverage-v8": "catalog:vitest",
-    "tailwindcss": "catalog:tailwind",
-    "vite": "catalog:vite",
-    "vitest": "catalog:vitest"
+    "@types/react": "catalog:react",
+    "@types/react-dom": "catalog:react",
+    "@vitejs/plugin-react": "catalog:dev",
+    "@vitest/browser": "catalog:dev",
+    "@vitest/coverage-v8": "catalog:dev",
+    "tailwindcss": "catalog:dev",
+    "vite": "catalog:dev",
+    "vitest": "catalog:dev"
   }
 }

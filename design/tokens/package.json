@@ -17,7 +17,7 @@
     "build:libs": "style-dictionary build --config style-dictionary.config.js"
   },
   "dependencies": {
-    "style-dictionary": "catalog:design"
+    "style-dictionary": "catalog:dev"
   },
   "devDependencies": {
     "@config/typescript": "workspace:*"

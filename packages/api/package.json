@@ -28,15 +28,15 @@
     "zod": ">=4.0.0"
   },
   "dependencies": {
-    "immer": "catalog:common"
+    "immer": "catalog:state"
   },
   "devDependencies": {
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
-    "@vitest/coverage-v8": "catalog:vitest",
-    "move-cli": "catalog:common",
-    "vite": "catalog:vite",
-    "vitest": "catalog:vitest",
+    "@vitest/coverage-v8": "catalog:dev",
+    "move-cli": "catalog:dev",
+    "vite": "catalog:dev",
+    "vitest": "catalog:dev",
     "zod": "catalog:validation"
   }
 }

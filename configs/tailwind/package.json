@@ -11,11 +11,11 @@
   "devDependencies": {
     "@config/typescript": "workspace:*",
     "@design/tokens": "workspace:*",
-    "@heroui/react": "catalog:design",
+    "@heroui/react": "catalog:ui",
     "@package/storybook": "workspace:*",
-    "@tailwindcss/aspect-ratio": "catalog:tailwind",
-    "@tailwindcss/typography": "catalog:tailwind",
-    "tailwindcss": "catalog:tailwind",
-    "tw-animate-css": "catalog:tailwind"
+    "@tailwindcss/aspect-ratio": "catalog:dev",
+    "@tailwindcss/typography": "catalog:dev",
+    "tailwindcss": "catalog:dev",
+    "tw-animate-css": "catalog:dev"
   }
 }

@@ -23,7 +23,7 @@
   "devDependencies": {
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
-    "@types/react": "catalog:react19",
-    "rimraf": "catalog:common"
+    "@types/react": "catalog:react",
+    "rimraf": "catalog:dev"
   }
 }

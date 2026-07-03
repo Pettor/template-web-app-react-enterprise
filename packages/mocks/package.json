@@ -20,7 +20,7 @@
   "devDependencies": {
     "@config/eslint": "workspace:*",
     "@config/typescript": "workspace:*",
-    "@mocks-server/admin-api-client": "catalog:mocks",
-    "@mocks-server/admin-api-paths": "catalog:mocks"
+    "@mocks-server/admin-api-client": "catalog:dev",
+    "@mocks-server/admin-api-paths": "catalog:dev"
   }
 }
