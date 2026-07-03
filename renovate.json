@@ -5,17 +5,60 @@
   "labels": ["dependency", "bot"],
   "packageRules": [
     {
-      "groupName": "dependencies",
-      "groupSlug": "prod-deps",
+      "groupName": "react",
+      "groupSlug": "react",
       "matchDatasources": ["npm"],
-      "matchDepTypes": [
-        "dependencies",
-        "pnpm.catalog.common",
-        "pnpm.catalog.design",
-        "pnpm.catalog.tanstack",
-        "pnpm.catalog.validation",
-        "pnpm.catalog.react19"
-      ],
+      "matchDepTypes": ["pnpm.catalog.react"],
+      "minimumReleaseAge": "7 days",
+      "semanticCommitType": "fix",
+      "separateMajorMinor": false,
+      "separateMultipleMajor": false
+    },
+    {
+      "groupName": "tanstack",
+      "groupSlug": "tanstack",
+      "matchDatasources": ["npm"],
+      "matchDepTypes": ["pnpm.catalog.tanstack"],
+      "minimumReleaseAge": "7 days",
+      "semanticCommitType": "fix",
+      "separateMajorMinor": false,
+      "separateMultipleMajor": false
+    },
+    {
+      "groupName": "tanstack",
+      "groupSlug": "tanstack",
+      "matchDatasources": ["npm"],
+      "matchDepNames": ["@tanstack/query-core"],
+      "minimumReleaseAge": "7 days",
+      "semanticCommitType": "fix",
+      "separateMajorMinor": false,
+      "separateMultipleMajor": false
+    },
+    {
+      "groupName": "ui",
+      "groupSlug": "ui",
+      "matchDatasources": ["npm"],
+      "matchDepTypes": ["pnpm.catalog.ui"],
+      "minimumReleaseAge": "7 days",
+      "semanticCommitType": "fix",
+      "separateMajorMinor": false,
+      "separateMultipleMajor": false
+    },
+    {
+      "groupName": "state",
+      "groupSlug": "state",
+      "matchDatasources": ["npm"],
+      "matchDepTypes": ["pnpm.catalog.state"],
+      "minimumReleaseAge": "7 days",
+      "semanticCommitType": "fix",
+      "separateMajorMinor": false,
+      "separateMultipleMajor": false
+    },
+    {
+      "groupName": "validation",
+      "groupSlug": "validation",
+      "matchDatasources": ["npm"],
+      "matchDepTypes": ["pnpm.catalog.validation"],
       "minimumReleaseAge": "7 days",
       "semanticCommitType": "fix",
       "separateMajorMinor": false,
@@ -25,28 +68,7 @@
       "groupName": "dev dependencies",
       "groupSlug": "dev-deps",
       "matchDatasources": ["npm"],
-      "matchDepTypes": [
-        "devDependencies",
-        "pnpm.catalog.eslint",
-        "pnpm.catalog.vite",
-        "pnpm.catalog.typescript",
-        "pnpm.catalog.storybook",
-        "pnpm.catalog.vitest",
-        "pnpm.catalog.playwright",
-        "pnpm.catalog.mocks",
-        "pnpm.catalog.coverage",
-        "pnpm.catalog.tailwind"
-      ],
-      "minimumReleaseAge": "7 days",
-      "semanticCommitType": "chore",
-      "separateMajorMinor": false,
-      "separateMultipleMajor": false
-    },
-    {
-      "groupName": "dev dependencies",
-      "groupSlug": "dev-deps",
-      "matchDatasources": ["npm"],
-      "matchDepNames": ["@faker-js/faker", "@formatjs/cli", "cross-env", "move-cli", "rimraf", "workbox-window"],
+      "matchDepTypes": ["pnpm.catalog.dev", "devDependencies", "pnpm-workspace.overrides"],
       "minimumReleaseAge": "7 days",
       "semanticCommitType": "chore",
       "separateMajorMinor": false,

@@ -16,16 +16,16 @@
     "clean:all": "rimraf dist node_modules"
   },
   "devDependencies": {
-    "@eslint/js": "catalog:eslint",
-    "eslint": "catalog:eslint",
-    "eslint-config-prettier": "catalog:eslint",
-    "eslint-plugin-formatjs": "catalog:eslint",
-    "eslint-plugin-import-x": "catalog:eslint",
-    "eslint-plugin-prettier": "catalog:eslint",
-    "eslint-plugin-react": "catalog:eslint",
-    "eslint-plugin-react-compiler": "catalog:eslint",
-    "eslint-plugin-react-hooks": "catalog:eslint",
-    "eslint-plugin-storybook": "catalog:eslint",
-    "typescript-eslint": "catalog:eslint"
+    "@eslint/js": "catalog:dev",
+    "eslint": "catalog:dev",
+    "eslint-config-prettier": "catalog:dev",
+    "eslint-plugin-formatjs": "catalog:dev",
+    "eslint-plugin-import-x": "catalog:dev",
+    "eslint-plugin-prettier": "catalog:dev",
+    "eslint-plugin-react": "catalog:dev",
+    "eslint-plugin-react-compiler": "catalog:dev",
+    "eslint-plugin-react-hooks": "catalog:dev",
+    "eslint-plugin-storybook": "catalog:dev",
+    "typescript-eslint": "catalog:dev"
   }
 }
