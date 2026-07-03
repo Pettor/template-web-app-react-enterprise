@@ -25,16 +25,6 @@
       "separateMultipleMajor": false
     },
     {
-      "groupName": "tanstack",
-      "groupSlug": "tanstack",
-      "matchDatasources": ["npm"],
-      "matchDepNames": ["@tanstack/query-core"],
-      "minimumReleaseAge": "7 days",
-      "semanticCommitType": "fix",
-      "separateMajorMinor": false,
-      "separateMultipleMajor": false
-    },
-    {
       "groupName": "ui",
       "groupSlug": "ui",
       "matchDatasources": ["npm"],
@@ -71,6 +61,16 @@
       "matchDepTypes": ["pnpm.catalog.dev", "devDependencies", "pnpm-workspace.overrides"],
       "minimumReleaseAge": "7 days",
       "semanticCommitType": "chore",
+      "separateMajorMinor": false,
+      "separateMultipleMajor": false
+    },
+    {
+      "groupName": "tanstack",
+      "groupSlug": "tanstack",
+      "matchDatasources": ["npm"],
+      "matchDepNames": ["@tanstack/query-core"],
+      "minimumReleaseAge": "7 days",
+      "semanticCommitType": "fix",
       "separateMajorMinor": false,
       "separateMultipleMajor": false
     }
