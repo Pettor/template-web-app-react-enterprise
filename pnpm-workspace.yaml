@@ -29,7 +29,7 @@ overrides:
   # minimatch@3 must stay on v3: glob@7 (transitive dev dep) uses the v3 pattern
   # `.set` structure, and v10's GLOBSTAR Symbol breaks its Array.join in sync.js.
   # 3.1.x is past the ReDoS fix (3.0.5), so security intent is preserved.
-  'minimatch@3': ^10.0.0
+  'minimatch@3': ^3.1.4
   'minimatch@5': ^10.0.0
   'minimatch@9': ^10.0.0
   'path-to-regexp@0': ^8.0.0
