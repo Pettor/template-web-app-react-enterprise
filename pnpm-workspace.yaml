@@ -67,7 +67,7 @@ catalogs:
     '@heroui/react': 3.2.1
     '@heroicons/react': 2.2.0
     '@fontsource/rubik': 5.2.8
-    framer-motion: 12.42.0
+    framer-motion: 12.42.2
     clsx: 2.1.1
     react-intl: 10.1.14
   state:
