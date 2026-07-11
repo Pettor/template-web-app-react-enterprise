@@ -203,8 +203,8 @@ catalogs:
       specifier: 2.1.1
       version: 2.1.1
     framer-motion:
-      specifier: 12.42.0
-      version: 12.42.0
+      specifier: 12.42.2
+      version: 12.42.2
     react-intl:
       specifier: 10.1.14
       version: 10.1.14
@@ -741,7 +741,7 @@ importers:
         version: 2.1.1
       framer-motion:
         specifier: catalog:ui
-        version: 12.42.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 12.42.2(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       jotai:
         specifier: catalog:state
         version: 2.20.1(@babel/core@7.29.0)(@babel/template@7.28.6)(@types/react@19.2.17)(react@19.2.7)
@@ -4692,8 +4692,8 @@ packages:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
     engines: {node: '>= 0.6'}
 
-  framer-motion@12.42.0:
-    resolution: {integrity: sha512-wp7EJnfWaaEScVygKv3e20udoRz+LbtxScsuTkakAxfXmt+ReC6WyPW2nINRAGvd+hG9odwcjBLyOTPjH5pBRA==}
+  framer-motion@12.42.2:
+    resolution: {integrity: sha512-5XY9luDiu0oHfHBjpDthFMh0ES+122w6p/papSJBweMkO8Sn+PW2QaEgRblQBpWFnuvZS5qvarpt/hO2pjGmnw==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: 19.2.7
@@ -11549,7 +11549,7 @@ snapshots:
 
   forwarded@0.2.0: {}
 
-  framer-motion@12.42.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+  framer-motion@12.42.2(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
     dependencies:
       motion-dom: 12.42.2
       motion-utils: 12.39.0
