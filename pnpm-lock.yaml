@@ -181,8 +181,8 @@ catalogs:
       version: 2.3.1
   tanstack:
     '@tanstack/react-form':
-      specifier: 1.33.0
-      version: 1.33.0
+      specifier: 1.33.1
+      version: 1.33.1
     '@tanstack/react-router':
       specifier: 1.170.17
       version: 1.170.17
@@ -433,7 +433,7 @@ importers:
         version: link:../../packages/ui
       '@tanstack/react-form':
         specifier: catalog:tanstack
-        version: 1.33.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 1.33.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@tanstack/react-query':
         specifier: 5.101.2
         version: 5.101.2(react@19.2.7)
@@ -2029,53 +2029,64 @@ packages:
   '@mocks-server/admin-api-client@7.0.1':
     resolution: {integrity: sha512-UFM5xWM3WRCJJYO4tsolxy+tfhEMJRA92rkW3gFnum4pQ6cyzhhUmwNGBBP645cWNUUcRzyQxsqVJh7BdTDk5Q==}
     engines: {node: '>=14.0.0'}
+    deprecated: This package has been discontinued and is no longer maintained. It will not receive bug fixes or security updates.
 
   '@mocks-server/admin-api-paths@5.0.0':
     resolution: {integrity: sha512-HlFhNnHtvY9ZZGthaatAFvGFofTCs1Yj3kxeb5EmvdHBgNC+dZxfMjXWCvuIhp7qFNaTFarPgGJ3Zsm7+o/siw==}
     engines: {node: '>=14.x'}
+    deprecated: This package has been discontinued and is no longer maintained. It will not receive bug fixes or security updates.
 
   '@mocks-server/config@1.4.1':
     resolution: {integrity: sha512-+CAcBxl3RiUoIJ7sDtn6077OXIdmrfTs92TT7G29DJLI+TtYKYSzw5q2Bhvr+AEhEpCAjyaPMoy3BSWTWzt/HA==}
     engines: {node: '>=14.x'}
+    deprecated: This package has been discontinued and is no longer maintained. It will not receive bug fixes or security updates.
 
   '@mocks-server/core@4.0.2':
     resolution: {integrity: sha512-TqV7WJwH+BeaaywXkGK4Xhy/qTx9ZEE/QOASJligRRMuWyhH5kdJ54ZVNegl7OEx++kY/NLCG2sOtZnbgGO2pA==}
     engines: {node: '>=14.x'}
+    deprecated: This package has been discontinued and is no longer maintained. It will not receive bug fixes or security updates.
 
   '@mocks-server/logger@1.1.2':
     resolution: {integrity: sha512-9FtmOG4EEMW15I8xeRwrS6RU0HcYF9uDSz0Eyu76VRWLH4tm0hER0pww5/j0VBIpuEliZb7aDZUaq7CzoIVLig==}
     engines: {node: '>=14.x'}
+    deprecated: This package has been discontinued and is no longer maintained. It will not receive bug fixes or security updates.
 
   '@mocks-server/main@4.1.0':
     resolution: {integrity: sha512-9wGFbFp6QF/vE05CCgNkicS9o/pbLNhVMD4+mwuBtx3//LqG0QjggRUfG7PqSalRWMt+oma06k6tfygdTPglag==}
     engines: {node: '>=14.0.0'}
+    deprecated: This package has been discontinued and is no longer maintained. It will not receive bug fixes or security updates.
     hasBin: true
 
   '@mocks-server/nested-collections@2.0.0':
     resolution: {integrity: sha512-ik/rvqNf4GdPakaPYLD59hcO9djnKlNzMYwdKrUOiIHUhMN76E2jEo3CYm9qZlJZJa2a7hxOCu5TuQQl8AWJRw==}
     engines: {node: '>=14.x'}
+    deprecated: This package has been discontinued and is no longer maintained. It will not receive bug fixes or security updates.
 
   '@mocks-server/plugin-admin-api@4.0.1':
     resolution: {integrity: sha512-+Y/AjH/m0cYyHsHOXndx0vkV1ugtSf6CqF8mUQ+0HwdHfqx5j7sRlp+zdxp78zbU8kQJUYJEsMjX20VNZ8SoBQ==}
     engines: {node: '>=14.0.0'}
+    deprecated: This package has been discontinued and is no longer maintained. It will not receive bug fixes or security updates.
     peerDependencies:
       '@mocks-server/core': '>=4.0.0 <5.x'
 
   '@mocks-server/plugin-inquirer-cli@4.0.0':
     resolution: {integrity: sha512-ogsp3e6rRMgEjXIFIw4PwET0YwLw+5ovk3J5LyEnKru3+09nrG241bjT0LHTsa7Q4KTauh24MAEhrVlrUBiy+w==}
     engines: {node: '>=14.0.0'}
+    deprecated: This package has been discontinued and is no longer maintained. It will not receive bug fixes or security updates.
     peerDependencies:
       '@mocks-server/core': '>=4.0.0 <5.x'
 
   '@mocks-server/plugin-openapi@2.1.0':
     resolution: {integrity: sha512-TZT2QzWDiwKY9nOA/h2pPxO7cjahK4W6D5QM6FN1qS7NDZv/wvLqMITcBpI1LKwN+A9BkgVlP/iqBZJjEiddSA==}
     engines: {node: '>=14.0.0'}
+    deprecated: This package has been discontinued and is no longer maintained. It will not receive bug fixes or security updates.
     peerDependencies:
       '@mocks-server/core': '>=4.0.0 <5.x'
 
   '@mocks-server/plugin-proxy@4.0.0':
     resolution: {integrity: sha512-9FX+gDsbtqA2oaGzlGy8s7Rtl5Mht15QuAKCUaw0ue1Zkkwljb0Fv9/KbUW9oboU8AsY8ELamRHDj7cGWgp/OA==}
     engines: {node: '>=14.0.0'}
+    deprecated: This package has been discontinued and is no longer maintained. It will not receive bug fixes or security updates.
     peerDependencies:
       '@mocks-server/core': '>=4.0.0 <5.x'
 
@@ -3075,8 +3086,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@tanstack/form-core@1.33.0':
-    resolution: {integrity: sha512-AV4Pw9Dk4orFsuPBcDssfWMJFs+yMYBae7zZ4oTqrCf4ftNGQKxvrQRZeqKHG6A4TkiLeSvf2kzIjcVkrW7E6w==}
+  '@tanstack/form-core@1.33.1':
+    resolution: {integrity: sha512-iSxLQIAz9vu+mo3Tnzlzo/I/5DC3L/jrQ1oc0ybXNbOJpeNGc4iKx/R3tp5d/Ra9y7JqONQBXiYtgz8/305yZA==}
 
   '@tanstack/history@1.162.0':
     resolution: {integrity: sha512-79pf/RkhteYZTRgcR4F9kbk84P2N8rugQJswxfIqovlbRiT3yI7eBE+5QorIrZaOKktsgzRlXh1l/du/xpl4iA==}
@@ -3089,8 +3100,8 @@ packages:
   '@tanstack/query-core@5.101.2':
     resolution: {integrity: sha512-hH5MLoJhF7KaIGd7q3xTXGXvslI+GYlM1Z/35aSHHWaCJWB7XvTSHYuV3eM7tw+aE0mT/xMro4M4Q9rCGHT0lw==}
 
-  '@tanstack/react-form@1.33.0':
-    resolution: {integrity: sha512-unaee+VS4MvKo+s1dmgGUXI4902VeAhuaUbKsQbhFe3MceOpB3JpAUGCDpyzjQPXVFkFY0COKfLrUNX2XZYW4g==}
+  '@tanstack/react-form@1.33.1':
+    resolution: {integrity: sha512-BF2fQtd0uEZxoki1cDlcG6KLkEthofmVRJMrpd5GWRtoRlxvm4iiLFRpoQR///qD16002+rKdH1kBBAUZDEQhw==}
     peerDependencies:
       '@tanstack/react-start': '*'
       react: 19.2.7
@@ -9704,7 +9715,7 @@ snapshots:
 
   '@tanstack/devtools-event-client@0.4.3': {}
 
-  '@tanstack/form-core@1.33.0':
+  '@tanstack/form-core@1.33.1':
     dependencies:
       '@tanstack/devtools-event-client': 0.4.3
       '@tanstack/pacer-lite': 0.1.1
@@ -9716,9 +9727,9 @@ snapshots:
 
   '@tanstack/query-core@5.101.2': {}
 
-  '@tanstack/react-form@1.33.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@tanstack/react-form@1.33.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
-      '@tanstack/form-core': 1.33.0
+      '@tanstack/form-core': 1.33.1
       '@tanstack/react-store': 0.11.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react: 19.2.7
     transitivePeerDependencies:
