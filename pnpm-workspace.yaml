@@ -64,12 +64,12 @@ catalogs:
     # Codegen plugin kept with the router so they bump together.
     '@tanstack/router-plugin': 1.168.19
   ui:
-    '@heroui/react': 3.2.1
+    '@heroui/react': 3.2.2
     '@heroicons/react': 2.2.0
     '@fontsource/rubik': 5.2.8
     framer-motion: 12.42.2
     clsx: 2.1.1
-    react-intl: 10.1.14
+    react-intl: 10.1.16
   state:
     jotai: 2.20.1
     jotai-effect: 2.3.1
