@@ -69,7 +69,7 @@ catalogs:
     '@fontsource/rubik': 5.2.8
     framer-motion: 12.42.2
     clsx: 2.1.1
-    react-intl: 10.1.16
+    react-intl: 10.1.18
   state:
     jotai: 2.20.1
     jotai-effect: 2.3.1
