@@ -71,9 +71,9 @@ catalogs:
     clsx: 2.1.1
     react-intl: 10.1.18
   state:
-    jotai: 2.20.1
+    jotai: 2.20.2
     jotai-effect: 2.3.1
-    immer: 11.1.11
+    immer: 11.1.15
   validation:
     '@hookform/resolvers': 5.4.0
     zod: 4.4.3
