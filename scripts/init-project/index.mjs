@@ -2,6 +2,7 @@ import path from "node:path";
 import { applyBranding } from "./branding.mjs";
 import { collectAnswers } from "./cli.mjs";
 import { configureBackend } from "./configureBackend.mjs";
+import { applyDevPortBranding, applyE2EPort, patchViteConfigPort } from "./devPort.mjs";
 import { applyPackageJsonUpdates } from "./packageJson.mjs";
 import { selfDestruct } from "./selfDestruct.mjs";
 import { stripBackend } from "./stripBackend.mjs";
@@ -14,6 +15,7 @@ function printSummary(answers) {
   console.log(" Repo name:     ", answers.repoName);
   console.log(" Project name:  ", answers.projectName);
   console.log(" Version:       ", answers.version);
+  console.log(" Dev port:      ", answers.devPort);
   console.log(" Backend:       ", answers.backend ? `yes (${answers.backendHost}:${answers.backendPort})` : "no");
   console.log("===========================================\n");
 }
@@ -27,10 +29,13 @@ async function main() {
 
   console.log("Applying branding (README, PWA manifest, app title)...");
   applyBranding(rootDir, answers);
+  applyDevPortBranding(rootDir, answers);
 
   if (answers.backend) {
     console.log("Configuring backend connection...");
+    patchViteConfigPort(rootDir, answers);
     configureBackend(rootDir, answers);
+    applyE2EPort(rootDir, answers);
   } else {
     console.log("Stripping backend-coupled code (API client, auth, e2e tests, dashboard, login/sign-up)...");
     stripBackend(rootDir, answers);

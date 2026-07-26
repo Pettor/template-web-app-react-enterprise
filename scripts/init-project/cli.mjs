@@ -4,6 +4,14 @@ const SEMVER_RE = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z-.]+)?(?:\+[0-9A-Za-z-.]+)?$/;
 const TRUE_VALUES = new Set(["true", "yes", "y", "1"]);
 const FALSE_VALUES = new Set(["false", "no", "n", "0"]);
 
+const DEFAULT_DEV_PORT = 5173;
+const DEV_PORT_RANDOM_MIN = 5000;
+const DEV_PORT_RANDOM_MAX = 5400;
+// Floor guarantees the derived e2e port (devPort - 1000) never drops below
+// the reserved-port boundary (1024), regardless of whether backend is kept.
+const MIN_DEV_PORT = 2024;
+const MAX_DEV_PORT = 65535;
+
 /**
  * Parses `--key=value`, `--key value`, and bare boolean `--flag` forms.
  */
@@ -44,6 +52,30 @@ function parseBoolean(value, fieldName) {
   throw new Error(`--${fieldName} must be one of yes/no/true/false (got "${value}")`);
 }
 
+function randomDevPort() {
+  return Math.floor(Math.random() * (DEV_PORT_RANDOM_MAX - DEV_PORT_RANDOM_MIN + 1)) + DEV_PORT_RANDOM_MIN;
+}
+
+/** Parses the raw `--dev-port` value: empty -> default, "random" -> randomized, else manual. */
+function parseDevPort(rawValue) {
+  const value = String(rawValue ?? "").trim();
+  let devPort;
+  if (!value) {
+    devPort = DEFAULT_DEV_PORT;
+  } else if (value.toLowerCase() === "random") {
+    devPort = randomDevPort();
+  } else {
+    devPort = Number(value);
+    if (!Number.isInteger(devPort)) throw new Error(`--dev-port "${rawValue}" is not a valid port number.`);
+  }
+
+  if (devPort < MIN_DEV_PORT || devPort > MAX_DEV_PORT) {
+    throw new Error(`--dev-port must be between ${MIN_DEV_PORT} and ${MAX_DEV_PORT} (got ${devPort}).`);
+  }
+
+  return devPort;
+}
+
 async function promptAnswers(flags) {
   const rl = createInterface({ input: process.stdin, output: process.stdout });
   try {
@@ -58,6 +90,13 @@ async function promptAnswers(flags) {
     if (!answers.version) {
       const version = await rl.question("Initial version [0.1.0]: ");
       answers.version = version.trim() || "0.1.0";
+    }
+    if (!answers["dev-port"]) {
+      const devPort = await rl.question(
+        `Dev server port — press Enter for default (${DEFAULT_DEV_PORT}), type "random" for a random port ` +
+          `(${DEV_PORT_RANDOM_MIN}-${DEV_PORT_RANDOM_MAX}), or enter a specific port number: `
+      );
+      answers["dev-port"] = devPort.trim();
     }
     if (!answers.backend) {
       const backend = await rl.question("Does this project need a backend? (y/N): ");
@@ -117,6 +156,9 @@ export async function collectAnswers(argv) {
   const version = String(raw.version).trim();
   if (!SEMVER_RE.test(version)) throw new Error(`--version "${version}" is not valid semver (e.g. 0.1.0).`);
 
+  const devPort = parseDevPort(raw["dev-port"]);
+  const e2ePort = devPort - 1000;
+
   const backend = parseBoolean(raw.backend, "backend");
 
   let backendHost;
@@ -134,6 +176,8 @@ export async function collectAnswers(argv) {
     projectName,
     shortName,
     version,
+    devPort,
+    e2ePort,
     backend,
     backendHost,
     backendPort,

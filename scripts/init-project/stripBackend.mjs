@@ -389,7 +389,7 @@ export function useCommandPaletteController(): CommandPaletteProps {
   );
 }
 
-function stripViteConfig(rootDir) {
+function stripViteConfig(rootDir, { devPort }) {
   write(
     rootDir,
     "apps/web/vite.config.ts",
@@ -426,7 +426,7 @@ export default defineConfig(({ command }) => {
           cors: true,
           // basicSsl() below provides the self-signed cert; https: true signals intent
           https: true,
-          port: 5173,
+          port: ${devPort},
         },
         plugins: [basicSsl()],
       });
@@ -830,7 +830,7 @@ export function stripBackend(rootDir, answers) {
   fixNotFoundRoute(rootDir);
   simplifySettingsModal(rootDir);
   simplifyCommandPalette(rootDir);
-  stripViteConfig(rootDir);
+  stripViteConfig(rootDir, answers);
   stripWebPackageJson(rootDir);
   stripRootPackageJson(rootDir);
   stripTurboJson(rootDir);
