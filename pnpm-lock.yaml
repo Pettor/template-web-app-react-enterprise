@@ -203,8 +203,8 @@ catalogs:
       specifier: 2.1.1
       version: 2.1.1
     framer-motion:
-      specifier: 13.0.0
-      version: 13.0.0
+      specifier: 13.1.0
+      version: 13.1.0
     react-intl:
       specifier: 10.1.20
       version: 10.1.20
@@ -741,7 +741,7 @@ importers:
         version: 2.1.1
       framer-motion:
         specifier: catalog:ui
-        version: 13.0.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 13.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       jotai:
         specifier: catalog:state
         version: 2.20.2(@babel/core@7.29.0)(@babel/template@7.28.6)(@types/react@19.2.18)(react@19.2.8)
@@ -4739,8 +4739,8 @@ packages:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
     engines: {node: '>= 0.6'}
 
-  framer-motion@13.0.0:
-    resolution: {integrity: sha512-nQGZXlsiigN48nzvE7AL1GLekql+etcphp8v+PQ0X04oxO20yVmV9rU9XQ25c136RdeIYoaWlKT9oAwvJza3mg==}
+  framer-motion@13.1.0:
+    resolution: {integrity: sha512-QSZrF0Id3QGuHJ+OL+9PSY9pk86C8ERFalwAGSchzTm65+ZoGH/RM26lmEARLljcHj2lqhv0jZOOks+EI3COOw==}
     peerDependencies:
       react: 19.2.8
       react-dom: 19.2.8
@@ -11658,7 +11658,7 @@ snapshots:
 
   forwarded@0.2.0: {}
 
-  framer-motion@13.0.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
+  framer-motion@13.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       motion-dom: 13.0.0
       motion-utils: 13.0.0
