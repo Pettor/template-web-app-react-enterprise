@@ -73,7 +73,7 @@ catalogs:
   state:
     jotai: 2.20.2
     jotai-effect: 2.4.1
-    immer: 11.1.17
+    immer: 11.1.18
   validation:
     '@hookform/resolvers': 5.9.1
     zod: 4.4.3
