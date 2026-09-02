@@ -29,13 +29,17 @@ overrides:
   # minimatch@3 must stay on v3: glob@7 (transitive dev dep) uses the v3 pattern
   # `.set` structure, and v10's GLOBSTAR Symbol breaks its Array.join in sync.js.
   # 3.1.x is past the ReDoS fix (3.0.5), so security intent is preserved.
-  'minimatch@3': ^10.0.0
+  'minimatch@3': ^3.1.4
   'minimatch@5': ^10.0.0
   'minimatch@9': ^10.0.0
   'path-to-regexp@0': ^8.0.0
   'picomatch@2': ^4.0.0
   'picomatch@4': ^4.0.4
   qs: ^6.14.2
+  # Pin TypeScript to the catalog version: the open peer range `typescript: >=5.0.0`
+  # in @config/vite otherwise resolves to the newest published major (7.x), which
+  # typescript-eslint and rollup-plugin-dts (via tsup) do not yet support.
+  typescript: catalog:dev
   'rollup@2': ^4.0.0
   'rollup@4': ^4.59.0
   send: ^1.0.0
@@ -92,7 +96,7 @@ catalogs:
     eslint-plugin-storybook: 10.5.10
     typescript-eslint: 8.68.0
     # typescript
-    typescript: 7.0.2
+    typescript: 6.0.3
     # tailwind
     tailwindcss: 4.3.3
     '@tailwindcss/aspect-ratio': 0.4.2
@@ -109,15 +113,18 @@ catalogs:
     '@vite-pwa/assets-generator': 1.0.2
     vite-plugin-istanbul: 9.0.1
     # storybook
-    '@storybook/addon-a11y': 10.5.10
-    '@storybook/addon-docs': 10.5.10
-    '@storybook/addon-mcp': 0.7.0
-    '@storybook/addon-themes': 10.5.10
-    '@storybook/addon-vitest': 10.5.10
-    '@storybook/builder-vite': 10.5.10
-    '@storybook/react': 10.5.10
-    '@storybook/react-vite': 10.5.10
-    storybook: 10.5.10
+    # Pinned to 10.4.6: 10.5.x's @storybook/addon-vitest browser setup does a named
+    # `import { elementRoles } from "aria-query"` (CJS) that Vite cannot resolve in the
+    # vitest browser runner, failing every story test. Revisit when addon-vitest fixes it.
+    '@storybook/addon-a11y': 10.4.6
+    '@storybook/addon-docs': 10.4.6
+    '@storybook/addon-mcp': 0.6.0
+    '@storybook/addon-themes': 10.4.6
+    '@storybook/addon-vitest': 10.4.6
+    '@storybook/builder-vite': 10.4.6
+    '@storybook/react': 10.4.6
+    '@storybook/react-vite': 10.4.6
+    storybook: 10.4.6
     # test
     vitest: 4.1.11
     '@vitest/browser': 4.1.11
