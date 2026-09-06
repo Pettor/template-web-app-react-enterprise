@@ -203,8 +203,8 @@ catalogs:
       specifier: 13.1.1
       version: 13.1.1
     react-intl:
-      specifier: 10.1.24
-      version: 10.1.24
+      specifier: 10.1.25
+      version: 10.1.25
   validation:
     zod:
       specifier: 4.5.4
@@ -340,7 +340,7 @@ importers:
         version: 19.2.8(react@19.2.8)
       react-intl:
         specifier: catalog:ui
-        version: 10.1.24(@types/react@19.2.18)(react@19.2.8)
+        version: 10.1.25(@types/react@19.2.18)(react@19.2.8)
     devDependencies:
       '@config/eslint':
         specifier: workspace:*
@@ -458,7 +458,7 @@ importers:
         version: 19.2.8(react@19.2.8)
       react-intl:
         specifier: catalog:ui
-        version: 10.1.24(@types/react@19.2.18)(react@19.2.8)
+        version: 10.1.25(@types/react@19.2.18)(react@19.2.8)
       zod:
         specifier: catalog:validation
         version: 4.5.4
@@ -1775,8 +1775,8 @@ packages:
   '@formatjs/intl-localematcher@0.6.2':
     resolution: {integrity: sha512-XOMO2Hupl0wdd172Y06h6kLpBz6Dv+J4okPLl4LPtzbr8f66WbIoy4ev98EBuZ6ZK4h5ydTN6XneT4QVpD7cdA==}
 
-  '@formatjs/intl@4.1.19':
-    resolution: {integrity: sha512-bZMROATl+rzfL8wsDZ53i8XWHx5e6rVr8QlGT5GDvHImEUro4WE9pxUd2dobzmI3CtD+zkt/wkEdqcb+3CK8Fg==}
+  '@formatjs/intl@4.1.20':
+    resolution: {integrity: sha512-q3gaFvc1mXrl0fcSY2QKSS+WzJxpbIXs48O+QLA3UsRtIwVhazvxtLrLGKEse5Mq4U8hAYyTB6Y9buU2ZRFz/w==}
 
   '@formatjs/ts-transformer@4.4.19':
     resolution: {integrity: sha512-TWxL1btx29333yEQc1/eJsU9SUjDJBruzkrR4TVXBLgPaCWbhxg7haOztGXTLgLx+X3ONat7F0kRzcCHksyJyA==}
@@ -6272,8 +6272,8 @@ packages:
     peerDependencies:
       react: 19.2.8
 
-  react-intl@10.1.24:
-    resolution: {integrity: sha512-8hiXRnnmOMEPvE5xb1T1Ce1AsmuSWX2voosCsmiyOEGEq83d1mbHy2M1DeoGKt4yF5oPPkzp+aUwSOtf+NYKPA==}
+  react-intl@10.1.25:
+    resolution: {integrity: sha512-otONc4Dqk0HNDdM1xVtjVm1pfeADRDZUnNMOiDZBYCYTz4FxYcid6Y2PrzeY3+FspW6ieObXtc3+VFUJYbDDGg==}
     peerDependencies:
       '@types/react': '>=18.0.0'
       react: 19.2.8
@@ -8689,7 +8689,7 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@formatjs/intl@4.1.19':
+  '@formatjs/intl@4.1.20':
     dependencies:
       '@formatjs/fast-memoize': 3.1.7
       '@formatjs/icu-messageformat-parser': 3.5.17
@@ -13196,10 +13196,10 @@ snapshots:
       react: 19.2.8
       scheduler: 0.27.0
 
-  react-intl@10.1.24(@types/react@19.2.18)(react@19.2.8):
+  react-intl@10.1.25(@types/react@19.2.18)(react@19.2.8):
     dependencies:
       '@formatjs/icu-messageformat-parser': 3.5.17
-      '@formatjs/intl': 4.1.19
+      '@formatjs/intl': 4.1.20
       '@types/react': 19.2.18
       intl-messageformat: 11.2.14
       react: 19.2.8
