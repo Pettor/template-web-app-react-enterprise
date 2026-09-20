@@ -75,7 +75,7 @@ catalogs:
     clsx: 2.1.1
     react-intl: 10.2.2
   state:
-    jotai: 2.20.3
+    jotai: 3.0.0
     jotai-effect: 2.4.1
     immer: 11.1.18
   validation:
