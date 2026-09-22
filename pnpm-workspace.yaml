@@ -1,3 +1,31 @@
+# pnpm settings. From pnpm 12 onwards pnpm reads its own settings from this file
+# only — `.npmrc` is left to npm registry/auth settings. Keys are camelCase here
+# (they were kebab-case in `.npmrc`).
+
+# Workspace settings
+saveWorkspaceProtocol: rolling
+linkWorkspacePackages: true
+resolvePeersFromWorkspaceRoot: true
+
+# Dependency resolution
+nodeLinker: isolated
+hoist: true
+strictPeerDependencies: false
+autoInstallPeers: true
+
+# Selective public hoisting. The lint scripts in apps/* and packages/* call the
+# `eslint` binary but declare only `@config/eslint`, so eslint has to be hoisted
+# into the root `node_modules` to stay on their PATH.
+publicHoistPattern:
+- '*@heroui/*'
+- '*@storybook/*'
+- '*types*'
+- '*eslint*'
+
+# Performance optimizations
+preferFrozenLockfile: true
+enableModulesDir: true
+
 packages:
 - apps/*
 - configs/*
@@ -145,3 +173,7 @@ catalogs:
     rimraf: 6.1.3
     workbox-window: 7.4.1
     'style-dictionary': 5.5.3
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
