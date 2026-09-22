@@ -4,12 +4,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { dashboardLoader } from "./-DashboardLoader";
 import { CommandPaletteController } from "~/components/actions/command-palette/CommandPaletteController";
 import { SettingsModalController } from "~/components/feedback/settings-modal/SettingsModalController";
+import { RouteError } from "~/core/routes/logic/RouteError";
 import { DashboardView } from "~/views/dashboard/DashboardView";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   loader: ({ context: { queryClient } }) => dashboardLoader(queryClient),
   component: DashboardPageRoute,
-  errorComponent: ({ error }) => <div>Error loading dashboard: {error.message}</div>,
+  errorComponent: ({ error }) => <RouteError error={error} />,
 });
 
 function DashboardPageRoute(): ReactElement {

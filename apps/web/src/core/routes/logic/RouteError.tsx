@@ -5,12 +5,14 @@ import { useRouter } from "@tanstack/react-router";
 import { useIntl } from "react-intl";
 
 interface RouteErrorProps {
-  error?: Error;
+  error?: unknown;
 }
 
 export function RouteError({ error }: RouteErrorProps): ReactElement {
   const intl = useIntl();
   const router = useRouter();
+
+  const errorMessage = error instanceof Error ? error.message : undefined;
 
   function handleRetry(): void {
     router.invalidate();
@@ -39,9 +41,9 @@ export function RouteError({ error }: RouteErrorProps): ReactElement {
       <ExclamationTriangleIcon className="text-warning h-12 w-12" aria-hidden="true" />
       <h1 className="text-xl font-semibold">{title}</h1>
       <p className="text-default-500 max-w-sm text-sm">{description}</p>
-      {error?.message && (
+      {errorMessage && (
         <p className="text-danger bg-danger-50 max-w-sm rounded-md px-3 py-2 font-mono text-xs" role="alert">
-          {error.message}
+          {errorMessage}
         </p>
       )}
       <Button variant="primary" onPress={handleRetry}>
