@@ -79,6 +79,13 @@
       "matchDatasources": ["npm"],
       "matchPackageNames": ["typescript"],
       "allowedVersions": "<6.1.0"
+    },
+    {
+      "description": "glob@7 (transitive dev dep) breaks on minimatch v10's GLOBSTAR Symbol, which takes down the mock server and `pnpm test:e2e`. See the override comment in pnpm-workspace.yaml.",
+      "matchDatasources": ["npm"],
+      "matchPackageNames": ["minimatch"],
+      "matchCurrentValue": "/^\\^3\\./",
+      "enabled": false
     }
   ],
   "schedule": ["every weekend"]
