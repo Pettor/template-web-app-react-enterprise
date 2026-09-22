@@ -60,7 +60,9 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "@heroui/shared-utils",
-      "sharp"
+      "esbuild",
+      "sharp",
+      "unrs-resolver"
     ]
   },
   "lint-staged": {
