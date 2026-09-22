@@ -73,6 +73,12 @@
       "semanticCommitType": "fix",
       "separateMajorMinor": false,
       "separateMultipleMajor": false
+    },
+    {
+      "description": "typescript-eslint peer range is `>=4.8.4 <6.1.0`; TS 7.x breaks `pnpm lint`. See the pin comment in pnpm-workspace.yaml.",
+      "matchDatasources": ["npm"],
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<6.1.0"
     }
   ],
   "schedule": ["every weekend"]
