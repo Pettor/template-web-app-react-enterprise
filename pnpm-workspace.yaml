@@ -29,7 +29,7 @@ packages:
 - tools/*
 overrides:
   '@tanstack/react-query': catalog:tanstack
-  '@tanstack/query-core': 5.104.0
+  '@tanstack/query-core': 5.104.1
   react: catalog:react
   react-dom: catalog:react
   # Security fixes for transitive dev dependencies flagged by GitHub Dependabot.
@@ -86,10 +86,10 @@ catalogs:
     babel-plugin-react-compiler: 19.1.0-rc.3
   tanstack:
     '@tanstack/react-form': 1.33.5
-    '@tanstack/react-query': 5.104.0
-    '@tanstack/react-router': 1.170.40
+    '@tanstack/react-query': 5.104.1
+    '@tanstack/react-router': 1.170.41
     # Codegen plugin kept with the router so they bump together.
-    '@tanstack/router-plugin': 1.168.41
+    '@tanstack/router-plugin': 1.168.42
   ui:
     '@heroui/react': 3.2.6
     '@heroicons/react': 2.2.0
