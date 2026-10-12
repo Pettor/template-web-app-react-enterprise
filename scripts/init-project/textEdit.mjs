@@ -1,19 +1,88 @@
 /**
- * Replaces the first occurrence of `search` with `replace`, throwing a
+ * Replaces the first occurrence of `search` (a string, or a RegExp for text
+ * that legitimately varies, like version numbers) with `replace`, throwing a
  * descriptive error if it isn't found — file edits should fail loudly rather
  * than silently no-op when the source file has drifted from what this script
- * expects.
+ * expects. `replace` is inserted literally (no `$1`-style expansion).
  */
 export function replaceOnce(content, search, replace, label) {
-  const index = content.indexOf(search);
+  let index;
+  let length;
+  if (search instanceof RegExp) {
+    const match = search.exec(content);
+    index = match ? match.index : -1;
+    length = match ? match[0].length : 0;
+  } else {
+    index = content.indexOf(search);
+    length = search.length;
+  }
   if (index === -1) {
     throw new Error(`Could not find expected text for "${label}". The source file may have changed.`);
   }
-  return content.slice(0, index) + replace + content.slice(index + search.length);
+  return content.slice(0, index) + replace + content.slice(index + length);
 }
 
 export function removeOnce(content, search, label) {
   return replaceOnce(content, search, "", label);
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function indentOf(line) {
+  return line.length - line.trimStart().length;
+}
+
+/**
+ * Removes a block of lines starting at `startIndex` and running until the
+ * next non-blank line indented at or below `indent` (a sibling job/step or a
+ * parent key). Blank lines trailing the block are removed with it.
+ */
+function removeIndentedBlock(lines, startIndex, indent) {
+  let end = startIndex + 1;
+  while (end < lines.length) {
+    const line = lines[end];
+    if (line.trim() !== "" && indentOf(line) <= indent) break;
+    end++;
+  }
+  lines.splice(startIndex, end - startIndex);
+  return lines;
+}
+
+/**
+ * Removes a GitHub Actions job (`  <jobId>:` under `jobs:`) by its key,
+ * regardless of its contents — so action version bumps, added steps etc.
+ * inside the job can't break the match.
+ */
+export function removeYamlJob(content, jobId, label) {
+  const lines = content.split("\n");
+  const pattern = new RegExp(`^  ${escapeRegExp(jobId)}:\\s*$`);
+  const start = lines.findIndex((line) => pattern.test(line));
+  if (start === -1) {
+    throw new Error(`Could not find job "${jobId}" for "${label}". The workflow file may have changed.`);
+  }
+  return removeIndentedBlock(lines, start, 2).join("\n");
+}
+
+/**
+ * Removes every workflow step whose `name:` matches `stepName`, regardless of
+ * its body. Throws if no such step exists.
+ */
+export function removeYamlStep(content, stepName, label) {
+  const lines = content.split("\n");
+  const pattern = new RegExp(`^(\\s*)- name: ["']?${escapeRegExp(stepName)}["']?\\s*$`);
+  let removed = 0;
+  for (let i = lines.length - 1; i >= 0; i--) {
+    const match = pattern.exec(lines[i]);
+    if (!match) continue;
+    removeIndentedBlock(lines, i, match[1].length);
+    removed++;
+  }
+  if (removed === 0) {
+    throw new Error(`Could not find step "${stepName}" for "${label}". The workflow file may have changed.`);
+  }
+  return lines.join("\n");
 }
 
 /** Escapes a value for safe insertion into a double-quoted JS/TS string literal. */

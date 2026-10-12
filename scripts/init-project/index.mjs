@@ -7,6 +7,7 @@ import { applyPackageJsonUpdates } from "./packageJson.mjs";
 import { selfDestruct } from "./selfDestruct.mjs";
 import { stripBackend } from "./stripBackend.mjs";
 import { verify } from "./verify.mjs";
+import { createWorkspace } from "./workspace.mjs";
 
 const rootDir = path.resolve(import.meta.dirname, "../..");
 
@@ -21,25 +22,43 @@ function printSummary(answers) {
 }
 
 async function main() {
-  const answers = await collectAnswers(process.argv.slice(2));
+  const argv = process.argv.slice(2);
+  const dryRun = argv.includes("--dry-run");
+  const answers = await collectAnswers(argv.filter((arg) => arg !== "--dry-run"));
   printSummary(answers);
 
+  // Every edit below is staged in memory and only written by ws.commit(), so
+  // a failure part-way through leaves the repo exactly as it was.
+  const ws = createWorkspace(rootDir);
+
   console.log("Applying version + name updates across package.json files...");
-  applyPackageJsonUpdates(rootDir, answers);
+  applyPackageJsonUpdates(ws, answers);
 
   console.log("Applying branding (README, PWA manifest, app title)...");
-  applyBranding(rootDir, answers);
-  applyDevPortBranding(rootDir, answers);
+  applyBranding(ws, answers);
+  applyDevPortBranding(ws, answers);
 
   if (answers.backend) {
     console.log("Configuring backend connection...");
-    patchViteConfigPort(rootDir, answers);
-    configureBackend(rootDir, answers);
-    applyE2EPort(rootDir, answers);
+    patchViteConfigPort(ws, answers);
+    configureBackend(ws, answers);
+    applyE2EPort(ws, answers);
   } else {
     console.log("Stripping backend-coupled code (API client, auth, e2e tests, dashboard, login/sign-up)...");
-    stripBackend(rootDir, answers);
+    stripBackend(ws, answers);
   }
+
+  const { deleted, written } = ws.changes();
+  if (dryRun) {
+    console.log(`\nDry run OK — ${written.length} file(s) would be written, ${deleted.length} path(s) deleted:`);
+    for (const rel of deleted) console.log(`  - ${rel}`);
+    for (const rel of written) console.log(`  ~ ${rel}`);
+    return;
+  }
+
+  console.log(`\nWriting changes (${written.length} file(s) written, ${deleted.length} path(s) deleted)...`);
+  ws.commit();
+  committed = true;
 
   console.log("\nVerifying the result (install, build, lint)...");
   verify(rootDir);
@@ -52,8 +71,17 @@ async function main() {
   console.log("Next steps: `pnpm dev` to start the dev server, `pnpm storybook` to browse components.");
 }
 
+let committed = false;
+
 main().catch((error) => {
   console.error(`\ninit-project failed: ${error.message}`);
-  console.error("No cleanup was performed — fix the issue above and re-run `pnpm init-project`.");
+  if (committed) {
+    console.error("The file changes were applied, but verification failed — the init script was kept so you can");
+    console.error(
+      "fix the issue and re-run verification, or discard everything with `git checkout . && git clean -fd`."
+    );
+  } else {
+    console.error("No files were modified — fix the issue above and re-run `pnpm init-project`.");
+  }
   process.exitCode = 1;
 });

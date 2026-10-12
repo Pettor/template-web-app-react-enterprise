@@ -1,20 +1,12 @@
-import { readFileSync, writeFileSync } from "node:fs";
-import path from "node:path";
 import { replaceOnce } from "./textEdit.mjs";
-
-function edit(rootDir, relPath, fn) {
-  const full = path.join(rootDir, relPath);
-  const content = readFileSync(full, "utf8");
-  writeFileSync(full, fn(content), "utf8");
-}
 
 /**
  * Updates every doc reference to the dev-server port (not the e2e port —
  * those are handled separately in applyE2EPort, since apps/e2e doesn't
  * exist when backend=false). Runs regardless of the backend choice.
  */
-export function applyDevPortBranding(rootDir, { devPort }) {
-  edit(rootDir, "README.md", (content) =>
+export function applyDevPortBranding(ws, { devPort }) {
+  ws.edit("README.md", (content) =>
     replaceOnce(
       content,
       "Your application will be available at `http://localhost:5173` with hot reload enabled.",
@@ -23,7 +15,7 @@ export function applyDevPortBranding(rootDir, { devPort }) {
     )
   );
 
-  edit(rootDir, "CLAUDE.md", (content) => {
+  ws.edit("CLAUDE.md", (content) => {
     content = replaceOnce(
       content,
       "- `pnpm dev` - Start development server (main app at https://localhost:5173)",
@@ -39,7 +31,7 @@ export function applyDevPortBranding(rootDir, { devPort }) {
     return content;
   });
 
-  edit(rootDir, "docs/packages.md", (content) =>
+  ws.edit("docs/packages.md", (content) =>
     replaceOnce(
       content,
       "| `apps/web` | React 19, Vite 8, Tailwind 4, HeroUI v3, TanStack Router | `src/main.tsx` | 5173 (HTTPS) |",
@@ -55,8 +47,8 @@ export function applyDevPortBranding(rootDir, { devPort }) {
  * file from its own template (which already carries devPort), so patching
  * here first would just be discarded.
  */
-export function patchViteConfigPort(rootDir, { devPort }) {
-  edit(rootDir, "apps/web/vite.config.ts", (content) =>
+export function patchViteConfigPort(ws, { devPort }) {
+  ws.edit("apps/web/vite.config.ts", (content) =>
     replaceOnce(content, "port: 5173,", `port: ${devPort},`, "vite.config.ts server port")
   );
 }
@@ -66,16 +58,16 @@ export function patchViteConfigPort(rootDir, { devPort }) {
  * hardcodes the old 4173 value. Only called for backend=true — apps/e2e is
  * deleted entirely otherwise.
  */
-export function applyE2EPort(rootDir, { e2ePort }) {
-  edit(rootDir, "apps/web/package.json", (content) =>
+export function applyE2EPort(ws, { e2ePort }) {
+  ws.edit("apps/web/package.json", (content) =>
     content.split("--port 4173 --strictPort").join(`--port ${e2ePort} --strictPort`)
   );
 
   for (const relPath of ["apps/e2e/playwright.config.ts", "apps/e2e/playwright.coverage.config.ts"]) {
-    edit(rootDir, relPath, (content) => content.split("https://localhost:4173").join(`https://localhost:${e2ePort}`));
+    ws.edit(relPath, (content) => content.split("https://localhost:4173").join(`https://localhost:${e2ePort}`));
   }
 
-  edit(rootDir, "apps/e2e/global-setup.ts", (content) =>
+  ws.edit("apps/e2e/global-setup.ts", (content) =>
     replaceOnce(
       content,
       'await page.goto("https://localhost:4173", {',
@@ -84,7 +76,7 @@ export function applyE2EPort(rootDir, { e2ePort }) {
     )
   );
 
-  edit(rootDir, "apps/e2e/global-setup.ui.ts", (content) =>
+  ws.edit("apps/e2e/global-setup.ui.ts", (content) =>
     replaceOnce(
       content,
       'waitForPort(4173, "localhost", timeout)',
@@ -93,7 +85,7 @@ export function applyE2EPort(rootDir, { e2ePort }) {
     )
   );
 
-  edit(rootDir, "CLAUDE.md", (content) => {
+  ws.edit("CLAUDE.md", (content) => {
     content = replaceOnce(
       content,
       "- **Config**: `apps/e2e/playwright.config.ts`, base URL https://localhost:5173, 1 retry, screenshots/traces on failure",
@@ -109,7 +101,7 @@ export function applyE2EPort(rootDir, { e2ePort }) {
     return content;
   });
 
-  edit(rootDir, "docs/packages.md", (content) =>
+  ws.edit("docs/packages.md", (content) =>
     replaceOnce(
       content,
       "| `apps/e2e` | Playwright 1.58, Chromium | `src/specs/*.spec.ts` | — (runs against 5173) |",

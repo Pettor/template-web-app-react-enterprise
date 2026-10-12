@@ -38,7 +38,10 @@ node scripts/init-project/index.mjs \
   --yes
 ```
 
-Omit `--dev-port` to keep the default (`5173`). Omit `--backend-host`/`--backend-port` when backend is `false`. The script itself runs `pnpm install`, a routeTree regeneration pass, `pnpm build`, and `pnpm lint`, streaming their output — relay any failures to the user rather than trying to fix them yourself first; the script leaves every edit in place (no self-delete) when verification fails, so it's safe to fix the reported issue and re-run the same command.
+Omit `--dev-port` to keep the default (`5173`). Omit `--backend-host`/`--backend-port` when backend is `false`. The script itself runs `pnpm install`, a routeTree regeneration pass, `pnpm build`, and `pnpm lint`, streaming their output — relay any failures to the user rather than trying to fix them yourself first.
+
+- **Fails before "Writing changes..."** (e.g. `Could not find expected text for ...`): every edit is staged in memory, so nothing was written. Fix the script and re-run the same command. Append `--dry-run` to rehearse the edits without writing anything. CI runs that rehearsal on every PR (the `init-project` job).
+- **Fails during verification** (install/build/lint): the edits are already on disk and the script is kept (no self-delete). Fix the reported issue and re-run the failing `pnpm` command. Don't re-run the init script on the already-modified tree. To start over, run `git checkout . && git clean -fd`.
 
 On success the script deletes itself (`scripts/init-project/`) and removes the `init-project` entry from root `package.json` — that's expected, not something to undo.
 

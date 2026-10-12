@@ -420,3 +420,24 @@ jobs:
         with:
           name: code-coverage-results.md
           path: code-coverage-results.md
+
+  # Dry-runs scripts/init-project against the current template so that drift
+  # (e.g. a Renovate bump inside text the script edits) fails here instead of
+  # in a freshly cloned project. Removed from generated projects by the script.
+  init-project:
+    name: Init project (dry run)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+
+      - name: Dry run without backend
+        run: node scripts/init-project/index.mjs --repo-name=ci-check --project-name="CI Check" --version=0.1.0 --dev-port=5173 --backend=false --yes --dry-run
+
+      - name: Dry run with backend
+        run: node scripts/init-project/index.mjs --repo-name=ci-check --project-name="CI Check" --version=0.1.0 --dev-port=5173 --backend=true --backend-host=http://localhost --backend-port=5000 --yes --dry-run
