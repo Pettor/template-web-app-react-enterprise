@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { readdirSync } from "node:fs";
 import path from "node:path";
 
 const SKIP_DIRS = new Set([
@@ -30,40 +30,21 @@ function findPackageJsonFiles(rootDir) {
   return results;
 }
 
-function writeJson(filePath, data) {
-  writeFileSync(filePath, `${JSON.stringify(data, null, 2)}\n`, "utf8");
-}
-
 /**
  * Sets `version` on every package.json in the workspace, and `name` on the
  * root package.json only — the scoped workspace package names (@app/web,
  * @package/api, ...) are left alone since they're referenced throughout
  * imports, `pnpm --filter=`, and CI.
  */
-export function applyPackageJsonUpdates(rootDir, { repoName, version }) {
-  const files = findPackageJsonFiles(rootDir);
-  const rootPackageJsonPath = path.join(rootDir, "package.json");
-  const touched = [];
+export function applyPackageJsonUpdates(ws, { repoName, version }) {
+  for (const filePath of findPackageJsonFiles(ws.rootDir)) {
+    const relPath = path.relative(ws.rootDir, filePath);
+    const data = JSON.parse(ws.read(relPath));
+    const isRoot = relPath === "package.json";
+    if (data.version === version && (!isRoot || data.name === repoName)) continue;
 
-  for (const filePath of files) {
-    const data = JSON.parse(readFileSync(filePath, "utf8"));
-    let changed = false;
-
-    if (data.version !== version) {
-      data.version = version;
-      changed = true;
-    }
-
-    if (filePath === rootPackageJsonPath && data.name !== repoName) {
-      data.name = repoName;
-      changed = true;
-    }
-
-    if (changed) {
-      writeJson(filePath, data);
-      touched.push(path.relative(rootDir, filePath));
-    }
+    data.version = version;
+    if (isRoot) data.name = repoName;
+    ws.write(relPath, `${JSON.stringify(data, null, 2)}\n`);
   }
-
-  return touched;
 }

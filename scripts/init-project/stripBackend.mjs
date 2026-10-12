@@ -1,30 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
-import path from "node:path";
-import { jsStringLiteral, removeOnce, replaceOnce } from "./textEdit.mjs";
-
-function rm(rootDir, relPath) {
-  const full = path.join(rootDir, relPath);
-  if (existsSync(full)) rmSync(full, { recursive: true, force: true });
-}
-
-function write(rootDir, relPath, content) {
-  const full = path.join(rootDir, relPath);
-  mkdirSync(path.dirname(full), { recursive: true });
-  writeFileSync(full, content, "utf8");
-}
-
-function edit(rootDir, relPath, fn) {
-  const full = path.join(rootDir, relPath);
-  const content = readFileSync(full, "utf8");
-  writeFileSync(full, fn(content), "utf8");
-}
-
-function editJson(rootDir, relPath, fn) {
-  const full = path.join(rootDir, relPath);
-  const data = JSON.parse(readFileSync(full, "utf8"));
-  fn(data);
-  writeFileSync(full, `${JSON.stringify(data, null, 2)}\n`, "utf8");
-}
+import { jsStringLiteral, removeOnce, removeYamlJob, removeYamlStep, replaceOnce } from "./textEdit.mjs";
 
 const DELETE_PATHS = [
   "packages/api",
@@ -44,13 +18,12 @@ const DELETE_PATHS = [
   "apps/web/.env.mocks",
 ];
 
-function deleteBackendFilesAndDirs(rootDir) {
-  for (const relPath of DELETE_PATHS) rm(rootDir, relPath);
+function deleteBackendFilesAndDirs(ws) {
+  for (const relPath of DELETE_PATHS) ws.rm(relPath);
 }
 
-function writeHomeRoute(rootDir) {
-  write(
-    rootDir,
+function writeHomeRoute(ws) {
+  ws.write(
     "apps/web/src/routes/index/route.tsx",
     `import type { ReactElement } from "react";
 import { useDocumentTitle } from "@package/react";
@@ -80,10 +53,9 @@ function HomePageRoute(): ReactElement {
   );
 }
 
-function writeHomeView(rootDir, { projectName }) {
+function writeHomeView(ws, { projectName }) {
   const name = jsStringLiteral(projectName);
-  write(
-    rootDir,
+  ws.write(
     "apps/web/src/views/home/HomeView.tsx",
     `import type { ReactElement } from "react";
 import { useIntl } from "react-intl";
@@ -116,9 +88,8 @@ export function HomeView(): ReactElement {
   );
 }
 
-function writeRootRoute(rootDir) {
-  write(
-    rootDir,
+function writeRootRoute(ws) {
+  ws.write(
     "apps/web/src/routes/__root/route.tsx",
     `import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext } from "@tanstack/react-router";
@@ -132,8 +103,8 @@ export const Route = createRootRouteWithContext<RouterContext>()({});
   );
 }
 
-function stripAppRoutes(rootDir) {
-  edit(rootDir, "apps/web/src/core/routes/AppRoutes.tsx", (content) => {
+function stripAppRoutes(ws) {
+  ws.edit("apps/web/src/core/routes/AppRoutes.tsx", (content) => {
     content = removeOnce(content, "    authStatus: undefined!,\n", "AppRoutes router context stub");
     content = replaceOnce(
       content,
@@ -145,8 +116,8 @@ function stripAppRoutes(rootDir) {
   });
 }
 
-function fixNotFoundRoute(rootDir) {
-  edit(rootDir, "apps/web/src/routes/$/route.tsx", (content) => {
+function fixNotFoundRoute(ws) {
+  ws.edit("apps/web/src/routes/$/route.tsx", (content) => {
     content = replaceOnce(content, 'navigate({ to: "/login" });', 'navigate({ to: "/" });', "404 navigate target");
     content = replaceOnce(
       content,
@@ -158,9 +129,8 @@ function fixNotFoundRoute(rootDir) {
   });
 }
 
-function simplifySettingsModal(rootDir) {
-  write(
-    rootDir,
+function simplifySettingsModal(ws) {
+  ws.write(
     "apps/web/src/core/settings/UseSettingsModal.ts",
     `import { useCallback } from "react";
 import { useAtom } from "jotai";
@@ -202,8 +172,7 @@ export function useSettingsModal(): UseSettingsModalResult {
 `
   );
 
-  write(
-    rootDir,
+  ws.write(
     "apps/web/src/components/feedback/settings-modal/UseSettingsModalController.ts",
     `import { useMemo } from "react";
 import type { SettingsModalProps } from "./SettingsModal";
@@ -236,7 +205,7 @@ export function useSettingsModalController(): SettingsModalProps {
 `
   );
 
-  edit(rootDir, "apps/web/src/components/feedback/about-details/AboutDetails.tsx", (content) => {
+  ws.edit("apps/web/src/components/feedback/about-details/AboutDetails.tsx", (content) => {
     content = replaceOnce(
       content,
       "  appVersion: string;\n  serverVersion: string;\n}",
@@ -273,9 +242,8 @@ export function useSettingsModalController(): SettingsModalProps {
   });
 }
 
-function simplifyCommandPalette(rootDir) {
-  write(
-    rootDir,
+function simplifyCommandPalette(ws) {
+  ws.write(
     "apps/web/src/components/actions/command-palette/UseCommandPaletteController.tsx",
     `import { useMemo } from "react";
 import { ComputerDesktopIcon, HomeIcon, MoonIcon, SunIcon } from "@heroicons/react/20/solid";
@@ -389,9 +357,8 @@ export function useCommandPaletteController(): CommandPaletteProps {
   );
 }
 
-function stripViteConfig(rootDir, { devPort }) {
-  write(
-    rootDir,
+function stripViteConfig(ws, { devPort }) {
+  ws.write(
     "apps/web/vite.config.ts",
     `import { createBaseConfig, createPWAConfig, createReactConfig, mergeConfigs } from "@config/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
@@ -436,8 +403,8 @@ export default defineConfig(({ command }) => {
   );
 }
 
-function stripWebPackageJson(rootDir) {
-  editJson(rootDir, "apps/web/package.json", (data) => {
+function stripWebPackageJson(ws) {
+  ws.editJson("apps/web/package.json", (data) => {
     delete data.scripts["dev:mocks"];
     delete data.scripts["test:e2e:env"];
     delete data.scripts["test:e2e:env:coverage"];
@@ -448,8 +415,8 @@ function stripWebPackageJson(rootDir) {
   });
 }
 
-function stripRootPackageJson(rootDir) {
-  editJson(rootDir, "package.json", (data) => {
+function stripRootPackageJson(ws) {
+  ws.editJson("package.json", (data) => {
     for (const script of [
       "dev:mocks",
       "dev:mocks:cli",
@@ -466,8 +433,8 @@ function stripRootPackageJson(rootDir) {
   });
 }
 
-function stripTurboJson(rootDir) {
-  editJson(rootDir, "turbo.json", (data) => {
+function stripTurboJson(ws) {
+  ws.editJson("turbo.json", (data) => {
     for (const task of [
       "dev:mocks",
       "dev:mocks:cli",
@@ -483,150 +450,55 @@ function stripTurboJson(rootDir) {
   });
 }
 
-function stripWebEnv(rootDir) {
-  edit(rootDir, "apps/web/.env", (content) =>
+function stripWebEnv(ws) {
+  ws.edit("apps/web/.env", (content) =>
     removeOnce(
       content,
-      "\n\n# Vite Proxy options\nVITE_CONNECT_HOST=http://localhost\nVITE_CONNECT_PORT=5000",
+      /\n+# Vite Proxy options\nVITE_CONNECT_HOST=.*\nVITE_CONNECT_PORT=.*/,
       "apps/web/.env proxy vars"
     )
   );
 }
 
-function stripCiWorkflows(rootDir) {
-  edit(rootDir, ".github/workflows/ci.yml", (content) => {
-    content = removeOnce(
-      content,
-      `  test-e2e:
-    name: Test E2E
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 2
+/**
+ * Rewrites the `node tools/merge-coverage.js ...` invocation (plus the comment
+ * block directly above it) so it only merges the reports that still exist.
+ * Located by the command itself rather than exact text, so comment tweaks or
+ * re-ordered arguments don't break it.
+ */
+function rewriteMergeCoverage(content) {
+  const lines = content.split("\n");
+  const cmd = lines.findIndex((line) => line.trim().startsWith("node tools/merge-coverage.js"));
+  if (cmd === -1) {
+    throw new Error('Could not find "node tools/merge-coverage.js" in ci.yml. The workflow file may have changed.');
+  }
+  const indent = lines[cmd].slice(0, lines[cmd].length - lines[cmd].trimStart().length);
 
-      - name: Cache turbo build setup
-        uses: actions/cache@v6
-        with:
-          path: .turbo
-          key: \${{ runner.os }}-turbo-\${{ github.sha }}
-          restore-keys: |
-            \${{ runner.os }}-turbo-
+  let start = cmd;
+  while (start > 0 && lines[start - 1].trim().startsWith("#")) start--;
+  let end = cmd;
+  while (end < lines.length - 1 && lines[end].trimEnd().endsWith("\\")) end++;
 
-      - name: Setup node
-        uses: actions/setup-node@v7
-        with:
-          node-version: "24"
+  const replacement = [
+    "# Merge cobertura XML files directly using max-hits-per-line strategy,",
+    "# taking the max hit count per line across reports.",
+    "#   - web.xml: storybook unit tests (V8, correct for unit-tested files)",
+    "#   - web-storybook.xml: storybook browser tests (V8, covers packages/ui)",
+    "node tools/merge-coverage.js \\",
+    "  output/coverage/combined.xml \\",
+    "  output/coverage/web.xml \\",
+    "  output/coverage/web-storybook.xml",
+  ].map((line) => indent + line);
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6.0.9
-        id: pnpm-install
-        with:
-          run_install: false
+  lines.splice(start, end - start + 1, ...replacement);
+  return lines.join("\n");
+}
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v6
-        with:
-          path: \${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: \${{ runner.os }}-pnpm-store-\${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            \${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
-
-      - name: Get installed Playwright version
-        id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(grep -E '^    playwright:' pnpm-workspace.yaml | awk '{print $2}')" >> $GITHUB_OUTPUT
-
-      - name: Cache playwright binaries
-        uses: actions/cache@v6
-        id: playwright-cache
-        with:
-          path: |
-            ~/.cache/ms-playwright
-          key: \${{ runner.os }}-playwright-\${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
-
-      - name: Install Playwright browsers
-        run: pnpm --filter=e2e exec playwright install chromium
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-
-      - name: Cache Playwright system dependencies
-        id: apt-cache-e2e
-        uses: actions/cache@v6
-        with:
-          path: ~/.cache/playwright-debs
-          key: \${{ runner.os }}-apt-playwright-\${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
-
-      - name: Install Playwright system dependencies
-        if: steps.apt-cache-e2e.outputs.cache-hit != 'true'
-        run: pnpm --filter=e2e exec playwright install-deps chromium
-
-      - name: Collect apt debs for next run
-        if: steps.apt-cache-e2e.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p ~/.cache/playwright-debs
-          sudo cp /var/cache/apt/archives/*.deb ~/.cache/playwright-debs/ 2>/dev/null || true
-
-      - name: Run tests
-        run: pnpm test:e2e:ci
-
-      - name: Publish test summary
-        uses: mikepenz/action-junit-report@v6
-        with:
-          report_paths: "**/.test-results/*.xml"
-          check_name: "Test E2E summary"
-        if: always()
-
-`,
-      "ci.yml test-e2e job"
-    );
-
-    content = removeOnce(
-      content,
-      `      - name: Run E2E tests with coverage
-        run: pnpm --filter=@app/e2e test:e2e:coverage
-        continue-on-error: false
-
-`,
-      "ci.yml e2e coverage step"
-    );
-
-    content = replaceOnce(
-      content,
-      `          # Merge cobertura XML files directly using max-hits-per-line strategy.
-          # This avoids the V8 (storybook/unit) vs Istanbul (E2E) format incompatibility
-          # that occurs when merging raw coverage JSON via nyc merge:
-          #   - V8 produces 1 statement per function; Istanbul produces per-line statements.
-          #   - Merging additively gives wrong line counts (e.g. 1/10 instead of 100%).
-          # Instead, we merge at the cobertura XML level, taking max hit count per line.
-          #   - web.xml: storybook unit tests (V8, correct for unit-tested files)
-          #   - web-storybook.xml: storybook browser tests (V8, covers packages/ui)
-          #   - e2e.xml: E2E Istanbul coverage (correct for browser-exercised files)
-          #   - api.xml: API unit tests (V8, covers packages/api/src/**)
-          node tools/merge-coverage.js \\
-            output/coverage/combined.xml \\
-            output/coverage/web.xml \\
-            output/coverage/web-storybook.xml \\
-            output/coverage/e2e.xml \\
-            output/coverage/api.xml`,
-      `          # Merge cobertura XML files directly using max-hits-per-line strategy,
-          # taking the max hit count per line across reports.
-          #   - web.xml: storybook unit tests (V8, correct for unit-tested files)
-          #   - web-storybook.xml: storybook browser tests (V8, covers packages/ui)
-          node tools/merge-coverage.js \\
-            output/coverage/combined.xml \\
-            output/coverage/web.xml \\
-            output/coverage/web-storybook.xml`,
-      "ci.yml merge-coverage args"
-    );
+function stripCiWorkflows(ws) {
+  ws.edit(".github/workflows/ci.yml", (content) => {
+    content = removeYamlJob(content, "test-e2e", "ci.yml test-e2e job");
+    content = removeYamlStep(content, "Run E2E tests with coverage", "ci.yml e2e coverage step");
+    content = rewriteMergeCoverage(content);
 
     content = content
       .split("pnpm --filter=e2e exec playwright install chromium")
@@ -638,10 +510,10 @@ function stripCiWorkflows(rootDir) {
     return content;
   });
 
-  edit(rootDir, ".github/workflows/main.yml", (content) => {
+  ws.edit(".github/workflows/main.yml", (content) => {
     content = replaceOnce(
       content,
-      `run: echo "PLAYWRIGHT_VERSION=$(pnpm list --filter=@app/e2e | grep "playwright " | awk '{print $2}')" >> $GITHUB_OUTPUT`,
+      /run: echo "PLAYWRIGHT_VERSION=.*" >> \$GITHUB_OUTPUT/,
       `run: echo "PLAYWRIGHT_VERSION=$(grep -E '^    playwright:' pnpm-workspace.yaml | awk '{print $2}')" >> $GITHUB_OUTPUT`,
       "main.yml playwright version detection"
     );
@@ -655,26 +527,26 @@ function stripCiWorkflows(rootDir) {
   });
 }
 
-function stripClaudeMd(rootDir) {
-  edit(rootDir, "CLAUDE.md", (content) => {
+function stripClaudeMd(ws) {
+  ws.edit("CLAUDE.md", (content) => {
     content = removeOnce(
       content,
-      '- `pnpm dev:mocks` - Start development with mock server enabled (API on port 3100)\n',
+      "- `pnpm dev:mocks` - Start development with mock server enabled (API on port 3100)\n",
       "CLAUDE.md dev:mocks command"
     );
     content = removeOnce(
       content,
-      '- `pnpm dev:mocks:cli` - Start standalone mock server only\n',
+      "- `pnpm dev:mocks:cli` - Start standalone mock server only\n",
       "CLAUDE.md dev:mocks:cli command"
     );
     content = removeOnce(
       content,
-      '- `pnpm test:e2e` - Run E2E tests with Playwright UI (starts dev server + mocks automatically)\n',
+      "- `pnpm test:e2e` - Run E2E tests with Playwright UI (starts dev server + mocks automatically)\n",
       "CLAUDE.md test:e2e command"
     );
     content = removeOnce(
       content,
-      '- `pnpm test:e2e:ci` - Run E2E tests headless in the terminal (used by CI)\n',
+      "- `pnpm test:e2e:ci` - Run E2E tests headless in the terminal (used by CI)\n",
       "CLAUDE.md test:e2e:ci command"
     );
 
@@ -821,20 +693,20 @@ Key exports: \`AdminApiClient\`, helpers for mock server integration (used in \`
  * minimal, non-authenticated HomeView. PWA support and the general app shell
  * (theming, i18n, settings, command palette) are left in place.
  */
-export function stripBackend(rootDir, answers) {
-  deleteBackendFilesAndDirs(rootDir);
-  writeHomeRoute(rootDir);
-  writeHomeView(rootDir, answers);
-  writeRootRoute(rootDir);
-  stripAppRoutes(rootDir);
-  fixNotFoundRoute(rootDir);
-  simplifySettingsModal(rootDir);
-  simplifyCommandPalette(rootDir);
-  stripViteConfig(rootDir, answers);
-  stripWebPackageJson(rootDir);
-  stripRootPackageJson(rootDir);
-  stripTurboJson(rootDir);
-  stripWebEnv(rootDir);
-  stripCiWorkflows(rootDir);
-  stripClaudeMd(rootDir);
+export function stripBackend(ws, answers) {
+  deleteBackendFilesAndDirs(ws);
+  writeHomeRoute(ws);
+  writeHomeView(ws, answers);
+  writeRootRoute(ws);
+  stripAppRoutes(ws);
+  fixNotFoundRoute(ws);
+  simplifySettingsModal(ws);
+  simplifyCommandPalette(ws);
+  stripViteConfig(ws, answers);
+  stripWebPackageJson(ws);
+  stripRootPackageJson(ws);
+  stripTurboJson(ws);
+  stripWebEnv(ws);
+  stripCiWorkflows(ws);
+  stripClaudeMd(ws);
 }

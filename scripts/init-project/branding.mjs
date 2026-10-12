@@ -1,13 +1,11 @@
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import path from "node:path";
 import { htmlEscape, jsStringLiteral, removeOnce, replaceOnce } from "./textEdit.mjs";
 
 const OLD_REPO_NAME_LONG = "template-web-app-react-enterprise";
 const OLD_REPO_NAME_SHORT = "template-web-app-react";
 
-function updateReadme(rootDir, { repoName, projectName, backend }) {
-  const filePath = path.join(rootDir, "README.md");
-  let content = readFileSync(filePath, "utf8");
+function updateReadme(ws, { repoName, projectName, backend }) {
+  const filePath = "README.md";
+  let content = ws.read(filePath);
 
   // Repo name shows up dozens of times across badges/links — swap the longer,
   // more specific name first so it isn't left half-replaced by the shorter one.
@@ -30,7 +28,7 @@ function updateReadme(rootDir, { repoName, projectName, backend }) {
     );
     content = removeOnce(
       content,
-      '\n- **[Playwright](https://playwright.dev/)** - Reliable end-to-end testing across all browsers',
+      "\n- **[Playwright](https://playwright.dev/)** - Reliable end-to-end testing across all browsers",
       "playwright e2e bullet"
     );
     content = removeOnce(content, "\n- `pnpm test:e2e` - Run end-to-end tests", "test:e2e script bullet");
@@ -63,24 +61,24 @@ function updateReadme(rootDir, { repoName, projectName, backend }) {
     content = removeOnce(content, " && pnpm test:e2e", "contributing test suite mention");
   }
 
-  writeFileSync(filePath, content, "utf8");
+  ws.write(filePath, content);
 }
 
-function updateIndexHtml(rootDir, { projectName }) {
-  const filePath = path.join(rootDir, "apps/web/index.html");
-  let content = readFileSync(filePath, "utf8");
+function updateIndexHtml(ws, { projectName }) {
+  const filePath = "apps/web/index.html";
+  let content = ws.read(filePath);
   content = replaceOnce(
     content,
     "<title>WebTemplate</title>",
     `<title>${htmlEscape(projectName)}</title>`,
     "index.html title"
   );
-  writeFileSync(filePath, content, "utf8");
+  ws.write(filePath, content);
 }
 
-function updatePwaConfig(rootDir, { projectName, shortName }) {
-  const filePath = path.join(rootDir, "configs/vite/src/pwa.ts");
-  let content = readFileSync(filePath, "utf8");
+function updatePwaConfig(ws, { projectName, shortName }) {
+  const filePath = "configs/vite/src/pwa.ts";
+  let content = ws.read(filePath);
   const name = jsStringLiteral(projectName);
   const short = jsStringLiteral(shortName);
 
@@ -115,37 +113,37 @@ function updatePwaConfig(rootDir, { projectName, shortName }) {
     "pwa manifest short_name"
   );
 
-  writeFileSync(filePath, content, "utf8");
+  ws.write(filePath, content);
 }
 
-function updateAppInfo(rootDir, { projectName }) {
-  const filePath = path.join(rootDir, "apps/web/src/core/config/UseAppInfo.ts");
-  let content = readFileSync(filePath, "utf8");
+function updateAppInfo(ws, { projectName }) {
+  const filePath = "apps/web/src/core/config/UseAppInfo.ts";
+  let content = ws.read(filePath);
   content = replaceOnce(
     content,
     'const appName = "Web App";',
     `const appName = "${jsStringLiteral(projectName)}";`,
     "appName constant"
   );
-  writeFileSync(filePath, content, "utf8");
+  ws.write(filePath, content);
 }
 
-function syncDemoEnvVersion(rootDir, { version }) {
-  const filePath = path.join(rootDir, "apps/web/.env.demo");
-  if (!existsSync(filePath)) return;
-  let content = readFileSync(filePath, "utf8");
-  content = content.replace(/^VITE_APP_VERSION=.*$/m, `VITE_APP_VERSION=${version}`);
-  writeFileSync(filePath, content, "utf8");
+function syncDemoEnvVersion(ws, { version }) {
+  const filePath = "apps/web/.env.demo";
+  if (!ws.exists(filePath)) return;
+  let content = ws.read(filePath);
+  content = content.replace(/^VITE_APP_VERSION=.*$/m, () => `VITE_APP_VERSION=${version}`);
+  ws.write(filePath, content);
 }
 
 /**
  * Applies the human-facing rebrand: README, PWA manifest, <title>, and the
  * in-app display name. Runs regardless of the backend choice.
  */
-export function applyBranding(rootDir, answers) {
-  updateReadme(rootDir, answers);
-  updateIndexHtml(rootDir, answers);
-  updatePwaConfig(rootDir, answers);
-  updateAppInfo(rootDir, answers);
-  syncDemoEnvVersion(rootDir, answers);
+export function applyBranding(ws, answers) {
+  updateReadme(ws, answers);
+  updateIndexHtml(ws, answers);
+  updatePwaConfig(ws, answers);
+  updateAppInfo(ws, answers);
+  syncDemoEnvVersion(ws, answers);
 }
