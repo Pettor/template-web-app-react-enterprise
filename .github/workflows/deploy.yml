@@ -4,6 +4,7 @@ on:
   pull_request:
     types:
       - closed
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -11,7 +12,7 @@ permissions:
 jobs:
   deploy-gh-pages:
     name: Deploy
-    if: github.event.pull_request.merged == true
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
