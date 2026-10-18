@@ -1,9 +1,8 @@
 import { replaceOnce } from "./textEdit.mjs";
 
 /**
- * Updates every doc reference to the dev-server port (not the e2e port —
- * those are handled separately in applyE2EPort, since apps/e2e doesn't
- * exist when backend=false). Runs regardless of the backend choice.
+ * Updates every doc reference to the dev-server port (the e2e port is handled
+ * separately in applyE2EPort). Runs regardless of the backend choice.
  */
 export function applyDevPortBranding(ws, { devPort }) {
   ws.edit("README.md", (content) =>
@@ -55,8 +54,8 @@ export function patchViteConfigPort(ws, { devPort }) {
 
 /**
  * Propagates the derived e2e port (devPort - 1000) across every file that
- * hardcodes the old 4173 value. Only called for backend=true — apps/e2e is
- * deleted entirely otherwise.
+ * hardcodes the old 4173 value. Runs regardless of the backend choice — must
+ * run before stripBackend, which edits some of the same files.
  */
 export function applyE2EPort(ws, { e2ePort }) {
   ws.edit("apps/web/package.json", (content) =>
@@ -107,6 +106,58 @@ export function applyE2EPort(ws, { e2ePort }) {
       "| `apps/e2e` | Playwright 1.58, Chromium | `src/specs/*.spec.ts` | — (runs against 5173) |",
       `| \`apps/e2e\` | Playwright 1.58, Chromium | \`src/specs/*.spec.ts\` | — (runs against ${e2ePort}) |`,
       "docs/packages.md apps/e2e row"
+    )
+  );
+}
+
+/**
+ * Replaces the template's Storybook port (9050) with the per-project random
+ * one. Runs after stripBackend, so files it deleted are skipped.
+ */
+export function applyStorybookPort(ws, { storybookPort }) {
+  ws.editJson("apps/storybook/package.json", (data) => {
+    const script = data.scripts.storybook;
+    if (!script.includes("-p 9050")) {
+      throw new Error('Could not find expected text for "apps/storybook storybook script port". The file may have changed.');
+    }
+    data.scripts.storybook = script.replace("-p 9050", `-p ${storybookPort}`);
+  });
+
+  const screenshotsConfig = "apps/e2e/playwright.screenshots.config.ts";
+  if (ws.exists(screenshotsConfig)) {
+    ws.edit(screenshotsConfig, (content) =>
+      content.split("http://localhost:9050").join(`http://localhost:${storybookPort}`)
+    );
+  }
+
+  ws.edit("CLAUDE.md", (content) => {
+    content = replaceOnce(
+      content,
+      "- `pnpm storybook` - Start Storybook development server (localhost:9050)",
+      `- \`pnpm storybook\` - Start Storybook development server (localhost:${storybookPort})`,
+      "CLAUDE.md pnpm storybook command"
+    );
+    content = replaceOnce(
+      content,
+      "- **URL**: localhost:9050",
+      `- **URL**: localhost:${storybookPort}`,
+      "CLAUDE.md apps/storybook URL"
+    );
+    content = replaceOnce(
+      content,
+      "Available at `http://localhost:9050/mcp`",
+      `Available at \`http://localhost:${storybookPort}/mcp\``,
+      "CLAUDE.md Storybook MCP URL"
+    );
+    return content;
+  });
+
+  ws.edit("docs/packages.md", (content) =>
+    replaceOnce(
+      content,
+      "| `apps/storybook` | Storybook 10 + Vite builder | `main.ts` | 9050 |",
+      `| \`apps/storybook\` | Storybook 10 + Vite builder | \`main.ts\` | ${storybookPort} |`,
+      "docs/packages.md apps/storybook row"
     )
   );
 }

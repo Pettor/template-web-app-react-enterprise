@@ -2,7 +2,7 @@ import path from "node:path";
 import { applyBranding } from "./branding.mjs";
 import { collectAnswers } from "./cli.mjs";
 import { configureBackend } from "./configureBackend.mjs";
-import { applyDevPortBranding, applyE2EPort, patchViteConfigPort } from "./devPort.mjs";
+import { applyDevPortBranding, applyE2EPort, applyStorybookPort, patchViteConfigPort } from "./devPort.mjs";
 import { applyPackageJsonUpdates } from "./packageJson.mjs";
 import { selfDestruct } from "./selfDestruct.mjs";
 import { stripBackend } from "./stripBackend.mjs";
@@ -17,6 +17,8 @@ function printSummary(answers) {
   console.log(" Project name:  ", answers.projectName);
   console.log(" Version:       ", answers.version);
   console.log(" Dev port:      ", answers.devPort);
+  console.log(" E2E port:      ", answers.e2ePort);
+  console.log(" Storybook port:", answers.storybookPort);
   console.log(" Backend:       ", answers.backend ? `yes (${answers.backendHost}:${answers.backendPort})` : "no");
   console.log("===========================================\n");
 }
@@ -37,16 +39,18 @@ async function main() {
   console.log("Applying branding (README, PWA manifest, app title)...");
   applyBranding(ws, answers);
   applyDevPortBranding(ws, answers);
+  applyE2EPort(ws, answers);
 
   if (answers.backend) {
     console.log("Configuring backend connection...");
     patchViteConfigPort(ws, answers);
     configureBackend(ws, answers);
-    applyE2EPort(ws, answers);
   } else {
-    console.log("Stripping backend-coupled code (API client, auth, e2e tests, dashboard, login/sign-up)...");
+    console.log("Stripping backend-coupled code (API client, auth, mock server, dashboard, login/sign-up)...");
     stripBackend(ws, answers);
   }
+
+  applyStorybookPort(ws, answers);
 
   const { deleted, written } = ws.changes();
   if (dryRun) {

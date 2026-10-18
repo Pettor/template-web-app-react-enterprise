@@ -19,9 +19,9 @@ Ask, in order, via `AskUserQuestion`:
 1. **Repo name** — used for the root `package.json` name and README links (e.g. `my-app`).
 2. **Project name** — human-readable display name (e.g. `My App`). Used in the README title, PWA manifest, browser tab title, and in-app "About" section.
 3. **Initial version** — semver, default `0.1.0`.
-4. **Dev server port** — default `5173`, or randomize (picks a port between 5000-5400), or let the user set one manually. The script derives the e2e test port as `devPort - 1000` (matching the template's existing convention, e.g. `5173` → `4173`) and updates every e2e config/script that references it — only relevant when backend is kept, since `apps/e2e` is deleted otherwise.
+4. **Dev server port** — default `5173`, or randomize (picks a port between 5000-5400), or let the user set one manually. The script derives the e2e test port as `devPort - 1000` (matching the template's existing convention, e.g. `5173` → `4173`) and updates every e2e config/script that references it.
 5. **Does this project need a backend?**
-   - **No backend** — purely a frontend project. The script deletes the API client, auth, authenticated/public route guards, login/sign-up/forgot-password, dashboard, mock server, and e2e tests, and replaces the home route with a minimal `HomeView`. PWA support and the general app shell (theme, i18n, settings, command palette) are kept.
+   - **No backend** — purely a frontend project. The script deletes the API client, auth, authenticated/public route guards, login/sign-up/forgot-password, dashboard, and mock server, and replaces the home route with a minimal `HomeView`. PWA support and the general app shell (theme, i18n, settings, command palette) are kept. Playwright e2e tests (`apps/e2e`) are kept too, but run against the plain dev server — the auth/screenshot specs are removed and `general.spec.ts` is rewritten for the new `HomeView`.
    - **Has backend** — ask two follow-ups: backend host (default `http://localhost`) and backend port (default `5000`). Nothing is deleted; the script just writes those into `apps/web/.env`.
 
 Once you have all the answers, run:
@@ -38,7 +38,7 @@ node scripts/init-project/index.mjs \
   --yes
 ```
 
-Omit `--dev-port` to keep the default (`5173`). Omit `--backend-host`/`--backend-port` when backend is `false`. The script itself runs `pnpm install`, a routeTree regeneration pass, `pnpm build`, and `pnpm lint`, streaming their output — relay any failures to the user rather than trying to fix them yourself first.
+Omit `--dev-port` to keep the default (`5173`). Storybook always gets a random port (9000-9999, avoiding the dev/e2e ports) so projects cloned from this template don't clash — don't ask about it; pass `--storybook-port=N` only if the user explicitly wants a specific one. Omit `--backend-host`/`--backend-port` when backend is `false`. The script itself runs `pnpm install`, a routeTree regeneration pass, `pnpm build`, and `pnpm lint`, streaming their output — relay any failures to the user rather than trying to fix them yourself first.
 
 - **Fails before "Writing changes..."** (e.g. `Could not find expected text for ...`): every edit is staged in memory, so nothing was written. Fix the script and re-run the same command. Append `--dry-run` to rehearse the edits without writing anything. CI runs that rehearsal on every PR (the `init-project` job).
 - **Fails during verification** (install/build/lint): the edits are already on disk and the script is kept (no self-delete). Fix the reported issue and re-run the failing `pnpm` command. Don't re-run the init script on the already-modified tree. To start over, run `git checkout . && git clean -fd`.
@@ -82,10 +82,10 @@ pnpm build:libs
 
 Print to the user:
 
-- **Choices made** — repo name, project name, version, backend mode (none / configured at host:port), colors changed (with old → new values if yes).
+- **Choices made** — repo name, project name, version, dev/e2e/Storybook ports (from the script's summary), backend mode (none / configured at host:port), colors changed (with old → new values if yes).
 - **High-level files touched** — relay what the script printed; don't re-enumerate every file.
 - **Greeting** — a friendly "Your project is ready!" plus next steps:
   - `pnpm dev` to start the dev server
   - `pnpm storybook` to browse the component library
-  - `pnpm test` (and `pnpm test:e2e`, if backend was kept) to run the test suites
+  - `pnpm test` and `pnpm test:e2e` to run the test suites
   - Review with `git status`/`git diff` and commit when happy — the script does not commit anything itself
