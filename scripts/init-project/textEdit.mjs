@@ -65,26 +65,6 @@ export function removeYamlJob(content, jobId, label) {
   return removeIndentedBlock(lines, start, 2).join("\n");
 }
 
-/**
- * Removes every workflow step whose `name:` matches `stepName`, regardless of
- * its body. Throws if no such step exists.
- */
-export function removeYamlStep(content, stepName, label) {
-  const lines = content.split("\n");
-  const pattern = new RegExp(`^(\\s*)- name: ["']?${escapeRegExp(stepName)}["']?\\s*$`);
-  let removed = 0;
-  for (let i = lines.length - 1; i >= 0; i--) {
-    const match = pattern.exec(lines[i]);
-    if (!match) continue;
-    removeIndentedBlock(lines, i, match[1].length);
-    removed++;
-  }
-  if (removed === 0) {
-    throw new Error(`Could not find step "${stepName}" for "${label}". The workflow file may have changed.`);
-  }
-  return lines.join("\n");
-}
-
 /** Escapes a value for safe insertion into a double-quoted JS/TS string literal. */
 export function jsStringLiteral(value) {
   return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');

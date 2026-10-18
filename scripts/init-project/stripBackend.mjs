@@ -1,10 +1,13 @@
-import { jsStringLiteral, removeOnce, removeYamlJob, removeYamlStep, replaceOnce } from "./textEdit.mjs";
+import { jsStringLiteral, removeOnce, replaceOnce } from "./textEdit.mjs";
 
 const DELETE_PATHS = [
   "packages/api",
   "packages/mocks",
   "tools/mock",
-  "apps/e2e",
+  "apps/e2e/src/specs/auth.spec.ts",
+  // Screenshots are taken of the login stories, which are deleted below
+  "apps/e2e/src/generate-screenshots.spec.ts",
+  "apps/e2e/playwright.screenshots.config.ts",
   "apps/web/src/core/auth",
   "apps/web/src/core/session",
   "apps/web/src/routes/_authenticated",
@@ -357,13 +360,132 @@ export function useCommandPaletteController(): CommandPaletteProps {
   );
 }
 
+function writeGeneralSpec(ws, { projectName }) {
+  const name = jsStringLiteral(projectName);
+  ws.write(
+    "apps/e2e/src/specs/general.spec.ts",
+    `import { expect, test } from "../fixtures";
+
+test.describe("general.home", () => {
+  test("renders the home view", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(async () => {
+      expect(await page.title()).toBe("Home");
+    }).toPass();
+
+    await expect(page.getByRole("heading", { name: "Welcome to ${name}" })).toBeVisible();
+  });
+
+  test("navigates home from the not found page", async ({ page }) => {
+    await page.goto("/#/does-not-exist");
+
+    await expect(page.getByText("Page could not be found")).toBeVisible();
+    await page.getByRole("button", { name: "Go home" }).click();
+
+    await expect(async () => {
+      expect(await page.title()).toBe("Home");
+    }).toPass();
+  });
+});
+
+test.describe("general.commandpalette", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+
+    await expect(async () => {
+      expect(await page.title()).toBe("Home");
+    }).toPass();
+
+    await page.keyboard.press("ControlOrMeta+K");
+    await expect(page.getByTestId("command-palette__search")).toBeVisible();
+  });
+
+  test("switches to dark theme via command palette", async ({ page }) => {
+    await page.getByTestId("command-palette__search").fill("dark");
+    const darkItem = page.getByTestId("command-palette__item-theme-dark");
+    await expect(darkItem).toBeVisible();
+    await darkItem.click();
+
+    await expect(page.locator("html")).toHaveClass("dark");
+  });
+
+  test("shows no results for unmatched search query", async ({ page }) => {
+    await page.getByTestId("command-palette__search").fill("zzznomatch");
+    await expect(page.getByText("No commands found")).toBeVisible();
+  });
+});
+`
+  );
+}
+
+/**
+ * Keeps apps/e2e but points it at the plain Vite dev server: no mock server
+ * to wait for, no shared mock state forcing serial runs, and no specs that
+ * depend on auth or the login stories.
+ */
+function stripE2E(ws, answers) {
+  writeGeneralSpec(ws, answers);
+
+  ws.editJson("apps/e2e/package.json", (data) => {
+    delete data.scripts["generate:screenshots"];
+    delete data.devDependencies["@package/mocks"];
+  });
+
+  ws.edit("apps/e2e/playwright.config.ts", (content) =>
+    removeOnce(
+      content,
+      `  // The mock server is shared state — run tests serially to prevent
+  // concurrent Tokens_Refresh variant mutations causing flaky failures.
+  workers: 1,
+`,
+      "playwright.config.ts serial workers"
+    )
+  );
+
+  ws.edit("apps/e2e/playwright.coverage.config.ts", (content) =>
+    removeOnce(
+      content,
+      `  // The mock server is shared state — run tests serially to prevent
+  // concurrent variant mutations causing flaky failures (same as playwright.config.ts).
+  workers: 1,
+`,
+      "playwright.coverage.config.ts serial workers"
+    )
+  );
+
+  ws.edit("apps/e2e/playwright.ui.config.ts", (content) =>
+    replaceOnce(
+      content,
+      "// globalSetup.ui.ts waits for both ports to be ready before tests run.",
+      "// globalSetup.ui.ts waits for the dev server port to be ready before tests run.",
+      "playwright.ui.config.ts globalSetup comment"
+    )
+  );
+
+  // Runs after applyE2EPort, so the dev server port is already the project's
+  // e2ePort — keep that wait and drop the mock server (3110) one.
+  ws.edit("apps/e2e/global-setup.ui.ts", (content) => {
+    const match = /await Promise\.all\(\[(waitForPort\(\d+, "localhost", timeout\)), waitForPort\(3110, "127\.0\.0\.1", timeout\)\]\);/.exec(content);
+    if (!match) {
+      throw new Error('Could not find expected text for "global-setup.ui.ts mock server wait". The source file may have changed.');
+    }
+    return replaceOnce(content, match[0], `await ${match[1]};`, "global-setup.ui.ts mock server wait");
+  });
+}
+
 function stripViteConfig(ws, { devPort }) {
   ws.write(
     "apps/web/vite.config.ts",
-    `import { createBaseConfig, createPWAConfig, createReactConfig, mergeConfigs } from "@config/vite";
+    `import path from "node:path";
+import { createBaseConfig, createPWAConfig, createReactConfig, mergeConfigs } from "@config/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import { defineConfig, mergeConfig } from "vite";
+import istanbul from "vite-plugin-istanbul";
+
+// Repo root — two levels up from apps/web
+const repoRoot = path.resolve(import.meta.dirname, "../..");
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
@@ -395,7 +517,21 @@ export default defineConfig(({ command }) => {
           https: true,
           port: ${devPort},
         },
-        plugins: [basicSsl()],
+        plugins: [
+          basicSsl(),
+          // Istanbul instrumentation is only active when VITE_COVERAGE is set (E2E coverage runs).
+          ...(process.env.VITE_COVERAGE
+            ? [
+                istanbul({
+                  cwd: repoRoot,
+                  include: ["apps/web/src/**/*.ts", "apps/web/src/**/*.tsx"],
+                  exclude: ["node_modules", "**/*.stories.*", "**/*.test.*", "**/*.spec.*", "**/index.ts"],
+                  extension: [".ts", ".tsx"],
+                  requireEnv: false,
+                }),
+              ]
+            : []),
+        ],
       });
   }
 });
@@ -406,28 +542,22 @@ export default defineConfig(({ command }) => {
 function stripWebPackageJson(ws) {
   ws.editJson("apps/web/package.json", (data) => {
     delete data.scripts["dev:mocks"];
-    delete data.scripts["test:e2e:env"];
-    delete data.scripts["test:e2e:env:coverage"];
     delete data.dependencies["@package/api"];
     delete data.devDependencies["vite-plugin-http2-proxy"];
-    delete data.devDependencies["vite-plugin-istanbul"];
-    delete data.devDependencies["cross-env"];
+
+    // The e2e server is the plain dev server now that there is no mock backend
+    for (const script of ["test:e2e:env", "test:e2e:env:coverage"]) {
+      if (!data.scripts[script]?.includes("--mode mocks ")) {
+        throw new Error(`Could not find "--mode mocks" in apps/web script "${script}". The file may have changed.`);
+      }
+      data.scripts[script] = data.scripts[script].replace("--mode mocks ", "");
+    }
   });
 }
 
 function stripRootPackageJson(ws) {
   ws.editJson("package.json", (data) => {
-    for (const script of [
-      "dev:mocks",
-      "dev:mocks:cli",
-      "generate:screenshots",
-      "test:e2e",
-      "test:e2e:ci",
-      "test:e2e:ui",
-      "test:e2e:env",
-      "test:e2e:coverage",
-      "test:e2e:env:coverage",
-    ]) {
+    for (const script of ["dev:mocks", "dev:mocks:cli", "generate:screenshots"]) {
       delete data.scripts[script];
     }
   });
@@ -435,16 +565,7 @@ function stripRootPackageJson(ws) {
 
 function stripTurboJson(ws) {
   ws.editJson("turbo.json", (data) => {
-    for (const task of [
-      "dev:mocks",
-      "dev:mocks:cli",
-      "test:e2e",
-      "test:e2e:ci",
-      "test:e2e:ui",
-      "test:e2e:coverage",
-      "test:e2e:env",
-      "test:e2e:env:coverage",
-    ]) {
+    for (const task of ["dev:mocks", "dev:mocks:cli"]) {
       delete data.tasks[task];
     }
   });
@@ -484,10 +605,12 @@ function rewriteMergeCoverage(content) {
     "# taking the max hit count per line across reports.",
     "#   - web.xml: storybook unit tests (V8, correct for unit-tested files)",
     "#   - web-storybook.xml: storybook browser tests (V8, covers packages/ui)",
+    "#   - e2e.xml: E2E Istanbul coverage (correct for browser-exercised files)",
     "node tools/merge-coverage.js \\",
     "  output/coverage/combined.xml \\",
     "  output/coverage/web.xml \\",
-    "  output/coverage/web-storybook.xml",
+    "  output/coverage/web-storybook.xml \\",
+    "  output/coverage/e2e.xml",
   ].map((line) => indent + line);
 
   lines.splice(start, end - start + 1, ...replacement);
@@ -495,36 +618,7 @@ function rewriteMergeCoverage(content) {
 }
 
 function stripCiWorkflows(ws) {
-  ws.edit(".github/workflows/ci.yml", (content) => {
-    content = removeYamlJob(content, "test-e2e", "ci.yml test-e2e job");
-    content = removeYamlStep(content, "Run E2E tests with coverage", "ci.yml e2e coverage step");
-    content = rewriteMergeCoverage(content);
-
-    content = content
-      .split("pnpm --filter=e2e exec playwright install chromium")
-      .join("pnpm exec playwright install chromium");
-    content = content
-      .split("pnpm --filter=e2e exec playwright install-deps chromium")
-      .join("pnpm exec playwright install-deps chromium");
-
-    return content;
-  });
-
-  ws.edit(".github/workflows/main.yml", (content) => {
-    content = replaceOnce(
-      content,
-      /run: echo "PLAYWRIGHT_VERSION=.*" >> \$GITHUB_OUTPUT/,
-      `run: echo "PLAYWRIGHT_VERSION=$(grep -E '^    playwright:' pnpm-workspace.yaml | awk '{print $2}')" >> $GITHUB_OUTPUT`,
-      "main.yml playwright version detection"
-    );
-    content = content
-      .split("pnpm --filter=e2e exec playwright install chromium")
-      .join("pnpm exec playwright install chromium");
-    content = content
-      .split("pnpm --filter=e2e exec playwright install-deps chromium")
-      .join("pnpm exec playwright install-deps chromium");
-    return content;
-  });
+  ws.edit(".github/workflows/ci.yml", rewriteMergeCoverage);
 }
 
 function stripClaudeMd(ws) {
@@ -539,15 +633,11 @@ function stripClaudeMd(ws) {
       "- `pnpm dev:mocks:cli` - Start standalone mock server only\n",
       "CLAUDE.md dev:mocks:cli command"
     );
-    content = removeOnce(
+    content = replaceOnce(
       content,
-      "- `pnpm test:e2e` - Run E2E tests with Playwright UI (starts dev server + mocks automatically)\n",
+      "- `pnpm test:e2e` - Run E2E tests with Playwright UI (starts dev server + mocks automatically)",
+      "- `pnpm test:e2e` - Run E2E tests with Playwright UI (starts dev server automatically)",
       "CLAUDE.md test:e2e command"
-    );
-    content = removeOnce(
-      content,
-      "- `pnpm test:e2e:ci` - Run E2E tests headless in the terminal (used by CI)\n",
-      "CLAUDE.md test:e2e:ci command"
     );
 
     content = replaceOnce(
@@ -563,7 +653,8 @@ function stripClaudeMd(ws) {
 │   ├── mocks/        # (@package/mocks) Mock data and test utilities
 │   └── storybook/    # (@package/storybook) Storybook decorators`,
       `│   ├── web/          # Main React application (Vite + React 19)
-│   └── storybook/    # Storybook configuration and stories
+│   ├── storybook/    # Storybook configuration and stories
+│   └── e2e/          # Playwright end-to-end tests
 ├── packages/
 │   ├── ui/           # (@package/ui) Shared UI components
 │   ├── react/        # (@package/react) Reusable React 19 hooks
@@ -573,18 +664,13 @@ function stripClaudeMd(ws) {
 
     content = removeOnce(
       content,
-      `### \`apps/e2e\` — End-to-End Tests
-
-- **Stack**: Playwright 1.58, Chromium, JUnit XML reporter
-- **Config**: \`apps/e2e/playwright.config.ts\`, base URL https://localhost:5173, 1 retry, screenshots/traces on failure
-
-### \`apps/mock\` — API Mock Server
+      `### \`apps/mock\` — API Mock Server
 
 - **Stack**: Mocks Server 4.1, runs on port 3100
 - **Activation**: \`pnpm dev:mocks\` sets \`--mode mocks\` which switches \`VITE_CONNECT_PORT\` to 3100
 
 `,
-      "CLAUDE.md apps/e2e and apps/mock sections"
+      "CLAUDE.md apps/mock section"
     );
 
     content = removeOnce(
@@ -646,23 +732,10 @@ Key exports: \`AdminApiClient\`, helpers for mock server integration (used in \`
       "CLAUDE.md API Client Pattern section"
     );
 
-    content = removeOnce(
+    content = replaceOnce(
       content,
-      `### E2E Tests (Playwright)
-
-- Located in \`apps/e2e/src/**/*.spec.ts\`
-- Dev server auto-starts on test run
-- Uses \`https://localhost:5173\` with HTTPS certificate bypass
-- Screenshots, videos, and traces captured on failure
-- Run: \`pnpm test:e2e\` (Playwright UI) or \`pnpm test:e2e:ci\` (headless, for CI)
-
-`,
-      "CLAUDE.md E2E Tests section"
-    );
-
-    content = removeOnce(
-      content,
-      "| \`/add-e2e-test\` | Add Playwright E2E tests, with optional new API services and mock definitions |\n",
+      "| \`/add-e2e-test\` | Add Playwright E2E tests, with optional new API services and mock definitions |",
+      "| \`/add-e2e-test\` | Add Playwright E2E tests |",
       "CLAUDE.md add-e2e-test skill row"
     );
     content = removeOnce(
@@ -689,9 +762,10 @@ Key exports: \`AdminApiClient\`, helpers for mock server integration (used in \`
 /**
  * Strips every backend-coupled piece of the template (API client, auth,
  * authenticated/public route guards, login/sign-up/forgot-password,
- * dashboard, mock server, e2e tests) and replaces the home route with a
- * minimal, non-authenticated HomeView. PWA support and the general app shell
- * (theming, i18n, settings, command palette) are left in place.
+ * dashboard, mock server, auth e2e specs) and replaces the home route with a
+ * minimal, non-authenticated HomeView. PWA support, the general app shell
+ * (theming, i18n, settings, command palette) and Playwright e2e tests (run
+ * against the plain dev server) are left in place.
  */
 export function stripBackend(ws, answers) {
   deleteBackendFilesAndDirs(ws);
@@ -702,6 +776,7 @@ export function stripBackend(ws, answers) {
   fixNotFoundRoute(ws);
   simplifySettingsModal(ws);
   simplifyCommandPalette(ws);
+  stripE2E(ws, answers);
   stripViteConfig(ws, answers);
   stripWebPackageJson(ws);
   stripRootPackageJson(ws);

@@ -12,6 +12,12 @@ const DEV_PORT_RANDOM_MAX = 5400;
 const MIN_DEV_PORT = 2024;
 const MAX_DEV_PORT = 65535;
 
+// Every initialized project gets its own Storybook port so several projects
+// cloned from this template can run Storybook side by side.
+const STORYBOOK_PORT_RANDOM_MIN = 9000;
+const STORYBOOK_PORT_RANDOM_MAX = 9999;
+const MIN_STORYBOOK_PORT = 1024;
+
 /**
  * Parses `--key=value`, `--key value`, and bare boolean `--flag` forms.
  */
@@ -52,8 +58,8 @@ function parseBoolean(value, fieldName) {
   throw new Error(`--${fieldName} must be one of yes/no/true/false (got "${value}")`);
 }
 
-function randomDevPort() {
-  return Math.floor(Math.random() * (DEV_PORT_RANDOM_MAX - DEV_PORT_RANDOM_MIN + 1)) + DEV_PORT_RANDOM_MIN;
+function randomPort(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 /** Parses the raw `--dev-port` value: empty -> default, "random" -> randomized, else manual. */
@@ -63,7 +69,7 @@ function parseDevPort(rawValue) {
   if (!value) {
     devPort = DEFAULT_DEV_PORT;
   } else if (value.toLowerCase() === "random") {
-    devPort = randomDevPort();
+    devPort = randomPort(DEV_PORT_RANDOM_MIN, DEV_PORT_RANDOM_MAX);
   } else {
     devPort = Number(value);
     if (!Number.isInteger(devPort)) throw new Error(`--dev-port "${rawValue}" is not a valid port number.`);
@@ -74,6 +80,30 @@ function parseDevPort(rawValue) {
   }
 
   return devPort;
+}
+
+/**
+ * Parses the optional `--storybook-port` value: empty or "random" -> randomized
+ * (re-rolled until it avoids `reservedPorts`), else manual.
+ */
+function parseStorybookPort(rawValue, reservedPorts) {
+  const value = String(rawValue ?? "").trim();
+  if (!value || value.toLowerCase() === "random") {
+    let storybookPort;
+    do {
+      storybookPort = randomPort(STORYBOOK_PORT_RANDOM_MIN, STORYBOOK_PORT_RANDOM_MAX);
+    } while (reservedPorts.includes(storybookPort));
+    return storybookPort;
+  }
+
+  const storybookPort = Number(value);
+  if (!Number.isInteger(storybookPort) || storybookPort < MIN_STORYBOOK_PORT || storybookPort > MAX_DEV_PORT) {
+    throw new Error(`--storybook-port must be an integer between ${MIN_STORYBOOK_PORT} and ${MAX_DEV_PORT}.`);
+  }
+  if (reservedPorts.includes(storybookPort)) {
+    throw new Error(`--storybook-port ${storybookPort} collides with the dev server or e2e port.`);
+  }
+  return storybookPort;
 }
 
 async function promptAnswers(flags) {
@@ -158,6 +188,7 @@ export async function collectAnswers(argv) {
 
   const devPort = parseDevPort(raw["dev-port"]);
   const e2ePort = devPort - 1000;
+  const storybookPort = parseStorybookPort(raw["storybook-port"], [devPort, e2ePort]);
 
   const backend = parseBoolean(raw.backend, "backend");
 
@@ -178,6 +209,7 @@ export async function collectAnswers(argv) {
     version,
     devPort,
     e2ePort,
+    storybookPort,
     backend,
     backendHost,
     backendPort,
