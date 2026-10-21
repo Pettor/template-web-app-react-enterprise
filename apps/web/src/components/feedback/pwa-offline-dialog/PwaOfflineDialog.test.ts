@@ -2,7 +2,9 @@ import { describe, expect, it, vi } from "vitest";
 import { PwaOfflineDialogProps } from "./PwaOfflineDialog";
 
 describe("PwaOfflineDialogProps", () => {
-  function makeMockIntl(formatMessage = (d: { defaultMessage: string }) => d.defaultMessage) {
+  function makeMockIntl(formatMessage = (d: { defaultMessage: string }) => d.defaultMessage): {
+    formatMessage: ReturnType<typeof vi.fn>;
+  } {
     return { formatMessage: vi.fn(formatMessage) };
   }
 
