@@ -243,4 +243,153 @@ describe("GitHubBackend", () => {
     await expect(missing.info()).rejects.toBeInstanceOf(GitHubError);
     await expect(missing.info()).rejects.toMatchObject({ kind: "not-found" });
   });
+
+  it("names the repository and remembers its default branch", async () => {
+    const repo = backend(github);
+    expect(repo.name).toBe("you/app-data");
+    expect(repo.currentBranch).toBeNull();
+    expect(await repo.info()).toEqual({ isPrivate: true, canPush: true, defaultBranch: "main" });
+    expect(repo.currentBranch).toBe("main");
+  });
+
+  it("asks GitHub whether the branch changed instead of downloading it again", async () => {
+    await github.push({ "app.json": "{}" });
+    const repo = backend(github);
+    expect(await repo.refresh()).toBe(true);
+
+    github.requests = [];
+    expect(await repo.refresh()).toBe(false);
+    expect(github.requests).toEqual(["GET /git/ref/heads/main"]);
+  });
+
+  it("reads, writes and removes files in the snapshot until they're committed", async () => {
+    await github.push({ "app.json": "{}", "notes/N1.json": "one" });
+    const repo = backend(github);
+
+    expect(await repo.read("notes/N1.json")).toBe("one");
+    await expect(repo.read("notes/missing.json")).rejects.toMatchObject({ kind: "not-found" });
+
+    await repo.write("notes/N1.json", "two");
+    expect(await repo.read("notes/N1.json")).toBe("two");
+    await repo.write("notes/N1.json", "one");
+    expect(repo.hasChanges).toBe(false);
+
+    await repo.remove("notes/N1.json");
+    await repo.remove("notes/never-existed.json");
+    expect(await repo.stat("notes/N1.json")).toBeNull();
+    expect((await repo.list("notes", 0)).map((file) => file.path)).toEqual([]);
+
+    expect(await repo.commit("data: sync")).toBe(true);
+    expect(github.file("notes/N1.json")).toBeUndefined();
+    expect(github.file("app.json")).toBe("{}");
+    expect(await repo.commit("data: sync")).toBe(false);
+  });
+
+  it("starts an empty repository with any file when there's no manifest", async () => {
+    const repo = backend(github);
+    await repo.write("notes/N1.json", "one");
+
+    expect(await repo.commit("data: sync")).toBe(true);
+    expect(github.file("notes/N1.json")).toBe("one");
+    expect(github.requests.filter((request) => request.startsWith("POST"))).toEqual([]);
+  });
+
+  it("reports a conflict when another device starts the empty repository first", async () => {
+    const repo = backend(github);
+    await repo.write("app.json", "{}");
+    await github.push({ "app.json": "{}" });
+
+    await expect(repo.commit("data: sync")).rejects.toMatchObject({ kind: "conflict" });
+  });
+
+  it("passes on errors other than a conflict while starting the empty repository", async () => {
+    const repo = new GitHubBackend({ owner: "you", repo: "app-data", token: TOKEN }, async (input, init) =>
+      init?.method === "PUT" ? new Response(null, { status: 403 }) : github.fetch(input, init)
+    );
+    await repo.write("app.json", "{}");
+
+    await expect(repo.commit("data: sync")).rejects.toMatchObject({ kind: "forbidden" });
+  });
+
+  it("refuses a repository too large to list in one go", async () => {
+    await github.push({ "app.json": "{}" });
+    const repo = new GitHubBackend({ owner: "you", repo: "app-data", token: TOKEN }, async (input, init) => {
+      const response = await github.fetch(input, init);
+      if (!input.includes("/git/trees/")) {
+        return response;
+      }
+      return new Response(JSON.stringify({ ...(await response.json()), truncated: true }), { status: 200 });
+    });
+
+    await expect(repo.refresh()).rejects.toMatchObject({ kind: "http" });
+  });
+
+  describe("errors", () => {
+    function failing(response: () => Response | Promise<Response>): GitHubBackend {
+      return new GitHubBackend({ owner: "you", repo: "app-data", token: TOKEN }, async () => response());
+    }
+
+    it("reports a missing connection", async () => {
+      const repo = failing(() => {
+        throw new TypeError("Failed to fetch");
+      });
+      await expect(repo.info()).rejects.toMatchObject({ kind: "network", message: "Failed to fetch" });
+    });
+
+    it("reports a token without permission", async () => {
+      const repo = failing(() => new Response(JSON.stringify({ message: "Resource not accessible" }), { status: 403 }));
+      await expect(repo.info()).rejects.toMatchObject({ kind: "forbidden", message: "Resource not accessible" });
+    });
+
+    it("keeps the status line when the error has no body", async () => {
+      const repo = failing(() => new Response("oops", { status: 500, statusText: "Server Error" }));
+      await expect(repo.info()).rejects.toMatchObject({ kind: "http", message: "500 Server Error" });
+    });
+
+    it("waits out a rate limit without asking GitHub again", async () => {
+      let calls = 0;
+      const resetAt = Math.floor(Date.now() / 1000) + 600;
+      const repo = failing(() => {
+        calls += 1;
+        return new Response(JSON.stringify({ message: "API rate limit exceeded" }), {
+          status: 403,
+          headers: { "x-ratelimit-remaining": "0", "x-ratelimit-reset": String(resetAt) },
+        });
+      });
+
+      await expect(repo.info()).rejects.toMatchObject({ kind: "rate-limited", resetAt: resetAt * 1000 });
+      await expect(repo.info()).rejects.toMatchObject({ kind: "rate-limited", resetAt: resetAt * 1000 });
+      expect(calls).toBe(1);
+    });
+
+    it("honours retry-after on a secondary rate limit", async () => {
+      const repo = failing(() => new Response(null, { status: 429, headers: { "retry-after": "30" } }));
+      const before = Date.now();
+
+      const error = await repo.info().then(
+        () => null,
+        (caught: unknown) => caught as GitHubError
+      );
+      expect(error).toMatchObject({ kind: "rate-limited" });
+      expect(error?.resetAt).toBeGreaterThanOrEqual(before + 30_000);
+    });
+
+    it("passes on errors that aren't an empty repository while loading the branch", async () => {
+      const repo = new GitHubBackend({ owner: "you", repo: "app-data", token: TOKEN }, async (input, init) =>
+        input.includes("/git/ref/") ? new Response(null, { status: 401 }) : github.fetch(input, init)
+      );
+      await expect(repo.refresh()).rejects.toMatchObject({ kind: "unauthorized" });
+    });
+
+    it("passes on errors other than a conflict while pushing", async () => {
+      await github.push({ "app.json": "{}" });
+      const repo = new GitHubBackend({ owner: "you", repo: "app-data", token: TOKEN }, async (input, init) =>
+        init?.method === "PATCH" ? new Response(null, { status: 403 }) : github.fetch(input, init)
+      );
+      await repo.write("notes/N1.json", "one");
+
+      await expect(repo.commit("data: sync")).rejects.toMatchObject({ kind: "forbidden" });
+      expect(repo.hasChanges).toBe(true);
+    });
+  });
 });
