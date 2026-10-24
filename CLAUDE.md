@@ -374,6 +374,26 @@ Hooks for panel-local state (filter, sort, range selection, derived totals) live
 6. **New API endpoint**: Add `packages/api/src/Api/<EndpointName>/` with `Classes.ts`, `Schema.ts`, `Convert.ts`, `Get.ts`/`Post.ts`. Export via the package barrel.
 7. **New Jotai atom**: Co-locate next to the feature — `core/<feature>/XxxAtoms.ts` for global state, or beside the owning component for feature-local state. Do **not** create `src/atoms/`.
 8. **New hook**: Co-locate with the feature it's used by.
+9. **New major or minor version**: Add "What's new" release notes for `x.y.0` — see [MANDATORY: What's New Release Notes](#mandatory-whats-new-release-notes). Patch versions get none.
+
+## MANDATORY: What's New Release Notes
+
+The app shows a fun, confetti-filled **"What's new" dialog** once after people update to a new **major or minor** version. Release notes are the repo's changeset: they live in `apps/web/src/core/whats-new/ReleaseNotes.ts`, one entry per version. Full detail: [`docs/patterns.md#whats-new-release-notes`](./docs/patterns.md#whats-new-release-notes).
+
+**Only major and minor versions are announced. Patch versions are not.**
+
+| Update | Shows "What's new"? |
+|---|---|
+| `1.x` → `2.0.0` (major) | ✅ yes |
+| `0.4.x` → `0.5.0` (minor) | ✅ yes |
+| `0.4.2` → `0.4.3` (patch) | ❌ no |
+
+- **Whenever a change bumps the major or minor version**, add an entry for `x.y.0` at the top of `RELEASE_NOTES` in the same change. Use `/add-release-notes`.
+- **Entries are always `x.y.0`** — never a patch version like `0.5.1`. `WhatsNew.test.ts` enforces this.
+- **Patch releases get no entry.** User-visible fixes from patches roll into the next minor's notes.
+- **Make them fun and exciting**: a short upbeat tagline, 2–5 highlights each with one emoji, a punchy benefit-led title and a friendly sentence or two. Lead with the best feature (it gets the spotlight card). Only list fixes people would notice. Never mention refactors, dependencies, tests or internal names.
+- All strings go through `defineMessages` (react-intl), like every other user-visible string.
+- Don't change the major/minor rule in `WhatsNew.ts` to make a patch show up.
 
 ## MANDATORY: HeroUI v3 Components
 
@@ -478,6 +498,7 @@ Use these skills to follow established patterns when adding to the project:
 | `/add-component` | Add a new UI component with HeroUI v3, Tailwind, React, and Storybook story |
 | `/add-e2e-test` | Add Playwright E2E tests, with optional new API services and mock definitions |
 | `/add-component-test` | Add component tests using Storybook play functions |
+| `/add-release-notes` | Write fun "What's new" release notes for a new major/minor version |
 | `/add-api-test` | Add unit tests for API schemas, converters, and utilities in `packages/api/` |
 
 ## Important Notes

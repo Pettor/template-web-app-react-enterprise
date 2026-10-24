@@ -3,6 +3,7 @@ import { useDocumentTitle } from "@package/react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useLoginRoute } from "./-UseLoginRoute";
 import { SettingsModalController } from "~/components/feedback/settings-modal/SettingsModalController";
+import { WhatsNewDialogController } from "~/components/feedback/whats-new-dialog/WhatsNewDialogController";
 import { RouteError } from "~/core/routes/logic/RouteError";
 import { LoginView } from "~/views/login/LoginView";
 
@@ -19,6 +20,7 @@ function LoginPageRoute(): ReactElement {
     <>
       <LoginView {...loginProps} />
       <SettingsModalController />
+      <WhatsNewDialogController />
     </>
   );
 }

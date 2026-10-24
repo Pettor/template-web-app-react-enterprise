@@ -22,6 +22,7 @@ const aboutArgs = {
   appName: "My App",
   appVersion: "1.0.0",
   serverVersion: "2.0.0",
+  onShowWhatsNew: () => console.log("onShowWhatsNew"),
 };
 
 const appearanceArgs = {

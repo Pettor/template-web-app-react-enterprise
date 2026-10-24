@@ -4,6 +4,7 @@ import { collectAnswers } from "./cli.mjs";
 import { configureBackend } from "./configureBackend.mjs";
 import { applyDevPortBranding, applyE2EPort, applyStorybookPort, patchViteConfigPort } from "./devPort.mjs";
 import { applyPackageJsonUpdates } from "./packageJson.mjs";
+import { resetReleaseNotes } from "./releaseNotes.mjs";
 import { selfDestruct } from "./selfDestruct.mjs";
 import { stripBackend } from "./stripBackend.mjs";
 import { verify } from "./verify.mjs";
@@ -40,6 +41,9 @@ async function main() {
   applyBranding(ws, answers);
   applyDevPortBranding(ws, answers);
   applyE2EPort(ws, answers);
+
+  console.log("Clearing the template's release notes (What's new)...");
+  resetReleaseNotes(ws);
 
   if (answers.backend) {
     console.log("Configuring backend connection...");

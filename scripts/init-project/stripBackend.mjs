@@ -33,6 +33,7 @@ import { useDocumentTitle } from "@package/react";
 import { createFileRoute } from "@tanstack/react-router";
 import { CommandPaletteController } from "~/components/actions/command-palette/CommandPaletteController";
 import { SettingsModalController } from "~/components/feedback/settings-modal/SettingsModalController";
+import { WhatsNewDialogController } from "~/components/feedback/whats-new-dialog/WhatsNewDialogController";
 import { RouteError } from "~/core/routes/logic/RouteError";
 import { HomeView } from "~/views/home/HomeView";
 
@@ -48,6 +49,7 @@ function HomePageRoute(): ReactElement {
     <>
       <HomeView />
       <SettingsModalController />
+      <WhatsNewDialogController />
       <CommandPaletteController />
     </>
   );
@@ -182,18 +184,26 @@ import type { SettingsModalProps } from "./SettingsModal";
 import { useThemeSelector } from "~/components/actions/theme-selector/UseThemeSelector";
 import { useAppInfo } from "~/core/config/UseAppInfo";
 import { useSettingsModal } from "~/core/settings/UseSettingsModal";
+import { useWhatsNew } from "~/core/whats-new/UseWhatsNew";
 
 export function useSettingsModalController(): SettingsModalProps {
   const { isOpen, initialSection, sections, close } = useSettingsModal();
   const { appName } = useAppInfo();
   const themeSelector = useThemeSelector();
+  const { open: openWhatsNew, hasReleaseNotes } = useWhatsNew();
 
   const aboutDetails = useMemo(
     () => ({
       appName,
       appVersion: import.meta.env.VITE_APP_VERSION,
+      onShowWhatsNew: hasReleaseNotes
+        ? () => {
+            close();
+            openWhatsNew();
+          }
+        : undefined,
     }),
-    [appName]
+    [appName, close, openWhatsNew, hasReleaseNotes]
   );
 
   return {
@@ -249,7 +259,7 @@ function simplifyCommandPalette(ws) {
   ws.write(
     "apps/web/src/components/actions/command-palette/UseCommandPaletteController.tsx",
     `import { useMemo } from "react";
-import { ComputerDesktopIcon, HomeIcon, MoonIcon, SunIcon } from "@heroicons/react/20/solid";
+import { ComputerDesktopIcon, HomeIcon, MoonIcon, SparklesIcon, SunIcon } from "@heroicons/react/20/solid";
 import { useNavigate } from "@tanstack/react-router";
 import { useSetAtom } from "jotai";
 import { useIntl } from "react-intl";
@@ -260,6 +270,7 @@ import { useCommandPaletteShortcut } from "./UseCommandPaletteShortcut";
 import { useCommandShortcuts } from "./UseCommandShortcuts";
 import { themeModeAtom } from "~/core/theme/ThemeAtoms";
 import type { ThemeMode } from "~/core/theme/ThemeMode";
+import { useWhatsNew } from "~/core/whats-new/UseWhatsNew";
 
 /**
  * Builds the app's default command list (navigation, theme), wires up the
@@ -272,6 +283,7 @@ export function useCommandPaletteController(): CommandPaletteProps {
   const navigate = useNavigate();
   const setThemeMode = useSetAtom(themeModeAtom);
   const { isOpen, close } = useCommandPalette();
+  const { open: openWhatsNew, hasReleaseNotes } = useWhatsNew();
 
   const navigationGroup = intl.formatMessage({
     description: "CommandPaletteController: label - navigation group",
@@ -282,6 +294,11 @@ export function useCommandPaletteController(): CommandPaletteProps {
     description: "CommandPaletteController: label - appearance group",
     defaultMessage: "Appearance",
     id: "vWoN3+",
+  });
+  const helpGroup = intl.formatMessage({
+    description: "CommandPaletteController: label - help group",
+    defaultMessage: "Help",
+    id: "2j3xL6",
   });
 
   const commands = useMemo<Command[]>(() => {
@@ -348,8 +365,29 @@ export function useCommandPaletteController(): CommandPaletteProps {
         shortcut: { mod: true, shift: true, key: "k" },
         perform: () => setTheme("dark"),
       },
+      ...(hasReleaseNotes
+        ? [
+            {
+              id: "whats-new",
+              label: intl.formatMessage({
+                description: "CommandPaletteController: label - what's new command",
+                defaultMessage: "What's new",
+                id: "xNYtAc",
+              }),
+              description: intl.formatMessage({
+                description: "CommandPaletteController: caption - what's new command",
+                defaultMessage: "See the latest features and fixes",
+                id: "ugrwdD",
+              }),
+              group: helpGroup,
+              keywords: ["whats new", "release notes", "changelog", "updates"],
+              icon: <SparklesIcon className="h-4 w-4" />,
+              perform: openWhatsNew,
+            },
+          ]
+        : []),
     ];
-  }, [intl, navigate, setThemeMode, navigationGroup, appearanceGroup]);
+  }, [intl, navigate, setThemeMode, openWhatsNew, hasReleaseNotes, navigationGroup, appearanceGroup, helpGroup]);
 
   useCommandPaletteShortcut();
   useCommandShortcuts(commands);
