@@ -1,6 +1,6 @@
 {
   "name": "template-web-app-react-enterprise",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "A template for building enterprise-grade web applications using React, TypeScript, and modern tooling.",
   "license": "MIT",
   "private": true,

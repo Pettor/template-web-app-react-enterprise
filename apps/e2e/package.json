@@ -1,6 +1,6 @@
 {
   "name": "@app/e2e",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "End-to-end tests for the web application using Playwright",
   "license": "MIT",
   "private": true,

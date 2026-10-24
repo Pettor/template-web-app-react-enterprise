@@ -20,6 +20,57 @@ export interface ReleaseNote {
   fixes: ReleaseNoteItem[];
 }
 
+const v080 = defineMessages({
+  tagline: {
+    description: "ReleaseNotes 0.8.0 - tagline for the release",
+    defaultMessage: "Your data, wherever you go",
+    id: "TNHtYI",
+  },
+  syncTitle: {
+    description: "ReleaseNotes 0.8.0 - highlight title: folder and GitHub sync",
+    defaultMessage: "Sync to a folder or GitHub",
+    id: "81alBY",
+  },
+  syncDescription: {
+    description: "ReleaseNotes 0.8.0 - highlight text: folder and GitHub sync",
+    defaultMessage:
+      "Open Settings → Sync and point the app at a folder, a Git repo on your computer or a private GitHub repository. Every device you connect stays in step.",
+    id: "zG3oyJ",
+  },
+  statusTitle: {
+    description: "ReleaseNotes 0.8.0 - highlight title: sync status",
+    defaultMessage: "Always know where you stand",
+    id: "dNwIGk",
+  },
+  statusDescription: {
+    description: "ReleaseNotes 0.8.0 - highlight text: sync status",
+    defaultMessage:
+      "A little cloud in the top bar shows when you last synced, what's still waiting and if anything needs your attention. Tap it to jump straight to the settings.",
+    id: "o560Cu",
+  },
+  notesTitle: {
+    description: "ReleaseNotes 0.8.0 - highlight title: notes",
+    defaultMessage: "Jot it down",
+    id: "du4EzI",
+  },
+  notesDescription: {
+    description: "ReleaseNotes 0.8.0 - highlight text: notes",
+    defaultMessage: "A new Notes page to capture ideas, pin the important ones to the top and archive the rest.",
+    id: "8SUeNy",
+  },
+  filesTitle: {
+    description: "ReleaseNotes 0.8.0 - highlight title: plain, readable files",
+    defaultMessage: "Plain files, no lock-in",
+    id: "DTCBU1",
+  },
+  filesDescription: {
+    description: "ReleaseNotes 0.8.0 - highlight text: plain, readable files",
+    defaultMessage:
+      "Everything is saved as simple files you can open, back up or hand to your favorite AI assistant. Works offline, too.",
+    id: "0HBSte",
+  },
+});
+
 const v070 = defineMessages({
   tagline: {
     description: "ReleaseNotes 0.7.0 - tagline for the release",
@@ -85,6 +136,17 @@ const v070 = defineMessages({
  * Patch releases (`x.y.z`, z > 0) never get an entry. See `/add-release-notes` for the full guide.
  */
 export const RELEASE_NOTES: ReleaseNote[] = [
+  {
+    version: "0.8.0",
+    tagline: v080.tagline,
+    highlights: [
+      { emoji: "🔄", title: v080.syncTitle, description: v080.syncDescription },
+      { emoji: "☁️", title: v080.statusTitle, description: v080.statusDescription },
+      { emoji: "📝", title: v080.notesTitle, description: v080.notesDescription },
+      { emoji: "📂", title: v080.filesTitle, description: v080.filesDescription },
+    ],
+    fixes: [],
+  },
   {
     version: "0.7.0",
     tagline: v070.tagline,

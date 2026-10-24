@@ -1,6 +1,6 @@
 {
   "name": "@app/web",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Web application built with React, TypeScript, and Vite",
   "license": "MIT",
   "private": true,

@@ -1,6 +1,6 @@
 {
   "name": "@package/react",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Reusable best-practice hooks that complement React 19",
   "license": "MIT",
   "private": true,
