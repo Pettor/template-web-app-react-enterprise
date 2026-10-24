@@ -365,8 +365,8 @@ catalogs:
       version: 12.1.4
   validation:
     zod:
-      specifier: 4.6.6
-      version: 4.6.6
+      specifier: 4.6.7
+      version: 4.6.7
 
 overrides:
   '@tanstack/react-query': 5.104.2
@@ -619,7 +619,7 @@ importers:
         version: 12.1.4(@types/react@19.3.0)(react@19.3.0)
       zod:
         specifier: catalog:validation
-        version: 4.6.6
+        version: 4.6.7
     devDependencies:
       '@config/eslint':
         specifier: workspace:*
@@ -826,7 +826,7 @@ importers:
         version: 5.0.3(@types/node@24.19.2)(@vitest/browser-playwright@5.0.3)(@vitest/coverage-v8@5.0.3)(@vitest/ui@5.0.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.27.0)(jiti@2.7.0)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.3))
       zod:
         specifier: catalog:validation
-        version: 4.6.6
+        version: 4.6.7
 
   packages/mocks:
     devDependencies:
@@ -7810,8 +7810,8 @@ packages:
   zod@4.6.2:
     resolution: {integrity: sha512-lh5RCAGFa1Cm2hjtNwLQhSs/AsqdWnTQaBER9fEwN/88pSh7KOtJavtBx/0VlkN/uFd61SwYmljLMDAsHlvzBQ==}
 
-  zod@4.6.6:
-    resolution: {integrity: sha512-4UmzQUF5fxvfcYHlbjBmejU+w+hbDnWFx4aS8kBx7nPBHcO2SqPbpAG8snbdg+Xse4pRefR98hgjFgIMCI/UhA==}
+  zod@4.6.7:
+    resolution: {integrity: sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==}
 
 snapshots:
 
@@ -10156,7 +10156,7 @@ snapshots:
       jiti: 2.7.0
       magic-string: 0.30.21
       prettier: 3.9.9
-      zod: 4.6.6
+      zod: 4.6.7
     transitivePeerDependencies:
       - supports-color
 
@@ -10170,7 +10170,7 @@ snapshots:
       '@tanstack/router-utils': 1.162.3(supports-color@7.2.0)
       chokidar: 5.0.0
       unplugin: 3.4.0(esbuild@0.27.0)(rolldown@1.2.12)(rollup@4.60.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.27.0)(jiti@2.7.0)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.3))
-      zod: 4.6.6
+      zod: 4.6.7
     optionalDependencies:
       '@tanstack/react-router': 1.170.42(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       vite: 8.3.4(@types/node@24.19.2)(esbuild@0.27.0)(jiti@2.7.0)(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.3)
@@ -15028,4 +15028,4 @@ snapshots:
 
   zod@4.6.2: {}
 
-  zod@4.6.6: {}
+  zod@4.6.7: {}
