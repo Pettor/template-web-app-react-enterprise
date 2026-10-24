@@ -4,7 +4,7 @@ import { PwaUpdateDialogProps } from "./PwaUpdateDialog";
 describe("PwaUpdateDialogProps", () => {
   function makeMockIntl(
     formatMessage = (d: { defaultMessage: string }, _values?: Record<string, unknown>) => d.defaultMessage
-  ) {
+  ): { formatMessage: ReturnType<typeof vi.fn> } {
     return { formatMessage: vi.fn(formatMessage) };
   }
 
