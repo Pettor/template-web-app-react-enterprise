@@ -157,6 +157,31 @@ export const themeModeAtom = atom(
 - Return an object (not a tuple) so callers can destructure only what they need.
 - Explicit return type on every exported hook.
 
+## What's new (release notes)
+
+When people update to a new **major or minor** version, the app greets them once with a "What's new" dialog (confetti included 🎉). Patch releases stay silent.
+
+| Update                                                 | Dialog?                                    |
+| ------------------------------------------------------ | ------------------------------------------ |
+| `1.4.2` → `2.0.0` (major)                              | ✅ shows `2.0.0`                           |
+| `0.4.2` → `0.5.0` (minor)                              | ✅ shows `0.5.0`                           |
+| `0.4.2` → `0.5.1` (minor, first build seen is a patch) | ✅ shows `0.5.0`                           |
+| `0.4.2` → `0.4.3` (patch)                              | ❌ silent                                  |
+| `0.3.1` → `0.5.0` (skipped a minor)                    | ✅ shows `0.5.0` and `0.4.0`, newest first |
+| Fresh install, downgrade, or no entry written          | ❌ silent                                  |
+
+How it fits together:
+
+- **`core/whats-new/ReleaseNotes.ts`** — the "changeset": one `RELEASE_NOTES` entry per `x.y.0` version, newest first. Every string is a react-intl `MessageDescriptor` (via `defineMessages`), so notes are translatable.
+- **`core/whats-new/WhatsNew.ts`** — pure functions. Versions are compared on their **release line** (`major.minor`); the patch number and any `-build.N` suffix are ignored.
+- **`core/whats-new/UseWhatsNew.ts`** — compares `VITE_APP_VERSION` (from `apps/web/package.json`) with the last version this device saw (`localStorage` key `whats-new-last-seen-version`) and opens the dialog when there's something unseen. Closing the dialog, or having nothing to show, records the current version.
+- **`components/feedback/whats-new-dialog/`** — the dialog, using the Controller pattern. Routes mount `<WhatsNewDialogController />` next to `<SettingsModalController />`.
+- Users can reopen it from **Settings → About → See what's new** or the command palette (**What's new**). Both are hidden when no notes exist yet.
+
+`WhatsNew.test.ts` guards the rules: every entry must be `x.y.0`, entries must be sorted newest first, and each needs at least one highlight.
+
+To write notes for a release, use the [`/add-release-notes`](../.claude/commands/add-release-notes.md) command.
+
 ## Component file conventions
 
 - Function declarations, not arrow functions: `export function MyComponent(props: MyComponentProps): ReactElement { … }`.

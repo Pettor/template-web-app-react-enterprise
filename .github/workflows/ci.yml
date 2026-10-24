@@ -3,18 +3,50 @@ name: "ci"
 on:
   pull_request:
     branches: ["main"]
+  push:
+    branches: ["main"]
+  workflow_dispatch:
 
 permissions:
   contents: read
   checks: write
   id-token: write
+  pull-requests: read
 
 env:
   COPILOT_AGENT_FIREWALL_ALLOW_LIST_ADDITIONS: "playwright.dev,storybook.js.org"
 
 jobs:
+  # A push to main that comes from a merged PR was already checked on the PR,
+  # so only direct pushes run the rest of the workflow.
+  check-trigger:
+    name: Check trigger
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.check.outputs.run }}
+    steps:
+      - name: Skip pushes from merged pull requests
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ github.event_name }}" != "push" ]; then
+            echo "run=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          merged=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" \
+            --jq '[.[] | select(.merged_at != null and .base.ref == "main")] | length')
+          if [ "$merged" -gt 0 ]; then
+            echo "Commit comes from a merged pull request, skipping."
+            echo "run=false" >> $GITHUB_OUTPUT
+          else
+            echo "run=true" >> $GITHUB_OUTPUT
+          fi
+
   lint:
     name: Lint
+    needs: check-trigger
+    if: needs.check-trigger.outputs.run == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -63,6 +95,8 @@ jobs:
 
   build:
     name: Build
+    needs: check-trigger
+    if: needs.check-trigger.outputs.run == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -111,6 +145,8 @@ jobs:
 
   test-components:
     name: Test components
+    needs: check-trigger
+    if: needs.check-trigger.outputs.run == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -200,6 +236,8 @@ jobs:
 
   test-e2e:
     name: Test E2E
+    needs: check-trigger
+    if: needs.check-trigger.outputs.run == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -288,6 +326,8 @@ jobs:
 
   test-coverage:
     name: Test coverage
+    needs: check-trigger
+    if: needs.check-trigger.outputs.run == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -426,6 +466,8 @@ jobs:
   # in a freshly cloned project. Removed from generated projects by the script.
   init-project:
     name: Init project (dry run)
+    needs: check-trigger
+    if: needs.check-trigger.outputs.run == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

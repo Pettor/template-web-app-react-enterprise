@@ -6,11 +6,15 @@ import { useThemeSelector } from "~/components/actions/theme-selector/UseThemeSe
 import { getAuthStatus } from "~/core/auth/AuthState";
 import { useAppInfo } from "~/core/config/UseAppInfo";
 import { useSettingsModal } from "~/core/settings/UseSettingsModal";
+import { useSync } from "~/core/sync/UseSync";
+import { useWhatsNew } from "~/core/whats-new/UseWhatsNew";
 
 export function useSettingsModalController(): SettingsModalProps {
   const { isOpen, initialSection, sections, close } = useSettingsModal();
   const { appName } = useAppInfo();
   const themeSelector = useThemeSelector();
+  const { open: openWhatsNew, hasReleaseNotes } = useWhatsNew();
+  const sync = useSync();
   const isAuthenticated = getAuthStatus() === "authenticated";
 
   const { data: profileInfo } = useQuery({
@@ -35,8 +39,14 @@ export function useSettingsModalController(): SettingsModalProps {
       appName,
       appVersion: import.meta.env.VITE_APP_VERSION,
       serverVersion: appInfo?.version ?? "",
+      onShowWhatsNew: hasReleaseNotes
+        ? () => {
+            close();
+            openWhatsNew();
+          }
+        : undefined,
     }),
-    [appName, appInfo]
+    [appName, appInfo, close, openWhatsNew, hasReleaseNotes]
   );
 
   return {
@@ -46,6 +56,17 @@ export function useSettingsModalController(): SettingsModalProps {
     onClose: close,
     account,
     appearance: { themeSelector },
+    sync: {
+      status: sync.status,
+      isFolderSupported: sync.isFolderSupported,
+      deviceName: sync.settings.deviceName,
+      onConnectFolder: sync.connectFolder,
+      onConnectGitHub: sync.connectGitHub,
+      onReconnect: () => void sync.reconnect(),
+      onDisconnect: () => void sync.disconnect(),
+      onSyncNow: sync.syncNow,
+      onDeviceNameChange: sync.setDeviceName,
+    },
     aboutDetails,
   };
 }

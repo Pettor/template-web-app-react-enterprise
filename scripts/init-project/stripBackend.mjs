@@ -16,6 +16,8 @@ const DELETE_PATHS = [
   "apps/web/src/views/sign-up",
   "apps/web/src/views/forgot-password",
   "apps/web/src/views/dashboard",
+  // The notes example moves onto the home page
+  "apps/web/src/views/notes",
   "apps/web/src/storybook/data/DashboardData.ts",
   "apps/web/src/storybook/data/AppSessionData.ts",
   "apps/web/.env.mocks",
@@ -31,8 +33,10 @@ function writeHomeRoute(ws) {
     `import type { ReactElement } from "react";
 import { useDocumentTitle } from "@package/react";
 import { createFileRoute } from "@tanstack/react-router";
+import { useHomeRoute } from "./-UseHomeRoute";
 import { CommandPaletteController } from "~/components/actions/command-palette/CommandPaletteController";
 import { SettingsModalController } from "~/components/feedback/settings-modal/SettingsModalController";
+import { WhatsNewDialogController } from "~/components/feedback/whats-new-dialog/WhatsNewDialogController";
 import { RouteError } from "~/core/routes/logic/RouteError";
 import { HomeView } from "~/views/home/HomeView";
 
@@ -43,14 +47,34 @@ export const Route = createFileRoute("/")({
 
 function HomePageRoute(): ReactElement {
   useDocumentTitle("Home");
+  const props = useHomeRoute();
 
   return (
     <>
-      <HomeView />
+      <HomeView {...props} />
       <SettingsModalController />
+      <WhatsNewDialogController />
       <CommandPaletteController />
     </>
   );
+}
+`
+  );
+
+  ws.write(
+    "apps/web/src/routes/index/-UseHomeRoute.ts",
+    `import { useNotes } from "~/core/data/UseNotes";
+import { useSyncStatusCard } from "~/core/sync/UseSyncStatusCard";
+import type { HomeViewProps } from "~/views/home/HomeView";
+
+export function useHomeRoute(): HomeViewProps {
+  const { notes, add, togglePinned, archive } = useNotes();
+  const syncStatus = useSyncStatusCard();
+
+  return {
+    notes: { notes, onAdd: add, onTogglePinned: togglePinned, onArchive: archive },
+    syncStatus,
+  };
 }
 `
   );
@@ -62,13 +86,22 @@ function writeHomeView(ws, { projectName }) {
     "apps/web/src/views/home/HomeView.tsx",
     `import type { ReactElement } from "react";
 import { useIntl } from "react-intl";
+import type { SyncStatusCardProps } from "~/components/display/sync-status/SyncStatusCard";
+import { SyncStatusCard } from "~/components/display/sync-status/SyncStatusCard";
+import type { NotesPanelProps } from "~/components/input/notes-panel/NotesPanel";
+import { NotesPanel } from "~/components/input/notes-panel/NotesPanel";
 
-export function HomeView(): ReactElement {
+export interface HomeViewProps {
+  notes: NotesPanelProps;
+  syncStatus: SyncStatusCardProps;
+}
+
+export function HomeView({ notes, syncStatus }: HomeViewProps): ReactElement {
   const intl = useIntl();
 
   return (
-    <div className="grid min-h-[60vh] w-full place-items-center px-4 text-center">
-      <div className="flex max-w-2xl flex-col items-center gap-4">
+    <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 py-12">
+      <div className="flex flex-col items-center gap-4 text-center">
         <h1 className="text-4xl font-medium md:text-5xl">
           {intl.formatMessage({
             description: "HomeView: heading - welcome title",
@@ -84,9 +117,57 @@ export function HomeView(): ReactElement {
           })}
         </p>
       </div>
+      <div className="flex justify-end">
+        <div className="w-full sm:w-64">
+          <SyncStatusCard {...syncStatus} />
+        </div>
+      </div>
+      <NotesPanel {...notes} />
     </div>
   );
 }
+`
+  );
+
+  ws.write(
+    "apps/web/src/views/home/HomeView.stories.tsx",
+    `import type { Meta, StoryObj } from "@storybook/react-vite";
+import { fn } from "storybook/test";
+import { HomeView as Component } from "./HomeView";
+import type { HomeViewProps as Props } from "./HomeView";
+import { createNote } from "~/core/data/AppData";
+
+const meta: Meta<typeof Component> = {
+  component: Component,
+  title: "Views/Home",
+  tags: ["autodocs"],
+  parameters: {
+    layout: "fullscreen",
+  },
+};
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+const defaultArgs = {
+  notes: {
+    notes: [createNote({ title: "Plan the launch" }, new Date("2026-10-21T08:00:00Z"), "N1")],
+    onAdd: fn(),
+    onTogglePinned: fn(),
+    onArchive: fn(),
+  },
+  syncStatus: { status: { state: "local", method: "local" }, onPress: fn() },
+} satisfies Props;
+
+export const Fullscreen: Story = {
+  args: defaultArgs,
+  parameters: { viewport: { value: "full" } },
+};
+
+export const Phone: Story = {
+  args: defaultArgs,
+  globals: { viewport: { value: "iphonex" } },
+};
 `
   );
 }
@@ -140,7 +221,7 @@ import { useAtom } from "jotai";
 import { settingsModalAtom } from "./SettingsAtoms";
 import type { SettingsSection } from "./SettingsSection";
 
-const SECTIONS: SettingsSection[] = ["appearance", "about"];
+const SECTIONS: SettingsSection[] = ["appearance", "sync", "about"];
 
 export interface UseSettingsModalResult {
   isOpen: boolean;
@@ -182,18 +263,28 @@ import type { SettingsModalProps } from "./SettingsModal";
 import { useThemeSelector } from "~/components/actions/theme-selector/UseThemeSelector";
 import { useAppInfo } from "~/core/config/UseAppInfo";
 import { useSettingsModal } from "~/core/settings/UseSettingsModal";
+import { useSync } from "~/core/sync/UseSync";
+import { useWhatsNew } from "~/core/whats-new/UseWhatsNew";
 
 export function useSettingsModalController(): SettingsModalProps {
   const { isOpen, initialSection, sections, close } = useSettingsModal();
   const { appName } = useAppInfo();
   const themeSelector = useThemeSelector();
+  const { open: openWhatsNew, hasReleaseNotes } = useWhatsNew();
+  const sync = useSync();
 
   const aboutDetails = useMemo(
     () => ({
       appName,
       appVersion: import.meta.env.VITE_APP_VERSION,
+      onShowWhatsNew: hasReleaseNotes
+        ? () => {
+            close();
+            openWhatsNew();
+          }
+        : undefined,
     }),
-    [appName]
+    [appName, close, openWhatsNew, hasReleaseNotes]
   );
 
   return {
@@ -202,6 +293,17 @@ export function useSettingsModalController(): SettingsModalProps {
     initialSection,
     onClose: close,
     appearance: { themeSelector },
+    sync: {
+      status: sync.status,
+      isFolderSupported: sync.isFolderSupported,
+      deviceName: sync.settings.deviceName,
+      onConnectFolder: sync.connectFolder,
+      onConnectGitHub: sync.connectGitHub,
+      onReconnect: () => void sync.reconnect(),
+      onDisconnect: () => void sync.disconnect(),
+      onSyncNow: sync.syncNow,
+      onDeviceNameChange: sync.setDeviceName,
+    },
     aboutDetails,
   };
 }
@@ -249,7 +351,7 @@ function simplifyCommandPalette(ws) {
   ws.write(
     "apps/web/src/components/actions/command-palette/UseCommandPaletteController.tsx",
     `import { useMemo } from "react";
-import { ComputerDesktopIcon, HomeIcon, MoonIcon, SunIcon } from "@heroicons/react/20/solid";
+import { ComputerDesktopIcon, HomeIcon, MoonIcon, SparklesIcon, SunIcon } from "@heroicons/react/20/solid";
 import { useNavigate } from "@tanstack/react-router";
 import { useSetAtom } from "jotai";
 import { useIntl } from "react-intl";
@@ -260,6 +362,7 @@ import { useCommandPaletteShortcut } from "./UseCommandPaletteShortcut";
 import { useCommandShortcuts } from "./UseCommandShortcuts";
 import { themeModeAtom } from "~/core/theme/ThemeAtoms";
 import type { ThemeMode } from "~/core/theme/ThemeMode";
+import { useWhatsNew } from "~/core/whats-new/UseWhatsNew";
 
 /**
  * Builds the app's default command list (navigation, theme), wires up the
@@ -272,6 +375,7 @@ export function useCommandPaletteController(): CommandPaletteProps {
   const navigate = useNavigate();
   const setThemeMode = useSetAtom(themeModeAtom);
   const { isOpen, close } = useCommandPalette();
+  const { open: openWhatsNew, hasReleaseNotes } = useWhatsNew();
 
   const navigationGroup = intl.formatMessage({
     description: "CommandPaletteController: label - navigation group",
@@ -282,6 +386,11 @@ export function useCommandPaletteController(): CommandPaletteProps {
     description: "CommandPaletteController: label - appearance group",
     defaultMessage: "Appearance",
     id: "vWoN3+",
+  });
+  const helpGroup = intl.formatMessage({
+    description: "CommandPaletteController: label - help group",
+    defaultMessage: "Help",
+    id: "2j3xL6",
   });
 
   const commands = useMemo<Command[]>(() => {
@@ -348,8 +457,29 @@ export function useCommandPaletteController(): CommandPaletteProps {
         shortcut: { mod: true, shift: true, key: "k" },
         perform: () => setTheme("dark"),
       },
+      ...(hasReleaseNotes
+        ? [
+            {
+              id: "whats-new",
+              label: intl.formatMessage({
+                description: "CommandPaletteController: label - what's new command",
+                defaultMessage: "What's new",
+                id: "xNYtAc",
+              }),
+              description: intl.formatMessage({
+                description: "CommandPaletteController: caption - what's new command",
+                defaultMessage: "See the latest features and fixes",
+                id: "ugrwdD",
+              }),
+              group: helpGroup,
+              keywords: ["whats new", "release notes", "changelog", "updates"],
+              icon: <SparklesIcon className="h-4 w-4" />,
+              perform: openWhatsNew,
+            },
+          ]
+        : []),
     ];
-  }, [intl, navigate, setThemeMode, navigationGroup, appearanceGroup]);
+  }, [intl, navigate, setThemeMode, openWhatsNew, hasReleaseNotes, navigationGroup, appearanceGroup, helpGroup]);
 
   useCommandPaletteShortcut();
   useCommandShortcuts(commands);
@@ -427,6 +557,25 @@ test.describe("general.commandpalette", () => {
 function stripE2E(ws, answers) {
   writeGeneralSpec(ws, answers);
 
+  ws.edit("apps/e2e/src/specs/data.spec.ts", (content) => {
+    content = removeOnce(content, 'import { mocksClient } from "@package/mocks";\n', "data.spec.ts mocks import");
+    content = removeOnce(
+      content,
+      `test.beforeEach(async () => {
+  await mocksClient.restoreRouteVariants();
+});
+
+`,
+      "data.spec.ts mock reset"
+    );
+    return replaceOnce(
+      content,
+      'const NOTES_PAGE = { url: "/#/notes", title: "Notes" };',
+      'const NOTES_PAGE = { url: "/", title: "Home" };',
+      "data.spec.ts notes page"
+    );
+  });
+
   ws.editJson("apps/e2e/package.json", (data) => {
     delete data.scripts["generate:screenshots"];
     delete data.devDependencies["@package/mocks"];
@@ -466,9 +615,14 @@ function stripE2E(ws, answers) {
   // Runs after applyE2EPort, so the dev server port is already the project's
   // e2ePort — keep that wait and drop the mock server (3110) one.
   ws.edit("apps/e2e/global-setup.ui.ts", (content) => {
-    const match = /await Promise\.all\(\[(waitForPort\(\d+, "localhost", timeout\)), waitForPort\(3110, "127\.0\.0\.1", timeout\)\]\);/.exec(content);
+    const match =
+      /await Promise\.all\(\[(waitForPort\(\d+, "localhost", timeout\)), waitForPort\(3110, "127\.0\.0\.1", timeout\)\]\);/.exec(
+        content
+      );
     if (!match) {
-      throw new Error('Could not find expected text for "global-setup.ui.ts mock server wait". The source file may have changed.');
+      throw new Error(
+        'Could not find expected text for "global-setup.ui.ts mock server wait". The source file may have changed.'
+      );
     }
     return replaceOnce(content, match[0], `await ${match[1]};`, "global-setup.ui.ts mock server wait");
   });

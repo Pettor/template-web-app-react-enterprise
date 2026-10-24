@@ -9,6 +9,7 @@ This folder contains the architectural reference for the repository. Start with 
 | Learn the Controller / route hook / atom co-location patterns | [patterns.md](./patterns.md) |
 | Name a file, folder, hook, atom, story, or test id | [naming.md](./naming.md) |
 | Tour the workspace packages (`@package/api`, `@package/ui`, …) | [packages.md](./packages.md) |
+| Store data locally and sync it to a folder, a Git clone or GitHub | [data-sync.md](./data-sync.md) |
 | Add a new component, test, or E2E spec by following an existing playbook | [`/.claude/commands/`](../.claude/commands/) |
 
 ## How the docs fit together

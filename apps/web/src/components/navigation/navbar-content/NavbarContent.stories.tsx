@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, within } from "storybook/test";
+import { expect, fn, within } from "storybook/test";
 import { NavbarContent as Component } from "./NavbarContent";
 import type { NavbarContentProps as Props } from "./NavbarContent";
 import { NavbarContentCommonData } from "~/storybook/data/NavbarContentData";
@@ -42,5 +42,19 @@ export const Interaction: Story = {
     const body = within(document.body);
     await expect(body.getByTestId("quick-menu__settings-button")).toBeInTheDocument();
     await userEvent.click(body.getByTestId("quick-menu__settings-button"));
+  },
+};
+
+export const WithSyncStatus: Story = {
+  args: {
+    ...defaultArgs,
+    syncStatus: {
+      status: { state: "synced", method: "github", folderName: "you/app-data", lastSyncedAt: new Date().toISOString() },
+      onPress: fn(),
+    },
+  },
+  play: async ({ args, canvas, userEvent }) => {
+    await userEvent.click(canvas.getByTestId("sync-status"));
+    await expect(args.syncStatus?.onPress).toHaveBeenCalled();
   },
 };

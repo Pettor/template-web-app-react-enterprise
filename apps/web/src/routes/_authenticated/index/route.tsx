@@ -3,6 +3,7 @@ import { useDocumentTitle } from "@package/react";
 import { createFileRoute } from "@tanstack/react-router";
 import { CommandPaletteController } from "~/components/actions/command-palette/CommandPaletteController";
 import { SettingsModalController } from "~/components/feedback/settings-modal/SettingsModalController";
+import { WhatsNewDialogController } from "~/components/feedback/whats-new-dialog/WhatsNewDialogController";
 import { RouteError } from "~/core/routes/logic/RouteError";
 import { HomeView } from "~/views/home/HomeView";
 
@@ -18,6 +19,7 @@ function HomePageRoute(): ReactElement {
     <>
       <HomeView />
       <SettingsModalController />
+      <WhatsNewDialogController />
       <CommandPaletteController />
     </>
   );

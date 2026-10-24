@@ -26,7 +26,7 @@ apps/web/src/
 `core/` holds everything that is **not a rendered UI component** but is still specific to this application:
 
 - App shell entry points: `App.tsx`, `AppProviders.tsx`, `AppLocales.tsx`, `AppTheme.tsx`.
-- Feature domains: `auth/`, `theme/`, `settings/`, `pwa/`, `session/`, `config/`, `social-links/`.
+- Feature domains: `auth/`, `theme/`, `settings/`, `pwa/`, `session/`, `config/`, `social-links/`, `data/`, `sync/`.
 - Router setup: `routes/AppRoutes.tsx` and the `routes/logic/` route-level UI (loading, error).
 
 Each feature domain typically contains:
@@ -91,8 +91,9 @@ HeroUIProvider (implicit via HeroUI v3 — no Provider component needed)
         └── AppLocales (react-intl)
               └── PwaLifecycle
                     └── QueryClientProvider (@tanstack/react-query)
-                          └── AppTheme (theme bootstrapping via Jotai atomEffect)
-                                └── AppRoutes (RouterProvider from @tanstack/react-router)
+                          └── SyncLifecycle (keeps local data in sync with a folder or GitHub)
+                                └── AppTheme (theme bootstrapping via Jotai atomEffect)
+                                      └── AppRoutes (RouterProvider from @tanstack/react-router)
 ```
 
 Authentication state uses **Jotai atoms** (`core/auth/AuthAtoms.ts`) rather than a React Context provider; `AuthInitializer` hydrates the atom on mount.
@@ -129,6 +130,7 @@ When a route needs to render a feature that reaches across the app (settings mod
 | Local, ephemeral UI state | Jotai atoms (no persistence) | co-located with the consumer (e.g. `components/actions/command-palette/CommandPaletteAtoms.ts`) |
 | Server state | `@tanstack/react-query` | `packages/api` hooks; route loaders |
 | Auth state | Jotai atoms + initializer | `core/auth/` |
+| Local-first app data | Jotai atom in `localStorage`, synced by `core/sync/` | `core/data/` — see [data-sync.md](./data-sync.md) |
 | Component-local state | `useState`, `useReducer` | inline |
 
 Atoms live **as close to their consumer as possible**. There is no central `src/atoms/` folder — global atoms sit in the relevant `core/` feature, and feature-local atoms sit next to the component that owns the feature.

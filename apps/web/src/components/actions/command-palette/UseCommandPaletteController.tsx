@@ -5,6 +5,7 @@ import {
   HomeIcon,
   MoonIcon,
   Squares2X2Icon,
+  SparklesIcon,
   SunIcon,
 } from "@heroicons/react/20/solid";
 import { useNavigate } from "@tanstack/react-router";
@@ -18,6 +19,7 @@ import { useCommandShortcuts } from "./UseCommandShortcuts";
 import { useAuth } from "~/core/auth/UseAuth";
 import { themeModeAtom } from "~/core/theme/ThemeAtoms";
 import type { ThemeMode } from "~/core/theme/ThemeMode";
+import { useWhatsNew } from "~/core/whats-new/UseWhatsNew";
 
 /**
  * Builds the app's default command list (navigation, theme, logout), wires up
@@ -31,6 +33,7 @@ export function useCommandPaletteController(): CommandPaletteProps {
   const { logout } = useAuth();
   const setThemeMode = useSetAtom(themeModeAtom);
   const { isOpen, close } = useCommandPalette();
+  const { open: openWhatsNew, hasReleaseNotes } = useWhatsNew();
 
   const navigationGroup = intl.formatMessage({
     description: "CommandPaletteController: label - navigation group",
@@ -41,6 +44,11 @@ export function useCommandPaletteController(): CommandPaletteProps {
     description: "CommandPaletteController: label - appearance group",
     defaultMessage: "Appearance",
     id: "vWoN3+",
+  });
+  const helpGroup = intl.formatMessage({
+    description: "CommandPaletteController: label - help group",
+    defaultMessage: "Help",
+    id: "2j3xL6",
   });
   const accountGroup = intl.formatMessage({
     description: "CommandPaletteController: label - account group",
@@ -132,6 +140,27 @@ export function useCommandPaletteController(): CommandPaletteProps {
         shortcut: { mod: true, shift: true, key: "k" },
         perform: () => setTheme("dark"),
       },
+      ...(hasReleaseNotes
+        ? [
+            {
+              id: "whats-new",
+              label: intl.formatMessage({
+                description: "CommandPaletteController: label - what's new command",
+                defaultMessage: "What's new",
+                id: "xNYtAc",
+              }),
+              description: intl.formatMessage({
+                description: "CommandPaletteController: caption - what's new command",
+                defaultMessage: "See the latest features and fixes",
+                id: "ugrwdD",
+              }),
+              group: helpGroup,
+              keywords: ["whats new", "release notes", "changelog", "updates"],
+              icon: <SparklesIcon className="h-4 w-4" />,
+              perform: openWhatsNew,
+            },
+          ]
+        : []),
       {
         id: "logout",
         label: intl.formatMessage({
@@ -152,7 +181,18 @@ export function useCommandPaletteController(): CommandPaletteProps {
         },
       },
     ];
-  }, [intl, navigate, setThemeMode, logout, navigationGroup, appearanceGroup, accountGroup]);
+  }, [
+    intl,
+    navigate,
+    setThemeMode,
+    logout,
+    openWhatsNew,
+    hasReleaseNotes,
+    navigationGroup,
+    appearanceGroup,
+    helpGroup,
+    accountGroup,
+  ]);
 
   useCommandPaletteShortcut();
   useCommandShortcuts(commands);
