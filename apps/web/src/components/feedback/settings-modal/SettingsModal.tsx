@@ -1,5 +1,5 @@
 import { useState, useEffect, type ReactElement } from "react";
-import { InformationCircleIcon, SwatchIcon, UserCircleIcon } from "@heroicons/react/20/solid";
+import { ArrowPathIcon, InformationCircleIcon, SwatchIcon, UserCircleIcon } from "@heroicons/react/20/solid";
 import { Modal, Separator, Tabs } from "@heroui/react";
 import { useIntl } from "react-intl";
 import type { SettingsAboutSectionProps } from "./SettingsAboutSection";
@@ -8,6 +8,8 @@ import type { SettingsAccountSectionProps } from "./SettingsAccountSection";
 import { SettingsAccountSection } from "./SettingsAccountSection";
 import type { SettingsAppearanceSectionProps } from "./SettingsAppearanceSection";
 import { SettingsAppearanceSection } from "./SettingsAppearanceSection";
+import type { SettingsSyncSectionProps } from "./SettingsSyncSection";
+import { SettingsSyncSection } from "./SettingsSyncSection";
 import type { SettingsSection } from "~/core/settings/SettingsSection";
 
 export interface SettingsModalProps {
@@ -17,12 +19,14 @@ export interface SettingsModalProps {
   onClose: () => void;
   account?: SettingsAccountSectionProps;
   appearance: SettingsAppearanceSectionProps;
+  sync?: SettingsSyncSectionProps;
   aboutDetails: SettingsAboutSectionProps;
 }
 
 const SECTION_ICONS: Record<SettingsSection, ReactElement> = {
   account: <UserCircleIcon className="h-4 w-4" />,
   appearance: <SwatchIcon className="h-4 w-4" />,
+  sync: <ArrowPathIcon className="h-4 w-4" />,
   about: <InformationCircleIcon className="h-4 w-4" />,
 };
 
@@ -33,6 +37,7 @@ export function SettingsModal({
   onClose,
   account,
   appearance,
+  sync,
   aboutDetails,
 }: SettingsModalProps): ReactElement {
   const intl = useIntl();
@@ -58,6 +63,12 @@ export function SettingsModal({
           defaultMessage: "Appearance",
           id: "miFRsV",
         });
+      case "sync":
+        return intl.formatMessage({
+          description: "SettingsModal: tab - sync",
+          defaultMessage: "Sync",
+          id: "Hne1cV",
+        });
       case "about":
         return intl.formatMessage({
           description: "SettingsModal: tab - about",
@@ -73,6 +84,8 @@ export function SettingsModal({
         return account ? <SettingsAccountSection {...account} /> : <></>;
       case "appearance":
         return <SettingsAppearanceSection {...appearance} />;
+      case "sync":
+        return sync ? <SettingsSyncSection {...sync} /> : <></>;
       case "about":
         return <SettingsAboutSection {...aboutDetails} />;
     }

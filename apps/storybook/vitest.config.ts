@@ -45,6 +45,7 @@ export default defineConfig({
             "react-intl",
             "@heroicons/react/24/outline",
             "@heroicons/react/20/solid",
+            "@heroicons/react/24/solid",
             "@heroui/react",
             "@tanstack/react-form",
             "@tanstack/react-router",

@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import { ChartBarSquareIcon, HomeIcon } from "@heroicons/react/20/solid";
+import { ChartBarSquareIcon, DocumentTextIcon, HomeIcon } from "@heroicons/react/20/solid";
 import type { IntlShape } from "react-intl";
 
 export interface NavMenuItem {
@@ -37,6 +37,16 @@ export function createNavMenuItems(_socialLinks: NavMenuSocialLinks, intl: IntlS
       }),
       href: "#/dashboard",
       icon: <ChartBarSquareIcon className="h-5 w-5" />,
+    },
+    {
+      id: "notes",
+      name: intl.formatMessage({
+        description: "NavMenuItems: menu-item - notes",
+        defaultMessage: "Notes",
+        id: "ecALgy",
+      }),
+      href: "#/notes",
+      icon: <DocumentTextIcon className="h-5 w-5" />,
     },
   ];
 }

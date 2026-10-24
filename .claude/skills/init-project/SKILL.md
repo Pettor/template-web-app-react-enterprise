@@ -21,8 +21,8 @@ Ask, in order, via `AskUserQuestion`:
 3. **Initial version** — semver, default `0.1.0`.
 4. **Dev server port** — default `5173`, or randomize (picks a port between 5000-5400), or let the user set one manually. The script derives the e2e test port as `devPort - 1000` (matching the template's existing convention, e.g. `5173` → `4173`) and updates every e2e config/script that references it.
 5. **Does this project need a backend?**
-   - **No backend** — purely a frontend project. The script deletes the API client, auth, authenticated/public route guards, login/sign-up/forgot-password, dashboard, and mock server, and replaces the home route with a minimal `HomeView`. PWA support and the general app shell (theme, i18n, settings, command palette) are kept. Playwright e2e tests (`apps/e2e`) are kept too, but run against the plain dev server — the auth/screenshot specs are removed and `general.spec.ts` is rewritten for the new `HomeView`.
-   - **Has backend** — ask two follow-ups: backend host (default `http://localhost`) and backend port (default `5000`). Nothing is deleted; the script just writes those into `apps/web/.env`.
+   - **No backend** — purely a frontend project. The script deletes the API client, auth, authenticated/public route guards, login/sign-up/forgot-password, dashboard, and mock server, and replaces the home route with a minimal `HomeView`. PWA support and the general app shell (theme, i18n, settings, command palette) are kept. Data is stored locally instead: the local data model (`core/data/`) and **Settings → Sync** (a local folder or Git clone, or a GitHub repository via a personal access token — see `docs/data-sync.md`) are kept, and the home page shows the notes example with its sync status. Playwright e2e tests (`apps/e2e`) are kept too, but run against the plain dev server — the auth/screenshot specs are removed, `general.spec.ts` is rewritten for the new `HomeView`, and `data.spec.ts` runs against the home page.
+   - **Has backend** — ask two follow-ups: backend host (default `http://localhost`) and backend port (default `5000`). The script writes those into `apps/web/.env` and removes the local data model, sync, the Notes page and `docs/data-sync.md` — the backend is the source of truth.
 
 Once you have all the answers, run:
 
@@ -82,7 +82,7 @@ pnpm build:libs
 
 Print to the user:
 
-- **Choices made** — repo name, project name, version, dev/e2e/Storybook ports (from the script's summary), backend mode (none / configured at host:port), colors changed (with old → new values if yes).
+- **Choices made** — repo name, project name, version, dev/e2e/Storybook ports (from the script's summary), backend mode (none, with local data + folder/GitHub sync / configured at host:port), colors changed (with old → new values if yes).
 - **High-level files touched** — relay what the script printed; don't re-enumerate every file.
 - **Greeting** — a friendly "Your project is ready!" plus next steps:
   - `pnpm dev` to start the dev server

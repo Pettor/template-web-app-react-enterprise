@@ -7,6 +7,7 @@ import { applyPackageJsonUpdates } from "./packageJson.mjs";
 import { resetReleaseNotes } from "./releaseNotes.mjs";
 import { selfDestruct } from "./selfDestruct.mjs";
 import { stripBackend } from "./stripBackend.mjs";
+import { stripSync } from "./stripSync.mjs";
 import { verify } from "./verify.mjs";
 import { createWorkspace } from "./workspace.mjs";
 
@@ -21,6 +22,7 @@ function printSummary(answers) {
   console.log(" E2E port:      ", answers.e2ePort);
   console.log(" Storybook port:", answers.storybookPort);
   console.log(" Backend:       ", answers.backend ? `yes (${answers.backendHost}:${answers.backendPort})` : "no");
+  console.log(" Data storage:  ", answers.backend ? "backend" : "local, with folder / Git / GitHub sync");
   console.log("===========================================\n");
 }
 
@@ -49,6 +51,8 @@ async function main() {
     console.log("Configuring backend connection...");
     patchViteConfigPort(ws, answers);
     configureBackend(ws, answers);
+    console.log("Removing local data + sync (the backend is the source of truth)...");
+    stripSync(ws);
   } else {
     console.log("Stripping backend-coupled code (API client, auth, mock server, dashboard, login/sign-up)...");
     stripBackend(ws, answers);

@@ -18,9 +18,9 @@ export function useSettingsModal(): UseSettingsModalResult {
 
   const sections = useMemo<SettingsSection[]>(() => {
     if (authStatus === "authenticated") {
-      return ["account", "appearance", "about"];
+      return ["account", "appearance", "sync", "about"];
     }
-    return ["appearance", "about"];
+    return ["appearance", "sync", "about"];
   }, [authStatus]);
 
   const open = useCallback(

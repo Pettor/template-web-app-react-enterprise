@@ -6,11 +6,15 @@ import { useIntl } from "react-intl";
 import { createNavMenuItems, type NavMenuSocialLinks } from "./NavMenuItems";
 import type { QuickMenuProps } from "~/components/actions/quick-menu/QuickMenu";
 import { QuickMenu } from "~/components/actions/quick-menu/QuickMenu";
+import type { SyncStatusCardProps } from "~/components/display/sync-status/SyncStatusCard";
+import { SyncStatusCard } from "~/components/display/sync-status/SyncStatusCard";
 
 export interface NavbarContentProps {
   quickMenu: QuickMenuProps;
   socialLinks: NavMenuSocialLinks;
   avatarName: string;
+  /** Shows where the data is synced; opens the sync settings when pressed. */
+  syncStatus?: SyncStatusCardProps;
   activeTab?: string;
   onTabChange?: (id: string) => void;
 }
@@ -19,6 +23,7 @@ export function NavbarContent({
   quickMenu,
   socialLinks,
   avatarName,
+  syncStatus,
   activeTab: activeTabProp = "home",
   onTabChange,
 }: NavbarContentProps): ReactElement {
@@ -143,32 +148,35 @@ export function NavbarContent({
   );
 
   const endElement = (
-    <div className="hidden sm:block">
-      <Popover isOpen={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-        <Popover.Trigger data-testid="home-page__menu-button">
-          <Avatar variant="soft" className="cursor-pointer">
-            <Avatar.Fallback>{getAvatarFallback(avatarName)}</Avatar.Fallback>
-          </Avatar>
-        </Popover.Trigger>
-        <Popover.Content placement="bottom end">
-          <Popover.Dialog className="p-2">
-            <QuickMenu
-              onSettings={() => {
-                setIsPopoverOpen(false);
-                quickMenu.onSettings();
-              }}
-              onLogout={() => {
-                setIsPopoverOpen(false);
-                quickMenu.onLogout();
-              }}
-              onSearch={() => {
-                setIsPopoverOpen(false);
-                quickMenu.onSearch();
-              }}
-            />
-          </Popover.Dialog>
-        </Popover.Content>
-      </Popover>
+    <div className="flex items-center gap-2">
+      {syncStatus && <SyncStatusCard {...syncStatus} variant="icon" />}
+      <div className="hidden sm:block">
+        <Popover isOpen={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+          <Popover.Trigger data-testid="home-page__menu-button">
+            <Avatar variant="soft" className="cursor-pointer">
+              <Avatar.Fallback>{getAvatarFallback(avatarName)}</Avatar.Fallback>
+            </Avatar>
+          </Popover.Trigger>
+          <Popover.Content placement="bottom end">
+            <Popover.Dialog className="p-2">
+              <QuickMenu
+                onSettings={() => {
+                  setIsPopoverOpen(false);
+                  quickMenu.onSettings();
+                }}
+                onLogout={() => {
+                  setIsPopoverOpen(false);
+                  quickMenu.onLogout();
+                }}
+                onSearch={() => {
+                  setIsPopoverOpen(false);
+                  quickMenu.onSearch();
+                }}
+              />
+            </Popover.Dialog>
+          </Popover.Content>
+        </Popover>
+      </div>
     </div>
   );
 
@@ -287,6 +295,7 @@ export function NavbarContent({
                 </nav>
               </Drawer.Body>
               <Drawer.Footer className="flex-col" onClick={() => setIsDrawerOpen(false)}>
+                {syncStatus && <SyncStatusCard {...syncStatus} />}
                 <Separator />
                 <QuickMenu
                   onSettings={quickMenu.onSettings}

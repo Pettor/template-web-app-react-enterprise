@@ -11,6 +11,7 @@ Deeper structural detail lives in the [`docs/`](./docs/) folder. When making arc
 - [`docs/patterns.md`](./docs/patterns.md) — Controller pattern, route hooks, atom co-location
 - [`docs/naming.md`](./docs/naming.md) — file, folder, hook, atom, story, and test-id conventions
 - [`docs/packages.md`](./docs/packages.md) — every workspace package and its responsibilities
+- [`docs/data-sync.md`](./docs/data-sync.md) — local-first data model and folder / Git clone / GitHub sync
 
 This file is the **rules** layer (what you must do); `docs/` is the **reference** layer (how the system is shaped). If they disagree, `docs/` is authoritative for structure — update this file to match.
 
@@ -159,7 +160,7 @@ apps/web/src/
 
 **Layer responsibilities:**
 
-- **`core/`** — app shell (`App.tsx`, `AppProviders.tsx`, `AppLocales.tsx`, `AppTheme.tsx`) plus domain modules (`auth/`, `theme/`, `settings/`, `pwa/`, `session/`, `config/`, `social-links/`, `routes/`). No rendered UI components except domain-inseparable ones (`AuthInitializer`, `PwaLifecycle`).
+- **`core/`** — app shell (`App.tsx`, `AppProviders.tsx`, `AppLocales.tsx`, `AppTheme.tsx`) plus domain modules (`auth/`, `theme/`, `settings/`, `pwa/`, `session/`, `config/`, `social-links/`, `data/`, `sync/`, `routes/`). No rendered UI components except domain-inseparable ones (`AuthInitializer`, `PwaLifecycle`).
 - **`components/`** — reusable UI in categorised folders: `actions/`, `display/`, `feedback/`, `forms/`, `input/`, `navigation/`. Each component lives in its own `kebab-case` folder with a co-located `.stories.tsx`.
 - **`views/`** — page-level compositions (`LoginView`, `DashboardView`, etc.). Pure presentational — never calls hooks from `core/`. Consumed only by routes.
 - **`routes/`** — TanStack file-based routes. Each leaf has `route.tsx` (the binding) and `-UseXxxRoute.ts` (the route hook). Layout segments (`_authenticated`, `_public`) apply guards.
@@ -173,8 +174,9 @@ ToastProvider (@heroui/react)
   └── AppLocales (react-intl)
         └── PwaLifecycle
               └── QueryClientProvider (@tanstack/react-query)
-                    └── AppTheme (Jotai atomEffect)
-                          └── AppRoutes (RouterProvider from @tanstack/react-router)
+                    └── SyncLifecycle (local data ↔ folder / GitHub)
+                          └── AppTheme (Jotai atomEffect)
+                                └── AppRoutes (RouterProvider from @tanstack/react-router)
 ```
 
 Auth state uses **Jotai atoms** (`core/auth/AuthAtoms.ts`) — not a React Context provider.
@@ -224,6 +226,7 @@ Files prefixed with `-` are ignored by TanStack Router. Detail: [`docs/patterns.
 | Feature-local UI state | Jotai atoms | next to the component (e.g. `components/actions/command-palette/CommandPaletteAtoms.ts`) |
 | Server state | `@tanstack/react-query` | `packages/api` hooks; route loaders |
 | Auth state | Jotai atoms + initializer | `core/auth/` |
+| Local-first app data | Jotai atom in `localStorage`, synced by `core/sync/` | `core/data/` |
 | Component-local state | `useState`, `useReducer` | inline |
 
 **Atoms co-locate with their consumer.** There is no central `src/atoms/` folder. See [`docs/patterns.md#atoms-co-location`](./docs/patterns.md#atoms-co-location).
@@ -233,6 +236,18 @@ Files prefixed with `-` are ignored by TanStack Router. Detail: [`docs/patterns.
 - API calls are delegated to a **Web Worker** (`ApiWorker`) to avoid blocking the main thread.
 - Each endpoint is a folder under `packages/api/src/Api/<EndpointName>/` with `Classes.ts`, `Schema.ts` (Zod), `Convert.ts` (DTO → domain), and `Get.ts` / `Post.ts` (service + React Query hook).
 - Errors are normalized through `ServiceErrorFactory.create()`.
+
+### Local Data & Sync
+
+Without a backend, app data lives in the browser (`core/data/`, `appDataAtom`) and can sync to a folder, a local Git clone or a GitHub repository (Settings → Sync). Full detail: [`docs/data-sync.md`](./docs/data-sync.md).
+
+- **One file per record**: `<collection>/<ULID>.json`, pretty-printed, keys in schema order. Add collections through `COLLECTIONS` in `core/data/AppData.ts` — never hand-roll file I/O in a feature.
+- **Every change stamps `updatedAt`**; conflicts resolve newest-wins, the loser goes to `.conflicts/`. Use the pure mutations in `AppData.ts`.
+- **Never delete records** — archive them (`status: "archived"`). A deleted file comes back from other devices.
+- **Keep `core/sync/AgentsMd.ts` in step** with the schemas. It's written to the data folder as `AGENTS.md`, the contract for agents that edit the data.
+- **Schemas parse leniently** (`.catch()` defaults) so hand- and agent-written files load.
+- **Show sync state with `SyncStatusCard`**, wired through `useSyncStatusCard()`.
+- The GitHub token stays in this browser's `localStorage`; never write it to the data folder or send it anywhere but `api.github.com`.
 
 ### Styling Conventions
 
@@ -374,7 +389,8 @@ Hooks for panel-local state (filter, sort, range selection, derived totals) live
 6. **New API endpoint**: Add `packages/api/src/Api/<EndpointName>/` with `Classes.ts`, `Schema.ts`, `Convert.ts`, `Get.ts`/`Post.ts`. Export via the package barrel.
 7. **New Jotai atom**: Co-locate next to the feature — `core/<feature>/XxxAtoms.ts` for global state, or beside the owning component for feature-local state. Do **not** create `src/atoms/`.
 8. **New hook**: Co-locate with the feature it's used by.
-9. **New major or minor version**: Add "What's new" release notes for `x.y.0` — see [MANDATORY: What's New Release Notes](#mandatory-whats-new-release-notes). Patch versions get none.
+9. **New stored data**: add a collection to `core/data/` and document it in `core/sync/AgentsMd.ts` — see [`docs/data-sync.md`](./docs/data-sync.md#adding-a-collection).
+10. **New major or minor version**: Add "What's new" release notes for `x.y.0` — see [MANDATORY: What's New Release Notes](#mandatory-whats-new-release-notes). Patch versions get none.
 
 ## MANDATORY: What's New Release Notes
 

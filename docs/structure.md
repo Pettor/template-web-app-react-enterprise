@@ -37,6 +37,13 @@ core/
 ├── config/               # App-level config constants / lookups
 │   └── UseAppInfo.ts          # App name, version, build info
 │
+├── data/                 # Local-first data model (see data-sync.md)
+│   ├── AppData.ts             # AppData, COLLECTIONS registry, pure mutations
+│   ├── Note.ts                # Zod schema for one note file (app.note/v1)
+│   ├── RecordId.ts            # ULID ids + UTC timestamps
+│   ├── DataAtoms.ts           # appDataAtom (localStorage)
+│   └── UseNotes.ts            # Hook exposing { notes, add, togglePinned, archive }
+│
 ├── pwa/                  # Progressive Web App lifecycle
 │   ├── PwaLifecycle.tsx       # Provider that wires update/offline events
 │   ├── PwaLifecycleConstants.ts
@@ -60,6 +67,15 @@ core/
 ├── social-links/         # Links to external socials
 │   ├── AppSocialLinks.ts
 │   └── UseAppSocialLinks.ts
+│
+├── sync/                 # Folder / Git clone / GitHub sync (see data-sync.md)
+│   ├── FolderSync.ts          # Sync engine over a FolderBackend
+│   ├── BrowserFolderBackend.ts, GitHubBackend.ts, GitClone.ts
+│   ├── AgentsMd.ts            # AGENTS.md written into the data folder
+│   ├── SyncAtoms.ts           # Connection + status atoms
+│   ├── UseSync.ts             # Hook for the Sync settings
+│   ├── UseSyncStatusCard.ts   # Props for SyncStatusCard
+│   └── SyncLifecycle.tsx      # Runs the sync (mounted in AppProviders)
 │
 ├── theme/                # Theme mode (light/dark/system)
 │   ├── ThemeAtoms.ts          # themeModeAtom + atomEffect persistence
@@ -92,7 +108,8 @@ components/
 │
 ├── display/
 │   ├── confetti-burst/         # One-shot confetti animation (respects reduced motion)
-│   └── grid-item/              # Small card for list/grid contexts
+│   ├── grid-item/              # Small card for list/grid contexts
+│   └── sync-status/            # Sync status card / icon button
 │
 ├── feedback/
 │   ├── about-details/          # About modal content
@@ -108,7 +125,8 @@ components/
 │   └── sign-up/
 │
 ├── input/
-│   └── input-field/            # Tanstack-Form-integrated text field
+│   ├── input-field/            # Tanstack-Form-integrated text field
+│   └── notes-panel/            # Add, pin and archive notes
 │
 └── navigation/
     └── navbar-content/         # User menu + search used inside NavbarLayout
@@ -134,6 +152,8 @@ views/
 │   └── HomeView.tsx
 ├── login/
 │   └── LoginView.tsx
+├── notes/
+│   └── NotesView.tsx
 └── sign-up/
     └── SignUpView.tsx
 ```
@@ -172,6 +192,9 @@ routes/
     ├── -UseAuthenticatedRoute.ts
     ├── index/
     │   └── route.tsx                       # "/" (home)
+    ├── notes/
+    │   ├── route.tsx                       # "/notes" — local data + sync example
+    │   └── -UseNotesRoute.ts
     └── dashboard/
         ├── route.tsx
         └── -DashboardLoader.ts             # React Query prefetch loader

@@ -24,7 +24,8 @@ export const Route = createFileRoute("/_authenticated")({
 
 function AuthenticatedLayout(): ReactElement {
   const intl = useIntl();
-  const { activeTab, onTabChange, sessionContent, socialLinks, githubLink, linkedInLink } = useAuthenticatedRoute();
+  const { activeTab, onTabChange, sessionContent, socialLinks, syncStatus, githubLink, linkedInLink } =
+    useAuthenticatedRoute();
 
   return (
     <NavbarLayout
@@ -48,6 +49,7 @@ function AuthenticatedLayout(): ReactElement {
           }}
           socialLinks={{ github: githubLink, linkedIn: linkedInLink }}
           avatarName={sessionContent.name}
+          syncStatus={syncStatus}
           activeTab={activeTab}
           onTabChange={onTabChange}
         />
