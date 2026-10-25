@@ -94,8 +94,10 @@ export function SettingsModal({
   return (
     <Modal isOpen={isOpen} onOpenChange={(open) => !open && onClose()}>
       <Modal.Backdrop variant="blur">
-        <Modal.Container size="lg">
+        <Modal.Container size="lg" className="sm:w-full">
+          {/* Fixed height on desktop so switching sections doesn't resize the dialog; the panel scrolls instead */}
           <Modal.Dialog
+            className="sm:h-[min(44rem,100%)] sm:max-w-[52rem]"
             aria-label={intl.formatMessage({
               description: "SettingsModal: aria-label - dialog",
               defaultMessage: "Settings",
@@ -112,17 +114,17 @@ export function SettingsModal({
               </Modal.Heading>
               <Modal.CloseTrigger />
             </Modal.Header>
-            <Modal.Body className="p-0">
+            <Modal.Body className="p-0 sm:flex sm:overflow-hidden">
               {/* Desktop: vertical tabs with content pane */}
-              <div className="hidden sm:flex sm:min-h-[400px] sm:flex-row">
+              <div className="hidden sm:flex sm:min-h-0 sm:flex-1 sm:flex-row">
                 <Tabs
                   variant="secondary"
                   orientation="vertical"
                   selectedKey={activeSection}
                   onSelectionChange={(key) => setActiveSection(key as SettingsSection)}
-                  className="flex-1"
+                  className="min-h-0 flex-1"
                 >
-                  <Tabs.ListContainer className="border-r">
+                  <Tabs.ListContainer className="shrink-0 border-r">
                     <Tabs.List
                       aria-label={intl.formatMessage({
                         description: "SettingsModal: aria-label - settings navigation",
@@ -130,8 +132,13 @@ export function SettingsModal({
                         id: "QJ8Qdm",
                       })}
                     >
+                      {/* Inset focus ring: the list's scroller clips HeroUI's outer ring on the left and right */}
                       {sections.map((section, index) => (
-                        <Tabs.Tab className="justify-start" key={section} id={section}>
+                        <Tabs.Tab
+                          className="justify-start data-[focus-visible=true]:[--tw-ring-offset-width:0px] data-[focus-visible=true]:ring-inset"
+                          key={section}
+                          id={section}
+                        >
                           {index > 0 && <Tabs.Separator />}
                           <span className="flex items-center gap-2">
                             {SECTION_ICONS[section]}
@@ -143,7 +150,11 @@ export function SettingsModal({
                     </Tabs.List>
                   </Tabs.ListContainer>
                   {sections.map((section) => (
-                    <Tabs.Panel key={section} id={section} className="flex-1 px-6">
+                    <Tabs.Panel
+                      key={section}
+                      id={section}
+                      className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-6"
+                    >
                       {renderSection(section)}
                     </Tabs.Panel>
                   ))}

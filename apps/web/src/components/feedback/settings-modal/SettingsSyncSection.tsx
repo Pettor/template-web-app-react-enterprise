@@ -87,7 +87,7 @@ export function SettingsSyncSection({
   ];
 
   return (
-    <div className="flex flex-col gap-4 pb-4">
+    <div className="@container flex flex-col gap-4 pb-4">
       <p className="text-lg font-semibold">
         {intl.formatMessage({
           description: "SettingsSyncSection: heading - section title",
@@ -134,7 +134,7 @@ export function SettingsSyncSection({
           defaultMessage: "Sync method",
           id: "SFoHrn",
         })}
-        className="flex flex-col gap-2"
+        className="grid gap-2 @xl:grid-cols-3"
       >
         {options.map((option) => (
           <Radio
