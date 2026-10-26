@@ -404,7 +404,8 @@ The app shows a fun, confetti-filled **"What's new" dialog** once after people u
 | `0.4.x` → `0.5.0` (minor) | ✅ yes |
 | `0.4.2` → `0.4.3` (patch) | ❌ no |
 
-- **Whenever a change bumps the major or minor version**, add an entry for `x.y.0` at the top of `RELEASE_NOTES` in the same change. Use `/add-release-notes`.
+- **Whenever a change bumps the major or minor version**, add an entry for `x.y.0` at the top of `RELEASE_NOTES` in the same change. Use `/bump-version` (or `/bump-minor`, `/bump-major`) to bump and write the notes together; `/add-release-notes` writes notes alone.
+- **Bump with `scripts/bump-version.mjs`**, never by hand: every `package.json` in the workspace shares one version, and `apps/web/.env.demo` carries it too.
 - **Entries are always `x.y.0`** — never a patch version like `0.5.1`. `WhatsNew.test.ts` enforces this.
 - **Patch releases get no entry.** User-visible fixes from patches roll into the next minor's notes.
 - **Make them fun and exciting**: a short upbeat tagline, 2–5 highlights each with one emoji, a punchy benefit-led title and a friendly sentence or two. Lead with the best feature (it gets the spotlight card). Only list fixes people would notice. Never mention refactors, dependencies, tests or internal names.
@@ -515,6 +516,10 @@ Use these skills to follow established patterns when adding to the project:
 | `/add-e2e-test` | Add Playwright E2E tests, with optional new API services and mock definitions |
 | `/add-component-test` | Add component tests using Storybook play functions |
 | `/add-release-notes` | Write fun "What's new" release notes for a new major/minor version |
+| `/bump-version` | Pick patch, minor or major from the unreleased changes and run the matching bump skill |
+| `/bump-patch` | Bump `x.y.Z` via `scripts/bump-version.mjs`; no release notes |
+| `/bump-minor` | Bump `x.Y.0` via `scripts/bump-version.mjs` and write its release notes |
+| `/bump-major` | Bump `X.0.0` via `scripts/bump-version.mjs` and write its release notes |
 | `/add-api-test` | Add unit tests for API schemas, converters, and utilities in `packages/api/` |
 
 ## Important Notes
