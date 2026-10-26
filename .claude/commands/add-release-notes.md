@@ -26,9 +26,18 @@ So:
 
 1. **Work out the version.**
    - Read `version` in `apps/web/package.json`. If the user is bumping now, the new version is the next major or minor (`0.7.3` → `0.8.0`, or `1.4.0` → `2.0.0` for breaking/headline changes).
-   - Bump `version` in **every** `package.json` in the workspace (they're kept in sync — `grep -rl '"version":' --include=package.json . | grep -v node_modules`) only if the user asked you to bump. Otherwise just write the notes for the version they name.
+   - Bump only if the user asked to — use `/bump-version` (or `/bump-minor`, `/bump-major`), which runs `scripts/bump-version.mjs` to keep every `package.json` and `apps/web/.env.demo` in sync. Otherwise just write the notes for the version they name.
    - Notes for a version that's newer than `apps/web/package.json` are fine: they stay hidden until the bump ships.
-2. **Gather what changed** since the previous minor. Start from `git log --oneline --no-merges <previous-minor-tag-or-version-bump-commit>..HEAD`, focusing on `feat:` and user-visible `fix:` commits. Ignore `chore:`, `refactor:`, dependency bumps, CI, tests and docs — nobody gets excited about those.
+2. **Gather what changed** since the previous minor (patches included — they don't get their own notes):
+
+   ```sh
+   MINOR=$(node -p 'require("./apps/web/package.json").version.replace(/\.\d+$/, ".0")')
+   BASE=$(git log --format=%H -S"\"version\": \"$MINOR\"" -- apps/web/package.json | tail -1)
+   git log --oneline --no-merges "$BASE"..HEAD
+   ```
+
+   If the version was already bumped for this release, `BASE` is the bump itself — use the previous minor's bump commit instead. Focus on `feat:` and user-visible `fix:` commits. Ignore `chore:`, `refactor:`, dependency bumps, CI, tests and docs — nobody gets excited about those.
+
 3. **Add the entry** to `apps/web/src/core/whats-new/ReleaseNotes.ts`:
    - A `const vXYZ = defineMessages({ ... })` block above the previous one (e.g. `v080` for `0.8.0`).
    - An object at the **top** of `RELEASE_NOTES` (newest first).

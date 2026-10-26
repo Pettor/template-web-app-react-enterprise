@@ -180,7 +180,7 @@ How it fits together:
 
 `WhatsNew.test.ts` guards the rules: every entry must be `x.y.0`, entries must be sorted newest first, and each needs at least one highlight.
 
-To write notes for a release, use the [`/add-release-notes`](../.claude/commands/add-release-notes.md) command.
+To cut a release, use `/bump-version` (or `/bump-patch`, `/bump-minor`, `/bump-major` in `.claude/skills/`): `scripts/bump-version.mjs` bumps every `package.json` in the workspace plus `VITE_APP_VERSION` in `apps/web/.env.demo`, and minor and major bumps write their notes with the [`/add-release-notes`](../.claude/commands/add-release-notes.md) command.
 
 ## Component file conventions
 
