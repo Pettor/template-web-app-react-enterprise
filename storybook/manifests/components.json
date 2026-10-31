@@ -1,0 +1,2371 @@
+{
+  "v": 0,
+  "components": {
+    "design-system-colors": {
+      "id": "design-system-colors",
+      "name": "Colors",
+      "path": "../web/src/storybook/foundation/Colors.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component found",
+        "message": "We could not detect the component from your story file. Specify meta.component.\n  3 | import { DocumentationDecorator, DocumentationLayout } from \"@package/storybook\";\n  4 |\n> 5 | export default {\n    | ^\n  6 |   title: \"Design System/Colors\",\n  7 |   tags: [\"no-tests\"],\n  8 |   decorators: [DocumentationDecorator],\n\n../web/src/storybook/foundation/Colors.stories.tsx:\nimport { useEffect, useRef, useState, type ReactElement, type ReactNode } from \"react\";\nimport { Card, CardContent } from \"@heroui/react\";\nimport { DocumentationDecorator, DocumentationLayout } from \"@package/storybook\";\n\nexport default {\n  title: \"Design System/Colors\",\n  tags: [\"no-tests\"],\n  decorators: [DocumentationDecorator],\n  parameters: {\n    a11y: {\n      test: \"off\",\n    },\n    layout: \"fullscreen\",\n  },\n};\n\nfunction resolveContrastColor(el: HTMLElement): \"black\" | \"white\" {\n  const bg = getComputedStyle(el).backgroundColor;\n  const canvas = document.createElement(\"canvas\");\n  canvas.width = 1;\n  canvas.height = 1;\n  const ctx = canvas.getContext(\"2d\");\n  if (!ctx) return \"black\";\n  ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue(\"--background\").trim() || \"#ffffff\";\n  ctx.fillRect(0, 0, 1, 1);\n  ctx.fillStyle = bg;\n  ctx.fillRect(0, 0, 1, 1);\n  const { data } = ctx.getImageData(0, 0, 1, 1);\n  const r = data[0] ?? 0;\n  const g = data[1] ?? 0;\n  const b = data[2] ?? 0;\n  return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255 > 0.5 ? \"black\" : \"white\";\n}\n\nfunction ColorSection({ title, children }: { title: string; children: ReactNode }): ReactElement {\n  return (\n    <div>\n      <p className=\"text-xl font-medium\">{title}</p>\n      <div className=\"h-2\" />\n      <div className=\"flex h-full w-full flex-row flex-wrap items-center justify-start px-4 py-1\">{children}</div>\n    </div>\n  );\n}\n\nfunction ColorItem({ text, bgColor }: { text: string; bgColor: string }): ReactElement {\n  const ref = useRef<HTMLDivElement>(null);\n  const [textColor, setTextColor] = useState<\"black\" | \"white\">(\"black\");\n\n  useEffect(() => {\n    function update(): void {\n      if (ref.current) setTextColor(resolveContrastColor(ref.current));\n    }\n    update();\n    const observer = new MutationObserver(update);\n    observer.observe(document.documentElement, { attributes: true, attributeFilter: [\"class\", \"data-theme\"] });\n    return (): void => observer.disconnect();\n  }, [bgColor]);\n\n  return (\n    <Card variant=\"secondary\" ref={ref} className={`m-2 h-15 w-35 ${bgColor}`}>\n      <CardContent className=\"items-center justify-center truncate text-xs\" style={{ color: textColor }}>\n        {text}\n      </CardContent>\n    </Card>\n  );\n}\n\nexport function Colors(): ReactElement {\n  return (\n    <DocumentationLayout label=\"Colors\">\n      <div className=\"h-8\" />\n      <div className=\"flex flex-col gap-4\">\n        <ColorSection title=\"Base Colors\">\n          <ColorItem text=\"--white\" bgColor=\"bg-[var(--white)]\" />\n          <ColorItem text=\"--black\" bgColor=\"bg-[var(--black)]\" />\n          <ColorItem text=\"--snow\" bgColor=\"bg-[var(--snow)]\" />\n          <ColorItem text=\"--eclipse\" bgColor=\"bg-[var(--eclipse)]\" />\n        </ColorSection>\n        <ColorSection title=\"Background & Surface\">\n          <ColorItem text=\"--background\" bgColor=\"bg-background\" />\n          <ColorItem text=\"--foreground\" bgColor=\"bg-foreground\" />\n          <ColorItem text=\"--surface\" bgColor=\"bg-surface\" />\n          <ColorItem text=\"--surface-foreground\" bgColor=\"bg-surface-foreground\" />\n          <ColorItem text=\"--overlay\" bgColor=\"bg-overlay\" />\n          <ColorItem text=\"--overlay-foreground\" bgColor=\"bg-overlay-foreground\" />\n        </ColorSection>\n        <ColorSection title=\"Primary Colors\">\n          <ColorItem text=\"--accent\" bgColor=\"bg-accent\" />\n          <ColorItem text=\"--accent-foreground\" bgColor=\"bg-accent-foreground\" />\n          <ColorItem text=\"--accent-soft\" bgColor=\"bg-accent-soft\" />\n          <ColorItem text=\"--accent-soft-foreground\" bgColor=\"bg-accent-soft-foreground\" />\n        </ColorSection>\n        <ColorSection title=\"Status Colors\">\n          <ColorItem text=\"--success\" bgColor=\"bg-success\" />\n          <ColorItem text=\"--success-foreground\" bgColor=\"bg-success-foreground\" />\n          <ColorItem text=\"--warning\" bgColor=\"bg-warning\" />\n          <ColorItem text=\"--warning-foreground\" bgColor=\"bg-warning-foreground\" />\n          <ColorItem text=\"--danger\" bgColor=\"bg-danger\" />\n          <ColorItem text=\"--danger-foreground\" bgColor=\"bg-danger-foreground\" />\n        </ColorSection>\n        <ColorSection title=\"Form Field Colors\">\n          <ColorItem text=\"--field-background\" bgColor=\"bg-field\" />\n          <ColorItem text=\"--field-foreground\" bgColor=\"bg-field-foreground\" />\n          <ColorItem text=\"--field-placeholder\" bgColor=\"bg-field-placeholder\" />\n          <ColorItem text=\"--field-border\" bgColor=\"bg-field-border\" />\n        </ColorSection>\n        <ColorSection title=\"Other Colors\">\n          <ColorItem text=\"--default\" bgColor=\"bg-default\" />\n          <ColorItem text=\"--default-foreground\" bgColor=\"bg-default-foreground\" />\n          <ColorItem text=\"--muted\" bgColor=\"bg-muted\" />\n          <ColorItem text=\"--border\" bgColor=\"bg-border\" />\n          <ColorItem text=\"--focus\" bgColor=\"bg-focus\" />\n          <ColorItem text=\"--link\" bgColor=\"bg-link\" />\n          <ColorItem text=\"--backdrop\" bgColor=\"bg-[var(--backdrop)]\" />\n          <ColorItem text=\"--scrollbar\" bgColor=\"bg-[var(--scrollbar)]\" />\n        </ColorSection>\n      </div>\n    </DocumentationLayout>\n  );\n}\n"
+      },
+      "stories": [
+        {
+          "id": "design-system-colors--colors",
+          "name": "Colors",
+          "snippet": "function Colors() {\n  return (\n    <DocumentationLayout label=\"Colors\">\n      <div className=\"h-8\" />\n      <div className=\"flex flex-col gap-4\">\n        <ColorSection title=\"Base Colors\">\n          <ColorItem text=\"--white\" bgColor=\"bg-[var(--white)]\" />\n          <ColorItem text=\"--black\" bgColor=\"bg-[var(--black)]\" />\n          <ColorItem text=\"--snow\" bgColor=\"bg-[var(--snow)]\" />\n          <ColorItem text=\"--eclipse\" bgColor=\"bg-[var(--eclipse)]\" />\n        </ColorSection>\n        <ColorSection title=\"Background & Surface\">\n          <ColorItem text=\"--background\" bgColor=\"bg-background\" />\n          <ColorItem text=\"--foreground\" bgColor=\"bg-foreground\" />\n          <ColorItem text=\"--surface\" bgColor=\"bg-surface\" />\n          <ColorItem text=\"--surface-foreground\" bgColor=\"bg-surface-foreground\" />\n          <ColorItem text=\"--overlay\" bgColor=\"bg-overlay\" />\n          <ColorItem text=\"--overlay-foreground\" bgColor=\"bg-overlay-foreground\" />\n        </ColorSection>\n        <ColorSection title=\"Primary Colors\">\n          <ColorItem text=\"--accent\" bgColor=\"bg-accent\" />\n          <ColorItem text=\"--accent-foreground\" bgColor=\"bg-accent-foreground\" />\n          <ColorItem text=\"--accent-soft\" bgColor=\"bg-accent-soft\" />\n          <ColorItem text=\"--accent-soft-foreground\" bgColor=\"bg-accent-soft-foreground\" />\n        </ColorSection>\n        <ColorSection title=\"Status Colors\">\n          <ColorItem text=\"--success\" bgColor=\"bg-success\" />\n          <ColorItem text=\"--success-foreground\" bgColor=\"bg-success-foreground\" />\n          <ColorItem text=\"--warning\" bgColor=\"bg-warning\" />\n          <ColorItem text=\"--warning-foreground\" bgColor=\"bg-warning-foreground\" />\n          <ColorItem text=\"--danger\" bgColor=\"bg-danger\" />\n          <ColorItem text=\"--danger-foreground\" bgColor=\"bg-danger-foreground\" />\n        </ColorSection>\n        <ColorSection title=\"Form Field Colors\">\n          <ColorItem text=\"--field-background\" bgColor=\"bg-field\" />\n          <ColorItem text=\"--field-foreground\" bgColor=\"bg-field-foreground\" />\n          <ColorItem text=\"--field-placeholder\" bgColor=\"bg-field-placeholder\" />\n          <ColorItem text=\"--field-border\" bgColor=\"bg-field-border\" />\n        </ColorSection>\n        <ColorSection title=\"Other Colors\">\n          <ColorItem text=\"--default\" bgColor=\"bg-default\" />\n          <ColorItem text=\"--default-foreground\" bgColor=\"bg-default-foreground\" />\n          <ColorItem text=\"--muted\" bgColor=\"bg-muted\" />\n          <ColorItem text=\"--border\" bgColor=\"bg-border\" />\n          <ColorItem text=\"--focus\" bgColor=\"bg-focus\" />\n          <ColorItem text=\"--link\" bgColor=\"bg-link\" />\n          <ColorItem text=\"--backdrop\" bgColor=\"bg-[var(--backdrop)]\" />\n          <ColorItem text=\"--scrollbar\" bgColor=\"bg-[var(--scrollbar)]\" />\n        </ColorSection>\n      </div>\n    </DocumentationLayout>\n  );\n}"
+        }
+      ],
+      "import": "import { Card, CardContent } from '@heroui/react';\nimport { DocumentationLayout } from '@package/storybook';"
+    },
+    "design-system-typography": {
+      "id": "design-system-typography",
+      "name": "Typography",
+      "path": "../web/src/storybook/foundation/Typography.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component found",
+        "message": "We could not detect the component from your story file. Specify meta.component.\n  2 | import { DocumentationDecorator, DocumentationLayout } from \"@package/storybook\";\n  3 |\n> 4 | export default {\n    | ^\n  5 |   title: \"Design System/Typography\",\n  6 |   tags: [\"no-tests\"],\n  7 |   decorators: [DocumentationDecorator],\n\n../web/src/storybook/foundation/Typography.stories.tsx:\nimport type { ReactElement } from \"react\";\nimport { DocumentationDecorator, DocumentationLayout } from \"@package/storybook\";\n\nexport default {\n  title: \"Design System/Typography\",\n  tags: [\"no-tests\"],\n  decorators: [DocumentationDecorator],\n  parameters: {\n    a11y: {\n      test: \"off\",\n    },\n    layout: \"fullscreen\",\n  },\n};\n\nexport function Typography(): ReactElement {\n  return (\n    <DocumentationLayout label=\"Typography\">\n      <div className=\"prose dark:prose-invert mt-10\">\n        <h1>h1. Heading</h1>\n        <h2>h2. Heading</h2>\n        <h3>h3. Heading</h3>\n        <h4>h4. Heading</h4>\n        <h5>h5. Heading</h5>\n        <h6>h6. Heading</h6>\n      </div>\n      <div className=\"prose dark:prose-invert mt-2\">\n        <div className=\"font-thin\">Thin - Font Weight</div>\n        <div className=\"font-extralight\">Extralight - Font Weight</div>\n        <div className=\"font-light\">Light - Font Weight</div>\n        <div className=\"font-normal\">Normal - Font Weight</div>\n        <div className=\"font-medium\">Medium - Font Weight</div>\n        <div className=\"font-semibold\">Semibold - Font Weight</div>\n        <div className=\"font-bold\">Bold - Font Weight</div>\n        <div className=\"font-extrabold\">Extrabold - Font Weight</div>\n        <div className=\"font-black\">Black - Font Weight</div>\n      </div>\n      <div className=\"prose dark:prose-invert mt-2\">\n        <div>subtitle1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>\n        <a>link. Lorem ipsum dolor sit amet</a>\n        <blockquote>blockqoute. Lorem ipsum dolor sit amet</blockquote>\n        <figure>figure. Lorem ipsum dolor sit amet</figure>\n        <figcaption>figcaption. Lorem ipsum dolor sit amet</figcaption>\n        <strong>strong. Lorem ipsum dolor sit amet</strong>\n        <em>em. Lorem ipsum dolor sit amet</em>\n        <code>code. Lorem ipsum dolor sit amet</code>\n        <pre>pre. Lorem ipsum dolor sit amet</pre>\n        <ol>ol. Lorem ipsum dolor sit amet</ol>\n        <ul>ul. Lorem ipsum dolor sit amet</ul>\n        <li>li. Lorem ipsum dolor sit amet</li>\n        <table>table. Lorem ipsum dolor sit amet</table>\n        <thead>thead. Lorem ipsum dolor sit amet</thead>\n        <tr>tr. Lorem ipsum dolor sit amet</tr>\n        <th>th. Lorem ipsum dolor sit amet</th>\n        <td>td. Lorem ipsum dolor sit amet</td>\n        <hr />\n      </div>\n    </DocumentationLayout>\n  );\n}\n"
+      },
+      "stories": [
+        {
+          "id": "design-system-typography--typography",
+          "name": "Typography",
+          "snippet": "function Typography() {\n  return (\n    <DocumentationLayout label=\"Typography\">\n      <div className=\"prose dark:prose-invert mt-10\">\n        <h1>h1. Heading</h1>\n        <h2>h2. Heading</h2>\n        <h3>h3. Heading</h3>\n        <h4>h4. Heading</h4>\n        <h5>h5. Heading</h5>\n        <h6>h6. Heading</h6>\n      </div>\n      <div className=\"prose dark:prose-invert mt-2\">\n        <div className=\"font-thin\">Thin - Font Weight</div>\n        <div className=\"font-extralight\">Extralight - Font Weight</div>\n        <div className=\"font-light\">Light - Font Weight</div>\n        <div className=\"font-normal\">Normal - Font Weight</div>\n        <div className=\"font-medium\">Medium - Font Weight</div>\n        <div className=\"font-semibold\">Semibold - Font Weight</div>\n        <div className=\"font-bold\">Bold - Font Weight</div>\n        <div className=\"font-extrabold\">Extrabold - Font Weight</div>\n        <div className=\"font-black\">Black - Font Weight</div>\n      </div>\n      <div className=\"prose dark:prose-invert mt-2\">\n        <div>subtitle1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>\n        <a>link. Lorem ipsum dolor sit amet</a>\n        <blockquote>blockqoute. Lorem ipsum dolor sit amet</blockquote>\n        <figure>figure. Lorem ipsum dolor sit amet</figure>\n        <figcaption>figcaption. Lorem ipsum dolor sit amet</figcaption>\n        <strong>strong. Lorem ipsum dolor sit amet</strong>\n        <em>em. Lorem ipsum dolor sit amet</em>\n        <code>code. Lorem ipsum dolor sit amet</code>\n        <pre>pre. Lorem ipsum dolor sit amet</pre>\n        <ol>ol. Lorem ipsum dolor sit amet</ol>\n        <ul>ul. Lorem ipsum dolor sit amet</ul>\n        <li>li. Lorem ipsum dolor sit amet</li>\n        <table>table. Lorem ipsum dolor sit amet</table>\n        <thead>thead. Lorem ipsum dolor sit amet</thead>\n        <tr>tr. Lorem ipsum dolor sit amet</tr>\n        <th>th. Lorem ipsum dolor sit amet</th>\n        <td>td. Lorem ipsum dolor sit amet</td>\n        <hr />\n      </div>\n    </DocumentationLayout>\n  );\n}"
+        }
+      ],
+      "import": "import { DocumentationLayout } from '@package/storybook';"
+    },
+    "views-dashboard": {
+      "id": "views-dashboard",
+      "name": "Component",
+      "path": "../web/src/views/dashboard/DashboardView.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "DashboardView",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/views/dashboard/DashboardView.tsx",
+        "actualName": "DashboardView",
+        "exportName": "DashboardView",
+        "props": {
+          "stats": {
+            "required": true,
+            "tsType": {
+              "name": "z.infer",
+              "elements": [
+                {
+                  "name": "dashboardStatsSchema"
+                }
+              ],
+              "raw": "z.infer<typeof dashboardStatsSchema>"
+            },
+            "description": ""
+          },
+          "chartData": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "z.infer",
+                  "elements": [
+                    {
+                      "name": "dashboardChartPointSchema"
+                    }
+                  ],
+                  "raw": "z.infer<typeof dashboardChartPointSchema>"
+                }
+              ],
+              "raw": "DashboardChartPoint[]"
+            },
+            "description": ""
+          },
+          "recentTransactions": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "z.infer",
+                  "elements": [
+                    {
+                      "name": "dashboardTransactionSchema"
+                    }
+                  ],
+                  "raw": "z.infer<typeof dashboardTransactionSchema>"
+                }
+              ],
+              "raw": "DashboardTransaction[]"
+            },
+            "description": ""
+          },
+          "kpis": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "z.infer",
+                  "elements": [
+                    {
+                      "name": "dashboardKpiSchema"
+                    }
+                  ],
+                  "raw": "z.infer<typeof dashboardKpiSchema>"
+                }
+              ],
+              "raw": "DashboardKpi[]"
+            },
+            "description": ""
+          },
+          "cohorts": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "z.infer",
+                  "elements": [
+                    {
+                      "name": "dashboardCohortSchema"
+                    }
+                  ],
+                  "raw": "z.infer<typeof dashboardCohortSchema>"
+                }
+              ],
+              "raw": "DashboardCohort[]"
+            },
+            "description": ""
+          },
+          "channels": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "z.infer",
+                  "elements": [
+                    {
+                      "name": "dashboardChannelSchema"
+                    }
+                  ],
+                  "raw": "z.infer<typeof dashboardChannelSchema>"
+                }
+              ],
+              "raw": "DashboardChannel[]"
+            },
+            "description": ""
+          },
+          "activity": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "z.infer",
+                  "elements": [
+                    {
+                      "name": "dashboardActivitySchema"
+                    }
+                  ],
+                  "raw": "z.infer<typeof dashboardActivitySchema>"
+                }
+              ],
+              "raw": "DashboardActivity[]"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "views-dashboard--fullscreen",
+          "name": "Fullscreen",
+          "snippet": "const Fullscreen = () => <Component\n    stats={DashboardStatsData}\n    chartData={DashboardChartData}\n    recentTransactions={DashboardTransactionsData}\n    kpis={DashboardKpisData}\n    cohorts={DashboardCohortsData}\n    channels={DashboardChannelsData}\n    activity={DashboardActivityData} />;"
+        },
+        {
+          "id": "views-dashboard--phone",
+          "name": "Phone",
+          "snippet": "const Phone = () => <Component\n    stats={DashboardStatsData}\n    chartData={DashboardChartData}\n    recentTransactions={DashboardTransactionsData}\n    kpis={DashboardKpisData}\n    cohorts={DashboardCohortsData}\n    channels={DashboardChannelsData}\n    activity={DashboardActivityData} />;"
+        }
+      ],
+      "import": "import { DashboardView as Component } from '@app/web';\nimport {\n  DashboardStatsData,\n  DashboardChartData,\n  DashboardTransactionsData,\n  DashboardKpisData,\n  DashboardCohortsData,\n  DashboardChannelsData,\n  DashboardActivityData,\n} from '~/storybook/data/DashboardData';"
+    },
+    "views-forgot-password": {
+      "id": "views-forgot-password",
+      "name": "Component",
+      "path": "../web/src/views/forgot-password/ForgotPasswordView.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "ForgotPasswordView",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/views/forgot-password/ForgotPasswordView.tsx",
+        "actualName": "ForgotPasswordView",
+        "exportName": "ForgotPasswordView",
+        "props": {
+          "appName": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "resetForm": {
+            "required": true,
+            "tsType": {
+              "name": "ForgotPasswordFormProps"
+            },
+            "description": ""
+          },
+          "onBack": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "views-forgot-password--fullscreen",
+          "name": "Fullscreen",
+          "snippet": "const Fullscreen = () => <Component\n    appName=\"My App\"\n    resetForm={{\n      loading: false,\n      onSubmit: () => console.log(\"onSubmit\"),\n    }}\n    onBack={() => console.log(\"onBack\")} />;"
+        },
+        {
+          "id": "views-forgot-password--phone",
+          "name": "Phone",
+          "snippet": "const Phone = () => <Component\n    appName=\"My App\"\n    resetForm={{\n      loading: false,\n      onSubmit: () => console.log(\"onSubmit\"),\n    }}\n    onBack={() => console.log(\"onBack\")} />;"
+        }
+      ],
+      "import": "import { ForgotPasswordView as Component } from '@app/web';"
+    },
+    "views-home": {
+      "id": "views-home",
+      "name": "Component",
+      "path": "../web/src/views/home/HomeView.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "HomeView",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/views/home/HomeView.tsx",
+        "actualName": "HomeView",
+        "exportName": "HomeView"
+      },
+      "stories": [
+        {
+          "id": "views-home--fullscreen",
+          "name": "Fullscreen",
+          "snippet": "const Fullscreen = () => <Component />;"
+        },
+        {
+          "id": "views-home--phone",
+          "name": "Phone",
+          "snippet": "const Phone = () => <Component />;"
+        }
+      ],
+      "import": "import { HomeView as Component } from '@app/web';"
+    },
+    "views-login": {
+      "id": "views-login",
+      "name": "Component",
+      "path": "../web/src/views/login/LoginView.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "LoginView",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/views/login/LoginView.tsx",
+        "actualName": "LoginView",
+        "exportName": "LoginView",
+        "props": {
+          "appName": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "loginForm": {
+            "required": true,
+            "tsType": {
+              "name": "LoginFormProps"
+            },
+            "description": ""
+          },
+          "error": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "views-login--fullscreen",
+          "name": "Fullscreen",
+          "snippet": "const Fullscreen = () => <Component\n    appName=\"My App\"\n    loginForm={{\n      loading: false,\n      onForgotPassword: () => console.log(\"handleForgotPassword\"),\n      onSignUp: () => console.log(\"handleSignUp\"),\n      onSubmit: () => console.log(\"onSubmit\"),\n    }}\n    onSettings={() => console.log(\"onSettings\")} />;"
+        },
+        {
+          "id": "views-login--phone",
+          "name": "Phone",
+          "snippet": "const Phone = () => <Component\n    appName=\"My App\"\n    loginForm={{\n      loading: false,\n      onForgotPassword: () => console.log(\"handleForgotPassword\"),\n      onSignUp: () => console.log(\"handleSignUp\"),\n      onSubmit: () => console.log(\"onSubmit\"),\n    }}\n    onSettings={() => console.log(\"onSettings\")} />;"
+        }
+      ],
+      "import": "import { LoginView as Component } from '@app/web';"
+    },
+    "views-notes": {
+      "id": "views-notes",
+      "name": "Component",
+      "path": "../web/src/views/notes/NotesView.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "NotesView",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/views/notes/NotesView.tsx",
+        "actualName": "NotesView",
+        "exportName": "NotesView",
+        "props": {
+          "notes": {
+            "required": true,
+            "tsType": {
+              "name": "NotesPanelProps"
+            },
+            "description": ""
+          },
+          "syncStatus": {
+            "required": true,
+            "tsType": {
+              "name": "SyncStatusCardProps"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "views-notes--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Component\n    notes={{\n      notes: [\n        createNote({ title: \"Plan the launch\", body: \"Draft the announcement.\" }, new Date(NOW), \"N1\"),\n        createNote({ title: \"Book the venue\" }, new Date(NOW - 3_600_000), \"N2\"),\n      ],\n      onAdd: fn(),\n      onTogglePinned: fn(),\n      onArchive: fn(),\n    }}\n    syncStatus={{\n      now: NOW,\n      status: { state: \"synced\", method: \"github\", folderName: \"you/app-data\", lastSyncedAt: \"2026-10-21T09:58:00Z\" },\n      onPress: fn(),\n    }} />;",
+          "warning": "Incomplete snippet: `NOW` could not be resolved statically."
+        },
+        {
+          "id": "views-notes--local-only",
+          "name": "Local Only",
+          "snippet": "const LocalOnly = () => <Component\n    notes={{\n        notes: [],\n        onAdd: fn(),\n        onTogglePinned: fn(),\n        onArchive: fn()\n    }}\n    syncStatus={{\n        now: NOW,\n        status: { state: \"local\", method: \"local\" },\n        onPress: fn()\n    }} />;",
+          "warning": "Incomplete snippet: `NOW` could not be resolved statically."
+        },
+        {
+          "id": "views-notes--phone",
+          "name": "Phone",
+          "snippet": "const Phone = () => <Component\n    notes={{\n      notes: [\n        createNote({ title: \"Plan the launch\", body: \"Draft the announcement.\" }, new Date(NOW), \"N1\"),\n        createNote({ title: \"Book the venue\" }, new Date(NOW - 3_600_000), \"N2\"),\n      ],\n      onAdd: fn(),\n      onTogglePinned: fn(),\n      onArchive: fn(),\n    }}\n    syncStatus={{\n      now: NOW,\n      status: { state: \"synced\", method: \"github\", folderName: \"you/app-data\", lastSyncedAt: \"2026-10-21T09:58:00Z\" },\n      onPress: fn(),\n    }} />;",
+          "warning": "Incomplete snippet: `NOW` could not be resolved statically."
+        }
+      ],
+      "import": "import { NotesView as Component } from '@app/web';\nimport { createNote } from '~/core/data/AppData';\nimport { fn } from 'storybook/test';"
+    },
+    "views-sign-up": {
+      "id": "views-sign-up",
+      "name": "Component",
+      "path": "../web/src/views/sign-up/SignUpView.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "SignUpView",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/views/sign-up/SignUpView.tsx",
+        "actualName": "SignUpView",
+        "exportName": "SignUpView",
+        "props": {
+          "appName": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "signUpForm": {
+            "required": true,
+            "tsType": {
+              "name": "SignUpFormProps"
+            },
+            "description": ""
+          },
+          "onBack": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "views-sign-up--fullscreen",
+          "name": "Fullscreen",
+          "snippet": "const Fullscreen = () => <Component\n    appName=\"My App\"\n    signUpForm={{\n      loading: false,\n      onSubmit: () => console.log(\"onSubmit\"),\n    }}\n    onBack={() => console.log(\"onBack\")} />;"
+        },
+        {
+          "id": "views-sign-up--phone",
+          "name": "Phone",
+          "snippet": "const Phone = () => <Component\n    appName=\"My App\"\n    signUpForm={{\n      loading: false,\n      onSubmit: () => console.log(\"onSubmit\"),\n    }}\n    onBack={() => console.log(\"onBack\")} />;"
+        }
+      ],
+      "import": "import { SignUpView as Component } from '@app/web';"
+    },
+    "actions-command-palette": {
+      "id": "actions-command-palette",
+      "name": "Component",
+      "path": "../web/src/components/actions/command-palette/CommandPalette.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "CommandPalette",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/actions/command-palette/CommandPalette.tsx",
+        "actualName": "CommandPalette",
+        "exportName": "CommandPalette",
+        "props": {
+          "isOpen": {
+            "required": true,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          },
+          "commands": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "Command"
+                }
+              ],
+              "raw": "Command[]"
+            },
+            "description": ""
+          },
+          "onClose": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "actions-command-palette--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Component\n    isOpen\n    commands={[\n      {\n        id: \"goto-home\",\n        label: \"Go to Home\",\n        description: \"Navigate to the home view\",\n        group: \"Navigation\",\n        keywords: [\"start\", \"index\"],\n        icon: iconEl(<HomeIcon className=\"h-4 w-4\" />),\n        shortcut: { mod: true, shift: true, key: \"h\" },\n        perform: () => console.log(\"goto home\"),\n      },\n      {\n        id: \"goto-dashboard\",\n        label: \"Go to Dashboard\",\n        description: \"Open the dashboard view\",\n        group: \"Navigation\",\n        icon: iconEl(<Squares2X2Icon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"goto dashboard\"),\n      },\n      {\n        id: \"theme-auto\",\n        label: \"Theme: System\",\n        group: \"Appearance\",\n        keywords: [\"auto\", \"system\"],\n        icon: iconEl(<ComputerDesktopIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"theme auto\"),\n      },\n      {\n        id: \"theme-light\",\n        label: \"Theme: Light\",\n        group: \"Appearance\",\n        icon: iconEl(<SunIcon className=\"h-4 w-4\" />),\n        shortcut: { mod: true, alt: true, key: \"l\" },\n        perform: () => console.log(\"theme light\"),\n      },\n      {\n        id: \"theme-dark\",\n        label: \"Theme: Dark\",\n        group: \"Appearance\",\n        icon: iconEl(<MoonIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"theme dark\"),\n      },\n      {\n        id: \"logout\",\n        label: \"Log out\",\n        description: \"End the current session\",\n        group: \"Account\",\n        icon: iconEl(<ArrowLeftStartOnRectangleIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"logout\"),\n      },\n    ]}\n    onClose={() => console.log(\"onClose\")} />;",
+          "warning": "Incomplete snippet: `iconEl` could not be resolved statically."
+        },
+        {
+          "id": "actions-command-palette--empty",
+          "name": "Empty",
+          "snippet": "const Empty = () => <Component isOpen commands={[]} onClose={() => console.log(\"onClose\")} />;"
+        },
+        {
+          "id": "actions-command-palette--phone",
+          "name": "Phone",
+          "snippet": "const Phone = () => <Component\n    isOpen\n    commands={[\n      {\n        id: \"goto-home\",\n        label: \"Go to Home\",\n        description: \"Navigate to the home view\",\n        group: \"Navigation\",\n        keywords: [\"start\", \"index\"],\n        icon: iconEl(<HomeIcon className=\"h-4 w-4\" />),\n        shortcut: { mod: true, shift: true, key: \"h\" },\n        perform: () => console.log(\"goto home\"),\n      },\n      {\n        id: \"goto-dashboard\",\n        label: \"Go to Dashboard\",\n        description: \"Open the dashboard view\",\n        group: \"Navigation\",\n        icon: iconEl(<Squares2X2Icon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"goto dashboard\"),\n      },\n      {\n        id: \"theme-auto\",\n        label: \"Theme: System\",\n        group: \"Appearance\",\n        keywords: [\"auto\", \"system\"],\n        icon: iconEl(<ComputerDesktopIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"theme auto\"),\n      },\n      {\n        id: \"theme-light\",\n        label: \"Theme: Light\",\n        group: \"Appearance\",\n        icon: iconEl(<SunIcon className=\"h-4 w-4\" />),\n        shortcut: { mod: true, alt: true, key: \"l\" },\n        perform: () => console.log(\"theme light\"),\n      },\n      {\n        id: \"theme-dark\",\n        label: \"Theme: Dark\",\n        group: \"Appearance\",\n        icon: iconEl(<MoonIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"theme dark\"),\n      },\n      {\n        id: \"logout\",\n        label: \"Log out\",\n        description: \"End the current session\",\n        group: \"Account\",\n        icon: iconEl(<ArrowLeftStartOnRectangleIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"logout\"),\n      },\n    ]}\n    onClose={() => console.log(\"onClose\")} />;",
+          "warning": "Incomplete snippet: `iconEl` could not be resolved statically."
+        },
+        {
+          "id": "actions-command-palette--search",
+          "name": "Search",
+          "snippet": "const Search = () => <Component\n    isOpen\n    commands={[\n      {\n        id: \"goto-home\",\n        label: \"Go to Home\",\n        description: \"Navigate to the home view\",\n        group: \"Navigation\",\n        keywords: [\"start\", \"index\"],\n        icon: iconEl(<HomeIcon className=\"h-4 w-4\" />),\n        shortcut: { mod: true, shift: true, key: \"h\" },\n        perform: () => console.log(\"goto home\"),\n      },\n      {\n        id: \"goto-dashboard\",\n        label: \"Go to Dashboard\",\n        description: \"Open the dashboard view\",\n        group: \"Navigation\",\n        icon: iconEl(<Squares2X2Icon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"goto dashboard\"),\n      },\n      {\n        id: \"theme-auto\",\n        label: \"Theme: System\",\n        group: \"Appearance\",\n        keywords: [\"auto\", \"system\"],\n        icon: iconEl(<ComputerDesktopIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"theme auto\"),\n      },\n      {\n        id: \"theme-light\",\n        label: \"Theme: Light\",\n        group: \"Appearance\",\n        icon: iconEl(<SunIcon className=\"h-4 w-4\" />),\n        shortcut: { mod: true, alt: true, key: \"l\" },\n        perform: () => console.log(\"theme light\"),\n      },\n      {\n        id: \"theme-dark\",\n        label: \"Theme: Dark\",\n        group: \"Appearance\",\n        icon: iconEl(<MoonIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"theme dark\"),\n      },\n      {\n        id: \"logout\",\n        label: \"Log out\",\n        description: \"End the current session\",\n        group: \"Account\",\n        icon: iconEl(<ArrowLeftStartOnRectangleIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"logout\"),\n      },\n    ]}\n    onClose={() => console.log(\"onClose\")} />;",
+          "warning": "Incomplete snippet: `iconEl` could not be resolved statically."
+        },
+        {
+          "id": "actions-command-palette--empty-search",
+          "name": "Empty Search",
+          "snippet": "const EmptySearch = () => <Component\n    isOpen\n    commands={[\n      {\n        id: \"goto-home\",\n        label: \"Go to Home\",\n        description: \"Navigate to the home view\",\n        group: \"Navigation\",\n        keywords: [\"start\", \"index\"],\n        icon: iconEl(<HomeIcon className=\"h-4 w-4\" />),\n        shortcut: { mod: true, shift: true, key: \"h\" },\n        perform: () => console.log(\"goto home\"),\n      },\n      {\n        id: \"goto-dashboard\",\n        label: \"Go to Dashboard\",\n        description: \"Open the dashboard view\",\n        group: \"Navigation\",\n        icon: iconEl(<Squares2X2Icon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"goto dashboard\"),\n      },\n      {\n        id: \"theme-auto\",\n        label: \"Theme: System\",\n        group: \"Appearance\",\n        keywords: [\"auto\", \"system\"],\n        icon: iconEl(<ComputerDesktopIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"theme auto\"),\n      },\n      {\n        id: \"theme-light\",\n        label: \"Theme: Light\",\n        group: \"Appearance\",\n        icon: iconEl(<SunIcon className=\"h-4 w-4\" />),\n        shortcut: { mod: true, alt: true, key: \"l\" },\n        perform: () => console.log(\"theme light\"),\n      },\n      {\n        id: \"theme-dark\",\n        label: \"Theme: Dark\",\n        group: \"Appearance\",\n        icon: iconEl(<MoonIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"theme dark\"),\n      },\n      {\n        id: \"logout\",\n        label: \"Log out\",\n        description: \"End the current session\",\n        group: \"Account\",\n        icon: iconEl(<ArrowLeftStartOnRectangleIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"logout\"),\n      },\n    ]}\n    onClose={() => console.log(\"onClose\")} />;",
+          "warning": "Incomplete snippet: `iconEl` could not be resolved statically."
+        },
+        {
+          "id": "actions-command-palette--click-command",
+          "name": "Click Command",
+          "snippet": "const ClickCommand = () => <Component\n    isOpen\n    commands={[\n      {\n        id: \"goto-home\",\n        label: \"Go to Home\",\n        description: \"Navigate to the home view\",\n        group: \"Navigation\",\n        keywords: [\"start\", \"index\"],\n        icon: iconEl(<HomeIcon className=\"h-4 w-4\" />),\n        shortcut: { mod: true, shift: true, key: \"h\" },\n        perform: () => console.log(\"goto home\"),\n      },\n      {\n        id: \"goto-dashboard\",\n        label: \"Go to Dashboard\",\n        description: \"Open the dashboard view\",\n        group: \"Navigation\",\n        icon: iconEl(<Squares2X2Icon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"goto dashboard\"),\n      },\n      {\n        id: \"theme-auto\",\n        label: \"Theme: System\",\n        group: \"Appearance\",\n        keywords: [\"auto\", \"system\"],\n        icon: iconEl(<ComputerDesktopIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"theme auto\"),\n      },\n      {\n        id: \"theme-light\",\n        label: \"Theme: Light\",\n        group: \"Appearance\",\n        icon: iconEl(<SunIcon className=\"h-4 w-4\" />),\n        shortcut: { mod: true, alt: true, key: \"l\" },\n        perform: () => console.log(\"theme light\"),\n      },\n      {\n        id: \"theme-dark\",\n        label: \"Theme: Dark\",\n        group: \"Appearance\",\n        icon: iconEl(<MoonIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"theme dark\"),\n      },\n      {\n        id: \"logout\",\n        label: \"Log out\",\n        description: \"End the current session\",\n        group: \"Account\",\n        icon: iconEl(<ArrowLeftStartOnRectangleIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"logout\"),\n      },\n    ]}\n    onClose={() => console.log(\"onClose\")} />;",
+          "warning": "Incomplete snippet: `iconEl` could not be resolved statically."
+        },
+        {
+          "id": "actions-command-palette--keyboard-navigation",
+          "name": "Keyboard Navigation",
+          "snippet": "const KeyboardNavigation = () => <Component\n    isOpen\n    commands={[\n      {\n        id: \"goto-home\",\n        label: \"Go to Home\",\n        description: \"Navigate to the home view\",\n        group: \"Navigation\",\n        keywords: [\"start\", \"index\"],\n        icon: iconEl(<HomeIcon className=\"h-4 w-4\" />),\n        shortcut: { mod: true, shift: true, key: \"h\" },\n        perform: () => console.log(\"goto home\"),\n      },\n      {\n        id: \"goto-dashboard\",\n        label: \"Go to Dashboard\",\n        description: \"Open the dashboard view\",\n        group: \"Navigation\",\n        icon: iconEl(<Squares2X2Icon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"goto dashboard\"),\n      },\n      {\n        id: \"theme-auto\",\n        label: \"Theme: System\",\n        group: \"Appearance\",\n        keywords: [\"auto\", \"system\"],\n        icon: iconEl(<ComputerDesktopIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"theme auto\"),\n      },\n      {\n        id: \"theme-light\",\n        label: \"Theme: Light\",\n        group: \"Appearance\",\n        icon: iconEl(<SunIcon className=\"h-4 w-4\" />),\n        shortcut: { mod: true, alt: true, key: \"l\" },\n        perform: () => console.log(\"theme light\"),\n      },\n      {\n        id: \"theme-dark\",\n        label: \"Theme: Dark\",\n        group: \"Appearance\",\n        icon: iconEl(<MoonIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"theme dark\"),\n      },\n      {\n        id: \"logout\",\n        label: \"Log out\",\n        description: \"End the current session\",\n        group: \"Account\",\n        icon: iconEl(<ArrowLeftStartOnRectangleIcon className=\"h-4 w-4\" />),\n        perform: () => console.log(\"logout\"),\n      },\n    ]}\n    onClose={() => console.log(\"onClose\")} />;",
+          "warning": "Incomplete snippet: `iconEl` could not be resolved statically."
+        }
+      ],
+      "import": "import {\n  ArrowLeftStartOnRectangleIcon,\n  ComputerDesktopIcon,\n  HomeIcon,\n  MoonIcon,\n  Squares2X2Icon,\n  SunIcon,\n} from '@heroicons/react/20/solid';\nimport { CommandPalette as Component } from '@app/web';"
+    },
+    "actions-quick-menu": {
+      "id": "actions-quick-menu",
+      "name": "Component",
+      "path": "../web/src/components/actions/quick-menu/QuickMenu.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "QuickMenu",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/actions/quick-menu/QuickMenu.tsx",
+        "actualName": "QuickMenu",
+        "exportName": "QuickMenu",
+        "props": {
+          "onSettings": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "onLogout": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "onSearch": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "actions-quick-menu--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Component\n    onSettings={() => console.log(\"onSettings\")}\n    onLogout={() => console.log(\"onLogout\")}\n    onSearch={() => console.log(\"onSearch\")} />;"
+        },
+        {
+          "id": "actions-quick-menu--interaction",
+          "name": "Interaction",
+          "snippet": "const Interaction = () => <Component\n    onSettings={() => console.log(\"onSettings\")}\n    onLogout={() => console.log(\"onLogout\")}\n    onSearch={() => console.log(\"onSearch\")} />;"
+        }
+      ],
+      "import": "import { QuickMenu as Component } from '@app/web';"
+    },
+    "actions-theme-selector": {
+      "id": "actions-theme-selector",
+      "name": "Component",
+      "path": "../web/src/components/actions/theme-selector/ThemeSelector.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "ThemeSelector",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/actions/theme-selector/ThemeSelector.tsx",
+        "actualName": "ThemeSelector",
+        "exportName": "ThemeSelector",
+        "props": {
+          "mode": {
+            "required": true,
+            "tsType": {
+              "name": "union",
+              "raw": "\"light\" | \"dark\" | \"auto\"",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "\"light\""
+                },
+                {
+                  "name": "literal",
+                  "value": "\"dark\""
+                },
+                {
+                  "name": "literal",
+                  "value": "\"auto\""
+                }
+              ]
+            },
+            "description": ""
+          },
+          "onSelect": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(mode: ThemeMode) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "union",
+                      "raw": "\"light\" | \"dark\" | \"auto\"",
+                      "elements": [
+                        {
+                          "name": "literal",
+                          "value": "\"light\""
+                        },
+                        {
+                          "name": "literal",
+                          "value": "\"dark\""
+                        },
+                        {
+                          "name": "literal",
+                          "value": "\"auto\""
+                        }
+                      ]
+                    },
+                    "name": "mode"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "actions-theme-selector--auto",
+          "name": "Auto",
+          "snippet": "const Auto = () => <Component mode=\"auto\" onSelect={(mode) => console.log(\"Selected:\", mode)} />;"
+        },
+        {
+          "id": "actions-theme-selector--light",
+          "name": "Light",
+          "snippet": "const Light = () => <Component mode=\"light\" onSelect={(mode) => console.log(\"Selected:\", mode)} />;"
+        },
+        {
+          "id": "actions-theme-selector--dark",
+          "name": "Dark",
+          "snippet": "const Dark = () => <Component mode=\"dark\" onSelect={(mode) => console.log(\"Selected:\", mode)} />;"
+        },
+        {
+          "id": "actions-theme-selector--select-light",
+          "name": "Select Light",
+          "snippet": "const SelectLight = () => <Component mode=\"auto\" onSelect={(mode) => console.log(\"Selected:\", mode)} />;"
+        },
+        {
+          "id": "actions-theme-selector--select-dark",
+          "name": "Select Dark",
+          "snippet": "const SelectDark = () => <Component mode=\"light\" onSelect={(mode) => console.log(\"Selected:\", mode)} />;"
+        }
+      ],
+      "import": "import { ThemeSelector as Component } from '@app/web';"
+    },
+    "core-route-error": {
+      "id": "core-route-error",
+      "name": "RouteError",
+      "path": "../web/src/core/routes/logic/RouteError.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "RouteError",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/core/routes/logic/RouteError.tsx",
+        "actualName": "RouteError",
+        "exportName": "RouteError",
+        "props": {
+          "error": {
+            "required": false,
+            "tsType": {
+              "name": "unknown"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "core-route-error--default",
+          "name": "Default",
+          "snippet": "const Default = () => <RouteError />;"
+        },
+        {
+          "id": "core-route-error--with-error-message",
+          "name": "With Error Message",
+          "snippet": "const WithErrorMessage = () => <RouteError error={new Error(\"Failed to fetch data from /api/users\")} />;"
+        }
+      ],
+      "import": "import { RouteError } from '@app/web';"
+    },
+    "core-route-loading": {
+      "id": "core-route-loading",
+      "name": "Component",
+      "path": "../web/src/core/routes/logic/RouteLoading.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "RouteLoading",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/core/routes/logic/RouteLoading.tsx",
+        "actualName": "RouteLoading",
+        "exportName": "RouteLoading"
+      },
+      "stories": [
+        {
+          "id": "core-route-loading--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Component />;"
+        }
+      ],
+      "import": "import { RouteLoading as Component } from '@app/web';"
+    },
+    "display-confetti-burst": {
+      "id": "display-confetti-burst",
+      "name": "Component",
+      "path": "../web/src/components/display/confetti-burst/ConfettiBurst.stories.tsx",
+      "jsDocTags": {},
+      "description": "A one-shot burst of confetti from the centre of its parent. Renders nothing for reduced motion.",
+      "reactDocgen": {
+        "description": "A one-shot burst of confetti from the centre of its parent. Renders nothing for reduced motion.",
+        "methods": [],
+        "displayName": "ConfettiBurst",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/display/confetti-burst/ConfettiBurst.tsx",
+        "actualName": "ConfettiBurst",
+        "exportName": "ConfettiBurst",
+        "props": {
+          "active": {
+            "required": true,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Fires a burst every time this turns true."
+          },
+          "pieces": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "Number of confetti pieces.",
+            "defaultValue": {
+              "value": "36",
+              "computed": false
+            }
+          },
+          "className": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "Positions the burst; the parent must be `relative`. Defaults to covering the parent."
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "display-confetti-burst--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Component active />;"
+        },
+        {
+          "id": "display-confetti-burst--small",
+          "name": "Small",
+          "snippet": "const Small = () => <Component active pieces={12} />;"
+        },
+        {
+          "id": "display-confetti-burst--replay",
+          "name": "Replay",
+          "snippet": "const Replay = () => <ReplayExample />;"
+        }
+      ],
+      "import": "import { Button } from '@heroui/react';\nimport { ConfettiBurst as Component } from '@app/web';"
+    },
+    "display-gauge": {
+      "id": "display-gauge",
+      "name": "Component",
+      "path": "../web/src/components/display/gauge/Gauge.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "Gauge",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/display/gauge/Gauge.tsx",
+        "actualName": "Gauge",
+        "exportName": "Gauge",
+        "props": {
+          "value": {
+            "required": true,
+            "tsType": {
+              "name": "number"
+            },
+            "description": ""
+          },
+          "total": {
+            "required": true,
+            "tsType": {
+              "name": "number"
+            },
+            "description": ""
+          },
+          "subLabel": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "size": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "132",
+              "computed": false
+            }
+          },
+          "strokeWidth": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "12",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "display-gauge--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Component value={1280} total={2350} subLabel=\"active rate\" />;"
+        },
+        {
+          "id": "display-gauge--high",
+          "name": "High",
+          "snippet": "const High = () => <Component value={2100} total={2350} subLabel=\"completion\" />;"
+        },
+        {
+          "id": "display-gauge--low",
+          "name": "Low",
+          "snippet": "const Low = () => <Component value={300} total={2350} subLabel=\"conversion\" />;"
+        },
+        {
+          "id": "display-gauge--empty",
+          "name": "Empty",
+          "snippet": "const Empty = () => <Component value={0} total={2350} subLabel=\"no data\" />;"
+        },
+        {
+          "id": "display-gauge--small",
+          "name": "Small",
+          "snippet": "const Small = () => <Component\n    value={1280}\n    total={2350}\n    subLabel=\"active rate\"\n    size={80}\n    strokeWidth={8} />;"
+        }
+      ],
+      "import": "import { Gauge as Component } from '@app/web';"
+    },
+    "display-grid-item": {
+      "id": "display-grid-item",
+      "name": "Component",
+      "path": "../web/src/components/display/grid-item/GridItem.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "GridItem",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/display/grid-item/GridItem.tsx",
+        "actualName": "GridItem",
+        "exportName": "GridItem",
+        "props": {
+          "title": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "imageSrc": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "description": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "display-grid-item--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Component title=\"Title\" imageSrc={storbookImgSrc} description=\"Description\" />;"
+        }
+      ],
+      "import": "import { GridItem as Component } from '@app/web';\nimport storbookImgSrc from '~/assets/images/storybook.png';"
+    },
+    "display-sparkline": {
+      "id": "display-sparkline",
+      "name": "Component",
+      "path": "../web/src/components/display/sparkline/Sparkline.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "Sparkline",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/display/sparkline/Sparkline.tsx",
+        "actualName": "Sparkline",
+        "exportName": "Sparkline",
+        "props": {
+          "data": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "number"
+                }
+              ],
+              "raw": "number[]"
+            },
+            "description": ""
+          },
+          "stroke": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "fill": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "width": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "86",
+              "computed": false
+            }
+          },
+          "height": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "28",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "display-sparkline--accent",
+          "name": "Accent",
+          "snippet": "const Accent = () => <Component\n    data={[22, 24, 23, 28, 26, 31, 30, 34, 33, 38, 36, 45]}\n    stroke=\"var(--accent)\"\n    fill=\"var(--accent)\" />;"
+        },
+        {
+          "id": "display-sparkline--success",
+          "name": "Success",
+          "snippet": "const Success = () => <Component\n    data={[22, 24, 23, 28, 26, 31, 30, 34, 33, 38, 36, 45]}\n    stroke=\"var(--success)\"\n    fill=\"var(--success)\" />;"
+        },
+        {
+          "id": "display-sparkline--warning",
+          "name": "Warning",
+          "snippet": "const Warning = () => <Component\n    data={[14, 13.5, 14.2, 13, 13.5, 12.8, 13.1, 12.9, 12.6, 13.0, 12.8, 12.5]}\n    stroke=\"var(--warning)\"\n    fill=\"var(--warning)\" />;"
+        },
+        {
+          "id": "display-sparkline--downtrend",
+          "name": "Downtrend",
+          "snippet": "const Downtrend = () => <Component\n    data={[45, 42, 38, 35, 33, 30, 28, 25, 22, 20, 18, 15]}\n    stroke=\"var(--danger)\"\n    fill=\"var(--danger)\" />;"
+        },
+        {
+          "id": "display-sparkline--violet",
+          "name": "Violet",
+          "snippet": "const Violet = () => <Component\n    data={[22, 24, 23, 28, 26, 31, 30, 34, 33, 38, 36, 45]}\n    stroke=\"#9353d3\"\n    fill=\"#9353d3\" />;"
+        },
+        {
+          "id": "display-sparkline--wide",
+          "name": "Wide",
+          "snippet": "const Wide = () => <Component\n    data={[22, 24, 23, 28, 26, 31, 30, 34, 33, 38, 36, 45]}\n    stroke=\"var(--accent)\"\n    fill=\"var(--accent)\"\n    width={160}\n    height={40} />;"
+        }
+      ],
+      "import": "import { Sparkline as Component } from '@app/web';"
+    },
+    "display-sync-status-card": {
+      "id": "display-sync-status-card",
+      "name": "Component",
+      "path": "../web/src/components/display/sync-status/SyncStatusCard.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "SyncStatusCard",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/display/sync-status/SyncStatusCard.tsx",
+        "actualName": "SyncStatusCard",
+        "exportName": "SyncStatusCard",
+        "props": {
+          "status": {
+            "required": true,
+            "tsType": {
+              "name": "SyncStatus"
+            },
+            "description": ""
+          },
+          "onPress": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": "Opens the sync settings."
+          },
+          "now": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "Rendered at this time; injected so stories are stable.",
+            "defaultValue": {
+              "value": "Date.now()",
+              "computed": true
+            }
+          },
+          "variant": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "\"card\" | \"icon\"",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "\"card\""
+                },
+                {
+                  "name": "literal",
+                  "value": "\"icon\""
+                }
+              ]
+            },
+            "description": "`icon` is a square button for toolbars, with the status in a tooltip.",
+            "defaultValue": {
+              "value": "\"card\"",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "display-sync-status-card--synced",
+          "name": "Synced",
+          "snippet": "const Synced = () => <Component\n    now={Date.parse(\"2026-10-21T10:00:00Z\")}\n    status={{ state: \"synced\", method: \"folder\", folderName: \"app-data\", lastSyncedAt: \"2026-10-21T09:55:00Z\" }}\n    onPress={fn()} />;"
+        },
+        {
+          "id": "display-sync-status-card--synced-just-now",
+          "name": "Synced Just Now",
+          "snippet": "const SyncedJustNow = () => <Component\n    now={Date.parse(\"2026-10-21T10:00:00Z\")}\n    status={{ state: \"synced\", method: \"github\", folderName: \"you/app-data\", lastSyncedAt: \"2026-10-21T09:59:50Z\" }}\n    onPress={fn()} />;"
+        },
+        {
+          "id": "display-sync-status-card--local-only",
+          "name": "Local Only",
+          "snippet": "const LocalOnly = () => <Component\n    now={Date.parse(\"2026-10-21T10:00:00Z\")}\n    status={{ state: \"local\", method: \"local\" }}\n    onPress={fn()} />;"
+        },
+        {
+          "id": "display-sync-status-card--syncing",
+          "name": "Syncing",
+          "snippet": "const Syncing = () => <Component\n    now={Date.parse(\"2026-10-21T10:00:00Z\")}\n    status={{ state: \"syncing\", method: \"github\", folderName: \"you/app-data\" }}\n    onPress={fn()} />;"
+        },
+        {
+          "id": "display-sync-status-card--pending-changes",
+          "name": "Pending Changes",
+          "snippet": "const PendingChanges = () => <Component\n    now={Date.parse(\"2026-10-21T10:00:00Z\")}\n    status={{\n      state: \"synced\",\n      method: \"github\",\n      folderName: \"you/app-data\",\n      lastSyncedAt: \"2026-10-21T09:58:00Z\",\n      hasPendingChanges: true,\n    }}\n    onPress={fn()} />;"
+        },
+        {
+          "id": "display-sync-status-card--needs-permission",
+          "name": "Needs Permission",
+          "snippet": "const NeedsPermission = () => <Component\n    now={Date.parse(\"2026-10-21T10:00:00Z\")}\n    status={{ state: \"needs-permission\", method: \"folder\", folderName: \"app-data\" }}\n    onPress={fn()} />;"
+        },
+        {
+          "id": "display-sync-status-card--sync-error",
+          "name": "Sync Error",
+          "snippet": "const SyncError = () => <Component\n    now={Date.parse(\"2026-10-21T10:00:00Z\")}\n    status={{ state: \"error\", method: \"github\", folderName: \"you/app-data\", error: \"Bad credentials\" }}\n    onPress={fn()} />;"
+        },
+        {
+          "id": "display-sync-status-card--icon",
+          "name": "Icon",
+          "snippet": "const Icon = () => <Component\n    now={Date.parse(\"2026-10-21T10:00:00Z\")}\n    status={{ state: \"synced\", method: \"folder\", folderName: \"app-data\", lastSyncedAt: \"2026-10-21T09:55:00Z\" }}\n    onPress={fn()}\n    variant=\"icon\" />;"
+        },
+        {
+          "id": "display-sync-status-card--opens-settings",
+          "name": "Opens Settings",
+          "snippet": "const OpensSettings = () => <Component\n    now={Date.parse(\"2026-10-21T10:00:00Z\")}\n    status={{ state: \"synced\", method: \"folder\", folderName: \"app-data\", lastSyncedAt: \"2026-10-21T09:55:00Z\" }}\n    onPress={fn()} />;"
+        }
+      ],
+      "import": "import { SyncStatusCard as Component } from '@app/web';\nimport { fn } from 'storybook/test';"
+    },
+    "feedback-about": {
+      "id": "feedback-about",
+      "name": "Component",
+      "path": "../web/src/components/feedback/about-details/AboutDetails.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "AboutDetails",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/feedback/about-details/AboutDetails.tsx",
+        "actualName": "AboutDetails",
+        "exportName": "AboutDetails",
+        "props": {
+          "appName": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "appVersion": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "serverVersion": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "feedback-about--details",
+          "name": "Details",
+          "snippet": "const Details = () => <Component appName=\"My App\" appVersion=\"1.0.0\" serverVersion=\"1.0.0\" />;"
+        }
+      ],
+      "import": "import { AboutDetails as Component } from '@app/web';"
+    },
+    "feedback-pwa-offline": {
+      "id": "feedback-pwa-offline",
+      "name": "PWAOffline",
+      "path": "../web/src/components/feedback/pwa-offline-dialog/PwaOfflineDialog.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component found",
+        "message": "We could not detect the component from your story file. Specify meta.component.\n   6 | import { PwaOfflineDialogProps } from \"./PwaOfflineDialog\";\n   7 |\n>  8 | const meta: Meta = {\n     | ^\n   9 |   title: \"Feedback/PWA Offline\",\n  10 |   decorators: [CommonDecorator, ToastDecorator],\n  11 | };\n\n../web/src/components/feedback/pwa-offline-dialog/PwaOfflineDialog.stories.tsx:\nimport { toast, Button } from \"@heroui/react\";\nimport { CommonDecorator, ToastDecorator } from \"@package/storybook\";\nimport type { Meta, StoryObj } from \"@storybook/react-vite\";\nimport { useIntl } from \"react-intl\";\nimport { expect, within } from \"storybook/test\";\nimport { PwaOfflineDialogProps } from \"./PwaOfflineDialog\";\n\nconst meta: Meta = {\n  title: \"Feedback/PWA Offline\",\n  decorators: [CommonDecorator, ToastDecorator],\n};\n\nexport default meta;\ntype Story = StoryObj<typeof meta>;\n\nexport const OfflineDialog: Story = {\n  render: () => {\n    const intl = useIntl();\n    return (\n      <Button\n        onPress={() => {\n          const [msg, opts] = PwaOfflineDialogProps(intl, () => console.log(\"onClose\"));\n          toast(msg, opts);\n        }}\n      >\n        Show Toast\n      </Button>\n    );\n  },\n  play: async ({ canvas, userEvent }) => {\n    await userEvent.click(canvas.getByRole(\"button\", { name: \"Show Toast\" }));\n\n    const body = within(document.body);\n    await expect(await body.findByText(/ready to work offline/i)).toBeInTheDocument();\n  },\n};\n"
+      },
+      "stories": [
+        {
+          "id": "feedback-pwa-offline--offline-dialog",
+          "name": "Offline Dialog",
+          "snippet": "const OfflineDialog = () => {\n  const intl = useIntl();\n  return (\n    <Button\n      onPress={() => {\n        const [msg, opts] = PwaOfflineDialogProps(intl, () => console.log(\"onClose\"));\n        toast(msg, opts);\n      }}\n    >\n      Show Toast\n    </Button>\n  );\n};"
+        }
+      ],
+      "import": "import { Button } from '@heroui/react';"
+    },
+    "feedback-pwa-update": {
+      "id": "feedback-pwa-update",
+      "name": "PWAUpdate",
+      "path": "../web/src/components/feedback/pwa-update-dialog/PwaUpdateDialog.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component found",
+        "message": "We could not detect the component from your story file. Specify meta.component.\n   6 | import { PwaUpdateDialogProps } from \"./PwaUpdateDialog\";\n   7 |\n>  8 | const meta = {\n     | ^\n   9 |   title: \"Feedback/PWA Update\",\n  10 |   decorators: [CommonDecorator, ToastDecorator],\n  11 | };\n\n../web/src/components/feedback/pwa-update-dialog/PwaUpdateDialog.stories.tsx:\nimport { Button, toast } from \"@heroui/react\";\nimport { CommonDecorator, ToastDecorator } from \"@package/storybook\";\nimport type { StoryObj } from \"@storybook/react-vite\";\nimport { useIntl } from \"react-intl\";\nimport { expect, within } from \"storybook/test\";\nimport { PwaUpdateDialogProps } from \"./PwaUpdateDialog\";\n\nconst meta = {\n  title: \"Feedback/PWA Update\",\n  decorators: [CommonDecorator, ToastDecorator],\n};\n\nexport default meta;\ntype Story = StoryObj<typeof meta>;\n\nexport const UpdateDialog: Story = {\n  render: () => {\n    const intl = useIntl();\n    return (\n      <Button\n        onPress={() => {\n          const [msg, opts] = PwaUpdateDialogProps(\n            intl,\n            \"App\",\n            () => console.log(\"onClose\"),\n            () => console.log(\"onUpdate\")\n          );\n          toast(msg, opts);\n        }}\n      >\n        Show Toast\n      </Button>\n    );\n  },\n  play: async ({ canvas, userEvent }) => {\n    await userEvent.click(canvas.getByRole(\"button\", { name: \"Show Toast\" }));\n\n    const body = within(document.body);\n    await expect(await body.findByText(/A new version of App is available/i)).toBeInTheDocument();\n    await expect(await body.findByRole(\"button\", { name: /update/i })).toBeInTheDocument();\n  },\n};\n"
+      },
+      "stories": [
+        {
+          "id": "feedback-pwa-update--update-dialog",
+          "name": "Update Dialog",
+          "snippet": "const UpdateDialog = () => {\n  const intl = useIntl();\n  return (\n    <Button\n      onPress={() => {\n        const [msg, opts] = PwaUpdateDialogProps(\n          intl,\n          \"App\",\n          () => console.log(\"onClose\"),\n          () => console.log(\"onUpdate\")\n        );\n        toast(msg, opts);\n      }}\n    >\n      Show Toast\n    </Button>\n  );\n};"
+        }
+      ],
+      "import": "import { Button } from '@heroui/react';"
+    },
+    "feedback-settings-modal": {
+      "id": "feedback-settings-modal",
+      "name": "Component",
+      "path": "../web/src/components/feedback/settings-modal/SettingsModal.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "SettingsModal",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/feedback/settings-modal/SettingsModal.tsx",
+        "actualName": "SettingsModal",
+        "exportName": "SettingsModal",
+        "props": {
+          "isOpen": {
+            "required": true,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          },
+          "sections": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "union",
+                  "raw": "\"account\" | \"appearance\" | \"sync\" | \"about\"",
+                  "elements": [
+                    {
+                      "name": "literal",
+                      "value": "\"account\""
+                    },
+                    {
+                      "name": "literal",
+                      "value": "\"appearance\""
+                    },
+                    {
+                      "name": "literal",
+                      "value": "\"sync\""
+                    },
+                    {
+                      "name": "literal",
+                      "value": "\"about\""
+                    }
+                  ]
+                }
+              ],
+              "raw": "SettingsSection[]"
+            },
+            "description": ""
+          },
+          "initialSection": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "\"account\" | \"appearance\" | \"sync\" | \"about\"",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "\"account\""
+                },
+                {
+                  "name": "literal",
+                  "value": "\"appearance\""
+                },
+                {
+                  "name": "literal",
+                  "value": "\"sync\""
+                },
+                {
+                  "name": "literal",
+                  "value": "\"about\""
+                }
+              ]
+            },
+            "description": ""
+          },
+          "onClose": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "account": {
+            "required": false,
+            "tsType": {
+              "name": "SettingsAccountSectionProps"
+            },
+            "description": ""
+          },
+          "appearance": {
+            "required": true,
+            "tsType": {
+              "name": "SettingsAppearanceSectionProps"
+            },
+            "description": ""
+          },
+          "sync": {
+            "required": false,
+            "tsType": {
+              "name": "SettingsSyncSectionProps"
+            },
+            "description": ""
+          },
+          "aboutDetails": {
+            "required": true,
+            "tsType": {
+              "name": "SettingsAboutSectionProps"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "feedback-settings-modal--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Component\n    isOpen\n    sections={[\"account\", \"appearance\", \"sync\", \"about\"]}\n    onClose={() => console.log(\"onClose\")}\n    account={{\n      name: \"John Doe\",\n      email: \"john.doe@example.com\",\n    }}\n    appearance={{\n      themeSelector: {\n        mode: \"auto\" as const,\n        onSelect: (mode: string) => console.log(\"onSelect\", mode),\n      },\n    }}\n    sync={{\n      status: { state: \"local\", method: \"local\" },\n      isFolderSupported: true,\n      deviceName: \"Mac\",\n      onConnectFolder: fn(async () => \"cancelled\" as const),\n      onConnectGitHub: fn(async () => ({ result: \"error\" as const, errorKind: \"unauthorized\" as const, detail: \"\" })),\n      onReconnect: fn(),\n      onDisconnect: fn(),\n      onSyncNow: fn(),\n      onDeviceNameChange: fn(),\n      now: Date.parse(\"2026-10-21T10:00:00Z\"),\n    }}\n    aboutDetails={{\n      appName: \"My App\",\n      appVersion: \"1.0.0\",\n      serverVersion: \"2.0.0\",\n      onShowWhatsNew: () => console.log(\"onShowWhatsNew\"),\n    }} />;"
+        },
+        {
+          "id": "feedback-settings-modal--account",
+          "name": "Account",
+          "snippet": "const Account = () => <Component\n    isOpen\n    sections={[\"account\", \"appearance\", \"sync\", \"about\"]}\n    onClose={() => console.log(\"onClose\")}\n    account={{\n      name: \"John Doe\",\n      email: \"john.doe@example.com\",\n    }}\n    appearance={{\n      themeSelector: {\n        mode: \"auto\" as const,\n        onSelect: (mode: string) => console.log(\"onSelect\", mode),\n      },\n    }}\n    sync={{\n      status: { state: \"local\", method: \"local\" },\n      isFolderSupported: true,\n      deviceName: \"Mac\",\n      onConnectFolder: fn(async () => \"cancelled\" as const),\n      onConnectGitHub: fn(async () => ({ result: \"error\" as const, errorKind: \"unauthorized\" as const, detail: \"\" })),\n      onReconnect: fn(),\n      onDisconnect: fn(),\n      onSyncNow: fn(),\n      onDeviceNameChange: fn(),\n      now: Date.parse(\"2026-10-21T10:00:00Z\"),\n    }}\n    aboutDetails={{\n      appName: \"My App\",\n      appVersion: \"1.0.0\",\n      serverVersion: \"2.0.0\",\n      onShowWhatsNew: () => console.log(\"onShowWhatsNew\"),\n    }}\n    initialSection=\"account\" />;"
+        },
+        {
+          "id": "feedback-settings-modal--appearance",
+          "name": "Appearance",
+          "snippet": "const Appearance = () => <Component\n    isOpen\n    sections={[\"account\", \"appearance\", \"sync\", \"about\"]}\n    onClose={() => console.log(\"onClose\")}\n    account={{\n      name: \"John Doe\",\n      email: \"john.doe@example.com\",\n    }}\n    appearance={{\n      themeSelector: {\n        mode: \"auto\" as const,\n        onSelect: (mode: string) => console.log(\"onSelect\", mode),\n      },\n    }}\n    sync={{\n      status: { state: \"local\", method: \"local\" },\n      isFolderSupported: true,\n      deviceName: \"Mac\",\n      onConnectFolder: fn(async () => \"cancelled\" as const),\n      onConnectGitHub: fn(async () => ({ result: \"error\" as const, errorKind: \"unauthorized\" as const, detail: \"\" })),\n      onReconnect: fn(),\n      onDisconnect: fn(),\n      onSyncNow: fn(),\n      onDeviceNameChange: fn(),\n      now: Date.parse(\"2026-10-21T10:00:00Z\"),\n    }}\n    aboutDetails={{\n      appName: \"My App\",\n      appVersion: \"1.0.0\",\n      serverVersion: \"2.0.0\",\n      onShowWhatsNew: () => console.log(\"onShowWhatsNew\"),\n    }}\n    initialSection=\"appearance\" />;"
+        },
+        {
+          "id": "feedback-settings-modal--sync",
+          "name": "Sync",
+          "snippet": "const Sync = () => <Component\n    isOpen\n    sections={[\"account\", \"appearance\", \"sync\", \"about\"]}\n    onClose={() => console.log(\"onClose\")}\n    account={{\n      name: \"John Doe\",\n      email: \"john.doe@example.com\",\n    }}\n    appearance={{\n      themeSelector: {\n        mode: \"auto\" as const,\n        onSelect: (mode: string) => console.log(\"onSelect\", mode),\n      },\n    }}\n    sync={{\n      status: { state: \"local\", method: \"local\" },\n      isFolderSupported: true,\n      deviceName: \"Mac\",\n      onConnectFolder: fn(async () => \"cancelled\" as const),\n      onConnectGitHub: fn(async () => ({ result: \"error\" as const, errorKind: \"unauthorized\" as const, detail: \"\" })),\n      onReconnect: fn(),\n      onDisconnect: fn(),\n      onSyncNow: fn(),\n      onDeviceNameChange: fn(),\n      now: Date.parse(\"2026-10-21T10:00:00Z\"),\n    }}\n    aboutDetails={{\n      appName: \"My App\",\n      appVersion: \"1.0.0\",\n      serverVersion: \"2.0.0\",\n      onShowWhatsNew: () => console.log(\"onShowWhatsNew\"),\n    }}\n    initialSection=\"sync\" />;"
+        },
+        {
+          "id": "feedback-settings-modal--sync-with-git-hub",
+          "name": "Sync With Git Hub",
+          "snippet": "const SyncWithGitHub = () => <Component\n    isOpen\n    sections={[\"account\", \"appearance\", \"sync\", \"about\"]}\n    onClose={() => console.log(\"onClose\")}\n    account={{\n      name: \"John Doe\",\n      email: \"john.doe@example.com\",\n    }}\n    appearance={{\n      themeSelector: {\n        mode: \"auto\" as const,\n        onSelect: (mode: string) => console.log(\"onSelect\", mode),\n      },\n    }}\n    sync={{\n        status: {\n          state: \"synced\",\n          method: \"github\",\n          folderName: \"you/app-data\",\n          lastSyncedAt: \"2026-10-21T09:58:00Z\",\n          git: { remoteUrl: \"github.com/you/app-data\", branch: \"main\", lastSyncedAt: \"2026-10-21T09:58:00Z\" },\n        },\n\n        isFolderSupported: true,\n        deviceName: \"Mac\",\n        onConnectFolder: fn(async () => \"cancelled\" as const),\n        onConnectGitHub: fn(async () => ({ result: \"error\" as const, errorKind: \"unauthorized\" as const, detail: \"\" })),\n        onReconnect: fn(),\n        onDisconnect: fn(),\n        onSyncNow: fn(),\n        onDeviceNameChange: fn(),\n        now: Date.parse(\"2026-10-21T10:00:00Z\")\n    }}\n    aboutDetails={{\n      appName: \"My App\",\n      appVersion: \"1.0.0\",\n      serverVersion: \"2.0.0\",\n      onShowWhatsNew: () => console.log(\"onShowWhatsNew\"),\n    }}\n    initialSection=\"sync\" />;"
+        },
+        {
+          "id": "feedback-settings-modal--sync-with-local-git-repo",
+          "name": "Sync With Local Git Repo",
+          "snippet": "const SyncWithLocalGitRepo = () => <Component\n    isOpen\n    sections={[\"account\", \"appearance\", \"sync\", \"about\"]}\n    onClose={() => console.log(\"onClose\")}\n    account={{\n      name: \"John Doe\",\n      email: \"john.doe@example.com\",\n    }}\n    appearance={{\n      themeSelector: {\n        mode: \"auto\" as const,\n        onSelect: (mode: string) => console.log(\"onSelect\", mode),\n      },\n    }}\n    sync={{\n        status: {\n          state: \"synced\",\n          method: \"folder\",\n          folderName: \"app-data\",\n          lastSyncedAt: \"2026-10-21T09:59:00Z\",\n          git: { isLocalClone: true, branch: \"main\", remoteUrl: \"git@github.com:you/app-data.git\" },\n        },\n\n        isFolderSupported: true,\n        deviceName: \"Mac\",\n        onConnectFolder: fn(async () => \"cancelled\" as const),\n        onConnectGitHub: fn(async () => ({ result: \"error\" as const, errorKind: \"unauthorized\" as const, detail: \"\" })),\n        onReconnect: fn(),\n        onDisconnect: fn(),\n        onSyncNow: fn(),\n        onDeviceNameChange: fn(),\n        now: Date.parse(\"2026-10-21T10:00:00Z\")\n    }}\n    aboutDetails={{\n      appName: \"My App\",\n      appVersion: \"1.0.0\",\n      serverVersion: \"2.0.0\",\n      onShowWhatsNew: () => console.log(\"onShowWhatsNew\"),\n    }}\n    initialSection=\"sync\" />;"
+        },
+        {
+          "id": "feedback-settings-modal--about",
+          "name": "About",
+          "snippet": "const About = () => <Component\n    isOpen\n    sections={[\"account\", \"appearance\", \"sync\", \"about\"]}\n    onClose={() => console.log(\"onClose\")}\n    account={{\n      name: \"John Doe\",\n      email: \"john.doe@example.com\",\n    }}\n    appearance={{\n      themeSelector: {\n        mode: \"auto\" as const,\n        onSelect: (mode: string) => console.log(\"onSelect\", mode),\n      },\n    }}\n    sync={{\n      status: { state: \"local\", method: \"local\" },\n      isFolderSupported: true,\n      deviceName: \"Mac\",\n      onConnectFolder: fn(async () => \"cancelled\" as const),\n      onConnectGitHub: fn(async () => ({ result: \"error\" as const, errorKind: \"unauthorized\" as const, detail: \"\" })),\n      onReconnect: fn(),\n      onDisconnect: fn(),\n      onSyncNow: fn(),\n      onDeviceNameChange: fn(),\n      now: Date.parse(\"2026-10-21T10:00:00Z\"),\n    }}\n    aboutDetails={{\n      appName: \"My App\",\n      appVersion: \"1.0.0\",\n      serverVersion: \"2.0.0\",\n      onShowWhatsNew: () => console.log(\"onShowWhatsNew\"),\n    }}\n    initialSection=\"about\" />;"
+        },
+        {
+          "id": "feedback-settings-modal--phone",
+          "name": "Phone",
+          "snippet": "const Phone = () => <Component\n    isOpen\n    sections={[\"account\", \"appearance\", \"sync\", \"about\"]}\n    onClose={() => console.log(\"onClose\")}\n    account={{\n      name: \"John Doe\",\n      email: \"john.doe@example.com\",\n    }}\n    appearance={{\n      themeSelector: {\n        mode: \"auto\" as const,\n        onSelect: (mode: string) => console.log(\"onSelect\", mode),\n      },\n    }}\n    sync={{\n      status: { state: \"local\", method: \"local\" },\n      isFolderSupported: true,\n      deviceName: \"Mac\",\n      onConnectFolder: fn(async () => \"cancelled\" as const),\n      onConnectGitHub: fn(async () => ({ result: \"error\" as const, errorKind: \"unauthorized\" as const, detail: \"\" })),\n      onReconnect: fn(),\n      onDisconnect: fn(),\n      onSyncNow: fn(),\n      onDeviceNameChange: fn(),\n      now: Date.parse(\"2026-10-21T10:00:00Z\"),\n    }}\n    aboutDetails={{\n      appName: \"My App\",\n      appVersion: \"1.0.0\",\n      serverVersion: \"2.0.0\",\n      onShowWhatsNew: () => console.log(\"onShowWhatsNew\"),\n    }} />;"
+        }
+      ],
+      "import": "import { SettingsModal as Component } from '@app/web';\nimport { fn } from 'storybook/test';"
+    },
+    "feedback-whats-new-dialog": {
+      "id": "feedback-whats-new-dialog",
+      "name": "Component",
+      "path": "../web/src/components/feedback/whats-new-dialog/WhatsNewDialog.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "WhatsNewDialog",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/feedback/whats-new-dialog/WhatsNewDialog.tsx",
+        "actualName": "WhatsNewDialog",
+        "exportName": "WhatsNewDialog",
+        "props": {
+          "isOpen": {
+            "required": true,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          },
+          "appName": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "releases": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "WhatsNewRelease"
+                }
+              ],
+              "raw": "WhatsNewRelease[]"
+            },
+            "description": "Newest first."
+          },
+          "onClose": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "feedback-whats-new-dialog--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Component isOpen appName=\"Web App\" releases={[latest]} onClose={fn()} />;",
+          "warning": "Incomplete snippet: `latest` could not be resolved statically."
+        },
+        {
+          "id": "feedback-whats-new-dialog--several-versions",
+          "name": "Several Versions",
+          "snippet": "const SeveralVersions = () => <Component isOpen appName=\"Web App\" releases={[latest, previous]} onClose={fn()} />;",
+          "warning": "Incomplete snippet: `latest`, `previous` could not be resolved statically."
+        },
+        {
+          "id": "feedback-whats-new-dialog--highlights-only",
+          "name": "Highlights Only",
+          "snippet": "const HighlightsOnly = () => <Component isOpen appName=\"Web App\" releases={[previous]} onClose={fn()} />;",
+          "warning": "Incomplete snippet: `previous` could not be resolved statically."
+        },
+        {
+          "id": "feedback-whats-new-dialog--phone",
+          "name": "Phone",
+          "snippet": "const Phone = () => <Component isOpen appName=\"Web App\" releases={[latest, previous]} onClose={fn()} />;",
+          "warning": "Incomplete snippet: `latest`, `previous` could not be resolved statically."
+        }
+      ],
+      "import": "import { WhatsNewDialog as Component } from '@app/web';\nimport { fn } from 'storybook/test';"
+    },
+    "forms-forgot-password": {
+      "id": "forms-forgot-password",
+      "name": "Component",
+      "path": "../web/src/components/forms/forgot-password/ForgotPasswordForm.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: /home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/forms/forgot-password/ForgotPasswordForm.tsx\nError:\nCannot find module './v4/classic/external.tsx'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport type { ReactElement } from \"react\";\nimport { EnvelopeIcon } from \"@heroicons/react/24/outline\";\nimport { Button, Form, Spinner } from \"@heroui/react\";\nimport { useForm } from \"@tanstack/react-form\";\nimport { useIntl } from \"react-intl\";\nimport { z } from \"zod\";\nimport { useFormValidation } from \"../shared/FormValidation\";\nimport { forgotPasswordFormMessages } from \"./ForgotPasswordForm.messages\";\nimport { InputField } from \"~/components/input/input-field/InputField\";\n\nexport interface FormForgotPassword {\n  email: string;\n}\n\nexport interface ForgotPasswordFormProps {\n  loading: boolean;\n  onSubmit: (data: FormForgotPassword) => void;\n}\n\nexport function ForgotPasswordForm({ loading, onSubmit }: ForgotPasswordFormProps): ReactElement {\n  const intl = useIntl();\n  const { emailSchema } = useFormValidation();\n\n  const schema = z.object({\n    email: emailSchema,\n  });\n\n  const form = useForm({\n    defaultValues: {\n      email: \"\",\n    },\n    validators: {\n      onSubmit: schema,\n    },\n    onSubmit: async ({ value }) => {\n      onSubmit(value);\n    },\n  });\n\n  return (\n    <Form\n      onSubmit={(e) => {\n        e.preventDefault();\n        e.stopPropagation();\n        form.handleSubmit();\n      }}\n      className=\"flex w-full flex-col justify-center gap-4\"\n    >\n      <form.Field\n        name=\"email\"\n        children={(field) => (\n          <InputField\n            autoFocus\n            field={field}\n            type=\"email\"\n            fullWidth\n            label={intl.formatMessage(forgotPasswordFormMessages.emailLabel)}\n            startContent={<EnvelopeIcon className=\"h-5 w-5\" />}\n            data-testid=\"forgot-password-form__email-input\"\n          />\n        )}\n      />\n      <form.Subscribe\n        selector={(state) => [state.canSubmit]}\n        children={([canSubmit]) => (\n          <Button\n            isDisabled={!canSubmit || loading}\n            variant=\"primary\"\n            type=\"submit\"\n            size=\"lg\"\n            className=\"mt-2 w-full\"\n            aria-label={intl.formatMessage(forgotPasswordFormMessages.submitAriaLabel)}\n            data-testid=\"forgot-password-form__submit-button\"\n          >\n            {loading ? <Spinner size=\"sm\" /> : intl.formatMessage(forgotPasswordFormMessages.submit)}\n          </Button>\n        )}\n      />\n    </Form>\n  );\n}\n"
+      },
+      "stories": [
+        {
+          "id": "forms-forgot-password--standard",
+          "name": "Standard",
+          "snippet": "const Standard = () => <Component loading={false} onSubmit={() => console.log(\"onSubmit\")} />;"
+        },
+        {
+          "id": "forms-forgot-password--success",
+          "name": "Success",
+          "snippet": "const Success = () => <Component loading={false} onSubmit={() => console.log(\"onSubmit\")} />;"
+        },
+        {
+          "id": "forms-forgot-password--incorrect-email",
+          "name": "Incorrect Email",
+          "snippet": "const IncorrectEmail = () => <Component loading={false} onSubmit={() => console.log(\"onSubmit\")} />;"
+        }
+      ],
+      "import": "import { ForgotPasswordForm as Component } from '@app/web';"
+    },
+    "forms-login": {
+      "id": "forms-login",
+      "name": "Component",
+      "path": "../web/src/components/forms/login/LoginForm.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: /home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/forms/login/LoginForm.tsx\nError:\nCannot find module './v4/classic/external.tsx'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport { useState, type ReactElement } from \"react\";\nimport { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon } from \"@heroicons/react/24/outline\";\nimport {\n  Button,\n  Checkbox,\n  CheckboxControl,\n  CheckboxIndicator,\n  CheckboxContent,\n  Form,\n  Label,\n  Link,\n  Spinner,\n} from \"@heroui/react\";\nimport { useForm } from \"@tanstack/react-form\";\nimport { useIntl } from \"react-intl\";\nimport { z } from \"zod\";\nimport { useFormValidation } from \"../shared/FormValidation\";\nimport { loginFormMessages } from \"./LoginForm.messages\";\nimport { InputField } from \"~/components/input/input-field/InputField\";\n\nexport interface FormLogin {\n  email: string;\n  password: string;\n  remember?: boolean;\n}\n\nexport interface LoginFormProps {\n  loading: boolean;\n  error?: string;\n  onForgotPassword(): void;\n  onSignUp(): void;\n  onSubmit: (data: FormLogin) => void;\n}\n\nexport function LoginForm({ loading, error, onForgotPassword, onSignUp, onSubmit }: LoginFormProps): ReactElement {\n  const intl = useIntl();\n  const { emailSchema, passwordSchema } = useFormValidation();\n  const [isVisible, setIsVisible] = useState(false);\n\n  function toggleVisibility(): void {\n    setIsVisible(!isVisible);\n  }\n\n  const schema = z.object({\n    email: emailSchema,\n    password: passwordSchema,\n    remember: z.boolean(),\n  });\n\n  const form = useForm({\n    defaultValues: {\n      email: \"\",\n      password: \"\",\n      remember: false,\n    },\n    validators: {\n      onSubmit: schema,\n    },\n    onSubmit: async (values) => {\n      onSubmit(values.value);\n    },\n  });\n\n  return (\n    <Form\n      onSubmit={(e) => {\n        e.preventDefault();\n        e.stopPropagation();\n        form.handleSubmit();\n      }}\n      className=\"flex flex-col justify-center gap-4\"\n    >\n      <form.Field\n        name=\"email\"\n        children={(field) => {\n          return (\n            <InputField\n              fullWidth\n              autoFocus\n              field={field}\n              autoComplete=\"username\"\n              id={field.name}\n              type=\"email\"\n              label={intl.formatMessage(loginFormMessages.emailLabel)}\n              placeholder={intl.formatMessage(loginFormMessages.emailPlaceholder)}\n              startContent={<EnvelopeIcon className=\"h-5 w-5\" />}\n              data-testid=\"login-form__email-input\"\n            />\n          );\n        }}\n      />\n      <form.Field\n        name=\"password\"\n        children={(field) => (\n          <InputField\n            fullWidth\n            field={field}\n            autoComplete=\"current-password\"\n            type={isVisible ? \"text\" : \"password\"}\n            label={intl.formatMessage(loginFormMessages.passwordLabel)}\n            placeholder={intl.formatMessage(loginFormMessages.passwordPlaceholder)}\n            startContent={<LockClosedIcon className=\"h-5 w-5\" />}\n            endContent={\n              <button\n                type=\"button\"\n                onClick={toggleVisibility}\n                aria-label={intl.formatMessage(loginFormMessages.togglePasswordVisibility)}\n              >\n                {isVisible ? <EyeIcon className=\"h-5 w-5\" /> : <EyeSlashIcon className=\"h-5 w-5\" />}\n              </button>\n            }\n            data-testid=\"login-form__password-input\"\n          />\n        )}\n      />\n      <div className=\"flex w-full items-center justify-between px-1 py-2\">\n        <form.Field\n          name=\"remember\"\n          children={(field) => (\n            <Checkbox id=\"remember\" isSelected={field.state.value} onChange={(value) => field.handleChange(value)}>\n              <CheckboxControl>\n                <CheckboxIndicator />\n              </CheckboxControl>\n              <CheckboxContent>\n                <Label htmlFor=\"remember\" className=\"text-xs sm:text-sm\">\n                  {intl.formatMessage(loginFormMessages.rememberMe)}\n                </Label>\n              </CheckboxContent>\n            </Checkbox>\n          )}\n        />\n        <Link className=\"cursor-pointer text-xs sm:text-sm\" onPress={onForgotPassword}>\n          {intl.formatMessage(loginFormMessages.forgotPassword)}\n        </Link>\n      </div>\n      <form.Subscribe\n        selector={(state) => [state.canSubmit]}\n        children={([canSubmit]) => (\n          <Button\n            fullWidth\n            isDisabled={!canSubmit || loading}\n            variant=\"primary\"\n            type=\"submit\"\n            onPress={() => form.handleSubmit()}\n            data-testid=\"login-form__submit-button\"\n          >\n            {loading ? <Spinner size=\"sm\" /> : intl.formatMessage(loginFormMessages.submit)}\n          </Button>\n        )}\n      />\n      {error && <div className=\"text-danger text-sm\">{error}</div>}\n      <p className=\"text-center text-sm\">\n        <Link className=\"cursor-pointer\" onPress={onSignUp}>\n          {intl.formatMessage(loginFormMessages.signUpLink)}\n        </Link>\n      </p>\n    </Form>\n  );\n}\n"
+      },
+      "stories": [
+        {
+          "id": "forms-login--standard",
+          "name": "Standard",
+          "snippet": "const Standard = () => <Component\n    loading={false}\n    onForgotPassword={() => console.log(\"handleForgotPassword\")}\n    onSignUp={() => console.log(\"handleSignUp\")}\n    onSubmit={() => console.log(\"onSubmit\")} />;"
+        },
+        {
+          "id": "forms-login--success",
+          "name": "Success",
+          "snippet": "const Success = () => <Component\n    loading={false}\n    onForgotPassword={() => console.log(\"handleForgotPassword\")}\n    onSignUp={() => console.log(\"handleSignUp\")}\n    onSubmit={() => console.log(\"onSubmit\")} />;"
+        },
+        {
+          "id": "forms-login--email-missing",
+          "name": "Email Missing",
+          "snippet": "const EmailMissing = () => <Component\n    loading={false}\n    onForgotPassword={() => console.log(\"handleForgotPassword\")}\n    onSignUp={() => console.log(\"handleSignUp\")}\n    onSubmit={() => console.log(\"onSubmit\")} />;"
+        },
+        {
+          "id": "forms-login--email-invalid",
+          "name": "Email Invalid",
+          "snippet": "const EmailInvalid = () => <Component\n    loading={false}\n    onForgotPassword={() => console.log(\"handleForgotPassword\")}\n    onSignUp={() => console.log(\"handleSignUp\")}\n    onSubmit={() => console.log(\"onSubmit\")} />;"
+        },
+        {
+          "id": "forms-login--password-missing",
+          "name": "Password Missing",
+          "snippet": "const PasswordMissing = () => <Component\n    loading={false}\n    onForgotPassword={() => console.log(\"handleForgotPassword\")}\n    onSignUp={() => console.log(\"handleSignUp\")}\n    onSubmit={() => console.log(\"onSubmit\")} />;"
+        }
+      ],
+      "import": "import { LoginForm as Component } from '@app/web';"
+    },
+    "forms-sign-up": {
+      "id": "forms-sign-up",
+      "name": "Component",
+      "path": "../web/src/components/forms/sign-up/SignUpForm.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component definition found",
+        "message": "File: /home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/forms/sign-up/SignUpForm.tsx\nError:\nCannot find module './v4/classic/external.tsx'\nYou can debug your component file in this playground: https://react-docgen.dev/playground\nCode:\nimport type { ReactElement } from \"react\";\nimport { EnvelopeIcon, IdentificationIcon, LockClosedIcon, PhoneIcon, UserIcon } from \"@heroicons/react/24/outline\";\nimport { Button, Form, Spinner } from \"@heroui/react\";\nimport { useForm } from \"@tanstack/react-form\";\nimport { useIntl } from \"react-intl\";\nimport { z } from \"zod\";\nimport { useFormValidation } from \"../shared/FormValidation\";\nimport { signUpFormMessages } from \"./SignUpForm.messages\";\nimport { InputField } from \"~/components/input/input-field/InputField\";\n\nexport interface FormSignUp {\n  firstName?: string;\n  lastName?: string;\n  email: string;\n  userName: string;\n  password: string;\n  confirmPassword: string;\n  phoneNumber?: string;\n}\n\nexport interface SignUpFormProps {\n  loading: boolean;\n  onSubmit: (data: FormSignUp) => void;\n}\n\nexport function SignUpForm({ loading, onSubmit }: SignUpFormProps): ReactElement {\n  const intl = useIntl();\n  const { emailSchema, passwordSchema, passwordConfirmSchema, passwordsMustMatchMessage } = useFormValidation();\n\n  const baseSchema = z.object({\n    firstName: z.string(),\n    lastName: z.string(),\n    userName: z.string().min(1, intl.formatMessage(signUpFormMessages.userNameRequired)),\n    email: emailSchema,\n    password: passwordSchema,\n    confirmPassword: passwordConfirmSchema,\n    phoneNumber: z.string(),\n  });\n\n  const schema = baseSchema.refine((data) => data.password === data.confirmPassword, {\n    message: passwordsMustMatchMessage,\n    path: [\"confirmPassword\"],\n  });\n\n  const form = useForm({\n    defaultValues: {\n      firstName: \"\",\n      lastName: \"\",\n      userName: \"\",\n      email: \"\",\n      password: \"\",\n      confirmPassword: \"\",\n      phoneNumber: \"\",\n    },\n    validators: {\n      onSubmit: schema,\n    },\n    onSubmit: async ({ value }) => {\n      onSubmit(value);\n    },\n  });\n\n  return (\n    <Form\n      onSubmit={(e) => {\n        e.preventDefault();\n        e.stopPropagation();\n        form.handleSubmit();\n      }}\n      className=\"flex min-w-full flex-col gap-4 md:min-w-sm\"\n    >\n      <form.Field\n        name=\"userName\"\n        children={(field) => (\n          <InputField\n            autoFocus\n            fullWidth\n            field={field}\n            type=\"text\"\n            startContent={<UserIcon className=\"h-5 w-5\" />}\n            label={intl.formatMessage(signUpFormMessages.userNameLabel)}\n            placeholder={intl.formatMessage(signUpFormMessages.userNamePlaceholder)}\n            data-testid=\"sign-up-form__username-input\"\n          />\n        )}\n      />\n      <div className=\"grid w-full grid-cols-1 gap-4 sm:grid-cols-2\">\n        <form.Field\n          name=\"firstName\"\n          children={(field) => (\n            <InputField\n              field={field}\n              type=\"text\"\n              startContent={<IdentificationIcon className=\"h-5 w-5\" />}\n              label={intl.formatMessage(signUpFormMessages.firstNameLabel)}\n              placeholder={intl.formatMessage(signUpFormMessages.firstNamePlaceholder)}\n              data-testid=\"sign-up-form__firstname-input\"\n            />\n          )}\n        />\n        <form.Field\n          name=\"lastName\"\n          children={(field) => (\n            <InputField\n              field={field}\n              type=\"text\"\n              startContent={<IdentificationIcon className=\"h-5 w-5\" />}\n              label={intl.formatMessage(signUpFormMessages.lastNameLabel)}\n              placeholder={intl.formatMessage(signUpFormMessages.lastNamePlaceholder)}\n              data-testid=\"sign-up-form__lastname-input\"\n            />\n          )}\n        />\n      </div>\n      <form.Field\n        name=\"email\"\n        children={(field) => (\n          <InputField\n            field={field}\n            type=\"email\"\n            startContent={<EnvelopeIcon className=\"h-5 w-5\" />}\n            label={intl.formatMessage(signUpFormMessages.emailLabel)}\n            placeholder={intl.formatMessage(signUpFormMessages.emailPlaceholder)}\n            data-testid=\"sign-up-form__email-input\"\n          />\n        )}\n      />\n      <form.Field\n        name=\"phoneNumber\"\n        children={(field) => (\n          <InputField\n            field={field}\n            type=\"tel\"\n            startContent={<PhoneIcon className=\"h-5 w-5\" />}\n            label={intl.formatMessage(signUpFormMessages.phoneNumberLabel)}\n            placeholder={intl.formatMessage(signUpFormMessages.phoneNumberPlaceholder)}\n            data-testid=\"sign-up-form__phonenumber-input\"\n          />\n        )}\n      />\n      <div className=\"grid w-full grid-cols-1 gap-4 sm:grid-cols-2\">\n        <form.Field\n          name=\"password\"\n          children={(field) => (\n            <InputField\n              field={field}\n              type=\"password\"\n              startContent={<LockClosedIcon className=\"h-5 w-5\" />}\n              label={intl.formatMessage(signUpFormMessages.passwordLabel)}\n              placeholder={intl.formatMessage(signUpFormMessages.passwordPlaceholder)}\n              data-testid=\"sign-up-form__password-input\"\n            />\n          )}\n        />\n        <form.Field\n          name=\"confirmPassword\"\n          children={(field) => (\n            <InputField\n              field={field}\n              type=\"password\"\n              startContent={<LockClosedIcon className=\"h-5 w-5\" />}\n              label={intl.formatMessage(signUpFormMessages.confirmPasswordLabel)}\n              placeholder={intl.formatMessage(signUpFormMessages.confirmPasswordPlaceholder)}\n              data-testid=\"sign-up-form__confirmpassword-input\"\n            />\n          )}\n        />\n      </div>\n      <form.Subscribe\n        selector={(state) => [state.canSubmit]}\n        children={([canSubmit]) => (\n          <Button\n            isDisabled={!canSubmit || loading}\n            variant=\"primary\"\n            type=\"submit\"\n            size=\"lg\"\n            className=\"mt-2 w-full\"\n            onPress={() => form.handleSubmit()}\n            data-testid=\"sign-up-form__submit-button\"\n          >\n            {loading && <Spinner size=\"sm\" />}\n            {intl.formatMessage(signUpFormMessages.submit)}\n          </Button>\n        )}\n      />\n    </Form>\n  );\n}\n"
+      },
+      "stories": [
+        {
+          "id": "forms-sign-up--standard",
+          "name": "Standard",
+          "snippet": "const Standard = () => <Component loading={false} onSubmit={() => console.log(\"onSubmit\")} />;"
+        },
+        {
+          "id": "forms-sign-up--success",
+          "name": "Success",
+          "snippet": "const Success = () => <Component loading={false} onSubmit={() => console.log(\"onSubmit\")} />;"
+        },
+        {
+          "id": "forms-sign-up--missing-fields",
+          "name": "Missing Fields",
+          "snippet": "const MissingFields = () => <Component loading={false} onSubmit={() => console.log(\"onSubmit\")} />;"
+        },
+        {
+          "id": "forms-sign-up--incorrect-password",
+          "name": "Incorrect Password",
+          "snippet": "const IncorrectPassword = () => <Component loading={false} onSubmit={() => console.log(\"onSubmit\")} />;"
+        }
+      ],
+      "import": "import { SignUpForm as Component } from '@app/web';"
+    },
+    "input-input-field": {
+      "id": "input-input-field",
+      "name": "InputFieldWrapper",
+      "path": "../web/src/components/input/input-field/InputField.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "InputField",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/input/input-field/InputField.tsx",
+        "actualName": "InputField",
+        "exportName": "InputField",
+        "props": {
+          "field": {
+            "required": true,
+            "tsType": {
+              "name": "AnyFieldApi"
+            },
+            "description": ""
+          },
+          "label": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "startContent": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          },
+          "endContent": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          }
+        },
+        "composes": [
+          "Omit"
+        ]
+      },
+      "stories": [
+        {
+          "id": "input-input-field--default",
+          "name": "Default",
+          "snippet": "const Default = () => <InputField label=\"Email\" placeholder=\"you@example.com\" />;"
+        },
+        {
+          "id": "input-input-field--with-icon",
+          "name": "With Icon",
+          "snippet": "const WithIcon = () => <InputField label=\"Email\" placeholder=\"you@example.com\" withIcon />;"
+        },
+        {
+          "id": "input-input-field--without-label",
+          "name": "Without Label",
+          "snippet": "const WithoutLabel = () => <InputField placeholder=\"Type something…\" />;"
+        }
+      ],
+      "import": "import { EnvelopeIcon } from '@heroicons/react/24/outline';\nimport { InputField } from '@app/web';"
+    },
+    "input-notes-panel": {
+      "id": "input-notes-panel",
+      "name": "Component",
+      "path": "../web/src/components/input/notes-panel/NotesPanel.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "NotesPanel",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/input/notes-panel/NotesPanel.tsx",
+        "actualName": "NotesPanel",
+        "exportName": "NotesPanel",
+        "props": {
+          "notes": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "z.infer",
+                  "elements": [
+                    {
+                      "name": "NoteFileSchema"
+                    }
+                  ],
+                  "raw": "z.infer<typeof NoteFileSchema>"
+                }
+              ],
+              "raw": "Note[]"
+            },
+            "description": "Active notes in display order."
+          },
+          "onAdd": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(draft: NoteDraft) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "NoteDraft"
+                    },
+                    "name": "draft"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "onTogglePinned": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(id: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "id"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "onArchive": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(id: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "id"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "input-notes-panel--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Component\n    notes={[\n      pinned,\n      createNote(\n        { title: \"Book the venue\", body: \"Ask for the big room.\\nCheck parking.\" },\n        new Date(\"2026-10-21T09:00:00Z\"),\n        \"N2\"\n      ),\n    ]}\n    onAdd={fn()}\n    onTogglePinned={fn()}\n    onArchive={fn()} />;",
+          "warning": "Incomplete snippet: `pinned` could not be resolved statically."
+        },
+        {
+          "id": "input-notes-panel--empty",
+          "name": "Empty",
+          "snippet": "const Empty = () => <Component notes={[]} onAdd={fn()} onTogglePinned={fn()} onArchive={fn()} />;"
+        },
+        {
+          "id": "input-notes-panel--adds-a-note",
+          "name": "Adds A Note",
+          "snippet": "const AddsANote = () => <Component notes={[]} onAdd={fn()} onTogglePinned={fn()} onArchive={fn()} />;"
+        },
+        {
+          "id": "input-notes-panel--pins-and-archives",
+          "name": "Pins And Archives",
+          "snippet": "const PinsAndArchives = () => <Component\n    notes={[\n      pinned,\n      createNote(\n        { title: \"Book the venue\", body: \"Ask for the big room.\\nCheck parking.\" },\n        new Date(\"2026-10-21T09:00:00Z\"),\n        \"N2\"\n      ),\n    ]}\n    onAdd={fn()}\n    onTogglePinned={fn()}\n    onArchive={fn()} />;",
+          "warning": "Incomplete snippet: `pinned` could not be resolved statically."
+        }
+      ],
+      "import": "import { NotesPanel as Component } from '@app/web';\nimport { createNote } from '~/core/data/AppData';\nimport { fn } from 'storybook/test';"
+    },
+    "input-search-field": {
+      "id": "input-search-field",
+      "name": "SearchFieldWrapper",
+      "path": "../web/src/components/input/input-field/SearchField.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "SearchField",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/input/input-field/SearchField.tsx",
+        "actualName": "SearchField",
+        "exportName": "SearchField",
+        "props": {
+          "value": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "onChange": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(value: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "value"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "ariaLabel": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "className": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          }
+        },
+        "composes": [
+          "Omit"
+        ]
+      },
+      "stories": [
+        {
+          "id": "input-search-field--default",
+          "name": "Default",
+          "snippet": "const Default = () => <SearchField placeholder=\"Search…\" />;"
+        },
+        {
+          "id": "input-search-field--with-value",
+          "name": "With Value",
+          "snippet": "const WithValue = () => <SearchField placeholder=\"Search…\" initialValue=\"invoice\" />;"
+        }
+      ],
+      "import": "import { SearchField } from '@app/web';"
+    },
+    "navigation-navbar-content": {
+      "id": "navigation-navbar-content",
+      "name": "Component",
+      "path": "../web/src/components/navigation/navbar-content/NavbarContent.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "NavbarContent",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/apps/web/src/components/navigation/navbar-content/NavbarContent.tsx",
+        "actualName": "NavbarContent",
+        "exportName": "NavbarContent",
+        "props": {
+          "quickMenu": {
+            "required": true,
+            "tsType": {
+              "name": "QuickMenuProps"
+            },
+            "description": ""
+          },
+          "socialLinks": {
+            "required": true,
+            "tsType": {
+              "name": "NavMenuSocialLinks"
+            },
+            "description": ""
+          },
+          "avatarName": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "syncStatus": {
+            "required": false,
+            "tsType": {
+              "name": "SyncStatusCardProps"
+            },
+            "description": "Shows where the data is synced; opens the sync settings when pressed."
+          },
+          "activeTab": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "\"home\"",
+              "computed": false
+            }
+          },
+          "onTabChange": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(id: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "id"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "navigation-navbar-content--responsive",
+          "name": "Responsive",
+          "snippet": "const Responsive = () => <Component />;",
+          "warning": "Incomplete snippet: `...NavbarContentCommonData` could not be resolved statically."
+        },
+        {
+          "id": "navigation-navbar-content--desktop",
+          "name": "Desktop",
+          "snippet": "const Desktop = () => <Component />;",
+          "warning": "Incomplete snippet: `...NavbarContentCommonData` could not be resolved statically."
+        },
+        {
+          "id": "navigation-navbar-content--phone",
+          "name": "Phone",
+          "snippet": "const Phone = () => <Component />;",
+          "warning": "Incomplete snippet: `...NavbarContentCommonData` could not be resolved statically."
+        },
+        {
+          "id": "navigation-navbar-content--interaction",
+          "name": "Interaction",
+          "snippet": "const Interaction = () => <Component />;",
+          "warning": "Incomplete snippet: `...NavbarContentCommonData` could not be resolved statically."
+        },
+        {
+          "id": "navigation-navbar-content--with-sync-status",
+          "name": "With Sync Status",
+          "snippet": "const WithSyncStatus = () => <Component\n    syncStatus={{\n      status: { state: \"synced\", method: \"github\", folderName: \"you/app-data\", lastSyncedAt: new Date().toISOString() },\n      onPress: fn(),\n    }} />;",
+          "warning": "Incomplete snippet: `...defaultArgs` could not be resolved statically."
+        }
+      ],
+      "import": "import { NavbarContent as Component } from '@app/web';\nimport { fn } from 'storybook/test';"
+    },
+    "shared-branding-logo": {
+      "id": "shared-branding-logo",
+      "name": "Component",
+      "path": "../../packages/ui/src/Branding/Logo/Logo.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "Logo",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/packages/ui/src/Branding/Logo/Logo.tsx",
+        "actualName": "Logo",
+        "exportName": "Logo",
+        "props": {
+          "size": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "\"small\" | \"medium\" | \"large\"",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "\"small\""
+                },
+                {
+                  "name": "literal",
+                  "value": "\"medium\""
+                },
+                {
+                  "name": "literal",
+                  "value": "\"large\""
+                }
+              ]
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "\"large\"",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "shared-branding-logo--small",
+          "name": "Small",
+          "snippet": "const Small = () => <Component size=\"small\" />;"
+        },
+        {
+          "id": "shared-branding-logo--medium",
+          "name": "Medium",
+          "snippet": "const Medium = () => <Component size=\"medium\" />;"
+        },
+        {
+          "id": "shared-branding-logo--large",
+          "name": "Large",
+          "snippet": "const Large = () => <Component size=\"large\" />;"
+        }
+      ],
+      "import": "import { Logo as Component } from '@package/ui';"
+    },
+    "shared-branding-logo-full": {
+      "id": "shared-branding-logo-full",
+      "name": "Component",
+      "path": "../../packages/ui/src/Branding/LogoFull/LogoFull.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "LogoFull",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/packages/ui/src/Branding/LogoFull/LogoFull.tsx",
+        "actualName": "LogoFull",
+        "exportName": "LogoFull",
+        "props": {
+          "appName": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "size": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "\"small\" | \"medium\" | \"large\"",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "\"small\""
+                },
+                {
+                  "name": "literal",
+                  "value": "\"medium\""
+                },
+                {
+                  "name": "literal",
+                  "value": "\"large\""
+                }
+              ]
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "\"large\"",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "shared-branding-logo-full--full-small",
+          "name": "Full Small",
+          "snippet": "const FullSmall = () => <Component appName=\"My App\" size=\"small\" />;"
+        },
+        {
+          "id": "shared-branding-logo-full--full-medium",
+          "name": "Full Medium",
+          "snippet": "const FullMedium = () => <Component appName=\"My App\" size=\"medium\" />;"
+        },
+        {
+          "id": "shared-branding-logo-full--full-large",
+          "name": "Full Large",
+          "snippet": "const FullLarge = () => <Component appName=\"My App\" size=\"large\" />;"
+        }
+      ],
+      "import": "import { LogoFull as Component } from '@package/ui';"
+    },
+    "shared-icons-social": {
+      "id": "shared-icons-social",
+      "name": "Social",
+      "path": "../../packages/ui/src/Icons/Social/SocialIcons.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component found",
+        "message": "We could not detect the component from your story file. Specify meta.component.\n  4 | import { LinkedInIcon } from \"./LinkedInIcon\";\n  5 |\n> 6 | const meta: Meta = {\n    | ^\n  7 |   title: \"Shared/Icons/Social\",\n  8 |   tags: [\"autodocs\"],\n  9 | };\n\n../../packages/ui/src/Icons/Social/SocialIcons.stories.tsx:\nimport type { ReactNode } from \"react\";\nimport type { Meta, StoryObj } from \"@storybook/react-vite\";\nimport { GithubIcon } from \"./GithubIcon\";\nimport { LinkedInIcon } from \"./LinkedInIcon\";\n\nconst meta: Meta = {\n  title: \"Shared/Icons/Social\",\n  tags: [\"autodocs\"],\n};\n\nexport default meta;\ntype Story = StoryObj<typeof meta>;\n\nfunction render(children?: ReactNode) {\n  return <div className=\"h-8 w-8\">{children}</div>;\n}\n\nexport const Github: Story = {\n  render: (args) => render(<GithubIcon {...args} />),\n};\n\nexport const Linkedin: Story = {\n  render: (args) => render(<LinkedInIcon {...args} />),\n};\n"
+      },
+      "stories": [
+        {
+          "id": "shared-icons-social--github",
+          "name": "Github",
+          "snippet": "const Github = (args) => render(<GithubIcon {...args} />);"
+        },
+        {
+          "id": "shared-icons-social--linkedin",
+          "name": "Linkedin",
+          "snippet": "const Linkedin = (args) => render(<LinkedInIcon {...args} />);"
+        }
+      ],
+      "import": "import { GithubIcon, LinkedInIcon } from '@package/ui';"
+    },
+    "shared-layout-background-blue-fade": {
+      "id": "shared-layout-background-blue-fade",
+      "name": "Component",
+      "path": "../../packages/ui/src/Layout/Background/BlueFadeBackground.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "BlueFadeBackground",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/packages/ui/src/Layout/Background/BlueFadeBackground.tsx",
+        "actualName": "BlueFadeBackground",
+        "exportName": "BlueFadeBackground"
+      },
+      "stories": [
+        {
+          "id": "shared-layout-background-blue-fade--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Component />;"
+        },
+        {
+          "id": "shared-layout-background-blue-fade--interaction",
+          "name": "Interaction",
+          "snippet": "const Interaction = () => <Component />;"
+        }
+      ],
+      "import": "import { BlueFadeBackground as Component } from '@package/ui';"
+    },
+    "shared-layout-background-grid": {
+      "id": "shared-layout-background-grid",
+      "name": "Component",
+      "path": "../../packages/ui/src/Layout/Background/GridBackground.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "GridBackground",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/packages/ui/src/Layout/Background/GridBackground.tsx",
+        "actualName": "GridBackground",
+        "exportName": "GridBackground"
+      },
+      "stories": [
+        {
+          "id": "shared-layout-background-grid--default",
+          "name": "Default",
+          "snippet": "const Default = () => <Component />;"
+        },
+        {
+          "id": "shared-layout-background-grid--interaction",
+          "name": "Interaction",
+          "snippet": "const Interaction = () => <Component />;"
+        }
+      ],
+      "import": "import { GridBackground as Component } from '@package/ui';"
+    },
+    "shared-layout-basic": {
+      "id": "shared-layout-basic",
+      "name": "Component",
+      "path": "../../packages/ui/src/Layout/BasicLayout/BasicLayout.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "BasicLayout",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/packages/ui/src/Layout/BasicLayout/BasicLayout.tsx",
+        "actualName": "BasicLayout",
+        "exportName": "BasicLayout",
+        "props": {
+          "className": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "backgroundElement": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          },
+          "children": {
+            "required": true,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "shared-layout-basic--basic-layout",
+          "name": "Basic Layout",
+          "snippet": "const BasicLayout = () => <Component><StorybookTableContentComponent /></Component>;"
+        }
+      ],
+      "import": "import { BasicLayout as Component, StorybookTableContentComponent } from '@package/ui';\nimport { StorybookTableContentComponent } from '../../Storybook/Components/StorybookTableContentComponent';"
+    },
+    "shared-layout-navbar": {
+      "id": "shared-layout-navbar",
+      "name": "Component",
+      "path": "../../packages/ui/src/Layout/NavbarLayout/NavbarLayout.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "NavbarLayout",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/packages/ui/src/Layout/NavbarLayout/NavbarLayout.tsx",
+        "actualName": "NavbarLayout",
+        "exportName": "NavbarLayout",
+        "props": {
+          "navbarElement": {
+            "required": true,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          },
+          "backgroundElement": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          },
+          "footer": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          },
+          "footerText": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "footerCopyright": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "footerContent": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          },
+          "children": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "shared-layout-navbar--navbar-layout",
+          "name": "Navbar Layout",
+          "snippet": "function NavbarLayout() {\n    return (\n        <Component navbarElement={<StorybookNavbarComponent />} footer>\n            <StorybookTableContentComponent />\n        </Component>\n    );\n}"
+        }
+      ],
+      "import": "import {\n  NavbarLayout as Component,\n  StorybookNavbarComponent,\n  StorybookTableContentComponent,\n} from '@package/ui';\nimport { StorybookNavbarComponent } from '../../Storybook/Components/StorybookNavbarComponent';"
+    },
+    "shared-navigation-navbar": {
+      "id": "shared-navigation-navbar",
+      "name": "Component",
+      "path": "../../packages/ui/src/Navigation/Navbar/Navbar.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "Navbar",
+        "definedInFile": "/home/runner/work/template-web-app-react-enterprise/template-web-app-react-enterprise/packages/ui/src/Navigation/Navbar/Navbar.tsx",
+        "actualName": "Navbar",
+        "exportName": "Navbar",
+        "props": {
+          "title": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "centerElement": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          },
+          "endElement": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          },
+          "startElement": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "shared-navigation-navbar--standard",
+          "name": "Standard",
+          "snippet": "const Standard = () => <Component title=\"This is a Header\" />;"
+        },
+        {
+          "id": "shared-navigation-navbar--with-components",
+          "name": "With Components",
+          "snippet": "const WithComponents = () => <Component title=\"This is a Header\" endElement={<StorybookNavbarContentComponent />} />;"
+        }
+      ],
+      "import": "import { Navbar as Component, StorybookNavbarContentComponent } from '@package/ui';\nimport { StorybookNavbarContentComponent } from '../../Storybook/Components/StorybookNavbarContentComponent';"
+    }
+  },
+  "meta": {
+    "docgen": "react-docgen",
+    "durationMs": 2147
+  }
+}
