@@ -1,0 +1,15 @@
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{i as t,r as n}from"./react-intl-DgDut_7x.js";import{t as r}from"./jsx-runtime-MKhVqBIO.js";import{n as i,t as a}from"./Cog6ToothIcon-CsBT9R8M.js";import{n as o,t as s}from"./button-DFb1jVee.js";import{a as c,i as l,n as u,r as d,t as f}from"./card-BN2zayTP.js";import{n as p,t as m}from"./LoginForm-B4N79d_h.js";import{t as h}from"./Logo-CDInDagu.js";import{t as g}from"./src-J4sf-05f.js";import{n as _,t as v}from"./BasicLayoutDecorator-EcR1SAT-.js";function y({appName:e,loginForm:n,onSettings:r}){let i=t();return(0,b.jsxs)(f,{className:`min-h-[550px] w-full sm:w-[550px]`,variant:`tertiary`,children:[(0,b.jsx)(l,{className:`flex w-full items-start justify-end`,children:(0,b.jsx)(s,{isIconOnly:!0,variant:`tertiary`,onPress:r,"aria-label":i.formatMessage({description:`LoginView: aria-label - settings button`,defaultMessage:`Settings`,id:`WYAsZQ`}),children:(0,b.jsx)(a,{className:`h-6 w-6`})})}),(0,b.jsxs)(d,{className:`flex flex-col items-center gap-2 px-6 pb-8`,children:[(0,b.jsx)(`div`,{className:`flex justify-center md:hidden`,children:(0,b.jsx)(h,{size:`medium`})}),(0,b.jsx)(`div`,{className:`flex justify-center max-md:hidden`,children:(0,b.jsx)(h,{size:`large`})}),(0,b.jsx)(`h1`,{className:`from-accent to-danger bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent`,children:e}),(0,b.jsx)(`p`,{className:`text-default-500 mb-4 max-w-sm text-center text-sm`,children:i.formatMessage({description:`LoginView: body - welcome tagline`,defaultMessage:`Welcome back. Sign in to continue.`,id:`Wf+Mha`})}),x,(0,b.jsx)(`div`,{className:`w-full max-w-sm`,children:(0,b.jsx)(m,{...n})})]})]})}var b,x;function S(){return(S=e((()=>{i(),u(),c(),o(),g(),n(),p(),b=r(),x=!1,y.__docgenInfo={description:``,methods:[],displayName:`LoginView`,props:{appName:{required:!0,tsType:{name:`string`},description:``},loginForm:{required:!0,tsType:{name:`LoginFormProps`},description:``},error:{required:!1,tsType:{name:`string`},description:``}}}})))()}var C,w,T,E,D;function O(){return(O=e((()=>{S(),_(),C={component:y,title:`Views/Login`,tags:[`!test`],parameters:{layout:`fullscreen`},decorators:[v()],argTypes:{loginForm:{table:{disable:!0}}}},w={appName:`My App`,loginForm:{loading:!1,onForgotPassword:()=>console.log(`handleForgotPassword`),onSignUp:()=>console.log(`handleSignUp`),onSubmit:()=>console.log(`onSubmit`)},onSettings:()=>console.log(`onSettings`)},T={args:w,parameters:{viewport:{value:`full`}}},E={args:w,globals:{viewport:{value:`iphonex`}}},D=[`Fullscreen`,`Phone`],T.parameters={...T.parameters,docs:{...T.parameters?.docs,source:{originalSource:`{
+  args: defaultArgs,
+  parameters: {
+    viewport: {
+      value: "full"
+    }
+  }
+}`,...T.parameters?.docs?.source}}},E.parameters={...E.parameters,docs:{...E.parameters?.docs,source:{originalSource:`{
+  args: defaultArgs,
+  globals: {
+    viewport: {
+      value: "iphonex"
+    }
+  }
+}`,...E.parameters?.docs?.source}}}})))()}O();export{T as Fullscreen,E as Phone,D as __namedExportsOrder,C as default};

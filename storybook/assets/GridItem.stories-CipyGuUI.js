@@ -1,0 +1,3 @@
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{i as t,n,r,t as i}from"./storybook-Cd3GNrCe.js";var a,o,s,c;function l(){return(l=e((()=>{t(),i(),a={title:`Display/Grid Item`,component:r},o={title:`Title`,imageSrc:n,description:`Description`},s={args:o},c=[`Default`],s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
+  args: defaultArgs
+}`,...s.parameters?.docs?.source}}}})))()}l();export{s as Default,c as __namedExportsOrder,a as default};
