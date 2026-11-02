@@ -1,6 +1,7 @@
 import type { ReactElement } from "react";
 import {
   ArrowPathIcon,
+  ArrowUpCircleIcon,
   ChevronRightIcon,
   CloudArrowUpIcon,
   CloudIcon,
@@ -54,6 +55,20 @@ function describeStatus(intl: IntlShape, status: SyncStatus, now: number): Statu
           id: "Pf0N5G",
         }),
         subtitle: folder,
+      };
+    case "outdated":
+      return {
+        icon: <ArrowUpCircleIcon className="text-warning size-[18px]" aria-hidden />,
+        title: intl.formatMessage({
+          description: "SyncStatusCard: title - a newer version of the app synced, so this one paused syncing",
+          defaultMessage: "Update to keep syncing",
+          id: "rwodD6",
+        }),
+        subtitle: intl.formatMessage({
+          description: "SyncStatusCard: subtitle - syncing is paused until the app is updated",
+          defaultMessage: "A newer version synced this data",
+          id: "663VBa",
+        }),
       };
     case "error":
       return {

@@ -8,6 +8,7 @@ const DELETE_PATHS = [
   "apps/web/src/core/data",
   "apps/web/src/core/sync",
   "apps/web/src/components/display/sync-status",
+  "apps/web/src/components/feedback/sync-outdated-dialog",
   "apps/web/src/components/input/notes-panel",
   "apps/web/src/components/feedback/settings-modal/SettingsSyncSection.tsx",
   "apps/web/src/components/feedback/settings-modal/UseSettingsSyncSection.ts",

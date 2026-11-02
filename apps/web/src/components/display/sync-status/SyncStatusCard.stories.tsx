@@ -69,6 +69,16 @@ export const NeedsPermission: Story = {
   args: { ...defaultArgs, status: { state: "needs-permission", method: "folder", folderName: "app-data" } },
 };
 
+export const Outdated: Story = {
+  args: {
+    ...defaultArgs,
+    status: { state: "outdated", method: "github", folderName: "you/app-data", folderVersion: 2 },
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText("Update to keep syncing")).toBeVisible();
+  },
+};
+
 export const SyncError: Story = {
   args: {
     ...defaultArgs,
