@@ -13,7 +13,7 @@ seconds (local folder) or a minute (GitHub), and writes its own changes back.
 ## Layout
 
 \`\`\`
-app.json            Manifest: data format version and the collections below.
+app.json            Manifest: data format, data version and the collections.
 AGENTS.md           This file. Rewritten by the app when its version changes.
 .gitattributes      Keeps line endings stable (LF) across operating systems.
 notes/<id>.json     One note per file, schema "app.note/v1".
@@ -78,6 +78,8 @@ Example:
 - Write UTF-8 JSON, 2-space indented, with a trailing newline, to keep diffs
   small. Unknown fields are dropped when the app rewrites a file.
 - Do not edit app.json, AGENTS.md or .gitattributes; the app rewrites them.
+  "dataVersion" in app.json is the newest data version that wrote the folder;
+  older apps stop syncing until they're updated. Keep it as it is.
 
 ## Git
 

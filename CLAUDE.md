@@ -244,6 +244,7 @@ Without a backend, app data lives in the browser (`core/data/`, `appDataAtom`) a
 - **One file per record**: `<collection>/<ULID>.json`, pretty-printed, keys in schema order. Add collections through `COLLECTIONS` in `core/data/AppData.ts` — never hand-roll file I/O in a feature.
 - **Every change stamps `updatedAt`**; conflicts resolve newest-wins, the loser goes to `.conflicts/`. Use the pure mutations in `AppData.ts`.
 - **Never delete records** — archive them (`status: "archived"`). A deleted file comes back from other devices.
+- **Bump `DATA_VERSION`** (`core/data/AppData.ts`) when you add a field or collection or change a field's meaning; older apps then stop syncing instead of overwriting the new data.
 - **Keep `core/sync/AgentsMd.ts` in step** with the schemas. It's written to the data folder as `AGENTS.md`, the contract for agents that edit the data.
 - **Schemas parse leniently** (`.catch()` defaults) so hand- and agent-written files load.
 - **Show sync state with `SyncStatusCard`**, wired through `useSyncStatusCard()`.

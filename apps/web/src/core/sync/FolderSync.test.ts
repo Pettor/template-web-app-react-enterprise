@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { AGENTS_MD, GITATTRIBUTES } from "./AgentsMd";
 import { BrowserFolderBackend } from "./BrowserFolderBackend";
+import { NewerDataVersionError } from "./DataVersion";
 import { FolderSync, serialize } from "./FolderSync";
 import type { AppData } from "~/core/data/AppData";
 import { addNote, createEmptyData, createNote, updateNote } from "~/core/data/AppData";
@@ -103,8 +104,8 @@ function seed(): AppData {
   return addNote(createEmptyData(), createNote({ title: "Plan the launch" }, new Date("2026-10-21T08:00:00Z"), "N1"));
 }
 
-function folderSync(root: FakeDir): FolderSync {
-  return new FolderSync(new BrowserFolderBackend(root as unknown as FileSystemDirectoryHandle));
+function folderSync(root: FakeDir, dataVersion?: number): FolderSync {
+  return new FolderSync(new BrowserFolderBackend(root as unknown as FileSystemDirectoryHandle), dataVersion);
 }
 
 describe("FolderSync", () => {
@@ -121,6 +122,7 @@ describe("FolderSync", () => {
 
     expect(JSON.parse(root.read("app.json")!)).toEqual({
       schema: "app.data/v1",
+      dataVersion: 1,
       collections: { notes: { schema: "app.note/v1", path: "notes/<id>.json" } },
     });
     expect(JSON.parse(root.read("notes/N1.json")!)).toMatchObject({ schema: "app.note/v1", id: "N1" });
@@ -235,5 +237,54 @@ describe("FolderSync", () => {
     await root.write("other/N9.json", serialize({ id: "N9", createdAt: "x", updatedAt: "x" }));
     const pulled = await sync.pull(createEmptyData());
     expect(Object.keys(pulled.data.notes)).toEqual([]);
+  });
+});
+
+describe("FolderSync data version", () => {
+  let root: FakeDir;
+
+  beforeEach(() => {
+    root = new FakeDir("Data");
+  });
+
+  it("records its data version in app.json", async () => {
+    await folderSync(root, 3).push(seed());
+    expect(JSON.parse(root.read("app.json")!)).toMatchObject({ dataVersion: 3 });
+  });
+
+  it("stops pulling and pushing when a newer data version wrote the folder", async () => {
+    await folderSync(root, 2).push(seed());
+    const before = root.read("notes/N1.json");
+
+    const old = folderSync(root, 1);
+    const edited = updateNote(seed(), "N1", { title: "Old app edit" }, new Date("2030-01-01T00:00:00Z"));
+    await expect(old.pull(createEmptyData())).rejects.toMatchObject({ folderVersion: 2 });
+    await expect(old.push(edited)).rejects.toBeInstanceOf(NewerDataVersionError);
+    expect(root.read("notes/N1.json")).toBe(before);
+    expect(JSON.parse(root.read("app.json")!)).toMatchObject({ dataVersion: 2 });
+  });
+
+  it("notices when another device upgrades the folder while connected", async () => {
+    const old = folderSync(root, 1);
+    await old.push(seed());
+    await folderSync(root, 2).push(seed());
+
+    await expect(old.pull(seed())).rejects.toBeInstanceOf(NewerDataVersionError);
+  });
+
+  it("syncs with a folder written by an older version, and raises its data version", async () => {
+    await folderSync(root, 1).push(seed());
+    const newer = folderSync(root, 2);
+    const pulled = await newer.pull(createEmptyData());
+    expect(pulled.data.notes.N1?.title).toBe("Plan the launch");
+    await newer.push(pulled.data);
+    expect(JSON.parse(root.read("app.json")!)).toMatchObject({ dataVersion: 2 });
+  });
+
+  it("syncs with a folder from before data versions", async () => {
+    await root.write("app.json", serialize({ schema: "app.data/v1", collections: {} }));
+    await root.write("notes/N1.json", serialize(seed().notes.N1));
+    const pulled = await folderSync(root, 1).pull(createEmptyData());
+    expect(pulled.data.notes.N1?.title).toBe("Plan the launch");
   });
 });

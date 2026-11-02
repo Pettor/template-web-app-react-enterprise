@@ -6,17 +6,23 @@ The template ships one example collection, **notes**, shown on the Notes page (`
 
 ## Data model (`core/data/`)
 
-| File           | What it is                                                                                                                                                 |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AppData.ts`   | `AppData` (every collection, records by id), the `COLLECTIONS` registry, pure mutations (`createNote`, `updateNote`, `archiveNote`, …) and `normalizeData` |
-| `Note.ts`      | `NoteFileSchema` (Zod, schema id `app.note/v1`) and the `Note` type                                                                                        |
-| `RecordId.ts`  | `createRecordId()` (ULID) and `toUtcTimestamp()`                                                                                                           |
-| `DataAtoms.ts` | `appDataAtom`, persisted to `localStorage` (`app-data`), normalized on read                                                                                |
-| `UseNotes.ts`  | `useNotes()`: active notes plus `add`, `togglePinned`, `archive`                                                                                           |
+| File           | What it is                                                                                                                                                                 |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AppData.ts`   | `AppData` (every collection, records by id), `DATA_VERSION`, the `COLLECTIONS` registry, pure mutations (`createNote`, `updateNote`, `archiveNote`, …) and `normalizeData` |
+| `Note.ts`      | `NoteFileSchema` (Zod, schema id `app.note/v1`) and the `Note` type                                                                                                        |
+| `RecordId.ts`  | `createRecordId()` (ULID) and `toUtcTimestamp()`                                                                                                                           |
+| `DataAtoms.ts` | `appDataAtom`, persisted to `localStorage` (`app-data`), normalized on read                                                                                                |
+| `UseNotes.ts`  | `useNotes()`: active notes plus `add`, `togglePinned`, `archive`                                                                                                           |
 
 Every record has `schema`, `id` (ULID), `createdAt` and `updatedAt` (ISO 8601 UTC, no milliseconds). Mutations are pure functions that stamp `updatedAt`. Records are **never deleted**, only archived (`status: "archived"`): a deleted file would come back from any device that still has the record, while an archive syncs like any other edit.
 
 Schemas parse **leniently**: optional fields fall back to defaults with `.catch()`, so files written by hand, by an agent, or by an older version still load, and the next push rewrites them in the current format (without touching `updatedAt`).
+
+### Data version
+
+`DATA_VERSION` in `AppData.ts` is a whole number written to `app.json` as `dataVersion`. Leniency only works one way: an older app reading files from a newer one drops fields it doesn't know and, on its next push, writes the records back without them. So before reading or writing, the engine checks the folder's `dataVersion`; when it's newer than the app's, the sync stops with `NewerDataVersionError` (`core/sync/DataVersion.ts`), the status goes to `outdated`, and a toast offers **Update**, which loads the newest version of the app. Local edits wait in `localStorage` until then. A newer app syncing a folder written by an older one raises its `dataVersion`. Folders from before data versions count as `0`.
+
+**Bump `DATA_VERSION`** in the same change whenever an older app would lose or misread data: a new field or collection, or a field whose meaning or format changes. Don't bump it for changes that leave the files alone.
 
 ### Adding a collection
 
@@ -24,6 +30,7 @@ Schemas parse **leniently**: optional fields fall back to defaults with `.catch(
 2. Add the key to `AppData` and `createEmptyData()`, and an entry to `COLLECTIONS` (`key`, `dir`, `schema`, `fileSchema`).
 3. Add mutations next to the note ones, and a `Use<Things>.ts` hook.
 4. Document the collection in `core/sync/AgentsMd.ts` — it's what agents read.
+5. Bump `DATA_VERSION` (see [Data version](#data-version)).
 
 Sync, storage and conflict handling pick the collection up from `COLLECTIONS`; nothing in `core/sync/` changes.
 
@@ -33,7 +40,7 @@ The same layout is used for a local folder and a GitHub repository. It's designe
 
 ```
 <data folder>/
-├── app.json            # Manifest: { schema: "app.data/v1", collections: { notes: { schema, path } } }
+├── app.json            # Manifest: { schema: "app.data/v1", dataVersion, collections: { notes: { schema, path } } }
 ├── AGENTS.md           # The data model and rules, for agents and people (rewritten when it changes)
 ├── .gitattributes      # * text=auto eol=lf
 ├── notes/<ULID>.json   # One note per file
@@ -56,6 +63,8 @@ The same layout is used for a local folder and a GitHub repository. It's designe
 | `UseSync.ts`                                | `useSync()` for the settings UI: connect a folder or GitHub, reconnect, disconnect, sync now                                             |
 | `UseSyncLifecycle.ts` / `SyncLifecycle.tsx` | Runs the sync; mounted once in `AppProviders`                                                                                            |
 | `UseSyncStatusCard.ts`                      | Props for `SyncStatusCard`: the live status, opening Settings → Sync on press                                                            |
+| `DataVersion.ts`                            | Reads `dataVersion` from `app.json`; `NewerDataVersionError`                                                                             |
+| `UseOutdatedSyncNotice.ts`                  | Shows the "update to keep syncing" toast once per data version                                                                           |
 
 ### Methods (Settings → Sync)
 
@@ -71,7 +80,7 @@ Each record is its own file, so devices editing different records never collide.
 
 ### Status
 
-`syncStatusAtom` holds `SyncStatus`: `state` (`local`, `syncing`, `synced`, `error`, `needs-permission`), `method`, the folder or repository name, `lastSyncedAt`, `error`, `conflicts`, `hasPendingChanges` (GitHub) and `git` (branch, remote, GitHub error kind, `isLocalClone`).
+`syncStatusAtom` holds `SyncStatus`: `state` (`local`, `syncing`, `synced`, `error`, `needs-permission`, `outdated`), `method`, the folder or repository name, `lastSyncedAt`, `error`, `conflicts`, `hasPendingChanges` (GitHub), `folderVersion` (`outdated`) and `git` (branch, remote, GitHub error kind, `isLocalClone`).
 
 `components/display/sync-status/SyncStatusCard` renders it as a card or as an icon button with a tooltip; both open Settings → Sync. The navbar shows the icon, the Notes page and the navigation drawer show the card.
 

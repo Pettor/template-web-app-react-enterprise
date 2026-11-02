@@ -5,6 +5,16 @@ import { createRecordId, toUtcTimestamp } from "./RecordId";
 
 export const DATA_SCHEMA = "app.data/v1";
 
+/**
+ * The version of what's in the data folder, recorded in `app.json`. An app
+ * whose data version is older than the folder's stops syncing with it until
+ * it's updated, so it never writes over files in a format it only half
+ * understands. Bump it when an older app would lose or misread data: a new
+ * field or collection (an older app drops unknown fields when it rewrites a
+ * record), or a field whose meaning changes.
+ */
+export const DATA_VERSION = 1;
+
 /** Fields every stored record has. Sync merges records by `updatedAt`, newest wins. */
 export interface DataRecord {
   id: string;

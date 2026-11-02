@@ -1,6 +1,7 @@
 import { useEffect, useEffectEvent, useRef } from "react";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { BrowserFolderBackend } from "./BrowserFolderBackend";
+import { NewerDataVersionError } from "./DataVersion";
 import { queryFolderPermission } from "./FileSystemAccess";
 import type { FolderBackend } from "./FolderBackend";
 import { loadFolderHandle } from "./FolderHandleStore";
@@ -59,6 +60,14 @@ export function rebase(base: AppData, pulled: AppData, current: AppData): AppDat
 
 function describe(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
+}
+
+/** What the status becomes when a sync job fails. */
+function failedStatus(error: unknown): Partial<SyncStatus> {
+  // Nothing was read or written; the sync waits for this app to be updated.
+  return error instanceof NewerDataVersionError
+    ? { state: "outdated", folderVersion: error.folderVersion, error: undefined }
+    : { state: "error", error: describe(error) };
 }
 
 function createBackend(connection: SyncConnection): FolderBackend {
@@ -125,7 +134,7 @@ export function useSyncLifecycle(): void {
       try {
         await job(engine);
       } catch (error) {
-        updateStatus(() => ({ state: "error", error: describe(error) }));
+        updateStatus(() => failedStatus(error));
       }
     });
   }
@@ -186,7 +195,8 @@ export function useSyncLifecycle(): void {
         return;
       }
       lastGitHubSyncRef.current = Date.now();
-      updateStatus(() => ({ state: "syncing" }));
+      // An outdated sync keeps checking, but shows that it's waiting for an update rather than syncing.
+      updateStatus((current) => (current.state === "outdated" ? {} : { state: "syncing" }));
       try {
         await githubSyncNow(engine, backend);
         const syncedAt = toUtcTimestamp(new Date());
@@ -204,6 +214,10 @@ export function useSyncLifecycle(): void {
           },
         }));
       } catch (error) {
+        if (error instanceof NewerDataVersionError) {
+          updateStatus(() => ({ ...failedStatus(error), hasPendingChanges: backend.hasChanges }));
+          return;
+        }
         const errorKind = error instanceof GitHubError ? error.kind : undefined;
         updateStatus((current) => ({
           state: "error",

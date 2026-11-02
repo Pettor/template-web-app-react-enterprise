@@ -1,7 +1,8 @@
 import { AGENTS_MD, GITATTRIBUTES } from "./AgentsMd";
+import { NewerDataVersionError, readDataVersion } from "./DataVersion";
 import type { FolderBackend, FolderFileInfo } from "./FolderBackend";
 import type { AppData, CollectionDefinition, DataRecord } from "~/core/data/AppData";
-import { COLLECTIONS, DATA_SCHEMA } from "~/core/data/AppData";
+import { COLLECTIONS, DATA_SCHEMA, DATA_VERSION } from "~/core/data/AppData";
 
 export const MANIFEST_FILE = "app.json";
 export const AGENTS_FILE = "AGENTS.md";
@@ -31,10 +32,11 @@ export function recordPath(collection: CollectionDefinition, id: string): string
   return `${collection.dir}/${id}.json`;
 }
 
-/** What `app.json` contains: which collections exist and where their records live. */
-export function buildManifest(): unknown {
+/** What `app.json` contains: the data version, which collections exist and where their records live. */
+export function buildManifest(dataVersion = DATA_VERSION): unknown {
   return {
     schema: DATA_SCHEMA,
+    dataVersion,
     collections: Object.fromEntries(
       COLLECTIONS.map((collection) => [
         collection.key,
@@ -44,9 +46,9 @@ export function buildManifest(): unknown {
   };
 }
 
-function staticFiles(): Map<string, string> {
+function staticFiles(dataVersion: number): Map<string, string> {
   return new Map([
-    [MANIFEST_FILE, serialize(buildManifest())],
+    [MANIFEST_FILE, serialize(buildManifest(dataVersion))],
     [AGENTS_FILE, AGENTS_MD],
     [GITATTRIBUTES_FILE, GITATTRIBUTES],
   ]);
@@ -70,11 +72,20 @@ function withRecord(data: AppData, collection: CollectionDefinition, record: Dat
  * changed. Records resolve by `updatedAt` (newest wins); a losing remote edit
  * is kept in `.conflicts/`. File access goes through a {@link FolderBackend},
  * so the same logic runs on a local folder and on a GitHub repository.
+ *
+ * Neither pull nor push touches a folder that a newer data version wrote to
+ * (see {@link DATA_VERSION}); both throw {@link NewerDataVersionError} instead.
  */
 export class FolderSync {
   private readonly known = new Map<string, KnownFile>();
+  /** The data version last read from `app.json`, by its `lastModified`. */
+  private folderVersion: { lastModified: number; version: number } | null = null;
 
-  constructor(private readonly folder: FolderBackend) {}
+  constructor(
+    private readonly folder: FolderBackend,
+    /** This app's data version; injected in tests. */
+    private readonly dataVersion = DATA_VERSION
+  ) {}
 
   get folderName(): string {
     return this.folder.name;
@@ -106,18 +117,41 @@ export class FolderSync {
     }
   }
 
+  /**
+   * Throws {@link NewerDataVersionError} when a newer version of the app wrote
+   * to the folder. Reads `app.json` on its own (only when it changed), so the
+   * pull still sees the file as changed afterwards.
+   */
+  private async checkDataVersion(): Promise<void> {
+    const lastModified = await this.folder.stat(MANIFEST_FILE);
+    if (lastModified === null) {
+      return;
+    }
+    if (this.folderVersion?.lastModified !== lastModified) {
+      this.folderVersion = { lastModified, version: readDataVersion(await this.folder.read(MANIFEST_FILE)) };
+    }
+    if (this.folderVersion.version > this.dataVersion) {
+      throw new NewerDataVersionError(this.folderVersion.version);
+    }
+  }
+
   private async write(path: string, content: string): Promise<void> {
     const lastModified = await this.folder.write(path, content);
     this.known.set(path, { content, lastModified });
+    if (path === MANIFEST_FILE) {
+      this.folderVersion = { lastModified, version: this.dataVersion };
+    }
   }
 
   async pull(local: AppData): Promise<PullResult> {
+    await this.checkDataVersion();
+
     let data = local;
     let changed = false;
     let conflicts = 0;
 
     // Push compares against what's on disk, so a folder written by an older version gets this version's files.
-    for (const path of staticFiles().keys()) {
+    for (const path of staticFiles(this.dataVersion).keys()) {
       const lastModified = await this.folder.stat(path);
       if (lastModified !== null) {
         await this.readChanged({ path, lastModified });
@@ -150,7 +184,9 @@ export class FolderSync {
 
   /** Writes every file whose content changed. Returns how many were written. */
   async push(data: AppData): Promise<number> {
-    const desired = staticFiles();
+    await this.checkDataVersion();
+
+    const desired = staticFiles(this.dataVersion);
     for (const collection of COLLECTIONS) {
       for (const record of Object.values(recordsOf(data, collection))) {
         desired.set(recordPath(collection, record.id), serialize(record));

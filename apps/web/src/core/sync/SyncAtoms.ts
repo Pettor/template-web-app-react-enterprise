@@ -11,7 +11,8 @@ import type { GitHubErrorKind } from "./GitHubBackend";
  */
 export type SyncMethod = "local" | "folder" | "github";
 
-export type SyncState = "local" | "syncing" | "synced" | "error" | "needs-permission";
+/** `outdated`: a newer version of the app wrote to the data folder; this app must be updated before it syncs again. */
+export type SyncState = "local" | "syncing" | "synced" | "error" | "needs-permission" | "outdated";
 
 /** The Git side of a sync: a local clone (read-only info) or a GitHub repository. */
 export interface GitSyncStatus {
@@ -36,6 +37,8 @@ export interface SyncStatus {
   conflicts?: number;
   /** GitHub sync only: local changes not yet committed. */
   hasPendingChanges?: boolean;
+  /** `outdated` only: the data folder's data version. */
+  folderVersion?: number;
   git?: GitSyncStatus;
 }
 
