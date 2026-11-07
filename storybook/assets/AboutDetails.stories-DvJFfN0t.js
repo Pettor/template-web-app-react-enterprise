@@ -1,0 +1,3 @@
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{t,u as n}from"./src-8qpjjsx2.js";import{n as r,t as i}from"./AboutDetails-Z0p1gPga.js";var a,o,s,c;function l(){return(l=e((()=>{t(),r(),a={component:i,title:`Feedback/About`,decorators:[n]},o={appName:`My App`,appVersion:`1.0.0`,serverVersion:`1.0.0`},s={args:o},c=[`Details`],s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
+  args: defaultArgs
+}`,...s.parameters?.docs?.source}}}})))()}l();export{s as Details,c as __namedExportsOrder,a as default};
