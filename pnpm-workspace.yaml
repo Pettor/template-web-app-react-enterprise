@@ -89,7 +89,7 @@ catalogs:
     '@tanstack/react-query': 5.107.1
     '@tanstack/react-router': 1.170.46
     # Codegen plugin kept with the router so they bump together.
-    '@tanstack/router-plugin': 1.168.48
+    '@tanstack/router-plugin': 1.169.0
   ui:
     '@heroui/react': 3.2.7
     '@heroicons/react': 2.2.0
