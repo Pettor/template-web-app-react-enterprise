@@ -55,7 +55,7 @@
     "rimraf": "catalog:dev",
     "sherif": "1.13.0",
     "tsup": "9.0.0",
-    "turbo": "2.11.11"
+    "turbo": "2.11.13"
   },
   "lint-staged": {
     "*.js": "prettier --write",
